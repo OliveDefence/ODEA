@@ -4,6 +4,8 @@
 
 <head>
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Olive Defence Entrance Academy</title>
 
 <style>
@@ -13,49 +15,44 @@ font-family:Arial;
 text-align:center;
 background:#f2f4f3;
 margin:0;
-padding:10px;
 }
-
-/* logo */
-
-.logo{
-margin-top:20px;
-}
-
-/* headings */
 
 h1{
-margin-top:10px;
-font-size:28px;
+margin-top:40px;
+font-size:36px;
+color:#1b3d2f;
 }
 
-h2{
+.subtitle{
 color:#666;
-font-weight:normal;
-margin-bottom:30px;
+font-size:16px;
+margin-top:5px;
 }
 
-/* subject cards */
+/* SUBJECT CARDS (same style as Biology) */
 
-.box{
-background:#f5f5f5;
-padding:18px;
-margin:16px auto;
-border-radius:14px;
-font-size:20px;
-font-weight:bold;
-width:92%;
+.subject{
+padding:16px;
+margin:18px auto;
+width:88%;
 max-width:420px;
-box-shadow:0 4px 10px rgba(0,0,0,0.08);
+border-radius:12px;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+box-shadow:0 3px 8px rgba(0,0,0,0.08);
 transition:all 0.25s ease;
+background:#f5f5f5;
 }
 
 /* hover animation */
 
-.box:hover{
+.subject:hover{
 transform:translateY(-3px);
 box-shadow:0 8px 18px rgba(0,0,0,0.15);
 }
+
+/* links */
 
 a{
 text-decoration:none;
@@ -68,46 +65,48 @@ color:black;
 
 <body>
 
-<img src="logo.png" width="220" class="logo">
+<img src="logo.png" width="220" style="margin-top:25px;">
 
 <h1>Olive Defence Entrance Academy</h1>
 
-<h2>Defence Exam Preparation Portal</h2>
+<p class="subtitle">
+Defence Exam Preparation Portal
+</p>
 
 <a href="English.html">
-<div class="box">English</div>
+<div class="subject">English</div>
 </a>
 
 <a href="Mathematics.html">
-<div class="box">Mathematics</div>
+<div class="subject">Mathematics</div>
 </a>
 
 <a href="Physics.html">
-<div class="box">Physics</div>
+<div class="subject">Physics</div>
 </a>
 
 <a href="Chemistry.html">
-<div class="box">Chemistry</div>
+<div class="subject">Chemistry</div>
 </a>
 
 <a href="Biology.html">
-<div class="box">Biology</div>
+<div class="subject">Biology</div>
 </a>
 
 <a href="Polity.html">
-<div class="box">Polity</div>
+<div class="subject">Polity</div>
 </a>
 
 <a href="History.html">
-<div class="box">History & Geography</div>
+<div class="subject">History & Geography</div>
 </a>
 
 <a href="CurrentAffairs.html">
-<div class="box">Current Affairs</div>
+<div class="subject">Current Affairs</div>
 </a>
 
 <a href="Reasoning.html">
-<div class="box">Logical Reasoning</div>
+<div class="subject">Logical Reasoning</div>
 </a>
 
 </body>
