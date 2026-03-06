@@ -1,0 +1,1319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NEET 2026 — Mole Concept & Stoichiometry</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --surface2: #1c2230;
+    --border: #253047;
+    --accent: #38bdf8;
+    --accent2: #fb923c;
+    --accent3: #86efac;
+    --accent4: #e879f9;
+    --text: #e6edf3;
+    --text-dim: #8b98b8;
+    --text-muted: #3d5273;
+    --gold: #fcd34d;
+    --red: #f87171;
+    --green: #4ade80;
+    --teal: #2dd4bf;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  /* scrollbar */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(13,17,23,0.94);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 60px;
+    gap: 1rem;
+  }
+  .nav-logo { font-family:'Syne',sans-serif; font-weight:800; font-size:1.1rem; color:var(--accent); letter-spacing:.05em; white-space:nowrap; }
+  .nav-logo span { color: var(--accent2); }
+  .nav-tabs { display:flex; gap:.2rem; overflow-x:auto; }
+  .nav-tab {
+    background: none; border: none; cursor: pointer;
+    font-family:'DM Sans',sans-serif; font-size:.78rem; font-weight:500;
+    color: var(--text-dim); padding:.4rem .8rem; border-radius:6px;
+    transition: all .2s; white-space:nowrap;
+  }
+  .nav-tab:hover { color:var(--text); background: var(--surface2); }
+  .nav-tab.active { color:var(--accent); background: rgba(56,189,248,.1); }
+  .chem-tag {
+    font-size:.68rem; font-weight:700; color:#86efac;
+    background: rgba(134,239,172,.1); border: 1px solid rgba(134,239,172,.2);
+    padding:.2rem .6rem; border-radius:4px; white-space:nowrap; letter-spacing:.06em;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 3.5rem 2rem 2.5rem;
+    max-width: 1100px; margin: 0 auto;
+    display: grid; grid-template-columns: 1fr auto; gap: 2.5rem; align-items: center;
+  }
+  .hero-badge {
+    display: inline-flex; align-items:center; gap:.5rem;
+    background: rgba(56,189,248,.08); border: 1px solid rgba(56,189,248,.2);
+    color:var(--accent); padding:.3rem .9rem; border-radius:20px;
+    font-size:.73rem; font-weight:600; letter-spacing:.08em; text-transform:uppercase;
+    margin-bottom: 1.1rem;
+  }
+  .hero h1 {
+    font-family:'Syne',sans-serif; font-weight:800;
+    font-size: clamp(1.8rem, 4.5vw, 3.2rem);
+    line-height: 1.05; color:#fff;
+    margin-bottom: .7rem;
+  }
+  .hero h1 em { color:var(--accent); font-style:normal; }
+  .hero-sub { color:var(--text-dim); font-size:.98rem; margin-bottom:1.5rem; max-width:500px; line-height:1.6; }
+  .hero-stats { display:flex; gap:1.5rem; flex-wrap:wrap; }
+  .stat { text-align:center; }
+  .stat-num { font-family:'Space Mono',monospace; font-size:1.5rem; font-weight:700; color:var(--accent); }
+  .stat-label { font-size:.68rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:.06em; margin-top:.1rem; }
+
+  /* atom animation */
+  .hero-visual { width:180px; height:180px; flex-shrink:0; position:relative; }
+  .atom-core {
+    position:absolute; inset:30%; border-radius:50%;
+    background: radial-gradient(circle at 35% 35%, rgba(56,189,248,.4), rgba(56,189,248,.05));
+    border: 1px solid rgba(56,189,248,.3);
+    display:flex; align-items:center; justify-content:center;
+    font-size:1.4rem;
+  }
+  .electron-orbit {
+    position:absolute; inset:0; border-radius:50%;
+    border: 1px dashed rgba(56,189,248,.2);
+  }
+  .electron-orbit:nth-child(2) { inset:12%; border-color:rgba(251,146,60,.2); transform:rotate(40deg); animation: orbit1 6s linear infinite; }
+  .electron-orbit:nth-child(3) { inset:4%; border-color:rgba(232,121,249,.2); transform:rotate(-20deg); animation: orbit2 10s linear infinite; }
+  .e-dot { position:absolute; width:8px; height:8px; border-radius:50%; top:-4px; left:50%; transform:translateX(-50%); box-shadow: 0 0 10px currentColor; }
+  .electron-orbit:nth-child(2) .e-dot { background:var(--accent2); box-shadow: 0 0 10px var(--accent2); }
+  .electron-orbit:nth-child(3) .e-dot { background:var(--accent4); box-shadow: 0 0 10px var(--accent4); }
+  @keyframes orbit1 { to { transform: rotate(calc(40deg + 360deg)); } }
+  @keyframes orbit2 { to { transform: rotate(calc(-20deg - 360deg)); } }
+
+  /* ── PAGES ── */
+  .page { display:none; max-width:1100px; margin:0 auto; padding:2rem; }
+  .page.active { display:block; }
+
+  /* ── TOPIC GRID ── */
+  .topic-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(290px,1fr)); gap:1.1rem; margin-bottom:2rem; }
+  .topic-card {
+    background:var(--surface); border:1px solid var(--border);
+    border-radius:14px; padding:1.4rem; cursor:pointer;
+    transition:all .25s; position:relative; overflow:hidden;
+  }
+  .topic-card::after {
+    content:''; position:absolute; bottom:0; left:0; right:0; height:2px;
+    background:linear-gradient(90deg, var(--accent), var(--accent4));
+    transform:scaleX(0); transform-origin:left; transition:transform .3s;
+  }
+  .topic-card:hover { border-color: rgba(56,189,248,.4); transform:translateY(-2px); box-shadow: 0 10px 32px rgba(0,0,0,.5); }
+  .topic-card:hover::after { transform:scaleX(1); }
+  .topic-num { font-family:'Space Mono',monospace; font-size:.68rem; color:var(--accent); text-transform:uppercase; letter-spacing:.1em; margin-bottom:.45rem; }
+  .topic-title { font-family:'Syne',sans-serif; font-weight:700; font-size:1rem; margin-bottom:.35rem; color:var(--text); }
+  .topic-desc { font-size:.8rem; color:var(--text-dim); line-height:1.55; }
+  .topic-pill {
+    display:inline-block; margin-top:.7rem;
+    font-size:.65rem; padding:.18rem .55rem; border-radius:4px; font-weight:600; letter-spacing:.04em;
+  }
+  .pill-blue { background:rgba(56,189,248,.1); color:var(--accent); }
+  .pill-orange { background:rgba(251,146,60,.1); color:var(--accent2); }
+  .pill-purple { background:rgba(232,121,249,.1); color:var(--accent4); }
+  .pill-green { background:rgba(134,239,172,.1); color:var(--accent3); }
+  .pill-teal { background:rgba(45,212,191,.1); color:var(--teal); }
+
+  /* ── SECTION TITLE ── */
+  .section-title {
+    font-family:'Syne',sans-serif; font-weight:800; font-size:1.4rem;
+    margin-bottom:1.4rem; display:flex; align-items:center; gap:.75rem; color: var(--text);
+  }
+  .section-title::after { content:''; flex:1; height:1px; background:var(--border); }
+  .section-title .accent { color:var(--accent); }
+
+  /* ── CONCEPT DETAIL ── */
+  .concept-detail { display:none; }
+  .concept-detail.active { display:block; }
+  .back-btn {
+    display:inline-flex; align-items:center; gap:.5rem;
+    background:none; border:1px solid var(--border); color:var(--text-dim);
+    padding:.4rem 1rem; border-radius:8px; cursor:pointer; font-size:.83rem;
+    font-family:'DM Sans',sans-serif; transition:all .2s; margin-bottom:1.4rem;
+  }
+  .back-btn:hover { border-color:var(--accent); color:var(--accent); }
+  .concept-header {
+    background:var(--surface); border:1px solid var(--border);
+    border-radius:14px; padding:1.75rem; margin-bottom:1.25rem;
+    border-left: 3px solid var(--accent);
+  }
+  .concept-header h2 { font-family:'Syne',sans-serif; font-weight:800; font-size:1.5rem; margin-bottom:.4rem; color:var(--text); }
+  .concept-header p { color:var(--text-dim); font-size:.92rem; }
+  .concept-block {
+    background:var(--surface); border:1px solid var(--border);
+    border-radius:14px; padding:1.4rem; margin-bottom:1.15rem;
+  }
+  .concept-block h3 {
+    font-family:'Syne',sans-serif; font-weight:700; font-size:1rem;
+    color:var(--accent); margin-bottom:.75rem; display:flex; align-items:center; gap:.5rem;
+  }
+
+  /* formula */
+  .formula-label { font-size:.7rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:.06em; margin-bottom:.25rem; margin-top:.6rem; }
+  .formula-card {
+    background: #0d1a2e; border:1px solid rgba(56,189,248,.2);
+    border-radius:9px; padding:.85rem 1.1rem; margin-bottom:.1rem;
+    font-family:'Space Mono',monospace; font-size:.88rem; color:var(--accent);
+    letter-spacing:.02em; line-height:1.7;
+  }
+  .formula-note { font-size:.78rem; color:var(--text-muted); margin-top:.5rem; font-style:italic; }
+
+  /* steps */
+  .step { display:flex; gap:.85rem; margin-bottom:.7rem; }
+  .step-arr {
+    flex-shrink:0; color:var(--accent); font-family:'Space Mono',monospace;
+    font-size:.75rem; font-weight:700; margin-top:3px; min-width:18px;
+  }
+  .step-content { font-size:.86rem; color:var(--text-dim); }
+  .step-content strong { color:var(--text); }
+
+  /* analogy box */
+  .analogy {
+    background: rgba(56,189,248,.04); border:1px solid rgba(56,189,248,.15);
+    border-left: 3px solid var(--teal);
+    border-radius:0 9px 9px 0; padding:.8rem 1rem; margin:.6rem 0;
+    font-size:.83rem; color:var(--text-dim);
+  }
+  .analogy strong { color:var(--teal); }
+
+  /* table */
+  .ref-table { width:100%; border-collapse:collapse; font-size:.82rem; }
+  .ref-table th {
+    background:var(--surface2); font-family:'Syne',sans-serif; font-size:.76rem;
+    font-weight:700; text-align:left; padding:.65rem 1rem; color:var(--accent);
+    letter-spacing:.04em; border-bottom:2px solid var(--border);
+  }
+  .ref-table td { padding:.55rem 1rem; border-bottom:1px solid rgba(37,48,71,.5); color:var(--text-dim); }
+  .ref-table tr:hover td { background:rgba(56,189,248,.03); }
+  .ref-table .mono { font-family:'Space Mono',monospace; color:var(--accent); font-size:.76rem; }
+
+  /* ── NUMERICALS ── */
+  .numerical {
+    background:var(--surface); border:1px solid var(--border);
+    border-radius:14px; overflow:hidden; margin-bottom:1.2rem;
+  }
+  .numerical-head {
+    background:linear-gradient(90deg, rgba(251,146,60,.1), transparent);
+    border-bottom:1px solid var(--border);
+    padding:.9rem 1.25rem; display:flex; align-items:center; gap:.75rem; flex-wrap:wrap;
+  }
+  .num-badge {
+    background:var(--accent2); color:#0d1117; font-size:.7rem; font-weight:700;
+    padding:.2rem .55rem; border-radius:5px; font-family:'Space Mono',monospace; flex-shrink:0;
+  }
+  .numerical-head h4 { font-family:'Syne',sans-serif; font-weight:700; font-size:.97rem; color:var(--text); }
+  .numerical-body { padding:1.2rem; }
+  .given-box {
+    background:rgba(0,0,0,.25); border-radius:8px; padding:.7rem 1rem; margin-bottom:1rem;
+    font-size:.82rem; color:var(--text-dim); border-left: 2px solid var(--border);
+  }
+  .given-box .label { font-size:.7rem; color:var(--accent3); text-transform:uppercase; letter-spacing:.07em; font-weight:600; margin-bottom:.35rem; }
+  .sol-step {
+    display:flex; gap:.75rem; margin-bottom:.55rem;
+    padding:.45rem .7rem; border-radius:7px;
+  }
+  .sol-step:nth-child(odd) { background:rgba(255,255,255,.02); }
+  .sol-num { color:var(--accent4); font-family:'Space Mono',monospace; font-size:.75rem; flex-shrink:0; margin-top:2px; white-space:nowrap; }
+  .sol-text { font-size:.84rem; color:var(--text-dim); }
+  .sol-text .math { color:var(--accent); font-family:'Space Mono',monospace; }
+  .answer-box {
+    background:rgba(74,222,128,.05); border:1px solid rgba(74,222,128,.2);
+    border-radius:8px; padding:.7rem 1rem; font-size:.88rem;
+    color: #86efac; font-weight:500;
+  }
+  .answer-box .alabel { font-size:.68rem; text-transform:uppercase; letter-spacing:.07em; color:var(--accent3); margin-bottom:.2rem; font-weight:600; }
+
+  /* warning / tip */
+  .warn-box {
+    background:rgba(248,113,113,.04); border:1px solid rgba(248,113,113,.2);
+    border-left:3px solid var(--red); border-radius:0 8px 8px 0;
+    padding:.75rem 1rem; margin:.6rem 0; font-size:.82rem; color: #fca5a5;
+  }
+  .warn-box strong { color:var(--red); }
+  .tip-box {
+    background:rgba(232,121,249,.04); border:1px solid rgba(232,121,249,.2);
+    border-left:3px solid var(--accent4); border-radius:0 8px 8px 0;
+    padding:.75rem 1rem; margin:.6rem 0; font-size:.82rem; color:#f0abfc;
+  }
+  .tip-box strong { color:var(--accent4); }
+
+  /* ── QUICK REF ── */
+  .qr-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.15rem; margin-bottom:1.25rem; }
+  .qr-card { background:var(--surface); border:1px solid var(--border); border-radius:13px; padding:1.2rem; }
+  .qr-card h3 { font-family:'Syne',sans-serif; font-weight:700; font-size:.9rem; color:var(--accent2); margin-bottom:.7rem; }
+  .qr-formula { margin-bottom:.45rem; }
+  .qr-name { font-size:.68rem; color:var(--text-muted); margin-bottom:.12rem; text-transform:uppercase; letter-spacing:.05em; }
+  .qr-eq { font-family:'Space Mono',monospace; font-size:.8rem; color:var(--accent); background:rgba(56,189,248,.05); padding:.28rem .55rem; border-radius:5px; line-height:1.5; }
+
+  /* ── QUIZ ── */
+  .quiz-container { max-width:760px; margin:0 auto; }
+  .quiz-header { text-align:center; margin-bottom:2rem; }
+  .quiz-header h2 { font-family:'Syne',sans-serif; font-weight:800; font-size:1.9rem; margin-bottom:.5rem; color:var(--text); }
+  .quiz-header p { color:var(--text-dim); font-size:.92rem; }
+
+  .progress-bar-wrap { background:var(--surface); border-radius:20px; height:5px; margin:1.25rem 0 .4rem; overflow:hidden; }
+  .progress-bar { height:5px; background:linear-gradient(90deg,var(--accent),var(--accent4)); border-radius:20px; transition:width .4s; }
+  .progress-text { font-size:.72rem; color:var(--text-muted); text-align:right; font-family:'Space Mono',monospace; }
+
+  .question-card {
+    background:var(--surface); border:1px solid var(--border);
+    border-radius:14px; padding:1.75rem; margin-bottom:1.25rem;
+    transition: border-color .3s;
+  }
+  .question-card.answered { border-color: rgba(56,189,248,.25); }
+  .q-meta { display:flex; justify-content:space-between; align-items:center; margin-bottom:.85rem; flex-wrap:wrap; gap:.5rem; }
+  .q-num { font-family:'Space Mono',monospace; font-size:.73rem; color:var(--accent); font-weight:700; }
+  .q-topic { font-size:.7rem; color:var(--text-muted); background:var(--surface2); padding:.18rem .55rem; border-radius:4px; }
+  .q-text { font-size:.97rem; color:var(--text); margin-bottom:1.15rem; line-height:1.65; }
+  .q-text .math { font-family:'Space Mono',monospace; color:var(--accent); background:rgba(56,189,248,.07); padding:.1rem .4rem; border-radius:4px; font-size:.88rem; }
+
+  .options { display:grid; gap:.55rem; }
+  .option {
+    display:flex; align-items:center; gap:.85rem;
+    background:var(--surface2); border:1px solid var(--border);
+    border-radius:9px; padding:.8rem 1.05rem; cursor:pointer;
+    transition:all .2s; font-size:.88rem; color:var(--text-dim);
+  }
+  .option:hover:not(.disabled) { border-color:var(--accent); color:var(--text); background:rgba(56,189,248,.05); }
+  .option.selected { border-color:var(--accent); background:rgba(56,189,248,.07); color:var(--text); }
+  .option.correct { border-color:var(--green) !important; background:rgba(74,222,128,.07) !important; color: #86efac !important; }
+  .option.wrong { border-color:var(--red) !important; background:rgba(248,113,113,.07) !important; color: #fca5a5 !important; }
+  .option.disabled { cursor:default; }
+  .opt-letter {
+    width:27px; height:27px; border-radius:6px; flex-shrink:0;
+    background:rgba(255,255,255,.04); border:1px solid var(--border);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Space Mono',monospace; font-size:.73rem; font-weight:700; color:var(--text-muted);
+  }
+  .option.selected .opt-letter { background:rgba(56,189,248,.15); border-color:var(--accent); color:var(--accent); }
+  .option.correct .opt-letter { background:rgba(74,222,128,.18); border-color:var(--green); color:var(--green); }
+  .option.wrong .opt-letter { background:rgba(248,113,113,.18); border-color:var(--red); color:var(--red); }
+
+  .explanation-box {
+    margin-top:.9rem; padding:.9rem 1.15rem;
+    background:rgba(0,0,0,.25); border-left:3px solid var(--accent4);
+    border-radius:0 8px 8px 0; font-size:.83rem; color:var(--text-dim);
+    display:none;
+  }
+  .explanation-box.visible { display:block; }
+  .exp-label { font-size:.7rem; color:var(--accent4); text-transform:uppercase; letter-spacing:.07em; font-weight:600; margin-bottom:.35rem; }
+  .exp-formula { font-family:'Space Mono',monospace; color:var(--accent); font-size:.78rem; margin:.4rem 0; background:rgba(56,189,248,.05); padding:.3rem .6rem; border-radius:5px; display:inline-block; }
+
+  .quiz-btn {
+    background:linear-gradient(135deg,var(--accent),#0284c7);
+    color:#0d1117; font-family:'Syne',sans-serif; font-weight:700;
+    border:none; padding:.8rem 1.8rem; border-radius:9px; cursor:pointer;
+    font-size:.92rem; transition:all .2s; letter-spacing:.03em;
+  }
+  .quiz-btn:hover { transform:translateY(-2px); box-shadow:0 8px 22px rgba(56,189,248,.25); }
+  .quiz-btn:disabled { opacity:.35; cursor:default; transform:none; box-shadow:none; }
+  .quiz-btn.secondary {
+    background:var(--surface2); color:var(--text);
+    border:1px solid var(--border);
+  }
+  .quiz-btn.secondary:hover { border-color:var(--accent); color:var(--accent); box-shadow:none; }
+
+  .result-screen { display:none; text-align:center; padding:1.5rem 0; }
+  .result-screen.active { display:block; }
+  .score-ring {
+    width:150px; height:150px; margin:0 auto 1.4rem;
+    position:relative; display:flex; align-items:center; justify-content:center;
+  }
+  .score-ring svg { position:absolute; inset:0; transform:rotate(-90deg); }
+  .score-text { position:relative; }
+  .score-text .big { font-family:'Space Mono',monospace; font-size:2.2rem; font-weight:700; color:var(--accent); display:block; }
+  .score-text .small { font-size:.75rem; color:var(--text-muted); font-family:'Space Mono',monospace; }
+  .result-grade { font-family:'Syne',sans-serif; font-weight:800; font-size:1.9rem; margin-bottom:.4rem; color:var(--text); }
+  .result-msg { color:var(--text-dim); margin-bottom:1.8rem; font-size:.92rem; }
+  .result-breakdown { display:flex; justify-content:center; gap:2.5rem; margin-bottom:1.8rem; }
+  .rb-item .rb-num { font-family:'Space Mono',monospace; font-size:1.7rem; font-weight:700; }
+  .rb-item .rb-label { font-size:.7rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:.05em; }
+
+  @media (max-width:660px) {
+    .hero { grid-template-columns:1fr; }
+    .hero-visual { display:none; }
+    .qr-grid { grid-template-columns:1fr; }
+    nav { padding:0 1rem; }
+    .page { padding:1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">NEET<span>2026</span></div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showPage('home')">Overview</button>
+    <button class="nav-tab" onclick="showPage('concepts')">Concepts</button>
+    <button class="nav-tab" onclick="showPage('numericals')">Numericals</button>
+    <button class="nav-tab" onclick="showPage('quickref')">Quick Ref</button>
+    <button class="nav-tab" onclick="showPage('quiz')">Quiz</button>
+  </div>
+  <div class="chem-tag">⚗️ CHEMISTRY</div>
+</nav>
+
+<!-- HOME -->
+<div id="home" class="page active">
+  <div class="hero">
+    <div>
+      <div class="hero-badge">🔬 Foundation of Chemistry — Very High Weightage</div>
+      <h1>Chapter 3<br><em>Mole Concept</em><br>&amp; Stoichiometry</h1>
+      <p class="hero-sub">If this chapter is weak, nearly all chemistry numericals suffer. Master the mole and every calculation falls into place — even for non-science backgrounds.</p>
+      <div class="hero-stats">
+        <div class="stat"><div class="stat-num">10</div><div class="stat-label">Topics</div></div>
+        <div class="stat"><div class="stat-num">12+</div><div class="stat-label">Solved Sums</div></div>
+        <div class="stat"><div class="stat-num">15</div><div class="stat-label">Quiz Questions</div></div>
+        <div class="stat"><div class="stat-num">3–5</div><div class="stat-label">NEET Marks</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="electron-orbit">
+        <div class="e-dot"></div>
+      </div>
+      <div class="electron-orbit">
+        <div class="e-dot"></div>
+      </div>
+      <div class="atom-core">⚗️</div>
+    </div>
+  </div>
+
+  <div style="max-width:1100px;margin:0 auto;padding:0 2rem 3rem">
+    <div class="section-title"><span class="accent">10</span> Topics to Master</div>
+    <div class="topic-grid">
+      <div class="topic-card" onclick="openConcept(0)"><div class="topic-num">Topic 01</div><div class="topic-title">The Mole Concept</div><div class="topic-desc">What is a mole, why it exists, and how it connects the microscopic world to measurable masses.</div><span class="topic-pill pill-blue">n = mass / M</span></div>
+      <div class="topic-card" onclick="openConcept(1)"><div class="topic-num">Topic 02</div><div class="topic-title">Avogadro's Number</div><div class="topic-desc">N_A = 6.022 × 10²³ — counting atoms, molecules, and ions. The bridge between moles and particles.</div><span class="topic-pill pill-orange">N = n × N_A</span></div>
+      <div class="topic-card" onclick="openConcept(2)"><div class="topic-num">Topic 03</div><div class="topic-title">Molar Mass Calculations</div><div class="topic-desc">Calculate molecular weight from atomic masses. Foundation for all mole conversions.</div><span class="topic-pill pill-green">Atomic mass table</span></div>
+      <div class="topic-card" onclick="openConcept(3)"><div class="topic-num">Topic 04</div><div class="topic-title">Mole–Mass Conversion</div><div class="topic-desc">Convert between moles and grams in both directions. The most-used skill in chemistry.</div><span class="topic-pill pill-teal">Two-way conversion</span></div>
+      <div class="topic-card" onclick="openConcept(4)"><div class="topic-num">Topic 05</div><div class="topic-title">Limiting Reagent</div><div class="topic-desc">Which reactant runs out first and controls how much product forms? The key to yield problems.</div><span class="topic-pill pill-orange">Controls product</span></div>
+      <div class="topic-card" onclick="openConcept(5)"><div class="topic-num">Topic 06</div><div class="topic-title">Percentage Composition</div><div class="topic-desc">What fraction of a compound's mass comes from each element? Essential for empirical formula.</div><span class="topic-pill pill-purple">% = (part/total)×100</span></div>
+      <div class="topic-card" onclick="openConcept(6)"><div class="topic-num">Topic 07</div><div class="topic-title">Empirical Formula</div><div class="topic-desc">The simplest whole-number ratio of atoms in a compound — found from percentage composition.</div><span class="topic-pill pill-blue">Simplest ratio</span></div>
+      <div class="topic-card" onclick="openConcept(7)"><div class="topic-num">Topic 08</div><div class="topic-title">Molecular Formula</div><div class="topic-desc">The actual number of each atom in one molecule — found using empirical formula and molar mass.</div><span class="topic-pill pill-green">n × EF</span></div>
+      <div class="topic-card" onclick="openConcept(8)"><div class="topic-num">Topic 09</div><div class="topic-title">Stoichiometric Calculations</div><div class="topic-desc">Use balanced equations to find how much product forms from given reactants. Real chemistry math.</div><span class="topic-pill pill-teal">Mole ratio method</span></div>
+      <div class="topic-card" onclick="openConcept(9)"><div class="topic-num">Topic 10</div><div class="topic-title">Volume–Mole Relations in Gases</div><div class="topic-desc">At STP, 1 mole of any gas = 22.4 L. Connect volume, moles, and number of molecules.</div><span class="topic-pill pill-purple">22.4 L/mol at STP</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- CONCEPTS PAGE -->
+<div id="concepts" class="page">
+  <div id="concept-list">
+    <div class="section-title"><span class="accent">All</span> Concepts</div>
+    <div class="topic-grid">
+      <div class="topic-card" onclick="openConcept(0)"><div class="topic-num">Topic 01</div><div class="topic-title">The Mole Concept</div><div class="topic-desc">What is a mole and why chemists invented it.</div></div>
+      <div class="topic-card" onclick="openConcept(1)"><div class="topic-num">Topic 02</div><div class="topic-title">Avogadro's Number</div><div class="topic-desc">Counting particles: atoms, molecules, ions.</div></div>
+      <div class="topic-card" onclick="openConcept(2)"><div class="topic-num">Topic 03</div><div class="topic-title">Molar Mass Calculations</div><div class="topic-desc">Calculating molecular weight step by step.</div></div>
+      <div class="topic-card" onclick="openConcept(3)"><div class="topic-num">Topic 04</div><div class="topic-title">Mole–Mass Conversion</div><div class="topic-desc">Going between grams and moles fluently.</div></div>
+      <div class="topic-card" onclick="openConcept(4)"><div class="topic-num">Topic 05</div><div class="topic-title">Limiting Reagent</div><div class="topic-desc">Which reactant controls the product amount.</div></div>
+      <div class="topic-card" onclick="openConcept(5)"><div class="topic-num">Topic 06</div><div class="topic-title">Percentage Composition</div><div class="topic-desc">Mass fraction of each element in a compound.</div></div>
+      <div class="topic-card" onclick="openConcept(6)"><div class="topic-num">Topic 07</div><div class="topic-title">Empirical Formula</div><div class="topic-desc">Simplest atom ratio from % composition data.</div></div>
+      <div class="topic-card" onclick="openConcept(7)"><div class="topic-num">Topic 08</div><div class="topic-title">Molecular Formula</div><div class="topic-desc">Actual atoms per molecule using molar mass.</div></div>
+      <div class="topic-card" onclick="openConcept(8)"><div class="topic-num">Topic 09</div><div class="topic-title">Stoichiometric Calculations</div><div class="topic-desc">Mole ratio method for balanced equations.</div></div>
+      <div class="topic-card" onclick="openConcept(9)"><div class="topic-num">Topic 10</div><div class="topic-title">Volume–Mole Relations</div><div class="topic-desc">Molar volume of gases at STP.</div></div>
+    </div>
+  </div>
+  <div id="concept-detail" class="concept-detail">
+    <button class="back-btn" onclick="closeConcept()">← Back to Topics</button>
+    <div id="concept-content"></div>
+  </div>
+</div>
+
+<!-- NUMERICALS PAGE -->
+<div id="numericals" class="page">
+  <div class="section-title"><span class="accent">Solved</span> Numericals</div>
+  <div id="num-content"></div>
+</div>
+
+<!-- QUICK REF PAGE -->
+<div id="quickref" class="page">
+  <div class="section-title"><span class="accent">Quick</span> Reference</div>
+  <div class="qr-grid">
+    <div class="qr-card">
+      <h3>⚗️ Core Mole Formulas</h3>
+      <div class="qr-formula"><div class="qr-name">Moles from mass</div><div class="qr-eq">n = mass (g) / Molar Mass (g/mol)</div></div>
+      <div class="qr-formula"><div class="qr-name">Mass from moles</div><div class="qr-eq">mass = n × Molar Mass</div></div>
+      <div class="qr-formula"><div class="qr-name">Number of particles</div><div class="qr-eq">N = n × 6.022 × 10²³</div></div>
+      <div class="qr-formula"><div class="qr-name">Moles from particles</div><div class="qr-eq">n = N / 6.022 × 10²³</div></div>
+    </div>
+    <div class="qr-card">
+      <h3>🔬 Gas Volume (STP)</h3>
+      <div class="qr-formula"><div class="qr-name">Molar volume at STP</div><div class="qr-eq">V = 22.4 L per mole</div></div>
+      <div class="qr-formula"><div class="qr-name">Moles from volume</div><div class="qr-eq">n = Volume (L) / 22.4</div></div>
+      <div class="qr-formula"><div class="qr-name">Volume from moles</div><div class="qr-eq">V = n × 22.4 L</div></div>
+      <div class="qr-formula"><div class="qr-name">STP conditions</div><div class="qr-eq">0°C (273 K), 1 atm pressure</div></div>
+    </div>
+    <div class="qr-card">
+      <h3>📊 % Composition & Formulas</h3>
+      <div class="qr-formula"><div class="qr-name">% by mass of element</div><div class="qr-eq">% = (mass of element / molar mass) × 100</div></div>
+      <div class="qr-formula"><div class="qr-name">Empirical formula step</div><div class="qr-eq">Divide % by atomic mass → simplest ratio</div></div>
+      <div class="qr-formula"><div class="qr-name">Molecular formula</div><div class="qr-eq">MF = n × EF  where n = M / EF_mass</div></div>
+    </div>
+    <div class="qr-card">
+      <h3>⚖️ Stoichiometry Method</h3>
+      <div class="qr-formula"><div class="qr-name">Step 1</div><div class="qr-eq">Balance the equation</div></div>
+      <div class="qr-formula"><div class="qr-name">Step 2</div><div class="qr-eq">Convert given to moles (n = m/M)</div></div>
+      <div class="qr-formula"><div class="qr-name">Step 3</div><div class="qr-eq">Use mole ratio from equation</div></div>
+      <div class="qr-formula"><div class="qr-name">Step 4</div><div class="qr-eq">Convert moles back to grams/volume</div></div>
+    </div>
+    <div class="qr-card">
+      <h3>🔑 Key Atomic Masses (NEET)</h3>
+      <div class="qr-formula"><div class="qr-name">Essential values</div><div class="qr-eq">H=1, C=12, N=14, O=16, Na=23, Mg=24, Al=27, S=32, Cl=35.5, K=39, Ca=40, Fe=56, Cu=64, Zn=65</div></div>
+    </div>
+    <div class="qr-card">
+      <h3>🎯 Limiting Reagent Method</h3>
+      <div class="qr-formula"><div class="qr-name">Step 1</div><div class="qr-eq">Find moles of each reactant</div></div>
+      <div class="qr-formula"><div class="qr-name">Step 2</div><div class="qr-eq">Divide moles by stoichiometric coefficient</div></div>
+      <div class="qr-formula"><div class="qr-name">Step 3</div><div class="qr-eq">Smaller value = Limiting Reagent</div></div>
+      <div class="qr-formula"><div class="qr-name">Step 4</div><div class="qr-eq">Use LR moles × ratio to find product</div></div>
+    </div>
+  </div>
+
+  <div class="concept-block">
+    <h3><span>📋</span> Complete Variable Reference</h3>
+    <table class="ref-table">
+      <tr><th>Symbol</th><th>Meaning</th><th>Unit</th><th>Formula / Note</th></tr>
+      <tr><td>n</td><td>Number of moles</td><td class="mono">mol</td><td>n = mass / M</td></tr>
+      <tr><td>M</td><td>Molar mass</td><td class="mono">g/mol</td><td>Sum of atomic masses</td></tr>
+      <tr><td>m</td><td>Mass of substance</td><td class="mono">g or kg</td><td>m = n × M</td></tr>
+      <tr><td>N</td><td>Number of particles (atoms/molecules)</td><td class="mono">dimensionless</td><td>N = n × N_A</td></tr>
+      <tr><td>N_A</td><td>Avogadro's number</td><td class="mono">mol⁻¹</td><td>6.022 × 10²³</td></tr>
+      <tr><td>V</td><td>Volume at STP</td><td class="mono">L</td><td>V = n × 22.4</td></tr>
+      <tr><td>EF</td><td>Empirical formula</td><td class="mono">—</td><td>Simplest ratio of atoms</td></tr>
+      <tr><td>MF</td><td>Molecular formula</td><td class="mono">—</td><td>MF = n × EF</td></tr>
+      <tr><td>LR</td><td>Limiting reagent</td><td class="mono">—</td><td>Reactant that runs out first</td></tr>
+    </table>
+  </div>
+</div>
+
+<!-- QUIZ PAGE -->
+<div id="quiz" class="page">
+  <div class="quiz-container">
+    <div id="quiz-start">
+      <div class="quiz-header">
+        <h2>🧪 Mole Concept Quiz</h2>
+        <p>15 NEET-style questions with full explanations. Test your understanding!</p>
+      </div>
+      <div style="display:flex;justify-content:center;gap:1rem;margin-top:1.5rem;flex-wrap:wrap">
+        <button class="quiz-btn" onclick="startQuiz()">Start Quiz →</button>
+        <button class="quiz-btn secondary" onclick="showPage('quickref')">Review Formulas First</button>
+      </div>
+    </div>
+    <div id="quiz-active" style="display:none">
+      <div class="progress-bar-wrap"><div class="progress-bar" id="progress-bar" style="width:0%"></div></div>
+      <div class="progress-text" id="progress-text">0 / 15</div>
+      <div id="questions-container"></div>
+      <div style="display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap">
+        <button class="quiz-btn secondary" id="prev-btn" onclick="prevQ()" disabled>← Prev</button>
+        <button class="quiz-btn" id="next-btn" onclick="nextQ()">Next →</button>
+        <button class="quiz-btn" id="submit-btn" onclick="submitQuiz()" style="display:none;background:linear-gradient(135deg,var(--accent3),#16a34a);color:#0d1117">Submit Quiz ✓</button>
+      </div>
+    </div>
+    <div id="quiz-result" class="result-screen">
+      <div class="score-ring">
+        <svg viewBox="0 0 150 150"><circle cx="75" cy="75" r="64" fill="none" stroke="#1c2230" stroke-width="9"/><circle id="score-arc" cx="75" cy="75" r="64" fill="none" stroke="url(#cgrad)" stroke-width="9" stroke-linecap="round" stroke-dasharray="402.1" stroke-dashoffset="402.1"/><defs><linearGradient id="cgrad" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#38bdf8"/><stop offset="100%" stop-color="#e879f9"/></linearGradient></defs></svg>
+        <div class="score-text"><span class="big" id="score-num">0</span><span class="small">/ 15</span></div>
+      </div>
+      <div class="result-grade" id="result-grade"></div>
+      <div class="result-msg" id="result-msg"></div>
+      <div class="result-breakdown">
+        <div class="rb-item"><div class="rb-num" id="rb-correct" style="color:var(--green)">0</div><div class="rb-label">Correct</div></div>
+        <div class="rb-item"><div class="rb-num" id="rb-wrong" style="color:var(--red)">0</div><div class="rb-label">Wrong</div></div>
+        <div class="rb-item"><div class="rb-num" id="rb-skip" style="color:var(--gold)">0</div><div class="rb-label">Skipped</div></div>
+      </div>
+      <div style="display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap">
+        <button class="quiz-btn" onclick="restartQuiz()">Try Again</button>
+        <button class="quiz-btn secondary" onclick="showPage('concepts')">Review Concepts</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── CONCEPTS DATA ─────────────────────────────────────────────────────────────
+const concepts = [
+  {
+    title: "The Mole Concept",
+    subtitle: "Chemistry's counting unit — connecting the invisible atom world to weighable amounts in the lab.",
+    blocks: [
+      {
+        icon: "🤔",
+        title: "Why Do We Need a Mole?",
+        type: "text",
+        content: [
+          { label: "The problem", text: "Atoms are incredibly tiny — one grain of sand contains more atoms than stars in the observable universe. You can never count atoms one by one. Chemists needed a practical way to 'count' huge numbers of atoms through weighing." },
+          { label: "The solution: the mole", text: "Just like a 'dozen' always means 12, a 'mole' always means exactly 6.022 × 10²³ particles. This number was chosen so that the molar mass in grams equals the atomic/molecular mass in atomic mass units (amu)." },
+          { label: "Beautiful consequence", text: "The molar mass of carbon is 12 g/mol. This means 12 grams of carbon contains exactly 6.022 × 10²³ carbon atoms. You can WEIGH a mole!" },
+        ]
+      },
+      {
+        icon: "📐",
+        title: "The Core Formula",
+        type: "formulas",
+        formulas: [
+          { label: "Number of moles (the master formula)", eq: "n = mass (g)  /  Molar Mass (g/mol)" },
+          { label: "Rearranged to find mass", eq: "mass = n  ×  Molar Mass" },
+          { label: "Rearranged to find molar mass", eq: "Molar Mass = mass / n" },
+        ],
+        note: "n is always in moles (mol). Mass must be in grams. Molar mass is in g/mol."
+      },
+      {
+        icon: "🍩",
+        title: "Real-World Analogy",
+        type: "analogy",
+        text: "Think of a 'mole' exactly like a 'dozen'. A dozen eggs = 12 eggs. A mole of water = 6.022×10²³ water molecules. A baker weighs flour by the kilogram rather than counting grains — similarly, a chemist weighs substances by the gram and converts to moles."
+      }
+    ]
+  },
+  {
+    title: "Avogadro's Number (N_A)",
+    subtitle: "The count: 6.022 × 10²³ — one of the most important numbers in all of science.",
+    blocks: [
+      {
+        icon: "🔢",
+        title: "What is Avogadro's Number?",
+        type: "text",
+        content: [
+          { label: "Value", text: "N_A = 6.022 × 10²³ per mole. This is the number of particles in exactly one mole of any substance." },
+          { label: "What 'particles' means", text: "For elements like He, Ar: 1 mole = 6.022×10²³ atoms. For molecular compounds like H₂O: 1 mole = 6.022×10²³ molecules. For ionic compounds like NaCl: 1 mole = 6.022×10²³ formula units." },
+          { label: "How big is it?", text: "If you had 6.022×10²³ rice grains, they would cover Earth's entire surface to a depth of 75 meters. That is how many particles are in just 18 grams of water!" },
+        ]
+      },
+      {
+        icon: "📐",
+        title: "Particle–Mole Formulas",
+        type: "formulas",
+        formulas: [
+          { label: "Number of particles from moles", eq: "N = n  ×  N_A   =   n  ×  6.022 × 10²³" },
+          { label: "Moles from number of particles", eq: "n = N / N_A   =   N / (6.022 × 10²³)" },
+          { label: "Combined master equation", eq: "n = mass / M  =  N / N_A  =  V(L) / 22.4  (at STP)" },
+        ],
+        note: "The last equation links all three conversion pathways — memorise this triangle!"
+      }
+    ]
+  },
+  {
+    title: "Molar Mass Calculations",
+    subtitle: "Add up atomic masses to find how heavy one mole of a substance is.",
+    blocks: [
+      {
+        icon: "⚖️",
+        title: "How to Calculate Molar Mass",
+        type: "text",
+        content: [
+          { label: "Step 1", text: "Write the molecular formula of the compound." },
+          { label: "Step 2", text: "Look up the atomic mass of each element (from the periodic table). For NEET: H=1, C=12, N=14, O=16, S=32, Cl=35.5, Na=23, Ca=40, Fe=56." },
+          { label: "Step 3", text: "Multiply each element's atomic mass by the number of atoms of that element in the formula." },
+          { label: "Step 4", text: "Add all the values. The result is the molar mass in g/mol." },
+          { label: "Example — H₂O", text: "H: 2 atoms × 1 g/mol = 2. O: 1 atom × 16 g/mol = 16. Molar mass = 2 + 16 = 18 g/mol." },
+          { label: "Example — H₂SO₄", text: "H: 2×1=2, S: 1×32=32, O: 4×16=64. Total = 2+32+64 = 98 g/mol." },
+        ]
+      },
+      {
+        icon: "📋",
+        title: "Key Molar Masses to Memorise",
+        type: "table",
+        headers: ["Compound", "Formula", "Molar Mass (g/mol)", "How calculated"],
+        rows: [
+          ["Water","H₂O","18","2(1) + 16 = 18"],
+          ["Carbon dioxide","CO₂","44","12 + 2(16) = 44"],
+          ["Sodium chloride","NaCl","58.5","23 + 35.5 = 58.5"],
+          ["Sulfuric acid","H₂SO₄","98","2+32+64 = 98"],
+          ["Ammonia","NH₃","17","14 + 3(1) = 17"],
+          ["Glucose","C₆H₁₂O₆","180","6(12)+12(1)+6(16)=180"],
+          ["Calcium carbonate","CaCO₃","100","40+12+3(16)=100"],
+          ["Sodium hydroxide","NaOH","40","23+16+1=40"],
+        ]
+      }
+    ]
+  },
+  {
+    title: "Mole–Mass Conversion",
+    subtitle: "The two-direction highway between grams in the lab and moles in calculations.",
+    blocks: [
+      {
+        icon: "🔄",
+        title: "The Two Directions",
+        type: "text",
+        content: [
+          { label: "Grams → Moles", text: "Divide the mass by the molar mass. n = m / M. Example: 36 g of water → n = 36/18 = 2 mol." },
+          { label: "Moles → Grams", text: "Multiply the moles by the molar mass. m = n × M. Example: 3 mol of CO₂ → m = 3 × 44 = 132 g." },
+          { label: "The map", text: "mass (g) ÷ M → moles → × M gives mass back. You can also go: moles × N_A = number of particles." },
+        ]
+      },
+      {
+        icon: "📐",
+        title: "Conversion Formulas",
+        type: "formulas",
+        formulas: [
+          { label: "Grams to moles", eq: "n = m / M" },
+          { label: "Moles to grams", eq: "m = n × M" },
+          { label: "Then: moles to particles", eq: "N = n × 6.022 × 10²³" },
+          { label: "Then: moles to volume (gas at STP)", eq: "V = n × 22.4 L" },
+        ]
+      }
+    ]
+  },
+  {
+    title: "Limiting Reagent",
+    subtitle: "The reactant that gets completely used up first — it limits how much product can form.",
+    blocks: [
+      {
+        icon: "🍞",
+        title: "The Sandwich Analogy",
+        type: "analogy",
+        text: "Making sandwiches: 1 sandwich needs 2 bread slices + 1 filling. You have 10 bread slices and 3 fillings. Max sandwiches = 3 (limited by filling, not bread). Filling is the LIMITING REAGENT. Bread is in excess. Chemistry works the same way!"
+      },
+      {
+        icon: "🔬",
+        title: "How to Find the Limiting Reagent",
+        type: "text",
+        content: [
+          { label: "Step 1", text: "Write the balanced chemical equation." },
+          { label: "Step 2", text: "Convert the given mass of EACH reactant to moles using n = m/M." },
+          { label: "Step 3", text: "Divide each reactant's moles by its stoichiometric coefficient (the number in front of it in the balanced equation)." },
+          { label: "Step 4", text: "The reactant with the SMALLER quotient is the Limiting Reagent (LR)." },
+          { label: "Step 5", text: "Use the moles of the LR and the mole ratio to calculate the product formed." },
+        ]
+      },
+      {
+        icon: "📐",
+        title: "Formula Summary",
+        type: "formulas",
+        formulas: [
+          { label: "Identify LR", eq: "Compare: (moles of A / coeff of A)  vs  (moles of B / coeff of B)" },
+          { label: "Product from LR", eq: "moles of product = moles of LR × (coeff of product / coeff of LR)" },
+        ]
+      }
+    ]
+  },
+  {
+    title: "Percentage Composition",
+    subtitle: "What percentage of a compound's total mass comes from each element?",
+    blocks: [
+      {
+        icon: "📊",
+        title: "Understanding Percentage Composition",
+        type: "text",
+        content: [
+          { label: "Definition", text: "Percentage composition is the mass percentage of each element present in a compound. It tells you: 'out of every 100 grams of this compound, how many grams are from element X?'" },
+          { label: "Why it matters", text: "Percentage composition is the first step to finding the empirical formula. It is also tested directly in NEET (e.g., % of N in urea, % of O in CO₂)." },
+          { label: "Key insight", text: "The percentages of ALL elements in a compound must add up to exactly 100%." },
+        ]
+      },
+      {
+        icon: "📐",
+        title: "Percentage Composition Formula",
+        type: "formulas",
+        formulas: [
+          { label: "% mass of an element", eq: "% element = (mass of element in 1 mol / molar mass of compound) × 100" },
+          { label: "Expanded form", eq: "% X = (n × at. mass of X / molar mass) × 100\n  where n = number of X atoms in formula" },
+        ]
+      }
+    ]
+  },
+  {
+    title: "Empirical Formula",
+    subtitle: "The simplest whole-number ratio of atoms — derived from experimental percentage data.",
+    blocks: [
+      {
+        icon: "🔍",
+        title: "Step-by-Step Method",
+        type: "text",
+        content: [
+          { label: "Step 1 — Start with %", text: "Take the given percentage of each element. If percentages are given, assume 100 g sample so % directly becomes grams." },
+          { label: "Step 2 — Convert to moles", text: "Divide each element's mass by its atomic mass to get moles of each element." },
+          { label: "Step 3 — Find ratio", text: "Divide all mole values by the smallest mole value. This gives the mole ratio." },
+          { label: "Step 4 — Make whole numbers", text: "If the ratios are not whole numbers, multiply all by the smallest integer that makes them whole (e.g., if ratio is 1.5:1, multiply by 2 to get 3:2)." },
+          { label: "Step 5 — Write formula", text: "Write the empirical formula using the whole number ratios as subscripts." },
+        ]
+      },
+      {
+        icon: "📐",
+        title: "Method in Formula Form",
+        type: "formulas",
+        formulas: [
+          { label: "Step 1→2: moles of each element", eq: "moles = % of element / atomic mass" },
+          { label: "Step 3: relative ratio", eq: "ratio = moles of element / smallest moles value" },
+        ]
+      }
+    ]
+  },
+  {
+    title: "Molecular Formula",
+    subtitle: "The actual count of atoms per molecule — a multiple of the empirical formula.",
+    blocks: [
+      {
+        icon: "🔗",
+        title: "Empirical vs Molecular Formula",
+        type: "text",
+        content: [
+          { label: "Empirical formula (EF)", text: "Simplest ratio. Example: CH₂O is the EF for glucose." },
+          { label: "Molecular formula (MF)", text: "Actual formula. Glucose is C₆H₁₂O₆ = 6 × (CH₂O). So MF = n × EF where n is a whole number." },
+          { label: "How to find n", text: "n = Molar Mass of compound / Molar Mass of empirical formula. Then MF = n × EF." },
+          { label: "Example", text: "EF = CH₂, EF mass = 14. If molar mass = 56, then n = 56/14 = 4. So MF = C₄H₈." },
+        ]
+      },
+      {
+        icon: "📐",
+        title: "Molecular Formula Formulas",
+        type: "formulas",
+        formulas: [
+          { label: "Multiplying factor", eq: "n = Molar Mass (given) / Mass of Empirical Formula" },
+          { label: "Molecular formula", eq: "Molecular Formula = n × Empirical Formula" },
+        ]
+      }
+    ]
+  },
+  {
+    title: "Stoichiometric Calculations",
+    subtitle: "Using balanced equations to find exact amounts of reactants used or products formed.",
+    blocks: [
+      {
+        icon: "⚖️",
+        title: "What is Stoichiometry?",
+        type: "text",
+        content: [
+          { label: "Definition", text: "Stoichiometry (from Greek: stoicheion = element, metron = measure) is the calculation of relative quantities of reactants and products in chemical reactions." },
+          { label: "The balanced equation is the key", text: "In N₂ + 3H₂ → 2NH₃, the coefficients (1, 3, 2) give the MOLE RATIO. This means 1 mol N₂ reacts with 3 mol H₂ to produce 2 mol NH₃." },
+          { label: "The universal method", text: "ALWAYS convert given quantity to moles first. Then use mole ratio. Then convert back to grams or volume." },
+        ]
+      },
+      {
+        icon: "📐",
+        title: "Stoichiometry Road Map",
+        type: "formulas",
+        formulas: [
+          { label: "Universal 4-step path", eq: "given grams → (÷M) → moles A → (×ratio) → moles B → (×M) → grams B" },
+          { label: "Mole ratio from equation", eq: "moles of B = moles of A × (coeff B / coeff A)" },
+        ]
+      }
+    ]
+  },
+  {
+    title: "Volume–Mole Relations in Gases",
+    subtitle: "At STP, every gas occupies the same volume per mole — a beautiful universal law.",
+    blocks: [
+      {
+        icon: "💨",
+        title: "Molar Volume — The Key Concept",
+        type: "text",
+        content: [
+          { label: "What is STP?", text: "STP = Standard Temperature and Pressure = 0°C (273 K) and 1 atm pressure. This is the reference condition for gas volume calculations in NEET." },
+          { label: "Molar volume", text: "At STP, 1 mole of ANY ideal gas occupies exactly 22.4 litres. It doesn't matter if it's H₂, O₂, CO₂, or NH₃ — all occupy 22.4 L/mol. This is because gas volume depends on number of molecules, not their size or mass." },
+          { label: "Why 22.4 L?", text: "This comes from the ideal gas law PV = nRT. At 273 K and 1 atm: V = nRT/P = 1 × 0.0821 × 273 / 1 = 22.4 L." },
+          { label: "Note for NEET", text: "Some modern textbooks use 22.7 L at the new STP (0°C, 1 bar). For NEET 2026, use 22.4 L unless stated otherwise." },
+        ]
+      },
+      {
+        icon: "📐",
+        title: "Gas Volume Formulas",
+        type: "formulas",
+        formulas: [
+          { label: "Volume from moles (at STP)", eq: "V = n × 22.4 L" },
+          { label: "Moles from volume (at STP)", eq: "n = V / 22.4" },
+          { label: "Particles from volume", eq: "N = (V / 22.4) × 6.022 × 10²³" },
+          { label: "Combined all-in-one", eq: "n = m/M = V/22.4 = N/N_A" },
+        ],
+        note: "The last equation is the 'mole triangle'. Commit it to memory — it connects every conversion."
+      }
+    ]
+  }
+];
+
+// ── NUMERICALS DATA ───────────────────────────────────────────────────────────
+const numericals = [
+  {
+    topic: "Mole Concept", title: "Find moles of water",
+    given: ["Mass of H₂O = 36 g", "Molar mass of H₂O = 18 g/mol"],
+    find: "Number of moles of water",
+    steps: [
+      { s: "Formula: n = mass / Molar Mass", r: "" },
+      { s: "n = 36 g / 18 g/mol", r: "= 2 mol" },
+      { s: "So 36 g of water contains 2 moles of H₂O molecules.", r: "" }
+    ],
+    answer: "n = 2 mol of H₂O"
+  },
+  {
+    topic: "Avogadro's Number", title: "Count molecules in 44 g of CO₂",
+    given: ["Mass of CO₂ = 44 g", "Molar mass of CO₂ = 44 g/mol", "N_A = 6.022 × 10²³"],
+    find: "Number of CO₂ molecules",
+    steps: [
+      { s: "Step 1: Find moles → n = 44/44", r: "= 1 mol" },
+      { s: "Step 2: N = n × N_A = 1 × 6.022 × 10²³", r: "= 6.022 × 10²³ molecules" },
+      { s: "Bonus: Count O atoms = 2 × 6.022 × 10²³", r: "= 1.204 × 10²⁴ atoms" }
+    ],
+    answer: "6.022 × 10²³ molecules of CO₂"
+  },
+  {
+    topic: "Molar Mass", title: "Calculate molar mass of H₂SO₄",
+    given: ["Formula: H₂SO₄", "H=1, S=32, O=16 g/mol"],
+    find: "Molar mass of H₂SO₄",
+    steps: [
+      { s: "H: 2 atoms × 1 g/mol", r: "= 2 g/mol" },
+      { s: "S: 1 atom × 32 g/mol", r: "= 32 g/mol" },
+      { s: "O: 4 atoms × 16 g/mol", r: "= 64 g/mol" },
+      { s: "Total molar mass = 2 + 32 + 64", r: "= 98 g/mol" }
+    ],
+    answer: "Molar mass of H₂SO₄ = 98 g/mol"
+  },
+  {
+    topic: "Mole–Mass Conversion", title: "Mass of 0.5 mol of CaCO₃",
+    given: ["n = 0.5 mol", "Molar mass of CaCO₃: Ca=40, C=12, O₃=48 → M=100 g/mol"],
+    find: "Mass in grams",
+    steps: [
+      { s: "Formula: mass = n × M", r: "" },
+      { s: "mass = 0.5 × 100", r: "= 50 g" }
+    ],
+    answer: "50 g of CaCO₃"
+  },
+  {
+    topic: "Limiting Reagent", title: "N₂ + 3H₂ → 2NH₃ — find limiting reagent",
+    given: ["28 g of N₂ (M=28 g/mol)", "9 g of H₂ (M=2 g/mol)", "Equation: N₂ + 3H₂ → 2NH₃"],
+    find: "Limiting reagent and mass of NH₃ formed",
+    steps: [
+      { s: "Moles of N₂ = 28/28", r: "= 1 mol" },
+      { s: "Moles of H₂ = 9/2", r: "= 4.5 mol" },
+      { s: "Divide by coefficient — N₂: 1/1 = 1.0, H₂: 4.5/3 = 1.5", r: "" },
+      { s: "N₂ has smaller quotient (1.0 < 1.5) → N₂ is the Limiting Reagent", r: "" },
+      { s: "From equation: 1 mol N₂ → 2 mol NH₃. So moles NH₃ = 1 × 2 = 2 mol", r: "" },
+      { s: "Mass of NH₃ = 2 × 17", r: "= 34 g" }
+    ],
+    answer: "Limiting Reagent = N₂. Mass of NH₃ formed = 34 g"
+  },
+  {
+    topic: "Percentage Composition", title: "% of each element in water (H₂O)",
+    given: ["Formula: H₂O", "Molar mass = 18 g/mol", "H=1, O=16"],
+    find: "Percentage by mass of H and O",
+    steps: [
+      { s: "% H = (mass of H / molar mass) × 100 = (2 × 1 / 18) × 100 = (2/18) × 100", r: "= 11.1%" },
+      { s: "% O = (16/18) × 100", r: "= 88.9%" },
+      { s: "Verify: 11.1 + 88.9", r: "= 100% ✓" }
+    ],
+    answer: "%H = 11.1%, %O = 88.9%"
+  },
+  {
+    topic: "Empirical Formula", title: "Find EF from % composition",
+    given: ["C = 40%, H = 6.67%, O = 53.3%", "Atomic masses: C=12, H=1, O=16"],
+    find: "Empirical formula",
+    steps: [
+      { s: "Step 1: Moles of C = 40/12", r: "= 3.33" },
+      { s: "Moles of H = 6.67/1", r: "= 6.67" },
+      { s: "Moles of O = 53.3/16", r: "= 3.33" },
+      { s: "Step 2: Divide by smallest (3.33). C: 3.33/3.33=1, H: 6.67/3.33=2, O: 3.33/3.33=1", r: "" },
+      { s: "Ratio C:H:O = 1:2:1", r: "" },
+      { s: "Empirical formula = CH₂O", r: "(This is also the formula for formaldehyde and the building block of glucose!)" }
+    ],
+    answer: "Empirical formula = CH₂O"
+  },
+  {
+    topic: "Molecular Formula", title: "Find MF from EF and molar mass",
+    given: ["Empirical formula = CH₂", "Molar mass of compound = 56 g/mol", "C=12, H=1"],
+    find: "Molecular formula",
+    steps: [
+      { s: "Step 1: Find mass of empirical formula CH₂ = 12 + 2(1)", r: "= 14 g/mol" },
+      { s: "Step 2: n = Molar Mass / EF mass = 56 / 14", r: "= 4" },
+      { s: "Step 3: MF = n × EF = 4 × CH₂", r: "= C₄H₈" }
+    ],
+    answer: "Molecular formula = C₄H₈ (butene)"
+  },
+  {
+    topic: "Stoichiometry", title: "Mass of CO₂ from burning glucose",
+    given: ["C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O", "Mass of glucose = 180 g", "M(C₆H₁₂O₆)=180, M(CO₂)=44"],
+    find: "Mass of CO₂ produced",
+    steps: [
+      { s: "Step 1: Moles of glucose = 180/180", r: "= 1 mol" },
+      { s: "Step 2: From equation, 1 mol glucose → 6 mol CO₂ (mole ratio = 6/1 = 6)", r: "" },
+      { s: "Step 3: Moles of CO₂ = 1 × 6", r: "= 6 mol" },
+      { s: "Step 4: Mass of CO₂ = 6 × 44", r: "= 264 g" }
+    ],
+    answer: "264 g of CO₂ is produced"
+  },
+  {
+    topic: "Volume–Mole (Gas)", title: "Volume of 4 g of H₂ at STP",
+    given: ["Mass of H₂ = 4 g", "Molar mass of H₂ = 2 g/mol", "Molar volume at STP = 22.4 L/mol"],
+    find: "Volume at STP",
+    steps: [
+      { s: "Step 1: Moles of H₂ = 4/2", r: "= 2 mol" },
+      { s: "Step 2: Volume = n × 22.4 = 2 × 22.4", r: "= 44.8 L" }
+    ],
+    answer: "Volume of 4 g H₂ at STP = 44.8 L"
+  },
+  {
+    topic: "Mixed — All Conversions", title: "Atoms in 5.6 L of CO at STP",
+    given: ["Volume of CO at STP = 5.6 L", "M(CO)=28, N_A=6.022×10²³"],
+    find: "Number of carbon atoms",
+    steps: [
+      { s: "Step 1: Moles of CO = V/22.4 = 5.6/22.4", r: "= 0.25 mol" },
+      { s: "Step 2: Molecules of CO = 0.25 × 6.022×10²³", r: "= 1.505 × 10²³ molecules" },
+      { s: "Step 3: Each CO has 1 C atom, so C atoms = molecules", r: "= 1.505 × 10²³ atoms" }
+    ],
+    answer: "1.505 × 10²³ carbon atoms"
+  },
+  {
+    topic: "Stoichiometry + Limiting Reagent", title: "Al₂O₃ formed from Al and O₂",
+    given: ["4Al + 3O₂ → 2Al₂O₃", "27 g Al (M=27), 48 g O₂ (M=32)"],
+    find: "Mass of Al₂O₃ formed",
+    steps: [
+      { s: "Moles of Al = 27/27", r: "= 1 mol" },
+      { s: "Moles of O₂ = 48/32", r: "= 1.5 mol" },
+      { s: "Divide by coefficient: Al: 1/4=0.25, O₂: 1.5/3=0.5. Al has smaller quotient → Al is LR", r: "" },
+      { s: "From LR (Al): moles of Al₂O₃ = 1 × (2/4)", r: "= 0.5 mol" },
+      { s: "M(Al₂O₃) = 2(27)+3(16) = 54+48 = 102 g/mol", r: "" },
+      { s: "Mass of Al₂O₃ = 0.5 × 102", r: "= 51 g" }
+    ],
+    answer: "51 g of Al₂O₃ is formed. Al is the limiting reagent."
+  }
+];
+
+// ── QUIZ DATA ─────────────────────────────────────────────────────────────────
+const quizQuestions = [
+  {
+    q: "The number of moles in 9 g of water (H₂O) is:",
+    opts: ["0.25 mol", "0.5 mol", "1 mol", "2 mol"],
+    ans: 1, topic: "Mole Concept",
+    exp: "n = mass / M = 9 / 18 = 0.5 mol. Molar mass of H₂O = 2(1) + 16 = 18 g/mol.",
+    formula: "n = mass / Molar Mass"
+  },
+  {
+    q: "How many molecules are present in 2 moles of CO₂?",
+    opts: ["6.022 × 10²³", "1.204 × 10²⁴", "3.011 × 10²³", "4.816 × 10²⁴"],
+    ans: 1, topic: "Avogadro's Number",
+    exp: "N = n × N_A = 2 × 6.022 × 10²³ = 1.204 × 10²⁴ molecules.",
+    formula: "N = n × N_A"
+  },
+  {
+    q: "The molar mass of CaCO₃ is: (Ca=40, C=12, O=16)",
+    opts: ["78 g/mol", "88 g/mol", "100 g/mol", "112 g/mol"],
+    ans: 2, topic: "Molar Mass",
+    exp: "M = 40 + 12 + 3(16) = 40 + 12 + 48 = 100 g/mol.",
+    formula: "M = sum of (atomic mass × number of atoms)"
+  },
+  {
+    q: "What is the mass of 3 moles of NaOH? (Na=23, O=16, H=1)",
+    opts: ["40 g", "80 g", "120 g", "160 g"],
+    ans: 2, topic: "Mole–Mass Conversion",
+    exp: "M(NaOH) = 23+16+1 = 40 g/mol. Mass = n × M = 3 × 40 = 120 g.",
+    formula: "mass = n × M"
+  },
+  {
+    q: "The volume occupied by 0.5 mol of O₂ at STP is:",
+    opts: ["5.6 L", "11.2 L", "22.4 L", "44.8 L"],
+    ans: 1, topic: "Gas Volume",
+    exp: "V = n × 22.4 = 0.5 × 22.4 = 11.2 L.",
+    formula: "V = n × 22.4 L (at STP)"
+  },
+  {
+    q: "In the reaction N₂ + 3H₂ → 2NH₃, if 1 mol N₂ and 2 mol H₂ are taken, which is the limiting reagent?",
+    opts: ["N₂", "H₂", "NH₃", "None — both react completely"],
+    ans: 1, topic: "Limiting Reagent",
+    exp: "N₂ needs 3×(1)=3 mol H₂, but only 2 mol available. Divide by coeff: N₂: 1/1=1, H₂: 2/3=0.67. H₂ has smaller quotient, so H₂ is LR.",
+    formula: "LR has smaller value of (moles / stoichiometric coefficient)"
+  },
+  {
+    q: "The percentage of nitrogen in NH₃ is: (N=14, H=1)",
+    opts: ["12.3%", "17.6%", "82.4%", "25.0%"],
+    ans: 2, topic: "Percentage Composition",
+    exp: "M(NH₃) = 14+3=17. % N = (14/17) × 100 = 82.4%.",
+    formula: "% = (mass of element in formula / molar mass) × 100"
+  },
+  {
+    q: "A compound has C=75%, H=25% by mass. Its empirical formula is: (C=12, H=1)",
+    opts: ["CH", "CH₂", "CH₃", "CH₄"],
+    ans: 2, topic: "Empirical Formula",
+    exp: "Moles: C=75/12=6.25, H=25/1=25. Divide by 6.25: C=1, H=4. Empirical formula = CH₄.",
+    formula: "moles = % / atomic mass → divide by smallest"
+  },
+  {
+    q: "Empirical formula of a compound is CH₂O and its molar mass is 90 g/mol. Molecular formula is: (EF mass=30)",
+    opts: ["CH₂O", "C₂H₄O₂", "C₃H₆O₃", "C₄H₈O₄"],
+    ans: 2, topic: "Molecular Formula",
+    exp: "n = Molar mass / EF mass = 90/30 = 3. MF = 3 × CH₂O = C₃H₆O₃.",
+    formula: "n = M / EF_mass, then MF = n × EF"
+  },
+  {
+    q: "In the reaction: 2H₂ + O₂ → 2H₂O, how many moles of H₂O are formed from 4 mol H₂?",
+    opts: ["2 mol", "4 mol", "6 mol", "8 mol"],
+    ans: 1, topic: "Stoichiometry",
+    exp: "Mole ratio: 2 mol H₂ → 2 mol H₂O. So 4 mol H₂ → 4 mol H₂O (ratio is 1:1).",
+    formula: "moles product = moles reactant × (coeff product / coeff reactant)"
+  },
+  {
+    q: "How many atoms are present in 5.6 L of N₂ at STP?",
+    opts: ["3.011 × 10²³", "6.022 × 10²³", "1.204 × 10²⁴", "1.505 × 10²³"],
+    ans: 1, topic: "Gas Volume + Avogadro",
+    exp: "n = 5.6/22.4 = 0.25 mol. Molecules = 0.25 × 6.022×10²³ = 1.505×10²³. Each N₂ has 2 N atoms. So atoms = 2 × 1.505×10²³ = 3.011×10²³.",
+    formula: "n = V/22.4, then N = n × N_A"
+  },
+  {
+    q: "The number of moles of electrons in 18 g of H₂O is:",
+    opts: ["1 mol", "5 mol", "10 mol", "18 mol"],
+    ans: 2, topic: "Mole Concept",
+    exp: "18g H₂O = 1 mol. Each H₂O molecule has 2+8=10 electrons. So moles of electrons = 1 × 10 = 10 mol.",
+    formula: "moles of electrons = moles of molecules × electrons per molecule"
+  },
+  {
+    q: "32 g of S reacts with 16 g of O₂ to form SO₂. S + O₂ → SO₂. The limiting reagent is: (S=32, O=32)",
+    opts: ["S", "O₂", "SO₂", "Both are limiting"],
+    ans: 1, topic: "Limiting Reagent",
+    exp: "Moles S = 32/32 = 1 mol. Moles O₂ = 16/32 = 0.5 mol. Divide by coeff (both=1): S=1, O₂=0.5. O₂ is smaller → O₂ is LR.",
+    formula: "Smaller (moles/coefficient) = Limiting Reagent"
+  },
+  {
+    q: "The percentage of oxygen in CO₂ is: (C=12, O=16)",
+    opts: ["27.3%", "44.0%", "72.7%", "36.4%"],
+    ans: 2, topic: "Percentage Composition",
+    exp: "M(CO₂)=44. O mass = 2×16=32. % O = (32/44)×100 = 72.7%.",
+    formula: "% element = (total atomic mass of element / molar mass) × 100"
+  },
+  {
+    q: "At STP, 22.4 L of any ideal gas contains how many molecules?",
+    opts: ["6.022 × 10²¹", "6.022 × 10²²", "6.022 × 10²³", "6.022 × 10²⁴"],
+    ans: 2, topic: "Gas Volume + Avogadro",
+    exp: "22.4 L at STP = 1 mole of gas. N = 1 × N_A = 6.022 × 10²³ molecules. This is true for ANY ideal gas.",
+    formula: "1 mol at STP = 22.4 L = 6.022×10²³ particles"
+  }
+];
+
+// ── STATE ─────────────────────────────────────────────────────────────────────
+let currentQ = 0;
+let answers = new Array(15).fill(null);
+
+// ── NAV ───────────────────────────────────────────────────────────────────────
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  const map = { home: 0, concepts: 1, numericals: 2, quickref: 3, quiz: 4 };
+  if (map[id] !== undefined) document.querySelectorAll('.nav-tab')[map[id]].classList.add('active');
+  window.scrollTo(0, 0);
+  if (id === 'numericals') renderNumericals();
+}
+
+// ── CONCEPTS ──────────────────────────────────────────────────────────────────
+function openConcept(idx) {
+  showPage('concepts');
+  const c = concepts[idx];
+  document.getElementById('concept-list').style.display = 'none';
+  document.getElementById('concept-detail').classList.add('active');
+
+  let html = `<div class="concept-header"><h2>${c.title}</h2><p>${c.subtitle}</p></div>`;
+
+  c.blocks.forEach(b => {
+    html += `<div class="concept-block"><h3><span>${b.icon}</span> ${b.title}</h3>`;
+
+    if (b.type === 'text') {
+      b.content.forEach(item => {
+        html += `<div class="step"><div class="step-arr">→</div><div class="step-content"><strong>${item.label}:</strong> ${item.text}</div></div>`;
+      });
+    } else if (b.type === 'formulas') {
+      if (b.note) html += `<p style="font-size:.78rem;color:var(--text-muted);margin-bottom:.6rem;font-style:italic">${b.note}</p>`;
+      b.formulas.forEach(f => {
+        html += `<div class="formula-label">${f.label}</div><div class="formula-card">${f.eq}</div>`;
+      });
+    } else if (b.type === 'analogy') {
+      html += `<div class="analogy"><strong>💡 Analogy: </strong>${b.text}</div>`;
+    } else if (b.type === 'table') {
+      html += `<div style="overflow-x:auto"><table class="ref-table"><tr>${b.headers.map(h=>`<th>${h}</th>`).join('')}</tr>`;
+      b.rows.forEach((r,i) => {
+        html += `<tr>${r.map((cell,ci) => `<td ${ci>1?'class="mono"':''}>${cell}</td>`).join('')}</tr>`;
+      });
+      html += `</table></div>`;
+    }
+
+    html += `</div>`;
+  });
+
+  // warning / tip additions per topic
+  const tipMap = {
+    0: `<div class="tip-box"><strong>💡 NEET Tip:</strong> The word "mole" appears in almost every chemistry numerical. Learn to identify whether you're converting mass→moles or moles→particles or moles→volume — these are the only three pathways.</div>`,
+    1: `<div class="warn-box"><strong>⚠️ Common Error:</strong> Students confuse 'number of molecules' with 'number of atoms'. For H₂O: 1 molecule has 3 atoms (2H + 1O). Always multiply molecules by atoms per molecule to get total atoms.</div>`,
+    4: `<div class="warn-box"><strong>⚠️ Common Error:</strong> Never assume the reactant with less mass is the limiting reagent. Always convert to moles first and divide by the stoichiometric coefficient.</div>`,
+    6: `<div class="tip-box"><strong>💡 NEET Tip:</strong> If the mole ratio gives you something like 1.5 or 2.5, multiply ALL ratios by 2. If you get 1.33, multiply by 3. If you get 1.25, multiply by 4.</div>`,
+    8: `<div class="tip-box"><strong>💡 NEET Tip:</strong> Always write the balanced equation first. The coefficients ARE the mole ratios. Never use unbalanced equations for stoichiometry.</div>`,
+  };
+  if (tipMap[idx]) html += tipMap[idx];
+
+  document.getElementById('concept-content').innerHTML = html;
+  window.scrollTo(0, 0);
+}
+
+function closeConcept() {
+  document.getElementById('concept-list').style.display = 'block';
+  document.getElementById('concept-detail').classList.remove('active');
+}
+
+// ── NUMERICALS ────────────────────────────────────────────────────────────────
+function renderNumericals() {
+  const c = document.getElementById('num-content');
+  if (c.innerHTML) return;
+  let html = '';
+  numericals.forEach((n, i) => {
+    html += `<div class="numerical">
+      <div class="numerical-head">
+        <span class="num-badge">No.${String(i+1).padStart(2,'0')}</span>
+        <h4>${n.title}</h4>
+        <span style="margin-left:auto;font-size:.7rem;color:var(--text-muted);background:var(--surface);padding:.18rem .5rem;border-radius:4px;white-space:nowrap">${n.topic}</span>
+      </div>
+      <div class="numerical-body">
+        <div class="given-box">
+          <div class="label">📋 Given</div>
+          ${n.given.map(g => `<div style="margin-bottom:.2rem">• ${g}</div>`).join('')}
+          <div style="margin-top:.45rem"><strong style="color:var(--accent3);font-size:.76rem">🎯 Find:</strong> <span style="color:var(--text-dim)">${n.find}</span></div>
+        </div>
+        <div>
+          ${n.steps.map((s, si) => `
+            <div class="sol-step">
+              <div class="sol-num">Step ${si+1}</div>
+              <div class="sol-text">${s.s} <span class="math">${s.r}</span></div>
+            </div>`).join('')}
+        </div>
+        <div style="height:.5rem"></div>
+        <div class="answer-box">
+          <div class="alabel">✅ Answer</div>
+          ${n.answer}
+        </div>
+      </div>
+    </div>`;
+  });
+  c.innerHTML = html;
+}
+
+// ── QUIZ ──────────────────────────────────────────────────────────────────────
+function startQuiz() {
+  answers = new Array(15).fill(null);
+  currentQ = 0;
+  document.getElementById('quiz-start').style.display = 'none';
+  document.getElementById('quiz-active').style.display = 'block';
+  document.getElementById('quiz-result').classList.remove('active');
+  renderQuestion();
+}
+
+function renderQuestion() {
+  const q = quizQuestions[currentQ];
+  updateProgress();
+  document.getElementById('prev-btn').disabled = currentQ === 0;
+  const isLast = currentQ === 14;
+  document.getElementById('next-btn').style.display = isLast ? 'none' : 'inline-block';
+  document.getElementById('submit-btn').style.display = isLast ? 'inline-block' : 'none';
+
+  const ans = answers[currentQ];
+  const done = ans !== null;
+  const letters = ['A','B','C','D'];
+
+  let html = `<div class="question-card ${done ? 'answered' : ''}">
+    <div class="q-meta">
+      <div class="q-num">Q${currentQ+1} / 15</div>
+      <div class="q-topic">${q.topic}</div>
+    </div>
+    <div class="q-text">${q.q}</div>
+    <div class="options">
+      ${q.opts.map((opt, oi) => {
+        let cls = 'option';
+        if (done) {
+          cls += ' disabled';
+          if (oi === q.ans) cls += ' correct';
+          else if (oi === ans && oi !== q.ans) cls += ' wrong';
+        } else if (ans === oi) cls += ' selected';
+        return `<div class="${cls}" ${!done ? `onclick="selectOption(${oi})"` : ''}>
+          <div class="opt-letter">${letters[oi]}</div>${opt}
+        </div>`;
+      }).join('')}
+    </div>
+    <div class="explanation-box ${done ? 'visible' : ''}">
+      <div class="exp-label">💡 Explanation</div>
+      <div style="margin-bottom:.4rem">${q.exp}</div>
+      <div class="exp-formula">${q.formula}</div>
+    </div>
+  </div>`;
+
+  document.getElementById('questions-container').innerHTML = html;
+}
+
+function selectOption(oi) {
+  if (answers[currentQ] !== null) return;
+  answers[currentQ] = oi;
+  renderQuestion();
+}
+
+function updateProgress() {
+  const pct = (currentQ / 15 * 100).toFixed(0);
+  document.getElementById('progress-bar').style.width = pct + '%';
+  document.getElementById('progress-text').textContent = `${currentQ} / 15`;
+}
+
+function nextQ() { if (currentQ < 14) { currentQ++; renderQuestion(); } }
+function prevQ() { if (currentQ > 0) { currentQ--; renderQuestion(); } }
+
+function submitQuiz() {
+  let correct = 0, wrong = 0, skip = 0;
+  quizQuestions.forEach((q, i) => {
+    if (answers[i] === null) skip++;
+    else if (answers[i] === q.ans) correct++;
+    else wrong++;
+  });
+
+  document.getElementById('quiz-active').style.display = 'none';
+  const res = document.getElementById('quiz-result');
+  res.classList.add('active');
+
+  document.getElementById('score-num').textContent = correct;
+  document.getElementById('rb-correct').textContent = correct;
+  document.getElementById('rb-wrong').textContent = wrong;
+  document.getElementById('rb-skip').textContent = skip;
+
+  const arc = document.getElementById('score-arc');
+  const circumference = 402.1;
+  arc.style.strokeDashoffset = circumference * (1 - correct / 15);
+
+  const grades = [
+    [13, "🏆 Excellent!", "Outstanding! Mole concept is one of your strengths now."],
+    [10, "⭐ Very Good!", "Strong performance. Review the questions you got wrong."],
+    [7,  "📚 Good Effort", "Decent understanding. Focus on stoichiometry and limiting reagent."],
+    [4,  "💪 Keep Going", "Practice more numericals — this topic needs repetition."],
+    [0,  "🌱 Just Starting", "Go through all concepts step by step, then retry the quiz."]
+  ];
+
+  const [, grade, msg] = grades.find(([min]) => correct >= min);
+  document.getElementById('result-grade').textContent = grade;
+  document.getElementById('result-msg').textContent = msg;
+}
+
+function restartQuiz() {
+  document.getElementById('quiz-result').classList.remove('active');
+  document.getElementById('quiz-start').style.display = 'block';
+}
+</script>
+</body>
+</html>
