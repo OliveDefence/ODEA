@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B12 · Evolution | Olive Defence</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+
+:root{
+  /* ── THEME B12: Deep Slate-Bronze + Fossil Ivory — ancient, geological ── */
+  --bg:        #F0EDE6;
+  --bg2:       #E4DFD4;
+  --bg3:       #D4CCBC;
+  --white:     #FAF8F4;
+  --ink:       #1A1408;
+  --ink2:      #2C2010;
+  --muted:     #6A5A3A;
+  --dim:       #A09070;
+  --border:    #CEBEA0;
+
+  --primary:      #5A3A10;
+  --primaryLt:    #7A5018;
+  --primaryPale:  #F5EEE0;
+
+  --amber:        #8A6008;
+  --amberLt:      #AE7A10;
+  --amberPale:    #FDF3DC;
+
+  --green:        #1A5A28;
+  --greenLt:      #227838;
+  --greenPale:    #E2F2E8;
+
+  --red:          #8A1A10;
+  --redLt:        #AE2018;
+  --redPale:      #FAECEA;
+
+  --blue:         #1A3868;
+  --bluePale:     #E4ECF6;
+
+  --purple:       #501870;
+  --purplePale:   #EEE8F6;
+
+  --teal:         #0A4840;
+  --tealPale:     #DCF0EE;
+
+  --slate:        #3A4858;
+  --slatePale:    #E8ECF2;
+
+  --radius:    12px;
+  --shadow:    0 2px 12px rgba(26,20,8,.09);
+  --shadow-md: 0 4px 20px rgba(26,20,8,.14);
+}
+
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--ink);font-size:17px;line-height:1.75;min-height:100vh}
+.page{max-width:680px;margin:0 auto;padding:0 16px 80px}
+
+/* ── HERO ─────────────────────────────────────────────────────── */
+.hero{
+  background:linear-gradient(135deg,#0C0804 0%,#5A3A10 50%,#7A5020 100%);
+  margin:0 -16px;padding:28px 20px 26px;position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 76% 20%,rgba(255,220,140,.09) 0%,transparent 55%),
+    radial-gradient(ellipse at 8% 80%,rgba(200,160,80,.06) 0%,transparent 50%);
+  pointer-events:none;
+}
+.hero::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(255,210,120,.35),transparent);
+  pointer-events:none;
+}
+.hero-kicker{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.50);margin-bottom:8px;display:flex;align-items:center;gap:8px;position:relative;z-index:1}
+.hero-kicker::before{content:'';width:18px;height:2px;background:rgba(255,255,255,.28)}
+.hero-title{font-family:'Lora',serif;font-size:clamp(24px,5.5vw,34px);font-weight:700;color:#fff;line-height:1.2;margin-bottom:10px;position:relative;z-index:1}
+.hero-title span{color:#FFD898;font-style:italic}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.66);margin-bottom:18px;line-height:1.65;position:relative;z-index:1}
+.hero-chips{display:flex;flex-wrap:wrap;gap:7px;position:relative;z-index:1}
+.chip{font-size:11px;font-weight:700;letter-spacing:1px;padding:4px 12px;border-radius:20px;text-transform:uppercase}
+.chip-w{background:rgba(255,255,255,.12);color:rgba(255,255,255,.88)}
+.chip-a{background:rgba(255,216,152,.18);color:#FFD898}
+.chip-g{background:rgba(140,240,160,.11);color:#90E8A8}
+
+/* ── TAB BAR ─────────────────────────────────────────────────── */
+.tab-bar{position:sticky;top:0;z-index:50;background:var(--white);border-bottom:2px solid var(--border);margin:0 -16px;display:flex;overflow-x:auto;box-shadow:0 2px 8px rgba(26,20,8,.07);-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.tab-bar::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;padding:14px 18px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);border:none;background:transparent;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;white-space:nowrap}
+.tab:hover{color:var(--ink);background:var(--bg)}
+.tab.on{color:var(--primary);border-bottom-color:var(--primary)}
+
+/* ── PANES ───────────────────────────────────────────────────── */
+.pane{display:none;padding-top:24px;animation:fadeUp .3s ease}
+.pane.on{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ── SECTION LABEL ───────────────────────────────────────────── */
+.sec-label{font-size:10px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--primary);margin:28px 0 12px;display:flex;align-items:center;gap:10px}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* ── INTRO BOX ───────────────────────────────────────────────── */
+.intro-box{background:var(--primaryPale);border:1.5px solid rgba(90,58,16,.20);border-radius:var(--radius);padding:20px;margin-bottom:8px}
+.intro-box p{font-size:16px;color:var(--ink2);line-height:1.8}
+.intro-box strong{color:var(--primary)}
+
+/* ── CONCEPT CARDS ───────────────────────────────────────────── */
+.c-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;box-shadow:var(--shadow);overflow:hidden}
+.c-head{display:flex;align-items:center;gap:12px;padding:16px 18px;cursor:pointer;border-left:4px solid transparent;transition:all .15s;-webkit-tap-highlight-color:transparent}
+.c-head:hover,.c-head.open{background:var(--bg);border-left-color:var(--primary)}
+.c-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.c-title{font-size:17px;font-weight:700;color:var(--ink);flex:1}
+.c-sub{font-size:12px;color:var(--dim);font-weight:600;margin-top:2px}
+.c-arrow{font-size:12px;color:var(--dim);transition:transform .2s;flex-shrink:0}
+.c-head.open .c-arrow{transform:rotate(180deg)}
+.c-body{display:none;padding:4px 18px 20px;border-top:1px solid var(--border)}
+.c-body.open{display:block;animation:fadeUp .2s ease}
+.c-body p{font-size:16px;color:var(--ink2);line-height:1.85;margin-bottom:12px}
+.c-body p:last-child{margin-bottom:0}
+.c-body strong{color:var(--primary);font-weight:700}
+.c-body em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* ── CONTENT BLOCKS ──────────────────────────────────────────── */
+.fact-box{background:var(--amberPale);border:1.5px solid rgba(138,96,8,.22);border-radius:10px;padding:16px 18px;margin:14px 0}
+.fact-box .fb-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--amber);text-transform:uppercase;margin-bottom:8px}
+.fact-box ul{list-style:none;padding:0}
+.fact-box li{font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;position:relative;line-height:1.7}
+.fact-box li::before{content:'→';position:absolute;left:0;color:var(--amber);font-weight:700;font-size:13px}
+
+.eg-box{background:var(--greenPale);border-left:4px solid var(--green);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.eg-box .eg-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--green);text-transform:uppercase;margin-bottom:6px}
+.eg-box ul{list-style:none;padding:0}
+.eg-box li{font-size:15px;color:var(--ink2);padding:4px 0 4px 18px;position:relative;line-height:1.65}
+.eg-box li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:800;font-size:12px}
+.eg-box p{font-size:15px;color:var(--ink2);line-height:1.75}
+
+.trap-box{background:var(--redPale);border:1.5px solid rgba(138,26,16,.20);border-radius:10px;padding:16px 18px;margin:14px 0}
+.trap-box .tr-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--red);text-transform:uppercase;margin-bottom:8px}
+.trap-box p,.trap-box li{font-size:15.5px;color:var(--ink2);line-height:1.75}
+.trap-box ul{list-style:none;padding:0}
+.trap-box li{padding:5px 0 5px 22px;position:relative}
+.trap-box li::before{content:'⚑';position:absolute;left:0;font-size:12px;color:var(--red)}
+
+.rule-box{background:var(--bluePale);border:1.5px solid rgba(26,56,104,.17);border-radius:10px;padding:16px 18px;margin:14px 0}
+.rule-box .rl-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--blue);text-transform:uppercase;margin-bottom:8px}
+.rule-box p{font-size:15.5px;color:var(--ink2);line-height:1.8}
+.rule-box strong{color:var(--blue)}
+
+.purple-box{background:var(--purplePale);border:1.5px solid rgba(80,24,112,.17);border-radius:10px;padding:16px 18px;margin:14px 0}
+.purple-box .pl-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--purple);text-transform:uppercase;margin-bottom:8px}
+.purple-box ul{list-style:none;padding:0}
+.purple-box li{font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;position:relative;line-height:1.8}
+.purple-box li::before{content:'◆';position:absolute;left:0;font-size:9px;color:var(--purple);top:10px}
+
+.slate-box{background:var(--slatePale);border:1.5px solid rgba(58,72,88,.17);border-radius:10px;padding:16px 18px;margin:14px 0}
+.slate-box .sl-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--slate);text-transform:uppercase;margin-bottom:8px}
+.slate-box p{font-size:15.5px;color:var(--ink2);line-height:1.8}
+.slate-box strong{color:var(--slate)}
+.slate-box ul{list-style:none;padding:0}
+.slate-box li{font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;position:relative;line-height:1.8}
+.slate-box li::before{content:'▸';position:absolute;left:0;color:var(--slate);font-size:12px;top:8px}
+
+.analogy-box{background:var(--primaryPale);border-left:4px solid var(--primary);border-radius:0 8px 8px 0;padding:14px 16px;margin:12px 0}
+.analogy-box .an-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--primary);text-transform:uppercase;margin-bottom:6px}
+.analogy-box p{font-size:15.5px;color:var(--ink2);line-height:1.75}
+.analogy-box strong{color:var(--primary)}
+
+/* timeline strip */
+.timeline{margin:16px 0;display:flex;flex-direction:column;gap:0}
+.tl-item{display:flex;gap:14px;align-items:stretch}
+.tl-left{display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:80px}
+.tl-era{font-family:'Lora',serif;font-size:12px;font-weight:700;color:var(--primary);text-align:center;line-height:1.3;padding-top:2px}
+.tl-dot{width:12px;height:12px;border-radius:50%;background:var(--primary);flex-shrink:0;margin:4px auto 0}
+.tl-line{width:2px;flex:1;background:var(--border);margin:2px auto 0}
+.tl-item:last-child .tl-line{display:none}
+.tl-content{padding:2px 0 20px;flex:1;padding-left:4px}
+.tl-title{font-size:15px;font-weight:800;color:var(--ink);margin-bottom:3px}
+.tl-desc{font-size:14.5px;color:var(--ink2);line-height:1.7}
+.tl-desc strong{color:var(--primary)}
+.tl-desc em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* journey/process strip */
+.journey{margin:16px 0;display:flex;flex-direction:column}
+.j-step{display:flex;align-items:stretch;gap:14px}
+.j-line{display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:28px}
+.j-dot{width:28px;height:28px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;margin-top:2px}
+.j-connector{width:2px;flex:1;background:var(--border);margin:2px 0}
+.j-step:last-child .j-connector{display:none}
+.j-content{padding:2px 0 18px;flex:1}
+.j-title{font-size:15px;font-weight:800;color:var(--ink);margin-bottom:3px}
+.j-desc{font-size:14.5px;color:var(--ink2);line-height:1.7}
+.j-desc strong{color:var(--primary)}
+.j-desc em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* stat band */
+.stat-band{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border-radius:var(--radius);overflow:hidden;margin:16px 0}
+.stat-cell{background:var(--white);padding:12px 8px;text-align:center}
+.stat-val{font-family:'Lora',serif;font-size:15px;font-weight:700;color:var(--primary);line-height:1;margin-bottom:4px}
+.stat-lbl{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:.4px;line-height:1.3}
+
+.compare-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
+.compare-table th{background:var(--primary);color:#fff;padding:10px 12px;text-align:left;font-size:13px;font-weight:700;letter-spacing:.5px}
+.compare-table td{padding:10px 12px;border:1px solid var(--border);color:var(--ink2);vertical-align:top;line-height:1.65}
+.compare-table tr:nth-child(even) td{background:var(--bg)}
+.compare-table td b{color:var(--primary)}
+.compare-table td em{color:var(--amber);font-style:normal;font-weight:700}
+
+.org-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}
+.org-card{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:13px 14px;position:relative;overflow:hidden}
+.org-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--primary)}
+.org-card .org-name{font-size:13px;font-weight:800;color:var(--primary);margin-bottom:3px}
+.org-card p{font-size:13.5px;color:var(--ink2);line-height:1.6;margin-top:2px}
+
+/* ── QUICK REFERENCE ─────────────────────────────────────────── */
+.ref-grid{display:grid;gap:10px;margin:8px 0}
+.ref-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+.ref-card-title{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--primary);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.ref-card ul{list-style:none;padding:0}
+.ref-card li{font-size:15px;color:var(--ink2);padding:5px 0 5px 16px;position:relative;line-height:1.65;border-bottom:1px solid var(--bg2)}
+.ref-card li:last-child{border-bottom:none}
+.ref-card li::before{content:'·';position:absolute;left:4px;color:var(--primary);font-weight:900;font-size:18px;line-height:1.3}
+.ref-card li b{color:var(--ink);font-weight:700}
+.ref-card li em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* ── QUIZ ────────────────────────────────────────────────────── */
+.quiz-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:16px;box-shadow:var(--shadow)}
+.qs-cell{background:var(--white);padding:12px 8px;text-align:center}
+.qs-val{font-family:'Lora',serif;font-size:22px;font-weight:700;color:var(--primary);line-height:1}
+.qs-val.g{color:var(--green)}.qs-val.r{color:var(--red)}.qs-val.a{color:var(--amber)}
+.qs-lbl{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:1px;margin-top:4px;text-transform:uppercase}
+.prog-wrap{margin-bottom:20px}
+.prog-bar{height:6px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;background:var(--primary);border-radius:3px;transition:width .4s ease;width:0%}
+.prog-label{font-size:12px;color:var(--muted);font-weight:700;margin-bottom:6px}
+.q-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:12px;box-shadow:var(--shadow);overflow:hidden;border-left:4px solid transparent;transition:border-color .15s}
+.q-card.answered{border-left-color:var(--primary)}
+.q-card.correct{border-left-color:var(--green)}
+.q-card.wrong{border-left-color:var(--red)}
+.q-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 16px;background:var(--bg);border-bottom:1px solid var(--border)}
+.q-num{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:1px}
+.q-diff{font-size:10px;font-weight:800;padding:2px 10px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase}
+.diff-e{background:var(--greenPale);color:var(--green)}
+.diff-m{background:var(--amberPale);color:var(--amber)}
+.diff-h{background:var(--redPale);color:var(--red)}
+.q-exam{font-size:11px;color:var(--dim);margin-left:auto;font-weight:600}
+.q-body{padding:16px}
+.q-text{font-size:17px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:14px 16px;cursor:pointer;display:flex;align-items:flex-start;gap:12px;font-size:16px;color:var(--ink2);text-align:left;width:100%;transition:all .15s;-webkit-tap-highlight-color:transparent;min-height:48px;line-height:1.6}
+.opt:hover:not(:disabled){border-color:var(--primary);background:var(--primaryPale)}
+.opt:disabled{cursor:default}
+.opt.sel{border-color:var(--primary);background:var(--primaryPale);color:var(--primary)}
+.opt.ok{border-color:var(--green)!important;background:var(--greenPale)!important;color:var(--green)!important}
+.opt.bad{border-color:var(--red)!important;background:var(--redPale)!important;color:var(--red)!important}
+.opt-lbl{min-width:28px;height:28px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--muted);flex-shrink:0;transition:all .15s}
+.opt.sel .opt-lbl{background:var(--primary);color:#fff;border-color:var(--primary)}
+.opt.ok .opt-lbl{background:var(--green);color:#fff;border-color:var(--green)}
+.opt.bad .opt-lbl{background:var(--red);color:#fff;border-color:var(--red)}
+.exp-panel{display:none;margin-top:12px;background:var(--bg);border-radius:10px;padding:14px 16px;border:1px solid var(--border)}
+.exp-panel.show{display:block;animation:fadeUp .2s ease}
+.exp-tag{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--primary);margin-bottom:6px}
+.exp-rule{font-size:13px;font-weight:800;color:var(--ink);background:var(--primaryPale);border-radius:6px;padding:6px 10px;margin-bottom:8px;border-left:3px solid var(--primary)}
+.exp-panel p{font-size:15px;color:var(--ink2);line-height:1.8}
+.q-foot{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-top:1px solid var(--border);background:var(--bg)}
+.q-status{font-size:12px;font-weight:700}
+.btn{padding:12px 24px;border-radius:10px;font-size:14px;font-weight:800;letter-spacing:.5px;border:none;cursor:pointer;transition:all .15s}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:var(--primaryLt)}
+.btn-ghost{background:var(--bg2);color:var(--ink2);border:1.5px solid var(--border)}
+.btn-ghost:hover{background:var(--bg3)}
+.quiz-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+#results{display:none;background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:20px;box-shadow:var(--shadow-md)}
+.res-hero{text-align:center;padding-bottom:20px;border-bottom:1px solid var(--border);margin-bottom:16px}
+.res-score{font-family:'Lora',serif;font-size:64px;font-weight:700;color:var(--primary);line-height:1}
+.res-grade{font-size:16px;font-weight:800;color:var(--ink);margin:8px 0 6px;letter-spacing:.5px}
+.res-msg{font-size:15px;color:var(--muted)}
+.res-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-kicker">Biology · Lesson B12 · Olive Defence</div>
+  <div class="hero-title"><span>Evolution</span> — Origin &amp; Diversity of Life</div>
+  <div class="hero-sub">Origin of life, theories of evolution, Darwin's natural selection, evidence for evolution, human evolution, Hardy-Weinberg law and speciation — at CDS, NDA &amp; AFCAT exam depth.</div>
+  <div class="hero-chips">
+    <span class="chip chip-w">CDS</span>
+    <span class="chip chip-w">NDA</span>
+    <span class="chip chip-w">AFCAT</span>
+    <span class="chip chip-a">Darwin</span>
+    <span class="chip chip-g">Natural Selection</span>
+    <span class="chip chip-a">Origin of Life</span>
+  </div>
+</div>
+
+<!-- TAB BAR -->
+<div class="tab-bar">
+  <button class="tab on" onclick="switchTab('theory')">📖 Theory</button>
+  <button class="tab" onclick="switchTab('quickref')">⚡ Quick Ref</button>
+  <button class="tab" onclick="switchTab('quiz')">✏️ Quiz</button>
+</div>
+
+<!-- ═══════════════════════════ THEORY ══════════════════════════ -->
+<div class="pane on" id="theory">
+
+  <div class="intro-box">
+    <p><strong>Evolution</strong> is the change in the inherited characteristics of biological populations over successive generations. It explains the <strong>unity and diversity of life</strong> — why all organisms share fundamental biochemistry (common descent) yet are spectacularly diverse in form and function. The theory of evolution by <strong>natural selection</strong>, proposed by <strong>Charles Darwin</strong> and Alfred Russel Wallace (1858), is the cornerstone of modern biology.</p>
+  </div>
+
+  <!-- SECTION 1 -->
+  <div class="sec-label">Section 1 — Origin of Life</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#F5EEE0">🌍</div>
+      <div style="flex:1">
+        <div class="c-title">Origin of Earth &amp; Early Life</div>
+        <div class="c-sub">Chemical evolution, Oparin-Haldane hypothesis, Miller-Urey experiment</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <div class="stat-band">
+        <div class="stat-cell"><div class="stat-val">~4.6 billion</div><div class="stat-lbl">Age of Earth (years)</div></div>
+        <div class="stat-cell"><div class="stat-val">~3.8 billion</div><div class="stat-lbl">Earliest life (prokaryotes)</div></div>
+        <div class="stat-cell"><div class="stat-val">~2.7 billion</div><div class="stat-lbl">Photosynthesis begins (O₂)</div></div>
+        <div class="stat-cell"><div class="stat-val">~1.5 billion</div><div class="stat-lbl">First eukaryotes</div></div>
+      </div>
+
+      <div class="fact-box">
+        <div class="fb-label">Theories on Origin of Life — Historical Progression</div>
+        <ul>
+          <li><strong>Spontaneous Generation (Abiogenesis)</strong> — belief that life arises spontaneously from non-living matter (e.g., maggots from meat). Disproved by <strong>Francesco Redi</strong> (1668 — flies on covered meat) and conclusively by <strong>Louis Pasteur</strong> (1861 — swan-neck flask experiment).</li>
+          <li><strong>Biogenesis</strong> — life arises only from pre-existing life (Pasteur). But this doesn't explain the very FIRST life.</li>
+          <li><strong>Panspermia</strong> — life arrived on Earth from outer space (spores/microbes on meteorites). Proposed by Arrhenius. Does not explain origin of life — just shifts the question elsewhere.</li>
+          <li><strong>Oparin-Haldane Hypothesis (Chemical Evolution / Abiogenesis)</strong> — A.I. Oparin (1924) and J.B.S. Haldane (1929) proposed that life originated from simple organic molecules in the early Earth's <em>primitive ocean</em> ("primordial soup") — rich in H₂, CH₄, NH₃, H₂O, NO atmosphere of free O₂. UV radiation and lightning provided energy for chemical reactions. Complex organic molecules formed → coacervates (protein clusters) → proto-cells → first living cells.</li>
+          <li><strong>Miller-Urey Experiment (1953)</strong> — Stanley Miller and Harold Urey experimentally tested Oparin-Haldane hypothesis. They simulated early Earth conditions (H₂, CH₄, NH₃, H₂O vapour; electric sparks for lightning) and produced <em>amino acids</em> and other organic molecules abiogenically — providing direct experimental support for chemical evolution.</li>
+        </ul>
+      </div>
+
+      <div class="rule-box">
+        <div class="rl-label">First Life — Key Milestones</div>
+        <p>The earliest life forms were <strong>chemoheterotrophs</strong> — anaerobic prokaryotes that obtained energy by breaking down organic molecules from the primordial soup. <strong>Cyanobacteria</strong> (blue-green algae) were among the first <strong>photosynthetic</strong> organisms (~3.5 billion years ago), gradually oxygenating Earth's atmosphere — enabling aerobic life. The development of the <strong>ozone layer</strong> from atmospheric O₂ shielded land from UV radiation, enabling colonisation of land. First eukaryotes ~1.5–2 billion years ago (endosymbiont theory — Lynn Margulis: mitochondria and chloroplasts originated as ingested prokaryotes).</p>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Miller-Urey Experiment — What It Did and Did NOT Prove</div>
+        <ul>
+          <li>It proved that <strong>amino acids and organic molecules</strong> CAN be produced from inorganic precursors under simulated early Earth conditions — supporting the idea that life could have originated chemically.</li>
+          <li>It did NOT produce a living cell — just the building blocks. The step from organic molecules to a self-replicating, membrane-bound cell remains an active area of research.</li>
+          <li>The exact composition of early Earth's atmosphere is debated — modern estimates suggest it may have had more CO₂ and less CH₄ than Miller used.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="sec-label">Section 2 — Pre-Darwinian Theories</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#F5EEE0">📜</div>
+      <div style="flex:1">
+        <div class="c-title">Lamarck, Cuvier &amp; Pre-Darwinian Ideas</div>
+        <div class="c-sub">Use and disuse, inheritance of acquired characters — and why they were wrong</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Scientist</th><th>Period</th><th>Theory</th><th>Key Idea</th><th>Status</th></tr>
+          <tr><td><b>Aristotle</b></td><td>384–322 BCE</td><td>Scala Naturae (Ladder of Nature)</td><td>Living organisms arranged in a linear scale of complexity; species are fixed and unchanging</td><td>Incorrect — species do change</td></tr>
+          <tr><td><b>Georges Cuvier</b></td><td>1769–1832</td><td>Catastrophism</td><td>Species are fixed; mass extinctions wiped out species periodically; new species created after each catastrophe</td><td>Partially correct about extinctions; incorrect about species fixity</td></tr>
+          <tr><td><b>James Hutton / Charles Lyell</b></td><td>18th–19th C</td><td>Uniformitarianism (Geology)</td><td>Earth's features shaped by slow, continuous processes (erosion, sedimentation) over vast time — same forces operating today operated in the past. Gave Darwin the deep time needed for evolution.</td><td>Correct — foundational to Darwin's thinking</td></tr>
+          <tr><td><b>Jean-Baptiste Lamarck</b></td><td>1744–1829</td><td>Theory of Inheritance of Acquired Characteristics</td><td>(1) Law of Use and Disuse: organs used more become stronger; unused organs degenerate. (2) Acquired characteristics can be inherited by offspring.</td><td>Mechanism incorrect — acquired traits NOT inherited via DNA; but recognised species change over time</td></tr>
+        </table>
+      </div>
+
+      <div class="eg-box">
+        <div class="eg-label">Lamarck's Giraffe Example — Classic but Wrong</div>
+        <p>Lamarck explained long giraffe necks: ancestral giraffes stretched their necks to reach higher leaves → necks became slightly longer → this acquired longer neck was passed to offspring → over generations, necks became longer. <strong>Why this is wrong:</strong> Acquired characteristics (changes due to use during lifetime) are NOT encoded in DNA and cannot be inherited. A bodybuilder's muscles are not passed to their children genetically. DNA is not altered by somatic effort. However, Lamarck was correct that organisms change over time — he just got the mechanism wrong.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="sec-label">Section 3 — Darwin's Theory of Natural Selection</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#F5EEE0">🦜</div>
+      <div style="flex:1">
+        <div class="c-title">Charles Darwin &amp; Natural Selection</div>
+        <div class="c-sub">The Beagle voyage, Galapagos finches, "On the Origin of Species" (1859)</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p><strong>Charles Darwin</strong> (1809–1882) developed his theory of evolution by natural selection after a 5-year voyage aboard HMS Beagle (1831–1836), during which he observed remarkable biological diversity — especially in the <strong>Galapagos Islands</strong>. <strong>Alfred Russel Wallace</strong> independently reached the same conclusion — both presented their ideas jointly to the Linnean Society in <strong>1858</strong>. Darwin published <em>On the Origin of Species</em> in <strong>1859</strong>.</p>
+
+      <div class="journey">
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">1</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Overproduction (Superfecundity)</div>
+            <div class="j-desc">All organisms produce <strong>more offspring than can survive</strong>. A single bacterium dividing every 20 min could produce a mass equal to Earth in hours. A single oyster produces millions of eggs per year.</div>
+          </div>
+        </div>
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">2</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Variation</div>
+            <div class="j-desc">Individuals in a population show <strong>heritable variation</strong> — differences in traits that can be passed to offspring. No two individuals (except identical twins) are exactly alike.</div>
+          </div>
+        </div>
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">3</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Struggle for Existence</div>
+            <div class="j-desc">Since more offspring are produced than can survive, there is <strong>competition</strong> for limited resources (food, space, mates) — intraspecific (within species) and interspecific (between species).</div>
+          </div>
+        </div>
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">4</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Survival of the Fittest (Natural Selection)</div>
+            <div class="j-desc">Individuals with <strong>advantageous heritable variations</strong> survive and reproduce more successfully. "Fittest" means <em>best adapted to the environment</em> — not necessarily strongest. Coined by <strong>Herbert Spencer</strong> (not Darwin).</div>
+          </div>
+        </div>
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">5</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Inheritance &amp; Gradual Change</div>
+            <div class="j-desc">Favourable traits are <strong>passed to offspring</strong>. Over many generations, the frequency of advantageous traits increases in the population → <em>gradual evolution</em> of new species. Darwin did NOT know the mechanism of inheritance (Mendel's work was unknown to him).</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fact-box">
+        <div class="fb-label">Darwin's Observations — Galapagos &amp; Beyond</div>
+        <ul>
+          <li><strong>Darwin's Finches</strong> — 13–14 species of finches on Galapagos; all descended from a common South American ancestor; each island had different food sources → different beak shapes evolved (seed crackers, insect pickers, cactus feeders) — classic adaptive radiation</li>
+          <li><strong>Fossils</strong> — extinct species resembled living species in the same region → species change over time</li>
+          <li><strong>Homologous structures</strong> — whale flipper, bat wing, horse leg, human arm all have same bone pattern (humerus-radius-ulna-carpals) despite different functions → common ancestor</li>
+          <li><strong>Geographic distribution</strong> — similar environments in different continents had different but ecologically equivalent species → independent evolution, not migration</li>
+          <li><strong>Artificial selection</strong> — humans had already produced dramatic changes in domesticated animals and crops by selective breeding → natural analogue could drive evolution over geological time</li>
+        </ul>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Common Misconceptions About Natural Selection</div>
+        <ul>
+          <li>"Survival of the fittest" means <strong>best adapted</strong>, NOT physically strongest. A tiny bacterium that is antibiotic-resistant is "fitter" than a large susceptible one in an antibiotic environment.</li>
+          <li>Evolution has <strong>no goal or direction</strong> — it is not "progress toward perfection." Adaptations are relative to the current environment.</li>
+          <li>Natural selection acts on <strong>individuals</strong> but evolution occurs in <strong>populations</strong> (change in allele frequencies over generations).</li>
+          <li>Darwin did NOT know about DNA or genes — he knew variation existed and was heritable, but not the mechanism. The "Modern Synthesis" (Neo-Darwinism) combined Darwin's natural selection with Mendelian genetics and population genetics.</li>
+          <li>"Survival of the fittest" was coined by <strong>Herbert Spencer</strong>, not Darwin. Darwin used "natural selection."</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="sec-label">Section 4 — Evidence for Evolution</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#F5EEE0">🦴</div>
+      <div style="flex:1">
+        <div class="c-title">Evidences for Evolution</div>
+        <div class="c-sub">Fossils, homologous organs, analogous organs, vestigial organs, embryology</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Evidence Type</th><th>Definition</th><th>Examples</th><th>What It Shows</th></tr>
+          <tr><td><b>Fossil Record</b></td><td>Preserved remains or impressions of ancient organisms in rock layers (strata)</td><td>Archaeopteryx (dinosaur-bird link); horse evolution series (Eohippus → Equus); trilobites</td><td>Organisms have changed over time; sequence of evolution; transitional forms show common descent</td></tr>
+          <tr><td><b>Homologous Organs</b></td><td>Organs with <em>same basic structure/origin</em> but <em>different functions</em> — due to common ancestry (divergent evolution)</td><td>Human arm, whale flipper, bat wing, horse foreleg — all have humerus, radius, ulna, carpals, phalanges</td><td>Common ancestry — structures modified for different functions</td></tr>
+          <tr><td><b>Analogous Organs</b></td><td>Organs with <em>different structure/origin</em> but <em>same function</em> — due to convergent evolution (similar environments selecting similar solutions)</td><td>Insect wing vs bird wing; eye of octopus vs human eye; fins of fish vs flippers of dolphin</td><td>Convergent evolution — similar environments produce similar adaptations independently</td></tr>
+          <tr><td><b>Vestigial Organs</b></td><td>Reduced, non-functional remnants of organs that were fully functional in ancestors</td><td>Human appendix, coccyx (tail bone), body hair, ear muscles, nictitating membrane; whale pelvic bones; python hind limb bones</td><td>Descent with modification — ancestors had functional organs; organisms retain traces of evolutionary history</td></tr>
+          <tr><td><b>Comparative Embryology</b></td><td>Embryos of related organisms look similar in early stages — showing common ancestry</td><td>Human, fish, frog, chick embryos all have gill slits and tails at some stage; von Baer's law</td><td>Common ancestry; embryos retain ancestral features</td></tr>
+          <tr><td><b>Molecular Evidence</b></td><td>Similar DNA, RNA, proteins across species — degree of similarity reflects evolutionary closeness</td><td>Human and chimpanzee DNA ~98.5% identical; cytochrome c protein conserved across all aerobic organisms</td><td>All life shares common ancestry; molecular clocks can date divergence</td></tr>
+          <tr><td><b>Biogeography</b></td><td>Geographic distribution of species reflects evolutionary history</td><td>Marsupials mainly in Australia; Darwin's finches on Galapagos; similar fossils on once-connected continents</td><td>Geographic isolation drives speciation; continental drift shaped distribution</td></tr>
+        </table>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Homologous vs Analogous — Most-Tested Distinction</div>
+        <ul>
+          <li><strong>Homologous</strong> = same <em>structure</em>, different <em>function</em> → evidence of <em>divergent</em> evolution from a common ancestor. Example: human arm vs whale flipper — same bones, very different uses.</li>
+          <li><strong>Analogous</strong> = same <em>function</em>, different <em>structure</em> → evidence of <em>convergent</em> evolution — unrelated organisms evolving similar adaptations independently. Example: butterfly wing and bat wing — both used for flying, but completely different internal structures.</li>
+          <li><strong>Memory trick</strong>: HOMologous = same HOM(e)/origin. ANAlogous = ANAlogous function (look-alikes in function, strangers in origin).</li>
+        </ul>
+      </div>
+
+      <div class="eg-box">
+        <div class="eg-label">Archaeopteryx — The Most Famous Transitional Fossil</div>
+        <ul>
+          <li>Discovered in 1861 (Jurassic limestone, Bavaria, Germany) — just 2 years after Darwin's "Origin of Species"</li>
+          <li>Shows both <strong>reptilian features</strong> (teeth, clawed wings, long bony tail, separate vertebrae) and <strong>avian features</strong> (feathers, wishbone/furcula, bird-like feet) → classic transitional fossil between theropod dinosaurs and birds</li>
+          <li>Named <em>Archaeopteryx lithographica</em> — "ancient wing from lithographic stone"</li>
+          <li>Strong evidence that birds evolved from theropod dinosaurs</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5 -->
+  <div class="sec-label">Section 5 — Modern Synthetic Theory &amp; Population Genetics</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E4ECF6">🧬</div>
+      <div style="flex:1">
+        <div class="c-title">Modern Synthetic Theory (Neo-Darwinism) &amp; Hardy-Weinberg Law</div>
+        <div class="c-sub">Combining Darwin with Mendel, population genetics and allele frequencies</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>The <strong>Modern Synthetic Theory of Evolution</strong> (Neo-Darwinism) — developed in the 1930s–1940s by Theodosius Dobzhansky, Julian Huxley, Ernst Mayr and others — unified Darwin's natural selection with Mendelian genetics, population genetics, and palaeontology.</p>
+
+      <div class="purple-box">
+        <div class="pl-label">Agents of Evolutionary Change (Forces That Change Allele Frequencies)</div>
+        <ul>
+          <li><strong>Mutation</strong> — random changes in DNA; ultimate source of all new variation; provides raw material for evolution; usually rare and random in direction</li>
+          <li><strong>Natural Selection</strong> — differential survival and reproduction of individuals with advantageous traits; directional, stabilising or disruptive</li>
+          <li><strong>Genetic Drift</strong> — random changes in allele frequencies due to chance, especially in <em>small populations</em>. Two forms: (a) <em>Bottleneck effect</em> — population sharply reduced (disaster) → survivors may not represent original gene pool → reduced genetic diversity. (b) <em>Founder effect</em> — small group colonises new area → limited gene pool of founders becomes dominant in new population</li>
+          <li><strong>Gene Flow (Migration)</strong> — movement of alleles between populations when individuals migrate and interbreed; tends to reduce genetic differences between populations; can introduce new alleles</li>
+          <li><strong>Recombination (Genetic Recombination)</strong> — new combinations of alleles produced by crossing over during meiosis and independent assortment; creates variation without changing allele frequencies</li>
+          <li><strong>Reproductive Isolation</strong> — prevents gene flow between populations → allows them to diverge → eventual speciation</li>
+        </ul>
+      </div>
+
+      <div class="rule-box">
+        <div class="rl-label">Hardy-Weinberg Equilibrium (1908)</div>
+        <p>The <strong>Hardy-Weinberg Law</strong> (G.H. Hardy, mathematician + Wilhelm Weinberg, physician, 1908) states that in a large, randomly mating population, <strong>allele frequencies and genotype frequencies remain constant from generation to generation</strong> provided there is no mutation, no migration, no natural selection, no genetic drift, and random mating.</p>
+        <p>Mathematical expression: <strong>p² + 2pq + q² = 1</strong> and <strong>p + q = 1</strong>, where p = frequency of dominant allele (A), q = frequency of recessive allele (a); p² = AA frequency, 2pq = Aa frequency, q² = aa frequency.</p>
+        <p>H-W equilibrium describes a <strong>non-evolving population</strong>. Real populations deviate from H-W conditions → evolution occurs. It provides a null model to detect evolutionary change.</p>
+      </div>
+
+      <div class="fact-box">
+        <div class="fb-label">Types of Natural Selection — Direction of Change</div>
+        <ul>
+          <li><strong>Directional Selection</strong> — one extreme phenotype favoured → population mean shifts in one direction. Example: industrial melanism in peppered moth (<em>Biston betularia</em>) — dark moths favoured in polluted forests; antibiotic resistance in bacteria.</li>
+          <li><strong>Stabilising Selection</strong> — intermediate phenotypes favoured; extremes selected against → reduces variation, maintains current mean. Example: human birth weight (very low and very high birth weights have higher mortality); shell thickness in snails.</li>
+          <li><strong>Disruptive (Diversifying) Selection</strong> — both extremes favoured; intermediate phenotypes selected against → population splits into two distinct groups. Example: beak size in black-bellied seedcracker bird (small beaks for soft seeds, large for hard seeds — intermediates fail).</li>
+        </ul>
+      </div>
+
+      <div class="eg-box">
+        <div class="eg-label">Industrial Melanism — Peppered Moth (Biston betularia)</div>
+        <ul>
+          <li>Pre-industrial Britain: mostly light-coloured moths (camouflaged on lichen-covered tree bark); rare dark (melanic) moths visible to predators → selected against</li>
+          <li>Industrial Revolution: soot killed lichens, darkened bark → dark moths now camouflaged; light moths now visible → natural selection reversed</li>
+          <li>By 1900s: dark moths dominated in industrial areas (~98% in Manchester)</li>
+          <li>Post-Clean Air Acts: lichens returned, light moths increasing again — real-time evolution observed</li>
+          <li>Studied by Bernard Kettlewell (1950s); classic textbook example of directional natural selection</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6 -->
+  <div class="sec-label">Section 6 — Speciation &amp; Adaptive Radiation</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#F5EEE0">🌿</div>
+      <div style="flex:1">
+        <div class="c-title">Speciation — How New Species Arise</div>
+        <div class="c-sub">Allopatric, sympatric, reproductive isolation and adaptive radiation</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>A <strong>species</strong> is a group of organisms that can interbreed and produce <strong>fertile offspring</strong>. <strong>Speciation</strong> is the process by which new species arise from existing ones — the central process of macroevolution.</p>
+
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Type</th><th>Mechanism</th><th>Example</th></tr>
+          <tr><td><b>Allopatric Speciation</b> (most common)</td><td>Geographic isolation separates populations → no gene flow → populations evolve independently → reproductive isolation → new species. A physical barrier (mountain range, river, ocean) prevents interbreeding.</td><td>Darwin's finches on different Galapagos islands; squirrels separated by Grand Canyon (Kaibab vs Abert's squirrel)</td></tr>
+          <tr><td><b>Sympatric Speciation</b></td><td>New species arise within the same geographic area — without physical separation. Often via polyploidy (plants), habitat differentiation, or assortative mating.</td><td>Apple maggot fly (Rhagoletis pomonella) — originally on hawthorn, some switched to introduced apple trees → now reproductively isolated; polyploidy in wheat and cotton</td></tr>
+          <tr><td><b>Parapatric Speciation</b></td><td>Populations in adjacent areas with partial overlap diverge; gene flow reduced but not eliminated; strong selection across a boundary zone.</td><td>Anthoxanthum grass on/off mine tailings (heavy metal tolerance boundary)</td></tr>
+        </table>
+      </div>
+
+      <div class="fact-box">
+        <div class="fb-label">Reproductive Isolation — Types</div>
+        <ul>
+          <li><strong>Pre-zygotic barriers</strong> (prevent mating or fertilisation): Habitat isolation, temporal isolation (different breeding seasons), behavioural isolation (different courtship displays), mechanical isolation (incompatible genitalia/flowers), gametic isolation (sperm cannot fertilise egg)</li>
+          <li><strong>Post-zygotic barriers</strong> (hybrid is formed but fails): Hybrid inviability (hybrid embryo dies early), hybrid sterility (hybrid survives but is infertile — e.g., mule = horse × donkey is sterile), hybrid breakdown (F₂ hybrids weak/infertile)</li>
+        </ul>
+      </div>
+
+      <div class="slate-box">
+        <div class="sl-label">Adaptive Radiation — Rapid Diversification</div>
+        <p><strong>Adaptive radiation</strong> is the rapid evolution of multiple species from a single ancestral species to fill different ecological niches — typically after colonising a new environment or after a mass extinction creates vacant niches.</p>
+        <ul>
+          <li><strong>Darwin's finches</strong> — one ancestral finch → 13–14 species with different beak shapes for different food sources (Galapagos Islands)</li>
+          <li><strong>Australian marsupials</strong> — one ancestral marsupial → ~250 species: kangaroos (grazers), koalas (leaf eaters), Tasmanian devil (carnivore), wombats (burrowers), sugar gliders (aerial)</li>
+          <li><strong>Hawaiian honeycreepers</strong> — one ancestral finch → 50+ species with diverse bills</li>
+          <li><strong>Mammalian radiation</strong> after dinosaur extinction (~66 million years ago) — mammals rapidly diversified into ecological niches left vacant by dinosaurs</li>
+          <li><strong>Convergent evolution</strong> is the opposite — unrelated species independently evolve similar adaptations to similar environments (e.g., cacti and euphorbs; dolphin and ichthyosaur body shape)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 7 -->
+  <div class="sec-label">Section 7 — Human Evolution</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#F5EEE0">🦴</div>
+      <div style="flex:1">
+        <div class="c-title">Human Evolution — Hominid Timeline</div>
+        <div class="c-sub">From Australopithecus to Homo sapiens — African origin of humans</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>Humans belong to the family <strong>Hominidae</strong> (great apes). Our closest living relatives are chimpanzees (~98.5% DNA identity). Modern humans and chimpanzees shared a common ancestor ~6–7 million years ago. All human evolution occurred in <strong>Africa</strong> — the "Out of Africa" hypothesis.</p>
+
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-era">~7–6 MYA</div><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Sahelanthropus tchadensis / Early Hominids</div>
+            <div class="tl-desc">Oldest known hominid fossils. Bipedal (walked upright) but small-brained. Discovered in Chad (Africa).</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-era">~4–2 MYA</div><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Australopithecus</div>
+            <div class="tl-desc">Genus of early hominids; fully bipedal; ape-like brain (~450 cc); lived in Africa. Famous specimen: <strong>"Lucy"</strong> (A. afarensis, discovered 1974 in Ethiopia by Donald Johanson). Also: A. africanus — "Taung Child" (discovered by Raymond Dart, 1924, South Africa).</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-era">~2.5–1.5 MYA</div><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Homo habilis — "Handy Man"</div>
+            <div class="tl-desc">First member of genus <em>Homo</em>. Brain ~650–800 cc. <strong>First to use stone tools</strong> (Oldowan stone tool industry). Lived in East Africa. Discovered by Louis and Mary Leakey in Tanzania (Olduvai Gorge), 1960.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-era">~1.9–0.1 MYA</div><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Homo erectus — "Upright Man"</div>
+            <div class="tl-desc">Brain ~900 cc. <strong>First hominid to leave Africa</strong> and spread to Asia and Europe. Used <em>Acheulean</em> hand axes (more sophisticated tools). <strong>First to use fire</strong>. Specimens: Java Man (Indonesia), Peking Man (China). Larger, more modern body proportions.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-era">~0.6–0.03 MYA</div><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Homo neanderthalensis — Neanderthals</div>
+            <div class="tl-desc">Brain ~1400–1600 cc (<em>larger</em> than modern humans!). Lived in Europe and western Asia. Buried their dead, made tools (<em>Mousterian</em> industry), cared for injured, wore clothes. NOT direct ancestors of modern humans — a separate lineage. Modern humans and Neanderthals interbred (~2–4% Neanderthal DNA in non-African modern humans). Went extinct ~30,000 years ago, possibly due to competition with <em>H. sapiens</em>.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-left"><div class="tl-era">~0.3 MYA–present</div><div class="tl-dot"></div><div class="tl-line"></div></div>
+          <div class="tl-content">
+            <div class="tl-title">Homo sapiens — Modern Humans</div>
+            <div class="tl-desc">Brain ~1350 cc. Originated in <strong>Africa</strong> (~300,000 years ago). Migrated out of Africa ~60,000–70,000 years ago. Cave paintings (Lascaux, France; Altamira, Spain), sophisticated tools (<em>Aurignacian</em> industry), symbolic thought, language. Anatomically and behaviourally modern. Only surviving hominid species.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="stat-band">
+        <div class="stat-cell"><div class="stat-val">~450 cc</div><div class="stat-lbl">Australopithecus brain</div></div>
+        <div class="stat-cell"><div class="stat-val">~800 cc</div><div class="stat-lbl">H. habilis brain</div></div>
+        <div class="stat-cell"><div class="stat-val">~900 cc</div><div class="stat-lbl">H. erectus brain</div></div>
+        <div class="stat-cell"><div class="stat-val">~1350 cc</div><div class="stat-lbl">H. sapiens brain</div></div>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Human Evolution Exam Traps</div>
+        <ul>
+          <li>Humans did NOT evolve from chimpanzees — both share a <strong>common ancestor</strong> ~6–7 million years ago. Chimps and humans are evolutionary cousins, not ancestor-descendant.</li>
+          <li><strong>Homo erectus</strong> was the FIRST to leave Africa — NOT <em>H. habilis</em>. H. habilis stayed in Africa.</li>
+          <li>Neanderthals are NOT direct human ancestors — they are a <strong>separate species</strong> (or subspecies). Modern humans coexisted with and interbred with Neanderthals in Europe.</li>
+          <li>Neanderthal brain was <strong>LARGER</strong> than modern human brain on average — bigger brain does NOT mean more intelligent in complex ways.</li>
+          <li>"Lucy" (Australopithecus afarensis) was discovered by <strong>Donald Johanson</strong> in Ethiopia, 1974 — NOT by the Leakeys (who found H. habilis in Tanzania).</li>
+          <li><strong>H. habilis</strong> made the <strong>first stone tools</strong>. <strong>H. erectus</strong> was the <strong>first to use fire</strong>.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 8 -->
+  <div class="sec-label">Section 8 — Geological Time Scale &amp; Mass Extinctions</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#EEE8F6">⏳</div>
+      <div style="flex:1">
+        <div class="c-title">Geological Time Scale &amp; Mass Extinctions</div>
+        <div class="c-sub">Eons, eras, periods and the five great mass extinctions</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Era</th><th>Period</th><th>Approx. Age (MYA)</th><th>Key Events &amp; Life Forms</th></tr>
+          <tr><td rowspan="3"><b>Palaeozoic</b> ("ancient life")</td><td>Cambrian</td><td>541–485</td><td><em>Cambrian Explosion</em> — most major animal phyla appear; trilobites; marine invertebrates dominate</td></tr>
+          <tr><td>Devonian</td><td>419–359</td><td>"Age of Fishes"; first amphibians move onto land; first forests; first insects</td></tr>
+          <tr><td>Carboniferous–Permian</td><td>359–252</td><td>Coal forests (giant tree ferns); reptiles; first seeds; <em>Permian extinction</em> — largest mass extinction (~96% marine species lost)</td></tr>
+          <tr><td rowspan="3"><b>Mesozoic</b> ("middle life")</td><td>Triassic</td><td>252–201</td><td>First dinosaurs, first mammals; recovery after Permian extinction</td></tr>
+          <tr><td>Jurassic</td><td>201–145</td><td>"Age of Dinosaurs"; <em>Archaeopteryx</em> (first bird); first flowering plants (angiosperms appearing); giant sauropods</td></tr>
+          <tr><td>Cretaceous</td><td>145–66</td><td>Angiosperms diversify; <em>K-Pg extinction</em> (~66 MYA — asteroid impact + volcanism) — <em>non-avian dinosaurs go extinct</em>; mammals and birds survive</td></tr>
+          <tr><td rowspan="2"><b>Cenozoic</b> ("recent life")</td><td>Palaeogene–Neogene</td><td>66–2.6</td><td><em>Mammalian adaptive radiation</em>; grasses and grasslands; horses, whales evolve; first hominids (~7 MYA)</td></tr>
+          <tr><td>Quaternary</td><td>2.6–present</td><td>Ice Ages; <em>Homo sapiens</em> (~300,000 years ago); megafauna extinctions (mammoths, giant sloths); human civilisations</td></tr>
+        </table>
+      </div>
+
+      <div class="fact-box">
+        <div class="fb-label">The Five Major Mass Extinctions ("Big Five")</div>
+        <ul>
+          <li><strong>Ordovician-Silurian (~444 MYA)</strong> — ~85% species lost; glaciation and sea level fall</li>
+          <li><strong>Late Devonian (~375 MYA)</strong> — ~75% species lost; reef collapse; possible asteroid impacts</li>
+          <li><strong>Permian-Triassic (~252 MYA — "The Great Dying")</strong> — <em>LARGEST mass extinction</em>; ~96% marine species, ~70% terrestrial vertebrate species lost; volcanic eruptions (Siberian Traps) + possible other causes</li>
+          <li><strong>Triassic-Jurassic (~201 MYA)</strong> — ~80% species lost; opened niches for dinosaurs to diversify</li>
+          <li><strong>Cretaceous-Palaeogene (K-Pg, ~66 MYA)</strong> — ~76% species lost; <em>non-avian dinosaurs extinct</em>; Chicxulub asteroid impact (Mexico) + Deccan Trap volcanism; mammals and birds survived and diversified</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /theory -->
+
+<!-- ════════════════════════════ QUICK REF ══════════════════════ -->
+<div class="pane" id="quickref">
+  <div class="ref-grid">
+
+    <div class="ref-card">
+      <div class="ref-card-title">Origin of Life &amp; Pre-Darwinian</div>
+      <ul>
+        <li>Earth age: <em>~4.6 billion years</em>; first life ~3.8 billion years (prokaryotes)</li>
+        <li>Spontaneous generation disproved: Redi (1668) + Pasteur (1861 — swan-neck flask)</li>
+        <li><b>Oparin-Haldane hypothesis</b> — primordial soup; H₂, CH₄, NH₃, H₂O; no free O₂</li>
+        <li><b>Miller-Urey experiment (1953)</b> — produced amino acids under simulated early Earth conditions; supported chemical evolution</li>
+        <li>Lamarck — use and disuse + inheritance of acquired characters — mechanism WRONG</li>
+        <li>Lyell — uniformitarianism; gave Darwin the concept of deep geological time</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Darwin's Natural Selection</div>
+      <ul>
+        <li>HMS Beagle voyage (1831–36); Galapagos finches; beak shapes; adaptive radiation</li>
+        <li>Darwin + Wallace — presented jointly to Linnean Society, <em>1858</em></li>
+        <li><em>On the Origin of Species</em> — published <em>1859</em></li>
+        <li>4 postulates: Overproduction → Variation → Struggle → Survival of fittest</li>
+        <li>"Survival of the fittest" coined by <b>Herbert Spencer</b>, not Darwin</li>
+        <li>Darwin did NOT know about genes/DNA — Modern Synthesis combined Darwin + Mendel</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Evidence for Evolution</div>
+      <ul>
+        <li><b>Homologous organs</b> — same structure, different function → common ancestor (divergent evolution). Human arm = whale flipper = bat wing</li>
+        <li><b>Analogous organs</b> — same function, different structure → convergent evolution. Insect wing ≠ bat wing</li>
+        <li><b>Vestigial organs</b> — appendix, coccyx, body hair, ear muscles in humans</li>
+        <li><b>Archaeopteryx</b> — transitional fossil; reptile + bird features; Jurassic; Bavaria 1861</li>
+        <li>Human and chimp DNA: <em>~98.5% identical</em></li>
+        <li>Industrial melanism (peppered moth) — directional selection; real-time evolution</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Population Genetics &amp; Hardy-Weinberg</div>
+      <ul>
+        <li><b>Hardy-Weinberg Law (1908)</b>: p² + 2pq + q² = 1; p + q = 1; allele frequencies stable in non-evolving population</li>
+        <li>Evolutionary forces: Mutation · Natural selection · Genetic drift · Gene flow · Recombination</li>
+        <li><b>Bottleneck effect</b> — population crash → reduced diversity (e.g., cheetahs)</li>
+        <li><b>Founder effect</b> — small group colonises new area → limited gene pool</li>
+        <li>Directional selection → population mean shifts; Stabilising → reduces variation; Disruptive → splits population</li>
+        <li>Peppered moth (<em>Biston betularia</em>) — classic directional selection example</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Human Evolution Timeline</div>
+      <ul>
+        <li><b>Australopithecus</b> (~4–2 MYA): bipedal; brain ~450 cc; "Lucy" = A. afarensis (Johanson, Ethiopia, 1974)</li>
+        <li><b>H. habilis</b> (~2.5–1.5 MYA): first <em>Homo</em>; brain ~800 cc; <em>first stone tools</em>; Africa only</li>
+        <li><b>H. erectus</b> (~1.9–0.1 MYA): brain ~900 cc; <em>first to leave Africa</em>; <em>first to use fire</em>; Java Man, Peking Man</li>
+        <li><b>H. neanderthalensis</b>: brain ~1600 cc (larger than ours); Europe/W. Asia; NOT direct ancestors; interbred with H. sapiens</li>
+        <li><b>H. sapiens</b>: brain ~1350 cc; Africa ~300,000 ya; out of Africa ~60,000–70,000 ya</li>
+        <li>Humans ≠ descended from chimps — shared common ancestor ~6–7 MYA</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Speciation &amp; Geological Timeline</div>
+      <ul>
+        <li><b>Allopatric speciation</b> — geographic isolation → no gene flow → new species (most common)</li>
+        <li><b>Sympatric speciation</b> — same geographic area; polyploidy; habitat differentiation</li>
+        <li>Cambrian Explosion (~541 MYA) — most animal phyla appear suddenly</li>
+        <li>Permian extinction (~252 MYA) — LARGEST; ~96% marine species lost ("The Great Dying")</li>
+        <li>K-Pg extinction (~66 MYA) — non-avian dinosaurs extinct; asteroid + Deccan Traps volcanism</li>
+        <li>Adaptive radiation — one ancestor → many species; Darwin's finches; Australian marsupials</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════ QUIZ ═════════════════════════ -->
+<div class="pane" id="quiz">
+  <div class="quiz-stats">
+    <div class="qs-cell"><div class="qs-val" id="s-att">0</div><div class="qs-lbl">Attempted</div></div>
+    <div class="qs-cell"><div class="qs-val g" id="s-cor">0</div><div class="qs-lbl">Correct</div></div>
+    <div class="qs-cell"><div class="qs-val r" id="s-wrg">0</div><div class="qs-lbl">Wrong</div></div>
+    <div class="qs-cell"><div class="qs-val a" id="s-tot">15</div><div class="qs-lbl">Total</div></div>
+  </div>
+  <div class="prog-wrap">
+    <div class="prog-label" id="prog-label">0 of 15 answered</div>
+    <div class="prog-bar"><div class="prog-fill" id="prog"></div></div>
+  </div>
+  <div class="quiz-actions">
+    <button class="btn btn-primary" onclick="submitAll()">Submit All &amp; Check</button>
+    <button class="btn btn-ghost" onclick="resetQuiz()">↺ Reset Quiz</button>
+  </div>
+  <div id="results"></div>
+  <div id="q-area"></div>
+</div>
+
+</div><!-- /page -->
+
+<script>
+const QS=[
+
+/* EASY */
+{d:"EASY",e:"NDA 2023",
+q:"The Miller-Urey experiment (1953) was designed to test which hypothesis about the origin of life?",
+opts:[
+  "Panspermia — that life arrived on Earth from outer space via meteorites",
+  "The Oparin-Haldane hypothesis — that organic molecules essential for life could be synthesised abiotically under early Earth conditions",
+  "Biogenesis — that life can only arise from pre-existing life",
+  "Spontaneous generation — that complex organisms arise from non-living matter in present-day conditions"
+],ans:1,
+rule:"Miller-Urey (1953) tested Oparin-Haldane hypothesis: simulated primitive Earth (H\u2082, CH\u2084, NH\u2083, H\u2082O, electric sparks) \u2192 produced amino acids",
+exp:"Stanley Miller and Harold Urey (1953) simulated early Earth conditions in a closed apparatus: a flask of boiling water connected to a chamber with H\u2082, CH\u2084, NH\u2083, H\u2082O vapour and electric sparks simulating lightning. After one week, the water contained AMINO ACIDS (glycine, alanine) and other organic molecules. This provided strong experimental support for the OPARIN-HALDANE HYPOTHESIS of chemical evolution \u2014 that the building blocks of life could form spontaneously from inorganic precursors. A.I. Oparin (1924) and J.B.S. Haldane (1929) independently proposed that early Earth had a reducing atmosphere (no free O\u2082) and a warm primordial ocean (the primordial soup) where organic molecules accumulated. IMPORTANT: The experiment did NOT produce a living cell, only the molecular building blocks. Panspermia is the hypothesis that life arrived from space \u2014 it does not explain the ultimate origin of life. Pasteur proved biogenesis (life from life) but could not explain the very first life."},
+
+{d:"EASY",e:"CDS 2022",
+q:"Which of the following is the BEST example of homologous organs?",
+opts:[
+  "Wings of a butterfly and wings of a bat \u2014 both used for flying",
+  "Flippers of a whale, wings of a bat, foreleg of a horse, and arm of a human \u2014 same basic bone structure (humerus-radius-ulna) but different functions",
+  "Eyes of an octopus and eyes of a human \u2014 both used for vision despite different evolutionary origins",
+  "Cactus spines and rose thorns \u2014 both used for defence"
+],ans:1,
+rule:"Homologous organs: same basic structure/embryonic origin, different functions \u2192 evidence of divergent evolution from common ancestor",
+exp:"HOMOLOGOUS ORGANS have the same basic structure and embryonic origin but may be used for entirely different functions. The classic example is the VERTEBRATE FORELIMB: the human arm (manipulating), whale flipper (swimming), bat wing (flying), and horse foreleg (running) all share the same fundamental bone pattern \u2014 HUMERUS \u2192 RADIUS and ULNA \u2192 CARPALS \u2192 METACARPALS \u2192 PHALANGES \u2014 despite very different appearances and functions. This identical underlying structure reveals their COMMON ANCESTRY and is called DIVERGENT EVOLUTION. ANALOGOUS ORGANS (Options A, C, D) have the same function but different structures and evolutionary origins \u2014 they show CONVERGENT EVOLUTION. Butterfly wing vs bat wing: both fly but have completely different internal structures. Octopus eye vs human eye: both see but evolved independently. Memory trick: HOMologous = same HOM(e)/origin; ANAlogous = same ANAlog function, different origin."},
+
+{d:"EASY",e:"AFCAT 2023",
+q:"Which early human species is credited with being the FIRST to leave Africa and migrate to Asia and Europe?",
+opts:["Australopithecus afarensis (Lucy)","Homo habilis","Homo erectus","Homo neanderthalensis"],
+ans:2,
+rule:"Homo erectus \u2014 first hominid to migrate out of Africa; also first to use fire; specimens include Java Man and Peking Man",
+exp:"HOMO ERECTUS (Upright Man) was the first hominid to migrate OUT OF AFRICA, spreading across Asia and Europe approximately 1.9 million to 100,000 years ago. Evidence: Java Man (discovered in Indonesia by Eugene Dubois, 1891) and Peking Man (discovered in China, 1920s\u20131930s) are both H. erectus specimens. H. erectus had a larger brain (~900 cc) than predecessors, used more sophisticated Acheulean stone tools (hand axes), and is widely believed to be the FIRST hominid to USE FIRE deliberately. AUSTRALOPITHECUS was confined to Africa and was not a member of genus Homo. H. HABILIS was restricted to Africa and made the first simple stone tools (Oldowan industry) but did not migrate. H. NEANDERTHALENSIS lived in Europe and western Asia, having evolved there from H. erectus ancestors, rather than migrating directly from Africa. Modern Homo sapiens left Africa much later (~60,000\u201370,000 years ago)."},
+
+{d:"EASY",e:"CDS 2023",
+q:"Darwin jointly presented his theory of natural selection with another scientist in 1858. Who was this co-presenter, and where was the joint presentation made?",
+opts:[
+  "Thomas Huxley \u2014 British Association for the Advancement of Science",
+  "Alfred Russel Wallace \u2014 Linnean Society of London",
+  "Joseph Dalton Hooker \u2014 Royal Society of London",
+  "Charles Lyell \u2014 Geological Society of London"
+],ans:1,
+rule:"Darwin + Alfred Russel Wallace jointly presented to Linnean Society of London, 1858; Darwin published On the Origin of Species in 1859",
+exp:"ALFRED RUSSEL WALLACE (1823\u20131913) independently developed the theory of evolution by natural selection while conducting fieldwork in the Malay Archipelago. In 1858, Wallace sent a letter outlining his theory to Darwin, prompting Darwin to finally publish his ideas. Friends Charles Lyell and Joseph Dalton Hooker arranged a joint presentation of both Darwin's and Wallace's papers at the LINNEAN SOCIETY OF LONDON on July 1, 1858. Darwin then rapidly completed and published On the Origin of Species on November 24, 1859. Wallace is often called the forgotten co-discoverer \u2014 he was remarkably generous in crediting Darwin with priority. Thomas Huxley was Darwin's great defender (Darwin's Bulldog). The key exam facts: joint presentation = 1858; Origin of Species = 1859; venue = Linnean Society; co-discoverer = Alfred Russel Wallace."},
+
+{d:"EASY",e:"NDA 2022",
+q:"\"Lucy\" is a famous fossil hominid. To which species does she belong, and who discovered her?",
+opts:[
+  "Homo habilis \u2014 discovered by Louis and Mary Leakey in Tanzania",
+  "Australopithecus afarensis \u2014 discovered by Donald Johanson in Ethiopia (1974)",
+  "Homo erectus \u2014 discovered by Eugene Dubois in Indonesia (1891)",
+  "Homo neanderthalensis \u2014 discovered in Neander Valley, Germany (1856)"
+],ans:1,
+rule:"Lucy = Australopithecus afarensis; Donald Johanson; Hadar, Ethiopia; 1974; ~3.2 million years old; bipedal but small-brained",
+exp:"LUCY is the informal name for a remarkably complete (~40% preserved) skeleton of AUSTRALOPITHECUS AFARENSIS discovered in November 1974 by paleoanthropologist DONALD JOHANSON at Hadar in the Afar Triangle of ETHIOPIA. She is approximately 3.2 million years old and was named after the Beatles song Lucy in the Sky with Diamonds. Lucy was approximately 1.1 metres tall and walked UPRIGHT (bipedal, proved by knee joint structure) but had a small brain (~380\u2013430 cc, similar to a chimpanzee). A. afarensis is considered a likely direct ancestor of the genus Homo. The LEAKEYS (Louis and Mary) discovered HOMO HABILIS in Olduvai Gorge, Tanzania. EUGENE DUBOIS discovered Java Man (Homo erectus) in Indonesia in 1891. Neanderthal remains were first found in Neander Valley, Germany in 1856. Key: Johanson = Lucy = A. afarensis = Ethiopia. Leakeys = H. habilis = Tanzania."},
+
+/* MEDIUM */
+{d:"MEDIUM",e:"CDS 2023",
+q:"The Hardy-Weinberg equilibrium describes a non-evolving population. Which combination of conditions, if present simultaneously, would DEFINITELY cause allele frequencies to change (i.e., cause evolution)?",
+opts:[
+  "Very large population size AND random mating \u2014 both conditions maintained",
+  "Natural selection (some genotypes reproduce more) AND small population size (genetic drift is significant)",
+  "All individuals have the same genotype \u2014 no heritable variation exists",
+  "The population has been isolated for exactly one generation with no immigration"
+],ans:1,
+rule:"H-W equilibrium requires: no selection, no drift, no mutation, no migration, random mating; violating any condition causes allele frequency change = evolution",
+exp:"The HARDY-WEINBERG LAW (G.H. Hardy + Wilhelm Weinberg, 1908) states that allele frequencies remain constant across generations ONLY when all five conditions are met: (1) Very large population size, (2) Random mating, (3) No mutations, (4) No natural selection, (5) No migration/gene flow. The equation is: p\u00b2 + 2pq + q\u00b2 = 1, where p = dominant allele frequency, q = recessive allele frequency. EVOLUTION occurs whenever any condition is violated. NATURAL SELECTION changes allele frequencies because some genotypes produce more surviving offspring (favoured alleles increase in frequency). SMALL POPULATION SIZE causes GENETIC DRIFT \u2014 random fluctuations in allele frequency due to chance sampling errors, not fitness differences. Both acting simultaneously would rapidly drive evolution. Option A (large population + random mating) actually SUPPORTS H-W equilibrium \u2014 these are two of the five required conditions. Option C (no variation) \u2014 selection cannot act without variation, so this is more stable. Option D (one generation of isolation) \u2014 too brief for significant divergence."},
+
+{d:"MEDIUM",e:"AFCAT 2022",
+q:"The peppered moth (Biston betularia) example is a classic demonstration of natural selection. Which type of selection does industrial melanism represent?",
+opts:[
+  "Stabilising selection \u2014 intermediate grey-coloured moths were always favoured throughout industrial change",
+  "Directional selection \u2014 industrial pollution darkened tree bark, shifting selection pressure to favour dark moths in polluted areas",
+  "Disruptive selection \u2014 both light and dark moths were simultaneously favoured over intermediate colours",
+  "Sexual selection \u2014 female moths preferentially chose dark-coloured males during the industrial period"
+],ans:1,
+rule:"Industrial melanism = directional selection; pollution darkened bark \u2192 light moths became visible to predators \u2192 dark moths favoured \u2192 population mean shifted",
+exp:"INDUSTRIAL MELANISM in the peppered moth is the textbook example of DIRECTIONAL SELECTION \u2014 where one extreme phenotype is favoured, shifting the population mean over time. Before the Industrial Revolution: tree bark was covered in light lichens \u2192 light-coloured moths well camouflaged \u2192 dark (melanic) moths eaten by birds \u2192 light morph ~99%. During Industrial Revolution: soot killed lichens and blackened bark \u2192 light moths now conspicuous; dark moths camouflaged \u2192 dark morph increased to ~98% in polluted areas (Manchester) by 1900. After Clean Air Acts (1956): pollution reduced, lichens returned \u2192 selection reversed \u2192 light moths increasing again. Studied extensively by Bernard Kettlewell (1950s). The three types of selection: DIRECTIONAL = one extreme favoured (population shifts); STABILISING = intermediate favoured, extremes eliminated (reduces variation, e.g. human birth weight); DISRUPTIVE = both extremes favoured, intermediates eliminated (e.g. beak size in black-bellied seedcracker bird)."},
+
+{d:"MEDIUM",e:"NDA 2023",
+q:"The Bottleneck Effect and the Founder Effect are both forms of which evolutionary mechanism, and how do they differ?",
+opts:[
+  "Natural selection \u2014 both represent extreme selective pressure on specific traits",
+  "Genetic drift \u2014 both involve random allele frequency changes due to small population size, NOT differential fitness; bottleneck = catastrophic population reduction; founder = small group colonising new area",
+  "Gene flow \u2014 both involve the movement of alleles between geographically separated populations",
+  "Mutation \u2014 both involve the sudden appearance of new alleles due to environmental stress"
+],ans:1,
+rule:"Bottleneck + Founder effects = Genetic Drift; random allele frequency change due to small population size, not selection",
+exp:"Both the BOTTLENECK EFFECT and FOUNDER EFFECT are specific types of GENETIC DRIFT \u2014 random changes in allele frequencies that occur by CHANCE rather than natural selection. Genetic drift has the greatest impact in SMALL POPULATIONS. BOTTLENECK EFFECT: A population is dramatically reduced by a catastrophic event (disease, natural disaster). The survivors are a random sample \u2014 they may not represent the original genetic diversity. Result: reduced genetic diversity; alleles may be lost or fixed by chance. Example: Cheetahs have extremely low genetic diversity due to a historical bottleneck ~10,000 years ago. Northern elephant seals were hunted to ~20 individuals in the 1890s; now ~170,000 but with very low genetic diversity. FOUNDER EFFECT: A small group of individuals colonises a new isolated area. The limited gene pool of the founders becomes the basis for the entire new population. Example: High frequency of Ellis-van Creveld syndrome in Amish communities traces back to a small founding group. KEY DIFFERENCE: Bottleneck = existing population reduced; Founder = new population started by few individuals."},
+
+{d:"MEDIUM",e:"CDS 2024",
+q:"Lamarck's theory of inheritance of acquired characteristics is now known to be incorrect. Which of the following provides the best biological explanation for WHY acquired characteristics cannot be inherited?",
+opts:[
+  "Acquired characteristics cannot be inherited because they are caused by the environment, and evolution only responds to genetic factors",
+  "Acquired characteristics (changes to body tissues) are NOT encoded into the DNA of reproductive cells (germline); the Weismann barrier separates somatic cells from germline \u2014 only germline DNA changes can be inherited",
+  "Lamarck's theory predicts too slow a rate of evolution \u2014 the mechanism works but is too inefficient to produce observable changes",
+  "Acquired characteristics can sometimes be inherited through epigenetics, making Lamarck partially correct in all cases"
+],ans:1,
+rule:"Weismann barrier: somatic cell changes do NOT alter germline DNA; only changes to gametes (sperm/egg DNA) are heritable",
+exp:"The correct mechanistic explanation for why Lamarck was wrong comes from our understanding of molecular biology and the WEISMANN BARRIER (proposed by August Weismann, 1880s). Lamarck proposed: an organism uses an organ heavily \u2192 organ changes during lifetime \u2192 this change is passed to offspring. WHY THIS IS WRONG: Changes that occur to SOMATIC CELLS (body cells \u2014 muscle, skin, bone) during an organism's lifetime do NOT alter the DNA in GERMLINE CELLS (sperm and eggs). Inheritance requires changes in the DNA of GAMETES, because only gamete DNA is passed to offspring. A bodybuilder's muscle hypertrophy involves changes in protein synthesis and cell structure \u2014 none of these are encoded into sperm or egg DNA. Weismann proved this by cutting the tails off mice for many generations \u2014 their offspring were still born with tails. EPIGENETICS: There is some evidence for limited transgenerational epigenetic inheritance (DNA methylation patterns), but these are not permanent, stable or directional enough to explain Lamarckian macroevolution. Lamarck was correct that species change over time \u2014 he just got the mechanism wrong."},
+
+{d:"MEDIUM",e:"AFCAT 2024",
+q:"Darwin's finches on the Galapagos Islands are a classic example of adaptive radiation. Which statement BEST describes adaptive radiation?",
+opts:[
+  "Adaptive radiation is when one species adapts to changes in its environment by acquiring progressively better traits over time",
+  "Adaptive radiation is the rapid diversification of one ancestral species into multiple new species, each adapted to exploit different ecological niches, driven by natural selection and geographic/ecological isolation",
+  "Adaptive radiation is the convergent evolution of unrelated species filling the same ecological niche in different parts of the world",
+  "Adaptive radiation only occurs on islands and cannot happen on continents or in freshwater"
+],ans:1,
+rule:"Adaptive radiation = one ancestor \u2192 many species filling different ecological niches; Darwin's finches evolved ~14 species from one ancestral South American finch",
+exp:"ADAPTIVE RADIATION is the relatively rapid diversification of a single ancestral lineage into multiple new species, each adapted to a distinct ECOLOGICAL NICHE. It typically occurs when an ancestral species colonises a new environment with many available niches and little competition. DARWIN'S FINCHES: One ancestral South American finch colonised the Galapagos Islands. With many ecological niches available and no competition, descendants evolved different beak shapes for different food sources: large deep beaks for cracking hard seeds; long curved beaks for cactus; small thin beaks for insects; straight beaks to probe wood for grubs. Today ~13\u201314 species exist across different islands. Other examples: AUSTRALIAN MARSUPIALS (~250 species from one ancestral marsupial after Australia separated from Gondwana); MAMMALIAN RADIATION after the K-Pg extinction ~66 MYA (mammals rapidly diversified into niches vacated by non-avian dinosaurs); CICHLID FISH in African Great Lakes. CONVERGENT EVOLUTION is the opposite \u2014 unrelated species independently evolving similar adaptations (e.g., dolphin and ichthyosaur body shape; cactus and euphorb stem succulence). Adaptive radiation = evidence of NATURAL SELECTION + SPECIATION driving biodiversity."},
+
+{d:"MEDIUM",e:"NDA 2024",
+q:"Which of the following correctly distinguishes the Permian-Triassic (P-T) extinction from the Cretaceous-Palaeogene (K-Pg) extinction?",
+opts:[
+  "Both extinctions were caused by asteroid impacts of similar scale; K-Pg was slightly larger in magnitude",
+  "P-T extinction (~252 MYA) was the LARGEST mass extinction in Earth history, called The Great Dying (~96% marine species lost), caused primarily by Siberian Traps volcanism; K-Pg (~66 MYA) was caused by the Chicxulub asteroid impact plus Deccan Traps volcanism, eliminating non-avian dinosaurs",
+  "The K-Pg extinction eliminated all marine life while the P-T extinction only affected land organisms",
+  "The P-T extinction was caused by early hominids hunting megafauna; the K-Pg extinction was due to global glaciation"
+],ans:1,
+rule:"P-T (~252 MYA) = LARGEST extinction (Great Dying; ~96% marine species); Siberian Traps volcanism. K-Pg (~66 MYA) = Chicxulub asteroid + Deccan Traps; non-avian dinosaurs extinct",
+exp:"The two most famous mass extinctions had different causes and affected different groups: PERMIAN-TRIASSIC (THE GREAT DYING, ~252 MYA) is the LARGEST mass extinction in Earth's history \u2014 ~96% of marine species and ~70% of terrestrial vertebrate species were lost. Primary cause: massive volcanic eruptions in Siberia (Siberian Traps), releasing enormous CO\u2082 \u2192 catastrophic global warming, ocean acidification and anoxia. Recovery took ~10 million years. CRETACEOUS-PALAEOGENE (K-Pg, ~66 MYA) eliminated ~76% of all species including ALL NON-AVIAN DINOSAURS. The CHICXULUB ASTEROID IMPACT (Yucatan Peninsula, Mexico \u2014 ~10 km diameter asteroid) caused massive fires, a nuclear winter effect (debris blocking sunlight \u2192 photosynthesis stops \u2192 food chain collapse), and acid rain. The Deccan Trap volcanic eruptions in India (ongoing at the time) exacerbated the effects. Birds (avian dinosaurs) and mammals survived, enabling the Cenozoic mammalian adaptive radiation. The Big Five extinctions: Ordovician-Silurian, Late Devonian, Permian-Triassic (largest), Triassic-Jurassic, Cretaceous-Palaeogene."},
+
+/* HARD */
+{d:"HARD",e:"CDS 2024",
+q:"In a population, the frequency of the recessive allele (q) for albinism is 0.1. Assuming Hardy-Weinberg equilibrium, what is the frequency of CARRIERS (heterozygotes) in the population?",
+opts:[
+  "1% (0.01) \u2014 because the carrier frequency equals q\u00b2",
+  "18% (0.18) \u2014 because carrier frequency = 2pq = 2 \u00d7 0.9 \u00d7 0.1",
+  "10% (0.1) \u2014 because the carrier frequency equals q directly",
+  "81% (0.81) \u2014 because the homozygous dominant frequency = p\u00b2"
+],ans:1,
+rule:"H-W: p + q = 1; p = 0.9, q = 0.1; Carrier (heterozygote) frequency = 2pq = 2 \u00d7 0.9 \u00d7 0.1 = 0.18 = 18%",
+exp:"Applying the HARDY-WEINBERG equation: p + q = 1, where p = dominant allele frequency (A), q = recessive allele frequency (a). Given: q = 0.1. Therefore: p = 1 \u2212 0.1 = 0.9. Genotype frequencies: p\u00b2 = AA (homozygous dominant, unaffected, non-carrier) = 0.9\u00b2 = 0.81 = 81%. 2pq = Aa (CARRIERS, phenotypically normal) = 2 \u00d7 0.9 \u00d7 0.1 = 0.18 = 18%. q\u00b2 = aa (homozygous recessive, AFFECTED, albino) = 0.1\u00b2 = 0.01 = 1%. CHECK: 0.81 + 0.18 + 0.01 = 1.00. So 18% of the population are CARRIERS. KEY INSIGHT: The carrier frequency (2pq = 18%) is MUCH HIGHER than the affected frequency (q\u00b2 = 1%) \u2014 for every 1 affected albino, there are 18 carriers. This is why recessive disorders persist in populations \u2014 most copies of the allele are hidden in carriers who are not selected against. Common exam traps: Option A (q\u00b2) gives the AFFECTED frequency, not carrier. Option C (q) is the raw allele frequency. Option D (p\u00b2) is the homozygous dominant frequency. Always use 2pq for heterozygote (carrier) frequency."},
+
+{d:"HARD",e:"NDA 2024",
+q:"The endosymbiont theory (proposed by Lynn Margulis) explains the evolutionary origin of mitochondria and chloroplasts. What evidence most strongly supports this theory?",
+opts:[
+  "Mitochondria and chloroplasts were created de novo by eukaryotic cells; their membrane structure is the supporting evidence",
+  "Mitochondria and chloroplasts originated as free-living prokaryotes engulfed by ancestral eukaryotic cells but not digested, forming permanent endosymbionts; supported by their own circular DNA, 70S ribosomes, double membrane, binary fission, and sensitivity to antibiotics that target prokaryotes",
+  "The eukaryotic nucleus evolved from an ingested virus; supported by the similarity between nuclear pores and viral capsids",
+  "All eukaryotes evolved directly from archaea in a single stepwise mutation event; supported by ribosomal RNA similarities alone"
+],ans:1,
+rule:"Endosymbiont theory (Lynn Margulis, 1967): mitochondria/chloroplasts were free-living prokaryotes; evidence = circular DNA, 70S ribosomes, double membrane, binary fission, antibiotic sensitivity",
+exp:"ENDOSYMBIONT THEORY was formally proposed by LYNN MARGULIS in 1967 (initially rejected by 15 journals before publication). The theory: ~1.5\u20132 billion years ago, a large anaerobic prokaryote engulfed smaller aerobic prokaryotes (ancestors of MITOCHONDRIA), forming a mutually beneficial relationship (endosymbiosis). The host gained ATP; the endosymbiont gained protection. Later, a eukaryotic cell similarly engulfed cyanobacteria, which became CHLOROPLASTS. EVIDENCE SUPPORTING THE THEORY: (1) Mitochondria and chloroplasts have their own CIRCULAR DNA, like prokaryotes \u2014 unlike the linear chromosomes of the eukaryotic nucleus. (2) They have their own 70S RIBOSOMES \u2014 prokaryotic size; cytoplasmic ribosomes in eukaryotes are 80S. (3) They are enclosed in a DOUBLE MEMBRANE \u2014 inner membrane = original prokaryote membrane; outer membrane = derived from the host's phagocytic membrane. (4) They divide by BINARY FISSION independently of the cell cycle. (5) They are sensitive to ANTIBIOTICS (chloramphenicol, tetracycline) that target 70S ribosomes, but NOT to eukaryotic inhibitors. (6) Their rRNA sequences closely resemble proteobacteria (mitochondria) and cyanobacteria (chloroplasts). Margulis received the National Medal of Science in 1999. The theory is now the accepted consensus in cell biology."},
+
+{d:"HARD",e:"AFCAT 2024",
+q:"Recent genomic analysis (Svante Paabo, Nobel Prize 2022) revealed that modern non-African humans carry ~2-4% Neanderthal DNA. What is the most accurate evolutionary interpretation of this finding?",
+opts:[
+  "Neanderthals are the direct ancestors of all modern non-African humans \u2014 the 2-4% represents incomplete replacement of Neanderthal genes by H. sapiens",
+  "Neanderthals and modern Homo sapiens interbred (hybridised) when H. sapiens migrated out of Africa and encountered Neanderthals in Europe and the Middle East ~60,000-40,000 years ago; some Neanderthal alleles were retained because they conferred adaptive advantages (e.g. immune genes, cold-adaptation)",
+  "The 2-4% Neanderthal DNA is a laboratory artefact \u2014 modern humans and Neanderthals were completely isolated with no interbreeding",
+  "Neanderthals and modern humans are the same species; the genetic similarity simply reflects common African ancestry rather than interbreeding outside Africa"
+],ans:1,
+rule:"Interbreeding (hybridisation) between H. sapiens and Neanderthals ~60,000-40,000 ya in Europe/Middle East; ~2-4% Neanderthal DNA in non-Africans; some alleles retained for adaptive advantage",
+exp:"This reflects the groundbreaking palaeogenomics research for which SVANTE PAABO received the Nobel Prize in Physiology or Medicine in 2022. KEY FINDINGS: (1) INTERBREEDING CONFIRMED: Modern non-African humans carry ~1-4% Neanderthal DNA. Sub-Saharan Africans have very little, consistent with interbreeding occurring AFTER H. sapiens left Africa, in Europe and the Middle East ~60,000-40,000 years ago. (2) SEPARATE SPECIES: Neanderthals are NOT direct ancestors of modern humans. They diverged from a common ancestor with H. sapiens ~400,000-600,000 years ago. (3) ADAPTIVE SIGNIFICANCE: Retained Neanderthal alleles include immune system genes (Toll-like receptor genes enhancing innate immunity to Eurasian pathogens), keratin genes (skin and hair cold-adaptation), and some metabolic variants. Some Neanderthal alleles were actually HARMFUL (associated with depression, blood clotting disorders) and have been selected against. (4) DENISOVANS: Another archaic human group discovered from a finger bone in Siberia. Melanesians and Aboriginal Australians carry ~3-5% Denisovan DNA. (5) IMPLICATION: Modern human evolution involved complex interbreeding and gene flow \u2014 not simple replacement of archaics \u2014 making human evolutionary history a mosaic."},
+
+{d:"HARD",e:"CDS 2024",
+q:"The Cambrian Explosion (~541 MYA) is described as the Big Bang of evolution. What was it, and which hypothesis best explains why it occurred so rapidly?",
+opts:[
+  "The Cambrian Explosion refers to the origin of all life during the Cambrian period \u2014 before this, Earth was completely lifeless",
+  "The Cambrian Explosion (~541-515 MYA) was a ~20-25 million year period in which most major animal body plans (phyla) appeared in the fossil record; hypotheses include: evolution of eyes/predation arms race, increased atmospheric oxygen, Snowball Earth glaciation thaw, and innovation of Hox gene toolkit enabling diverse body plans",
+  "The Cambrian Explosion was a single catastrophic geological event lasting ~1,000 years that killed most life and replaced it with new organisms created through rapid mutation",
+  "The Cambrian Explosion refers only to the explosion in diversity of trilobites, not to broader animal diversity"
+],ans:1,
+rule:"Cambrian Explosion ~541 MYA: most major animal phyla appear; preceded by Ediacaran soft-bodied fauna; hypotheses: O\u2082 rise, predation arms race, Hox genes, ecological cascades",
+exp:"The CAMBRIAN EXPLOSION (~541-515 MYA) is one of the most debated events in evolutionary biology \u2014 a ~20-25 million year period in which most major ANIMAL PHYLA (body plans) we recognise today appear in the fossil record for the first time, seemingly simultaneously in geological terms. WHAT PRECEDED IT: The Precambrian had simple life. The EDIACARAN BIOTA (~635-541 MYA) were enigmatic soft-bodied multicellular organisms (fronds, discs, quilted mats) that do not clearly connect to modern animal groups. KEY FOSSIL SITES: Burgess Shale (British Columbia, Canada) and Chengjiang biota (China) show extraordinarily preserved Cambrian animal diversity. WHY SO RAPID? Multiple non-exclusive hypotheses: (1) OXYGEN HYPOTHESIS: Atmospheric O\u2082 crossed a threshold enabling large, complex bodies with high metabolic demands. (2) SNOWBALL EARTH THAW: Glaciation ended ~635 MYA, nutrient runoff into oceans created ecological opportunity. (3) PREDATION ARMS RACE: Evolution of eyes and active predation drove rapid coevolution of defensive structures (shells, spines). (4) HOX GENE EVOLUTION: The genetic toolkit controlling body plan development underwent rapid elaboration, enabling diverse body plans to evolve quickly. (5) ECOLOGICAL CASCADES: Once the first complex animals appeared, new ecological roles (predators, prey, detritivores) drove rapid diversification. Still actively debated."},
+
+{d:"HARD",e:"NDA 2024",
+q:"The apple maggot fly (Rhagoletis pomonella) is a famous example of speciation in progress. What type of speciation does it represent, and what mechanisms maintain reproductive isolation without a physical barrier?",
+opts:[
+  "Allopatric speciation \u2014 the fly populations on apple and hawthorn are geographically separated by mountain ranges",
+  "Sympatric speciation \u2014 occurring in the same geographic area; reproductive isolation maintained by temporal isolation (different fruiting seasons of apple vs hawthorn), host preference (flies mate on their host plant), and assortative mating (apple-flies mate with apple-flies)",
+  "Parapatric speciation \u2014 the apple and hawthorn populations live in adjacent habitats with a sharp boundary between orchards and wild hawthorn areas",
+  "Hybridisation \u2014 the apple-flies and hawthorn-flies interbreed freely and produce fertile hybrid offspring"
+],ans:1,
+rule:"Rhagoletis = sympatric speciation; same geographic area; reproductive isolation via host preference, temporal isolation (fruiting seasons differ) and assortative mating on host plant",
+exp:"The APPLE MAGGOT FLY (Rhagoletis pomonella) is the most famous real-world example of SYMPATRIC SPECIATION \u2014 speciation occurring WITHOUT geographic separation. HISTORY: Rhagoletis originally fed and mated exclusively on native North American HAWTHORN (Crataegus) berries. When European settlers introduced APPLE trees to North America, some flies colonised apple trees. By the 1860s, two distinct host races were recognisable in the same geographic areas. MECHANISMS OF REPRODUCTIVE ISOLATION (without physical barriers): (1) TEMPORAL/SEASONAL ISOLATION: Hawthorn fruits in autumn (September-October); Apple fruits in summer (July-August). The two host races are reproductively active at different times. (2) HABITAT/HOST PREFERENCE: Flies strongly prefer to MATE ON THEIR HOST PLANT, so apple-flies mostly encounter and mate with other apple-flies; hawthorn-flies with hawthorn-flies. Host preference is at least partly genetically determined. (3) LOCAL ADAPTATION: Each race has evolved alleles favouring survival on their specific host plant's chemistry. CURRENT STATUS: The two host races are not yet fully reproductively isolated (some interbreeding occurs) \u2014 they are in the PROCESS of speciation, making this a real-time example of sympatric speciation in progress. This challenged the long-held view that geographic isolation is necessary for speciation."}
+
+];
+
+const answers=new Array(QS.length).fill(null);
+const revealed=new Array(QS.length).fill(false);
+const LABS=["A","B","C","D"];
+
+function build(){
+  const area=document.getElementById("q-area");
+  area.innerHTML="";
+  QS.forEach((q,i)=>{
+    const dc=q.d==="EASY"?"diff-e":q.d==="MEDIUM"?"diff-m":"diff-h";
+    const div=document.createElement("div");
+    div.className="q-card";div.id="qc"+i;
+    div.innerHTML=`
+      <div class="q-meta">
+        <span class="q-num">Q.${String(i+1).padStart(2,"0")}</span>
+        <span class="q-diff ${dc}">${q.d}</span>
+        <span class="q-exam">${q.e}</span>
+      </div>
+      <div class="q-body">
+        <div class="q-text">${q.q}</div>
+        <div class="opts" id="opts${i}">
+          ${q.opts.map((o,j)=>`
+            <button class="opt" id="o${i}_${j}" onclick="pick(${i},${j})">
+              <span class="opt-lbl">${LABS[j]}</span>${o}
+            </button>`).join("")}
+        </div>
+        <div class="exp-panel" id="ex${i}">
+          <div class="exp-tag">Explanation</div>
+          <div class="exp-rule">${q.rule}</div>
+          <p>${q.exp}</p>
+        </div>
+      </div>
+      <div class="q-foot">
+        <span style="font-size:11px;color:var(--dim);font-weight:700">Biology · B12</span>
+        <span id="ai${i}" class="q-status">\u2014</span>
+      </div>`;
+    area.appendChild(div);
+  });
+}
+
+function pick(qi,oi){
+  if(revealed[qi])return;
+  answers[qi]=oi;
+  document.querySelectorAll("#opts"+qi+" .opt").forEach((b,j)=>{b.classList.remove("sel");if(j===oi)b.classList.add("sel")});
+  document.getElementById("qc"+qi).classList.add("answered");
+  const ai=document.getElementById("ai"+qi);
+  ai.textContent="Selected: "+LABS[oi];
+  ai.style.color="var(--primary)";
+  updateStats();
+}
+
+function updateStats(){
+  const att=answers.filter(a=>a!==null).length;
+  document.getElementById("s-att").textContent=att;
+  document.getElementById("prog").style.width=(att/QS.length*100)+"%";
+  document.getElementById("prog-label").textContent=att+" of "+QS.length+" answered";
+  let c=0,w=0;
+  answers.forEach((a,i)=>{if(a===null)return;if(a===QS[i].ans)c++;else w++;});
+  document.getElementById("s-cor").textContent=c;
+  document.getElementById("s-wrg").textContent=w;
+}
+
+function submitAll(){
+  let cor=0,wrg=0,skp=0;
+  QS.forEach((q,i)=>{
+    revealed[i]=true;
+    const opts=document.querySelectorAll("#opts"+i+" .opt");
+    opts.forEach(b=>{b.disabled=true;b.classList.remove("sel")});
+    opts[q.ans].classList.add("ok");
+    if(answers[i]!==null&&answers[i]!==q.ans)opts[answers[i]].classList.add("bad");
+    document.getElementById("ex"+i).classList.add("show");
+    const ai=document.getElementById("ai"+i);
+    const card=document.getElementById("qc"+i);
+    card.classList.remove("answered");
+    if(answers[i]===null){skp++;ai.textContent="Skipped";ai.style.color="var(--dim)";}
+    else if(answers[i]===q.ans){cor++;card.classList.add("correct");ai.textContent="\u2713 Correct";ai.style.color="var(--green)";}
+    else{wrg++;card.classList.add("wrong");ai.textContent="\u2717 Wrong";ai.style.color="var(--red)";}
+  });
+  updateStats();
+  showResults(cor,wrg,skp);
+}
+
+function showResults(cor,wrg,skp){
+  const pct=Math.round(cor/QS.length*100);
+  let grade,msg;
+  if(pct>=88){grade="Excellent";msg="Outstanding! You have mastered Evolution.";}
+  else if(pct>=70){grade="Good";msg="Well done. Review the questions you missed.";}
+  else if(pct>=50){grade="Average";msg="Good effort. Revisit the theory cards and try again.";}
+  else{grade="Needs Work";msg="Review the Quick Ref carefully and try again.";}
+  const res=document.getElementById("results");
+  res.innerHTML=`
+    <div class="res-hero">
+      <div class="res-score">${cor}<span style="font-size:36px;opacity:.5">/${QS.length}</span></div>
+      <div class="res-grade">${grade} \u00b7 ${pct}%</div>
+      <div class="res-msg">${msg}</div>
+    </div>
+    <div class="res-stats">
+      <div class="qs-cell"><div class="qs-val g">${cor}</div><div class="qs-lbl">Correct</div></div>
+      <div class="qs-cell"><div class="qs-val r">${wrg}</div><div class="qs-lbl">Wrong</div></div>
+      <div class="qs-cell"><div class="qs-val a">${skp}</div><div class="qs-lbl">Skipped</div></div>
+      <div class="qs-cell"><div class="qs-val">${pct}%</div><div class="qs-lbl">Score</div></div>
+    </div>
+    <div style="text-align:center;margin:16px 0">
+      <button class="btn btn-ghost" onclick="document.getElementById('q-area').scrollIntoView({behavior:'smooth'})">Review All Answers</button>
+    </div>`;
+  res.style.display="block";
+  res.scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+function resetQuiz(){
+  answers.fill(null);revealed.fill(false);
+  build();
+  document.getElementById("results").style.display="none";
+  document.getElementById("results").innerHTML="";
+  ["s-att","s-cor","s-wrg"].forEach(id=>document.getElementById(id).textContent="0");
+  document.getElementById("prog").style.width="0%";
+  document.getElementById("prog-label").textContent="0 of "+QS.length+" answered";
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function switchTab(id){
+  document.querySelectorAll(".pane").forEach(p=>p.classList.remove("on"));
+  document.querySelectorAll(".tab").forEach(b=>b.classList.remove("on"));
+  document.getElementById(id).classList.add("on");
+  const idx={theory:0,quickref:1,quiz:2}[id];
+  document.querySelectorAll(".tab")[idx].classList.add("on");
+}
+
+function tog(hd){
+  const bd=hd.nextElementSibling;
+  const isOpen=bd.classList.contains("open");
+  bd.classList.toggle("open",!isOpen);
+  hd.classList.toggle("open",!isOpen);
+}
+
+build();
+</script>
+</body>
+</html>

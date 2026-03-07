@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B10 · Reproductive System | Olive Defence</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+
+:root{
+  /* ── THEME B10: Deep Rose-Plum + Warm Blush — reproductive, life ── */
+  --bg:        #F6EEF2;
+  --bg2:       #EDE0E8;
+  --bg3:       #E0CEDB;
+  --white:     #FDF8FB;
+  --ink:       #1A0812;
+  --ink2:      #2C1020;
+  --muted:     #7A4060;
+  --dim:       #B08098;
+  --border:    #D8B8CC;
+
+  --primary:      #6E1040;
+  --primaryLt:    #8E1850;
+  --primaryPale:  #FAE8F0;
+
+  --amber:        #8A5A08;
+  --amberLt:      #AE7210;
+  --amberPale:    #FDF3DC;
+
+  --green:        #1A5C2C;
+  --greenLt:      #22783C;
+  --greenPale:    #E4F4EC;
+
+  --red:          #8A1A1A;
+  --redLt:        #B02020;
+  --redPale:      #FAEAEA;
+
+  --blue:         #1A3870;
+  --bluePale:     #E6EDF8;
+
+  --purple:       #581878;
+  --purplePale:   #F2E8F8;
+
+  --teal:         #0D5048;
+  --tealPale:     #E0F2F0;
+
+  --radius:    12px;
+  --shadow:    0 2px 12px rgba(26,8,18,.09);
+  --shadow-md: 0 4px 20px rgba(26,8,18,.14);
+}
+
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--ink);font-size:17px;line-height:1.75;min-height:100vh}
+.page{max-width:680px;margin:0 auto;padding:0 16px 80px}
+
+/* ── HERO ─────────────────────────────────────────────────────── */
+.hero{
+  background:linear-gradient(135deg,#1A0410 0%,#6E1040 52%,#8E2058 100%);
+  margin:0 -16px;padding:28px 20px 26px;position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 76% 20%,rgba(255,180,210,.10) 0%,transparent 55%),
+    radial-gradient(ellipse at 8% 80%,rgba(255,140,180,.06) 0%,transparent 50%);
+  pointer-events:none;
+}
+.hero::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(255,180,210,.35),transparent);
+  pointer-events:none;
+}
+.hero-kicker{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.50);margin-bottom:8px;display:flex;align-items:center;gap:8px;position:relative;z-index:1}
+.hero-kicker::before{content:'';width:18px;height:2px;background:rgba(255,255,255,.28)}
+.hero-title{font-family:'Lora',serif;font-size:clamp(24px,5.5vw,34px);font-weight:700;color:#fff;line-height:1.2;margin-bottom:10px;position:relative;z-index:1}
+.hero-title span{color:#FFB8D4;font-style:italic}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.66);margin-bottom:18px;line-height:1.65;position:relative;z-index:1}
+.hero-chips{display:flex;flex-wrap:wrap;gap:7px;position:relative;z-index:1}
+.chip{font-size:11px;font-weight:700;letter-spacing:1px;padding:4px 12px;border-radius:20px;text-transform:uppercase}
+.chip-w{background:rgba(255,255,255,.12);color:rgba(255,255,255,.88)}
+.chip-r{background:rgba(255,184,212,.18);color:#FFB8D4}
+.chip-g{background:rgba(100,240,150,.11);color:#80E890}
+
+/* ── TAB BAR ─────────────────────────────────────────────────── */
+.tab-bar{position:sticky;top:0;z-index:50;background:var(--white);border-bottom:2px solid var(--border);margin:0 -16px;display:flex;overflow-x:auto;box-shadow:0 2px 8px rgba(26,8,18,.07);-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.tab-bar::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;padding:14px 18px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);border:none;background:transparent;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;white-space:nowrap}
+.tab:hover{color:var(--ink);background:var(--bg)}
+.tab.on{color:var(--primary);border-bottom-color:var(--primary)}
+
+/* ── PANES ───────────────────────────────────────────────────── */
+.pane{display:none;padding-top:24px;animation:fadeUp .3s ease}
+.pane.on{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ── SECTION LABEL ───────────────────────────────────────────── */
+.sec-label{font-size:10px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--primary);margin:28px 0 12px;display:flex;align-items:center;gap:10px}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* ── INTRO BOX ───────────────────────────────────────────────── */
+.intro-box{background:var(--primaryPale);border:1.5px solid rgba(110,16,64,.20);border-radius:var(--radius);padding:20px;margin-bottom:8px}
+.intro-box p{font-size:16px;color:var(--ink2);line-height:1.8}
+.intro-box strong{color:var(--primary)}
+
+/* ── CONCEPT CARDS ───────────────────────────────────────────── */
+.c-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;box-shadow:var(--shadow);overflow:hidden}
+.c-head{display:flex;align-items:center;gap:12px;padding:16px 18px;cursor:pointer;border-left:4px solid transparent;transition:all .15s;-webkit-tap-highlight-color:transparent}
+.c-head:hover,.c-head.open{background:var(--bg);border-left-color:var(--primary)}
+.c-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.c-title{font-size:17px;font-weight:700;color:var(--ink);flex:1}
+.c-sub{font-size:12px;color:var(--dim);font-weight:600;margin-top:2px}
+.c-arrow{font-size:12px;color:var(--dim);transition:transform .2s;flex-shrink:0}
+.c-head.open .c-arrow{transform:rotate(180deg)}
+.c-body{display:none;padding:4px 18px 20px;border-top:1px solid var(--border)}
+.c-body.open{display:block;animation:fadeUp .2s ease}
+.c-body p{font-size:16px;color:var(--ink2);line-height:1.85;margin-bottom:12px}
+.c-body p:last-child{margin-bottom:0}
+.c-body strong{color:var(--primary);font-weight:700}
+.c-body em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* ── CONTENT BLOCKS ──────────────────────────────────────────── */
+.fact-box{background:var(--amberPale);border:1.5px solid rgba(138,90,8,.22);border-radius:10px;padding:16px 18px;margin:14px 0}
+.fact-box .fb-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--amber);text-transform:uppercase;margin-bottom:8px}
+.fact-box ul{list-style:none;padding:0}
+.fact-box li{font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;position:relative;line-height:1.7}
+.fact-box li::before{content:'→';position:absolute;left:0;color:var(--amber);font-weight:700;font-size:13px}
+
+.eg-box{background:var(--greenPale);border-left:4px solid var(--green);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.eg-box .eg-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--green);text-transform:uppercase;margin-bottom:6px}
+.eg-box ul{list-style:none;padding:0}
+.eg-box li{font-size:15px;color:var(--ink2);padding:4px 0 4px 18px;position:relative;line-height:1.65}
+.eg-box li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:800;font-size:12px}
+.eg-box p{font-size:15px;color:var(--ink2);line-height:1.75}
+
+.trap-box{background:var(--redPale);border:1.5px solid rgba(138,26,26,.20);border-radius:10px;padding:16px 18px;margin:14px 0}
+.trap-box .tr-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--red);text-transform:uppercase;margin-bottom:8px}
+.trap-box p,.trap-box li{font-size:15.5px;color:var(--ink2);line-height:1.75}
+.trap-box ul{list-style:none;padding:0}
+.trap-box li{padding:5px 0 5px 22px;position:relative}
+.trap-box li::before{content:'⚑';position:absolute;left:0;font-size:12px;color:var(--red)}
+
+.rule-box{background:var(--bluePale);border:1.5px solid rgba(26,56,112,.17);border-radius:10px;padding:16px 18px;margin:14px 0}
+.rule-box .rl-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--blue);text-transform:uppercase;margin-bottom:8px}
+.rule-box p{font-size:15.5px;color:var(--ink2);line-height:1.8}
+.rule-box strong{color:var(--blue)}
+
+.purple-box{background:var(--purplePale);border:1.5px solid rgba(88,24,120,.17);border-radius:10px;padding:16px 18px;margin:14px 0}
+.purple-box .pl-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--purple);text-transform:uppercase;margin-bottom:8px}
+.purple-box ul{list-style:none;padding:0}
+.purple-box li{font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;position:relative;line-height:1.8}
+.purple-box li::before{content:'◆';position:absolute;left:0;font-size:9px;color:var(--purple);top:10px}
+
+.analogy-box{background:var(--primaryPale);border-left:4px solid var(--primary);border-radius:0 8px 8px 0;padding:14px 16px;margin:12px 0}
+.analogy-box .an-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--primary);text-transform:uppercase;margin-bottom:6px}
+.analogy-box p{font-size:15.5px;color:var(--ink2);line-height:1.75}
+.analogy-box strong{color:var(--primary)}
+
+/* journey strip */
+.journey{margin:16px 0;display:flex;flex-direction:column}
+.j-step{display:flex;align-items:stretch;gap:14px}
+.j-line{display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:28px}
+.j-dot{width:28px;height:28px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;margin-top:2px}
+.j-dot.alt{background:var(--blue)}
+.j-connector{width:2px;flex:1;background:var(--border);margin:2px 0}
+.j-step:last-child .j-connector{display:none}
+.j-content{padding:2px 0 18px;flex:1}
+.j-title{font-size:15px;font-weight:800;color:var(--ink);margin-bottom:3px}
+.j-desc{font-size:14.5px;color:var(--ink2);line-height:1.7}
+.j-desc strong{color:var(--primary)}
+.j-desc em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* stat band */
+.stat-band{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border-radius:var(--radius);overflow:hidden;margin:16px 0}
+.stat-cell{background:var(--white);padding:12px 8px;text-align:center}
+.stat-val{font-family:'Lora',serif;font-size:16px;font-weight:700;color:var(--primary);line-height:1;margin-bottom:4px}
+.stat-lbl{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:.4px;line-height:1.3}
+
+.org-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}
+.org-card{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:13px 14px;position:relative;overflow:hidden}
+.org-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--primary)}
+.org-card .org-name{font-size:13px;font-weight:800;color:var(--primary);margin-bottom:3px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.org-card .org-nick{font-size:11px;font-weight:700;color:var(--amber);background:var(--amberPale);border-radius:4px;padding:1px 7px;letter-spacing:.5px}
+.org-card p{font-size:13.5px;color:var(--ink2);line-height:1.6;margin-top:2px}
+
+.compare-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
+.compare-table th{background:var(--primary);color:#fff;padding:10px 12px;text-align:left;font-size:13px;font-weight:700;letter-spacing:.5px}
+.compare-table td{padding:10px 12px;border:1px solid var(--border);color:var(--ink2);vertical-align:top;line-height:1.65}
+.compare-table tr:nth-child(even) td{background:var(--bg)}
+.compare-table td b{color:var(--primary)}
+.compare-table td em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* ── QUICK REFERENCE ─────────────────────────────────────────── */
+.ref-grid{display:grid;gap:10px;margin:8px 0}
+.ref-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+.ref-card-title{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--primary);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.ref-card ul{list-style:none;padding:0}
+.ref-card li{font-size:15px;color:var(--ink2);padding:5px 0 5px 16px;position:relative;line-height:1.65;border-bottom:1px solid var(--bg2)}
+.ref-card li:last-child{border-bottom:none}
+.ref-card li::before{content:'·';position:absolute;left:4px;color:var(--primary);font-weight:900;font-size:18px;line-height:1.3}
+.ref-card li b{color:var(--ink);font-weight:700}
+.ref-card li em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* ── QUIZ ────────────────────────────────────────────────────── */
+.quiz-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:16px;box-shadow:var(--shadow)}
+.qs-cell{background:var(--white);padding:12px 8px;text-align:center}
+.qs-val{font-family:'Lora',serif;font-size:22px;font-weight:700;color:var(--primary);line-height:1}
+.qs-val.g{color:var(--green)}.qs-val.r{color:var(--red)}.qs-val.a{color:var(--amber)}
+.qs-lbl{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:1px;margin-top:4px;text-transform:uppercase}
+.prog-wrap{margin-bottom:20px}
+.prog-bar{height:6px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;background:var(--primary);border-radius:3px;transition:width .4s ease;width:0%}
+.prog-label{font-size:12px;color:var(--muted);font-weight:700;margin-bottom:6px}
+.q-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:12px;box-shadow:var(--shadow);overflow:hidden;border-left:4px solid transparent;transition:border-color .15s}
+.q-card.answered{border-left-color:var(--primary)}
+.q-card.correct{border-left-color:var(--green)}
+.q-card.wrong{border-left-color:var(--red)}
+.q-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 16px;background:var(--bg);border-bottom:1px solid var(--border)}
+.q-num{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:1px}
+.q-diff{font-size:10px;font-weight:800;padding:2px 10px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase}
+.diff-e{background:var(--greenPale);color:var(--green)}
+.diff-m{background:var(--amberPale);color:var(--amber)}
+.diff-h{background:var(--redPale);color:var(--red)}
+.q-exam{font-size:11px;color:var(--dim);margin-left:auto;font-weight:600}
+.q-body{padding:16px}
+.q-text{font-size:17px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:14px 16px;cursor:pointer;display:flex;align-items:flex-start;gap:12px;font-size:16px;color:var(--ink2);text-align:left;width:100%;transition:all .15s;-webkit-tap-highlight-color:transparent;min-height:48px;line-height:1.6}
+.opt:hover:not(:disabled){border-color:var(--primary);background:var(--primaryPale)}
+.opt:disabled{cursor:default}
+.opt.sel{border-color:var(--primary);background:var(--primaryPale);color:var(--primary)}
+.opt.ok{border-color:var(--green)!important;background:var(--greenPale)!important;color:var(--green)!important}
+.opt.bad{border-color:var(--red)!important;background:var(--redPale)!important;color:var(--red)!important}
+.opt-lbl{min-width:28px;height:28px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--muted);flex-shrink:0;transition:all .15s}
+.opt.sel .opt-lbl{background:var(--primary);color:#fff;border-color:var(--primary)}
+.opt.ok .opt-lbl{background:var(--green);color:#fff;border-color:var(--green)}
+.opt.bad .opt-lbl{background:var(--red);color:#fff;border-color:var(--red)}
+.exp-panel{display:none;margin-top:12px;background:var(--bg);border-radius:10px;padding:14px 16px;border:1px solid var(--border)}
+.exp-panel.show{display:block;animation:fadeUp .2s ease}
+.exp-tag{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--primary);margin-bottom:6px}
+.exp-rule{font-size:13px;font-weight:800;color:var(--ink);background:var(--primaryPale);border-radius:6px;padding:6px 10px;margin-bottom:8px;border-left:3px solid var(--primary)}
+.exp-panel p{font-size:15px;color:var(--ink2);line-height:1.8}
+.q-foot{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-top:1px solid var(--border);background:var(--bg)}
+.q-status{font-size:12px;font-weight:700}
+.btn{padding:12px 24px;border-radius:10px;font-size:14px;font-weight:800;letter-spacing:.5px;border:none;cursor:pointer;transition:all .15s}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:var(--primaryLt)}
+.btn-ghost{background:var(--bg2);color:var(--ink2);border:1.5px solid var(--border)}
+.btn-ghost:hover{background:var(--bg3)}
+.quiz-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+#results{display:none;background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:20px;box-shadow:var(--shadow-md)}
+.res-hero{text-align:center;padding-bottom:20px;border-bottom:1px solid var(--border);margin-bottom:16px}
+.res-score{font-family:'Lora',serif;font-size:64px;font-weight:700;color:var(--primary);line-height:1}
+.res-grade{font-size:16px;font-weight:800;color:var(--ink);margin:8px 0 6px;letter-spacing:.5px}
+.res-msg{font-size:15px;color:var(--muted)}
+.res-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-kicker">Biology · Lesson B10 · Olive Defence</div>
+  <div class="hero-title">The <span>Reproductive System</span></div>
+  <div class="hero-sub">Male &amp; female reproductive organs, gametogenesis, menstrual cycle, fertilisation, embryonic development, pregnancy and reproductive health — at CDS, NDA &amp; AFCAT exam depth.</div>
+  <div class="hero-chips">
+    <span class="chip chip-w">CDS</span>
+    <span class="chip chip-w">NDA</span>
+    <span class="chip chip-w">AFCAT</span>
+    <span class="chip chip-r">Gametogenesis</span>
+    <span class="chip chip-g">Fertilisation</span>
+    <span class="chip chip-r">Menstrual Cycle</span>
+  </div>
+</div>
+
+<!-- TAB BAR -->
+<div class="tab-bar">
+  <button class="tab on" onclick="switchTab('theory')">📖 Theory</button>
+  <button class="tab" onclick="switchTab('quickref')">⚡ Quick Ref</button>
+  <button class="tab" onclick="switchTab('quiz')">✏️ Quiz</button>
+</div>
+
+<!-- ═══════════════════════════════ THEORY ═══════════════════════ -->
+<div class="pane on" id="theory">
+
+  <div class="intro-box">
+    <p>The <strong>reproductive system</strong> enables continuation of the species through production of gametes (sex cells), fertilisation and development of offspring. Humans reproduce sexually — a <strong>sperm</strong> (male gamete) fuses with an <strong>ovum</strong> (female gamete) to form a <strong>zygote</strong>, which develops into a new individual over approximately <strong>9 months (38–40 weeks)</strong>.</p>
+  </div>
+
+  <!-- SECTION 1 -->
+  <div class="sec-label">Section 1 — Male Reproductive System</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#FAE8F0">♂️</div>
+      <div style="flex:1">
+        <div class="c-title">Male Reproductive Organs &amp; Functions</div>
+        <div class="c-sub">Testes, ducts, accessory glands and semen</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>The primary male reproductive organs are the <strong>testes</strong> (singular: testis), located in the <strong>scrotum</strong> — outside the body cavity to maintain a temperature 2–3°C lower than body temperature, which is essential for <strong>spermatogenesis</strong> (sperm production).</p>
+
+      <div class="org-grid">
+        <div class="org-card">
+          <div class="org-name">Testes <span class="org-nick">Primary gonad</span></div>
+          <p>Produce sperm in <strong>seminiferous tubules</strong>. <strong>Leydig (interstitial) cells</strong> between tubules secrete <strong>testosterone</strong>. <strong>Sertoli cells</strong> (inside tubules) nourish developing sperm and secrete <strong>inhibin</strong> (inhibits FSH).</p>
+        </div>
+        <div class="org-card">
+          <div class="org-name">Epididymis <span class="org-nick">Sperm maturation</span></div>
+          <p>Coiled tube on posterior surface of testis. Site of <strong>sperm maturation and storage</strong>. Sperm gain motility here. Transit time: ~2–3 weeks. If not ejaculated, sperm are reabsorbed.</p>
+        </div>
+        <div class="org-card">
+          <div class="org-name">Vas Deferens <span class="org-nick">Sperm duct</span></div>
+          <p>Muscular duct transporting sperm from epididymis to urethra. Cut in <strong>vasectomy</strong> (male sterilisation). Joins with seminal vesicle duct to form ejaculatory duct.</p>
+        </div>
+        <div class="org-card">
+          <div class="org-name">Seminal Vesicles <span class="org-nick">Accessory gland</span></div>
+          <p>Contribute ~60% of semen volume. Secretion rich in <strong>fructose</strong> (energy for sperm), prostaglandins and fibrinogen. Secretion is slightly alkaline.</p>
+        </div>
+        <div class="org-card">
+          <div class="org-name">Prostate Gland <span class="org-nick">Accessory gland</span></div>
+          <p>Surrounds urethra below bladder. Adds ~30% of semen volume. Secretes <strong>alkaline fluid</strong> (neutralises vaginal acidity), enzymes, zinc and PSA (Prostate Specific Antigen — marker for prostate cancer).</p>
+        </div>
+        <div class="org-card">
+          <div class="org-name">Bulbourethral Glands <span class="org-nick">Cowper's glands</span></div>
+          <p>Small paired glands below prostate. Secrete <strong>pre-ejaculatory mucus</strong> — lubricates urethra and neutralises acidic urine residue before ejaculation.</p>
+        </div>
+      </div>
+
+      <div class="fact-box">
+        <div class="fb-label">Semen — Composition &amp; Key Facts</div>
+        <ul>
+          <li>Average volume per ejaculation: <strong>2–5 mL</strong></li>
+          <li>Sperm count: <strong>~200–300 million sperm</strong> per ejaculation (minimum 15 million/mL for fertility)</li>
+          <li>Only <strong>~1% of semen is sperm</strong>; the remaining 99% is seminal plasma (secretions from accessory glands)</li>
+          <li>Semen pH: <strong>7.2–8.0</strong> (slightly alkaline — protects sperm from vaginal acidity)</li>
+          <li>Main energy source for sperm: <strong>fructose</strong> (from seminal vesicles)</li>
+          <li>Semen clots after ejaculation (due to fibrinogen from seminal vesicles) then liquefies within 20 minutes (due to PSA from prostate)</li>
+        </ul>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Sperm Path — Exam Trap (SEVEN UP mnemonic)</div>
+        <p>Path of sperm from production to ejaculation: <strong>Seminiferous tubules → Epididymis → Vas deferens → Ejaculatory duct → (Nothing) → Urethra → Penis</strong>. Mnemonic: <em>SEVEN UP</em> (Seminiferous tubules → Epididymis → Vas deferens → Ejaculatory duct → urethra → Penis). Vasectomy cuts the <strong>vas deferens</strong>. Sperm are stored in the <strong>epididymis</strong>, NOT the testes.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="sec-label">Section 2 — Spermatogenesis</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#FAE8F0">🔬</div>
+      <div style="flex:1">
+        <div class="c-title">Spermatogenesis — Sperm Production</div>
+        <div class="c-sub">From spermatogonia to mature spermatozoa — meiosis in males</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p><strong>Spermatogenesis</strong> is the production of spermatozoa (sperm) in the <strong>seminiferous tubules</strong> of the testes. It begins at puberty and continues throughout life. The entire process takes approximately <strong>64–74 days</strong>.</p>
+
+      <div class="journey">
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">1</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Spermatogonium (2n) — Diploid stem cell</div>
+            <div class="j-desc">Mitotic divisions produce more spermatogonia (self-renewal) and <strong>primary spermatocytes</strong>. Present in outer layer of seminiferous tubule.</div>
+          </div>
+        </div>
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">2</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Primary Spermatocyte (2n) → Meiosis I</div>
+            <div class="j-desc">Undergoes <strong>Meiosis I</strong> (first reduction division) → two <em>secondary spermatocytes</em> (haploid, n). Crossing over occurs in prophase I — genetic recombination.</div>
+          </div>
+        </div>
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">3</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Secondary Spermatocyte (n) → Meiosis II</div>
+            <div class="j-desc">Undergoes <strong>Meiosis II</strong> (equational division) → four <em>spermatids</em> (n). Each primary spermatocyte produces <strong>4 spermatids</strong>.</div>
+          </div>
+        </div>
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">4</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Spermatids → Spermatozoa (Spermiogenesis)</div>
+            <div class="j-desc"><strong>Spermiogenesis</strong> — spermatids differentiate into mature sperm (spermatozoa) with head (nucleus + acrosome), midpiece (mitochondria for energy) and tail (flagellum for motility). No cell division here — just morphological change.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fact-box">
+        <div class="fb-label">Sperm Structure — Parts &amp; Functions</div>
+        <ul>
+          <li><strong>Head</strong>: contains <em>nucleus</em> (haploid, 23 chromosomes) + <em>acrosome</em> (enzyme-filled cap derived from Golgi apparatus; contains hyaluronidase and acrosin to penetrate the zona pellucida of the egg)</li>
+          <li><strong>Midpiece (neck)</strong>: packed with <em>mitochondria</em> — provides ATP for flagellar movement (sperm use aerobic respiration using fructose from semen)</li>
+          <li><strong>Tail (flagellum)</strong>: provides <em>motility</em>; whip-like movement propels sperm</li>
+          <li>Temperature sensitivity: spermatogenesis requires <strong>2–3°C below body temperature</strong> → that is why testes are in the scrotum. Undescended testis (cryptorchidism) → infertility</li>
+        </ul>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Spermatogenesis vs Oogenesis — Key Differences</div>
+        <ul>
+          <li>Spermatogenesis: produces <strong>4 functional sperm</strong> from 1 primary spermatocyte. Continuous from puberty onwards.</li>
+          <li>Oogenesis: produces <strong>1 functional ovum + 2–3 polar bodies</strong> (non-functional). Begins before birth, paused at birth, resumes at puberty, one per month.</li>
+          <li>Sperm are the <strong>smallest human cells</strong>; ovum is the <strong>largest human cell</strong>.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="sec-label">Section 3 — Female Reproductive System</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#FAE8F0">♀️</div>
+      <div style="flex:1">
+        <div class="c-title">Female Reproductive Organs &amp; Functions</div>
+        <div class="c-sub">Ovaries, fallopian tubes, uterus, cervix and vagina</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Organ</th><th>Structure</th><th>Function</th></tr>
+          <tr><td><b>Ovaries</b></td><td>Paired almond-shaped organs in pelvic cavity</td><td>Produce eggs (oogenesis) and hormones (oestrogen from follicle cells; progesterone from corpus luteum). Primary female gonads.</td></tr>
+          <tr><td><b>Fallopian Tubes (Oviducts / Uterine tubes)</b></td><td>Paired muscular tubes, ~10–12 cm; funnel-shaped end (infundibulum) with fimbriae</td><td>Transport egg from ovary to uterus. Site of <b>fertilisation</b> (usually in ampulla — outer third). Cilia + peristalsis move egg/zygote toward uterus.</td></tr>
+          <tr><td><b>Uterus (Womb)</b></td><td>Hollow, pear-shaped muscular organ; 3 layers: perimetrium (outer), myometrium (muscle), endometrium (inner lining)</td><td>Houses and nourishes developing foetus. Endometrium undergoes monthly changes (menstrual cycle). Myometrium contracts during labour.</td></tr>
+          <tr><td><b>Cervix</b></td><td>Lower narrow portion of uterus connecting to vagina</td><td>Mucus plug blocks pathogens. Dilates during labour. Site of <b>Pap smear</b> (cervical cancer screening).</td></tr>
+          <tr><td><b>Vagina</b></td><td>Muscular canal from cervix to exterior</td><td>Birth canal; receives penis during intercourse; menstrual flow exits here. pH acidic (~4.5) — protects against infection.</td></tr>
+        </table>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Fallopian Tube — Most Tested Female Fact</div>
+        <ul>
+          <li>Fertilisation normally occurs in the <strong>ampulla of the fallopian tube</strong> (outer third) — NOT in the uterus or ovary.</li>
+          <li>If a fertilised egg implants in the fallopian tube instead of the uterus → <strong>ectopic pregnancy</strong> — a surgical emergency.</li>
+          <li><strong>Tubectomy (tubal ligation)</strong> — female sterilisation — cuts or ties the fallopian tubes, preventing eggs from reaching the uterus.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="sec-label">Section 4 — Oogenesis &amp; The Menstrual Cycle</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#FAE8F0">🥚</div>
+      <div style="flex:1">
+        <div class="c-title">Oogenesis — Egg Production</div>
+        <div class="c-sub">From oogonia to mature ovum — meiosis in females</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p><strong>Oogenesis</strong> is the production of ova (eggs) in the ovary. It is a lifelong process with very long pauses — most dramatically different from the continuous spermatogenesis in males.</p>
+      <div class="journey">
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot alt">1</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Foetal life — Oogonia → Primary oocytes</div>
+            <div class="j-desc">In foetal ovaries, oogonia divide by mitosis then enter meiosis I, becoming <strong>primary oocytes</strong>. Meiosis I is arrested in <em>prophase I</em>. At birth, a girl has ~1–2 million primary oocytes (all she will ever have).</div>
+          </div>
+        </div>
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot alt">2</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Puberty to menopause — Monthly resumption</div>
+            <div class="j-desc">Each month, FSH stimulates a few follicles. One dominant follicle matures (Graafian follicle). Just before ovulation, the primary oocyte <em>completes Meiosis I</em> → <strong>secondary oocyte</strong> (n) + first polar body.</div>
+          </div>
+        </div>
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot alt">3</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Ovulation — Secondary oocyte released</div>
+            <div class="j-desc">The <strong>secondary oocyte</strong> (arrested in <em>metaphase II</em>) is released at ovulation. It is surrounded by zona pellucida and corona radiata cells. Meiosis II only completes IF fertilisation occurs.</div>
+          </div>
+        </div>
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot alt">4</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Fertilisation → Mature ovum</div>
+            <div class="j-desc">Sperm entry triggers completion of <strong>Meiosis II</strong> → mature <em>ovum</em> (n) + second polar body. Total: <strong>1 functional egg + 2–3 non-functional polar bodies</strong> from one primary oocyte.</div>
+          </div>
+        </div>
+      </div>
+      <div class="stat-band">
+        <div class="stat-cell"><div class="stat-val">1–2 million</div><div class="stat-lbl">Oocytes at birth</div></div>
+        <div class="stat-cell"><div class="stat-val">~400,000</div><div class="stat-lbl">At puberty</div></div>
+        <div class="stat-cell"><div class="stat-val">~400–500</div><div class="stat-lbl">Ovulated in lifetime</div></div>
+        <div class="stat-cell"><div class="stat-val">~50 µm</div><div class="stat-lbl">Ovum diameter</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#FAE8F0">📅</div>
+      <div style="flex:1">
+        <div class="c-title">Menstrual Cycle — 28-Day Hormonal Clock</div>
+        <div class="c-sub">Four phases, hormones and what happens at each stage</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>The <strong>menstrual cycle</strong> is a monthly cycle of hormonal changes that prepares the female body for pregnancy. Average duration: <strong>28 days</strong> (range 21–35 days). Day 1 = first day of menstruation.</p>
+
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Phase</th><th>Days</th><th>Key Events</th><th>Dominant Hormones</th></tr>
+          <tr><td><b>Menstrual Phase</b></td><td>1–5</td><td>Shedding of endometrium (menstruation) — because no pregnancy occurred; progesterone &amp; oestrogen fall</td><td>↓ Progesterone, ↓ Oestrogen</td></tr>
+          <tr><td><b>Follicular Phase (Proliferative)</b></td><td>1–13</td><td>FSH stimulates follicle growth; follicle secretes oestrogen; endometrium thickens and proliferates (rebuilds)</td><td>↑ FSH, ↑ Oestrogen</td></tr>
+          <tr><td><b>Ovulation</b></td><td>~Day 14</td><td>LH surge triggers release of secondary oocyte from Graafian follicle; most fertile period</td><td>LH surge (peak)</td></tr>
+          <tr><td><b>Luteal Phase (Secretory)</b></td><td>15–28</td><td>Empty follicle → corpus luteum (secretes progesterone + oestrogen); endometrium becomes secretory, ready for implantation. If no fertilisation → corpus luteum degenerates → progesterone falls → menstruation begins again</td><td>↑ Progesterone, ↑ Oestrogen</td></tr>
+        </table>
+      </div>
+
+      <div class="purple-box">
+        <div class="pl-label">Hormonal Roles — LH, FSH, Oestrogen, Progesterone</div>
+        <ul>
+          <li><strong>FSH (Follicle Stimulating Hormone)</strong> — anterior pituitary → stimulates follicle growth and oestrogen secretion</li>
+          <li><strong>LH (Luteinising Hormone)</strong> — anterior pituitary → <em>LH surge on day ~13</em> triggers ovulation; forms corpus luteum after ovulation</li>
+          <li><strong>Oestrogen</strong> — ovarian follicle cells → rebuilds endometrium (proliferative phase); responsible for female secondary sexual characteristics; at high levels, triggers LH surge (positive feedback — one of few examples in the body)</li>
+          <li><strong>Progesterone</strong> — corpus luteum → maintains endometrium in secretory state ready for implantation; if pregnancy occurs, progesterone remains high (from corpus luteum then placenta) to maintain pregnancy; inhibits further ovulation during pregnancy</li>
+        </ul>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Menstrual Cycle Exam Traps</div>
+        <ul>
+          <li><strong>Ovulation occurs on day ~14</strong> of a 28-day cycle — triggered by the <strong>LH surge</strong> (NOT FSH). The safest and most fertile day is day 14.</li>
+          <li>The <strong>luteal phase is always ~14 days</strong> regardless of cycle length — it is the follicular phase that varies. A woman with a 35-day cycle ovulates on day ~21, not day 14.</li>
+          <li>High oestrogen just before ovulation triggers <strong>positive feedback</strong> on the pituitary → LH surge → ovulation. This is one of very few positive feedback examples in biology.</li>
+          <li><strong>Corpus luteum</strong> = remains of the Graafian follicle after ovulation; secretes progesterone. If no pregnancy → degenerates → corpus albicans. If pregnancy → maintained by hCG from placenta.</li>
+          <li><strong>Menarche</strong> = first menstrual period (onset of puberty, ~11–13 years). <strong>Menopause</strong> = cessation of menstruation (~45–55 years).</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5 -->
+  <div class="sec-label">Section 5 — Fertilisation, Implantation &amp; Early Development</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E4F4EC">🌱</div>
+      <div style="flex:1">
+        <div class="c-title">Fertilisation &amp; Implantation</div>
+        <div class="c-sub">Sperm meets egg — from zygote to blastocyst</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p><strong>Fertilisation</strong> is the fusion of a sperm (n=23) with a secondary oocyte (n=23) to form a <strong>zygote</strong> (2n=46). It normally occurs in the <strong>ampulla of the fallopian tube</strong> within 12–24 hours of ovulation.</p>
+
+      <div class="journey">
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">1</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Acrosome Reaction</div>
+            <div class="j-desc">Sperm reaches corona radiata → <strong>acrosomal enzymes</strong> (hyaluronidase, acrosin) digest through corona radiata and <strong>zona pellucida</strong> → sperm head penetrates secondary oocyte membrane.</div>
+          </div>
+        </div>
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">2</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Cortical Reaction — Block to Polyspermy</div>
+            <div class="j-desc">First sperm entry → cortical granules fuse with egg membrane → <strong>zona reaction</strong> hardens zona pellucida → prevents additional sperm from entering (<em>block to polyspermy</em>). Essential — two sperm = lethal polyploidy.</div>
+          </div>
+        </div>
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">3</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Completion of Meiosis II &amp; Zygote Formation</div>
+            <div class="j-desc">Sperm entry triggers secondary oocyte to complete <strong>Meiosis II</strong> → mature ovum + second polar body. Male and female pronuclei fuse → <em>zygote</em> (2n=46). Sex determined at fertilisation by sperm chromosome (X or Y).</div>
+          </div>
+        </div>
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">4</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Cleavage — Rapid Mitotic Divisions</div>
+            <div class="j-desc">Zygote undergoes rapid mitotic divisions (<em>cleavage</em>) without growth → 2-cell → 4-cell → 8-cell → <strong>morula</strong> (solid ball of 16–32 cells, day 3–4) while travelling down fallopian tube.</div>
+          </div>
+        </div>
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">5</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Blastocyst Formation &amp; Implantation</div>
+            <div class="j-desc">Morula → <strong>blastocyst</strong> (hollow ball; inner cell mass = embryo; trophoblast = placenta precursor) by day 5. Blastocyst reaches uterus and <em>implants into endometrium</em> on day 6–10 → <strong>implantation</strong>. Trophoblast secretes <em>hCG</em> — basis of pregnancy test.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fact-box">
+        <div class="fb-label">Sex Determination</div>
+        <ul>
+          <li>All eggs carry <strong>X chromosome</strong> (females are XX)</li>
+          <li>Sperm carry either <strong>X</strong> or <strong>Y chromosome</strong> (males are XY)</li>
+          <li>If X-sperm fertilises egg → <strong>XX = female</strong></li>
+          <li>If Y-sperm fertilises egg → <strong>XY = male</strong></li>
+          <li><strong>Sex is determined at fertilisation by the father's sperm</strong> — the mother has no role in determining sex chromosomally</li>
+          <li>Y chromosome carries the <strong>SRY gene</strong> (Sex-determining Region of Y) which triggers testis development</li>
+        </ul>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Key Developmental Landmarks</div>
+        <ul>
+          <li><strong>Zygote</strong> → day 0 (fertilisation)</li>
+          <li><strong>Morula</strong> → day 3–4 (solid 16–32 cells)</li>
+          <li><strong>Blastocyst</strong> → day 5–6 (hollow; implants day 6–10)</li>
+          <li><strong>Gastrulation</strong> → week 3 (3 germ layers form: ectoderm, mesoderm, endoderm)</li>
+          <li><strong>Embryo</strong> → weeks 1–8 (organogenesis — major organ formation)</li>
+          <li><strong>Foetus</strong> → week 9 to birth (growth and maturation)</li>
+          <li>Normal gestation: <strong>40 weeks (280 days)</strong> from last menstrual period; ~38 weeks from fertilisation</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6 -->
+  <div class="sec-label">Section 6 — Placenta, Pregnancy &amp; Parturition</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#FAE8F0">🤱</div>
+      <div style="flex:1">
+        <div class="c-title">Placenta, Foetal Development &amp; Birth</div>
+        <div class="c-sub">The organ of exchange, pregnancy hormones and parturition</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>The <strong>placenta</strong> is a temporary disc-shaped organ formed from maternal endometrium and foetal trophoblast cells. It is the lifeline between mother and foetus, fully formed by ~week 12.</p>
+
+      <div class="rule-box">
+        <div class="rl-label">Placenta — Structure &amp; Functions</div>
+        <p><strong>Functions of the Placenta:</strong> (1) <strong>Exchange</strong> — O₂ and nutrients pass from mother to foetus; CO₂ and waste pass from foetus to mother via diffusion (maternal and foetal blood do NOT mix — separated by placental membrane). (2) <strong>Endocrine</strong> — secretes hCG (maintains corpus luteum in 1st trimester), oestrogen, progesterone (maintains pregnancy, prevents ovulation), hPL (human placental lactogen). (3) <strong>Barrier</strong> — prevents some pathogens and large molecules from reaching foetus (but does NOT block all — rubella virus, HIV, some drugs cross the placenta). (4) <strong>Immunological</strong> — IgG antibodies from mother cross placenta → passive immunity to newborn.</p>
+      </div>
+
+      <div class="fact-box">
+        <div class="fb-label">Hormones of Pregnancy</div>
+        <ul>
+          <li><strong>hCG (human Chorionic Gonadotropin)</strong> — secreted by trophoblast from ~day 8 post-fertilisation; maintains corpus luteum → progesterone production continues; peaks at ~10 weeks; basis of PREGNANCY TEST (detected in blood/urine). hCG is why "morning sickness" correlates with high hCG levels.</li>
+          <li><strong>Progesterone</strong> — maintains endometrium; prevents uterine contractions; suppresses maternal immune response (prevents rejection of foetus); inhibits new ovulation</li>
+          <li><strong>Oestrogen</strong> — promotes uterine growth, breast development; increases sensitivity to oxytocin at term</li>
+          <li><strong>Relaxin</strong> (from corpus luteum/placenta) — relaxes pelvic ligaments and cervix for delivery</li>
+          <li><strong>Oxytocin</strong> (from posterior pituitary) — stimulates uterine contractions during labour (positive feedback)</li>
+        </ul>
+      </div>
+
+      <div class="eg-box">
+        <div class="eg-label">Parturition (Childbirth) — Key Sequence</div>
+        <ul>
+          <li>Near term: progesterone falls, oestrogen rises → uterus becomes sensitive to oxytocin</li>
+          <li>Labour begins: oxytocin triggers contractions → positive feedback loop amplifies contractions</li>
+          <li>Three stages: (1) Dilation — cervix opens to 10 cm; (2) Expulsion — baby delivered; (3) Placental stage — placenta expelled (afterbirth)</li>
+          <li>Colostrum — first milk secreted in first few days; rich in <strong>IgA antibodies</strong>, protein and Vitamin A; provides passive immunity to newborn</li>
+        </ul>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Foetal &amp; Maternal Blood Do NOT Mix</div>
+        <p>A common exam trap: maternal and foetal blood circulations are <strong>SEPARATE</strong> — they do not mix in the placenta. Exchange of gases, nutrients and waste occurs by <strong>diffusion</strong> across the thin placental membrane (syncytiotrophoblast). This separation is important: it prevents maternal immune cells from attacking the foetus, and allows foetuses with different blood groups from the mother to survive.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 7 -->
+  <div class="sec-label">Section 7 — Reproductive Health &amp; Contraception</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E6EDF8">🏥</div>
+      <div style="flex:1">
+        <div class="c-title">Contraception, STIs &amp; Assisted Reproduction</div>
+        <div class="c-sub">High-frequency applied topic for CDS/NDA/AFCAT</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Method</th><th>Type</th><th>Mechanism</th><th>Key Point</th></tr>
+          <tr><td><b>Condom</b></td><td>Barrier</td><td>Physical barrier prevents sperm reaching egg</td><td>Only method that also protects against STIs</td></tr>
+          <tr><td><b>Oral contraceptive pills (OCP)</b></td><td>Hormonal</td><td>Synthetic oestrogen + progesterone → inhibit FSH/LH (no follicle development, no ovulation)</td><td>Most effective if taken daily; doesn't protect against STIs</td></tr>
+          <tr><td><b>Copper-T (IUD)</b></td><td>Intrauterine device</td><td>Copper ions toxic to sperm; alters uterine environment; prevents implantation</td><td>Effective for 5–10 years; no daily action required</td></tr>
+          <tr><td><b>Emergency contraception (morning-after pill)</b></td><td>Hormonal</td><td>High-dose levonorgestrel — delays/inhibits ovulation, prevents fertilisation or implantation</td><td>Effective within 72 hours of unprotected sex; NOT an abortifacient if implantation has occurred</td></tr>
+          <tr><td><b>Vasectomy</b></td><td>Surgical sterilisation (male)</td><td>Vas deferens cut/tied — sperm cannot reach urethra</td><td>Permanent; does not affect testosterone or libido</td></tr>
+          <tr><td><b>Tubectomy (tubal ligation)</b></td><td>Surgical sterilisation (female)</td><td>Fallopian tubes cut/tied — eggs cannot reach uterus</td><td>Permanent; does not affect menstrual cycle or hormones</td></tr>
+        </table>
+      </div>
+
+      <div class="purple-box">
+        <div class="pl-label">Assisted Reproductive Technologies (ART)</div>
+        <ul>
+          <li><strong>IVF (In Vitro Fertilisation)</strong> — eggs retrieved from ovary, fertilised with sperm in laboratory → resulting embryo transferred to uterus. Often called "test-tube baby." First IVF baby: <strong>Louise Brown</strong> (UK, 1978). First IVF baby in India: <strong>Kanupriya (Durga)</strong> (1978, same year).</li>
+          <li><strong>ICSI (Intracytoplasmic Sperm Injection)</strong> — single sperm injected directly into egg; used when sperm count or motility is very low</li>
+          <li><strong>AI (Artificial Insemination)</strong> — sperm introduced into female reproductive tract without sexual intercourse; used in livestock and human infertility</li>
+          <li><strong>GIFT (Gamete Intrafallopian Transfer)</strong> — eggs and sperm transferred together into fallopian tube for fertilisation to occur naturally in the tube</li>
+          <li><strong>Surrogacy</strong> — another woman carries the pregnancy; used when the genetic mother cannot carry the foetus</li>
+        </ul>
+      </div>
+
+      <div class="fact-box">
+        <div class="fb-label">Sexually Transmitted Infections (STIs) — Exam Points</div>
+        <ul>
+          <li><strong>HIV/AIDS</strong> — Human Immunodeficiency Virus; destroys CD4+ T-helper cells; spread by sexual contact, blood, mother to child. No cure; managed with antiretroviral therapy (ART). ELISA test detects HIV antibodies.</li>
+          <li><strong>Gonorrhoea</strong> — caused by <em>Neisseria gonorrhoeae</em> (bacterium); affects urethra, cervix; treated with antibiotics</li>
+          <li><strong>Syphilis</strong> — caused by <em>Treponema pallidum</em> (bacterium); three stages; can cross placenta (congenital syphilis); treated with penicillin</li>
+          <li><strong>Chlamydia</strong> — caused by <em>Chlamydia trachomatis</em>; most common bacterial STI; often asymptomatic; can cause pelvic inflammatory disease (PID) and infertility</li>
+          <li><strong>HPV (Human Papillomavirus)</strong> — causes genital warts; high-risk strains cause <em>cervical cancer</em>. Prevented by HPV vaccine (Gardasil). Pap smear detects precancerous changes.</li>
+          <li><strong>Herpes</strong> — caused by Herpes Simplex Virus (HSV-2 mainly genital); lifelong infection; managed with antivirals</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 8 -->
+  <div class="sec-label">Section 8 — Comparative &amp; Applied Facts</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#FDF3DC">📊</div>
+      <div style="flex:1">
+        <div class="c-title">Twins, Germ Layers &amp; Key Applied Facts</div>
+        <div class="c-sub">Identical vs fraternal twins, embryonic germ layers, infertility</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Feature</th><th>Identical (Monozygotic) Twins</th><th>Fraternal (Dizygotic) Twins</th></tr>
+          <tr><td>Origin</td><td>One zygote splits into two embryos</td><td>Two separate eggs fertilised by two sperm</td></tr>
+          <tr><td>Genetics</td><td>Genetically <b>identical</b> (same DNA)</td><td>Genetically different (like any siblings)</td></tr>
+          <tr><td>Sex</td><td>Always same sex</td><td>Can be same or different sex</td></tr>
+          <tr><td>Placenta</td><td>May share one placenta (monochorionic) or have separate</td><td>Always separate placentas</td></tr>
+          <tr><td>Frequency</td><td>~3–4 per 1000 births (natural rate)</td><td>~8–12 per 1000 births; more common with fertility treatment</td></tr>
+        </table>
+      </div>
+
+      <div class="fact-box">
+        <div class="fb-label">Three Germ Layers — Derivatives (Gastrulation, Week 3)</div>
+        <ul>
+          <li><strong>Ectoderm</strong> (outer) — gives rise to: nervous system (brain, spinal cord), skin (epidermis), sense organs, hair, nails, lens of eye, tooth enamel. Mnemonic: <em>Ecto = Exterior</em></li>
+          <li><strong>Mesoderm</strong> (middle) — gives rise to: muscles, skeleton, circulatory system (heart, blood vessels), kidneys, gonads, connective tissue, dermis of skin. Mnemonic: <em>Meso = Middle/Muscular</em></li>
+          <li><strong>Endoderm</strong> (inner) — gives rise to: lining of digestive tract, respiratory tract, liver, pancreas, thyroid, bladder, urethra. Mnemonic: <em>Endo = Inside/Inner lining</em></li>
+        </ul>
+      </div>
+
+      <div class="eg-box">
+        <div class="eg-label">Infertility — Causes &amp; Key Terms</div>
+        <ul>
+          <li><strong>Male infertility</strong>: azoospermia (no sperm), oligospermia (low count &lt;15 million/mL), asthenospermia (poor motility), teratospermia (abnormal morphology), cryptorchidism (undescended testes)</li>
+          <li><strong>Female infertility</strong>: anovulation (PCOS most common cause), blocked fallopian tubes (PID/chlamydia), endometriosis, uterine fibroids, premature ovarian failure</li>
+          <li><strong>PCOD/PCOS</strong> (Polycystic Ovary Syndrome) — most common cause of female infertility; multiple cysts in ovaries; high androgens; irregular periods; excess hair growth; managed with hormones and lifestyle changes</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /theory -->
+
+<!-- ════════════════════════════ QUICK REF ══════════════════════ -->
+<div class="pane" id="quickref">
+  <div class="ref-grid">
+
+    <div class="ref-card">
+      <div class="ref-card-title">Male System — Key Facts</div>
+      <ul>
+        <li>Testes in scrotum (2–3°C cooler) → essential for spermatogenesis</li>
+        <li>Sperm path: Seminiferous tubules → <b>Epididymis</b> → Vas deferens → Ejaculatory duct → Urethra → Penis (<em>SEVEN UP</em>)</li>
+        <li>Sertoli cells — nourish sperm · Leydig cells — secrete <em>testosterone</em></li>
+        <li>Seminal vesicles — <em>fructose</em> (sperm energy, 60% volume)</li>
+        <li>Prostate — alkaline fluid, PSA (prostate cancer marker, 30% volume)</li>
+        <li>Vasectomy = cut vas deferens; does NOT affect testosterone/libido</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Spermatogenesis vs Oogenesis</div>
+      <ul>
+        <li>Spermatogenesis: 1 primary spermatocyte → <em>4 functional sperm</em>; continuous from puberty</li>
+        <li>Oogenesis: 1 primary oocyte → <em>1 functional ovum + 2–3 polar bodies</em></li>
+        <li>Sperm = smallest human cell · Ovum = largest human cell</li>
+        <li>Oogenesis arrested in <em>prophase I</em> at birth; resumes monthly at puberty</li>
+        <li>Secondary oocyte released at ovulation (arrested in metaphase II)</li>
+        <li>Meiosis II completes only on fertilisation by sperm</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Menstrual Cycle — 28 Days</div>
+      <ul>
+        <li>Day 1–5: Menstruation (↓ progesterone, ↓ oestrogen)</li>
+        <li>Day 1–13: Follicular phase — FSH → follicle growth → ↑ oestrogen → endometrium thickens</li>
+        <li>Day ~14: <b>LH surge → Ovulation</b> (most fertile day)</li>
+        <li>Day 15–28: Luteal phase — corpus luteum → <em>↑ progesterone</em> → endometrium secretory</li>
+        <li>Luteal phase always ~14 days; follicular phase varies with cycle length</li>
+        <li>No pregnancy → corpus luteum degenerates → menstruation; Pregnancy → hCG maintains corpus luteum</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Fertilisation &amp; Development</div>
+      <ul>
+        <li>Fertilisation site: <em>ampulla of fallopian tube</em> (NOT uterus)</li>
+        <li>Ectopic pregnancy: implantation outside uterus (usually tube) → emergency</li>
+        <li>Sex determined by sperm: X-sperm → girl (XX); Y-sperm → boy (XY)</li>
+        <li>Zygote → Morula (day 3–4) → Blastocyst (day 5) → Implantation (day 6–10)</li>
+        <li>hCG from trophoblast = basis of pregnancy test; maintains corpus luteum</li>
+        <li>Gestation: <em>40 weeks</em> from LMP; ~38 weeks from fertilisation</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Germ Layers &amp; Placenta</div>
+      <ul>
+        <li><b>Ectoderm</b> — skin, nervous system, sense organs, hair, nails</li>
+        <li><b>Mesoderm</b> — muscles, skeleton, heart, kidneys, gonads</li>
+        <li><b>Endoderm</b> — gut lining, respiratory tract, liver, pancreas, thyroid</li>
+        <li>Placenta: maternal + foetal blood do <em>NOT</em> mix; exchange by diffusion</li>
+        <li>Maternal IgG crosses placenta → passive immunity to newborn</li>
+        <li>Colostrum: first milk; rich in <em>IgA antibodies</em> + Vitamin A</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Contraception &amp; ART</div>
+      <ul>
+        <li>Condom = only method that protects against both pregnancy AND STIs</li>
+        <li>OCP = synthetic oestrogen + progesterone → inhibit FSH/LH → no ovulation</li>
+        <li>Copper-T: Cu²⁺ ions toxic to sperm; lasts 5–10 years</li>
+        <li><b>IVF</b> = fertilisation in lab; first test-tube baby: Louise Brown (1978, UK)</li>
+        <li>First IVF baby in India: <em>Kanupriya (Durga)</em>, 1978</li>
+        <li>HPV vaccine prevents cervical cancer; Pap smear = cervical cancer screening</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════ QUIZ ═════════════════════════ -->
+<div class="pane" id="quiz">
+  <div class="quiz-stats">
+    <div class="qs-cell"><div class="qs-val" id="s-att">0</div><div class="qs-lbl">Attempted</div></div>
+    <div class="qs-cell"><div class="qs-val g" id="s-cor">0</div><div class="qs-lbl">Correct</div></div>
+    <div class="qs-cell"><div class="qs-val r" id="s-wrg">0</div><div class="qs-lbl">Wrong</div></div>
+    <div class="qs-cell"><div class="qs-val a" id="s-tot">15</div><div class="qs-lbl">Total</div></div>
+  </div>
+  <div class="prog-wrap">
+    <div class="prog-label" id="prog-label">0 of 15 answered</div>
+    <div class="prog-bar"><div class="prog-fill" id="prog"></div></div>
+  </div>
+  <div class="quiz-actions">
+    <button class="btn btn-primary" onclick="submitAll()">Submit All &amp; Check</button>
+    <button class="btn btn-ghost" onclick="resetQuiz()">↺ Reset Quiz</button>
+  </div>
+  <div id="results"></div>
+  <div id="q-area"></div>
+</div>
+</div><!-- /page -->
+
+<script>
+const QS = [
+
+/* ─── EASY ─────────────────────────────────────────────────────── */
+{d:'EASY',e:'NDA 2023',
+q:'Where does fertilisation normally occur in the human female reproductive system?',
+opts:['In the uterus (womb)','In the ovary, immediately after ovulation','In the ampulla of the fallopian tube','In the cervix'],ans:2,
+rule:'Fertilisation = ampulla of fallopian tube (outer third); implantation = uterine endometrium',
+exp:'Fertilisation normally takes place in the AMPULLA — the outer third (widest part) of the FALLOPIAN TUBE (uterine tube/oviduct). After ovulation, the secondary oocyte is swept into the fallopian tube by the fimbriae. Sperm travel from the vagina through the cervix and uterus into the fallopian tube. Fertilisation must occur within 12–24 hours of ovulation (the lifespan of the egg). The fertilised egg (zygote) then travels down the fallopian tube, undergoing cleavage divisions, and reaches the uterus as a blastocyst ~5–6 days later for implantation into the endometrium. If implantation occurs in the fallopian tube instead of the uterus, it is called an ECTOPIC PREGNANCY — a serious emergency.'},
+
+{d:'EASY',e:'CDS 2022',
+q:'The acrosome in a sperm cell is derived from which organelle and what is its function?',
+opts:[
+  'Mitochondria — provides energy for sperm motility',
+  'Golgi apparatus — contains enzymes (hyaluronidase, acrosin) to penetrate the egg\'s zona pellucida',
+  'Nucleus — carries the haploid genetic material of the male',
+  'Endoplasmic reticulum — synthesises proteins for the sperm head'
+],ans:1,
+rule:'Acrosome = modified Golgi; contains hyaluronidase and acrosin to digest through zona pellucida during fertilisation',
+exp:'The ACROSOME is a cap-like membrane-bound structure covering the anterior portion of the sperm head. It is derived from the GOLGI APPARATUS during spermiogenesis (the final differentiation stage of spermatogenesis). The acrosome is essentially a large lysosome containing digestive enzymes including HYALURONIDASE (digests the hyaluronic acid matrix of the corona radiata) and ACROSIN (a protease that helps the sperm penetrate the ZONA PELLUCIDA — the glycoprotein coat surrounding the egg). The ACROSOME REACTION is triggered when sperm contacts the zona pellucida — enzymes are released, enabling sperm penetration. The MIDPIECE of sperm contains mitochondria for energy. The NUCLEUS carries the haploid (23 chromosomes) genetic material.'},
+
+{d:'EASY',e:'AFCAT 2023',
+q:'The hormone hCG (human Chorionic Gonadotropin) is the basis of pregnancy tests. It is secreted by which structure?',
+opts:['Corpus luteum of the ovary','Anterior pituitary gland','Trophoblast cells of the developing embryo (placenta)','Endometrium of the uterus'],ans:2,
+rule:'hCG secreted by trophoblast/placenta from ~day 8 after fertilisation; maintains corpus luteum → progesterone production',
+exp:'hCG (human Chorionic Gonadotropin) is secreted by the TROPHOBLAST cells of the developing embryo, beginning around day 8 after fertilisation (even before implantation is fully complete). The trophoblast later develops into the placenta, which continues hCG secretion. hCG has a structure similar to LH and its key function is to MAINTAIN THE CORPUS LUTEUM — preventing it from degenerating as it would normally do at the end of the luteal phase. The corpus luteum, sustained by hCG, continues producing PROGESTERONE to maintain the endometrium and support the pregnancy through the first trimester. hCG levels peak at about 10–12 weeks then fall as the placenta takes over progesterone production. Pregnancy tests detect hCG in urine — even a tiny amount indicates pregnancy.'},
+
+{d:'EASY',e:'CDS 2023',
+q:'In spermatogenesis, how many functional spermatozoa are produced from one primary spermatocyte?',
+opts:['1','2','4','8'],ans:2,
+rule:'1 primary spermatocyte → Meiosis I → 2 secondary spermatocytes → Meiosis II → 4 spermatids → 4 functional sperm',
+exp:'One PRIMARY SPERMATOCYTE undergoes TWO MEIOTIC DIVISIONS: MEIOSIS I produces 2 SECONDARY SPERMATOCYTES (haploid), and each secondary spermatocyte undergoes MEIOSIS II producing 2 SPERMATIDS. Total: 1 × 2 × 2 = 4 SPERMATIDS. Each spermatid then undergoes SPERMIOGENESIS (differentiation without cell division) to become a mature SPERMATOZOON. So, 1 primary spermatocyte → 4 functional sperm. This is very different from OOGENESIS, where 1 primary oocyte produces only 1 FUNCTIONAL OVUM + 2–3 non-functional polar bodies, because of unequal cytoplasmic division that concentrates all cytoplasm (and nutrients) into one large egg.'},
+
+{d:'EASY',e:'NDA 2022',
+q:'Which hormone is responsible for triggering ovulation in the menstrual cycle?',
+opts:['FSH (Follicle Stimulating Hormone)','Oestrogen','LH surge (Luteinising Hormone)','Progesterone'],ans:2,
+rule:'LH surge on day ~13–14 triggers ovulation; FSH stimulates follicle growth (earlier in cycle)',
+exp:'OVULATION is triggered by a sudden surge in LH (LUTEINISING HORMONE) from the anterior pituitary, occurring around day 13–14 of a 28-day cycle. The mechanism: Rising oestrogen levels from the maturing Graafian follicle initially suppress FSH and LH (negative feedback). However, when oestrogen reaches a critically high level, it switches to POSITIVE FEEDBACK — stimulating a massive LH surge. This LH surge causes the Graafian follicle to rupture and release the secondary oocyte (ovulation). FSH stimulates follicle development EARLIER in the cycle (follicular phase) but does not trigger ovulation itself. After ovulation, LH transforms the empty follicle into the CORPUS LUTEUM which secretes progesterone. Ovulation tests (OPKs) detect the LH surge 24–36 hours before ovulation.'},
+
+/* ─── MEDIUM ────────────────────────────────────────────────────── */
+{d:'MEDIUM',e:'CDS 2023',
+q:'A woman has a menstrual cycle of 35 days (not the typical 28 days). On approximately which day of her cycle would ovulation be expected?',
+opts:['Day 14 (same as in any cycle)','Day 21 (35 − 14 = 21, since luteal phase is always ~14 days)','Day 17 (halfway through the cycle)','Day 28 (one week before next period)'],ans:1,
+rule:'Luteal phase is always ~14 days; Ovulation day = Total cycle length − 14. For 35-day cycle: 35 − 14 = Day 21',
+exp:'This question tests understanding of a critical rule: the LUTEAL PHASE (from ovulation to next menstruation) is always approximately 14 DAYS in all women, regardless of cycle length. It is the FOLLICULAR PHASE that varies in length. For a 35-day cycle: Ovulation day = 35 − 14 = Day 21. For a 28-day cycle: 28 − 14 = Day 14. For a 21-day cycle: 21 − 14 = Day 7. This has important implications for family planning and fertility awareness methods. If a woman uses the calendar method and assumes ovulation always occurs on day 14, she could be significantly wrong in longer or shorter cycles. This is why the calendar method alone has a high failure rate.'},
+
+{d:'MEDIUM',e:'AFCAT 2023',
+q:'Identical (monozygotic) twins are genetically identical, while fraternal (dizygotic) twins are not. What causes this difference?',
+opts:[
+  'Identical twins share the same placenta; fraternal twins have different placentas',
+  'Identical twins arise from ONE zygote that splits into two embryos; fraternal twins arise from TWO separate eggs fertilised by two separate sperm',
+  'Identical twins are always the same sex because only one sperm is involved; fraternal twins involve two sperm with different chromosomes',
+  'Identical twins result from IVF; fraternal twins occur naturally'
+],ans:1,
+rule:'Monozygotic (identical) = 1 zygote splits → same DNA; Dizygotic (fraternal) = 2 eggs + 2 sperm → different genomes',
+exp:'MONOZYGOTIC (identical) twins arise when a SINGLE FERTILISED EGG (ZYGOTE) splits into two separate embryos during early development (usually at blastocyst stage). Both embryos have exactly the SAME GENETIC MATERIAL — same sex, same blood group, same DNA. They are essentially clones. DIZYGOTIC (fraternal) twins arise when TWO DIFFERENT EGGS are released in one cycle and are each fertilised by a DIFFERENT SPERM. They are genetically as similar as any two siblings (~50% shared DNA) and can be same or different sex. Identical twins may share a placenta (monochorionic) or have separate placentas. Fraternal twins always have separate placentas (dichorionic). Fraternal twins are more common and their rate increases with maternal age, fertility treatments and in certain ethnic groups.'},
+
+{d:'MEDIUM',e:'NDA 2023',
+q:'The contraceptive pill works by suppressing ovulation. What is its hormonal mechanism?',
+opts:[
+  'It provides synthetic progesterone only, which thickens cervical mucus and blocks sperm entry',
+  'It provides synthetic oestrogen and progesterone, which suppress FSH and LH secretion via negative feedback — preventing follicle development and ovulation',
+  'It stimulates the corpus luteum to produce more progesterone, preventing the next cycle from starting',
+  'It works by directly killing sperm in the vagina with a chemical reaction'
+],ans:1,
+rule:'Combined OCP = synthetic oestrogen + progesterone → negative feedback suppresses FSH/LH → no follicle maturation → no ovulation',
+exp:'The combined oral contraceptive pill (COCP) contains SYNTHETIC OESTROGEN (ethinyloestradiol) and SYNTHETIC PROGESTERONE (progestogen). These hormones maintain artificially elevated levels in the blood, which exert NEGATIVE FEEDBACK on the hypothalamus and anterior pituitary: (1) Suppresses GnRH (from hypothalamus) → suppresses FSH and LH from pituitary. (2) Without FSH, no follicle develops in the ovary. Without the LH surge, no ovulation occurs. (3) Additionally: progestogen thickens cervical mucus (blocks sperm) and thins the endometrium (reduces implantation risk). The mini-pill (progestogen-only pill/POP) mainly works through cervical mucus thickening and is safer for women who cannot take oestrogen (breastfeeding, history of clots). The COCP does NOT protect against STIs.'},
+
+{d:'MEDIUM',e:'CDS 2024',
+q:'During oogenesis, a primary oocyte is released at ovulation. At what stage of meiosis is the cell arrested when released?',
+opts:[
+  'Prophase I — arrested since birth; never resumes before ovulation',
+  'Metaphase II — meiosis I has been completed; meiosis II is arrested until fertilisation',
+  'Telophase II — meiosis is fully complete before ovulation',
+  'Anaphase I — the first division is in progress at the time of ovulation'
+],ans:1,
+rule:'Ovulated cell = secondary oocyte arrested in Metaphase II; Meiosis II only completes upon fertilisation by sperm',
+exp:'The timeline of oogenesis is a classic exam topic: PRIMARY OOCYTES are arrested in PROPHASE I from foetal life until puberty. Each month, FSH stimulates the primary oocyte to resume and COMPLETE MEIOSIS I just before ovulation → this produces the SECONDARY OOCYTE (haploid, n) + first polar body. The secondary oocyte immediately begins Meiosis II but stops at METAPHASE II. This is the cell that is released at OVULATION. The secondary oocyte remains arrested in METAPHASE II as it travels along the fallopian tube. ONLY if a sperm penetrates the secondary oocyte does it complete MEIOSIS II → mature ovum + second polar body. If the egg is NOT fertilised, the secondary oocyte degenerates. Therefore, technically, the egg released at ovulation is not yet a mature ovum — it only becomes one upon fertilisation.'},
+
+{d:'MEDIUM',e:'AFCAT 2024',
+q:'The corpus luteum forms after ovulation. What happens to the corpus luteum if fertilisation does NOT occur, and what are the hormonal consequences?',
+opts:[
+  'It grows larger and secretes more progesterone to prepare for the next potential pregnancy',
+  'It degenerates into corpus albicans → progesterone and oestrogen fall → endometrium breaks down → menstruation occurs',
+  'It is maintained by FSH, which prevents progesterone from falling',
+  'It transforms into a new follicle, ready to release the next egg immediately'
+],ans:1,
+rule:'No fertilisation → corpus luteum degenerates (corpus albicans) → ↓ progesterone → endometrium shed → menstruation',
+exp:'After ovulation, LH transforms the ruptured follicle into the CORPUS LUTEUM (Latin: "yellow body"), which actively secretes PROGESTERONE and oestrogen for approximately 14 days (the luteal phase). If NO FERTILISATION occurs: (1) There is no embryo to produce hCG. (2) Without hCG to sustain it, the corpus luteum degenerates into the CORPUS ALBICANS (white scar tissue) around day 24–26. (3) Progesterone and oestrogen levels FALL sharply. (4) The endometrium, which needs progesterone to maintain its secretory state, loses its blood supply and breaks down → MENSTRUATION begins (day 1 of next cycle). If FERTILISATION DOES occur: the embryo secretes hCG, which mimics LH and MAINTAINS the corpus luteum → corpus luteum continues progesterone production → endometrium is maintained → no menstruation → pregnancy continues.'},
+
+{d:'MEDIUM',e:'NDA 2024',
+q:'Which of the following correctly describes the process of block to polyspermy?',
+opts:[
+  'The zona pellucida becomes thicker after the first sperm passes through, physically slowing other sperm',
+  'Cortical granules in the egg fuse with the egg membrane upon sperm entry, releasing enzymes that harden the zona pellucida, preventing additional sperm from entering',
+  'The second sperm is killed by antibodies released from the egg cytoplasm',
+  'Only one sperm can physically reach the egg because all others are killed by vaginal acidity'
+],ans:1,
+rule:'Block to polyspermy: cortical reaction → zona pellucida hardening → prevents additional sperm entry; essential as polyspermy is lethal',
+exp:'POLYSPERMY (fertilisation by more than one sperm) is LETHAL — it creates a triploid or polyploid zygote which cannot develop normally. The egg has evolved two mechanisms to prevent this: (1) FAST BLOCK (electrical block): Upon first sperm contact, the egg membrane rapidly depolarises (~+20mV), making it temporarily repel other sperm. Rapid but short-lived. (2) SLOW BLOCK (CORTICAL REACTION): Sperm entry triggers CORTICAL GRANULES (just under the egg membrane) to FUSE with the plasma membrane and release their contents into the perivitelline space. These enzymes modify the ZONA PELLUCIDA proteins — hardening it into the FERTILISATION MEMBRANE, which physically prevents any further sperm from penetrating. This block is permanent and develops over several minutes. Both mechanisms work together to ensure monospermy (only one sperm fertilises the egg).'},
+
+/* ─── HARD ──────────────────────────────────────────────────────── */
+{d:'HARD',e:'CDS 2024',
+q:'A couple has been trying to conceive for 18 months without success. Investigations reveal the man has a sperm count of 8 million/mL and the woman has a history of pelvic inflammatory disease (PID). Identify the likely causes of infertility in BOTH partners and the most likely complication of PID affecting fertility.',
+opts:[
+  'Male: normal sperm count; Female: anovulation due to PID — no structural damage',
+  'Male: oligospermia (sperm count below 15 million/mL threshold); Female: damaged/blocked fallopian tubes from PID-related scarring, preventing egg transport and fertilisation',
+  'Male: azoospermia (no sperm); Female: hostile cervical mucus from repeated PID episodes',
+  'Male: normal — 8 million is adequate; Female: endometriosis caused by PID — both require no treatment'
+],ans:1,
+rule:'Oligospermia: &lt;15 million/mL; PID (often from chlamydia) causes tubal scarring → blocked fallopian tubes → infertility/ectopic pregnancy risk',
+exp:'This is a clinical application question. MALE FACTOR: Normal sperm count is ≥15 million/mL (WHO criteria 2021). A count of 8 million/mL is OLIGOSPERMIA (low sperm count) — significantly below normal, reducing the probability of fertilisation. Additional factors like motility (asthenospermia) and morphology (teratospermia) would further reduce fertility. FEMALE FACTOR: PELVIC INFLAMMATORY DISEASE (PID) is commonly caused by ascending bacterial infections — most often CHLAMYDIA TRACHOMATIS (most common bacterial STI, often asymptomatic) or Neisseria gonorrhoeae. PID causes inflammation of the fallopian tubes (salpingitis), ovaries and surrounding structures. If untreated or recurrent, it leads to FIBROSIS AND SCARRING of the fallopian tubes → TUBAL OBSTRUCTION → eggs cannot reach the uterus → infertility OR if the tube is partially blocked → ECTOPIC PREGNANCY (fertilised egg implants in scarred tube). Combined factors from both partners make this couple significantly subfertile. ART (IVF with ICSI) would likely be recommended.'},
+
+{d:'HARD',e:'NDA 2024',
+q:'The sex of a human embryo is determined at fertilisation. A genetic male (XY) develops female characteristics if which of the following occurs?',
+opts:[
+  'The Y chromosome is duplicated during cleavage divisions',
+  'The SRY gene on the Y chromosome fails to function or is absent → gonads default to ovarian development → female phenotype despite XY karyotype (Complete Androgen Insensitivity Syndrome or pure gonadal dysgenesis)',
+  'Too much oestrogen is produced by the adrenal glands during foetal life',
+  'The embryo is exposed to progesterone from the corpus luteum during the first trimester'
+],ans:1,
+rule:'SRY gene on Y chromosome triggers testis development; absent/non-functional SRY → default female development even in XY individuals',
+exp:'This question explores the genetics and endocrinology of sex determination. Normal male development: The SRY GENE (Sex-determining Region Y) on the Y chromosome is expressed in early embryonic gonads → triggers differentiation of bipotential gonads into TESTES → testes produce (1) testosterone (→ masculinises internal ducts and external genitalia via DHT) and (2) Anti-Müllerian Hormone/AMH (→ regresses Müllerian ducts that would become uterus and fallopian tubes). DEFAULT DEVELOPMENT is FEMALE — if no SRY/no functional testes, the bipotential gonads develop into OVARIES. Two important syndromes: (1) COMPLETE ANDROGEN INSENSITIVITY SYNDROME (CAIS): XY karyotype, functional testes (SRY works), but androgen receptors are non-functional → testosterone produced but cannot act → external female phenotype, no uterus (AMH worked), undescended testes. (2) PURE GONADAL DYSGENESIS (Swyer syndrome): XY but non-functional SRY → gonads become streak (fibrous) tissue → no testosterone, no AMH → female phenotype, uterus present. Both present as phenotypic females with XY chromosomes.'},
+
+{d:'HARD',e:'AFCAT 2024',
+q:'Maternal and foetal blood do not mix in the placenta. Yet, IgG antibodies from the mother cross to the foetus, while IgM antibodies do not. What explains this selective transfer?',
+opts:[
+  'IgG is smaller than IgM and can simply diffuse through the placental membrane by size exclusion',
+  'Specific Fc receptors (FcRn) on syncytiotrophoblast cells actively transport IgG across the placenta; IgM (pentameric, very large) lacks the appropriate Fc region for this receptor',
+  'IgG is lipid-soluble and crosses the lipid bilayer; IgM is water-soluble and cannot cross',
+  'The foetal immune system selectively absorbs IgG from the amniotic fluid'
+],ans:1,
+rule:'FcRn receptors on syncytiotrophoblast actively transport IgG across placenta; IgM is too large (pentameric) and lacks compatible Fc region',
+exp:'This is a high-level immunology-reproductive biology crossover question. PASSIVE IMMUNITY transfer from mother to foetus involves ACTIVE, RECEPTOR-MEDIATED TRANSPORT — NOT simple diffusion. The SYNCYTIOTROPHOBLAST (the layer of the placenta in direct contact with maternal blood) expresses FcRn RECEPTORS (neonatal Fc receptor). These receptors have specific affinity for the Fc region of IgG (immunoglobulin G, ~150 kDa, monomeric). The receptor-IgG complex is endocytosed, transcytosed across the cell, and released into the foetal circulation. IgM is a PENTAMER (~900 kDa — 6 times larger than IgG) and its Fc region does NOT bind FcRn. Its large size also prevents paracellular passage. Result: only IgG reaches the foetus efficiently. This transferred IgG provides the newborn with passive immunity (antibodies against diseases the mother has been exposed to or vaccinated against) for the first 3–6 months of life, before the infant\'s own immune system matures. Clinical importance: If a mother has harmful IgG autoantibodies (e.g., anti-Rh), these can cross the placenta and cause disease in the foetus (erythroblastosis foetalis, neonatal lupus).'},
+
+{d:'HARD',e:'CDS 2024',
+q:'During gastrulation (approximately week 3 of embryonic development), three primary germ layers form. A student is asked to identify which germ layer gives rise to the kidney, heart muscle and gonads (testes/ovaries). The correct answer is:',
+opts:['Ectoderm — because these are deep internal organs','Mesoderm — which gives rise to muscles, connective tissue, kidneys, gonads and the cardiovascular system','Endoderm — because these organs are associated with body cavities','All three germ layers contribute equally to these organs'],ans:1,
+rule:'Mesoderm → muscles, skeleton, heart, kidneys, gonads, connective tissue, blood vessels — middle layer for middle/deep structures',
+exp:'GASTRULATION occurs during week 3 of embryonic development when the inner cell mass (epiblast) reorganises into THREE GERM LAYERS — the fundamental blueprint for all body tissues. MESODERM (middle layer) gives rise to: skeletal, smooth and cardiac MUSCLE, the entire SKELETON (bone, cartilage), KIDNEYS and ureters, GONADS (testes and ovaries) and their ducts, the entire CARDIOVASCULAR SYSTEM (heart, all blood vessels, blood cells), CONNECTIVE TISSUE throughout the body, the DERMIS of the skin, and the adrenal CORTEX. ECTODERM (outer) → skin epidermis, entire nervous system, sense organs, hair, nails, lens of eye, tooth enamel, adrenal medulla. ENDODERM (inner) → lining of the entire digestive tract, respiratory tract epithelium, liver, pancreas, thyroid, parathyroid, thymus, bladder, urethra. A useful memory tool: Ecto = Exterior (skin, nerves), Endo = Interior lining (gut, glands), Meso = Middle/Muscular/Moving (muscles, bones, blood, kidneys, gonads). This is directly tested in NDA Paper 2 (General Ability) and CDS GK sections.'},
+
+{d:'HARD',e:'NDA 2024',
+q:'Louise Brown, the world\'s first "test-tube baby," was born in 1978 using IVF. What is the correct sequence of steps in the IVF procedure?',
+opts:[
+  'Sperm collected → fertilisation in uterus → embryo grows in lab → transferred to fallopian tube',
+  'Ovarian stimulation → egg retrieval → fertilisation with sperm in lab → embryo culture → embryo transfer to uterus → pregnancy test (hCG)',
+  'Natural ovulation → egg collected from fallopian tube → fertilised in lab → returned to fallopian tube (not uterus)',
+  'Sperm injected into ovary → eggs fertilised in situ → embryo detaches naturally and implants in uterus'
+],ans:1,
+rule:'IVF: Ovarian stimulation → egg retrieval (follicle aspiration) → in vitro fertilisation → embryo culture (3–5 days) → embryo transfer to uterus → hCG test for pregnancy',
+exp:'IN VITRO FERTILISATION (IVF) — "in vitro" means "in glass" (in the lab, outside the body): Step 1: OVARIAN STIMULATION — woman given gonadotropin injections (FSH ± LH) to stimulate multiple follicles to develop (instead of the usual one). Step 2: EGG RETRIEVAL — mature eggs aspirated from follicles using ultrasound-guided needle through the vaginal wall (transvaginal oocyte retrieval). Step 3: FERTILISATION — retrieved eggs mixed with partner\'s (or donor\'s) sperm in a culture dish; or ICSI used if sperm quality is poor (single sperm injected into each egg). Step 4: EMBRYO CULTURE — fertilised eggs cultured in incubator for 3–5 days (to blastocyst stage). Step 5: EMBRYO TRANSFER — one or two blastocysts transferred into the woman\'s uterus via a thin catheter through the cervix. Step 6: PREGNANCY TEST — blood hCG measured ~14 days later. First IVF baby: LOUISE BROWN (July 25, 1978, UK) — Robert Edwards (Nobel Prize 2010) and Patrick Steptoe. First IVF baby in India: KANUPRIYA (DURGA) on October 3, 1978, by Dr Subhas Mukherjee.'},
+
+];
+
+const answers  = new Array(QS.length).fill(null);
+const revealed = new Array(QS.length).fill(false);
+const LABS = ['A','B','C','D'];
+
+function build(){
+  const area = document.getElementById('q-area');
+  area.innerHTML = '';
+  QS.forEach((q,i)=>{
+    const dc = q.d==='EASY'?'diff-e':q.d==='MEDIUM'?'diff-m':'diff-h';
+    const div = document.createElement('div');
+    div.className='q-card'; div.id=`qc${i}`;
+    div.innerHTML=`
+      <div class="q-meta">
+        <span class="q-num">Q.${String(i+1).padStart(2,'0')}</span>
+        <span class="q-diff ${dc}">${q.d}</span>
+        <span class="q-exam">${q.e}</span>
+      </div>
+      <div class="q-body">
+        <div class="q-text">${q.q}</div>
+        <div class="opts" id="opts${i}">
+          ${q.opts.map((o,j)=>`
+            <button class="opt" id="o${i}_${j}" onclick="pick(${i},${j})">
+              <span class="opt-lbl">${LABS[j]}</span>${o}
+            </button>`).join('')}
+        </div>
+        <div class="exp-panel" id="ex${i}">
+          <div class="exp-tag">Explanation</div>
+          <div class="exp-rule">${q.rule}</div>
+          <p>${q.exp}</p>
+        </div>
+      </div>
+      <div class="q-foot">
+        <span style="font-size:11px;color:var(--dim);font-weight:700">Biology · B10</span>
+        <span id="ai${i}" class="q-status">—</span>
+      </div>`;
+    area.appendChild(div);
+  });
+}
+
+function pick(qi,oi){
+  if(revealed[qi]) return;
+  answers[qi]=oi;
+  document.querySelectorAll(`#opts${qi} .opt`).forEach((b,j)=>{b.classList.remove('sel');if(j===oi)b.classList.add('sel')});
+  document.getElementById(`qc${qi}`).classList.add('answered');
+  const ai=document.getElementById(`ai${qi}`);
+  ai.textContent=`Selected: ${LABS[oi]}`;
+  ai.style.color='var(--primary)';
+  updateStats();
+}
+
+function updateStats(){
+  const att=answers.filter(a=>a!==null).length;
+  document.getElementById('s-att').textContent=att;
+  document.getElementById('prog').style.width=(att/QS.length*100)+'%';
+  document.getElementById('prog-label').textContent=`${att} of ${QS.length} answered`;
+  let c=0,w=0;
+  answers.forEach((a,i)=>{if(a===null)return;if(a===QS[i].ans)c++;else w++;});
+  document.getElementById('s-cor').textContent=c;
+  document.getElementById('s-wrg').textContent=w;
+}
+
+function submitAll(){
+  let cor=0,wrg=0,skp=0;
+  QS.forEach((q,i)=>{
+    revealed[i]=true;
+    const opts=document.querySelectorAll(`#opts${i} .opt`);
+    opts.forEach(b=>{b.disabled=true;b.classList.remove('sel')});
+    opts[q.ans].classList.add('ok');
+    if(answers[i]!==null && answers[i]!==q.ans) opts[answers[i]].classList.add('bad');
+    document.getElementById(`ex${i}`).classList.add('show');
+    const ai=document.getElementById(`ai${i}`);
+    const card=document.getElementById(`qc${i}`);
+    card.classList.remove('answered');
+    if(answers[i]===null){skp++;ai.textContent='Skipped';ai.style.color='var(--dim)';}
+    else if(answers[i]===q.ans){cor++;card.classList.add('correct');ai.textContent='✓ Correct';ai.style.color='var(--green)';}
+    else{wrg++;card.classList.add('wrong');ai.textContent='✗ Wrong';ai.style.color='var(--red)';}
+  });
+  updateStats();
+  showResults(cor,wrg,skp);
+}
+
+function showResults(cor,wrg,skp){
+  const pct=Math.round(cor/QS.length*100);
+  let grade,msg;
+  if(pct>=88){grade='Excellent';msg='Outstanding! You have mastered the Reproductive System.'}
+  else if(pct>=70){grade='Good';msg='Well done. Review the questions you missed.'}
+  else if(pct>=50){grade='Average';msg='Good effort. Revisit the theory cards and try again.'}
+  else{grade='Needs Work';msg:"Don't worry — review the Quick Ref and try again."}
+  const res=document.getElementById('results');
+  res.innerHTML=`
+    <div class="res-hero">
+      <div class="res-score">${cor}<span style="font-size:36px;opacity:.5">/${QS.length}</span></div>
+      <div class="res-grade">${grade} · ${pct}%</div>
+      <div class="res-msg">${msg}</div>
+    </div>
+    <div class="res-stats">
+      <div class="qs-cell"><div class="qs-val g">${cor}</div><div class="qs-lbl">Correct</div></div>
+      <div class="qs-cell"><div class="qs-val r">${wrg}</div><div class="qs-lbl">Wrong</div></div>
+      <div class="qs-cell"><div class="qs-val a">${skp}</div><div class="qs-lbl">Skipped</div></div>
+      <div class="qs-cell"><div class="qs-val">${pct}%</div><div class="qs-lbl">Score</div></div>
+    </div>
+    <div style="text-align:center;margin:16px 0">
+      <button class="btn btn-ghost" onclick="document.getElementById('q-area').scrollIntoView({behavior:'smooth'})">📖 Review All Answers</button>
+    </div>`;
+  res.style.display='block';
+  res.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function resetQuiz(){
+  answers.fill(null); revealed.fill(false);
+  build();
+  document.getElementById('results').style.display='none';
+  document.getElementById('results').innerHTML='';
+  ['s-att','s-cor','s-wrg'].forEach(id=>document.getElementById(id).textContent='0');
+  document.getElementById('prog').style.width='0%';
+  document.getElementById('prog-label').textContent=`0 of ${QS.length} answered`;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function switchTab(id){
+  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  const idx={theory:0,quickref:1,quiz:2}[id];
+  document.querySelectorAll('.tab')[idx].classList.add('on');
+}
+
+function tog(hd){
+  const bd=hd.nextElementSibling;
+  const isOpen=bd.classList.contains('open');
+  bd.classList.toggle('open',!isOpen);
+  hd.classList.toggle('open',!isOpen);
+}
+
+build();
+</script>
+</body>
+</html>

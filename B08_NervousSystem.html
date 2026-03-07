@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B08 · Nervous System | Olive Defence</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+
+:root{
+  /* ── THEME B08: Deep Indigo-Charcoal + Electric Violet — neural, precise ── */
+  --bg:        #EEECF6;
+  --bg2:       #E3E0F0;
+  --bg3:       #D4D0E8;
+  --white:     #F8F7FC;
+  --ink:       #0E0A1C;
+  --ink2:      #1C1630;
+  --muted:     #5C5280;
+  --dim:       #9490B8;
+  --border:    #C8C2E0;
+
+  --primary:      #2E1A7A;
+  --primaryLt:    #3D26A0;
+  --primaryPale:  #ECEAF8;
+
+  --amber:        #8A6008;
+  --amberLt:      #AE7A0E;
+  --amberPale:    #FDF4DC;
+
+  --green:        #1A6038;
+  --greenLt:      #22804A;
+  --greenPale:    #E4F4EC;
+
+  --red:          #8A1A1A;
+  --redLt:        #B02020;
+  --redPale:      #FAEAEA;
+
+  --teal:         #0D5C52;
+  --tealPale:     #E0F4F2;
+
+  --purple:       #6A1880;
+  --purplePale:   #F4E8F8;
+
+  --radius:    12px;
+  --shadow:    0 2px 12px rgba(14,10,28,.09);
+  --shadow-md: 0 4px 20px rgba(14,10,28,.14);
+}
+
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--ink);font-size:17px;line-height:1.75;min-height:100vh}
+.page{max-width:680px;margin:0 auto;padding:0 16px 80px}
+
+/* ── HERO ─────────────────────────────────────────────────────── */
+.hero{
+  background:linear-gradient(135deg,#06031A 0%,#2E1A7A 52%,#3D2898 100%);
+  margin:0 -16px;padding:28px 20px 26px;position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 80% 15%,rgba(180,140,255,.10) 0%,transparent 55%),
+    radial-gradient(ellipse at 5% 85%,rgba(100,200,255,.06) 0%,transparent 50%);
+  pointer-events:none;
+}
+/* neural network dots */
+.hero::after{
+  content:'';position:absolute;inset:0;
+  background-image:
+    radial-gradient(circle,rgba(255,255,255,.06) 1px,transparent 1px);
+  background-size:28px 28px;
+  pointer-events:none;
+}
+.hero-kicker{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.50);margin-bottom:8px;display:flex;align-items:center;gap:8px;position:relative;z-index:1}
+.hero-kicker::before{content:'';width:18px;height:2px;background:rgba(255,255,255,.28)}
+.hero-title{font-family:'Lora',serif;font-size:clamp(24px,5.5vw,34px);font-weight:700;color:#fff;line-height:1.2;margin-bottom:10px;position:relative;z-index:1}
+.hero-title span{color:#C8B8FF;font-style:italic}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.66);margin-bottom:18px;line-height:1.65;position:relative;z-index:1}
+.hero-chips{display:flex;flex-wrap:wrap;gap:7px;position:relative;z-index:1}
+.chip{font-size:11px;font-weight:700;letter-spacing:1px;padding:4px 12px;border-radius:20px;text-transform:uppercase}
+.chip-w{background:rgba(255,255,255,.12);color:rgba(255,255,255,.88)}
+.chip-v{background:rgba(200,184,255,.18);color:#C8B8FF}
+.chip-g{background:rgba(100,240,180,.11);color:#80E8B8}
+
+/* ── TAB BAR ─────────────────────────────────────────────────── */
+.tab-bar{position:sticky;top:0;z-index:50;background:var(--white);border-bottom:2px solid var(--border);margin:0 -16px;display:flex;overflow-x:auto;box-shadow:0 2px 8px rgba(14,10,28,.07);-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.tab-bar::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;padding:14px 18px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);border:none;background:transparent;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;white-space:nowrap}
+.tab:hover{color:var(--ink);background:var(--bg)}
+.tab.on{color:var(--primary);border-bottom-color:var(--primary)}
+
+/* ── PANES ───────────────────────────────────────────────────── */
+.pane{display:none;padding-top:24px;animation:fadeUp .3s ease}
+.pane.on{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ── SECTION LABEL ───────────────────────────────────────────── */
+.sec-label{font-size:10px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--primary);margin:28px 0 12px;display:flex;align-items:center;gap:10px}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* ── INTRO BOX ───────────────────────────────────────────────── */
+.intro-box{background:var(--primaryPale);border:1.5px solid rgba(46,26,122,.20);border-radius:var(--radius);padding:20px;margin-bottom:8px}
+.intro-box p{font-size:16px;color:var(--ink2);line-height:1.8}
+.intro-box strong{color:var(--primary)}
+
+/* ── CONCEPT CARDS ───────────────────────────────────────────── */
+.c-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;box-shadow:var(--shadow);overflow:hidden}
+.c-head{display:flex;align-items:center;gap:12px;padding:16px 18px;cursor:pointer;border-left:4px solid transparent;transition:all .15s;-webkit-tap-highlight-color:transparent}
+.c-head:hover,.c-head.open{background:var(--bg);border-left-color:var(--primary)}
+.c-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.c-title{font-size:17px;font-weight:700;color:var(--ink);flex:1}
+.c-sub{font-size:12px;color:var(--dim);font-weight:600;margin-top:2px}
+.c-arrow{font-size:12px;color:var(--dim);transition:transform .2s;flex-shrink:0}
+.c-head.open .c-arrow{transform:rotate(180deg)}
+.c-body{display:none;padding:4px 18px 20px;border-top:1px solid var(--border)}
+.c-body.open{display:block;animation:fadeUp .2s ease}
+.c-body p{font-size:16px;color:var(--ink2);line-height:1.85;margin-bottom:12px}
+.c-body p:last-child{margin-bottom:0}
+.c-body strong{color:var(--primary);font-weight:700}
+.c-body em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* ── CONTENT BLOCKS ──────────────────────────────────────────── */
+.fact-box{background:var(--amberPale);border:1.5px solid rgba(138,96,8,.20);border-radius:10px;padding:16px 18px;margin:14px 0}
+.fact-box .fb-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--amber);text-transform:uppercase;margin-bottom:8px}
+.fact-box ul{list-style:none;padding:0}
+.fact-box li{font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;position:relative;line-height:1.7}
+.fact-box li::before{content:'→';position:absolute;left:0;color:var(--amber);font-weight:700;font-size:13px}
+
+.eg-box{background:var(--greenPale);border-left:4px solid var(--green);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.eg-box .eg-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--green);text-transform:uppercase;margin-bottom:6px}
+.eg-box p{font-size:15px;color:var(--ink2);line-height:1.75}
+.eg-box ul{list-style:none;padding:0}
+.eg-box li{font-size:15px;color:var(--ink2);padding:4px 0 4px 18px;position:relative;line-height:1.65}
+.eg-box li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:800;font-size:12px}
+
+.trap-box{background:var(--redPale);border:1.5px solid rgba(138,26,26,.20);border-radius:10px;padding:16px 18px;margin:14px 0}
+.trap-box .tr-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--red);text-transform:uppercase;margin-bottom:8px}
+.trap-box p,.trap-box li{font-size:15.5px;color:var(--ink2);line-height:1.75}
+.trap-box ul{list-style:none;padding:0}
+.trap-box li{padding:5px 0 5px 22px;position:relative}
+.trap-box li::before{content:'⚑';position:absolute;left:0;font-size:12px;color:var(--red)}
+
+.rule-box{background:var(--tealPale);border:1.5px solid rgba(13,92,82,.18);border-radius:10px;padding:16px 18px;margin:14px 0}
+.rule-box .rl-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--teal);text-transform:uppercase;margin-bottom:8px}
+.rule-box p{font-size:15.5px;color:var(--ink2);line-height:1.8}
+.rule-box strong{color:var(--teal)}
+
+.purple-box{background:var(--purplePale);border:1.5px solid rgba(106,24,128,.17);border-radius:10px;padding:16px 18px;margin:14px 0}
+.purple-box .pl-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--purple);text-transform:uppercase;margin-bottom:8px}
+.purple-box ul{list-style:none;padding:0}
+.purple-box li{font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;position:relative;line-height:1.8}
+.purple-box li::before{content:'◆';position:absolute;left:0;font-size:9px;color:var(--purple);top:10px}
+
+.analogy-box{background:var(--primaryPale);border-left:4px solid var(--primary);border-radius:0 8px 8px 0;padding:14px 16px;margin:12px 0}
+.analogy-box .an-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--primary);text-transform:uppercase;margin-bottom:6px}
+.analogy-box p{font-size:15.5px;color:var(--ink2);line-height:1.75}
+.analogy-box strong{color:var(--primary)}
+
+/* signal journey strip */
+.journey{margin:16px 0;display:flex;flex-direction:column}
+.j-step{display:flex;align-items:stretch;gap:14px}
+.j-line{display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:28px}
+.j-dot{width:28px;height:28px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;margin-top:2px}
+.j-connector{width:2px;flex:1;background:var(--border);margin:2px 0}
+.j-step:last-child .j-connector{display:none}
+.j-content{padding:2px 0 18px;flex:1}
+.j-title{font-size:15px;font-weight:800;color:var(--ink);margin-bottom:3px}
+.j-desc{font-size:14.5px;color:var(--ink2);line-height:1.7}
+.j-desc strong{color:var(--primary)}
+.j-desc em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* stat band */
+.stat-band{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border-radius:var(--radius);overflow:hidden;margin:16px 0}
+.stat-cell{background:var(--white);padding:12px 8px;text-align:center}
+.stat-val{font-family:'Lora',serif;font-size:17px;font-weight:700;color:var(--primary);line-height:1;margin-bottom:4px}
+.stat-lbl{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:.4px;line-height:1.3}
+
+.org-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}
+.org-card{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:13px 14px}
+.org-card .org-name{font-size:13px;font-weight:800;color:var(--primary);margin-bottom:4px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.org-card .org-nick{font-size:11px;font-weight:700;color:var(--amber);background:var(--amberPale);border-radius:4px;padding:1px 7px}
+.org-card p{font-size:14px;color:var(--ink2);line-height:1.6}
+
+.compare-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
+.compare-table th{background:var(--primary);color:#fff;padding:10px 12px;text-align:left;font-size:13px;font-weight:700;letter-spacing:.5px}
+.compare-table td{padding:10px 12px;border:1px solid var(--border);color:var(--ink2);vertical-align:top;line-height:1.65}
+.compare-table tr:nth-child(even) td{background:var(--bg)}
+.compare-table td b{color:var(--primary)}
+
+/* ── QUICK REFERENCE ─────────────────────────────────────────── */
+.ref-grid{display:grid;gap:10px;margin:8px 0}
+.ref-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+.ref-card-title{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--primary);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.ref-card ul{list-style:none;padding:0}
+.ref-card li{font-size:15px;color:var(--ink2);padding:5px 0 5px 16px;position:relative;line-height:1.65;border-bottom:1px solid var(--bg2)}
+.ref-card li:last-child{border-bottom:none}
+.ref-card li::before{content:'·';position:absolute;left:4px;color:var(--primary);font-weight:900;font-size:18px;line-height:1.3}
+.ref-card li b{color:var(--ink);font-weight:700}
+.ref-card li em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* ── QUIZ ────────────────────────────────────────────────────── */
+.quiz-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:16px;box-shadow:var(--shadow)}
+.qs-cell{background:var(--white);padding:12px 8px;text-align:center}
+.qs-val{font-family:'Lora',serif;font-size:22px;font-weight:700;color:var(--primary);line-height:1}
+.qs-val.g{color:var(--green)}.qs-val.r{color:var(--red)}.qs-val.a{color:var(--amber)}
+.qs-lbl{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:1px;margin-top:4px;text-transform:uppercase}
+.prog-wrap{margin-bottom:20px}
+.prog-bar{height:6px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;background:var(--primary);border-radius:3px;transition:width .4s ease;width:0%}
+.prog-label{font-size:12px;color:var(--muted);font-weight:700;margin-bottom:6px}
+.q-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:12px;box-shadow:var(--shadow);overflow:hidden;border-left:4px solid transparent;transition:border-color .15s}
+.q-card.answered{border-left-color:var(--primary)}
+.q-card.correct{border-left-color:var(--green)}
+.q-card.wrong{border-left-color:var(--red)}
+.q-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 16px;background:var(--bg);border-bottom:1px solid var(--border)}
+.q-num{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:1px}
+.q-diff{font-size:10px;font-weight:800;padding:2px 10px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase}
+.diff-e{background:var(--greenPale);color:var(--green)}
+.diff-m{background:var(--amberPale);color:var(--amber)}
+.diff-h{background:var(--redPale);color:var(--red)}
+.q-exam{font-size:11px;color:var(--dim);margin-left:auto;font-weight:600}
+.q-body{padding:16px}
+.q-text{font-size:17px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:14px 16px;cursor:pointer;display:flex;align-items:flex-start;gap:12px;font-size:16px;color:var(--ink2);text-align:left;width:100%;transition:all .15s;-webkit-tap-highlight-color:transparent;min-height:48px;line-height:1.6}
+.opt:hover:not(:disabled){border-color:var(--primary);background:var(--primaryPale)}
+.opt:disabled{cursor:default}
+.opt.sel{border-color:var(--primary);background:var(--primaryPale);color:var(--primary)}
+.opt.ok{border-color:var(--green)!important;background:var(--greenPale)!important;color:var(--green)!important}
+.opt.bad{border-color:var(--red)!important;background:var(--redPale)!important;color:var(--red)!important}
+.opt-lbl{min-width:28px;height:28px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--muted);flex-shrink:0;transition:all .15s}
+.opt.sel .opt-lbl{background:var(--primary);color:#fff;border-color:var(--primary)}
+.opt.ok .opt-lbl{background:var(--green);color:#fff;border-color:var(--green)}
+.opt.bad .opt-lbl{background:var(--red);color:#fff;border-color:var(--red)}
+.exp-panel{display:none;margin-top:12px;background:var(--bg);border-radius:10px;padding:14px 16px;border:1px solid var(--border)}
+.exp-panel.show{display:block;animation:fadeUp .2s ease}
+.exp-tag{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--primary);margin-bottom:6px}
+.exp-rule{font-size:13px;font-weight:800;color:var(--ink);background:var(--primaryPale);border-radius:6px;padding:6px 10px;margin-bottom:8px;border-left:3px solid var(--primary)}
+.exp-panel p{font-size:15px;color:var(--ink2);line-height:1.8}
+.q-foot{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-top:1px solid var(--border);background:var(--bg)}
+.q-status{font-size:12px;font-weight:700}
+.btn{padding:12px 24px;border-radius:10px;font-size:14px;font-weight:800;letter-spacing:.5px;border:none;cursor:pointer;transition:all .15s}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:var(--primaryLt)}
+.btn-ghost{background:var(--bg2);color:var(--ink2);border:1.5px solid var(--border)}
+.btn-ghost:hover{background:var(--bg3)}
+.quiz-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+#results{display:none;background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:20px;box-shadow:var(--shadow-md)}
+.res-hero{text-align:center;padding-bottom:20px;border-bottom:1px solid var(--border);margin-bottom:16px}
+.res-score{font-family:'Lora',serif;font-size:64px;font-weight:700;color:var(--primary);line-height:1}
+.res-grade{font-size:16px;font-weight:800;color:var(--ink);margin:8px 0 6px;letter-spacing:.5px}
+.res-msg{font-size:15px;color:var(--muted)}
+.res-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-kicker">Biology · Lesson B08 · Olive Defence</div>
+  <div class="hero-title">The <span>Nervous System</span></div>
+  <div class="hero-sub">Neuron structure, CNS &amp; PNS, brain regions, spinal cord, reflex arc, action potential, synapse and neurological disorders — at CDS, NDA &amp; AFCAT exam depth.</div>
+  <div class="hero-chips">
+    <span class="chip chip-w">CDS</span>
+    <span class="chip chip-w">NDA</span>
+    <span class="chip chip-w">AFCAT</span>
+    <span class="chip chip-v">Brain</span>
+    <span class="chip chip-g">Neuron</span>
+    <span class="chip chip-v">Reflex Arc</span>
+  </div>
+</div>
+
+<!-- TAB BAR -->
+<div class="tab-bar">
+  <button class="tab on" onclick="switchTab('theory')">📖 Theory</button>
+  <button class="tab" onclick="switchTab('quickref')">⚡ Quick Ref</button>
+  <button class="tab" onclick="switchTab('quiz')">✏️ Quiz</button>
+</div>
+
+<!-- ═══════════════════════ THEORY ══════════════════════════════ -->
+<div class="pane on" id="theory">
+
+  <div class="intro-box">
+    <p>The <strong>nervous system</strong> is the body's rapid communication and control network. It detects stimuli, processes information and coordinates responses. In humans it is divided into the <strong>Central Nervous System (CNS)</strong> — brain and spinal cord — and the <strong>Peripheral Nervous System (PNS)</strong> — all nerves outside the CNS. The basic unit is the <strong>neuron</strong> (nerve cell).</p>
+  </div>
+
+  <!-- SECTION 1 -->
+  <div class="sec-label">Section 1 — The Neuron</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#ECEAF8">🧠</div>
+      <div style="flex:1">
+        <div class="c-title">Neuron — Structure &amp; Types</div>
+        <div class="c-sub">The structural and functional unit of the nervous system</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>The <strong>neuron</strong> (nerve cell) is the structural and functional unit of the nervous system. Unlike most cells, mature neurons in the CNS <strong>cannot divide</strong> (non-mitotic). The human brain contains ~86 billion neurons.</p>
+
+      <div class="fact-box">
+        <div class="fb-label">Parts of a Neuron</div>
+        <ul>
+          <li><strong>Cell body (Soma/Cyton)</strong> — contains nucleus and most organelles; metabolic centre of the neuron</li>
+          <li><strong>Dendrites</strong> — short, branched projections that <em>receive</em> incoming signals and carry them <em>toward</em> the cell body (afferent to soma). A neuron may have many dendrites.</li>
+          <li><strong>Axon (Nerve fibre)</strong> — single long process that carries impulse <em>away</em> from cell body. Can be up to 1 metre long (e.g., sciatic nerve axons). Covered by myelin sheath in myelinated neurons.</li>
+          <li><strong>Myelin sheath</strong> — fatty insulating layer around the axon; produced by <strong>Schwann cells</strong> (PNS) or <strong>oligodendrocytes</strong> (CNS). Speeds up conduction.</li>
+          <li><strong>Nodes of Ranvier</strong> — gaps in the myelin sheath; allow <strong>saltatory conduction</strong> (impulse jumps node to node).</li>
+          <li><strong>Axon terminals (synaptic knobs)</strong> — release neurotransmitters into the synapse.</li>
+          <li><strong>Synaptic vesicles</strong> — tiny membrane-bound sacs storing neurotransmitters in axon terminals.</li>
+        </ul>
+      </div>
+
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Type</th><th>Structure</th><th>Function</th><th>Example Location</th></tr>
+          <tr><td><b>Sensory (Afferent)</b></td><td>Usually unipolar or bipolar</td><td>Carries signals FROM sense organs TO CNS</td><td>Dorsal root ganglia; retina</td></tr>
+          <tr><td><b>Motor (Efferent)</b></td><td>Multipolar (most common type)</td><td>Carries signals FROM CNS TO muscles/glands</td><td>Ventral horn of spinal cord</td></tr>
+          <tr><td><b>Interneuron (Association)</b></td><td>Multipolar</td><td>Connects sensory and motor neurons within CNS; integration</td><td>Brain and spinal cord</td></tr>
+        </table>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Dendrite vs Axon — Direction of Signal</div>
+        <ul>
+          <li><strong>Dendrites</strong> → cell body: <em>afferent</em> direction (toward soma)</li>
+          <li><strong>Axon</strong> → away from cell body: <em>efferent</em> direction</li>
+          <li>Signals always travel in ONE direction in a neuron: dendrite → cell body → axon. This is the <strong>law of dynamic polarisation</strong>.</li>
+          <li>Do NOT confuse <em>afferent neurons</em> (sensory, carry signals TO brain) with <em>efferent neurons</em> (motor, carry signals FROM brain).</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#ECEAF8">⚡</div>
+      <div style="flex:1">
+        <div class="c-title">Nerve Impulse — Action Potential</div>
+        <div class="c-sub">How electrical signals travel along a neuron</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>A <strong>nerve impulse</strong> is an electrochemical signal — a wave of electrical disturbance travelling along the neuron membrane. It depends on the movement of <strong>Na⁺ and K⁺ ions</strong> across the membrane.</p>
+
+      <div class="rule-box">
+        <div class="rl-label">Resting Membrane Potential</div>
+        <p>At rest, the inside of the neuron is <strong>negatively charged relative to outside</strong> (resting potential ≈ <strong>−70 mV</strong>). This is maintained by the <strong>Na⁺/K⁺ ATPase pump</strong>, which pumps 3 Na⁺ OUT and 2 K⁺ IN per cycle, keeping Na⁺ concentrated outside and K⁺ concentrated inside.</p>
+      </div>
+
+      <div class="journey">
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">1</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Depolarisation</div>
+            <div class="j-desc">A stimulus triggers voltage-gated <strong>Na⁺ channels to open</strong> → Na⁺ rushes INTO the cell → inside becomes positive → membrane potential rises to <em>+35 mV</em>. This is the <strong>action potential</strong>.</div>
+          </div>
+        </div>
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">2</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Repolarisation</div>
+            <div class="j-desc">Na⁺ channels close; <strong>K⁺ channels open</strong> → K⁺ flows OUT → inside becomes negative again → membrane repolarises.</div>
+          </div>
+        </div>
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">3</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Hyperpolarisation &amp; Refractory Period</div>
+            <div class="j-desc">K⁺ channels close slightly late → membrane overshoots briefly below −70 mV. During this <em>refractory period</em> no new impulse can be generated — ensures <strong>one-directional</strong> propagation.</div>
+          </div>
+        </div>
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">4</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Saltatory Conduction (Myelinated Fibres)</div>
+            <div class="j-desc">In myelinated neurons, the impulse <strong>jumps from node to node</strong> (Nodes of Ranvier) — saltatory conduction — much <em>faster</em> than continuous conduction in unmyelinated fibres.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fact-box">
+        <div class="fb-label">Key Numbers — Nerve Conduction</div>
+        <ul>
+          <li>Resting potential: <strong>−70 mV</strong></li>
+          <li>Action potential peak: <strong>+35 mV</strong></li>
+          <li>Conduction speed: unmyelinated fibres ~0.5–2 m/s; myelinated fibres up to <strong>120 m/s</strong></li>
+          <li>All-or-nothing law: an action potential either occurs fully or not at all — no partial impulses</li>
+        </ul>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Exam Trap — All-or-Nothing Law</div>
+        <p>Nerve impulses follow the <strong>All-or-Nothing Law</strong> — if the stimulus reaches the threshold, a full action potential fires; if it doesn't, nothing happens. The <strong>strength</strong> of a stimulus is coded by the <strong>frequency</strong> (rate) of impulses, NOT by the amplitude of each impulse.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#ECEAF8">🔗</div>
+      <div style="flex:1">
+        <div class="c-title">Synapse — Junction Between Neurons</div>
+        <div class="c-sub">Chemical transmission across the synaptic cleft</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>A <strong>synapse</strong> is the junction between two neurons (or between a neuron and an effector). The tiny gap between them (~20–40 nm) is the <strong>synaptic cleft</strong>. Transmission across the synapse is chemical — via <strong>neurotransmitters</strong>.</p>
+
+      <div class="journey">
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">1</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Impulse Arrives at Axon Terminal (Pre-synaptic)</div>
+            <div class="j-desc">Action potential reaches the synaptic knob → voltage-gated <strong>Ca²⁺ channels open</strong> → Ca²⁺ rushes in.</div>
+          </div>
+        </div>
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">2</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Neurotransmitter Release</div>
+            <div class="j-desc">Ca²⁺ influx triggers <strong>synaptic vesicles</strong> to fuse with the pre-synaptic membrane → neurotransmitters released into the <em>synaptic cleft</em> by exocytosis.</div>
+          </div>
+        </div>
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">3</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Receptor Binding (Post-synaptic)</div>
+            <div class="j-desc">Neurotransmitters diffuse across cleft → bind to <strong>receptors</strong> on post-synaptic membrane → generate new impulse (excitatory) or inhibit it (inhibitory).</div>
+          </div>
+        </div>
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">4</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Termination</div>
+            <div class="j-desc">Neurotransmitter is <strong>degraded by enzymes</strong> (e.g., acetylcholinesterase breaks down acetylcholine) or <strong>reabsorbed</strong> into the pre-synaptic terminal → synapse resets.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="purple-box">
+        <div class="pl-label">Key Neurotransmitters — CDS/NDA Frequency</div>
+        <ul>
+          <li><strong>Acetylcholine (ACh)</strong> — neuromuscular junction; parasympathetic NS; memory and arousal. Degraded by <strong>acetylcholinesterase</strong>. Inhibition of this enzyme by nerve agents (organophosphates) causes uncontrolled nerve firing.</li>
+          <li><strong>Dopamine</strong> — reward, movement, motivation. Deficiency → <strong>Parkinson's disease</strong>. Excess → associated with schizophrenia.</li>
+          <li><strong>Serotonin (5-HT)</strong> — mood, sleep, appetite. Deficiency → <strong>depression</strong>. SSRIs (Selective Serotonin Reuptake Inhibitors) treat depression by increasing synaptic serotonin.</li>
+          <li><strong>Noradrenaline (Norepinephrine)</strong> — fight-or-flight response; sympathetic NS; alertness.</li>
+          <li><strong>GABA (γ-aminobutyric acid)</strong> — main inhibitory neurotransmitter of CNS. Benzodiazepines enhance GABA action → sedation.</li>
+          <li><strong>Glutamate</strong> — main excitatory neurotransmitter of CNS; learning and memory.</li>
+        </ul>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Synaptic Transmission is One-Way</div>
+        <p>Synaptic transmission is <strong>unidirectional</strong> — only pre-synaptic → post-synaptic — because neurotransmitters are stored in vesicles only in the pre-synaptic terminal, and receptors are only on the post-synaptic membrane. This ensures signals travel in one direction through neural circuits.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="sec-label">Section 2 — Organisation of the Nervous System</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#ECEAF8">🗺️</div>
+      <div style="flex:1">
+        <div class="c-title">CNS &amp; PNS — The Full Map</div>
+        <div class="c-sub">How the nervous system is divided and organised</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Division</th><th>Components</th><th>Function</th></tr>
+          <tr><td><b>CNS</b></td><td>Brain + Spinal cord</td><td>Processing centre; integration; higher functions</td></tr>
+          <tr><td><b>PNS — Somatic NS</b></td><td>Sensory &amp; motor nerves to/from skin, muscles, sense organs</td><td>Voluntary control; sensory relay; skeletal muscle control</td></tr>
+          <tr><td><b>PNS — Autonomic NS (ANS)</b></td><td>Sympathetic + Parasympathetic divisions</td><td>Involuntary control of internal organs (heart, gut, glands)</td></tr>
+          <tr><td><b>Sympathetic NS</b></td><td>Thoracolumbar outflow (T1–L2)</td><td>"Fight or flight" — ↑ HR, ↑ BP, dilates pupils, inhibits digestion</td></tr>
+          <tr><td><b>Parasympathetic NS</b></td><td>Craniosacral outflow (CN III, VII, IX, X; S2–S4)</td><td>"Rest and digest" — ↓ HR, ↑ digestion, constricts pupils</td></tr>
+        </table>
+      </div>
+      <div class="analogy-box">
+        <div class="an-label">Think of it this way</div>
+        <p>The <strong>sympathetic</strong> system is your body's <strong>accelerator</strong> — it revs everything up for action (fight or flight). The <strong>parasympathetic</strong> system is the <strong>brake</strong> — it calms things down for rest and recovery. Most organs have both, maintaining balance (homeostasis).</p>
+      </div>
+      <div class="fact-box">
+        <div class="fb-label">Sympathetic vs Parasympathetic — Quick Comparison</div>
+        <ul>
+          <li><strong>Heart rate</strong>: Sympathetic ↑; Parasympathetic ↓ (vagus nerve)</li>
+          <li><strong>Pupils</strong>: Sympathetic dilates (mydriasis); Parasympathetic constricts (miosis)</li>
+          <li><strong>Digestion</strong>: Sympathetic inhibits; Parasympathetic stimulates (↑ peristalsis, ↑ secretions)</li>
+          <li><strong>Bronchi</strong>: Sympathetic dilates (bronchodilation); Parasympathetic constricts</li>
+          <li><strong>Bladder</strong>: Sympathetic relaxes (urine retention); Parasympathetic contracts (urination)</li>
+          <li><strong>Sweat glands</strong>: Sympathetic only (acetylcholine as transmitter here — exception)</li>
+          <li><strong>Neurotransmitter</strong>: Sympathetic post-ganglionic → noradrenaline; Parasympathetic → acetylcholine</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="sec-label">Section 3 — The Brain</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#ECEAF8">🧠</div>
+      <div style="flex:1">
+        <div class="c-title">Brain — Divisions &amp; Functions</div>
+        <div class="c-sub">Forebrain, midbrain, hindbrain — each region's role</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>The human brain weighs approximately <strong>1.4 kg</strong> and is protected by the <strong>skull</strong> (cranium) and three membranes — the <strong>meninges</strong> (dura mater, arachnoid mater, pia mater). The space between arachnoid and pia mater contains <strong>cerebrospinal fluid (CSF)</strong>.</p>
+
+      <div class="stat-band">
+        <div class="stat-cell"><div class="stat-val">~1.4 kg</div><div class="stat-lbl">Brain weight</div></div>
+        <div class="stat-cell"><div class="stat-val">86 billion</div><div class="stat-lbl">Neurons</div></div>
+        <div class="stat-cell"><div class="stat-val">100–500 T</div><div class="stat-lbl">Synaptic connections</div></div>
+        <div class="stat-cell"><div class="stat-val">12 pairs</div><div class="stat-lbl">Cranial nerves</div></div>
+      </div>
+
+      <div class="org-grid">
+        <div class="org-card">
+          <div class="org-name">Cerebrum <span class="org-nick">Forebrain</span></div>
+          <p>Largest part (~85%). Two hemispheres connected by <strong>corpus callosum</strong>. Controls intelligence, memory, reasoning, voluntary movement, speech, emotions. <strong>Cerebral cortex</strong> = outer grey matter.</p>
+        </div>
+        <div class="org-card">
+          <div class="org-name">Diencephalon <span class="org-nick">Forebrain</span></div>
+          <p><strong>Thalamus</strong> — relay station; routes sensory info to cortex. <strong>Hypothalamus</strong> — master regulator; controls temperature, hunger, thirst, sleep, circadian rhythm; controls pituitary gland.</p>
+        </div>
+        <div class="org-card">
+          <div class="org-name">Midbrain <span class="org-nick">Mesencephalon</span></div>
+          <p>Controls visual and auditory reflexes (superior and inferior colliculi). Houses reticular activating system (RAS) — controls arousal and consciousness. Connects forebrain and hindbrain.</p>
+        </div>
+        <div class="org-card">
+          <div class="org-name">Cerebellum <span class="org-nick">Hindbrain</span></div>
+          <p>"Little brain". Controls <strong>coordination, balance and fine muscle movement</strong>. Damage → <strong>ataxia</strong> (inability to coordinate movements). Does NOT initiate movement.</p>
+        </div>
+        <div class="org-card">
+          <div class="org-name">Pons <span class="org-nick">Hindbrain</span></div>
+          <p>Bridge between cerebrum and cerebellum. Contains pneumotaxic and apneustic centres (breathing control). Relays signals between higher brain and spinal cord.</p>
+        </div>
+        <div class="org-card">
+          <div class="org-name">Medulla Oblongata <span class="org-nick">Hindbrain</span></div>
+          <p>Most vital brain region — controls <strong>heart rate, blood pressure, breathing, swallowing, coughing, vomiting</strong>. Connects brain to spinal cord. Damage = fatal.</p>
+        </div>
+      </div>
+
+      <div class="purple-box">
+        <div class="pl-label">Cerebral Lobes &amp; Their Functions</div>
+        <ul>
+          <li><strong>Frontal lobe</strong> — voluntary movement, speech (Broca's area), personality, decision-making, reasoning</li>
+          <li><strong>Parietal lobe</strong> — sensory perception (touch, pain, temperature), spatial awareness, body position sense (proprioception)</li>
+          <li><strong>Temporal lobe</strong> — hearing, language comprehension (Wernicke's area), memory (hippocampus lies beneath)</li>
+          <li><strong>Occipital lobe</strong> — vision processing (primary visual cortex)</li>
+          <li><strong>Limbic system</strong> (includes amygdala + hippocampus) — emotions, memory formation, motivation</li>
+        </ul>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Brain Region Exam Traps</div>
+        <ul>
+          <li><strong>Cerebellum</strong> coordinates movement but does NOT initiate it. Initiation of voluntary movement = <strong>motor cortex (frontal lobe)</strong>.</li>
+          <li><strong>Medulla oblongata</strong> controls vital involuntary functions — it is the most critical region for survival. Damage here is rapidly fatal.</li>
+          <li><strong>Hypothalamus</strong> is the master regulator of homeostasis and controls the <strong>pituitary gland</strong> (the "master endocrine gland"). It links nervous and endocrine systems.</li>
+          <li><strong>Broca's area</strong> (frontal) = speech production; <strong>Wernicke's area</strong> (temporal) = speech comprehension. Damage to Broca's = cannot speak properly; damage to Wernicke's = cannot understand speech.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="sec-label">Section 4 — Spinal Cord &amp; Reflex Arc</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E0F4F2">🔌</div>
+      <div style="flex:1">
+        <div class="c-title">Spinal Cord — Structure</div>
+        <div class="c-sub">31 pairs of spinal nerves, grey matter, white matter</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>The spinal cord extends from the medulla oblongata to the <strong>L1–L2 vertebral level</strong> in adults (ends as the <strong>conus medullaris</strong>; below this is the cauda equina — a bundle of nerve roots). It is about <strong>45 cm long</strong> and is protected by the vertebral column and meninges.</p>
+      <div class="fact-box">
+        <div class="fb-label">Spinal Cord — Cross-Section</div>
+        <ul>
+          <li><strong>Grey matter (H-shaped, inner)</strong> — cell bodies of neurons. <em>Dorsal horn</em>: receives sensory input (sensory neurons synapse here). <em>Ventral horn</em>: houses motor neuron cell bodies that send signals to muscles.</li>
+          <li><strong>White matter (outer)</strong> — myelinated axons forming ascending (sensory) and descending (motor) tracts. White colour from myelin.</li>
+          <li><strong>Dorsal root</strong> — carries <em>sensory</em> signals INTO spinal cord (contains dorsal root ganglion with sensory neuron cell bodies)</li>
+          <li><strong>Ventral root</strong> — carries <em>motor</em> signals OUT of spinal cord to effectors</li>
+          <li>Together, dorsal + ventral roots form the <strong>spinal nerve</strong> (mixed — both sensory and motor)</li>
+          <li><strong>31 pairs of spinal nerves</strong>: 8 cervical, 12 thoracic, 5 lumbar, 5 sacral, 1 coccygeal</li>
+        </ul>
+      </div>
+      <div class="trap-box">
+        <div class="tr-label">⚑ Bell-Magendie Law</div>
+        <p><strong>Bell-Magendie Law</strong>: <strong>Dorsal root = sensory (afferent)</strong>; <strong>Ventral root = motor (efferent)</strong>. This is one of the most directly tested facts about the spinal cord. Remember: <em>"Dorsal = Detective senses things"</em> and <em>"Ventral = Vehicle drives out motor signals."</em></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E0F4F2">⚡</div>
+      <div style="flex:1">
+        <div class="c-title">Reflex Arc — Fast, Involuntary Response</div>
+        <div class="c-sub">The 5-component pathway of a reflex</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>A <strong>reflex</strong> is a rapid, automatic, involuntary response to a stimulus that does NOT require conscious thought. It is mediated through the <strong>spinal cord</strong> (for spinal reflexes), bypassing the brain for speed. The pathway is the <strong>reflex arc</strong>.</p>
+
+      <div class="journey">
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">1</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Receptor</div>
+            <div class="j-desc">Detects the stimulus (e.g., pain from hot object, tap on patellar tendon). Converts stimulus to nerve impulse.</div>
+          </div>
+        </div>
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">2</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Afferent (Sensory) Neuron</div>
+            <div class="j-desc">Carries impulse from receptor → spinal cord via the <strong>dorsal root</strong>. Fast conduction, myelinated.</div>
+          </div>
+        </div>
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">3</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Nerve Centre (Interneuron in Spinal Cord)</div>
+            <div class="j-desc">Processes and integrates signal in the <strong>grey matter of spinal cord</strong>. A copy of the signal is simultaneously sent up to the brain (we feel pain slightly after we've already pulled away).</div>
+          </div>
+        </div>
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">4</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Efferent (Motor) Neuron</div>
+            <div class="j-desc">Carries impulse from spinal cord → effector via the <strong>ventral root</strong>.</div>
+          </div>
+        </div>
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">5</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Effector</div>
+            <div class="j-desc">Muscle or gland that produces the response (e.g., hand pulls away from heat; quadriceps contracts in knee-jerk reflex).</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="eg-box">
+        <div class="eg-label">Common Examples of Reflexes</div>
+        <ul>
+          <li><strong>Knee-jerk (Patellar reflex)</strong> — monosynaptic (only 1 synapse); tap on patellar tendon → quadriceps contracts. Tests L3–L4 spinal segment integrity.</li>
+          <li><strong>Withdrawal reflex</strong> — hand pulled away from pain; polysynaptic (involves interneurons)</li>
+          <li><strong>Pupillary light reflex</strong> — bright light → pupils constrict (cranial nerve II and III); tests midbrain integrity</li>
+          <li><strong>Babinski reflex</strong> — stroking sole of foot → big toe extends in infants (normal); in adults = sign of upper motor neuron damage</li>
+          <li><strong>Blink reflex</strong> — corneal touch → eyelid closes (cranial nerve V and VII)</li>
+        </ul>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Reflex vs Voluntary Action</div>
+        <ul>
+          <li>Reflexes do NOT require the brain — they are integrated at the <strong>spinal cord level</strong>. However, the brain receives a copy of the signal and is aware of the reflex after the fact.</li>
+          <li>The <strong>knee-jerk reflex</strong> is monosynaptic (NO interneuron) — the only truly 2-neuron reflex arc. All others involve interneurons.</li>
+          <li>Conditioned reflexes (Pavlov's dogs) ARE learned and involve higher brain centres — they are NOT spinal reflexes.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5 -->
+  <div class="sec-label">Section 5 — Sense Organs</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#FDF4DC">👁️</div>
+      <div style="flex:1">
+        <div class="c-title">Eye — Structure &amp; Vision</div>
+        <div class="c-sub">Rods, cones, retina and common eye disorders</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>The eye is the organ of vision. Light enters through the <strong>cornea</strong> → <strong>aqueous humour</strong> → <strong>pupil</strong> → <strong>lens</strong> → <strong>vitreous humour</strong> → <strong>retina</strong>. The retina contains the photoreceptors.</p>
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Feature</th><th>Rods</th><th>Cones</th></tr>
+          <tr><td>Number</td><td>~120 million per retina</td><td>~6–7 million per retina</td></tr>
+          <tr><td>Location</td><td>Peripheral retina</td><td>Concentrated at <b>fovea centralis</b> (point of sharpest vision)</td></tr>
+          <tr><td>Function</td><td>Dim/night vision; detect light intensity (black &amp; white)</td><td>Colour vision (day); visual acuity</td></tr>
+          <tr><td>Photopigment</td><td><b>Rhodopsin</b> (visual purple) — contains Vit A</td><td>3 types of <b>Iodopsin</b> (red, green, blue)</td></tr>
+          <tr><td>Sensitivity</td><td>Very sensitive to dim light</td><td>Require bright light</td></tr>
+        </table>
+      </div>
+      <div class="fact-box">
+        <div class="fb-label">Eye Anatomy — Key Terms</div>
+        <ul>
+          <li><strong>Cornea</strong> — transparent, avascular outer layer; refracts most light; site of LASIK surgery</li>
+          <li><strong>Iris</strong> — coloured muscular ring; controls pupil size (light intensity)</li>
+          <li><strong>Lens</strong> — flexible; changes shape for near/far focus (<strong>accommodation</strong>); controlled by ciliary muscles</li>
+          <li><strong>Retina</strong> — inner layer with rods and cones; where image forms (inverted)</li>
+          <li><strong>Fovea centralis</strong> — area of sharpest vision; densely packed cones; no rods</li>
+          <li><strong>Blind spot (Optic disc)</strong> — where optic nerve exits; no photoreceptors → no vision here</li>
+          <li><strong>Optic nerve (CN II)</strong> — carries visual signals to occipital cortex</li>
+          <li><strong>Aqueous humour</strong> (front of lens) and <strong>vitreous humour</strong> (behind lens) maintain eye shape</li>
+        </ul>
+      </div>
+      <div class="trap-box">
+        <div class="tr-label">⚑ Eye Disorder Exam Traps</div>
+        <ul>
+          <li><strong>Night blindness</strong> — deficiency of <strong>Vitamin A</strong> (needed for rhodopsin synthesis) → rods cannot function in low light</li>
+          <li><strong>Colour blindness</strong> — X-linked recessive; deficiency in one or more types of cone pigment; more common in males; red-green most common type</li>
+          <li><strong>Glaucoma</strong> — increased intraocular pressure (aqueous humour build-up) → optic nerve damage → blindness. Leading cause of irreversible blindness worldwide.</li>
+          <li><strong>Cataract</strong> — clouding of the lens; leading cause of treatable blindness worldwide; treated by lens replacement surgery</li>
+          <li><strong>Myopia (short-sightedness)</strong> — eyeball too long; image forms in FRONT of retina; corrected with <strong>concave lens</strong></li>
+          <li><strong>Hypermetropia (long-sightedness)</strong> — eyeball too short; image forms BEHIND retina; corrected with <strong>convex lens</strong></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#FDF4DC">👂</div>
+      <div style="flex:1">
+        <div class="c-title">Ear — Hearing &amp; Balance</div>
+        <div class="c-sub">Outer, middle and inner ear — cochlea and semicircular canals</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Region</th><th>Structure</th><th>Function</th></tr>
+          <tr><td><b>Outer ear</b></td><td>Pinna (auricle) + External auditory canal</td><td>Collects and channels sound waves to eardrum</td></tr>
+          <tr><td><b>Middle ear</b></td><td>Tympanic membrane (eardrum) + 3 ossicles: Malleus → Incus → Stapes</td><td>Amplifies and transmits sound vibrations to inner ear. Eustachian tube equalises pressure.</td></tr>
+          <tr><td><b>Inner ear</b></td><td><b>Cochlea</b> — spiral fluid-filled organ of hearing; contains organ of Corti (hair cells). <b>Semicircular canals</b> — 3 canals for balance</td><td>Cochlea converts sound vibrations → nerve impulses (cochlear nerve, CN VIII). Semicircular canals detect rotational head movement.</td></tr>
+        </table>
+      </div>
+      <div class="fact-box">
+        <div class="fb-label">Key Ear Facts</div>
+        <ul>
+          <li>The three ossicles (smallest bones in the body) in order: <strong>Malleus (hammer) → Incus (anvil) → Stapes (stirrup)</strong></li>
+          <li><strong>Stapes</strong> is the <em>smallest bone in the human body</em></li>
+          <li><strong>Cochlea</strong> — organ of hearing; hair cells in the <strong>organ of Corti</strong> detect sound vibrations</li>
+          <li><strong>Semicircular canals</strong> (3, at right angles) — detect angular/rotational movement; maintain dynamic balance</li>
+          <li><strong>Utricle and Saccule</strong> — in inner ear; detect linear acceleration and gravity (static balance)</li>
+          <li><strong>Eustachian tube</strong> — connects middle ear to pharynx; equalises air pressure on both sides of eardrum</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6 -->
+  <div class="sec-label">Section 6 — Neurological Disorders</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#FAEAEA">🩺</div>
+      <div style="flex:1">
+        <div class="c-title">Key Neurological &amp; Sensory Disorders</div>
+        <div class="c-sub">High-frequency applied MCQs for CDS/NDA/AFCAT</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Disorder</th><th>Cause / Mechanism</th><th>Key Exam Point</th></tr>
+          <tr><td><b>Parkinson's Disease</b></td><td>Progressive loss of dopamine-producing neurons in substantia nigra (midbrain)</td><td>Tremors at rest, rigidity, slow movement (bradykinesia); treated with L-DOPA</td></tr>
+          <tr><td><b>Alzheimer's Disease</b></td><td>Progressive loss of neurons; plaques (amyloid-β) and tangles (tau protein) in brain</td><td>Most common dementia; memory loss (especially recent memory); no cure</td></tr>
+          <tr><td><b>Multiple Sclerosis (MS)</b></td><td>Autoimmune destruction of myelin sheaths in CNS</td><td>Impaired nerve conduction; muscle weakness, vision problems; relapsing-remitting pattern</td></tr>
+          <tr><td><b>Epilepsy</b></td><td>Abnormal excessive electrical activity in brain neurons</td><td>Seizures; generalised (grand mal) or focal; treated with anticonvulsants</td></tr>
+          <tr><td><b>Meningitis</b></td><td>Inflammation of meninges; bacterial (Neisseria meningitidis) or viral</td><td>Severe headache, neck stiffness, photophobia; medical emergency</td></tr>
+          <tr><td><b>Stroke (CVA)</b></td><td>Ischaemic (clot blocks artery) or haemorrhagic (artery bursts) in brain</td><td>Sudden weakness, speech loss, facial droop; time-critical treatment</td></tr>
+          <tr><td><b>Myasthenia Gravis</b></td><td>Autoimmune attack on acetylcholine receptors at neuromuscular junction</td><td>Muscle weakness that worsens with activity; drooping eyelids (ptosis)</td></tr>
+        </table>
+      </div>
+      <div class="rule-box">
+        <div class="rl-label">Pavlov's Conditioned Reflex — Classical Conditioning</div>
+        <p>Ivan Pavlov demonstrated that animals can be trained to respond to a neutral stimulus (bell) when it is repeatedly paired with a natural stimulus (food → salivation). The <strong>conditioned reflex</strong> is a learned response involving the <strong>cerebral cortex</strong> — unlike spinal reflexes. Pavlov received the Nobel Prize in Physiology or Medicine in <strong>1904</strong> for this work on digestion (not reflexes per se, though reflexes made it possible).</p>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /theory -->
+
+<!-- ═══════════════════════════════════════ QUICK REF ════════════ -->
+<div class="pane" id="quickref">
+  <div class="ref-grid">
+
+    <div class="ref-card">
+      <div class="ref-card-title">Neuron — Structure &amp; Signal Direction</div>
+      <ul>
+        <li>Dendrites → cell body → axon: signals travel ONE direction (law of dynamic polarisation)</li>
+        <li>Axon covered by <b>myelin sheath</b> (Schwann cells in PNS; oligodendrocytes in CNS)</li>
+        <li>Nodes of Ranvier → saltatory conduction → myelinated fibres up to <em>120 m/s</em></li>
+        <li>Resting potential: <em>−70 mV</em> · Action potential peak: <em>+35 mV</em></li>
+        <li>All-or-Nothing Law: full AP fires or nothing; intensity coded by frequency</li>
+        <li>Sensory (afferent) → TO brain · Motor (efferent) → FROM brain</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Synapse &amp; Neurotransmitters</div>
+      <ul>
+        <li>Synapse: unidirectional (pre → post); Ca²⁺ triggers vesicle release</li>
+        <li><b>Acetylcholine</b> — NMJ, parasympathetic, memory; broken down by <em>acetylcholinesterase</em></li>
+        <li><b>Dopamine</b> — reward, movement; deficiency → <em>Parkinson's</em></li>
+        <li><b>Serotonin</b> — mood; deficiency → <em>depression</em>; SSRIs treat depression</li>
+        <li><b>GABA</b> — main CNS inhibitor; benzodiazepines enhance it</li>
+        <li><b>Noradrenaline</b> — fight-or-flight, sympathetic post-ganglionic transmitter</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Brain Regions &amp; Functions</div>
+      <ul>
+        <li><b>Cerebrum</b> — intelligence, memory, voluntary movement, speech; corpus callosum links hemispheres</li>
+        <li><b>Hypothalamus</b> — homeostasis; controls pituitary; hunger, thirst, temp, sleep</li>
+        <li><b>Cerebellum</b> — coordination and balance; damage → ataxia; does NOT initiate movement</li>
+        <li><b>Medulla oblongata</b> — heart rate, breathing, BP; most vital region</li>
+        <li><b>Broca's area</b> (frontal) = speech production · <b>Wernicke's</b> (temporal) = comprehension</li>
+        <li>12 pairs cranial nerves · 31 pairs spinal nerves</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Spinal Cord &amp; Reflex Arc</div>
+      <ul>
+        <li>Bell-Magendie Law: <em>Dorsal root = sensory</em> · <em>Ventral root = motor</em></li>
+        <li>Grey matter (inner, H-shaped): cell bodies · White matter (outer): myelinated axons</li>
+        <li>Reflex arc: Receptor → Afferent neuron → Spinal cord → Efferent neuron → Effector</li>
+        <li>Knee-jerk = <em>monosynaptic</em> (only 1 synapse; L3–L4); all others polysynaptic</li>
+        <li>Reflexes bypass brain (spinal level); brain informed after the fact</li>
+        <li>Babinski reflex in adults = upper motor neuron damage</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Eye &amp; Ear</div>
+      <ul>
+        <li><b>Rods</b> — night/dim vision; rhodopsin (Vit A); peripheral retina</li>
+        <li><b>Cones</b> — colour/day vision; iodopsin; fovea centralis</li>
+        <li>Blind spot (optic disc) — no photoreceptors; where optic nerve exits</li>
+        <li>Ossicles (smallest bones): <em>Malleus → Incus → Stapes</em>; stapes = smallest bone in body</li>
+        <li>Cochlea — organ of hearing · Semicircular canals — rotational balance</li>
+        <li>Myopia (short-sight) → concave lens · Hypermetropia → convex lens</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Disorders &amp; High-Yield Facts</div>
+      <ul>
+        <li><b>Parkinson's</b> — dopamine deficiency (substantia nigra); tremors; L-DOPA treatment</li>
+        <li><b>Alzheimer's</b> — amyloid-β plaques; commonest dementia; memory loss</li>
+        <li><b>Multiple Sclerosis</b> — autoimmune myelin destruction in CNS</li>
+        <li><b>Glaucoma</b> — ↑ intraocular pressure → optic nerve damage; leading irreversible blindness</li>
+        <li><b>Cataract</b> — clouded lens; leading treatable blindness; lens replacement</li>
+        <li>Night blindness = Vit A deficiency · Colour blindness = X-linked recessive</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ QUIZ ════════════════ -->
+<div class="pane" id="quiz">
+
+  <div class="quiz-stats">
+    <div class="qs-cell"><div class="qs-val" id="s-att">0</div><div class="qs-lbl">Attempted</div></div>
+    <div class="qs-cell"><div class="qs-val g" id="s-cor">0</div><div class="qs-lbl">Correct</div></div>
+    <div class="qs-cell"><div class="qs-val r" id="s-wrg">0</div><div class="qs-lbl">Wrong</div></div>
+    <div class="qs-cell"><div class="qs-val a" id="s-tot">15</div><div class="qs-lbl">Total</div></div>
+  </div>
+
+  <div class="prog-wrap">
+    <div class="prog-label" id="prog-label">0 of 15 answered</div>
+    <div class="prog-bar"><div class="prog-fill" id="prog"></div></div>
+  </div>
+
+  <div class="quiz-actions">
+    <button class="btn btn-primary" onclick="submitAll()">Submit All &amp; Check</button>
+    <button class="btn btn-ghost" onclick="resetQuiz()">↺ Reset Quiz</button>
+  </div>
+
+  <div id="results"></div>
+  <div id="q-area"></div>
+
+</div>
+</div><!-- /page -->
+
+<script>
+const QS = [
+
+{d:'EASY',e:'NDA 2023',
+q:'The structural and functional unit of the nervous system is the:',
+opts:['Nephron','Neuron','Ganglion','Schwann cell'],ans:1,
+rule:'Neuron (nerve cell) = structural AND functional unit of the nervous system',
+exp:'The neuron (nerve cell) is the structural and functional unit of the nervous system, just as the nephron is for the kidney. A neuron consists of a cell body (soma), dendrites (that receive signals) and an axon (that transmits signals away from the cell body). The human nervous system contains approximately 86 billion neurons. Neurons are specialised for rapid electrical signalling. Nephrons are units of the kidney. Ganglia are clusters of nerve cell bodies outside the CNS. Schwann cells are glial (support) cells that form the myelin sheath in the PNS — they are not neurons.'},
+
+{d:'EASY',e:'CDS 2022',
+q:'The part of the brain responsible for coordination of body movements and maintaining balance is the:',
+opts:['Cerebrum','Medulla oblongata','Cerebellum','Hypothalamus'],ans:2,
+rule:'Cerebellum = coordination, balance and fine motor control; damage → ataxia',
+exp:'The cerebellum ("little brain") is located at the back and bottom of the brain and is responsible for COORDINATION of voluntary movements, maintaining BALANCE and POSTURE, and fine-tuning muscle activity. It does NOT initiate movements — that is done by the motor cortex in the cerebral frontal lobe. Damage to the cerebellum causes ATAXIA — an inability to coordinate muscle movements, resulting in unsteady gait and clumsiness. The medulla oblongata controls vital functions like breathing and heart rate. The cerebrum handles higher thinking. The hypothalamus regulates homeostasis.'},
+
+{d:'EASY',e:'AFCAT 2023',
+q:'Which part of the ear contains the organ of Corti, which is responsible for hearing?',
+opts:['Pinna','Middle ear ossicles','Cochlea (inner ear)','Eustachian tube'],ans:2,
+rule:'Cochlea (inner ear) contains the organ of Corti — hair cells convert sound vibrations to nerve impulses',
+exp:'The cochlea is a spiral, fluid-filled structure in the inner ear. Inside it lies the ORGAN OF CORTI, which contains specialised HAIR CELLS (mechanoreceptors). When sound vibrations pass through the cochlear fluid, they cause the basilar membrane to vibrate, which bends the hair cell stereocilia, generating electrical impulses in the cochlear nerve (part of CN VIII — vestibulocochlear nerve). These impulses are then interpreted as sound in the auditory cortex of the temporal lobe. The pinna collects sound. Ossicles amplify vibrations. The Eustachian tube equalises pressure.'},
+
+{d:'EASY',e:'CDS 2023',
+q:'Night blindness is caused by deficiency of which vitamin, and which photoreceptor cells are affected?',
+opts:[
+  'Vitamin C deficiency; affecting cone cells',
+  'Vitamin A deficiency; affecting rod cells',
+  'Vitamin D deficiency; affecting both rods and cones',
+  'Vitamin B12 deficiency; affecting the optic nerve'
+],ans:1,
+rule:'Night blindness = Vitamin A deficiency → insufficient rhodopsin in rod cells → cannot see in dim light',
+exp:'Night blindness (nyctalopia) is caused by VITAMIN A (retinol) deficiency. Vitamin A is a component of RHODOPSIN (visual purple), the photopigment found in ROD cells of the retina. Rods are responsible for vision in dim/low light conditions and are found predominantly in the peripheral retina. Without adequate Vitamin A, rhodopsin cannot be synthesised or regenerated, and rod cells lose their sensitivity to dim light. Cone cells (for colour and day vision) use iodopsin, which is less directly affected by Vitamin A deficiency. Treatment: Vitamin A supplementation.'},
+
+{d:'EASY',e:'NDA 2022',
+q:'Bell-Magendie Law states that in a spinal nerve:',
+opts:[
+  'Dorsal root carries motor fibres; ventral root carries sensory fibres',
+  'Dorsal root carries sensory fibres; ventral root carries motor fibres',
+  'Both dorsal and ventral roots carry mixed sensory and motor fibres',
+  'Dorsal root carries autonomic fibres; ventral root carries somatic fibres'
+],ans:1,
+rule:'Bell-Magendie Law: Dorsal root = sensory (afferent) · Ventral root = motor (efferent)',
+exp:'The Bell-Magendie Law is a fundamental principle of spinal cord anatomy: the DORSAL (posterior) root of each spinal nerve carries SENSORY (afferent) fibres that bring information from the periphery (skin, muscles, organs) INTO the spinal cord. The dorsal root contains the dorsal root GANGLION with sensory neuron cell bodies. The VENTRAL (anterior) root carries MOTOR (efferent) fibres that carry signals FROM the spinal cord OUT to muscles and glands. The two roots join to form the spinal nerve, which is a mixed nerve (both sensory and motor). Named after Charles Bell and François Magendie who independently established this in the early 19th century.'},
+
+{d:'MEDIUM',e:'CDS 2023',
+q:'The resting membrane potential of a neuron is approximately −70 mV. What maintains this potential?',
+opts:[
+  'Passive diffusion of Ca²⁺ into the cell at rest',
+  'The Na⁺/K⁺ ATPase pump, which actively pumps 3 Na⁺ out and 2 K⁺ in per cycle',
+  'Continuous action potentials that keep resetting the membrane',
+  'The myelin sheath preventing any ion movement at rest'
+],ans:1,
+rule:'Resting potential −70 mV maintained by Na⁺/K⁺ ATPase pump: 3 Na⁺ out, 2 K⁺ in → net negative interior',
+exp:'The resting membrane potential of approximately −70 mV (inside negative relative to outside) is maintained primarily by the NA⁺/K⁺ ATPase PUMP (sodium-potassium pump), which uses ATP to actively transport 3 Na⁺ ions OUT of the cell and 2 K⁺ ions IN per cycle. This creates concentration gradients: high Na⁺ outside, high K⁺ inside. The unequal exchange (3 out vs 2 in) also contributes directly to the negative interior charge. At rest, K⁺ leaks out slowly through K⁺ leak channels, further contributing to the negative interior. This stable negative resting potential is essential for the neuron to be excitable — ready to fire an action potential when stimulated.'},
+
+{d:'MEDIUM',e:'AFCAT 2022',
+q:'Which of the following correctly describes the role of the hypothalamus?',
+opts:[
+  'It is the primary visual cortex; it processes all visual information from the eyes',
+  'It controls voluntary muscle movement and is the largest part of the brain',
+  'It regulates homeostasis (temperature, hunger, thirst, sleep cycles) and controls the pituitary gland — linking nervous and endocrine systems',
+  'It is the relay station that routes all sensory signals except smell to the cerebral cortex'
+],ans:2,
+rule:'Hypothalamus = master homeostasis regulator; controls pituitary; links nervous and endocrine systems',
+exp:'The hypothalamus is a small but critically important region in the diencephalon (forebrain). Its key roles include: (1) HOMEOSTASIS — regulates body temperature (thermoregulation), hunger, thirst, sleep-wake cycles (circadian rhythms), and osmolarity. (2) PITUITARY CONTROL — produces releasing and inhibiting hormones that control the anterior pituitary (e.g., GnRH, CRH, TRH); directly produces ADH and oxytocin stored in the posterior pituitary. This makes it the key LINK between the nervous system and endocrine system. Option D (relay station for sensory signals) describes the THALAMUS. Option A describes the occipital lobe. Option B describes the cerebrum/motor cortex.'},
+
+{d:'MEDIUM',e:'NDA 2023',
+q:'In a chemical synapse, what is the role of calcium ions (Ca²⁺) in synaptic transmission?',
+opts:[
+  'Ca²⁺ maintains the resting membrane potential at the pre-synaptic terminal',
+  'Ca²⁺ influx into the pre-synaptic terminal triggers synaptic vesicle fusion and neurotransmitter release',
+  'Ca²⁺ binds to receptors on the post-synaptic membrane to generate a new impulse',
+  'Ca²⁺ degrades the neurotransmitter in the synaptic cleft'
+],ans:1,
+rule:'Ca²⁺ influx into axon terminal triggers vesicle-membrane fusion → neurotransmitter exocytosis',
+exp:'When an action potential arrives at the pre-synaptic axon terminal, it triggers the opening of voltage-gated CALCIUM (Ca²⁺) channels in the terminal membrane. Ca²⁺ rushes into the axon terminal down its concentration gradient. This Ca²⁺ influx is the key trigger that causes SYNAPTIC VESICLES (containing neurotransmitters) to fuse with the pre-synaptic membrane and release their neurotransmitter contents into the synaptic cleft by EXOCYTOSIS. Without Ca²⁺, no neurotransmitter is released and no signal crosses the synapse. This is why drugs that block Ca²⁺ channels (calcium channel blockers) can affect neurotransmission. The neurotransmitter then diffuses across the ~20 nm cleft and binds to receptors on the post-synaptic membrane.'},
+
+{d:'MEDIUM',e:'CDS 2024',
+q:'A patient has muscle weakness that worsens with activity and drooping eyelids (ptosis). Further tests show antibodies against acetylcholine receptors. This condition is:',
+opts:['Parkinson\'s disease','Multiple Sclerosis','Myasthenia Gravis','Epilepsy'],ans:2,
+rule:'Myasthenia Gravis = autoimmune attack on ACh receptors at NMJ → muscle weakness worsening with use',
+exp:'MYASTHENIA GRAVIS is an autoimmune disorder in which the body produces antibodies that attack and destroy acetylcholine (ACh) receptors at the neuromuscular junction (NMJ). With fewer ACh receptors available, repeated stimulation of the muscle fails to produce a sustained contraction — causing characteristic muscle weakness that WORSENS WITH ACTIVITY and improves with rest. Classic signs include PTOSIS (drooping eyelids), diplopia (double vision), difficulty swallowing and limb weakness. Treatment includes acetylcholinesterase inhibitors (pyridostigmine — prevent ACh breakdown so more is available) and immunosuppressants. Parkinson\'s affects dopamine neurons. MS destroys myelin. Epilepsy involves abnormal brain electrical activity.'},
+
+{d:'MEDIUM',e:'AFCAT 2024',
+q:'Which of the following correctly distinguishes the sympathetic from the parasympathetic nervous system?',
+opts:[
+  'Sympathetic uses acetylcholine; parasympathetic uses noradrenaline',
+  'Sympathetic (fight-or-flight) increases heart rate and dilates pupils; parasympathetic (rest-and-digest) decreases heart rate and stimulates digestion',
+  'Sympathetic originates from craniosacral outflow; parasympathetic from thoracolumbar outflow',
+  'Both systems use the same neurotransmitters and have identical effects on organs'
+],ans:1,
+rule:'Sympathetic = fight-or-flight (↑HR, dilate pupils, ↓digestion) · Parasympathetic = rest-and-digest (↓HR, ↑digestion)',
+exp:'The autonomic nervous system (ANS) has two divisions with opposing effects: SYMPATHETIC (fight-or-flight, thoracolumbar T1–L2): increases heart rate and blood pressure, dilates pupils (mydriasis), dilates bronchi, inhibits digestion, releases adrenaline/noradrenaline. PARASYMPATHETIC (rest-and-digest, craniosacral): decreases heart rate (via vagus nerve CN X), constricts pupils (miosis), stimulates digestion (↑ peristalsis, ↑ secretions), promotes urination. The sympathetic post-ganglionic transmitter is NORADRENALINE (not acetylcholine); parasympathetic uses ACETYLCHOLINE. The origins are the reverse of option C — sympathetic is thoracolumbar; parasympathetic is craniosacral.'},
+
+{d:'MEDIUM',e:'NDA 2024',
+q:'Glaucoma leads to irreversible blindness. What is the primary pathological mechanism?',
+opts:[
+  'Clouding of the lens due to protein aggregation',
+  'Vitamin A deficiency impairing rhodopsin synthesis in rods',
+  'Increased intraocular pressure compressing and damaging the optic nerve',
+  'Autoimmune destruction of cone cells in the fovea'
+],ans:2,
+rule:'Glaucoma = ↑ intraocular pressure (aqueous humour build-up) → optic nerve compression → irreversible blindness',
+exp:'GLAUCOMA is a group of eye conditions characterised by INCREASED INTRAOCULAR PRESSURE (IOP), usually caused by impaired drainage of AQUEOUS HUMOUR (the fluid in the front of the eye). As pressure builds, it gradually compresses and damages the OPTIC NERVE (CN II), causing progressive and IRREVERSIBLE loss of vision, typically starting from the peripheral visual field. Glaucoma is the leading cause of IRREVERSIBLE blindness worldwide. It is often called the "silent thief of sight" because it is painless and gradual. Treatment includes eye drops (prostaglandin analogues, beta-blockers) to reduce IOP or surgery. Option A describes CATARACT (leading treatable blindness). Option B describes night blindness. Option D is not a recognised condition.'},
+
+{d:'HARD',e:'CDS 2024',
+q:'A patient with damage to the left cerebral hemisphere presents with difficulty producing speech but can understand what is said to them. The specific area damaged is most likely:',
+opts:[
+  'Wernicke\'s area in the left temporal lobe',
+  'Broca\'s area in the left frontal lobe',
+  'The primary visual cortex in the left occipital lobe',
+  'The left cerebellum'
+],ans:1,
+rule:'Broca\'s area (frontal lobe) = speech production; Broca\'s aphasia = cannot speak fluently but comprehension intact',
+exp:'This presentation describes BROCA\'S APHASIA (expressive aphasia): the patient CANNOT PRODUCE fluent speech (non-fluent, effortful speech) but retains the ability to COMPREHEND language. The lesion is in BROCA\'S AREA — located in the LEFT inferior frontal gyrus (frontal lobe), which is responsible for speech PRODUCTION and coordinating the motor aspects of speech. In contrast, WERNICKE\'S APHASIA (receptive aphasia) occurs with damage to WERNICKE\'S AREA in the left superior temporal gyrus — patients speak fluently but produce meaningless "word salad" and cannot comprehend what is said to them. Speech and language are lateralised to the LEFT hemisphere in ~95% of right-handed people. This is a classic applied neurology question in competitive exams.'},
+
+{d:'HARD',e:'NDA 2024',
+q:'Multiple Sclerosis (MS) is an autoimmune disease that destroys the myelin sheaths in the CNS. What is the direct consequence of demyelination on nerve conduction?',
+opts:[
+  'Neurons produce more action potentials (increased frequency) to compensate',
+  'Saltatory conduction is lost; conduction becomes slow, erratic or fails — leading to muscle weakness, vision problems and cognitive impairment',
+  'Demyelination only affects the PNS and does not impair CNS function',
+  'The nodes of Ranvier enlarge to compensate, restoring normal conduction speed'
+],ans:1,
+rule:'MS destroys myelin (oligodendrocytes) in CNS → saltatory conduction lost → slow/failed nerve conduction → neurological deficits',
+exp:'In Multiple Sclerosis, the immune system attacks OLIGODENDROCYTES — the CNS cells that produce myelin — destroying the myelin sheaths around axons. This DESTROYS SALTATORY CONDUCTION (where impulses normally jump rapidly between Nodes of Ranvier at speeds up to 120 m/s). Without myelin: (1) Impulse conduction becomes slow and continuous instead of saltatory (like an unmyelinated fibre, ~1 m/s). (2) The impulse may fail to propagate altogether (conduction block). (3) This leads to diverse neurological symptoms depending on which CNS tracts are affected — muscle weakness, spasticity, vision problems (optic neuritis), balance issues, fatigue and cognitive problems. Plaques (areas of demyelination and scarring — "sclerosis") form throughout the CNS. MS is a relapsing-remitting disease in most cases.'},
+
+{d:'HARD',e:'AFCAT 2024',
+q:'Acetylcholinesterase inhibitors (e.g., organophosphate nerve agents) prevent the breakdown of acetylcholine at the neuromuscular junction. What is the physiological consequence?',
+opts:[
+  'Muscles cannot contract because acetylcholine is never released from vesicles',
+  'Excess acetylcholine accumulates at the NMJ causing continuous, uncontrolled muscle stimulation (tetanic paralysis), excessive glandular secretions and respiratory failure',
+  'Acetylcholine is reabsorbed more quickly into pre-synaptic terminals, reducing muscle activation',
+  'The post-synaptic receptors are blocked, preventing any muscle response'
+],ans:1,
+rule:'AChE inhibitor → ACh accumulates at NMJ → continuous depolarisation → tetanic paralysis + cholinergic crisis',
+exp:'Acetylcholinesterase (AChE) is the enzyme that breaks down ACETYLCHOLINE (ACh) in the synaptic cleft after it has acted. Organophosphate nerve agents (sarin, VX) and certain pesticides IRREVERSIBLY INHIBIT AChE. Without degradation, ACh ACCUMULATES in the cleft and CONTINUOUSLY STIMULATES post-synaptic receptors. At the neuromuscular junction: initially excessive muscle contraction (fasciculations), then TETANIC PARALYSIS because muscles cannot relax (cannot be repolarised). At other sites: excessive secretions (salivation, lacrimation, urination, defecation — SLUDGE syndrome), bronchospasm and bronchial secretions → RESPIRATORY FAILURE (the main cause of death). The antidote is ATROPINE (blocks ACh receptors) plus pralidoxime (reactivates AChE if given early). This applies to both military nerve agents and organophosphate pesticide poisoning.'},
+
+{d:'HARD',e:'CDS 2024',
+q:'Parkinson\'s disease involves degeneration of dopaminergic neurons in the substantia nigra. Treatment with L-DOPA (levodopa) is used rather than dopamine itself. Why?',
+opts:[
+  'Dopamine is more expensive to manufacture than L-DOPA',
+  'Dopamine cannot cross the blood-brain barrier (BBB), while L-DOPA can cross via amino acid transporters and is then converted to dopamine in the brain',
+  'L-DOPA directly replaces lost neurons in the substantia nigra',
+  'Dopamine would cause too many side effects in the peripheral nervous system'
+],ans:1,
+rule:'Dopamine cannot cross the BBB; L-DOPA crosses via amino acid transporters → converted to dopamine inside CNS',
+exp:'Parkinson\'s disease results from progressive loss of dopamine-producing neurons in the SUBSTANTIA NIGRA (midbrain), causing insufficient dopamine in the STRIATUM — leading to tremors at rest, muscular rigidity, bradykinesia (slow movement) and postural instability. The treatment aim is to restore dopamine levels in the brain. Simply giving dopamine directly does NOT work because DOPAMINE CANNOT CROSS THE BLOOD-BRAIN BARRIER (BBB) — a highly selective barrier formed by tight junctions in brain capillary endothelium that prevents most molecules from entering the CNS. L-DOPA (levodopa), however, is structurally similar to amino acids and crosses the BBB via large neutral amino acid transporters. Once inside the CNS, the enzyme DOPA decarboxylase converts L-DOPA → DOPAMINE within the remaining neurons. L-DOPA is combined with carbidopa (which inhibits peripheral conversion) to reduce side effects and increase brain availability. This is a classic pharmacology-physiology applied question.'},
+
+];
+
+const answers  = new Array(QS.length).fill(null);
+const revealed = new Array(QS.length).fill(false);
+const LABS = ['A','B','C','D'];
+
+function build(){
+  const area = document.getElementById('q-area');
+  area.innerHTML = '';
+  QS.forEach((q,i)=>{
+    const dc = q.d==='EASY'?'diff-e':q.d==='MEDIUM'?'diff-m':'diff-h';
+    const div = document.createElement('div');
+    div.className='q-card'; div.id=`qc${i}`;
+    div.innerHTML=`
+      <div class="q-meta">
+        <span class="q-num">Q.${String(i+1).padStart(2,'0')}</span>
+        <span class="q-diff ${dc}">${q.d}</span>
+        <span class="q-exam">${q.e}</span>
+      </div>
+      <div class="q-body">
+        <div class="q-text">${q.q}</div>
+        <div class="opts" id="opts${i}">
+          ${q.opts.map((o,j)=>`
+            <button class="opt" id="o${i}_${j}" onclick="pick(${i},${j})">
+              <span class="opt-lbl">${LABS[j]}</span>${o}
+            </button>`).join('')}
+        </div>
+        <div class="exp-panel" id="ex${i}">
+          <div class="exp-tag">Explanation</div>
+          <div class="exp-rule">${q.rule}</div>
+          <p>${q.exp}</p>
+        </div>
+      </div>
+      <div class="q-foot">
+        <span style="font-size:11px;color:var(--dim);font-weight:700">Biology · B08</span>
+        <span id="ai${i}" class="q-status">—</span>
+      </div>`;
+    area.appendChild(div);
+  });
+}
+
+function pick(qi,oi){
+  if(revealed[qi]) return;
+  answers[qi]=oi;
+  document.querySelectorAll(`#opts${qi} .opt`).forEach((b,j)=>{b.classList.remove('sel');if(j===oi)b.classList.add('sel')});
+  document.getElementById(`qc${qi}`).classList.add('answered');
+  const ai=document.getElementById(`ai${qi}`);
+  ai.textContent=`Selected: ${LABS[oi]}`;
+  ai.style.color='var(--primary)';
+  updateStats();
+}
+
+function updateStats(){
+  const att=answers.filter(a=>a!==null).length;
+  document.getElementById('s-att').textContent=att;
+  document.getElementById('prog').style.width=(att/QS.length*100)+'%';
+  document.getElementById('prog-label').textContent=`${att} of ${QS.length} answered`;
+  let c=0,w=0;
+  answers.forEach((a,i)=>{if(a===null)return;if(a===QS[i].ans)c++;else w++;});
+  document.getElementById('s-cor').textContent=c;
+  document.getElementById('s-wrg').textContent=w;
+}
+
+function submitAll(){
+  let cor=0,wrg=0,skp=0;
+  QS.forEach((q,i)=>{
+    revealed[i]=true;
+    const opts=document.querySelectorAll(`#opts${i} .opt`);
+    opts.forEach(b=>{b.disabled=true;b.classList.remove('sel')});
+    opts[q.ans].classList.add('ok');
+    if(answers[i]!==null && answers[i]!==q.ans) opts[answers[i]].classList.add('bad');
+    document.getElementById(`ex${i}`).classList.add('show');
+    const ai=document.getElementById(`ai${i}`);
+    const card=document.getElementById(`qc${i}`);
+    card.classList.remove('answered');
+    if(answers[i]===null){skp++;ai.textContent='Skipped';ai.style.color='var(--dim)';}
+    else if(answers[i]===q.ans){cor++;card.classList.add('correct');ai.textContent='✓ Correct';ai.style.color='var(--green)';}
+    else{wrg++;card.classList.add('wrong');ai.textContent='✗ Wrong';ai.style.color='var(--red)';}
+  });
+  updateStats();
+  showResults(cor,wrg,skp);
+}
+
+function showResults(cor,wrg,skp){
+  const pct=Math.round(cor/QS.length*100);
+  let grade,msg;
+  if(pct>=88){grade='Excellent';msg='Outstanding! You have mastered the Nervous System.'}
+  else if(pct>=70){grade='Good';msg='Well done. Review the questions you got wrong.'}
+  else if(pct>=50){grade='Average';msg='Good start. Revisit the theory cards and try again.'}
+  else{grade='Needs Work';msg="Don't worry — go through the Quick Ref and try again."}
+  const res=document.getElementById('results');
+  res.innerHTML=`
+    <div class="res-hero">
+      <div class="res-score">${cor}<span style="font-size:36px;opacity:.5">/${QS.length}</span></div>
+      <div class="res-grade">${grade} · ${pct}%</div>
+      <div class="res-msg">${msg}</div>
+    </div>
+    <div class="res-stats">
+      <div class="qs-cell"><div class="qs-val g">${cor}</div><div class="qs-lbl">Correct</div></div>
+      <div class="qs-cell"><div class="qs-val r">${wrg}</div><div class="qs-lbl">Wrong</div></div>
+      <div class="qs-cell"><div class="qs-val a">${skp}</div><div class="qs-lbl">Skipped</div></div>
+      <div class="qs-cell"><div class="qs-val">${pct}%</div><div class="qs-lbl">Score</div></div>
+    </div>
+    <div style="text-align:center;margin:16px 0">
+      <button class="btn btn-ghost" onclick="document.getElementById('q-area').scrollIntoView({behavior:'smooth'})">📖 Review All Answers</button>
+    </div>`;
+  res.style.display='block';
+  res.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function resetQuiz(){
+  answers.fill(null); revealed.fill(false);
+  build();
+  document.getElementById('results').style.display='none';
+  document.getElementById('results').innerHTML='';
+  ['s-att','s-cor','s-wrg'].forEach(id=>document.getElementById(id).textContent='0');
+  document.getElementById('prog').style.width='0%';
+  document.getElementById('prog-label').textContent=`0 of ${QS.length} answered`;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function switchTab(id){
+  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  const idx={theory:0,quickref:1,quiz:2}[id];
+  document.querySelectorAll('.tab')[idx].classList.add('on');
+}
+
+function tog(hd){
+  const bd=hd.nextElementSibling;
+  const isOpen=bd.classList.contains('open');
+  bd.classList.toggle('open',!isOpen);
+  hd.classList.toggle('open',!isOpen);
+}
+
+build();
+</script>
+</body>
+</html>

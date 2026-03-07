@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B06 · Circulatory System | Olive Defence</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+
+:root{
+  /* ── THEME B06: Deep Burgundy + Warm Gold — cardiovascular, vital ── */
+  --bg:        #F6F1F4;
+  --bg2:       #EDE4E9;
+  --bg3:       #E0D3DC;
+  --white:     #FDF8FB;
+  --ink:       #1A0A12;
+  --ink2:      #2E1220;
+  --muted:     #7A526A;
+  --dim:       #A8809A;
+  --border:    #D8BED0;
+
+  /* Primary — deep burgundy */
+  --primary:      #6B0F2A;
+  --primaryLt:    #8C1A38;
+  --primaryPale:  #FAE8EE;
+
+  /* Accent 1 — warm gold */
+  --amber:        #936008;
+  --amberLt:      #B87A10;
+  --amberPale:    #FDF3DC;
+
+  /* Accent 2 — forest green */
+  --green:        #1E5C38;
+  --greenLt:      #277A4A;
+  --greenPale:    #E6F4EC;
+
+  /* Accent 3 — alert red */
+  --red:          #8A1A1A;
+  --redLt:        #B02020;
+  --redPale:      #FAEAEA;
+
+  /* Accent 4 — indigo */
+  --blue:         #1E3A72;
+  --bluePale:     #E8EEF8;
+
+  /* Accent 5 — muted rose-purple */
+  --purple:       #6A2060;
+  --purplePale:   #F5EAF3;
+
+  --radius:    12px;
+  --shadow:    0 2px 12px rgba(26,10,18,.09);
+  --shadow-md: 0 4px 20px rgba(26,10,18,.14);
+}
+
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--ink);font-size:17px;line-height:1.75;min-height:100vh}
+.page{max-width:680px;margin:0 auto;padding:0 16px 80px}
+
+/* ── HERO ─────────────────────────────────────────────────────── */
+.hero{
+  background:linear-gradient(135deg,#2A0410 0%,#6B0F2A 52%,#8C2040 100%);
+  margin:0 -16px;padding:28px 20px 26px;position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 80% 18%,rgba(255,180,120,.08) 0%,transparent 55%),
+    radial-gradient(ellipse at 8% 82%,rgba(255,210,100,.05) 0%,transparent 50%);
+  pointer-events:none;
+}
+/* heartbeat line decoration */
+.hero::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,transparent 0%,rgba(255,200,150,.25) 30%,rgba(255,160,120,.4) 50%,rgba(255,200,150,.25) 70%,transparent 100%);
+  pointer-events:none;
+}
+.hero-kicker{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.50);margin-bottom:8px;display:flex;align-items:center;gap:8px;position:relative;z-index:1}
+.hero-kicker::before{content:'';width:18px;height:2px;background:rgba(255,255,255,.28)}
+.hero-title{font-family:'Lora',serif;font-size:clamp(24px,5.5vw,34px);font-weight:700;color:#fff;line-height:1.2;margin-bottom:10px;position:relative;z-index:1}
+.hero-title span{color:#FFD0A8;font-style:italic}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.66);margin-bottom:18px;line-height:1.65;position:relative;z-index:1}
+.hero-chips{display:flex;flex-wrap:wrap;gap:7px;position:relative;z-index:1}
+.chip{font-size:11px;font-weight:700;letter-spacing:1px;padding:4px 12px;border-radius:20px;text-transform:uppercase}
+.chip-w{background:rgba(255,255,255,.12);color:rgba(255,255,255,.88)}
+.chip-r{background:rgba(255,208,168,.16);color:#FFD0A8}
+.chip-g{background:rgba(100,220,150,.12);color:#88E0A8}
+
+/* ── TAB BAR ─────────────────────────────────────────────────── */
+.tab-bar{position:sticky;top:0;z-index:50;background:var(--white);border-bottom:2px solid var(--border);margin:0 -16px;display:flex;overflow-x:auto;box-shadow:0 2px 8px rgba(26,10,18,.07);-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.tab-bar::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;padding:14px 18px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);border:none;background:transparent;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;white-space:nowrap}
+.tab:hover{color:var(--ink);background:var(--bg)}
+.tab.on{color:var(--primary);border-bottom-color:var(--primary)}
+
+/* ── PANES ───────────────────────────────────────────────────── */
+.pane{display:none;padding-top:24px;animation:fadeUp .3s ease}
+.pane.on{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ── SECTION LABEL ───────────────────────────────────────────── */
+.sec-label{font-size:10px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--primary);margin:28px 0 12px;display:flex;align-items:center;gap:10px}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* ── INTRO BOX ───────────────────────────────────────────────── */
+.intro-box{background:var(--primaryPale);border:1.5px solid rgba(107,15,42,.20);border-radius:var(--radius);padding:20px;margin-bottom:8px}
+.intro-box p{font-size:16px;color:var(--ink2);line-height:1.8}
+.intro-box strong{color:var(--primary)}
+
+/* ── CONCEPT CARDS ───────────────────────────────────────────── */
+.c-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;box-shadow:var(--shadow);overflow:hidden}
+.c-head{display:flex;align-items:center;gap:12px;padding:16px 18px;cursor:pointer;border-left:4px solid transparent;transition:all .15s;-webkit-tap-highlight-color:transparent}
+.c-head:hover,.c-head.open{background:var(--bg);border-left-color:var(--primary)}
+.c-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.c-title{font-size:17px;font-weight:700;color:var(--ink);flex:1}
+.c-sub{font-size:12px;color:var(--dim);font-weight:600;margin-top:2px}
+.c-arrow{font-size:12px;color:var(--dim);transition:transform .2s;flex-shrink:0}
+.c-head.open .c-arrow{transform:rotate(180deg)}
+.c-body{display:none;padding:4px 18px 20px;border-top:1px solid var(--border)}
+.c-body.open{display:block;animation:fadeUp .2s ease}
+.c-body p{font-size:16px;color:var(--ink2);line-height:1.85;margin-bottom:12px}
+.c-body p:last-child{margin-bottom:0}
+.c-body strong{color:var(--primary);font-weight:700}
+.c-body em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* ── CONTENT BLOCKS ──────────────────────────────────────────── */
+.fact-box{background:var(--amberPale);border:1.5px solid rgba(147,96,8,.20);border-radius:10px;padding:16px 18px;margin:14px 0}
+.fact-box .fb-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--amber);text-transform:uppercase;margin-bottom:8px}
+.fact-box ul{list-style:none;padding:0}
+.fact-box li{font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;position:relative;line-height:1.7}
+.fact-box li::before{content:'→';position:absolute;left:0;color:var(--amber);font-weight:700;font-size:13px}
+
+.eg-box{background:var(--greenPale);border-left:4px solid var(--green);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.eg-box .eg-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--green);text-transform:uppercase;margin-bottom:6px}
+.eg-box p{font-size:15px;color:var(--ink2);line-height:1.75}
+.eg-box ul{list-style:none;padding:0}
+.eg-box li{font-size:15px;color:var(--ink2);padding:4px 0 4px 18px;position:relative;line-height:1.65}
+.eg-box li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:800;font-size:12px}
+
+.trap-box{background:var(--redPale);border:1.5px solid rgba(138,26,26,.20);border-radius:10px;padding:16px 18px;margin:14px 0}
+.trap-box .tr-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--red);text-transform:uppercase;margin-bottom:8px}
+.trap-box p,.trap-box li{font-size:15.5px;color:var(--ink2);line-height:1.75}
+.trap-box ul{list-style:none;padding:0}
+.trap-box li{padding:5px 0 5px 22px;position:relative}
+.trap-box li::before{content:'⚑';position:absolute;left:0;font-size:12px;color:var(--red)}
+
+.rule-box{background:var(--bluePale);border:1.5px solid rgba(30,58,114,.17);border-radius:10px;padding:16px 18px;margin:14px 0}
+.rule-box .rl-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--blue);text-transform:uppercase;margin-bottom:8px}
+.rule-box p{font-size:15.5px;color:var(--ink2);line-height:1.8}
+.rule-box strong{color:var(--blue)}
+
+.purple-box{background:var(--purplePale);border:1.5px solid rgba(106,32,96,.17);border-radius:10px;padding:16px 18px;margin:14px 0}
+.purple-box .pl-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--purple);text-transform:uppercase;margin-bottom:8px}
+.purple-box ul{list-style:none;padding:0}
+.purple-box li{font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;position:relative;line-height:1.8}
+.purple-box li::before{content:'◆';position:absolute;left:0;font-size:9px;color:var(--purple);top:10px}
+
+.analogy-box{background:var(--primaryPale);border-left:4px solid var(--primary);border-radius:0 8px 8px 0;padding:14px 16px;margin:12px 0}
+.analogy-box .an-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--primary);text-transform:uppercase;margin-bottom:6px}
+.analogy-box p{font-size:15.5px;color:var(--ink2);line-height:1.75}
+.analogy-box strong{color:var(--primary)}
+
+/* circulation journey strip */
+.journey{margin:16px 0;display:flex;flex-direction:column}
+.j-step{display:flex;align-items:stretch;gap:14px}
+.j-line{display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:28px}
+.j-dot{width:28px;height:28px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;margin-top:2px}
+.j-dot.alt{background:var(--blue)}
+.j-connector{width:2px;flex:1;background:var(--border);margin:2px 0}
+.j-step:last-child .j-connector{display:none}
+.j-content{padding:2px 0 18px;flex:1}
+.j-title{font-size:15px;font-weight:800;color:var(--ink);margin-bottom:3px}
+.j-desc{font-size:14.5px;color:var(--ink2);line-height:1.7}
+.j-desc strong{color:var(--primary)}
+.j-desc em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* stat band */
+.stat-band{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border-radius:var(--radius);overflow:hidden;margin:16px 0}
+.stat-cell{background:var(--white);padding:12px 8px;text-align:center}
+.stat-val{font-family:'Lora',serif;font-size:18px;font-weight:700;color:var(--primary);line-height:1;margin-bottom:4px}
+.stat-lbl{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:.4px;line-height:1.3}
+
+/* blood cell mini-cards */
+.org-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}
+.org-card{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:13px 14px}
+.org-card .org-name{font-size:13px;font-weight:800;color:var(--primary);margin-bottom:4px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.org-card .org-nick{font-size:11px;font-weight:700;color:var(--amber);background:var(--amberPale);border-radius:4px;padding:1px 7px}
+.org-card p{font-size:14px;color:var(--ink2);line-height:1.6}
+
+.compare-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
+.compare-table th{background:var(--primary);color:#fff;padding:10px 12px;text-align:left;font-size:13px;font-weight:700;letter-spacing:.5px}
+.compare-table td{padding:10px 12px;border:1px solid var(--border);color:var(--ink2);vertical-align:top;line-height:1.65}
+.compare-table tr:nth-child(even) td{background:var(--bg)}
+.compare-table td b{color:var(--primary)}
+
+/* ── QUICK REFERENCE ─────────────────────────────────────────── */
+.ref-grid{display:grid;gap:10px;margin:8px 0}
+.ref-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+.ref-card-title{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--primary);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.ref-card ul{list-style:none;padding:0}
+.ref-card li{font-size:15px;color:var(--ink2);padding:5px 0 5px 16px;position:relative;line-height:1.65;border-bottom:1px solid var(--bg2)}
+.ref-card li:last-child{border-bottom:none}
+.ref-card li::before{content:'·';position:absolute;left:4px;color:var(--primary);font-weight:900;font-size:18px;line-height:1.3}
+.ref-card li b{color:var(--ink);font-weight:700}
+.ref-card li em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* ── QUIZ ────────────────────────────────────────────────────── */
+.quiz-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:16px;box-shadow:var(--shadow)}
+.qs-cell{background:var(--white);padding:12px 8px;text-align:center}
+.qs-val{font-family:'Lora',serif;font-size:22px;font-weight:700;color:var(--primary);line-height:1}
+.qs-val.g{color:var(--green)}.qs-val.r{color:var(--red)}.qs-val.a{color:var(--amber)}
+.qs-lbl{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:1px;margin-top:4px;text-transform:uppercase}
+
+.prog-wrap{margin-bottom:20px}
+.prog-bar{height:6px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;background:var(--primary);border-radius:3px;transition:width .4s ease;width:0%}
+.prog-label{font-size:12px;color:var(--muted);font-weight:700;margin-bottom:6px}
+
+.q-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:12px;box-shadow:var(--shadow);overflow:hidden;border-left:4px solid transparent;transition:border-color .15s}
+.q-card.answered{border-left-color:var(--primary)}
+.q-card.correct{border-left-color:var(--green)}
+.q-card.wrong{border-left-color:var(--red)}
+
+.q-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 16px;background:var(--bg);border-bottom:1px solid var(--border)}
+.q-num{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:1px}
+.q-diff{font-size:10px;font-weight:800;padding:2px 10px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase}
+.diff-e{background:var(--greenPale);color:var(--green)}
+.diff-m{background:var(--amberPale);color:var(--amber)}
+.diff-h{background:var(--redPale);color:var(--red)}
+.q-exam{font-size:11px;color:var(--dim);margin-left:auto;font-weight:600}
+
+.q-body{padding:16px}
+.q-text{font-size:17px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-weight:600}
+
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:14px 16px;cursor:pointer;display:flex;align-items:flex-start;gap:12px;font-size:16px;color:var(--ink2);text-align:left;width:100%;transition:all .15s;-webkit-tap-highlight-color:transparent;min-height:48px;line-height:1.6}
+.opt:hover:not(:disabled){border-color:var(--primary);background:var(--primaryPale)}
+.opt:disabled{cursor:default}
+.opt.sel{border-color:var(--primary);background:var(--primaryPale);color:var(--primary)}
+.opt.ok{border-color:var(--green)!important;background:var(--greenPale)!important;color:var(--green)!important}
+.opt.bad{border-color:var(--red)!important;background:var(--redPale)!important;color:var(--red)!important}
+
+.opt-lbl{min-width:28px;height:28px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--muted);flex-shrink:0;transition:all .15s}
+.opt.sel .opt-lbl{background:var(--primary);color:#fff;border-color:var(--primary)}
+.opt.ok .opt-lbl{background:var(--green);color:#fff;border-color:var(--green)}
+.opt.bad .opt-lbl{background:var(--red);color:#fff;border-color:var(--red)}
+
+.exp-panel{display:none;margin-top:12px;background:var(--bg);border-radius:10px;padding:14px 16px;border:1px solid var(--border)}
+.exp-panel.show{display:block;animation:fadeUp .2s ease}
+.exp-tag{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--primary);margin-bottom:6px}
+.exp-rule{font-size:13px;font-weight:800;color:var(--ink);background:var(--primaryPale);border-radius:6px;padding:6px 10px;margin-bottom:8px;border-left:3px solid var(--primary)}
+.exp-panel p{font-size:15px;color:var(--ink2);line-height:1.8}
+
+.q-foot{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-top:1px solid var(--border);background:var(--bg)}
+.q-status{font-size:12px;font-weight:700}
+
+.btn{padding:12px 24px;border-radius:10px;font-size:14px;font-weight:800;letter-spacing:.5px;border:none;cursor:pointer;transition:all .15s}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:var(--primaryLt)}
+.btn-ghost{background:var(--bg2);color:var(--ink2);border:1.5px solid var(--border)}
+.btn-ghost:hover{background:var(--bg3)}
+.quiz-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+
+#results{display:none;background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:20px;box-shadow:var(--shadow-md)}
+.res-hero{text-align:center;padding-bottom:20px;border-bottom:1px solid var(--border);margin-bottom:16px}
+.res-score{font-family:'Lora',serif;font-size:64px;font-weight:700;color:var(--primary);line-height:1}
+.res-grade{font-size:16px;font-weight:800;color:var(--ink);margin:8px 0 6px;letter-spacing:.5px}
+.res-msg{font-size:15px;color:var(--muted)}
+.res-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-kicker">Biology · Lesson B06 · Olive Defence</div>
+  <div class="hero-title">The <span>Circulatory System</span></div>
+  <div class="hero-sub">Heart anatomy, double circulation, blood vessels, blood composition, cardiac cycle and cardiovascular disorders — at CDS, NDA &amp; AFCAT exam depth.</div>
+  <div class="hero-chips">
+    <span class="chip chip-w">CDS</span>
+    <span class="chip chip-w">NDA</span>
+    <span class="chip chip-w">AFCAT</span>
+    <span class="chip chip-r">Heart</span>
+    <span class="chip chip-g">Blood</span>
+    <span class="chip chip-r">Circulation</span>
+  </div>
+</div>
+
+<!-- TAB BAR -->
+<div class="tab-bar">
+  <button class="tab on" onclick="switchTab('theory')">📖 Theory</button>
+  <button class="tab" onclick="switchTab('quickref')">⚡ Quick Ref</button>
+  <button class="tab" onclick="switchTab('quiz')">✏️ Quiz</button>
+</div>
+
+<!-- ═══════════════════════════════════════ THEORY ═══════════════ -->
+<div class="pane on" id="theory">
+
+  <div class="intro-box">
+    <p>The <strong>circulatory system</strong> (cardiovascular system) transports oxygen, nutrients, hormones and waste products throughout the body. It consists of the <strong>heart</strong> (pump), <strong>blood vessels</strong> (pipes) and <strong>blood</strong> (fluid medium). Humans have a <strong>closed, double circulatory system</strong> — blood circulates through the heart twice per complete circuit.</p>
+  </div>
+
+  <!-- SECTION 1 -->
+  <div class="sec-label">Section 1 — The Heart</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#FAE8EE">❤️</div>
+      <div style="flex:1">
+        <div class="c-title">Heart — Structure &amp; Chambers</div>
+        <div class="c-sub">Four chambers, valves and the cardiac wall layers</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>The human heart is a <strong>muscular, hollow organ</strong> about the size of a closed fist, located in the <strong>thoracic cavity</strong> between the lungs (in the mediastinum), slightly tilted to the <strong>left</strong>. It is enclosed in a double-walled sac called the <strong>pericardium</strong>.</p>
+      <div class="fact-box">
+        <div class="fb-label">Three Layers of the Heart Wall</div>
+        <ul>
+          <li><strong>Pericardium</strong> — outermost double-walled protective sac; contains pericardial fluid to reduce friction</li>
+          <li><strong>Myocardium</strong> — middle, thickest layer; cardiac muscle responsible for pumping action</li>
+          <li><strong>Endocardium</strong> — innermost smooth lining of heart chambers and valves</li>
+        </ul>
+      </div>
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Chamber</th><th>Side</th><th>Receives Blood From</th><th>Pumps Blood To</th><th>Wall Thickness</th></tr>
+          <tr><td><b>Right Atrium (RA)</b></td><td>Right</td><td>Superior &amp; inferior vena cava (deoxygenated)</td><td>Right ventricle</td><td>Thin</td></tr>
+          <tr><td><b>Right Ventricle (RV)</b></td><td>Right</td><td>Right atrium</td><td>Lungs via pulmonary artery</td><td>Moderate</td></tr>
+          <tr><td><b>Left Atrium (LA)</b></td><td>Left</td><td>Lungs via pulmonary veins (oxygenated)</td><td>Left ventricle</td><td>Thin</td></tr>
+          <tr><td><b>Left Ventricle (LV)</b></td><td>Left</td><td>Left atrium</td><td>Whole body via aorta</td><td><b>Thickest</b> — pumps hardest</td></tr>
+        </table>
+      </div>
+      <div class="analogy-box">
+        <div class="an-label">Think of it this way</div>
+        <p>The heart is like a <strong>double pump</strong> side by side. The <strong>right side</strong> is a low-pressure pump sending blood to the nearby lungs. The <strong>left side</strong> is a high-pressure pump pushing blood all the way around the body — which is why its wall is much thicker.</p>
+      </div>
+      <div class="trap-box">
+        <div class="tr-label">⚑ Exam Trap</div>
+        <p>The <strong>left ventricle has the thickest wall</strong> — it must generate enough pressure to push blood to the entire body via the aorta. The right ventricle only pumps to the nearby lungs and has a thinner wall. Confusing left and right wall thickness is a classic mistake.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#FAE8EE">🚪</div>
+      <div style="flex:1">
+        <div class="c-title">Heart Valves — The Four Gatekeepers</div>
+        <div class="c-sub">Preventing backflow and producing heart sounds</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>Heart valves ensure <strong>one-way blood flow</strong> through the heart. They open and close passively in response to pressure differences. There are four valves:</p>
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Valve</th><th>Location</th><th>Also Called</th><th>Function</th></tr>
+          <tr><td><b>Tricuspid valve</b></td><td>Between RA and RV</td><td>Right atrioventricular (AV) valve</td><td>Prevents backflow from RV → RA; has 3 cusps (leaflets)</td></tr>
+          <tr><td><b>Pulmonary valve</b></td><td>Between RV and pulmonary artery</td><td>Pulmonary semilunar valve</td><td>Prevents backflow from pulmonary artery → RV</td></tr>
+          <tr><td><b>Mitral valve</b></td><td>Between LA and LV</td><td>Bicuspid / Left AV valve</td><td>Prevents backflow from LV → LA; has 2 cusps</td></tr>
+          <tr><td><b>Aortic valve</b></td><td>Between LV and aorta</td><td>Aortic semilunar valve</td><td>Prevents backflow from aorta → LV</td></tr>
+        </table>
+      </div>
+      <div class="rule-box">
+        <div class="rl-label">Heart Sounds — "Lub-Dub"</div>
+        <p><strong>First heart sound (S1) — "Lub"</strong>: caused by closure of the <strong>AV valves</strong> (tricuspid + mitral) at the start of ventricular contraction (systole). <strong>Second heart sound (S2) — "Dub"</strong>: caused by closure of the <strong>semilunar valves</strong> (aortic + pulmonary) at the end of ventricular contraction (beginning of diastole). <strong>Heart murmur</strong> = abnormal sound caused by faulty valve or turbulent blood flow.</p>
+      </div>
+      <div class="trap-box">
+        <div class="tr-label">⚑ Exam Traps — Valves</div>
+        <ul>
+          <li><strong>Mitral (Bicuspid)</strong> = 2 cusps; <strong>Tricuspid</strong> = 3 cusps. Mitral is on the LEFT (Mitral → M → Memory: M for Mitral and L for Left).</li>
+          <li><strong>Mitral valve prolapse</strong> and <strong>rheumatic fever</strong> commonly damage the mitral valve — most tested cardiac valve pathology.</li>
+          <li>"Lub" = AV valve closure. "Dub" = semilunar valve closure. This order is frequently tested.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="sec-label">Section 2 — Double Circulation</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E8EEF8">🔄</div>
+      <div style="flex:1">
+        <div class="c-title">Pulmonary &amp; Systemic Circulation</div>
+        <div class="c-sub">The two complete loops of blood flow</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>In <strong>double circulation</strong>, blood passes through the heart <strong>twice</strong> in one complete circuit — once through the pulmonary loop and once through the systemic loop. This keeps oxygenated and deoxygenated blood completely separate.</p>
+
+      <div class="sec-label" style="margin-top:14px;font-size:9px">Pulmonary Circulation — Right side of heart → Lungs → Left side</div>
+      <div class="journey">
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot alt">1</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Right Ventricle</div>
+            <div class="j-desc">Pumps <em>deoxygenated blood</em> into the <strong>pulmonary artery</strong> (only artery carrying deoxygenated blood — exam trap!).</div>
+          </div>
+        </div>
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot alt">2</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Lungs (Gas Exchange)</div>
+            <div class="j-desc">CO₂ released; O₂ absorbed → blood becomes <em>oxygenated</em> in pulmonary capillaries.</div>
+          </div>
+        </div>
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot alt">3</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Left Atrium</div>
+            <div class="j-desc"><strong>Pulmonary veins</strong> (4 veins) return oxygenated blood to the left atrium (only veins carrying oxygenated blood — exam trap!).</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="sec-label" style="margin-top:4px;font-size:9px">Systemic Circulation — Left side of heart → Body → Right side</div>
+      <div class="journey">
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">4</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Left Ventricle</div>
+            <div class="j-desc">Pumps <em>oxygenated blood</em> into the <strong>aorta</strong> (largest artery) at high pressure to supply entire body.</div>
+          </div>
+        </div>
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">5</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Body Tissues</div>
+            <div class="j-desc">O₂ delivered to tissues; CO₂ and waste collected. Blood becomes <em>deoxygenated</em> in tissue capillaries.</div>
+          </div>
+        </div>
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">6</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Right Atrium</div>
+            <div class="j-desc"><strong>Superior vena cava</strong> (upper body) + <strong>inferior vena cava</strong> (lower body) drain deoxygenated blood back into right atrium.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ The Most Tested Circulatory Traps</div>
+        <ul>
+          <li><strong>Pulmonary artery carries deoxygenated blood</strong> — arteries carry blood AWAY from the heart, not necessarily oxygenated blood.</li>
+          <li><strong>Pulmonary veins carry oxygenated blood</strong> — veins carry blood TOWARD the heart, not necessarily deoxygenated blood.</li>
+          <li>The <strong>portal vein</strong> is unique — it carries nutrient-rich blood from the intestines to the liver (not directly back to the heart). It is a vein between two capillary beds.</li>
+          <li>The <strong>hepatic artery</strong> supplies oxygenated blood to the liver; the <strong>hepatic portal vein</strong> brings nutrient-rich blood from gut.</li>
+        </ul>
+      </div>
+
+      <div class="fact-box">
+        <div class="fb-label">Types of Circulation in Animals</div>
+        <ul>
+          <li><strong>Open circulation</strong> — blood flows into open spaces (haemocoel), not enclosed vessels. Examples: insects, crustaceans, molluscs (except cephalopods)</li>
+          <li><strong>Closed circulation</strong> — blood always remains in blood vessels. Examples: all vertebrates, earthworms, cephalopods (octopus, squid)</li>
+          <li><strong>Single circulation</strong> — blood passes through heart once per circuit. Example: fish (1 atrium + 1 ventricle)</li>
+          <li><strong>Double circulation</strong> — blood passes through heart twice. Example: all mammals, birds (complete double); amphibians and most reptiles (incomplete double — 3 chambers)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="sec-label">Section 3 — Cardiac Cycle &amp; ECG</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#FAE8EE">📈</div>
+      <div style="flex:1">
+        <div class="c-title">Cardiac Cycle — Systole &amp; Diastole</div>
+        <div class="c-sub">One complete heartbeat — timings and pressures</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>The <strong>cardiac cycle</strong> is one complete sequence of contraction and relaxation of the heart. At a normal heart rate of 72 beats/min, each cycle lasts about <strong>0.8 seconds</strong>.</p>
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Phase</th><th>Event</th><th>Duration</th><th>Valves</th></tr>
+          <tr><td><b>Atrial Systole</b></td><td>Atria contract → blood pushed into ventricles</td><td>0.1 sec</td><td>AV valves open; semilunar closed</td></tr>
+          <tr><td><b>Ventricular Systole</b></td><td>Ventricles contract → blood ejected into arteries</td><td>0.3 sec</td><td>AV valves close (S1 — Lub); semilunar open</td></tr>
+          <tr><td><b>Joint Diastole</b></td><td>All chambers relax; heart fills passively</td><td>0.4 sec</td><td>Semilunar valves close (S2 — Dub); AV valves open</td></tr>
+        </table>
+      </div>
+      <div class="fact-box">
+        <div class="fb-label">Key Cardiac Numbers</div>
+        <ul>
+          <li><strong>Normal heart rate</strong>: 70–72 beats per minute</li>
+          <li><strong>Stroke Volume (SV)</strong>: volume of blood ejected per beat ≈ 70 mL</li>
+          <li><strong>Cardiac Output (CO)</strong> = Heart Rate × Stroke Volume = 72 × 70 ≈ <strong>5 litres/min</strong></li>
+          <li><strong>Blood pressure (normal)</strong>: systolic 120 mmHg / diastolic 80 mmHg (written 120/80)</li>
+          <li><strong>Systolic pressure</strong>: peak pressure during ventricular contraction</li>
+          <li><strong>Diastolic pressure</strong>: lowest pressure during ventricular relaxation</li>
+          <li><strong>Pulse pressure</strong> = Systolic − Diastolic = 120 − 80 = 40 mmHg</li>
+        </ul>
+      </div>
+      <div class="rule-box">
+        <div class="rl-label">ECG — Electrocardiogram Waves</div>
+        <p>An ECG records the electrical activity of the heart. Key waves: <strong>P wave</strong> — atrial depolarisation (atria contract). <strong>QRS complex</strong> — ventricular depolarisation (ventricles contract — systole). <strong>T wave</strong> — ventricular repolarisation (ventricles relax — diastole). <strong>PR interval</strong> — AV node conduction time. A normal ECG confirms proper rhythm, rate and conduction.</p>
+      </div>
+      <div class="trap-box">
+        <div class="tr-label">⚑ Exam Trap</div>
+        <p>The <strong>QRS complex</strong> represents ventricular depolarisation (contraction), NOT atrial. Atrial repolarisation is hidden within the QRS complex and not seen separately. The T wave = ventricular repolarisation (relaxation). Getting P, QRS and T wave events confused is one of the most common exam errors.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E8EEF8">⚡</div>
+      <div style="flex:1">
+        <div class="c-title">Conduction System of the Heart</div>
+        <div class="c-sub">SA node, AV node, Bundle of His and Purkinje fibres</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>The heart generates its own electrical impulse — it is <strong>myogenic</strong> (the impulse originates in the heart muscle itself, not from nerves).</p>
+      <div class="journey">
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">1</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">SA Node — Sinoatrial Node</div>
+            <div class="j-desc">Located in the wall of the <strong>right atrium</strong>. The <em>"pacemaker"</em> of the heart — generates 70–75 impulses/min. Sets the normal heart rhythm (sinus rhythm). Impulse spreads across both atria → atrial contraction.</div>
+          </div>
+        </div>
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">2</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">AV Node — Atrioventricular Node</div>
+            <div class="j-desc">Located at the <strong>junction of atria and ventricles</strong>. Receives impulse from SA node; <em>delays it by ~0.1 sec</em> to allow atria to finish contracting before ventricles fire.</div>
+          </div>
+        </div>
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">3</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Bundle of His &amp; Bundle Branches</div>
+            <div class="j-desc">Impulse travels down the <strong>interventricular septum</strong> via the Bundle of His (AV bundle), splits into left and right bundle branches.</div>
+          </div>
+        </div>
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">4</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Purkinje Fibres</div>
+            <div class="j-desc">Rapidly conduct impulse throughout the <strong>ventricular myocardium</strong> → ventricles contract from apex upward, efficiently ejecting blood into arteries.</div>
+          </div>
+        </div>
+      </div>
+      <div class="trap-box">
+        <div class="tr-label">⚑ Exam Trap</div>
+        <p>The heart is <strong>myogenic</strong> — it can beat without any nervous input (proven by isolated heart preparations). The SA node spontaneously generates electrical impulses. An <strong>artificial pacemaker</strong> is implanted when the SA node fails. If only the AV node functions, the heart beats at ~40–50 bpm (slower than SA node's 70–75 bpm).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="sec-label">Section 4 — Blood Vessels</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E8EEF8">🩸</div>
+      <div style="flex:1">
+        <div class="c-title">Arteries, Veins &amp; Capillaries</div>
+        <div class="c-sub">Structure, function and key differences</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Feature</th><th>Arteries</th><th>Veins</th><th>Capillaries</th></tr>
+          <tr><td>Direction</td><td>Away from heart</td><td>Toward heart</td><td>Connect arterioles to venules</td></tr>
+          <tr><td>Blood type (usually)</td><td>Oxygenated</td><td>Deoxygenated</td><td>Both (exchange zone)</td></tr>
+          <tr><td>Wall thickness</td><td><b>Thick</b> — 3 layers (tunica intima, media, adventitia); muscular</td><td><b>Thin</b> — less muscle/elastin</td><td><b>One cell thick</b> — only tunica intima</td></tr>
+          <tr><td>Valves</td><td>None (except aortic &amp; pulmonary at heart)</td><td><b>Present</b> — prevent backflow</td><td>None</td></tr>
+          <tr><td>Blood pressure</td><td>High</td><td>Low</td><td>Very low</td></tr>
+          <tr><td>Lumen</td><td>Narrow, round</td><td>Wide, irregular</td><td>Very narrow (1 RBC wide)</td></tr>
+          <tr><td>Function</td><td>Transport oxygenated blood under pressure</td><td>Return deoxygenated blood; blood reservoir</td><td>Site of substance exchange</td></tr>
+        </table>
+      </div>
+      <div class="eg-box">
+        <div class="eg-label">Named Major Blood Vessels to Know</div>
+        <ul>
+          <li><strong>Aorta</strong> — largest artery; carries oxygenated blood from left ventricle to body</li>
+          <li><strong>Pulmonary artery</strong> — carries deoxygenated blood from right ventricle to lungs</li>
+          <li><strong>Pulmonary veins (×4)</strong> — carry oxygenated blood from lungs to left atrium</li>
+          <li><strong>Superior vena cava</strong> — drains upper body (head, arms) into right atrium</li>
+          <li><strong>Inferior vena cava</strong> — drains lower body (legs, abdomen) into right atrium</li>
+          <li><strong>Coronary arteries</strong> — supply heart muscle with oxygenated blood (blockage = heart attack)</li>
+          <li><strong>Hepatic portal vein</strong> — carries nutrient-rich blood from intestines to liver</li>
+          <li><strong>Renal artery/vein</strong> — supply and drain the kidneys</li>
+        </ul>
+      </div>
+      <div class="trap-box">
+        <div class="tr-label">⚑ Exam Trap — Veins Have Valves, Arteries Don't</div>
+        <p>Veins carry blood at <strong>low pressure</strong> against gravity (from legs to heart). Their <strong>valves</strong> prevent backflow. When these valves fail → <strong>varicose veins</strong>. Arteries have no valves (except at the heart outlet) because their high pressure keeps blood moving forward. Capillaries have no valves — they are the site of exchange.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5 -->
+  <div class="sec-label">Section 5 — Blood: Composition &amp; Functions</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#FAE8EE">🩺</div>
+      <div style="flex:1">
+        <div class="c-title">Blood — Components &amp; Functions</div>
+        <div class="c-sub">Plasma, RBCs, WBCs and Platelets</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>Blood is a <strong>fluid connective tissue</strong> (≈5–6 litres in adults) consisting of a liquid <strong>plasma</strong> (55%) and formed elements — <strong>RBCs, WBCs and Platelets</strong> (45%). The ratio of RBC volume to total blood volume is the <strong>haematocrit</strong> (normal ≈ 45%).</p>
+
+      <div class="stat-band">
+        <div class="stat-cell"><div class="stat-val">5–6 L</div><div class="stat-lbl">Total blood volume</div></div>
+        <div class="stat-cell"><div class="stat-val">55%</div><div class="stat-lbl">Plasma</div></div>
+        <div class="stat-cell"><div class="stat-val">45%</div><div class="stat-lbl">Formed elements</div></div>
+        <div class="stat-cell"><div class="stat-val">7.35–7.45</div><div class="stat-lbl">Normal blood pH</div></div>
+      </div>
+
+      <div class="org-grid">
+        <div class="org-card">
+          <div class="org-name">RBC (Erythrocytes) <span class="org-nick">Red cells</span></div>
+          <p>Most numerous (~5 million/mm³). <strong>Biconcave disc</strong>, no nucleus (in mature human RBCs), no mitochondria. Contains <strong>haemoglobin</strong>. Life span: <strong>120 days</strong>. Made in red bone marrow. Destroyed in spleen ("graveyard of RBCs").</p>
+        </div>
+        <div class="org-card">
+          <div class="org-name">WBC (Leukocytes) <span class="org-nick">White cells</span></div>
+          <p>~5,000–10,000/mm³. Nucleated. Key defenders. Types: <strong>Neutrophils</strong> (most common, 60–70%), Lymphocytes (20–25%), Monocytes, Eosinophils, Basophils. Life span: days to years.</p>
+        </div>
+        <div class="org-card">
+          <div class="org-name">Platelets (Thrombocytes) <span class="org-nick">Clotting</span></div>
+          <p>1.5–4 lakh/mm³. Smallest formed elements. No nucleus. Fragments of megakaryocytes. Essential for <strong>blood clotting (haemostasis)</strong>. Life span: 5–10 days.</p>
+        </div>
+        <div class="org-card">
+          <div class="org-name">Plasma <span class="org-nick">55% of blood</span></div>
+          <p>Straw-coloured liquid. 90% water. Contains: proteins (albumin, globulins, fibrinogen), glucose, hormones, ions, urea, CO₂. <strong>Serum</strong> = plasma minus clotting factors.</p>
+        </div>
+      </div>
+
+      <div class="fact-box">
+        <div class="fb-label">Blood Clotting — Key Steps</div>
+        <ul>
+          <li>Injury → platelet plug forms at wound site</li>
+          <li>Clotting cascade activated → <strong>prothrombin → thrombin</strong> (enzyme; needs Ca²⁺ and Vitamin K)</li>
+          <li><strong>Fibrinogen (soluble) → Fibrin (insoluble threads)</strong> — forms the clot mesh trapping RBCs</li>
+          <li><strong>Haemophilia</strong> — genetic disorder; deficiency of clotting factor VIII (Haemophilia A) or IX (Haemophilia B); blood fails to clot normally</li>
+          <li><strong>Vitamin K</strong> is essential for synthesis of clotting factors (II, VII, IX, X)</li>
+        </ul>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Exam Traps — Blood</div>
+        <ul>
+          <li>Mature human RBCs have <strong>NO nucleus and NO mitochondria</strong> — they produce energy by anaerobic glycolysis only.</li>
+          <li><strong>Serum = plasma minus fibrinogen</strong> (and other clotting factors). Serum is what's left after blood has clotted.</li>
+          <li>RBCs live <strong>120 days</strong>, not 30 or 60 days. They are destroyed in the <strong>spleen</strong> — the spleen is the "graveyard of RBCs."</li>
+          <li>Platelets are not complete cells — they are <strong>fragments of megakaryocytes</strong> (large bone marrow cells).</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6 -->
+  <div class="sec-label">Section 6 — Blood Groups &amp; Transfusion</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#F5EAF3">🅰️</div>
+      <div style="flex:1">
+        <div class="c-title">ABO Blood Group System</div>
+        <div class="c-sub">Antigens, antibodies and transfusion compatibility</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>Blood groups are determined by the presence of <strong>antigens (agglutinogens)</strong> on the surface of RBCs and <strong>antibodies (agglutinins)</strong> in the plasma. The ABO system was discovered by <strong>Karl Landsteiner</strong> (Nobel Prize, 1930).</p>
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Blood Group</th><th>Antigen on RBC</th><th>Antibody in Plasma</th><th>Can Donate To</th><th>Can Receive From</th></tr>
+          <tr><td><b>A</b></td><td>A antigen</td><td>Anti-B</td><td>A, AB</td><td>A, O</td></tr>
+          <tr><td><b>B</b></td><td>B antigen</td><td>Anti-A</td><td>B, AB</td><td>B, O</td></tr>
+          <tr><td><b>AB</b></td><td>Both A and B</td><td>Neither (no antibodies)</td><td><b>AB only</b></td><td><b>A, B, AB, O (Universal Recipient)</b></td></tr>
+          <tr><td><b>O</b></td><td>Neither</td><td>Both Anti-A and Anti-B</td><td><b>A, B, AB, O (Universal Donor)</b></td><td><b>O only</b></td></tr>
+        </table>
+      </div>
+      <div class="purple-box">
+        <div class="pl-label">Rh Factor — Rhesus Blood Group</div>
+        <ul>
+          <li><strong>Rh factor</strong> (Rhesus antigen, mainly Rh D) — discovered in rhesus monkeys by Landsteiner &amp; Wiener (1940)</li>
+          <li><strong>Rh positive (Rh+)</strong>: RBCs have Rh antigen (~80–85% of people in India)</li>
+          <li><strong>Rh negative (Rh−)</strong>: RBCs lack Rh antigen; no naturally occurring anti-Rh antibodies (unlike ABO)</li>
+          <li><strong>Erythroblastosis foetalis (Haemolytic disease of newborn)</strong>: occurs when Rh− mother carries Rh+ foetus. Mother produces anti-Rh antibodies after first pregnancy. In second Rh+ pregnancy, maternal antibodies cross placenta and destroy foetal RBCs → life-threatening anaemia in foetus.</li>
+          <li>Prevention: Anti-D immunoglobulin (Rh immunoglobulin) given to Rh− mother within 72 hours of delivery of Rh+ baby.</li>
+        </ul>
+      </div>
+      <div class="trap-box">
+        <div class="tr-label">⚑ Exam Traps — Blood Groups</div>
+        <ul>
+          <li><strong>Group O</strong> = universal donor (no antigens to react). <strong>Group AB</strong> = universal recipient (no antibodies to react). These roles are for packed RBC transfusions; whole blood transfusion compatibility still follows ABO rules.</li>
+          <li><strong>ABO antigens</strong> are inherited; determined by a single gene with three alleles (Iᴬ, Iᴮ, i). Iᴬ and Iᴮ are codominant; i is recessive.</li>
+          <li>Anti-Rh antibodies are <strong>NOT naturally present</strong> — they develop only after Rh− person is exposed to Rh+ blood (transfusion or pregnancy). This is why the first incompatible pregnancy is usually safe; the second is dangerous.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 7 -->
+  <div class="sec-label">Section 7 — Lymphatic System &amp; Cardiovascular Disorders</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E6F4EC">🌿</div>
+      <div style="flex:1">
+        <div class="c-title">Lymphatic System</div>
+        <div class="c-sub">Lymph, lymph nodes and immune drainage</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>The <strong>lymphatic system</strong> is a one-way drainage network that collects excess tissue fluid (interstitial fluid) and returns it to the bloodstream. The fluid within lymph vessels is called <strong>lymph</strong>.</p>
+      <div class="fact-box">
+        <div class="fb-label">Lymphatic System — Key Facts</div>
+        <ul>
+          <li>Lymph is similar to plasma but has <strong>no RBCs and fewer proteins</strong></li>
+          <li>Lymph flows in one direction — toward the heart — via the <strong>thoracic duct</strong> (largest lymph vessel; drains most of body) and right lymphatic duct</li>
+          <li><strong>Lymph nodes</strong> — bean-shaped organs along lymph vessels; contain lymphocytes; filter lymph and trap pathogens → immune response</li>
+          <li><strong>Lacteals</strong> — lymph capillaries in intestinal villi; absorb dietary fats as <strong>chylomicrons</strong></li>
+          <li><strong>Spleen</strong> — largest lymphoid organ; filters blood, destroys old RBCs, stores platelets, produces lymphocytes</li>
+          <li><strong>Thymus</strong> — primary lymphoid organ; site of T-lymphocyte maturation; most active in childhood, involutes with age</li>
+          <li><strong>Oedema</strong> — excess fluid accumulation in tissues when lymphatic drainage is blocked (e.g., filariasis/elephantiasis caused by Wuchereria bancrofti)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#FAEAEA">🩺</div>
+      <div style="flex:1">
+        <div class="c-title">Cardiovascular Disorders</div>
+        <div class="c-sub">High-frequency disease facts for MCQs</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Condition</th><th>Cause / Mechanism</th><th>Key Exam Point</th></tr>
+          <tr><td><b>Hypertension</b></td><td>Persistently elevated blood pressure (≥140/90 mmHg)</td><td>Silent killer; risk factor for stroke, MI, kidney failure; primary (essential) has no single cause</td></tr>
+          <tr><td><b>Myocardial Infarction (MI) / Heart Attack</b></td><td>Blockage of coronary artery → heart muscle death</td><td>Caused by atherosclerosis + thrombus; ECG shows ST elevation; treated with thrombolytics or stenting</td></tr>
+          <tr><td><b>Atherosclerosis</b></td><td>Fatty plaques (cholesterol) deposit in arterial walls → narrowing</td><td>Risk factors: smoking, hypertension, diabetes, obesity, high LDL ("bad cholesterol")</td></tr>
+          <tr><td><b>Angina Pectoris</b></td><td>Chest pain due to inadequate blood supply to heart (ischaemia); temporary</td><td>Pain on exertion, relieved by rest; different from MI (no permanent damage)</td></tr>
+          <tr><td><b>Cardiac Arrest</b></td><td>Sudden complete cessation of effective heart pumping</td><td>Different from heart attack; treated with CPR and defibrillation</td></tr>
+          <tr><td><b>Rheumatic Heart Disease</b></td><td>Rheumatic fever (Group A Streptococcus) damages heart valves</td><td>Most commonly damages <strong>mitral valve</strong>; preventable with penicillin</td></tr>
+          <tr><td><b>Anaemia</b></td><td>Reduced Hb or RBC count → reduced O₂ carrying capacity</td><td>Iron deficiency = most common; Sickle cell, Pernicious (B12), Aplastic types also tested</td></tr>
+          <tr><td><b>Haemophilia</b></td><td>X-linked recessive; deficiency of clotting factor VIII or IX</td><td>Affects mostly males; females are carriers; bleeds don't stop normally</td></tr>
+        </table>
+      </div>
+      <div class="rule-box">
+        <div class="rl-label">Sickle Cell Anaemia — Frequently Tested</div>
+        <p><strong>Sickle cell anaemia</strong> is a genetic disorder caused by a <strong>point mutation in the beta-globin gene</strong> of haemoglobin. Normal HbA is replaced by HbS. Under low oxygen, HbS polymerises → RBCs become rigid sickle (crescent) shapes → block capillaries, cause pain crises, haemolytic anaemia. <strong>Heterozygotes (HbA/HbS)</strong> have sickle cell TRAIT — they are resistant to malaria, explaining why the mutation is common in malaria-endemic regions.</p>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /theory -->
+
+<!-- ═══════════════════════════════════════ QUICK REF ════════════ -->
+<div class="pane" id="quickref">
+  <div class="ref-grid">
+
+    <div class="ref-card">
+      <div class="ref-card-title">Heart — Structure Essentials</div>
+      <ul>
+        <li>4 chambers: RA, RV (right — deoxygenated) · LA, LV (left — oxygenated)</li>
+        <li>LV has thickest wall — pumps to entire body via aorta</li>
+        <li>Layers: <b>Pericardium</b> (outer sac) → <b>Myocardium</b> (muscle) → <b>Endocardium</b> (inner lining)</li>
+        <li>Tricuspid (3 cusps, right) · Mitral/Bicuspid (2 cusps, left)</li>
+        <li>S1 "Lub" = AV valves close · S2 "Dub" = semilunar valves close</li>
+        <li>SA node = pacemaker (right atrium); heart is <em>myogenic</em></li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Circulation — Must-Know Facts</div>
+      <ul>
+        <li><b>Pulmonary artery</b> — deoxygenated blood (RV → lungs) · artery, NOT oxygenated!</li>
+        <li><b>Pulmonary veins (×4)</b> — oxygenated blood (lungs → LA) · vein, NOT deoxygenated!</li>
+        <li>Aorta = largest artery · Vena cava (SVC + IVC) drain into RA</li>
+        <li>Single circulation: fish · Double: mammals, birds · Incomplete double: amphibians</li>
+        <li>Open circulation: insects · Closed: all vertebrates, earthworm</li>
+        <li>Portal vein: intestine → liver (nutrient-rich, not heart)</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Cardiac Cycle &amp; ECG</div>
+      <ul>
+        <li>Cardiac cycle duration: <em>0.8 sec</em> (72 beats/min)</li>
+        <li>Cardiac Output = HR × SV = 72 × 70 mL ≈ <em>5 L/min</em></li>
+        <li>Normal BP: <em>120/80 mmHg</em> · Hypertension: ≥140/90</li>
+        <li><b>P wave</b> = atrial depolarisation · <b>QRS</b> = ventricular depolarisation (systole)</li>
+        <li><b>T wave</b> = ventricular repolarisation (diastole)</li>
+        <li>SA node → AV node (0.1 sec delay) → Bundle of His → Purkinje fibres</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Blood — Composition</div>
+      <ul>
+        <li>RBC: biconcave, no nucleus, no mitochondria · life span <em>120 days</em> · destroyed in spleen</li>
+        <li>WBC: nucleated · Neutrophils most common (60–70%)</li>
+        <li>Platelets: cell fragments of megakaryocytes · clotting</li>
+        <li>Serum = plasma <em>minus</em> clotting factors (fibrinogen)</li>
+        <li>Clotting: Prothrombin → Thrombin → Fibrinogen → Fibrin (needs Vit K, Ca²⁺)</li>
+        <li>Haemophilia A = Factor VIII deficiency · X-linked recessive</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Blood Groups</div>
+      <ul>
+        <li>Discovered by <em>Karl Landsteiner</em> (Nobel 1930)</li>
+        <li><b>Group O</b> = Universal Donor (no antigens) · <b>Group AB</b> = Universal Recipient (no antibodies)</li>
+        <li>Rh factor — Rh+ (~85% Indians) · Rh− lacks Rh antigen</li>
+        <li><b>Erythroblastosis foetalis</b>: Rh− mother + Rh+ foetus (2nd pregnancy risk)</li>
+        <li>Prevention: Anti-D immunoglobulin within 72 hrs of delivery</li>
+        <li>ABO genes: Iᴬ, Iᴮ (codominant) · i (recessive)</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Disorders — Key Facts</div>
+      <ul>
+        <li><b>MI (Heart attack)</b> — coronary artery blockage; ST elevation on ECG</li>
+        <li><b>Angina</b> — chest pain on exertion; reversible ischaemia; no cell death</li>
+        <li><b>Atherosclerosis</b> — fatty plaques; ↑LDL risk</li>
+        <li><b>Rheumatic fever</b> → mitral valve most affected</li>
+        <li><b>Sickle cell</b> — beta-globin mutation; HbS; malaria resistance in carriers</li>
+        <li><b>Filariasis/Elephantiasis</b> → lymph blockage → oedema (Wuchereria bancrofti)</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════ QUIZ ════════════════ -->
+<div class="pane" id="quiz">
+
+  <div class="quiz-stats">
+    <div class="qs-cell"><div class="qs-val" id="s-att">0</div><div class="qs-lbl">Attempted</div></div>
+    <div class="qs-cell"><div class="qs-val g" id="s-cor">0</div><div class="qs-lbl">Correct</div></div>
+    <div class="qs-cell"><div class="qs-val r" id="s-wrg">0</div><div class="qs-lbl">Wrong</div></div>
+    <div class="qs-cell"><div class="qs-val a" id="s-tot">15</div><div class="qs-lbl">Total</div></div>
+  </div>
+
+  <div class="prog-wrap">
+    <div class="prog-label" id="prog-label">0 of 15 answered</div>
+    <div class="prog-bar"><div class="prog-fill" id="prog"></div></div>
+  </div>
+
+  <div class="quiz-actions">
+    <button class="btn btn-primary" onclick="submitAll()">Submit All &amp; Check</button>
+    <button class="btn btn-ghost" onclick="resetQuiz()">↺ Reset Quiz</button>
+  </div>
+
+  <div id="results"></div>
+  <div id="q-area"></div>
+
+</div>
+</div><!-- /page -->
+
+<script>
+const QS = [
+
+{d:'EASY',e:'NDA 2023',
+q:'Which chamber of the human heart has the thickest muscular wall?',
+opts:['Right atrium','Right ventricle','Left atrium','Left ventricle'],ans:3,
+rule:'Left ventricle = thickest wall — must pump blood to entire body via aorta',
+exp:'The left ventricle has the thickest muscular wall because it must generate enough pressure to propel oxygenated blood through the aorta to the entire body — a much longer and higher-resistance circuit than the pulmonary circuit. The right ventricle only pumps to the nearby lungs (low resistance, low pressure), so its wall is moderately thick. The atria have thin walls because they only pump blood into the ventricles below them, requiring little force.'},
+
+{d:'EASY',e:'CDS 2022',
+q:'The "pacemaker" of the human heart is the:',
+opts:['AV node','Bundle of His','SA node (Sinoatrial node)','Purkinje fibres'],ans:2,
+rule:'SA node = natural pacemaker; located in right atrium; generates 70–75 impulses/min',
+exp:'The Sinoatrial (SA) node is called the natural pacemaker of the heart. It is located in the wall of the right atrium and spontaneously generates electrical impulses at a rate of 70–75 per minute, setting the normal heart rhythm (sinus rhythm). The AV node receives this impulse and delays it to allow the atria to complete contraction before the ventricles fire. The Bundle of His and Purkinje fibres conduct the impulse through the ventricles. The heart is myogenic — it generates its own rhythm without needing nerve input.'},
+
+{d:'EASY',e:'AFCAT 2023',
+q:'Which blood group is known as the "universal donor"?',
+opts:['Blood group A','Blood group B','Blood group AB','Blood group O'],ans:3,
+rule:'Group O = universal donor (no A or B antigens on RBCs; no risk of agglutination)',
+exp:'Blood group O is the universal donor for packed red blood cell transfusions because O-type RBCs have NO A or B antigens on their surface. When transfused into any recipient (A, B, AB, or O), there are no antigens for the recipient\'s antibodies to attack, preventing a transfusion reaction. Blood group AB is the universal RECIPIENT because AB individuals have no anti-A or anti-B antibodies in their plasma, so they can receive blood from any ABO group. Discovered by Karl Landsteiner who received the Nobel Prize in 1930.'},
+
+{d:'EASY',e:'CDS 2023',
+q:'The pulmonary artery carries:',
+opts:[
+  'Oxygenated blood from the lungs to the left atrium',
+  'Deoxygenated blood from the right ventricle to the lungs',
+  'Oxygenated blood from the left ventricle to the body',
+  'Deoxygenated blood from the body to the right atrium'
+],ans:1,
+rule:'Pulmonary artery: deoxygenated blood · RV → lungs · Only artery carrying deoxygenated blood',
+exp:'The pulmonary artery is the only artery in the body that carries DEOXYGENATED blood. It carries blood from the right ventricle to the lungs for oxygenation. This is a classic exam trap — arteries are defined by carrying blood AWAY from the heart, not by carrying oxygenated blood. Similarly, the pulmonary VEINS carry oxygenated blood back from the lungs to the left atrium — the only veins carrying oxygenated blood. All other arteries carry oxygenated blood; all other veins carry deoxygenated blood.'},
+
+{d:'EASY',e:'NDA 2022',
+q:'The life span of a red blood cell (RBC) in the human body is approximately:',
+opts:['30 days','60 days','120 days','365 days'],ans:2,
+rule:'RBC life span = 120 days; destroyed by macrophages in the spleen',
+exp:'Human red blood cells (erythrocytes) have a life span of approximately 120 days. After 120 days, they become fragile and are recognised and destroyed by macrophages primarily in the SPLEEN (which is therefore called the "graveyard of RBCs"). The haemoglobin from destroyed RBCs is broken down — the iron is recycled back to the bone marrow for new RBC production, and the haem portion is converted to bilirubin (a bile pigment). New RBCs are continuously produced in red bone marrow (haematopoiesis).'},
+
+{d:'MEDIUM',e:'CDS 2023',
+q:'During the cardiac cycle, the first heart sound (S1 — "Lub") is produced by the closure of:',
+opts:[
+  'Aortic and pulmonary (semilunar) valves',
+  'Mitral and tricuspid (AV) valves',
+  'Mitral and aortic valves',
+  'Tricuspid and pulmonary valves'
+],ans:1,
+rule:'S1 "Lub" = AV valve closure (mitral + tricuspid) at start of ventricular systole',
+exp:'The first heart sound (S1, "Lub") is produced by the simultaneous closure of BOTH AV valves — the mitral valve (left side) and the tricuspid valve (right side) — at the beginning of ventricular systole (contraction). This prevents backflow of blood from ventricles into atria. The second heart sound (S2, "Dub") is produced by closure of the SEMILUNAR valves — the aortic and pulmonary valves — at the end of ventricular systole. A simple memory: "Lub" = Left and Right AV valves; "Dub" = Done — semilunar valves close when the ventricles are done contracting.'},
+
+{d:'MEDIUM',e:'AFCAT 2022',
+q:'In the ABO blood group system, which combination correctly describes blood group AB?',
+opts:[
+  'Both A and B antigens on RBCs; both anti-A and anti-B antibodies in plasma',
+  'Neither A nor B antigens on RBCs; both anti-A and anti-B antibodies in plasma',
+  'Both A and B antigens on RBCs; no antibodies in plasma',
+  'Neither antigen on RBCs; no antibodies in plasma'
+],ans:2,
+rule:'Group AB: both A+B antigens on RBCs · NO antibodies in plasma → universal recipient',
+exp:'Blood group AB individuals have BOTH A and B antigens on the surface of their RBCs. Because the body never makes antibodies against its own antigens, AB individuals have NEITHER anti-A nor anti-B antibodies in their plasma. This makes them the universal recipient — they can receive blood from any ABO group because they have no antibodies to react against donated blood. Blood group O has NEITHER antigen but BOTH antibodies. Group A has A antigen and anti-B antibody. Group B has B antigen and anti-A antibody.'},
+
+{d:'MEDIUM',e:'NDA 2023',
+q:'Which of the following is correct regarding the Rh factor and erythroblastosis foetalis?',
+opts:[
+  'It occurs when an Rh+ mother carries an Rh− foetus in the first pregnancy',
+  'It occurs when an Rh− mother carries an Rh+ foetus, typically in the second or later pregnancy',
+  'It occurs in every pregnancy of an Rh− mother regardless of the father',
+  'Rh− individuals naturally have anti-Rh antibodies before any exposure'
+],ans:1,
+rule:'Erythroblastosis foetalis: Rh− mother + Rh+ foetus → dangerous in 2nd pregnancy (antibodies formed in 1st)',
+exp:'Erythroblastosis foetalis (haemolytic disease of the newborn) occurs when an Rh− mother is pregnant with an Rh+ foetus. During the FIRST pregnancy or delivery, small amounts of foetal Rh+ RBCs enter the mother\'s blood, stimulating her immune system to produce anti-Rh antibodies. The first baby is usually unaffected. In a SECOND Rh+ pregnancy, the mother\'s anti-Rh antibodies (IgG type, which cross the placenta) attack the foetal RBCs, causing severe haemolytic anaemia. Rh− individuals do NOT have natural anti-Rh antibodies; they develop them only after sensitisation. Prevention: Anti-D immunoglobulin within 72 hours of delivery.'},
+
+{d:'MEDIUM',e:'CDS 2024',
+q:'Cardiac output (CO) is defined as the volume of blood pumped by the heart per minute. For a person with a heart rate of 72 beats/min and stroke volume of 70 mL, the cardiac output is:',
+opts:['72 mL/min','5040 mL/min (approximately 5 L/min)','700 mL/min','1440 mL/min'],ans:1,
+rule:'Cardiac Output = Heart Rate × Stroke Volume = 72 × 70 = 5040 mL/min ≈ 5 L/min',
+exp:'Cardiac Output (CO) = Heart Rate (HR) × Stroke Volume (SV). With HR = 72 beats/min and SV = 70 mL/beat: CO = 72 × 70 = 5,040 mL/min ≈ 5 litres/min. This means the heart pumps the entire blood volume (≈5 litres) every minute. During intense exercise, CO can increase to 20–25 L/min (increase in both HR and SV). Stroke volume is the volume of blood ejected by one ventricle in one beat. This formula and its normal value are directly tested in CDS/NDA exams.'},
+
+{d:'MEDIUM',e:'AFCAT 2024',
+q:'In veins, backflow of blood is prevented by:',
+opts:[
+  'Thick muscular walls generating high pressure',
+  'Valves (semi-lunar folds) inside the vein lumen',
+  'Peristaltic contractions of the vein wall',
+  'The presence of elastic fibres in tunica media'
+],ans:1,
+rule:'Veins have valves that prevent backflow; especially important in leg veins against gravity',
+exp:'Veins carry blood at LOW pressure, often against gravity (especially from the legs). To prevent backflow, veins have VALVES — semi-lunar folds of the tunica intima that project into the lumen. When blood flows toward the heart, the valves are open (pushed flat against the wall). If blood tries to flow backward, it fills the pocket of the valve cusps, closing them. When these valves fail or become incompetent (e.g., due to prolonged standing), blood pools in the legs causing VARICOSE VEINS. Arteries do not need internal valves because their high pressure keeps blood moving forward.'},
+
+{d:'MEDIUM',e:'NDA 2024',
+q:'On an ECG, the QRS complex represents:',
+opts:[
+  'Atrial depolarisation (atria contracting)',
+  'Ventricular repolarisation (ventricles relaxing)',
+  'Ventricular depolarisation (ventricles contracting — systole)',
+  'AV node conduction delay'
+],ans:2,
+rule:'QRS = ventricular depolarisation (contraction/systole) · P = atrial depolarisation · T = ventricular repolarisation',
+exp:'The ECG has three main waves: P wave = ATRIAL depolarisation (atria contract; P for "pump" atria). QRS complex = VENTRICULAR depolarisation (ventricles contract; systole begins). T wave = ventricular REPOLARISATION (ventricles recover/relax; diastole). Atrial repolarisation is hidden within the QRS complex and not visible separately. The PR interval represents conduction time through the AV node. A prolonged PR interval indicates AV block. The QRS complex is the largest wave because the ventricles are the largest muscle mass in the heart.'},
+
+{d:'HARD',e:'CDS 2024',
+q:'A patient presents with acute chest pain radiating to the left arm. ECG shows ST segment elevation in leads II, III and aVF. Which vessel is most likely occluded?',
+opts:[
+  'Left anterior descending (LAD) artery — supplies anterior heart wall',
+  'Right coronary artery (RCA) — supplies inferior/posterior heart wall',
+  'Left circumflex artery — supplies lateral wall',
+  'Pulmonary artery — supplies the lungs'
+],ans:1,
+rule:'ST elevation in II, III, aVF = inferior MI → Right Coronary Artery (RCA) occlusion',
+exp:'ECG leads II, III, and aVF look at the INFERIOR wall of the left ventricle. ST elevation in these leads indicates an inferior wall myocardial infarction (MI). The inferior wall of the heart is supplied predominantly by the RIGHT CORONARY ARTERY (RCA) in most people. ST elevation in leads V1–V4 would indicate anterior MI (LAD occlusion). Lateral wall MI involves leads I, aVL, V5, V6 (Left circumflex). The pulmonary artery supplies blood TO the lungs, not the heart muscle. Coronary arteries supply the heart muscle (myocardium) itself. This is an applied-level question testing anatomical knowledge of coronary circulation.'},
+
+{d:'HARD',e:'NDA 2024',
+q:'Sickle cell anaemia provides a survival advantage in malaria-endemic regions because:',
+opts:[
+  'HbS carries more oxygen than HbA, so carriers are stronger',
+  'Individuals with sickle cell trait (HbA/HbS) have RBCs that are inhospitable to Plasmodium parasites, conferring resistance to malaria',
+  'Sickle cells block the spleen, preventing Plasmodium from entering the bloodstream',
+  'Anti-malarial antibodies are automatically produced by HbS carriers'
+],ans:1,
+rule:'Sickle cell trait (HbA/HbS heterozygote) confers malaria resistance — natural selection maintains the allele',
+exp:'Sickle cell anaemia involves a point mutation converting glutamic acid to valine at position 6 of the beta-globin chain. Homozygotes (HbS/HbS) suffer severe anaemia. However, HETEROZYGOTES (HbA/HbS — sickle cell TRAIT) have a significant survival advantage in malaria-endemic areas. When Plasmodium parasites infect RBCs, they cause the cells to sickle. Sickled cells are rapidly removed by the spleen before parasites can complete their cycle. This makes carriers resistant to severe malaria. This explains why the sickle cell allele is maintained at high frequency in sub-Saharan Africa and parts of India despite its disadvantage in homozygotes — a classic example of balancing selection.'},
+
+{d:'HARD',e:'AFCAT 2024',
+q:'The hepatic portal system is unique because it carries blood between two capillary beds. Which correctly describes it?',
+opts:[
+  'It carries oxygenated blood from the aorta directly to hepatic veins, bypassing the liver cells',
+  'It carries nutrient-rich blood from intestinal capillaries to the liver (sinusoids) before entering general circulation',
+  'It returns deoxygenated blood from the liver to the right atrium via the inferior vena cava',
+  'It is the system that carries bile from the liver to the intestine'
+],ans:1,
+rule:'Hepatic portal system: intestinal capillaries → portal vein → liver sinusoids → hepatic vein → IVC',
+exp:'The hepatic portal system is a specialised venous system that directs nutrient-rich blood from the digestive system to the liver BEFORE it enters general circulation. After absorption in the small intestine, blood rich in glucose, amino acids, vitamins, and toxins drains into the PORTAL VEIN. This portal vein delivers blood to the liver sinusoids (capillary beds), where hepatocytes process nutrients, store glycogen, detoxify substances, and synthesise plasma proteins. Blood then drains via the hepatic veins into the inferior vena cava and returns to the heart. The liver also receives oxygenated blood via the hepatic artery (a branch of the coeliac trunk). This "portal" arrangement gives the liver first pass at all absorbed nutrients.'},
+
+{d:'HARD',e:'CDS 2024',
+q:'A student learns that the human heart is described as "myogenic." What does this mean, and what is its clinical implication?',
+opts:[
+  'The heart muscle is made of myosin; clinical implication — muscle relaxants stop the heart',
+  'The heart generates its own electrical impulse without needing nervous input; implication — an isolated heart can still beat if supplied with nutrients',
+  'The heart is controlled entirely by the vagus nerve; implication — cutting the vagus stops the heart',
+  'Heart rate is determined by blood temperature; implication — fever permanently increases heart rate'
+],ans:1,
+rule:'Myogenic = heart generates its own impulse (SA node); isolated heart continues beating in nutrient solution',
+exp:'MYOGENIC means the heartbeat originates from within the heart muscle itself — specifically from the SA node — without needing external nerve input. This is demonstrated by the fact that an isolated heart placed in a nutrient solution continues to beat rhythmically. In contrast, skeletal muscles are NEUROGENIC — they contract only when stimulated by motor nerves. The clinical implication is significant: (1) A transplanted heart (which has its nerve connections severed) continues to function because of myogenicity. (2) Artificial pacemakers work by taking over the SA node\'s role when it fails. (3) Drugs like beta-blockers and digoxin that affect heart rate work directly on the SA/AV nodes. The autonomic nervous system MODULATES heart rate (vagus slows it; sympathetic speeds it) but does not initiate the beat.'},
+
+];
+
+const answers  = new Array(QS.length).fill(null);
+const revealed = new Array(QS.length).fill(false);
+const LABS = ['A','B','C','D'];
+
+function build(){
+  const area = document.getElementById('q-area');
+  area.innerHTML = '';
+  QS.forEach((q,i)=>{
+    const dc = q.d==='EASY'?'diff-e':q.d==='MEDIUM'?'diff-m':'diff-h';
+    const div = document.createElement('div');
+    div.className='q-card'; div.id=`qc${i}`;
+    div.innerHTML=`
+      <div class="q-meta">
+        <span class="q-num">Q.${String(i+1).padStart(2,'0')}</span>
+        <span class="q-diff ${dc}">${q.d}</span>
+        <span class="q-exam">${q.e}</span>
+      </div>
+      <div class="q-body">
+        <div class="q-text">${q.q}</div>
+        <div class="opts" id="opts${i}">
+          ${q.opts.map((o,j)=>`
+            <button class="opt" id="o${i}_${j}" onclick="pick(${i},${j})">
+              <span class="opt-lbl">${LABS[j]}</span>${o}
+            </button>`).join('')}
+        </div>
+        <div class="exp-panel" id="ex${i}">
+          <div class="exp-tag">Explanation</div>
+          <div class="exp-rule">${q.rule}</div>
+          <p>${q.exp}</p>
+        </div>
+      </div>
+      <div class="q-foot">
+        <span style="font-size:11px;color:var(--dim);font-weight:700">Biology · B06</span>
+        <span id="ai${i}" class="q-status">—</span>
+      </div>`;
+    area.appendChild(div);
+  });
+}
+
+function pick(qi,oi){
+  if(revealed[qi]) return;
+  answers[qi]=oi;
+  document.querySelectorAll(`#opts${qi} .opt`).forEach((b,j)=>{b.classList.remove('sel');if(j===oi)b.classList.add('sel')});
+  document.getElementById(`qc${qi}`).classList.add('answered');
+  const ai=document.getElementById(`ai${qi}`);
+  ai.textContent=`Selected: ${LABS[oi]}`;
+  ai.style.color='var(--primary)';
+  updateStats();
+}
+
+function updateStats(){
+  const att=answers.filter(a=>a!==null).length;
+  document.getElementById('s-att').textContent=att;
+  document.getElementById('prog').style.width=(att/QS.length*100)+'%';
+  document.getElementById('prog-label').textContent=`${att} of ${QS.length} answered`;
+  let c=0,w=0;
+  answers.forEach((a,i)=>{if(a===null)return;if(a===QS[i].ans)c++;else w++;});
+  document.getElementById('s-cor').textContent=c;
+  document.getElementById('s-wrg').textContent=w;
+}
+
+function submitAll(){
+  let cor=0,wrg=0,skp=0;
+  QS.forEach((q,i)=>{
+    revealed[i]=true;
+    const opts=document.querySelectorAll(`#opts${i} .opt`);
+    opts.forEach(b=>{b.disabled=true;b.classList.remove('sel')});
+    opts[q.ans].classList.add('ok');
+    if(answers[i]!==null && answers[i]!==q.ans) opts[answers[i]].classList.add('bad');
+    document.getElementById(`ex${i}`).classList.add('show');
+    const ai=document.getElementById(`ai${i}`);
+    const card=document.getElementById(`qc${i}`);
+    card.classList.remove('answered');
+    if(answers[i]===null){skp++;ai.textContent='Skipped';ai.style.color='var(--dim)';}
+    else if(answers[i]===q.ans){cor++;card.classList.add('correct');ai.textContent='✓ Correct';ai.style.color='var(--green)';}
+    else{wrg++;card.classList.add('wrong');ai.textContent='✗ Wrong';ai.style.color='var(--red)';}
+  });
+  updateStats();
+  showResults(cor,wrg,skp);
+}
+
+function showResults(cor,wrg,skp){
+  const pct=Math.round(cor/QS.length*100);
+  let grade,msg;
+  if(pct>=88){grade='Excellent';msg='Outstanding! You have mastered the Circulatory System.'}
+  else if(pct>=70){grade='Good';msg='Well done. Review the questions you got wrong.'}
+  else if(pct>=50){grade='Average';msg='Good start. Revisit the theory cards and try again.'}
+  else{grade='Needs Work';msg="Don't worry — go through the Quick Ref and try again."}
+  const res=document.getElementById('results');
+  res.innerHTML=`
+    <div class="res-hero">
+      <div class="res-score">${cor}<span style="font-size:36px;opacity:.5">/${QS.length}</span></div>
+      <div class="res-grade">${grade} · ${pct}%</div>
+      <div class="res-msg">${msg}</div>
+    </div>
+    <div class="res-stats">
+      <div class="qs-cell"><div class="qs-val g">${cor}</div><div class="qs-lbl">Correct</div></div>
+      <div class="qs-cell"><div class="qs-val r">${wrg}</div><div class="qs-lbl">Wrong</div></div>
+      <div class="qs-cell"><div class="qs-val a">${skp}</div><div class="qs-lbl">Skipped</div></div>
+      <div class="qs-cell"><div class="qs-val">${pct}%</div><div class="qs-lbl">Score</div></div>
+    </div>
+    <div style="text-align:center;margin:16px 0">
+      <button class="btn btn-ghost" onclick="document.getElementById('q-area').scrollIntoView({behavior:'smooth'})">📖 Review All Answers</button>
+    </div>`;
+  res.style.display='block';
+  res.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function resetQuiz(){
+  answers.fill(null); revealed.fill(false);
+  build();
+  document.getElementById('results').style.display='none';
+  document.getElementById('results').innerHTML='';
+  ['s-att','s-cor','s-wrg'].forEach(id=>document.getElementById(id).textContent='0');
+  document.getElementById('prog').style.width='0%';
+  document.getElementById('prog-label').textContent=`0 of ${QS.length} answered`;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function switchTab(id){
+  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  const idx={theory:0,quickref:1,quiz:2}[id];
+  document.querySelectorAll('.tab')[idx].classList.add('on');
+}
+
+function tog(hd){
+  const bd=hd.nextElementSibling;
+  const isOpen=bd.classList.contains('open');
+  bd.classList.toggle('open',!isOpen);
+  hd.classList.toggle('open',!isOpen);
+}
+
+build();
+</script>
+</body>
+</html>

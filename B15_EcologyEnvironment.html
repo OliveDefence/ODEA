@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B14 · Ecology &amp; Environment | Olive Defence</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+
+:root{
+  /* ── THEME B14: Forest Green + Earth Ochre + Sky — ecological, living ── */
+  --bg:        #EBF0EA;
+  --bg2:       #DAE3D8;
+  --bg3:       #C4D2C0;
+  --white:     #F6FAF5;
+  --ink:       #080E06;
+  --ink2:      #101A0C;
+  --muted:     #4A6040;
+  --dim:       #7A9870;
+  --border:    #AECAA6;
+
+  --primary:      #1A4A0C;
+  --primaryLt:    #286018;
+  --primaryPale:  #E0EED8;
+
+  --amber:        #7A5A08;
+  --amberLt:      #9E7010;
+  --amberPale:    #FBF2D8;
+
+  --green:        #0A5A1A;
+  --greenLt:      #167828;
+  --greenPale:    #D8F0E0;
+
+  --red:          #7A1810;
+  --redLt:        #9E2018;
+  --redPale:      #F8E8E6;
+
+  --blue:         #0E3060;
+  --bluePale:     #DDE8F4;
+
+  --purple:       #481268;
+  --purplePale:   #EAE2F4;
+
+  --teal:         #084038;
+  --tealPale:     #D4EDE8;
+
+  --slate:        #384050;
+  --slatePale:    #E4E8F0;
+
+  --ochre:        #7A5010;
+  --ochrePale:    #F4ECD8;
+
+  --radius:    12px;
+  --shadow:    0 2px 12px rgba(8,14,6,.09);
+  --shadow-md: 0 4px 20px rgba(8,14,6,.14);
+}
+
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--ink);font-size:17px;line-height:1.75;min-height:100vh}
+.page{max-width:680px;margin:0 auto;padding:0 16px 80px}
+
+/* ── HERO ─────────────────────────────────────────────────────── */
+.hero{
+  background:linear-gradient(135deg,#020A00 0%,#1A4A0C 50%,#286018 100%);
+  margin:0 -16px;padding:28px 20px 26px;position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 75% 18%,rgba(140,255,120,.08) 0%,transparent 55%),
+    radial-gradient(ellipse at 10% 82%,rgba(100,200,80,.06) 0%,transparent 50%);
+  pointer-events:none;
+}
+.hero::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(160,255,140,.35),transparent);
+  pointer-events:none;
+}
+.hero-kicker{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.50);margin-bottom:8px;display:flex;align-items:center;gap:8px;position:relative;z-index:1}
+.hero-kicker::before{content:'';width:18px;height:2px;background:rgba(255,255,255,.28)}
+.hero-title{font-family:'Lora',serif;font-size:clamp(24px,5.5vw,34px);font-weight:700;color:#fff;line-height:1.2;margin-bottom:10px;position:relative;z-index:1}
+.hero-title span{color:#AAFF88;font-style:italic}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.66);margin-bottom:18px;line-height:1.65;position:relative;z-index:1}
+.hero-chips{display:flex;flex-wrap:wrap;gap:7px;position:relative;z-index:1}
+.chip{font-size:11px;font-weight:700;letter-spacing:1px;padding:4px 12px;border-radius:20px;text-transform:uppercase}
+.chip-w{background:rgba(255,255,255,.12);color:rgba(255,255,255,.88)}
+.chip-a{background:rgba(170,255,136,.18);color:#AAFF88}
+.chip-g{background:rgba(140,240,160,.11);color:#90E8A8}
+
+/* ── TAB BAR ─────────────────────────────────────────────────── */
+.tab-bar{position:sticky;top:0;z-index:50;background:var(--white);border-bottom:2px solid var(--border);margin:0 -16px;display:flex;overflow-x:auto;box-shadow:0 2px 8px rgba(8,14,6,.07);-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.tab-bar::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;padding:14px 18px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);border:none;background:transparent;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;white-space:nowrap}
+.tab:hover{color:var(--ink);background:var(--bg)}
+.tab.on{color:var(--primary);border-bottom-color:var(--primary)}
+
+/* ── PANES ───────────────────────────────────────────────────── */
+.pane{display:none;padding-top:24px;animation:fadeUp .3s ease}
+.pane.on{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ── SECTION LABEL ───────────────────────────────────────────── */
+.sec-label{font-size:10px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--primary);margin:28px 0 12px;display:flex;align-items:center;gap:10px}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* ── INTRO BOX ───────────────────────────────────────────────── */
+.intro-box{background:var(--primaryPale);border:1.5px solid rgba(26,74,12,.20);border-radius:var(--radius);padding:20px;margin-bottom:8px}
+.intro-box p{font-size:16px;color:var(--ink2);line-height:1.8}
+.intro-box strong{color:var(--primary)}
+
+/* ── CONCEPT CARDS ───────────────────────────────────────────── */
+.c-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;box-shadow:var(--shadow);overflow:hidden}
+.c-head{display:flex;align-items:center;gap:12px;padding:16px 18px;cursor:pointer;border-left:4px solid transparent;transition:all .15s;-webkit-tap-highlight-color:transparent}
+.c-head:hover,.c-head.open{background:var(--bg);border-left-color:var(--primary)}
+.c-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.c-title{font-size:17px;font-weight:700;color:var(--ink);flex:1}
+.c-sub{font-size:12px;color:var(--dim);font-weight:600;margin-top:2px}
+.c-arrow{font-size:12px;color:var(--dim);transition:transform .2s;flex-shrink:0}
+.c-head.open .c-arrow{transform:rotate(180deg)}
+.c-body{display:none;padding:4px 18px 20px;border-top:1px solid var(--border)}
+.c-body.open{display:block;animation:fadeUp .2s ease}
+.c-body p{font-size:16px;color:var(--ink2);line-height:1.85;margin-bottom:12px}
+.c-body p:last-child{margin-bottom:0}
+.c-body strong{color:var(--primary);font-weight:700}
+.c-body em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* ── CONTENT BLOCKS ──────────────────────────────────────────── */
+.fact-box{background:var(--amberPale);border:1.5px solid rgba(122,90,8,.22);border-radius:10px;padding:16px 18px;margin:14px 0}
+.fact-box .fb-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--amber);text-transform:uppercase;margin-bottom:8px}
+.fact-box ul{list-style:none;padding:0}
+.fact-box li{font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;position:relative;line-height:1.7}
+.fact-box li::before{content:'→';position:absolute;left:0;color:var(--amber);font-weight:700;font-size:13px}
+
+.eg-box{background:var(--greenPale);border-left:4px solid var(--green);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.eg-box .eg-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--green);text-transform:uppercase;margin-bottom:6px}
+.eg-box ul{list-style:none;padding:0}
+.eg-box li{font-size:15px;color:var(--ink2);padding:4px 0 4px 18px;position:relative;line-height:1.65}
+.eg-box li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:800;font-size:12px}
+.eg-box p{font-size:15px;color:var(--ink2);line-height:1.75}
+
+.trap-box{background:var(--redPale);border:1.5px solid rgba(122,24,16,.20);border-radius:10px;padding:16px 18px;margin:14px 0}
+.trap-box .tr-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--red);text-transform:uppercase;margin-bottom:8px}
+.trap-box p,.trap-box li{font-size:15.5px;color:var(--ink2);line-height:1.75}
+.trap-box ul{list-style:none;padding:0}
+.trap-box li{padding:5px 0 5px 22px;position:relative}
+.trap-box li::before{content:'⚑';position:absolute;left:0;font-size:12px;color:var(--red)}
+
+.rule-box{background:var(--bluePale);border:1.5px solid rgba(14,48,96,.17);border-radius:10px;padding:16px 18px;margin:14px 0}
+.rule-box .rl-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--blue);text-transform:uppercase;margin-bottom:8px}
+.rule-box p{font-size:15.5px;color:var(--ink2);line-height:1.8}
+.rule-box strong{color:var(--blue)}
+
+.purple-box{background:var(--purplePale);border:1.5px solid rgba(72,18,104,.17);border-radius:10px;padding:16px 18px;margin:14px 0}
+.purple-box .pl-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--purple);text-transform:uppercase;margin-bottom:8px}
+.purple-box ul{list-style:none;padding:0}
+.purple-box li{font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;position:relative;line-height:1.8}
+.purple-box li::before{content:'◆';position:absolute;left:0;font-size:9px;color:var(--purple);top:10px}
+
+.slate-box{background:var(--slatePale);border:1.5px solid rgba(56,64,80,.17);border-radius:10px;padding:16px 18px;margin:14px 0}
+.slate-box .sl-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--slate);text-transform:uppercase;margin-bottom:8px}
+.slate-box p{font-size:15.5px;color:var(--ink2);line-height:1.8}
+.slate-box strong{color:var(--slate)}
+.slate-box ul{list-style:none;padding:0}
+.slate-box li{font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;position:relative;line-height:1.8}
+.slate-box li::before{content:'▸';position:absolute;left:0;color:var(--slate);font-size:12px;top:8px}
+
+.teal-box{background:var(--tealPale);border:1.5px solid rgba(8,64,56,.17);border-radius:10px;padding:16px 18px;margin:14px 0}
+.teal-box .tl-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--teal);text-transform:uppercase;margin-bottom:8px}
+.teal-box ul{list-style:none;padding:0}
+.teal-box li{font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;position:relative;line-height:1.8}
+.teal-box li::before{content:'●';position:absolute;left:0;font-size:7px;color:var(--teal);top:11px}
+.teal-box p{font-size:15.5px;color:var(--ink2);line-height:1.8}
+.teal-box strong{color:var(--teal)}
+
+.ochre-box{background:var(--ochrePale);border:1.5px solid rgba(122,80,16,.20);border-radius:10px;padding:16px 18px;margin:14px 0}
+.ochre-box .oc-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--ochre);text-transform:uppercase;margin-bottom:8px}
+.ochre-box ul{list-style:none;padding:0}
+.ochre-box li{font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;position:relative;line-height:1.8}
+.ochre-box li::before{content:'◉';position:absolute;left:0;font-size:9px;color:var(--ochre);top:9px}
+.ochre-box p{font-size:15.5px;color:var(--ink2);line-height:1.8}
+.ochre-box strong{color:var(--ochre)}
+
+.analogy-box{background:var(--primaryPale);border-left:4px solid var(--primary);border-radius:0 8px 8px 0;padding:14px 16px;margin:12px 0}
+.analogy-box .an-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--primary);text-transform:uppercase;margin-bottom:6px}
+.analogy-box p{font-size:15.5px;color:var(--ink2);line-height:1.75}
+.analogy-box strong{color:var(--primary)}
+
+/* journey/process strip */
+.journey{margin:16px 0;display:flex;flex-direction:column}
+.j-step{display:flex;align-items:stretch;gap:14px}
+.j-line{display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:28px}
+.j-dot{width:28px;height:28px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;margin-top:2px}
+.j-connector{width:2px;flex:1;background:var(--border);margin:2px 0}
+.j-step:last-child .j-connector{display:none}
+.j-content{padding:2px 0 18px;flex:1}
+.j-title{font-size:15px;font-weight:800;color:var(--ink);margin-bottom:3px}
+.j-desc{font-size:14.5px;color:var(--ink2);line-height:1.7}
+.j-desc strong{color:var(--primary)}
+.j-desc em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* stat band */
+.stat-band{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border-radius:var(--radius);overflow:hidden;margin:16px 0}
+.stat-cell{background:var(--white);padding:12px 8px;text-align:center}
+.stat-val{font-family:'Lora',serif;font-size:15px;font-weight:700;color:var(--primary);line-height:1;margin-bottom:4px}
+.stat-lbl{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:.4px;line-height:1.3}
+
+.compare-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
+.compare-table th{background:var(--primary);color:#fff;padding:10px 12px;text-align:left;font-size:13px;font-weight:700;letter-spacing:.5px}
+.compare-table td{padding:10px 12px;border:1px solid var(--border);color:var(--ink2);vertical-align:top;line-height:1.65}
+.compare-table tr:nth-child(even) td{background:var(--bg)}
+.compare-table td b{color:var(--primary)}
+.compare-table td em{color:var(--amber);font-style:normal;font-weight:700}
+
+.org-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}
+.org-card{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:13px 14px;position:relative;overflow:hidden}
+.org-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--primary)}
+.org-card .org-name{font-size:13px;font-weight:800;color:var(--primary);margin-bottom:3px}
+.org-card p{font-size:13.5px;color:var(--ink2);line-height:1.6;margin-top:2px}
+
+/* ── QUICK REFERENCE ─────────────────────────────────────────── */
+.ref-grid{display:grid;gap:10px;margin:8px 0}
+.ref-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+.ref-card-title{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--primary);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.ref-card ul{list-style:none;padding:0}
+.ref-card li{font-size:15px;color:var(--ink2);padding:5px 0 5px 16px;position:relative;line-height:1.65;border-bottom:1px solid var(--bg2)}
+.ref-card li:last-child{border-bottom:none}
+.ref-card li::before{content:'·';position:absolute;left:4px;color:var(--primary);font-weight:900;font-size:18px;line-height:1.3}
+.ref-card li b{color:var(--ink);font-weight:700}
+.ref-card li em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* ── QUIZ ────────────────────────────────────────────────────── */
+.quiz-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:16px;box-shadow:var(--shadow)}
+.qs-cell{background:var(--white);padding:12px 8px;text-align:center}
+.qs-val{font-family:'Lora',serif;font-size:22px;font-weight:700;color:var(--primary);line-height:1}
+.qs-val.g{color:var(--green)}.qs-val.r{color:var(--red)}.qs-val.a{color:var(--amber)}
+.qs-lbl{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:1px;margin-top:4px;text-transform:uppercase}
+.prog-wrap{margin-bottom:20px}
+.prog-bar{height:6px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;background:var(--primary);border-radius:3px;transition:width .4s ease;width:0%}
+.prog-label{font-size:12px;color:var(--muted);font-weight:700;margin-bottom:6px}
+.q-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:12px;box-shadow:var(--shadow);overflow:hidden;border-left:4px solid transparent;transition:border-color .15s}
+.q-card.answered{border-left-color:var(--primary)}
+.q-card.correct{border-left-color:var(--green)}
+.q-card.wrong{border-left-color:var(--red)}
+.q-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 16px;background:var(--bg);border-bottom:1px solid var(--border)}
+.q-num{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:1px}
+.q-diff{font-size:10px;font-weight:800;padding:2px 10px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase}
+.diff-e{background:var(--greenPale);color:var(--green)}
+.diff-m{background:var(--amberPale);color:var(--amber)}
+.diff-h{background:var(--redPale);color:var(--red)}
+.q-exam{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:.5px;margin-left:auto}
+.q-body{padding:16px}
+.q-text{font-size:16px;font-weight:600;color:var(--ink);line-height:1.7;margin-bottom:14px}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;align-items:flex-start;gap:10px;padding:11px 14px;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;cursor:pointer;text-align:left;font-family:'Nunito',sans-serif;font-size:15px;color:var(--ink2);line-height:1.6;transition:all .15s;-webkit-tap-highlight-color:transparent}
+.opt:hover{border-color:var(--primary);background:var(--primaryPale)}
+.opt.sel{border-color:var(--primary);background:var(--primaryPale);color:var(--primary)}
+.opt.ok{border-color:var(--green);background:var(--greenPale);color:var(--green)}
+.opt.bad{border-color:var(--red);background:var(--redPale);color:var(--red);text-decoration:line-through}
+.opt:disabled,.opt[disabled]{cursor:default}
+.opt-lbl{font-size:11px;font-weight:800;color:var(--dim);flex-shrink:0;padding-top:1px;min-width:16px}
+.opt.sel .opt-lbl{color:var(--primary)}
+.opt.ok .opt-lbl{color:var(--green)}
+.opt.bad .opt-lbl{color:var(--red)}
+.exp-panel{display:none;margin-top:14px;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:14px}
+.exp-panel.show{display:block;animation:fadeUp .2s ease}
+.exp-tag{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--primary);text-transform:uppercase;margin-bottom:8px}
+.exp-rule{font-size:13.5px;font-weight:700;color:var(--ink);background:var(--primaryPale);border-left:3px solid var(--primary);padding:8px 12px;border-radius:0 6px 6px 0;margin-bottom:10px;line-height:1.6}
+.exp-panel p{font-size:14.5px;color:var(--ink2);line-height:1.8}
+.q-foot{display:flex;align-items:center;justify-content:space-between;padding:8px 16px;border-top:1px solid var(--border);background:var(--bg)}
+.q-status{font-size:12px;font-weight:700}
+.quiz-actions{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.btn{padding:11px 20px;border-radius:10px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;cursor:pointer;border:none;transition:all .15s}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:var(--primaryLt)}
+.btn-ghost{background:var(--white);color:var(--primary);border:1.5px solid var(--border)}
+.btn-ghost:hover{border-color:var(--primary);background:var(--primaryPale)}
+.res-hero{background:var(--primary);border-radius:var(--radius);padding:28px;text-align:center;margin-bottom:12px}
+.res-score{font-family:'Lora',serif;font-size:64px;font-weight:700;color:#fff;line-height:1}
+.res-grade{font-size:18px;font-weight:700;color:#AAFF88;margin:8px 0 4px}
+.res-msg{font-size:15px;color:rgba(255,255,255,.75);line-height:1.6}
+.res-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:14px}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ══════════════════════════ HERO ═════════════════════════════ -->
+<div class="hero">
+  <div class="hero-kicker">Biology · Chapter B14 · Olive Defence</div>
+  <div class="hero-title">Ecology &amp; <span>Environment</span></div>
+  <div class="hero-sub">Ecosystems, food chains, biogeochemical cycles, biodiversity, pollution and environmental issues for CDS · NDA · AFCAT</div>
+  <div class="hero-chips">
+    <span class="chip chip-w">CDS</span>
+    <span class="chip chip-w">NDA</span>
+    <span class="chip chip-w">AFCAT</span>
+    <span class="chip chip-a">Theory</span>
+    <span class="chip chip-g">15 MCQs</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════ TAB BAR ══════════════════════════ -->
+<div class="tab-bar">
+  <button class="tab on" onclick="switchTab('theory')">📖 Theory</button>
+  <button class="tab" onclick="switchTab('quickref')">⚡ Quick Ref</button>
+  <button class="tab" onclick="switchTab('quiz')">✏️ Quiz</button>
+</div>
+
+<!-- ══════════════════════════ THEORY ═══════════════════════════ -->
+<div class="pane on" id="theory">
+
+  <div class="intro-box">
+    <p><strong>Ecology</strong> is the scientific study of the interactions between organisms and their environment. The term was coined by <strong>Ernst Haeckel in 1866</strong> (from Greek <em>oikos</em> = house + <em>logos</em> = study). Ecology operates at multiple levels — individual organisms, populations, communities, ecosystems and the biosphere. Understanding how energy flows, how matter cycles, and how human activity disrupts these systems is central to defence exam biology.</p>
+  </div>
+
+  <!-- SECTION 1 -->
+  <div class="sec-label">Section 1 — Levels of Organisation &amp; Ecosystem</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E0EED8">🌍</div>
+      <div style="flex:1">
+        <div class="c-title">Ecosystem — Structure &amp; Components</div>
+        <div class="c-sub">Biotic and abiotic components, autotrophs, heterotrophs, decomposers</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>An <strong>ecosystem</strong> is a functional unit of nature where living organisms (<em>biotic</em> components) interact with each other and with the non-living environment (<em>abiotic</em> components). The term was coined by <strong>A.G. Tansley in 1935</strong>.</p>
+
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Level</th><th>Definition</th><th>Example</th></tr>
+          <tr><td><b>Individual</b></td><td>A single organism</td><td>One tiger</td></tr>
+          <tr><td><b>Population</b></td><td>All individuals of same species in an area at a given time</td><td>All tigers in Ranthambore</td></tr>
+          <tr><td><b>Community (Biocoenosis)</b></td><td>All populations of different species in an area</td><td>All plants, animals, fungi, microbes in a forest</td></tr>
+          <tr><td><b>Ecosystem</b></td><td>Community + its abiotic environment; coined by A.G. Tansley (1935)</td><td>A pond, forest, grassland, coral reef</td></tr>
+          <tr><td><b>Biome</b></td><td>Large geographic area with similar climate, flora and fauna</td><td>Tropical rainforest, tundra, desert, savanna</td></tr>
+          <tr><td><b>Biosphere</b></td><td>The zone of life on Earth; all ecosystems together</td><td>From deep ocean floor to lower atmosphere</td></tr>
+        </table>
+      </div>
+
+      <div class="fact-box">
+        <div class="fb-label">Biotic Components of Ecosystem</div>
+        <ul>
+          <li><strong>Producers (Autotrophs)</strong> — synthesise organic food from inorganic substances using sunlight (photosynthesis) or chemical energy (chemosynthesis). Examples: green plants, algae, cyanobacteria, chemosynthetic bacteria (at hydrothermal vents). Form the base of all food chains.</li>
+          <li><strong>Primary Consumers (Herbivores)</strong> — eat producers directly. Examples: grasshoppers, rabbits, deer, caterpillar, cow. Occupy 2nd trophic level.</li>
+          <li><strong>Secondary Consumers (Primary carnivores)</strong> — eat herbivores. Examples: frogs, small fish, fox. Occupy 3rd trophic level.</li>
+          <li><strong>Tertiary Consumers (Secondary carnivores)</strong> — eat primary carnivores. Examples: eagle, lion, large fish. Occupy 4th trophic level.</li>
+          <li><strong>Decomposers (Saprotrophes/Reducers)</strong> — break down dead organic matter (detritus) into inorganic substances, returning nutrients to the soil. Examples: bacteria, fungi (mushrooms, moulds). CRITICAL for nutrient recycling. WITHOUT decomposers, nutrients would remain locked in dead organic matter.</li>
+        </ul>
+      </div>
+
+      <div class="teal-box">
+        <div class="tl-label">Abiotic Components</div>
+        <ul>
+          <li><strong>Physical factors</strong>: Temperature, light (intensity, duration, quality), water/moisture, humidity, wind, fire</li>
+          <li><strong>Chemical factors</strong>: Soil minerals (N, P, K, Ca, Mg), atmospheric gases (O₂, CO₂, N₂), pH, salinity</li>
+          <li><strong>Climatic factors</strong>: Rainfall pattern, seasonality, altitude, latitude</li>
+          <li>Limiting factors (Liebig's Law of the Minimum): the factor present in shortest supply relative to requirement limits growth — e.g., phosphorus often limits lake productivity</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="sec-label">Section 2 — Food Chains, Food Webs &amp; Ecological Pyramids</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#FBF2D8">🍃</div>
+      <div style="flex:1">
+        <div class="c-title">Food Chains, Food Webs &amp; Trophic Levels</div>
+        <div class="c-sub">Energy flow, 10% law, grazing vs detritus food chains</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>A <strong>food chain</strong> is a linear sequence showing the flow of energy from one organism to the next. Energy flows <strong>unidirectionally</strong> — from producers to consumers — and is <strong>never recycled</strong>. Matter (nutrients), by contrast, is recycled through biogeochemical cycles.</p>
+
+      <div class="rule-box">
+        <div class="rl-label">10% Law of Energy Transfer — Lindeman (1942)</div>
+        <p>Proposed by <strong>Raymond Lindeman (1942)</strong>: only about <strong>10%</strong> of the energy available at one trophic level is transferred to the next trophic level. The remaining ~90% is lost as <strong>heat (respiration)</strong>, used for metabolism, movement, or lost as excretory products. This is why food chains are short (rarely more than 4–5 trophic levels) and why it is more energy-efficient for humans to eat plants (grain) than meat. Example: 1000 kcal in grass → 100 kcal in grasshopper → 10 kcal in frog → 1 kcal in snake → 0.1 kcal in hawk.</p>
+      </div>
+
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Type</th><th>Starts With</th><th>Description</th><th>Example</th></tr>
+          <tr><td><b>Grazing Food Chain (GFC)</b></td><td>Living green plants (producers)</td><td>Energy from living plant matter; most common in terrestrial and aquatic systems; begins with photosynthesis</td><td>Grass → Grasshopper → Frog → Snake → Eagle</td></tr>
+          <tr><td><b>Detritus Food Chain (DFC)</b></td><td>Dead organic matter (detritus)</td><td>Begins with dead organic matter; decomposers break down detritus; dominant in forest floor and ocean bottom ecosystems</td><td>Leaf litter → Earthworm → Robin → Hawk</td></tr>
+        </table>
+      </div>
+
+      <div class="fact-box">
+        <div class="fb-label">Food Web — Key Points</div>
+        <ul>
+          <li>A <strong>food web</strong> is an interconnected network of food chains in an ecosystem — more realistic than a single food chain</li>
+          <li>Food webs provide <strong>stability</strong> — if one species disappears, energy can flow through alternative pathways</li>
+          <li><strong>Keystone species</strong> — a species that has a disproportionately large effect on ecosystem structure relative to its abundance. Removal causes ecosystem collapse. Example: Sea otter (controls sea urchin populations → prevents overgrazing of kelp forests); wolves in Yellowstone (trophic cascade)</li>
+          <li>Energy flows <strong>unidirectionally</strong> (one way) in a food chain — NEVER recycled. Matter is recycled; energy is not.</li>
+          <li>The <strong>trophic level</strong> of an organism = its position in a food chain. Producers = T1; Herbivores = T2; Primary carnivores = T3; etc.</li>
+        </ul>
+      </div>
+
+      <div class="slate-box">
+        <div class="sl-label">Ecological Pyramids — Three Types</div>
+        <ul>
+          <li><strong>Pyramid of Numbers</strong> — shows number of organisms at each trophic level. Can be upright (grassland), inverted (tree ecosystem: one tree supports many insects) or irregular (parasitic chains). Devised by Charles Elton (1927) — "Eltonian pyramid"</li>
+          <li><strong>Pyramid of Biomass</strong> — shows total dry weight (biomass) of organisms at each trophic level. Usually upright in terrestrial ecosystems (more plant biomass than herbivore biomass). <strong>Inverted in aquatic (ocean) ecosystems</strong> — phytoplankton (tiny, reproduce fast) supports a larger biomass of zooplankton + fish above them at any given moment</li>
+          <li><strong>Pyramid of Energy</strong> — shows total energy at each trophic level per unit area per unit time. <strong>ALWAYS UPRIGHT</strong> — energy always decreases at each successive level (10% law); can never be inverted. This is the most accurate and fundamental pyramid.</li>
+        </ul>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Food Chain &amp; Pyramid Exam Traps</div>
+        <ul>
+          <li>Pyramid of Energy is <strong>ALWAYS UPRIGHT</strong> — it can NEVER be inverted. This is the most tested fact about ecological pyramids.</li>
+          <li>Pyramid of Biomass is <strong>INVERTED in aquatic/ocean ecosystems</strong> — phytoplankton have low standing biomass but very high productivity rate.</li>
+          <li>Energy flows <strong>unidirectionally</strong>; matter/nutrients are <strong>recycled</strong>. This is a classic trick question.</li>
+          <li>The <strong>10% Law</strong> was proposed by <strong>Raymond Lindeman (1942)</strong> — NOT by Haeckel or Tansley.</li>
+          <li>Decomposers are NOT included in food chains but ARE part of food webs and play the critical role of nutrient recycling.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="sec-label">Section 3 — Biogeochemical Cycles</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#D4EDE8">♻️</div>
+      <div style="flex:1">
+        <div class="c-title">Biogeochemical Cycles — Carbon, Nitrogen, Water, Phosphorus</div>
+        <div class="c-sub">How matter cycles through biotic and abiotic components</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p><strong>Biogeochemical cycles</strong> describe the movement of chemical elements between the biotic (living) and abiotic (non-living) components of the ecosystem. Unlike energy, <strong>matter is cycled and recycled</strong>. Key cycles: Carbon, Nitrogen, Water (Hydrological), Oxygen, Phosphorus, Sulphur.</p>
+
+      <div class="ochre-box">
+        <div class="oc-label">Carbon Cycle — Key Processes</div>
+        <ul>
+          <li><strong>Photosynthesis</strong>: CO₂ + H₂O → glucose + O₂ (removes CO₂ from atmosphere — carbon fixation by plants/algae)</li>
+          <li><strong>Respiration</strong>: Glucose + O₂ → CO₂ + H₂O + energy (releases CO₂ to atmosphere — all living organisms)</li>
+          <li><strong>Decomposition</strong>: Decomposers break down dead organic matter → releases CO₂ and nutrients back</li>
+          <li><strong>Combustion</strong>: Burning of fossil fuels (coal, oil, natural gas) and biomass releases stored CO₂ — major source of anthropogenic greenhouse gas emissions</li>
+          <li><strong>Ocean absorption</strong>: Oceans absorb ~30% of anthropogenic CO₂ (form bicarbonates/carbonates) — ocean acidification is a side effect</li>
+          <li><strong>Sedimentation/Fossilisation</strong>: Organic matter buried → compressed over millions of years → fossil fuels (coal, petroleum, natural gas)</li>
+        </ul>
+      </div>
+
+      <div class="purple-box">
+        <div class="pl-label">Nitrogen Cycle — Most Complex Biogeochemical Cycle</div>
+        <ul>
+          <li><strong>Nitrogen Fixation</strong>: Conversion of atmospheric N₂ (inert) into ammonia (NH₃) or nitrates usable by plants. Done by: (a) Biological fixation — <em>Rhizobium</em> (symbiotic in legume root nodules), <em>Azotobacter</em>, <em>Clostridium</em>, <em>Nostoc</em>, <em>Anabaena</em> (free-living); (b) Industrial fixation — Haber-Bosch process (N₂ + H₂ → NH₃); (c) Atmospheric fixation — lightning</li>
+          <li><strong>Nitrification</strong>: NH₄⁺ → NO₂⁻ (by <em>Nitrosomonas</em>) → NO₃⁻ (by <em>Nitrobacter</em>) — converts ammonia to nitrates that plants absorb</li>
+          <li><strong>Assimilation</strong>: Plants absorb NO₃⁻/NH₄⁺ from soil → incorporated into amino acids, proteins, nucleic acids → passed to animals through food chains</li>
+          <li><strong>Ammonification</strong>: Decomposers (bacteria, fungi) break down proteins/urea from dead organisms and excreta → NH₃ / NH₄⁺ (ammonia) — returns N to soil</li>
+          <li><strong>Denitrification</strong>: <em>Pseudomonas</em>, <em>Thiobacillus</em> convert NO₃⁻ → N₂ (returns nitrogen gas to atmosphere) — completes the cycle</li>
+        </ul>
+      </div>
+
+      <div class="teal-box">
+        <div class="tl-label">Water (Hydrological) Cycle</div>
+        <ul>
+          <li><strong>Evaporation</strong>: Water from oceans/lakes/rivers → water vapour (driven by solar energy); oceans = 85% of evaporation</li>
+          <li><strong>Transpiration</strong>: Water loss from plant leaves → atmosphere; evapotranspiration = evaporation + transpiration combined</li>
+          <li><strong>Condensation</strong>: Water vapour cools → liquid droplets → clouds</li>
+          <li><strong>Precipitation</strong>: Rain, snow, sleet, hail → returns water to land and oceans</li>
+          <li><strong>Runoff &amp; Infiltration</strong>: Surface runoff → rivers → oceans; infiltration → groundwater recharge</li>
+          <li>The Sun drives the water cycle (energy source); gravity drives precipitation and runoff</li>
+        </ul>
+      </div>
+
+      <div class="eg-box">
+        <div class="eg-label">Key Nitrogen-Fixing Bacteria — Exam List</div>
+        <ul>
+          <li><em>Rhizobium</em> — symbiotic in root nodules of LEGUMES (peas, beans, soyabean, groundnut, clover) — most important for agriculture</li>
+          <li><em>Azotobacter</em> — free-living in aerobic soil</li>
+          <li><em>Clostridium</em> — free-living in anaerobic soil</li>
+          <li><em>Nostoc</em> and <em>Anabaena</em> — cyanobacteria (blue-green algae); free-living in soil and water; Anabaena is symbiotic in <em>Azolla</em> (water fern used as green manure in rice fields)</li>
+          <li><em>Frankia</em> — symbiotic in non-legume plant <em>Alnus</em> (alder tree)</li>
+        </ul>
+      </div>
+
+      <div class="rule-box">
+        <div class="rl-label">Phosphorus Cycle — Sedimentary Cycle (No Gaseous Phase)</div>
+        <p>Phosphorus is unique — its cycle has <strong>NO gaseous phase</strong> (unlike C, N, O, S cycles). Phosphorus moves from rocks (lithosphere) → soil water → plants → animals → decomposers → back to soil. Weathering of phosphate rocks releases phosphate ions (PO₄³⁻) → absorbed by plant roots → consumed by animals → returned by decomposition. Phosphorus is often the <strong>limiting nutrient</strong> in freshwater ecosystems (causes algal blooms / eutrophication when in excess from agricultural runoff).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="sec-label">Section 4 — Biodiversity &amp; Conservation</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#EAE2F4">🦋</div>
+      <div style="flex:1">
+        <div class="c-title">Biodiversity — Types, Importance &amp; Threats</div>
+        <div class="c-sub">Alpha, beta, gamma diversity; hotspots; IUCN categories; conservation strategies</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p><strong>Biodiversity</strong> (Biological Diversity) refers to the variety of life on Earth — at all levels from genes to ecosystems. The term was popularised by <strong>E.O. Wilson</strong> in the 1980s. India is a <strong>megadiverse country</strong> — one of 17 recognised globally.</p>
+
+      <div class="fact-box">
+        <div class="fb-label">Three Levels of Biodiversity</div>
+        <ul>
+          <li><strong>Genetic Diversity</strong> — variation in genes within a species or population. Example: different varieties of rice (<em>Oryza sativa</em>); different breeds of dogs. Basis of evolution and adaptation. Measured by allele frequency differences.</li>
+          <li><strong>Species Diversity (Alpha diversity)</strong> — number and relative abundance of species in a defined area. Measured by species richness (number of species) and evenness (how evenly individuals are distributed). Tropical regions have highest species diversity.</li>
+          <li><strong>Ecosystem (Ecological) Diversity</strong> — variety of habitats, communities and ecological processes in a region. India has diverse ecosystems: deserts, rainforests, mangroves, coral reefs, wetlands, grasslands, alpine meadows.</li>
+        </ul>
+      </div>
+
+      <div class="slate-box">
+        <div class="sl-label">Biodiversity Hotspots — India</div>
+        <ul>
+          <li>A <strong>biodiversity hotspot</strong> is a region with exceptionally high species richness AND endemism (species found nowhere else), but that has already lost &gt;70% of its original habitat. Concept proposed by <strong>Norman Myers (1988)</strong></li>
+          <li>Globally: <strong>36 biodiversity hotspots</strong> (as of 2023), covering ~2.5% of Earth's land surface but harbouring &gt;60% of the world's plant, reptile, bird and amphibian species</li>
+          <li>India's hotspots: (1) <strong>Western Ghats &amp; Sri Lanka</strong> (2) <strong>Eastern Himalayas (Indo-Burma)</strong> (3) <strong>Sundaland</strong> (Nicobar Islands) (4) <strong>Western Ghats</strong> are often split as a separate India-specific hotspot in exam contexts</li>
+          <li>India has ~7–8% of world's biodiversity on ~2.4% of world's land area</li>
+        </ul>
+      </div>
+
+      <div class="purple-box">
+        <div class="pl-label">IUCN Red List Categories (Threat Status)</div>
+        <ul>
+          <li><strong>Extinct (EX)</strong> — no individual known to survive anywhere. Ex: Dodo (<em>Raphus cucullatus</em>), Passenger pigeon, Pyrenean ibex</li>
+          <li><strong>Extinct in the Wild (EW)</strong> — survives only in captivity. Ex: Hawaiian crow (<em>Corvus hawaiiensis</em>)</li>
+          <li><strong>Critically Endangered (CR)</strong> — extremely high risk. Ex: Indian Vulture, Sumatran orangutan, Amur leopard</li>
+          <li><strong>Endangered (EN)</strong> — high risk. Ex: Bengal tiger, Snow leopard, Asiatic lion, Ganges river dolphin</li>
+          <li><strong>Vulnerable (VU)</strong> — facing high risk. Ex: Indian elephant, Great white shark, Polar bear, Hippopotamus</li>
+          <li><strong>Near Threatened (NT)</strong> — close to qualifying for threatened category. Ex: Striped hyena</li>
+          <li><strong>Least Concern (LC)</strong> — widespread and abundant. Ex: House sparrow, Common crow</li>
+        </ul>
+      </div>
+
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Conservation Strategy</th><th>Definition</th><th>Examples</th></tr>
+          <tr><td><b>In situ Conservation</b></td><td>Conservation of species in their natural habitat (on-site)</td><td>National parks (no human activity allowed), Wildlife sanctuaries (some human activity), Biosphere reserves, Sacred groves (<em>Dev vans</em>)</td></tr>
+          <tr><td><b>Ex situ Conservation</b></td><td>Conservation outside natural habitat (off-site)</td><td>Zoological parks (zoos), Botanical gardens, Seed banks, Gene banks, Cryopreservation, Tissue culture, Aquaria</td></tr>
+        </table>
+      </div>
+
+      <div class="eg-box">
+        <div class="eg-label">India — Protected Area Network</div>
+        <ul>
+          <li>India has <strong>106 National Parks</strong>, <strong>567 Wildlife Sanctuaries</strong> and <strong>18 Biosphere Reserves</strong> (as of 2024)</li>
+          <li>Notable National Parks: Jim Corbett (first NP in India, 1936, Uttarakhand); Kaziranga (one-horned rhino, Assam); Ranthambore (tigers, Rajasthan); Gir (Asiatic lions, Gujarat); Sundarbans (Royal Bengal tigers, mangroves, West Bengal)</li>
+          <li>World Heritage Sites (Natural): Kaziranga, Manas, Keoladeo Ghana (Bharatpur), Sundarbans, Western Ghats, Great Himalayan NP</li>
+          <li>Biosphere Reserve: large multi-use protected area with core zone (strict), buffer zone and transition zone. Examples: Nilgiri (first in India, 1986), Nanda Devi, Gulf of Mannar</li>
+        </ul>
+      </div>
+
+      <div class="ochre-box">
+        <div class="oc-label">Causes of Biodiversity Loss — HIPPO</div>
+        <ul>
+          <li><strong>H</strong>abitat loss, degradation and fragmentation — LARGEST cause of species extinction globally (deforestation, urbanisation, agriculture)</li>
+          <li><strong>I</strong>nvasive alien species — non-native species introduced to new ecosystems that outcompete natives. Examples: Water hyacinth (<em>Eichhornia crassipes</em>) in India's water bodies; <em>Lantana camara</em> in forests; Nile perch in Lake Victoria → wiped out 200+ native cichlid species</li>
+          <li><strong>P</strong>ollution — air, water and soil pollution kill organisms and disrupt food chains. DDT caused eggshell thinning in raptors → near extinction of Peregrine falcon and Bald eagle</li>
+          <li><strong>P</strong>opulation (human overexploitation) — overhunting, overfishing, poaching. Examples: Dodo hunted to extinction; Blue whale hunted to near extinction; Tiger and rhino poached for body parts</li>
+          <li><strong>O</strong>ver-exploitation — taking resources faster than they can regenerate (fishing, logging, bushmeat)</li>
+          <li><strong>Climate Change</strong> — shifting temperature and rainfall patterns → habitat shifts, coral bleaching, polar ice melt → species cannot adapt fast enough</li>
+          <li><strong>Co-extinction</strong> — when a species goes extinct, species dependent on it (parasites, mutualists, commensals) also go extinct. Example: extinction of a specific plant → extinction of its specialist pollinator</li>
+        </ul>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Biodiversity Exam Traps</div>
+        <ul>
+          <li>Jim Corbett National Park was the <strong>first National Park in India</strong>, established in <strong>1936</strong> (originally called Hailey National Park). Do NOT confuse with Kaziranga (first UNESCO World Heritage Site among NPs).</li>
+          <li><strong>In situ</strong> = in natural habitat (national parks, sanctuaries); <strong>Ex situ</strong> = outside natural habitat (zoos, seed banks). Both are equally important.</li>
+          <li>Water hyacinth (<em>Eichhornia crassipes</em>) is an <strong>invasive alien species</strong>, NOT a native Indian plant — it is native to South America.</li>
+          <li>The <strong>first Biosphere Reserve in India</strong> was <strong>Nilgiri</strong> (1986), NOT Jim Corbett or Kaziranga.</li>
+          <li>Co-extinction is often the FORGOTTEN cause of biodiversity loss in exams — remember: loss of one species causes chain reactions.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5 -->
+  <div class="sec-label">Section 5 — Environmental Pollution</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#F8E8E6">🏭</div>
+      <div style="flex:1">
+        <div class="c-title">Air, Water &amp; Soil Pollution</div>
+        <div class="c-sub">Pollutants, effects, major disasters, air quality index</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+
+      <div class="fact-box">
+        <div class="fb-label">Air Pollution — Key Pollutants &amp; Effects</div>
+        <ul>
+          <li><strong>Carbon Monoxide (CO)</strong> — produced by incomplete combustion (vehicle exhaust, burning); colourless, odourless; binds haemoglobin (~240× stronger than O₂) → reduces O₂ carrying capacity → suffocation; primary pollutant</li>
+          <li><strong>Sulphur Dioxide (SO₂)</strong> — burning of coal and oil (power plants, smelters); causes acid rain (SO₂ + H₂O → H₂SO₃); irritates respiratory tract; London smog (1952) killed ~4,000–12,000 people</li>
+          <li><strong>Nitrogen Oxides (NOₓ)</strong> — vehicle exhaust, power plants; involved in photochemical smog (Los Angeles type); causes acid rain (NO₂ + H₂O → HNO₃)</li>
+          <li><strong>Particulate Matter (PM₂.₅ and PM₁₀)</strong> — tiny particles in air; penetrate deep into lungs; cause lung cancer, cardiovascular disease, COPD; major concern in Indian cities</li>
+          <li><strong>Lead (Pb)</strong> — leaded petrol (phased out); paint; damages nervous system (neurotoxin) especially in children; causes learning disability</li>
+          <li><strong>Ozone (O₃)</strong> — secondary pollutant in troposphere; formed by sunlight + NOₓ + VOCs → photochemical smog; irritates lungs; at stratospheric level, protective (absorbs UV-B)</li>
+          <li><strong>Volatile Organic Compounds (VOCs)</strong> — paints, solvents, fuel vapours; precursor to ground-level ozone and smog</li>
+        </ul>
+      </div>
+
+      <div class="teal-box">
+        <div class="tl-label">Water Pollution — Key Concepts</div>
+        <ul>
+          <li><strong>Eutrophication</strong> — excessive nutrient enrichment (N, P from agricultural runoff, sewage) → algal blooms → algae consume O₂ during decomposition → Biological Oxygen Demand (BOD) rises → fish die (dead zones). <strong>Cultural eutrophication</strong> = human-accelerated eutrophication</li>
+          <li><strong>BOD (Biochemical Oxygen Demand)</strong> — amount of O₂ required by bacteria to decompose organic matter in water. <strong>High BOD = more polluted water</strong>. Pure water: BOD &lt; 1 mg/L; highly polluted: BOD &gt; 17 mg/L</li>
+          <li><strong>Biomagnification (Biological magnification)</strong> — concentration of a pollutant increases at each successive trophic level. Example: DDT → plankton (low DDT) → small fish → large fish → fish-eating birds (osprey, eagle) — highest DDT concentration; caused eggshell thinning → reproductive failure → population crash</li>
+          <li><strong>Mercury poisoning (Minamata disease)</strong> — industrial mercury discharge → Minamata Bay, Japan (1956); methylmercury concentrated in fish → neurological damage in humans eating fish</li>
+          <li><strong>Arsenic poisoning</strong> — geogenic (natural) arsenic in groundwater in West Bengal and Bangladesh; cause of largest mass poisoning in history</li>
+          <li><strong>Fluorosis</strong> — excess fluoride in drinking water → dental and skeletal fluorosis; endemic in Rajasthan, Gujarat, Andhra Pradesh</li>
+        </ul>
+      </div>
+
+      <div class="slate-box">
+        <div class="sl-label">Soil Pollution — Causes &amp; Effects</div>
+        <ul>
+          <li><strong>Pesticides and herbicides</strong> — DDT, BHC, Endosulfan; persist in soil (non-biodegradable) → enter food chains → biomagnification</li>
+          <li><strong>Heavy metals</strong> — Cadmium (Cd), Lead (Pb), Mercury (Hg), Chromium (Cr) from industrial effluents; toxic to plants and animals; accumulate in soil</li>
+          <li><strong>Itai-Itai disease</strong> — cadmium contamination from Zn-mining runoff in Japan's Jinzū River; caused painful brittle bones (Itai-Itai = "it hurts it hurts" in Japanese)</li>
+          <li><strong>Solid waste</strong> — plastics, e-waste, municipal solid waste; microplastics now found in soil worldwide</li>
+          <li><strong>Radioactive waste</strong> — nuclear power plants, mining; long half-lives; causes mutations, cancer</li>
+        </ul>
+      </div>
+
+      <div class="rule-box">
+        <div class="rl-label">Major Environmental Disasters — Exam List</div>
+        <p><strong>Bhopal Gas Tragedy (2–3 December 1984)</strong> — Union Carbide India Ltd plant released Methyl Isocyanate (MIC) gas; deadliest industrial disaster (~3,787 immediate deaths; 500,000+ affected); Bhopal, Madhya Pradesh, India. <strong>Chernobyl (1986)</strong> — nuclear reactor explosion; radioactive cesium and iodine released; Ukraine (then USSR). <strong>Fukushima (2011)</strong> — tsunami triggered nuclear meltdown; Japan. <strong>Exxon Valdez (1989)</strong> — oil tanker spill off Alaska; major marine pollution. <strong>London Smog (1952)</strong> — SO₂ + fog → deadly smog; ~4,000–12,000 deaths; led to Clean Air Act 1956 (UK).</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6 -->
+  <div class="sec-label">Section 6 — Global Environmental Issues</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#DDE8F4">🌡️</div>
+      <div style="flex:1">
+        <div class="c-title">Climate Change, Ozone Depletion &amp; Greenhouse Effect</div>
+        <div class="c-sub">Global warming, GHGs, ozone hole, acid rain, international agreements</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+
+      <div class="ochre-box">
+        <div class="oc-label">Greenhouse Effect &amp; Global Warming</div>
+        <ul>
+          <li><strong>Greenhouse Effect</strong>: Short-wave solar radiation passes through atmosphere → absorbed by Earth's surface → re-emitted as long-wave infrared (heat) → greenhouse gases (GHGs) absorb this heat → warm the atmosphere. A <em>natural</em> greenhouse effect is essential for life (without it, Earth's average T would be –18°C instead of +15°C)</li>
+          <li><strong>Enhanced Greenhouse Effect</strong> (Global Warming): Human activities increase GHG concentrations → trapping more heat → rising temperatures</li>
+          <li><strong>Major Greenhouse Gases</strong> (by contribution to global warming): CO₂ (most by volume, ~60% of warming) &gt; CH₄ (methane, ~20%) &gt; N₂O (nitrous oxide) &gt; O₃ (ground-level ozone) &gt; CFCs (highest Global Warming Potential per molecule)</li>
+          <li>Water vapour is the most abundant natural GHG but is NOT directly anthropogenic</li>
+          <li><strong>Global Warming Potential (GWP)</strong>: CO₂ = 1 (reference); CH₄ = 25; N₂O = 298; SF₆ = ~23,500 (highest); CFCs = 4,000–10,000+</li>
+          <li>Consequences of global warming: sea level rise, more frequent extreme weather events, melting glaciers and ice caps, coral bleaching, species range shifts, agricultural disruption</li>
+        </ul>
+      </div>
+
+      <div class="purple-box">
+        <div class="pl-label">Ozone Layer Depletion</div>
+        <ul>
+          <li>The <strong>ozone layer</strong> is in the <strong>stratosphere</strong> (15–35 km altitude); absorbs harmful <strong>UV-B radiation</strong> (280–315 nm wavelength) from the Sun</li>
+          <li><strong>Ozone hole</strong> first discovered over <strong>Antarctica</strong> in 1985 by British Antarctic Survey (Farman, Gardiner, Shanklin)</li>
+          <li><strong>Culprits</strong>: <strong>CFCs (Chlorofluorocarbons)</strong> — refrigerants (Freon), aerosol propellants, foam blowing agents — release Cl atoms that catalytically destroy O₃ (one Cl atom can destroy 100,000 ozone molecules). Also: Halons (fire extinguishers), N₂O, CH₄</li>
+          <li>Effects of increased UV-B: skin cancer (melanoma), cataracts, weakened immune system in humans; phytoplankton decline → disrupts marine food chains; crop damage</li>
+          <li><strong>Montreal Protocol (1987)</strong> — international treaty to phase out CFC production and consumption; most successful international environmental treaty; CFCs being replaced by HFCs (hydrofluorocarbons) — but HFCs are potent GHGs (irony!)</li>
+        </ul>
+      </div>
+
+      <div class="teal-box">
+        <div class="tl-label">Acid Rain</div>
+        <ul>
+          <li><strong>Acid rain</strong> = precipitation (rain, snow, fog) with pH &lt; 5.6 (normal rain pH ~5.6 due to dissolved CO₂ forming carbonic acid)</li>
+          <li>Caused by: SO₂ (from coal combustion, smelters) and NOₓ (from vehicles, power plants) reacting with atmospheric water → sulphuric acid (H₂SO₄) and nitric acid (HNO₃)</li>
+          <li>Effects: acidification of lakes and rivers (kills fish; Sweden's lakes severely affected in 1970s–80s); leaches toxic metals (Al, Pb) from soil into water; damages forests (Black Forest in Germany); corrodes buildings and monuments (Taj Mahal — marble cancer from SO₂)</li>
+          <li>Taj Mahal is threatened by acid rain from Mathura oil refinery and Agra industrial units — marble (CaCO₃) + H₂SO₄ → CaSO₄ (gypsum) → powdering/yellowing</li>
+        </ul>
+      </div>
+
+      <div class="fact-box">
+        <div class="fb-label">Key International Environmental Agreements</div>
+        <ul>
+          <li><strong>Stockholm Conference (1972)</strong> — first UN conference on human environment; established UNEP (United Nations Environment Programme); June 5 declared World Environment Day</li>
+          <li><strong>Ramsar Convention (1971)</strong> — wetlands of international importance; India has 75+ Ramsar sites (2023); Chilika Lake (Odisha) and Keoladeo Ghana (Rajasthan) among first in India (1981)</li>
+          <li><strong>CITES (1973)</strong> — Convention on International Trade in Endangered Species; regulates trade in wild flora and fauna; 3 appendices (I = total ban; II = controlled; III = specific country request)</li>
+          <li><strong>Montreal Protocol (1987)</strong> — phase-out of CFCs to protect ozone layer; universally ratified</li>
+          <li><strong>Kyoto Protocol (1997)</strong> — legally binding emission reduction targets for developed nations (Annex I countries); USA did not ratify; India and China excluded as developing nations</li>
+          <li><strong>Paris Agreement (2015)</strong> — limit global temperature rise to &lt;2°C (ideally 1.5°C) above pre-industrial levels; nationally determined contributions (NDCs); 196 parties</li>
+          <li><strong>Convention on Biological Diversity (CBD, 1992)</strong> — Rio Earth Summit; Nagoya Protocol (2010) on access and benefit sharing of genetic resources</li>
+        </ul>
+      </div>
+
+      <div class="stat-band">
+        <div class="stat-cell"><div class="stat-val">1972</div><div class="stat-lbl">Stockholm Conf.</div></div>
+        <div class="stat-cell"><div class="stat-val">1987</div><div class="stat-lbl">Montreal Protocol</div></div>
+        <div class="stat-cell"><div class="stat-val">1997</div><div class="stat-lbl">Kyoto Protocol</div></div>
+        <div class="stat-cell"><div class="stat-val">2015</div><div class="stat-lbl">Paris Agreement</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 7 -->
+  <div class="sec-label">Section 7 — Ecological Succession &amp; Biomes</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#D8F0E0">🌱</div>
+      <div style="flex:1">
+        <div class="c-title">Ecological Succession, Biomes &amp; Population Ecology</div>
+        <div class="c-sub">Primary/secondary succession, major biomes, population growth models</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+
+      <div class="slate-box">
+        <div class="sl-label">Ecological Succession</div>
+        <ul>
+          <li><strong>Ecological succession</strong> — the gradual and predictable directional change in the species composition and community structure of an ecosystem over time, until a stable <strong>climax community</strong> is reached</li>
+          <li><strong>Pioneer species</strong> — first colonisers; hardy, stress-tolerant; e.g., lichens on bare rock, grasses after a fire. They modify the environment (soil building, shade) → allow subsequent species to establish</li>
+          <li><strong>Primary succession</strong> — begins on bare, lifeless substrate that has never had life (bare rock, lava flows, sand dunes, glacial moraines). Very slow (100s–1000s of years). Pioneer species = lichens → mosses → grasses → shrubs → trees (forest)</li>
+          <li><strong>Secondary succession</strong> — begins on a previously inhabited area after disturbance (fire, flood, agriculture). Faster than primary succession as soil already exists. Pioneer species = grasses, annual weeds → perennial plants → shrubs → forest</li>
+          <li><strong>Climax community</strong> — the final, stable, self-sustaining community in equilibrium with the climate. Species composition changes slowly. Example: tropical rainforest in warm-humid regions; deciduous forest in temperate zones</li>
+          <li><strong>Hydrarch succession</strong> — begins in water (pond, lake); ends with terrestrial (forest) climax over time as the water body fills up</li>
+          <li><strong>Xerarch succession</strong> — begins on dry, xeric habitats (bare rock); ends with mesophytic forest climax</li>
+        </ul>
+      </div>
+
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Biome</th><th>Climate</th><th>Characteristic Vegetation</th><th>Key Animals</th></tr>
+          <tr><td><b>Tropical Rainforest</b></td><td>Hot and wet year-round (&gt;200 cm rain; 25–35°C)</td><td>Multi-layered canopy; epiphytes; lianas; evergreen broadleaf trees; highest biodiversity</td><td>Jaguars, toucans, sloths, poison dart frogs; most species-rich biome</td></tr>
+          <tr><td><b>Tropical Savanna</b></td><td>Warm; seasonal rainfall; distinct dry season</td><td>Grassland with scattered trees (acacia, baobab)</td><td>Elephant, lion, zebra, wildebeest, giraffe (Africa); kangaroo (Australia)</td></tr>
+          <tr><td><b>Temperate Deciduous Forest</b></td><td>Moderate rainfall; 4 seasons; 0–30°C</td><td>Deciduous broadleaf trees (oak, maple, beech, birch); seasonal leaf fall</td><td>Deer, bear, fox, wolf, squirrel</td></tr>
+          <tr><td><b>Temperate Grassland</b></td><td>Low rainfall; hot summer, cold winter</td><td>Dominated by grasses; few trees; e.g., Prairies (N America), Steppes (Russia), Pampas (S America), Veldt (Africa)</td><td>Bison, prairie dog, pronghorn antelope</td></tr>
+          <tr><td><b>Desert</b></td><td>Very low rainfall (&lt;25 cm/yr); extreme temp fluctuations</td><td>Cacti, succulents, xerophytes; sparse vegetation; extensive bare soil</td><td>Camel, scorpion, rattlesnake, Gila woodpecker</td></tr>
+          <tr><td><b>Tundra</b></td><td>Very cold; permafrost; low rainfall</td><td>Mosses, lichens, sedges, dwarf shrubs; no trees; low productivity</td><td>Polar bear, Arctic fox, caribou/reindeer, snowy owl; migratory birds in summer</td></tr>
+          <tr><td><b>Taiga (Boreal Forest)</b></td><td>Cold; moderate rainfall; coniferous forest</td><td>Spruce, fir, pine, larch; needle-leaved evergreen trees; largest land biome</td><td>Moose, wolf, lynx, beaver, migratory birds</td></tr>
+        </table>
+      </div>
+
+      <div class="analogy-box">
+        <div class="an-label">Population Growth Models</div>
+        <p>Two fundamental growth models: (1) <strong>Exponential (J-shaped) growth</strong> — unlimited resources; population grows without bound; N = N₀e^(rt); seen in bacteria in ideal conditions, invasive species entering new territory. (2) <strong>Logistic (S-shaped/sigmoid) growth</strong> — limited resources; growth slows as population approaches <strong>Carrying Capacity (K)</strong> — the maximum population an environment can support sustainably. Real populations show logistic growth. The logistic model was described by Verhulst (1838). Concept of <strong>r (intrinsic rate of natural increase)</strong> and <strong>K (carrying capacity)</strong> is key to population ecology.</p>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /theory -->
+
+<!-- ════════════════════════════ QUICK REF ══════════════════════ -->
+<div class="pane" id="quickref">
+  <div class="ref-grid">
+
+    <div class="ref-card">
+      <div class="ref-card-title">Ecology — Key Concepts &amp; Discoverers</div>
+      <ul>
+        <li><b>Ecology</b> coined by <em>Ernst Haeckel</em> (1866) — study of organism-environment interactions</li>
+        <li><b>Ecosystem</b> term by <em>A.G. Tansley</em> (1935); food chain concept by <em>Charles Elton</em> (1927)</li>
+        <li><b>10% Law</b> — Raymond Lindeman (1942); only 10% energy transferred per trophic level</li>
+        <li><b>Biodiversity hotspot</b> — Norman Myers (1988); 36 global hotspots; &gt;70% habitat lost</li>
+        <li>India's hotspots: <em>Western Ghats, Eastern Himalayas, Sundaland</em> (Nicobar)</li>
+        <li>India = megadiverse country; ~7–8% of world biodiversity on 2.4% of land</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Ecological Pyramids — Must Know</div>
+      <ul>
+        <li><b>Pyramid of Energy</b> — <em>ALWAYS UPRIGHT</em>; can never be inverted (10% law)</li>
+        <li><b>Pyramid of Biomass</b> — upright in terrestrial; <em>INVERTED in aquatic</em> (phytoplankton low standing biomass)</li>
+        <li><b>Pyramid of Numbers</b> — can be upright, inverted OR irregular</li>
+        <li>Energy flows <em>unidirectionally</em>; matter/nutrients are <em>recycled</em></li>
+        <li><b>GFC</b> = starts with living plants; <b>DFC</b> = starts with dead organic matter (detritus)</li>
+        <li>Food webs give ecosystem stability; keystone species = disproportionate ecosystem role</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Nitrogen Cycle Bacteria</div>
+      <ul>
+        <li><b>Nitrogen fixation</b>: <em>Rhizobium</em> (legume root nodules) · <em>Azotobacter</em> (aerobic, free-living) · <em>Clostridium</em> (anaerobic) · <em>Nostoc, Anabaena</em> (cyanobacteria)</li>
+        <li><b>Nitrification</b>: NH₄⁺ → NO₂⁻ by <em>Nitrosomonas</em>; NO₂⁻ → NO₃⁻ by <em>Nitrobacter</em></li>
+        <li><b>Denitrification</b>: NO₃⁻ → N₂ by <em>Pseudomonas, Thiobacillus</em></li>
+        <li><b>Ammonification</b>: Dead matter → NH₃ by bacteria and fungi</li>
+        <li>Phosphorus cycle has <em>NO gaseous phase</em> — sedimentary cycle only</li>
+        <li>P is often limiting nutrient in freshwater → eutrophication when excess</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Biodiversity Conservation</div>
+      <ul>
+        <li><b>In situ</b> — in natural habitat: National Parks, Sanctuaries, Biosphere Reserves, Sacred groves</li>
+        <li><b>Ex situ</b> — outside habitat: Zoos, Botanical gardens, Seed banks, Gene banks</li>
+        <li><b>Jim Corbett NP</b> — first NP in India (1936), Uttarakhand</li>
+        <li><b>Nilgiri BR</b> — first Biosphere Reserve in India (1986)</li>
+        <li>India: 106 NPs · 567 Sanctuaries · 18 Biosphere Reserves</li>
+        <li>HIPPO: Habitat loss · Invasive species · Pollution · Population · Over-exploitation → largest threats</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Pollution &amp; Environmental Disasters</div>
+      <ul>
+        <li><b>Eutrophication</b> — excess N/P → algal blooms → high BOD → O₂ depletion → fish kill</li>
+        <li><b>Biomagnification</b> — DDT concentration increases up trophic levels; highest in top predators</li>
+        <li><b>Minamata disease</b> — methyl mercury; Japan 1956; neurological damage</li>
+        <li><b>Itai-Itai disease</b> — cadmium; Japan; brittle bones</li>
+        <li><b>Bhopal Gas Tragedy</b> — MIC gas; 2–3 Dec 1984; deadliest industrial disaster</li>
+        <li>Taj Mahal threatened by acid rain (SO₂) — "marble cancer" (CaCO₃ → CaSO₄)</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Global Issues &amp; International Agreements</div>
+      <ul>
+        <li><b>Greenhouse gases</b>: CO₂ (most by volume) &lt; CH₄ &lt; N₂O &lt; CFCs (highest GWP per molecule)</li>
+        <li><b>Ozone layer</b> in stratosphere; UV-B absorber; CFC destroys O₃; hole over Antarctica</li>
+        <li><b>Montreal Protocol (1987)</b> — phase-out of CFCs; most successful enviro treaty</li>
+        <li><b>Stockholm 1972</b> — UNEP formed; World Environment Day = June 5</li>
+        <li><b>Ramsar Convention</b> — wetland protection; India has 75+ Ramsar sites</li>
+        <li><b>Paris Agreement (2015)</b> — limit warming to &lt;2°C; NDCs from all nations</li>
+        <li><b>Kyoto Protocol (1997)</b> — binding targets for developed countries only</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Biomes &amp; Succession</div>
+      <ul>
+        <li><b>Tropical rainforest</b> — highest biodiversity; multi-layered canopy; &gt;200 cm rain</li>
+        <li><b>Tundra</b> — permafrost; mosses/lichens/sedges; no trees; polar bear, caribou</li>
+        <li><b>Taiga</b> — largest land biome; coniferous (spruce, fir, pine)</li>
+        <li><b>Primary succession</b> — bare rock; very slow; lichens → moss → grass → forest</li>
+        <li><b>Secondary succession</b> — disturbed soil; faster; grass → shrubs → forest</li>
+        <li><b>Climax community</b> — final stable community; in equilibrium with climate</li>
+        <li>Carrying capacity (K) = max population environment can support; logistic (S-curve) growth</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════ QUIZ ═════════════════════════ -->
+<div class="pane" id="quiz">
+  <div class="quiz-stats">
+    <div class="qs-cell"><div class="qs-val" id="s-att">0</div><div class="qs-lbl">Attempted</div></div>
+    <div class="qs-cell"><div class="qs-val g" id="s-cor">0</div><div class="qs-lbl">Correct</div></div>
+    <div class="qs-cell"><div class="qs-val r" id="s-wrg">0</div><div class="qs-lbl">Wrong</div></div>
+    <div class="qs-cell"><div class="qs-val a" id="s-tot">15</div><div class="qs-lbl">Total</div></div>
+  </div>
+  <div class="prog-wrap">
+    <div class="prog-label" id="prog-label">0 of 15 answered</div>
+    <div class="prog-bar"><div class="prog-fill" id="prog"></div></div>
+  </div>
+  <div class="quiz-actions">
+    <button class="btn btn-primary" onclick="submitAll()">Submit All &amp; Check</button>
+    <button class="btn btn-ghost" onclick="resetQuiz()">&#8635; Reset Quiz</button>
+  </div>
+  <div id="results"></div>
+  <div id="q-area"></div>
+</div>
+
+</div><!-- /page -->
+
+<script>
+const QS=[
+
+{d:"EASY",e:"NDA 2022",
+q:"The term 'Ecosystem' was coined by:",
+opts:["Ernst Haeckel","A.G. Tansley","Charles Elton","Raymond Lindeman"],
+ans:1,
+rule:"Ecosystem = A.G. Tansley (1935); Ecology = Haeckel (1866); food chain/pyramid = Elton (1927); 10% law = Lindeman (1942)",
+exp:"A.G. TANSLEY coined the term ECOSYSTEM in 1935 to describe the complex of organisms (biotic) and their physical environment (abiotic) interacting as a single functional unit. ERNST HAECKEL coined the term ECOLOGY in 1866 (from Greek oikos = house, logos = study). CHARLES ELTON introduced the concept of FOOD CHAINS and the ECOLOGICAL PYRAMID (Eltonian pyramid) in his 1927 book 'Animal Ecology'. RAYMOND LINDEMAN formulated the 10% LAW OF ENERGY TRANSFER in 1942, stating that only ~10% of energy available at one trophic level is transferred to the next. Each scientist made a distinct foundational contribution — knowing which name goes with which concept is critical for defence exams."},
+
+{d:"EASY",e:"CDS 2023",
+q:"Which of the following ecological pyramids can NEVER be inverted under any circumstances?",
+opts:["Pyramid of Numbers","Pyramid of Biomass","Pyramid of Energy","Both Pyramid of Numbers and Biomass"],
+ans:2,
+rule:"Pyramid of Energy = ALWAYS upright (10% law — energy always decreases); Biomass = inverted in oceans; Numbers = can be inverted or irregular",
+exp:"The PYRAMID OF ENERGY is ALWAYS UPRIGHT and can NEVER be inverted under any ecological conditions. This is because energy always decreases at each successive trophic level due to the 10% law (Lindeman, 1942) — approximately 90% of energy is lost as heat (respiration), leaving only ~10% for the next level. Energy obeys the second law of thermodynamics — it degrades at each transfer and is NEVER recycled. The PYRAMID OF BIOMASS can be inverted in aquatic/ocean ecosystems where phytoplankton (producers) have low standing biomass but very high turnover rate, supporting a larger total biomass of consumers above them. The PYRAMID OF NUMBERS can be upright (grassland ecosystem), inverted (one large tree supporting hundreds of insects and birds), or irregular (parasitic food chain). The pyramid of energy is the MOST fundamental and always reflects the one-way flow of energy."},
+
+{d:"EASY",e:"AFCAT 2022",
+q:"Which bacterium is responsible for nitrogen fixation in the root nodules of leguminous plants?",
+opts:["Nitrosomonas","Rhizobium","Pseudomonas","Azotobacter"],
+ans:1,
+rule:"Rhizobium = symbiotic N-fixation in legume root nodules; Azotobacter = free-living aerobic; Nitrosomonas = nitrification; Pseudomonas = denitrification",
+exp:"RHIZOBIUM is the nitrogen-fixing bacterium that lives in SYMBIOSIS within the ROOT NODULES of LEGUMINOUS PLANTS (peas, beans, lentils, soyabean, groundnut, clover, alfalfa). The plant provides carbohydrates (photosynthate) to Rhizobium; in return, Rhizobium converts atmospheric N₂ into ammonia (NH₃) — a form the plant can use. This is the MOST important biological nitrogen fixation in agriculture — it reduces the need for chemical fertilisers and is why legumes are used as green manure and in crop rotation. Why others are wrong: NITROSOMONAS is a NITRIFYING bacterium — it converts NH₄⁺ → NO₂⁻ in the soil. PSEUDOMONAS is a DENITRIFYING bacterium — it converts NO₃⁻ back to N₂ gas. AZOTOBACTER is a FREE-LIVING (non-symbiotic) nitrogen-fixing bacterium living in AEROBIC soil — not in root nodules."},
+
+{d:"EASY",e:"NDA 2021",
+q:"What is Biomagnification?",
+opts:[
+  "The increase in size of organisms as they move up a food chain",
+  "The progressive increase in the concentration of a non-degradable pollutant at each successive trophic level of a food chain",
+  "The process by which decomposers magnify soil nutrients",
+  "The increase in biodiversity at higher altitudes"
+],ans:1,
+rule:"Biomagnification = concentration of non-biodegradable pollutants (e.g., DDT, mercury) increases at each higher trophic level; highest in top predators",
+exp:"BIOMAGNIFICATION (also called Biological Magnification or Bioaccumulation) is the progressive INCREASE IN CONCENTRATION of a persistent, non-biodegradable pollutant at each successive trophic level of a food chain. This occurs because the pollutant cannot be broken down by the body's metabolic processes, so it accumulates in fatty tissues. As predators eat many prey organisms, they accumulate the total pollution load of all their prey. The classic example is DDT (dichlorodiphenyltrichloroethane): plankton may contain 0.003 ppm DDT → small fish (~0.5 ppm) → large fish (~2 ppm) → fish-eating birds like osprey and bald eagle (~25 ppm). High DDT in birds caused EGGSHELL THINNING → eggs cracked during incubation → reproductive failure → population crash. Rachel Carson's 1962 book SILENT SPRING documented this, leading to the ban of DDT in many countries. MERCURY in fish is another classic example (Minamata disease in Japan, 1956)."},
+
+{d:"MEDIUM",e:"CDS 2022",
+q:"The Bhopal Gas Tragedy (December 1984) was caused by the release of which gas?",
+opts:[
+  "Carbon Monoxide (CO)",
+  "Chlorine gas (Cl₂)",
+  "Methyl Isocyanate (MIC)",
+  "Hydrogen Cyanide (HCN)"
+],ans:2,
+rule:"Bhopal Gas Tragedy (2-3 Dec 1984) = Methyl Isocyanate (MIC) gas leak from Union Carbide India Ltd plant; deadliest industrial disaster",
+exp:"The BHOPAL GAS TRAGEDY (2–3 December 1984) was caused by the accidental release of METHYL ISOCYANATE (MIC — CH₃NCO) gas from the pesticide manufacturing plant of UNION CARBIDE INDIA LIMITED (UCIL) in Bhopal, Madhya Pradesh, India. It is the world's WORST INDUSTRIAL DISASTER. Approximately 40 tonnes of MIC gas leaked from a storage tank due to water entering the tank, triggering a runaway exothermic reaction. MIC is highly toxic — it reacts with moisture in the lungs and eyes, causing pulmonary oedema, blindness, and multi-organ failure. DEATHS: approximately 3,787 officially (immediate), with estimates up to 8,000–16,000 in the following weeks; over 500,000 people were exposed and affected. The Bhopal disaster led to major changes in industrial safety regulations globally (right-to-know laws, emergency planning) and is a landmark case in environmental law and corporate liability. Warren Anderson (CEO of Union Carbide) fled India — creating a major legal controversy."},
+
+{d:"MEDIUM",e:"NDA 2023",
+q:"The Montreal Protocol (1987) was primarily designed to address:",
+opts:[
+  "Reduction of greenhouse gas emissions to limit global warming",
+  "Protection of wetlands of international importance",
+  "Phase-out of ozone-depleting substances, especially chlorofluorocarbons (CFCs)",
+  "Control of trade in endangered species of wild flora and fauna"
+],ans:2,
+rule:"Montreal Protocol (1987) = phase-out of CFCs and ozone-depleting substances; CITES = endangered species trade; Ramsar = wetlands; Kyoto/Paris = GHGs",
+exp:"The MONTREAL PROTOCOL (1987) is an international treaty specifically designed to protect the OZONE LAYER by phasing out the production and consumption of OZONE-DEPLETING SUBSTANCES (ODS), primarily CHLOROFLUOROCARBONS (CFCs) — used in refrigerants (Freon), aerosol propellants, and foam-blowing agents. CFCs release chlorine atoms in the stratosphere that catalytically destroy ozone molecules (one Cl atom can destroy 100,000 ozone molecules). The ozone layer protects life from harmful UV-B radiation. The Montreal Protocol has been universally ratified (every UN member state) and is considered THE MOST SUCCESSFUL international environmental treaty in history — scientific evidence shows the ozone layer is slowly recovering. CFCs are being replaced by HFCs (hydrofluorocarbons), but HFCs are potent greenhouse gases — addressed by the Kigali Amendment (2016) to the Montreal Protocol. WHY OTHERS ARE WRONG: Greenhouse gas emissions = Kyoto Protocol (1997) + Paris Agreement (2015). Wetlands = Ramsar Convention (1971). Endangered species trade = CITES (1973)."},
+
+{d:"MEDIUM",e:"AFCAT 2023",
+q:"Which of the following is the CORRECT sequence of organisms in a DETRITUS food chain?",
+opts:[
+  "Grass → Grasshopper → Frog → Snake → Eagle",
+  "Phytoplankton → Zooplankton → Small fish → Large fish",
+  "Dead organic matter (leaf litter) → Earthworm → Robin → Hawk",
+  "Green algae → Water insect → Small fish → Heron"
+],ans:2,
+rule:"Detritus food chain starts with DEAD organic matter (detritus); Grazing food chain starts with LIVING producers; options A, B, D are all grazing food chains",
+exp:"A DETRITUS FOOD CHAIN (DFC) begins with DEAD ORGANIC MATTER (detritus) — dead plant and animal remains, excreta — and passes energy to DECOMPOSERS (bacteria, fungi) and DETRITIVORES (earthworms, millipedes, wood lice, dung beetles, termites). OPTION C is correct: DEAD ORGANIC MATTER (leaf litter) → EARTHWORM (detritivore) → ROBIN → HAWK — this chain begins with dead organic matter, not with living plants. WHY OTHERS ARE WRONG: OPTIONS A, B, D are all GRAZING FOOD CHAINS (GFC) — they begin with LIVING PRODUCERS (grass, phytoplankton, green algae) that photosynthesise. In most terrestrial forest ecosystems, the DETRITUS FOOD CHAIN dominates — more energy flows through decomposers/detritivores than through grazers. In aquatic ecosystems, the grazing food chain dominates. The DFC is critical for nutrient recycling — without it, nutrients would remain locked in dead organic matter indefinitely."},
+
+{d:"MEDIUM",e:"CDS 2021",
+q:"Which of the following pairs is CORRECTLY matched — disease/condition with its cause?",
+opts:[
+  "Minamata disease — excess fluoride in drinking water",
+  "Itai-Itai disease — methyl mercury contamination in fish",
+  "Fluorosis — cadmium contamination from mining runoff",
+  "Minamata disease — methyl mercury contamination from industrial discharge into Minamata Bay, Japan"
+],ans:3,
+rule:"Minamata = methyl mercury, Japan (1956); Itai-Itai = cadmium, Japan; Fluorosis = excess fluoride in drinking water",
+exp:"OPTION D is correct: MINAMATA DISEASE was caused by METHYL MERCURY (CH₃Hg⁺) contamination from the Chisso Corporation chemical factory, which discharged mercury-laden wastewater into MINAMATA BAY, Japan, from the 1930s to 1968. Methylmercury bioaccumulated and biomagnified in fish and shellfish → fishing communities eating these fish developed severe neurological symptoms: sensory disturbances (numbness of extremities), ataxia (impaired coordination), constriction of visual fields, hearing impairment, speech difficulties, and in severe cases, insanity, paralysis, coma, and death. First described in 1956. WHY OTHERS ARE WRONG: OPTION A — Minamata disease is caused by mercury, NOT fluoride. OPTION B — Itai-Itai disease is caused by CADMIUM (Cd), NOT mercury. OPTION C — Fluorosis is caused by excess FLUORIDE in drinking water, NOT cadmium. ITAI-ITAI disease ('it hurts it hurts' in Japanese) — cadmium from Zn-Pb mining contaminated the Jinzū River in Toyama Prefecture; caused severe bone pain, pathological fractures, and kidney damage."},
+
+{d:"MEDIUM",e:"NDA 2022",
+q:"The first National Park established in India was:",
+opts:[
+  "Gir National Park, Gujarat (1965)",
+  "Corbett National Park, Uttarakhand (1936)",
+  "Kaziranga National Park, Assam (1974)",
+  "Bandipur National Park, Karnataka (1974)"
+],ans:1,
+rule:"Jim Corbett NP = first National Park in India (1936, originally Hailey NP), Uttarakhand; Gir = Asiatic lions; Kaziranga = one-horned rhino; Nilgiri = first Biosphere Reserve (1986)",
+exp:"JIM CORBETT NATIONAL PARK (Uttarakhand) is the FIRST NATIONAL PARK in India, established in 1936 as HAILEY NATIONAL PARK during British India (named after Sir Malcolm Hailey, then Governor of the United Provinces). It was later renamed Ramganga National Park and finally Jim Corbett National Park in 1957, in honour of Jim Corbett — the famous British-Indian hunter-turned-conservationist and author of 'Man-Eaters of Kumaon'. Corbett NP is located in the Himalayan foothills of Uttarakhand, on the banks of the Ramganga river. It was also the FIRST tiger reserve under PROJECT TIGER (launched 1973). KAZIRANGA (Assam) — famous for one-horned rhinoceros; declared NP in 1974; UNESCO World Heritage Site. GIR (Gujarat) — only habitat of Asiatic lion; protected since 1965 as sanctuary, NP since 1975. The FIRST BIOSPHERE RESERVE in India was NILGIRI Biosphere Reserve (1986), NOT Jim Corbett."},
+
+{d:"HARD",e:"CDS 2022",
+q:"With reference to the Nitrogen Cycle, which of the following is the CORRECT sequence of processes that converts atmospheric nitrogen (N₂) into a form absorbed by plant roots, and then returns it to the atmosphere?",
+opts:[
+  "N₂ → Nitrogen Fixation (Rhizobium) → NH₃ → Nitrification (Nitrosomonas, Nitrobacter) → NO₃⁻ → Assimilation → Ammonification (decomposers) → NH₄⁺ → Denitrification (Pseudomonas) → N₂",
+  "N₂ → Denitrification → NO₃⁻ → Nitrification → NH₃ → Nitrogen fixation → Proteins → N₂",
+  "N₂ → Ammonification → NH₄⁺ → Nitrification → NO₃⁻ → Assimilation → Denitrification → N₂",
+  "N₂ → Nitrification → NO₂⁻ → Assimilation → Ammonification → NH₄⁺ → Nitrogen Fixation → N₂"
+],ans:0,
+rule:"N₂ → fixation → NH₃ → nitrification → NO₃⁻ → assimilation → ammonification → NH₄⁺ → denitrification → N₂ (complete nitrogen cycle)",
+exp:"OPTION A gives the correct sequence of the complete NITROGEN CYCLE: (1) NITROGEN FIXATION: Atmospheric N₂ (inert) → NH₃/NH₄⁺ by Rhizobium (in legume nodules), Azotobacter (free-living aerobic), Clostridium (anaerobic), Nostoc/Anabaena (cyanobacteria), and by lightning/Haber process. (2) NITRIFICATION: NH₄⁺ → NO₂⁻ by Nitrosomonas → NO₃⁻ by Nitrobacter. Plants absorb NO₃⁻ or NH₄⁺ from soil. (3) ASSIMILATION: Plants incorporate nitrogen from NO₃⁻/NH₄⁺ into amino acids, proteins, nucleic acids → passed to animals through food chains. (4) AMMONIFICATION: When organisms die, decomposers (bacteria + fungi) break down proteins/nucleic acids/urea → NH₃/NH₄⁺ (returned to soil). (5) DENITRIFICATION: Pseudomonas, Thiobacillus convert NO₃⁻ → N₂ gas → returns to atmosphere, completing the cycle. WHY OTHER OPTIONS ARE WRONG: Option B starts with denitrification, which is wrong (denitrification is the last step). Option C starts with ammonification, skipping fixation. Option D starts with nitrification — you cannot nitrify atmospheric N₂ directly. Each process has specific bacteria."},
+
+{d:"HARD",e:"NDA 2023",
+q:"Eutrophication of a water body results from:",
+opts:[
+  "Decrease in pH due to acid rain, causing death of aquatic organisms",
+  "Excess nutrient (especially phosphorus and nitrogen) input from agricultural runoff and sewage, leading to algal blooms, increased BOD and oxygen depletion",
+  "Introduction of exotic predatory fish species into a lake, disrupting the native food web",
+  "Increase in water temperature due to global warming, causing thermal stratification"
+],ans:1,
+rule:"Eutrophication = excess N/P nutrients → algal blooms → decomposition → high BOD → O₂ depletion → hypoxic dead zones → fish kill; cultural eutrophication is human-accelerated",
+exp:"EUTROPHICATION is the OVER-ENRICHMENT of a water body with NUTRIENTS, especially NITROGEN (N) and PHOSPHORUS (P), leading to excessive growth of algae and aquatic plants. THE SEQUENCE: (1) Agricultural fertilisers, sewage and industrial effluents add excess N and P to water (CULTURAL EUTROPHICATION — accelerated by human activity). (2) ALGAL BLOOMS: rapid, dense proliferation of algae (and cyanobacteria), forming a green/blue-green surface mat that blocks sunlight to submerged plants. (3) When algae die, DECOMPOSERS (bacteria) break down the organic matter, consuming large amounts of dissolved oxygen. (4) BIOCHEMICAL OXYGEN DEMAND (BOD) rises sharply — BOD is the amount of O₂ needed by bacteria to decompose organic matter. High BOD = polluted water. (5) DISSOLVED OXYGEN falls → HYPOXIC/ANOXIC conditions → fish and aquatic animals suffocate and die (DEAD ZONES). The world's largest dead zone is in the Gulf of Mexico (from Mississippi River nutrient runoff). Famous Indian example: Hussain Sagar Lake (Hyderabad) and many urban lakes suffer from severe eutrophication."},
+
+{d:"HARD",e:"AFCAT 2022",
+q:"Which of the following statements about the Pyramid of Biomass is CORRECT?",
+opts:[
+  "The Pyramid of Biomass is always upright because large organisms always have more biomass than smaller ones",
+  "The Pyramid of Biomass is always inverted because producers are always smaller than consumers",
+  "In terrestrial ecosystems, the Pyramid of Biomass is typically upright; in aquatic (open ocean) ecosystems, it is typically inverted",
+  "The Pyramid of Biomass can never be inverted because biomass follows the 10% law strictly"
+],ans:2,
+rule:"Biomass pyramid: upright on land (plant biomass > herbivore > carnivore); INVERTED in open ocean (phytoplankton low standing crop but rapid turnover supports larger zooplankton/fish biomass)",
+exp:"OPTION C is correct: The PYRAMID OF BIOMASS shows the total dry weight (standing crop biomass) of organisms at each trophic level at a given moment. IN TERRESTRIAL ECOSYSTEMS (grassland, forest): Upright — plant biomass (grass, trees) >> herbivore biomass >> carnivore biomass. Example: in a grassland, the total mass of grass is far greater than all grasshoppers, which is greater than all frogs, etc. IN OPEN OCEAN (AQUATIC) ECOSYSTEMS: INVERTED — this seems paradoxical but has a clear explanation: PHYTOPLANKTON (producers) are microscopic and have a very HIGH TURNOVER RATE (reproduce very rapidly — new generation in hours to days). Although their standing biomass at any ONE MOMENT is low, they produce enormous amounts of new biomass. ZOOPLANKTON and FISH (consumers) are larger and longer-lived, accumulating biomass. So the standing crop biomass of consumers EXCEEDS that of producers at any given instant. WHY OPTION D IS WRONG: The 10% law applies to ENERGY flow (always upright pyramid), NOT to biomass. Biomass is a snapshot measure, not a rate. The pyramid of ENERGY is always upright; the pyramid of BIOMASS can be inverted (in aquatic systems)."},
+
+{d:"HARD",e:"CDS 2023",
+q:"Which of the following correctly describes a BIODIVERSITY HOTSPOT?",
+opts:[
+  "Any region with more than 1,000 plant species",
+  "A region with exceptionally high species richness and endemism (&gt;1,500 endemic vascular plant species) that has already lost more than 70% of its original primary vegetation",
+  "A region designated by the IUCN as having the highest number of Critically Endangered species",
+  "Any tropical rainforest region receiving more than 200 cm of annual rainfall"
+],ans:1,
+rule:"Biodiversity hotspot = exceptionally high endemic species richness (>1,500 endemic plants) + >70% original habitat already lost; concept by Norman Myers (1988); 36 hotspots globally",
+exp:"OPTION B correctly defines a BIODIVERSITY HOTSPOT as per the criteria established by NORMAN MYERS (1988), later refined by Conservation International: A region must meet TWO strict criteria to qualify: (1) It must contain at least 1,500 ENDEMIC vascular plant species (plants found NOWHERE ELSE on Earth) — representing at least 0.5% of the world's total vascular plant species. (2) It must have ALREADY LOST at least 70% (many sources say 30% remains, i.e., 70%+ destroyed) of its original PRIMARY VEGETATION (habitat). The idea is that these regions are both IRREPLACEABLE (high endemism = can't be replaced if lost) and UNDER THREAT (high habitat loss). Currently 36 hotspots are recognised globally, covering only ~2.5% of Earth's land surface but harbouring over 60% of the world's plant, bird, mammal, reptile and amphibian species. INDIA'S HOTSPOTS: (1) Western Ghats & Sri Lanka — extraordinarily high plant endemism; home to lion-tailed macaque, Malabar giant squirrel; (2) Eastern Himalayas (Indo-Burma region) — red panda, snow leopard; (3) Sundaland (includes Nicobar Islands). WHY A IS WRONG: The threshold is 1,500 ENDEMIC vascular plant species — not just any 1,000 plant species. WHY C IS WRONG: IUCN categories are a different system. WHY D IS WRONG: Rainfall is not a criterion for hotspots."},
+
+{d:"HARD",e:"NDA 2021",
+q:"In the context of Primary Succession, which of the following is the correct sequence from pioneer stage to climax community on a BARE ROCK?",
+opts:[
+  "Bare Rock → Mosses → Lichens → Grasses → Shrubs → Forest (Climax)",
+  "Bare Rock → Lichens → Mosses → Grasses → Shrubs → Forest (Climax)",
+  "Bare Rock → Grasses → Shrubs → Mosses → Lichens → Forest (Climax)",
+  "Bare Rock → Phytoplankton → Lichens → Grasses → Forest (Climax)"
+],ans:1,
+rule:"Primary succession on bare rock: Bare rock → Lichens (pioneer) → Mosses → Herbs/Grasses → Shrubs → Trees (climax forest); Lichens = first pioneer on bare rock (secrete acids to weather rock)",
+exp:"OPTION B gives the correct sequence of PRIMARY SUCCESSION (xerarch succession) on a BARE ROCK: (1) BARE ROCK (no soil, no life); (2) CRUSTOSE LICHENS — the true pioneers. Lichens (algae + fungi in symbiosis) can survive extreme desiccation and temperature. They secrete weak organic acids that slowly WEATHER the rock surface, creating tiny pockets of mineral material. Lichens die and add organic matter → PROTO-SOIL begins to form. (3) FOLIOSE/FRUTICOSE LICHENS → (4) MOSSES — as minimal soil accumulates, mosses colonise. Mosses retain water better, accelerate soil formation. (5) HERBS AND GRASSES — with more soil depth, annual then perennial grasses and forbs establish. (6) SHRUBS — larger, woody plants can now survive; further soil deepening. (7) TREES / FOREST — climax community determined by climate. This is XERARCH SUCCESSION (xero = dry). WHY A IS WRONG: Option A incorrectly places MOSSES before LICHENS. Lichens ALWAYS precede mosses on bare rock — this order is a classic exam trap. LICHENS are the PIONEER SPECIES on bare rock; mosses come later. This succession is extremely slow — hundreds to thousands of years. HYDRARCH SUCCESSION starts in water (pond/lake → marsh → meadow → shrubland → forest climax)."},
+
+{d:"HARD",e:"CDS 2021",
+q:"With reference to CITES, Ramsar Convention and the Convention on Biological Diversity (CBD), which of the following statements is CORRECT?",
+opts:[
+  "CITES (1973) regulates the trade in endangered species; Ramsar Convention (1971) protects wetlands of international importance; CBD (1992) addresses biodiversity conservation, sustainable use and benefit-sharing — all three are distinct treaties with different focuses",
+  "CITES and Ramsar are both components of the CBD, signed at the Rio Earth Summit (1992)",
+  "The Ramsar Convention was signed in 1987 and specifically addresses ozone depletion, while CITES (1971) focuses on wetland protection",
+  "All three conventions were established under the Montreal Protocol to protect global biodiversity"
+],ans:0,
+rule:"CITES (1973) = trade in endangered species; Ramsar (1971) = wetlands; CBD (1992, Rio) = biodiversity conservation + sustainable use + benefit-sharing; all separate treaties, different years and focuses",
+exp:"OPTION A is correct — it accurately describes all three conventions as DISTINCT, INDEPENDENT international treaties: CITES (Convention on International Trade in Endangered Species of Wild Fauna and Flora, 1973): Controls and regulates international trade in wildlife products. Has three appendices: Appendix I (commercial trade banned — e.g., tigers, elephants, rhinos, gorillas), Appendix II (trade allowed with permits — monitoring required), Appendix III (protection requested by specific countries). RAMSAR CONVENTION (1971, signed in Ramsar, Iran): International treaty for the conservation and sustainable use of WETLANDS. Countries designate wetlands of international importance (Ramsar Sites). India has 75+ Ramsar sites including Chilika Lake (Odisha), Keoladeo Ghana (Rajasthan), Loktak Lake (Manipur), Wular Lake (J&K). CONVENTION ON BIOLOGICAL DIVERSITY (CBD, 1992 — Rio Earth Summit / Earth Summit): Three objectives — (1) Conservation of biodiversity, (2) Sustainable use of its components, (3) Fair and equitable sharing of benefits from genetic resources. NAGOYA PROTOCOL (2010) is a supplementary agreement to the CBD specifically on Access and Benefit Sharing (ABS) from genetic resources. WHY OTHERS ARE WRONG: B — CITES and Ramsar predate the CBD and are NOT components of it; all three are independent UN treaties. C — Ramsar was 1971 (not 1987), and it covers wetlands, not ozone (Montreal Protocol = ozone). D — Montreal Protocol covers ozone, not biodiversity."}
+
+];
+
+const answers=new Array(QS.length).fill(null);
+const revealed=new Array(QS.length).fill(false);
+const LABS=["A","B","C","D"];
+
+function build(){
+  const area=document.getElementById("q-area");
+  area.innerHTML="";
+  QS.forEach((q,i)=>{
+    const dc=q.d==="EASY"?"diff-e":q.d==="MEDIUM"?"diff-m":"diff-h";
+    const div=document.createElement("div");
+    div.className="q-card";div.id="qc"+i;
+    div.innerHTML=`
+      <div class="q-meta">
+        <span class="q-num">Q.${String(i+1).padStart(2,"0")}</span>
+        <span class="q-diff ${dc}">${q.d}</span>
+        <span class="q-exam">${q.e}</span>
+      </div>
+      <div class="q-body">
+        <div class="q-text">${q.q}</div>
+        <div class="opts" id="opts${i}">
+          ${q.opts.map((o,j)=>`
+            <button class="opt" id="o${i}_${j}" onclick="pick(${i},${j})">
+              <span class="opt-lbl">${LABS[j]}</span>${o}
+            </button>`).join("")}
+        </div>
+        <div class="exp-panel" id="ex${i}">
+          <div class="exp-tag">Explanation</div>
+          <div class="exp-rule">${q.rule}</div>
+          <p>${q.exp}</p>
+        </div>
+      </div>
+      <div class="q-foot">
+        <span style="font-size:11px;color:var(--dim);font-weight:700">Biology · B14</span>
+        <span id="ai${i}" class="q-status">&mdash;</span>
+      </div>`;
+    area.appendChild(div);
+  });
+}
+
+function pick(qi,oi){
+  if(revealed[qi])return;
+  answers[qi]=oi;
+  document.querySelectorAll("#opts"+qi+" .opt").forEach((b,j)=>{b.classList.remove("sel");if(j===oi)b.classList.add("sel")});
+  document.getElementById("qc"+qi).classList.add("answered");
+  const ai=document.getElementById("ai"+qi);
+  ai.textContent="Selected: "+LABS[oi];
+  ai.style.color="var(--primary)";
+  updateStats();
+}
+
+function updateStats(){
+  const att=answers.filter(a=>a!==null).length;
+  document.getElementById("s-att").textContent=att;
+  document.getElementById("prog").style.width=(att/QS.length*100)+"%";
+  document.getElementById("prog-label").textContent=att+" of "+QS.length+" answered";
+  let c=0,w=0;
+  answers.forEach((a,i)=>{if(a===null)return;if(a===QS[i].ans)c++;else w++;});
+  document.getElementById("s-cor").textContent=c;
+  document.getElementById("s-wrg").textContent=w;
+}
+
+function submitAll(){
+  let cor=0,wrg=0,skp=0;
+  QS.forEach((q,i)=>{
+    revealed[i]=true;
+    const opts=document.querySelectorAll("#opts"+i+" .opt");
+    opts.forEach(b=>{b.disabled=true;b.classList.remove("sel")});
+    opts[q.ans].classList.add("ok");
+    if(answers[i]!==null&&answers[i]!==q.ans)opts[answers[i]].classList.add("bad");
+    document.getElementById("ex"+i).classList.add("show");
+    const ai=document.getElementById("ai"+i);
+    const card=document.getElementById("qc"+i);
+    card.classList.remove("answered");
+    if(answers[i]===null){skp++;ai.textContent="Skipped";ai.style.color="var(--dim)";}
+    else if(answers[i]===q.ans){cor++;card.classList.add("correct");ai.textContent="\u2713 Correct";ai.style.color="var(--green)";}
+    else{wrg++;card.classList.add("wrong");ai.textContent="\u2717 Wrong";ai.style.color="var(--red)";}
+  });
+  updateStats();
+  showResults(cor,wrg,skp);
+}
+
+function showResults(cor,wrg,skp){
+  const pct=Math.round(cor/QS.length*100);
+  let grade,msg;
+  if(pct>=88){grade="Excellent";msg="Outstanding! You have mastered Ecology &amp; Environment.";}
+  else if(pct>=70){grade="Good";msg="Well done. Review the questions you missed.";}
+  else if(pct>=50){grade="Average";msg="Good effort. Revisit the theory cards and try again.";}
+  else{grade="Needs Work";msg="Review the Quick Ref carefully and try again.";}
+  const res=document.getElementById("results");
+  res.innerHTML=`
+    <div class="res-hero">
+      <div class="res-score">${cor}<span style="font-size:36px;opacity:.5">/${QS.length}</span></div>
+      <div class="res-grade">${grade} &middot; ${pct}%</div>
+      <div class="res-msg">${msg}</div>
+    </div>
+    <div class="res-stats">
+      <div class="qs-cell"><div class="qs-val g">${cor}</div><div class="qs-lbl">Correct</div></div>
+      <div class="qs-cell"><div class="qs-val r">${wrg}</div><div class="qs-lbl">Wrong</div></div>
+      <div class="qs-cell"><div class="qs-val a">${skp}</div><div class="qs-lbl">Skipped</div></div>
+      <div class="qs-cell"><div class="qs-val">${pct}%</div><div class="qs-lbl">Score</div></div>
+    </div>
+    <div style="text-align:center;margin:16px 0">
+      <button class="btn btn-ghost" onclick="document.getElementById('q-area').scrollIntoView({behavior:'smooth'})">Review All Answers</button>
+    </div>`;
+  res.style.display="block";
+  res.scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+function resetQuiz(){
+  answers.fill(null);revealed.fill(false);
+  build();
+  document.getElementById("results").style.display="none";
+  document.getElementById("results").innerHTML="";
+  ["s-att","s-cor","s-wrg"].forEach(id=>document.getElementById(id).textContent="0");
+  document.getElementById("prog").style.width="0%";
+  document.getElementById("prog-label").textContent="0 of "+QS.length+" answered";
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function switchTab(id){
+  document.querySelectorAll(".pane").forEach(p=>p.classList.remove("on"));
+  document.querySelectorAll(".tab").forEach(b=>b.classList.remove("on"));
+  document.getElementById(id).classList.add("on");
+  const idx={theory:0,quickref:1,quiz:2}[id];
+  document.querySelectorAll(".tab")[idx].classList.add("on");
+}
+
+function tog(hd){
+  const bd=hd.nextElementSibling;
+  const isOpen=bd.classList.contains("open");
+  bd.classList.toggle("open",!isOpen);
+  hd.classList.toggle("open",!isOpen);
+}
+
+build();
+</script>
+</body>
+</html>

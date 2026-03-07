@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B05 · Respiratory System | Olive Defence</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+
+:root{
+  /* ── THEME B05: Deep Slate-Blue + Steel + Ice — clinical, airy ── */
+  --bg:        #EEF2F7;
+  --bg2:       #E2E9F2;
+  --bg3:       #D4DEE8;
+  --white:     #F8FAFD;
+  --ink:       #0D1A2A;
+  --ink2:      #1A2D42;
+  --muted:     #516A84;
+  --dim:       #8099B2;
+  --border:    #C0CEDe;
+
+  /* Primary — deep slate blue */
+  --primary:      #1A3F6F;
+  --primaryLt:    #2252A0;
+  --primaryPale:  #E4EDF8;
+
+  /* Accent 1 — steel teal */
+  --teal:         #126A72;
+  --tealLt:       #178590;
+  --tealPale:     #E0F3F5;
+
+  /* Accent 2 — sage success green */
+  --green:        #1E6644;
+  --greenLt:      #278055;
+  --greenPale:    #E4F4EC;
+
+  /* Accent 3 — brick warning */
+  --red:          #8A2020;
+  --redLt:        #B02828;
+  --redPale:      #FAEAEA;
+
+  /* Accent 4 — amber highlight */
+  --amber:        #8A5C08;
+  --amberLt:      #B07510;
+  --amberPale:    #FEF3DC;
+
+  /* Accent 5 — violet note */
+  --purple:       #4A2880;
+  --purplePale:   #EEE8F8;
+
+  --radius:    12px;
+  --shadow:    0 2px 12px rgba(13,26,42,.09);
+  --shadow-md: 0 4px 20px rgba(13,26,42,.14);
+}
+
+body{
+  font-family:'Nunito',sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  font-size:17px;
+  line-height:1.75;
+  min-height:100vh;
+}
+
+.page{max-width:680px;margin:0 auto;padding:0 16px 80px}
+
+/* ── HERO ─────────────────────────────────────────────────────── */
+.hero{
+  background:linear-gradient(135deg,#091829 0%,#1A3F6F 50%,#1E5490 100%);
+  margin:0 -16px;
+  padding:28px 20px 26px;
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 75% 15%,rgba(100,180,255,.09) 0%,transparent 55%),
+    radial-gradient(ellipse at 10% 80%,rgba(60,220,200,.05) 0%,transparent 50%);
+  pointer-events:none;
+}
+/* subtle grid texture */
+.hero::after{
+  content:'';position:absolute;inset:0;
+  background-image:linear-gradient(rgba(255,255,255,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,.03) 1px,transparent 1px);
+  background-size:32px 32px;
+  pointer-events:none;
+}
+.hero-kicker{
+  font-size:11px;font-weight:700;letter-spacing:3px;
+  text-transform:uppercase;color:rgba(255,255,255,.50);
+  margin-bottom:8px;display:flex;align-items:center;gap:8px;
+  position:relative;z-index:1;
+}
+.hero-kicker::before{content:'';width:18px;height:2px;background:rgba(255,255,255,.28)}
+.hero-title{
+  font-family:'Lora',serif;
+  font-size:clamp(24px,5.5vw,34px);
+  font-weight:700;color:#fff;line-height:1.2;margin-bottom:10px;
+  position:relative;z-index:1;
+}
+.hero-title span{color:#A8D8FF;font-style:italic}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.66);margin-bottom:18px;line-height:1.65;position:relative;z-index:1}
+.hero-chips{display:flex;flex-wrap:wrap;gap:7px;position:relative;z-index:1}
+.chip{font-size:11px;font-weight:700;letter-spacing:1px;padding:4px 12px;border-radius:20px;text-transform:uppercase}
+.chip-w{background:rgba(255,255,255,.12);color:rgba(255,255,255,.88)}
+.chip-b{background:rgba(168,216,255,.16);color:#A8D8FF}
+.chip-g{background:rgba(100,220,180,.12);color:#7ADEC8}
+
+/* ── TAB BAR ──────────────────────────────────────────────────── */
+.tab-bar{
+  position:sticky;top:0;z-index:50;
+  background:var(--white);border-bottom:2px solid var(--border);
+  margin:0 -16px;display:flex;overflow-x:auto;
+  box-shadow:0 2px 8px rgba(13,26,42,.07);
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;
+}
+.tab-bar::-webkit-scrollbar{display:none}
+.tab{
+  flex-shrink:0;padding:14px 18px;
+  font-size:12px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--muted);
+  border:none;background:transparent;cursor:pointer;
+  border-bottom:3px solid transparent;margin-bottom:-2px;
+  transition:all .2s;white-space:nowrap;
+}
+.tab:hover{color:var(--ink);background:var(--bg)}
+.tab.on{color:var(--primary);border-bottom-color:var(--primary)}
+
+/* ── PANES ────────────────────────────────────────────────────── */
+.pane{display:none;padding-top:24px;animation:fadeUp .3s ease}
+.pane.on{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── SECTION LABEL ────────────────────────────────────────────── */
+.sec-label{
+  font-size:10px;font-weight:800;letter-spacing:3px;
+  text-transform:uppercase;color:var(--primary);
+  margin:28px 0 12px;display:flex;align-items:center;gap:10px;
+}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* ── INTRO BOX ────────────────────────────────────────────────── */
+.intro-box{
+  background:var(--primaryPale);border:1.5px solid rgba(26,63,111,.20);
+  border-radius:var(--radius);padding:20px;margin-bottom:8px;
+}
+.intro-box p{font-size:16px;color:var(--ink2);line-height:1.8}
+.intro-box strong{color:var(--primary)}
+
+/* ── CONCEPT CARDS ────────────────────────────────────────────── */
+.c-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius);margin-bottom:10px;
+  box-shadow:var(--shadow);overflow:hidden;
+}
+.c-head{
+  display:flex;align-items:center;gap:12px;padding:16px 18px;
+  cursor:pointer;border-left:4px solid transparent;
+  transition:all .15s;-webkit-tap-highlight-color:transparent;
+}
+.c-head:hover,.c-head.open{background:var(--bg);border-left-color:var(--primary)}
+.c-icon{
+  width:38px;height:38px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;
+}
+.c-title{font-size:17px;font-weight:700;color:var(--ink);flex:1}
+.c-sub{font-size:12px;color:var(--dim);font-weight:600;margin-top:2px}
+.c-arrow{font-size:12px;color:var(--dim);transition:transform .2s;flex-shrink:0}
+.c-head.open .c-arrow{transform:rotate(180deg)}
+.c-body{display:none;padding:4px 18px 20px;border-top:1px solid var(--border)}
+.c-body.open{display:block;animation:fadeUp .2s ease}
+.c-body p{font-size:16px;color:var(--ink2);line-height:1.85;margin-bottom:12px}
+.c-body p:last-child{margin-bottom:0}
+.c-body strong{color:var(--primary);font-weight:700}
+.c-body em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* ── CONTENT BLOCKS ───────────────────────────────────────────── */
+.fact-box{
+  background:var(--amberPale);border:1.5px solid rgba(138,92,8,.20);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.fact-box .fb-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--amber);text-transform:uppercase;margin-bottom:8px;
+}
+.fact-box ul{list-style:none;padding:0}
+.fact-box li{font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;position:relative;line-height:1.7}
+.fact-box li::before{content:'→';position:absolute;left:0;color:var(--amber);font-weight:700;font-size:13px}
+
+.eg-box{
+  background:var(--greenPale);border-left:4px solid var(--green);
+  border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0;
+}
+.eg-box .eg-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--green);text-transform:uppercase;margin-bottom:6px}
+.eg-box p{font-size:15px;color:var(--ink2);line-height:1.75}
+.eg-box ul{list-style:none;padding:0}
+.eg-box li{font-size:15px;color:var(--ink2);padding:4px 0 4px 18px;position:relative;line-height:1.65}
+.eg-box li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:800;font-size:12px}
+
+.trap-box{
+  background:var(--redPale);border:1.5px solid rgba(138,32,32,.20);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.trap-box .tr-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--red);text-transform:uppercase;margin-bottom:8px}
+.trap-box p,.trap-box li{font-size:15.5px;color:var(--ink2);line-height:1.75}
+.trap-box ul{list-style:none;padding:0}
+.trap-box li{padding:5px 0 5px 22px;position:relative}
+.trap-box li::before{content:'⚑';position:absolute;left:0;font-size:12px;color:var(--red)}
+
+.rule-box{
+  background:var(--tealPale);border:1.5px solid rgba(18,106,114,.18);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.rule-box .rl-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--teal);text-transform:uppercase;margin-bottom:8px}
+.rule-box p{font-size:15.5px;color:var(--ink2);line-height:1.8}
+.rule-box strong{color:var(--teal)}
+
+.purple-box{
+  background:var(--purplePale);border:1.5px solid rgba(74,40,128,.17);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.purple-box .pl-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--purple);text-transform:uppercase;margin-bottom:8px}
+.purple-box ul{list-style:none;padding:0}
+.purple-box li{font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;position:relative;line-height:1.8}
+.purple-box li::before{content:'◆';position:absolute;left:0;font-size:9px;color:var(--purple);top:10px}
+
+.analogy-box{
+  background:var(--primaryPale);border-left:4px solid var(--primary);
+  border-radius:0 8px 8px 0;padding:14px 16px;margin:12px 0;
+}
+.analogy-box .an-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--primary);text-transform:uppercase;margin-bottom:6px}
+.analogy-box p{font-size:15.5px;color:var(--ink2);line-height:1.75}
+.analogy-box strong{color:var(--primary)}
+
+/* airway journey strip */
+.journey{margin:16px 0;display:flex;flex-direction:column;gap:0}
+.j-step{display:flex;align-items:stretch;gap:14px}
+.j-line{display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:28px}
+.j-dot{width:28px;height:28px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;margin-top:2px}
+.j-connector{width:2px;flex:1;background:var(--border);margin:2px 0}
+.j-step:last-child .j-connector{display:none}
+.j-content{padding:2px 0 18px;flex:1}
+.j-title{font-size:15px;font-weight:800;color:var(--ink);margin-bottom:3px}
+.j-desc{font-size:14.5px;color:var(--ink2);line-height:1.7}
+.j-desc strong{color:var(--primary)}
+.j-desc em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* data stat band */
+.stat-band{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:2px;background:var(--border);
+  border-radius:var(--radius);overflow:hidden;margin:16px 0;
+}
+.stat-cell{background:var(--white);padding:14px 10px;text-align:center}
+.stat-val{font-family:'Lora',serif;font-size:20px;font-weight:700;color:var(--primary);line-height:1;margin-bottom:4px}
+.stat-lbl{font-size:11px;color:var(--muted);font-weight:700;letter-spacing:.5px}
+
+.compare-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
+.compare-table th{background:var(--primary);color:#fff;padding:10px 12px;text-align:left;font-size:13px;font-weight:700;letter-spacing:.5px}
+.compare-table td{padding:10px 12px;border:1px solid var(--border);color:var(--ink2);vertical-align:top;line-height:1.65}
+.compare-table tr:nth-child(even) td{background:var(--bg)}
+.compare-table td b{color:var(--primary)}
+
+.org-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}
+.org-card{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:13px 14px}
+.org-card .org-name{font-size:13px;font-weight:800;color:var(--primary);margin-bottom:4px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.org-card .org-nick{font-size:11px;font-weight:700;color:var(--amber);background:var(--amberPale);border-radius:4px;padding:1px 7px}
+.org-card p{font-size:14px;color:var(--ink2);line-height:1.6}
+
+/* ── QUICK REFERENCE ──────────────────────────────────────────── */
+.ref-grid{display:grid;gap:10px;margin:8px 0}
+.ref-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+.ref-card-title{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--primary);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.ref-card ul{list-style:none;padding:0}
+.ref-card li{font-size:15px;color:var(--ink2);padding:5px 0 5px 16px;position:relative;line-height:1.65;border-bottom:1px solid var(--bg2)}
+.ref-card li:last-child{border-bottom:none}
+.ref-card li::before{content:'·';position:absolute;left:4px;color:var(--primary);font-weight:900;font-size:18px;line-height:1.3}
+.ref-card li b{color:var(--ink);font-weight:700}
+.ref-card li em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* ── QUIZ ─────────────────────────────────────────────────────── */
+.quiz-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:16px;box-shadow:var(--shadow)}
+.qs-cell{background:var(--white);padding:12px 8px;text-align:center}
+.qs-val{font-family:'Lora',serif;font-size:22px;font-weight:700;color:var(--primary);line-height:1}
+.qs-val.g{color:var(--green)}.qs-val.r{color:var(--red)}.qs-val.a{color:var(--amber)}
+.qs-lbl{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:1px;margin-top:4px;text-transform:uppercase}
+
+.prog-wrap{margin-bottom:20px}
+.prog-bar{height:6px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;background:var(--primary);border-radius:3px;transition:width .4s ease;width:0%}
+.prog-label{font-size:12px;color:var(--muted);font-weight:700;margin-bottom:6px}
+
+.q-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:12px;box-shadow:var(--shadow);overflow:hidden;border-left:4px solid transparent;transition:border-color .15s}
+.q-card.answered{border-left-color:var(--primary)}
+.q-card.correct{border-left-color:var(--green)}
+.q-card.wrong{border-left-color:var(--red)}
+
+.q-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 16px;background:var(--bg);border-bottom:1px solid var(--border)}
+.q-num{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:1px}
+.q-diff{font-size:10px;font-weight:800;padding:2px 10px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase}
+.diff-e{background:var(--greenPale);color:var(--green)}
+.diff-m{background:var(--amberPale);color:var(--amber)}
+.diff-h{background:var(--redPale);color:var(--red)}
+.q-exam{font-size:11px;color:var(--dim);margin-left:auto;font-weight:600}
+
+.q-body{padding:16px}
+.q-text{font-size:17px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-weight:600}
+
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:14px 16px;cursor:pointer;display:flex;align-items:flex-start;gap:12px;font-size:16px;color:var(--ink2);text-align:left;width:100%;transition:all .15s;-webkit-tap-highlight-color:transparent;min-height:48px;line-height:1.6}
+.opt:hover:not(:disabled){border-color:var(--primary);background:var(--primaryPale)}
+.opt:disabled{cursor:default}
+.opt.sel{border-color:var(--primary);background:var(--primaryPale);color:var(--primary)}
+.opt.ok{border-color:var(--green)!important;background:var(--greenPale)!important;color:var(--green)!important}
+.opt.bad{border-color:var(--red)!important;background:var(--redPale)!important;color:var(--red)!important}
+
+.opt-lbl{min-width:28px;height:28px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--muted);flex-shrink:0;transition:all .15s}
+.opt.sel .opt-lbl{background:var(--primary);color:#fff;border-color:var(--primary)}
+.opt.ok .opt-lbl{background:var(--green);color:#fff;border-color:var(--green)}
+.opt.bad .opt-lbl{background:var(--red);color:#fff;border-color:var(--red)}
+
+.exp-panel{display:none;margin-top:12px;background:var(--bg);border-radius:10px;padding:14px 16px;border:1px solid var(--border)}
+.exp-panel.show{display:block;animation:fadeUp .2s ease}
+.exp-tag{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--primary);margin-bottom:6px}
+.exp-rule{font-size:13px;font-weight:800;color:var(--ink);background:var(--primaryPale);border-radius:6px;padding:6px 10px;margin-bottom:8px;border-left:3px solid var(--primary)}
+.exp-panel p{font-size:15px;color:var(--ink2);line-height:1.8}
+
+.q-foot{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-top:1px solid var(--border);background:var(--bg)}
+.q-status{font-size:12px;font-weight:700}
+
+.btn{padding:12px 24px;border-radius:10px;font-size:14px;font-weight:800;letter-spacing:.5px;border:none;cursor:pointer;transition:all .15s}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:var(--primaryLt)}
+.btn-ghost{background:var(--bg2);color:var(--ink2);border:1.5px solid var(--border)}
+.btn-ghost:hover{background:var(--bg3)}
+.quiz-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+
+#results{display:none;background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:20px;box-shadow:var(--shadow-md)}
+.res-hero{text-align:center;padding-bottom:20px;border-bottom:1px solid var(--border);margin-bottom:16px}
+.res-score{font-family:'Lora',serif;font-size:64px;font-weight:700;color:var(--primary);line-height:1}
+.res-grade{font-size:16px;font-weight:800;color:var(--ink);margin:8px 0 6px;letter-spacing:.5px}
+.res-msg{font-size:15px;color:var(--muted)}
+.res-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-kicker">Biology · Lesson B05 · Olive Defence</div>
+  <div class="hero-title">The <span>Respiratory System</span></div>
+  <div class="hero-sub">Breathing mechanics, gas exchange, transport of O₂ &amp; CO₂, respiratory volumes and disorders — at CDS, NDA &amp; AFCAT exam depth.</div>
+  <div class="hero-chips">
+    <span class="chip chip-w">CDS</span>
+    <span class="chip chip-w">NDA</span>
+    <span class="chip chip-w">AFCAT</span>
+    <span class="chip chip-b">Airways</span>
+    <span class="chip chip-g">Gas Exchange</span>
+    <span class="chip chip-b">Lung Volumes</span>
+  </div>
+</div>
+
+<!-- TAB BAR -->
+<div class="tab-bar">
+  <button class="tab on" onclick="switchTab('theory')">📖 Theory</button>
+  <button class="tab" onclick="switchTab('quickref')">⚡ Quick Ref</button>
+  <button class="tab" onclick="switchTab('quiz')">✏️ Quiz</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  THEORY PANE                                              -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="pane on" id="theory">
+
+  <div class="intro-box">
+    <p><strong>Respiration</strong> in physiology refers to the entire process of gas exchange between an organism and its environment — taking in <strong>O₂</strong> and releasing <strong>CO₂</strong>. The <strong>respiratory system</strong> provides the anatomical machinery for this exchange. It includes the <strong>airway</strong> (nose → lungs) and the <strong>breathing mechanism</strong> (diaphragm and chest muscles). This is distinct from <em>cellular respiration</em> (energy release in cells — covered in B03).</p>
+  </div>
+
+  <!-- SECTION 1 -->
+  <div class="sec-label">Section 1 — Organs of the Respiratory System</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E4EDF8">🫁</div>
+      <div style="flex:1">
+        <div class="c-title">The Airway — Path of Air</div>
+        <div class="c-sub">From nasal cavity to alveoli</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>Air travels through a series of progressively narrowing passages before reaching the alveoli where gas exchange occurs. Each region has a specific structural and protective role.</p>
+      <div class="journey">
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">1</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Nasal Cavity</div>
+            <div class="j-desc">Air enters through the nostrils (external nares). <strong>Nasal hair and mucus</strong> filter dust and pathogens. <strong>Nasal conchae</strong> warm and humidify incoming air. The <strong>olfactory epithelium</strong> in the roof provides the sense of smell.</div>
+          </div>
+        </div>
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">2</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Pharynx &amp; Larynx</div>
+            <div class="j-desc">Pharynx (throat) — common passage for air and food. <strong>Epiglottis</strong> covers the larynx during swallowing to prevent food entering the airway. <strong>Larynx</strong> (voice box) contains the <strong>vocal cords</strong>; generates sound by vibration of air.</div>
+          </div>
+        </div>
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">3</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Trachea (Windpipe)</div>
+            <div class="j-desc">~12 cm long tube reinforced by <strong>C-shaped cartilage rings</strong> (incomplete — open posteriorly) to keep the airway open. Lined by <strong>ciliated epithelium</strong> with goblet cells producing mucus — the <em>"mucociliary escalator"</em> traps and sweeps debris upward.</div>
+          </div>
+        </div>
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">4</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Bronchi &amp; Bronchioles</div>
+            <div class="j-desc">Trachea divides at the <strong>carina</strong> into the <strong>right and left primary bronchi</strong> (right bronchus is shorter, wider, and more vertical — more common site of inhaled foreign body lodgement). Bronchi further divide into secondary → tertiary bronchi → <strong>bronchioles</strong> (no cartilage, smooth muscle walls).</div>
+          </div>
+        </div>
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">5</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Alveoli — Site of Gas Exchange</div>
+            <div class="j-desc">Tiny air sacs (~300 million in each lung). Walls are extremely thin (one cell thick — <strong>simple squamous epithelium</strong>). Surrounded by a rich capillary network. <strong>Surfactant</strong> (secreted by Type II pneumocytes) prevents alveolar collapse. Total surface area: <em>~70 m²</em> in adults.</div>
+          </div>
+        </div>
+      </div>
+      <div class="stat-band">
+        <div class="stat-cell"><div class="stat-val">~300M</div><div class="stat-lbl">Alveoli per lung</div></div>
+        <div class="stat-cell"><div class="stat-val">70 m²</div><div class="stat-lbl">Gas exchange area</div></div>
+        <div class="stat-cell"><div class="stat-val">0.2 µm</div><div class="stat-lbl">Alveolar wall thickness</div></div>
+      </div>
+      <div class="trap-box">
+        <div class="tr-label">⚑ Exam Traps — Airways</div>
+        <ul>
+          <li>The <strong>right bronchus</strong> is shorter, wider and more vertical — inhaled foreign objects (coins, peanuts) lodge more commonly in the <strong>right bronchus</strong>.</li>
+          <li>Bronchioles have <strong>no cartilage</strong> — they are held open only by smooth muscle tone and lung elastic recoil. This is why asthma (bronchospasm) causes such severe narrowing.</li>
+          <li>The trachea has <strong>C-shaped</strong> (not complete O-shaped) cartilage rings — the opening is posterior, allowing the oesophagus to expand during swallowing.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E4EDF8">🫁</div>
+      <div style="flex:1">
+        <div class="c-title">The Lungs — Structure &amp; Pleura</div>
+        <div class="c-sub">Right vs left lung, lobes, and the pleural cavity</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Feature</th><th>Right Lung</th><th>Left Lung</th></tr>
+          <tr><td>Lobes</td><td><b>3 lobes</b> (upper, middle, lower)</td><td><b>2 lobes</b> (upper, lower)</td></tr>
+          <tr><td>Size</td><td>Larger, broader</td><td>Smaller — cardiac notch makes room for heart</td></tr>
+          <tr><td>Volume</td><td>~55% of total lung volume</td><td>~45% of total lung volume</td></tr>
+          <tr><td>Fissures</td><td>2 fissures (horizontal + oblique)</td><td>1 fissure (oblique only)</td></tr>
+        </table>
+      </div>
+      <div class="rule-box">
+        <div class="rl-label">Pleura — The Double Membrane Around Lungs</div>
+        <p>Each lung is covered by two layers of <strong>pleura</strong>: the <strong>visceral pleura</strong> (inner — directly covers the lung) and the <strong>parietal pleura</strong> (outer — lines the chest wall). Between them is the <strong>pleural cavity</strong> containing a thin film of <strong>pleural fluid</strong> that lubricates lung movement and creates surface tension that keeps the lung expanded. <strong>Pleuritis (pleurisy)</strong> = inflammation of the pleura, causing painful breathing.</p>
+      </div>
+      <div class="trap-box">
+        <div class="tr-label">⚑ Exam Trap</div>
+        <p><strong>Pneumothorax</strong> — if air enters the pleural cavity (e.g., due to a stab wound or spontaneous rupture), the negative pressure is lost and the lung <strong>collapses</strong>. The pleural fluid's surface tension is what normally holds the lungs expanded against the chest wall.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="sec-label">Section 2 — Mechanism of Breathing</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E0F3F5">💨</div>
+      <div style="flex:1">
+        <div class="c-title">Inspiration &amp; Expiration</div>
+        <div class="c-sub">How pressure changes drive airflow</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>Breathing is driven by <strong>pressure differences</strong> between the lungs and atmosphere, created by changes in chest volume (Boyle's Law: P ∝ 1/V). The <strong>diaphragm</strong> is the primary muscle of respiration.</p>
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Phase</th><th>Inspiration (Inhalation)</th><th>Expiration (Exhalation)</th></tr>
+          <tr><td>Diaphragm</td><td><b>Contracts &amp; flattens</b> (moves down)</td><td><b>Relaxes</b> — domes upward</td></tr>
+          <tr><td>External intercostals</td><td><b>Contract</b> — ribs move up &amp; out</td><td>Relax</td></tr>
+          <tr><td>Chest volume</td><td>Increases</td><td>Decreases</td></tr>
+          <tr><td>Lung pressure</td><td>Decreases below atmospheric → air flows <b>in</b></td><td>Increases above atmospheric → air flows <b>out</b></td></tr>
+          <tr><td>Energy requirement</td><td>Active (requires muscle contraction)</td><td>Passive (elastic recoil of lungs — no muscles needed normally)</td></tr>
+        </table>
+      </div>
+      <div class="analogy-box">
+        <div class="an-label">Think of it this way</div>
+        <p>The lung is like a <strong>bellows</strong>. When you pull the handles apart (chest expands), pressure inside drops and air rushes in. When you push them together (chest contracts), air is forced out.</p>
+      </div>
+      <div class="fact-box">
+        <div class="fb-label">Key Breathing Facts</div>
+        <ul>
+          <li>Normal breathing rate at rest: <strong>12–20 breaths/minute</strong></li>
+          <li>Tidal volume (normal breath): <strong>500 mL</strong></li>
+          <li>Breathing is controlled by the <strong>respiratory centre in the medulla oblongata</strong> (brainstem)</li>
+          <li>Primary stimulus for breathing: rising <strong>CO₂</strong> levels (not falling O₂) detected by chemoreceptors</li>
+          <li><strong>Forced expiration</strong> — uses internal intercostals and abdominal muscles (active)</li>
+        </ul>
+      </div>
+      <div class="trap-box">
+        <div class="tr-label">⚑ Exam Trap</div>
+        <p>Normal <strong>expiration is passive</strong> — it requires no muscular effort; it is driven by the elastic recoil of lung tissue. Only <strong>forced expiration</strong> (e.g., blowing out a candle, coughing) requires active muscular contraction. This is frequently tested.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="sec-label">Section 3 — Lung Volumes &amp; Capacities</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E0F3F5">📊</div>
+      <div style="flex:1">
+        <div class="c-title">Pulmonary Volumes &amp; Capacities</div>
+        <div class="c-sub">The numbers every CDS/NDA aspirant must know</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Term</th><th>Definition</th><th>Value (approx.)</th></tr>
+          <tr><td><b>Tidal Volume (TV)</b></td><td>Air inhaled/exhaled in one normal breath</td><td><b>500 mL (0.5 L)</b></td></tr>
+          <tr><td><b>Inspiratory Reserve Volume (IRV)</b></td><td>Extra air that can be inhaled forcibly after a normal inspiration</td><td><b>2500–3000 mL</b></td></tr>
+          <tr><td><b>Expiratory Reserve Volume (ERV)</b></td><td>Extra air that can be exhaled forcibly after a normal expiration</td><td><b>1000–1200 mL</b></td></tr>
+          <tr><td><b>Residual Volume (RV)</b></td><td>Air remaining in lungs even after maximum expiration (keeps alveoli open)</td><td><b>1100–1200 mL</b></td></tr>
+          <tr><td><b>Vital Capacity (VC)</b></td><td>Maximum air exhaled after maximum inspiration = TV + IRV + ERV</td><td><b>~4600 mL (4.6 L)</b></td></tr>
+          <tr><td><b>Total Lung Capacity (TLC)</b></td><td>Total air lungs can hold = VC + RV</td><td><b>~5800 mL (5.8 L)</b></td></tr>
+          <tr><td><b>Functional Residual Capacity (FRC)</b></td><td>Air remaining after normal expiration = ERV + RV</td><td><b>~2300 mL</b></td></tr>
+          <tr><td><b>Inspiratory Capacity (IC)</b></td><td>Maximum air inhaled after normal expiration = TV + IRV</td><td><b>~3500 mL</b></td></tr>
+          <tr><td><b>Dead Space Volume</b></td><td>Air in airways that doesn't reach alveoli (no gas exchange)</td><td><b>~150 mL</b></td></tr>
+        </table>
+      </div>
+      <div class="fact-box">
+        <div class="fb-label">Memory Aid — Volumes &amp; Capacities</div>
+        <ul>
+          <li><strong>Tidal Volume (TV)</strong> = 500 mL — the baseline number everything builds on</li>
+          <li><strong>Vital Capacity (VC)</strong> = TV + IRV + ERV ≈ 4.6 L — what spirometry measures; decreases in lung disease</li>
+          <li><strong>Total Lung Capacity (TLC)</strong> = VC + RV ≈ 5.8 L — maximum possible air in lungs</li>
+          <li><strong>Residual Volume (RV)</strong> — cannot be measured by spirometry alone (lungs never fully empty)</li>
+          <li>Trained athletes have higher VC than untrained individuals</li>
+        </ul>
+      </div>
+      <div class="trap-box">
+        <div class="tr-label">⚑ Exam Trap</div>
+        <p><strong>Residual Volume (RV) cannot be measured by a simple spirometer</strong> — it requires special techniques (gas dilution, body plethysmography). This is because you can never exhale all the air from your lungs. Only capacities that include RV (TLC, FRC) also cannot be measured by spirometry alone.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="sec-label">Section 4 — Gas Exchange &amp; Transport</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E4EDF8">🔄</div>
+      <div style="flex:1">
+        <div class="c-title">Gas Exchange — Alveoli &amp; Tissues</div>
+        <div class="c-sub">How O₂ and CO₂ cross membranes by diffusion</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>Gas exchange occurs by <strong>simple diffusion</strong> along partial pressure gradients. Gases move from <strong>high partial pressure → low partial pressure</strong>.</p>
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Location</th><th>O₂ Movement</th><th>CO₂ Movement</th></tr>
+          <tr><td><b>Alveoli ↔ Blood</b> (External respiration)</td><td>pO₂ in alveoli (104 mmHg) &gt; pO₂ in deoxygenated blood (40 mmHg) → O₂ diffuses <b>into blood</b></td><td>pCO₂ in blood (45 mmHg) &gt; pCO₂ in alveoli (40 mmHg) → CO₂ diffuses <b>into alveoli</b></td></tr>
+          <tr><td><b>Blood ↔ Tissues</b> (Internal respiration)</td><td>pO₂ in blood (95 mmHg) &gt; pO₂ in tissues (40 mmHg) → O₂ diffuses <b>into tissues</b></td><td>pCO₂ in tissues (45 mmHg) &gt; pCO₂ in blood (40 mmHg) → CO₂ diffuses <b>into blood</b></td></tr>
+        </table>
+      </div>
+      <div class="rule-box">
+        <div class="rl-label">Factors Favouring Efficient Gas Exchange at Alveoli</div>
+        <p>① <strong>Large surface area</strong> (~70 m² — 300 million alveoli). ② <strong>Thin walls</strong> (~0.2 µm — simple squamous epithelium + capillary endothelium). ③ <strong>Rich blood supply</strong> — dense capillary network. ④ <strong>Steep partial pressure gradient</strong> maintained by constant ventilation and blood flow. ⑤ <strong>Moist surface</strong> — gases dissolve in moisture first.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E4EDF8">🩸</div>
+      <div style="flex:1">
+        <div class="c-title">Transport of O₂ &amp; CO₂ in Blood</div>
+        <div class="c-sub">Haemoglobin, oxyhaemoglobin and the chloride shift</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <div class="purple-box">
+        <div class="pl-label">Oxygen Transport — 3 Forms</div>
+        <ul>
+          <li><strong>As oxyhaemoglobin (HbO₂)</strong> — ~97% of O₂; Hb binds O₂ in lungs (high pO₂), releases it in tissues (low pO₂). Each Hb molecule carries 4 O₂ molecules.</li>
+          <li><strong>Dissolved in plasma</strong> — ~3% only (O₂ is poorly soluble in water)</li>
+          <li>1 gram of Hb carries ~1.34 mL of O₂ (O₂-carrying capacity)</li>
+        </ul>
+      </div>
+      <div class="purple-box">
+        <div class="pl-label">Carbon Dioxide Transport — 3 Forms</div>
+        <ul>
+          <li><strong>As bicarbonate ions (HCO₃⁻)</strong> — ~70% of CO₂ (most important). CO₂ + H₂O → H₂CO₃ → H⁺ + HCO₃⁻ (catalysed by <strong>carbonic anhydrase</strong> in RBCs). HCO₃⁻ moves into plasma (chloride shift balances charge).</li>
+          <li><strong>Bound to haemoglobin as carbaminohaemoglobin</strong> — ~23% of CO₂ binds to the protein part of Hb (NOT to haem — different from O₂ binding).</li>
+          <li><strong>Dissolved in plasma</strong> — ~7% (CO₂ more soluble than O₂)</li>
+        </ul>
+      </div>
+      <div class="fact-box">
+        <div class="fb-label">Haemoglobin — Key Facts</div>
+        <ul>
+          <li>Hb is a <strong>conjugated protein</strong> with 4 subunits — each subunit has a <strong>haem group</strong> containing <strong>iron (Fe²⁺)</strong></li>
+          <li>Normal Hb level: males ~14–16 g/dL; females ~12–14 g/dL</li>
+          <li><strong>Bohr Effect</strong>: increased CO₂ / decreased pH → decreased Hb affinity for O₂ → more O₂ released to active tissues</li>
+          <li><strong>CO (carbon monoxide)</strong> binds Hb with 200× more affinity than O₂ → forms <strong>carboxyhaemoglobin</strong> → blocks O₂ transport → CO poisoning</li>
+          <li>Foetal Hb (HbF) has <strong>higher affinity for O₂</strong> than adult Hb (HbA) — allows foetus to extract O₂ from maternal blood</li>
+        </ul>
+      </div>
+      <div class="trap-box">
+        <div class="tr-label">⚑ Exam Traps — Gas Transport</div>
+        <ul>
+          <li>CO₂ binds to the <strong>protein (globin) part</strong> of Hb, NOT to the haem group. O₂ binds to the <strong>haem (iron) part</strong>. These are different binding sites.</li>
+          <li>The <strong>Bohr Effect</strong> is about O₂ release — high CO₂ / low pH pushes O₂ OFF haemoglobin. Very commonly tested.</li>
+          <li><strong>Carbonic anhydrase</strong> is the enzyme that catalyses CO₂ + H₂O ⇌ H₂CO₃. Acetazolamide (a drug) inhibits it — used for altitude sickness.</li>
+          <li>Most CO₂ is transported as <strong>bicarbonate (HCO₃⁻)</strong> — NOT as carbaminohaemoglobin.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5 -->
+  <div class="sec-label">Section 5 — Regulation of Breathing</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#EEE8F8">🧠</div>
+      <div style="flex:1">
+        <div class="c-title">Neural &amp; Chemical Control of Breathing</div>
+        <div class="c-sub">Medulla, chemoreceptors and the CO₂ drive</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>Breathing is an <strong>involuntary rhythmic process</strong> controlled by the <strong>respiratory centre</strong> in the brainstem.</p>
+      <div class="org-grid">
+        <div class="org-card">
+          <div class="org-name">Medulla Oblongata <span class="org-nick">Primary centre</span></div>
+          <p>Houses <strong>DRG</strong> (Dorsal Respiratory Group — controls inspiration) and <strong>VRG</strong> (Ventral — controls forced expiration). Sets the basic rhythm.</p>
+        </div>
+        <div class="org-card">
+          <div class="org-name">Pons <span class="org-nick">Modifier</span></div>
+          <p>Contains <strong>pneumotaxic centre</strong> (limits inspiration duration) and <strong>apneustic centre</strong> (prolongs inspiration). Fine-tunes rhythm.</p>
+        </div>
+        <div class="org-card">
+          <div class="org-name">Central Chemoreceptors <span class="org-nick">Medulla</span></div>
+          <p>Detect rising <strong>CO₂ and H⁺</strong> in cerebrospinal fluid. Most potent stimulus for increasing breathing rate.</p>
+        </div>
+        <div class="org-card">
+          <div class="org-name">Peripheral Chemoreceptors <span class="org-nick">Carotid &amp; Aortic bodies</span></div>
+          <p>Detect <strong>falling O₂</strong> (hypoxia), rising CO₂, and rising H⁺ in blood. Secondary stimulus; primary for hypoxic drive at high altitude.</p>
+        </div>
+      </div>
+      <div class="rule-box">
+        <div class="rl-label">Primary Stimulus for Breathing — CO₂, NOT O₂</div>
+        <p>The <strong>primary chemical stimulus</strong> for normal breathing is an <strong>increase in blood CO₂ (hypercapnia)</strong>, not a decrease in O₂. CO₂ crosses the blood-brain barrier and lowers pH in the CSF, directly stimulating central chemoreceptors. A decrease in O₂ (<strong>hypoxia</strong>) only becomes a significant drive at very low O₂ levels (pO₂ &lt; 60 mmHg) — important in patients with COPD.</p>
+      </div>
+      <div class="trap-box">
+        <div class="tr-label">⚑ Exam Trap — CO₂ vs O₂ Drive</div>
+        <p>In healthy individuals, <strong>CO₂ is the primary respiratory stimulus</strong>. In patients with chronic lung disease (COPD) who retain CO₂, chemoreceptors become desensitised to CO₂ and they shift to an <strong>"hypoxic drive"</strong> (low O₂ stimulates breathing). Giving such patients high-flow O₂ without monitoring can paradoxically suppress their breathing — a classic clinical MCQ.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6 -->
+  <div class="sec-label">Section 6 — Respiratory Disorders</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#FAEAEA">🩺</div>
+      <div style="flex:1">
+        <div class="c-title">Common Respiratory Diseases</div>
+        <div class="c-sub">Causes, features and exam-relevant links</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Disease</th><th>Cause / Mechanism</th><th>Key Feature</th></tr>
+          <tr><td><b>Asthma</b></td><td>Allergen-triggered bronchospasm + inflammation → narrowed airways</td><td>Wheezing, breathlessness; reversible; treated with bronchodilators</td></tr>
+          <tr><td><b>Emphysema</b></td><td>Destruction of alveolar walls (mainly from smoking) → fewer, larger air sacs</td><td>Reduced gas exchange area; barrel chest; irreversible; ↑ RV</td></tr>
+          <tr><td><b>Chronic Bronchitis</b></td><td>Chronic inflammation and excess mucus in bronchi (smoking, pollution)</td><td>Productive cough for ≥3 months/year for ≥2 years; "blue bloater"</td></tr>
+          <tr><td><b>COPD</b></td><td>Emphysema + chronic bronchitis together; mainly from smoking</td><td>Irreversible airflow obstruction; reduced FEV₁/FVC ratio</td></tr>
+          <tr><td><b>Pneumonia</b></td><td>Infection of alveoli (bacteria — Streptococcus pneumoniae; virus — influenza)</td><td>Alveoli fill with fluid/pus → impaired gas exchange; fever, cough</td></tr>
+          <tr><td><b>Tuberculosis (TB)</b></td><td>Mycobacterium tuberculosis infection; airborne</td><td>Chronic cough, haemoptysis (blood in sputum), night sweats; Koch's disease</td></tr>
+          <tr><td><b>Pleuritis (Pleurisy)</b></td><td>Inflammation of the pleura</td><td>Sharp chest pain on breathing; pleural friction rub</td></tr>
+          <tr><td><b>Pneumothorax</b></td><td>Air in pleural cavity → lung collapse</td><td>Sudden chest pain and breathlessness; needs emergency drainage</td></tr>
+          <tr><td><b>Silicosis / Asbestosis</b></td><td>Inhalation of silica dust (miners) or asbestos fibres</td><td>Lung fibrosis; occupational disease; associated with lung cancer</td></tr>
+        </table>
+      </div>
+      <div class="eg-box">
+        <div class="eg-label">High-Yield Disease Facts</div>
+        <ul>
+          <li><strong>TB causative organism</strong>: Mycobacterium tuberculosis — also called Koch's bacillus (Robert Koch, 1882)</li>
+          <li><strong>BCG vaccine</strong> (Bacille Calmette-Guérin) — protects against TB; given at birth in India</li>
+          <li><strong>Emphysema</strong> — lungs trap air (↑ Residual Volume); "pink puffer" presentation</li>
+          <li><strong>Asthma</strong> — reversible obstruction vs COPD — irreversible. Key distinction.</li>
+          <li><strong>Occupational lung diseases</strong>: Silicosis (miners/quarry workers), Asbestosis (construction/shipbuilding), Byssinosis (cotton workers)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 7 -->
+  <div class="sec-label">Section 7 — Special Topics for Exams</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#FEF3DC">⭐</div>
+      <div style="flex:1">
+        <div class="c-title">High-Altitude Physiology &amp; Other Key Facts</div>
+        <div class="c-sub">Acclimatisation, diving, artificial respiration</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <div class="fact-box">
+        <div class="fb-label">High Altitude — Acclimatisation Response</div>
+        <ul>
+          <li>At high altitude, atmospheric pO₂ falls → <strong>hypoxia</strong></li>
+          <li>Immediate: ↑ breathing rate (hyperventilation)</li>
+          <li>Short term: ↑ heart rate, ↑ cardiac output</li>
+          <li>Long term (days–weeks): ↑ RBC production (erythropoiesis) due to <strong>erythropoietin (EPO)</strong> secretion by kidneys → ↑ Hb → more O₂ carrying capacity</li>
+          <li>Altitude sickness symptoms: headache, nausea, fatigue at >2500 m</li>
+        </ul>
+      </div>
+      <div class="fact-box">
+        <div class="fb-label">Other Frequently Tested Facts</div>
+        <ul>
+          <li><strong>Respiratory quotient (RQ)</strong>: ratio of CO₂ produced to O₂ consumed. Carbohydrates: RQ = 1.0 · Fats: RQ ≈ 0.7 · Proteins: RQ ≈ 0.8 · Mixed diet: RQ ≈ 0.85</li>
+          <li><strong>Surfactant</strong>: produced by Type II alveolar cells (pneumocytes); reduces surface tension; prevents alveolar collapse. Absent in premature infants → <strong>Infant Respiratory Distress Syndrome (IRDS)</strong></li>
+          <li><strong>Diaphragm</strong>: the most important muscle of breathing; innervated by the <strong>phrenic nerve</strong> (C3, C4, C5)</li>
+          <li><strong>Yawning</strong>: reflex to increase O₂ and expel excess CO₂ when shallow breathing causes CO₂ build-up</li>
+          <li><strong>Hiccup</strong>: involuntary diaphragm spasm followed by sudden closure of glottis</li>
+        </ul>
+      </div>
+      <div class="rule-box">
+        <div class="rl-label">Composition of Inhaled vs Exhaled Air</div>
+        <p>Inhaled air: <strong>O₂ 21%, CO₂ 0.04%, N₂ 78%</strong>. Exhaled air: <strong>O₂ ~16%, CO₂ ~4%, N₂ ~78%</strong>. The body consumes ~5% of O₂ per breath and produces ~4% CO₂. Nitrogen is physiologically inert — same percentage in and out.</p>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /theory -->
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  QUICK REFERENCE PANE                                     -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="pane" id="quickref">
+  <div class="ref-grid">
+
+    <div class="ref-card">
+      <div class="ref-card-title">Airway — Path &amp; Key Structures</div>
+      <ul>
+        <li>Nasal cavity → pharynx → larynx (voice box) → trachea → bronchi → bronchioles → alveoli</li>
+        <li>Trachea: <em>C-shaped cartilage rings</em>; ciliated epithelium + goblet cells</li>
+        <li>Right bronchus — shorter, wider, more vertical → foreign bodies lodge here</li>
+        <li>Bronchioles — <em>no cartilage</em>; smooth muscle only → asthma causes narrowing</li>
+        <li>Alveoli — 300 million per lung; ~70 m² surface; 0.2 µm wall; surfactant prevents collapse</li>
+        <li>Right lung = 3 lobes · Left lung = 2 lobes (cardiac notch)</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Lung Volumes — Must Know Numbers</div>
+      <ul>
+        <li><b>Tidal Volume (TV)</b> = <em>500 mL</em></li>
+        <li><b>IRV</b> = 2500–3000 mL · <b>ERV</b> = 1000–1200 mL</li>
+        <li><b>Residual Volume (RV)</b> = 1100–1200 mL (cannot be measured by spirometer)</li>
+        <li><b>Vital Capacity (VC)</b> = TV + IRV + ERV ≈ <em>4600 mL</em></li>
+        <li><b>Total Lung Capacity (TLC)</b> = VC + RV ≈ <em>5800 mL</em></li>
+        <li>Breathing rate at rest: <em>12–20 breaths/min</em></li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Breathing Mechanics</div>
+      <ul>
+        <li>Inspiration = <em>active</em> (diaphragm contracts, flattens; ribs move up+out)</li>
+        <li>Normal expiration = <em>passive</em> (elastic recoil; no muscles)</li>
+        <li>Forced expiration = active (internal intercostals + abdominal muscles)</li>
+        <li>Primary respiratory drive = ↑ CO₂ (NOT falling O₂)</li>
+        <li>Respiratory centre: <em>medulla oblongata</em></li>
+        <li>Diaphragm innervated by phrenic nerve (C3–C5)</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Gas Transport in Blood</div>
+      <ul>
+        <li>O₂: 97% as <em>oxyhaemoglobin</em> · 3% dissolved in plasma</li>
+        <li>CO₂: 70% as <em>bicarbonate (HCO₃⁻)</em> · 23% carbaminoHb · 7% dissolved</li>
+        <li>CO₂ + H₂O → H₂CO₃ → H⁺ + HCO₃⁻ (enzyme: <em>carbonic anhydrase</em>)</li>
+        <li><b>Bohr Effect</b>: ↑CO₂/↓pH → O₂ released from Hb to tissues</li>
+        <li>CO binds Hb 200× stronger than O₂ → carboxyhaemoglobin → poisoning</li>
+        <li>HbF (foetal) has higher O₂ affinity than HbA (adult)</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Key Respiratory Diseases</div>
+      <ul>
+        <li><b>Asthma</b> — reversible bronchospasm; allergen-triggered</li>
+        <li><b>Emphysema</b> — alveolar wall destruction; ↑RV; smoking; irreversible</li>
+        <li><b>TB</b> — Mycobacterium tuberculosis (Koch's bacillus); BCG vaccine</li>
+        <li><b>Pneumonia</b> — alveoli fill with fluid; Streptococcus pneumoniae</li>
+        <li><b>Silicosis</b> — miners; <b>Asbestosis</b> — construction; <b>Byssinosis</b> — cotton</li>
+        <li><b>Pneumothorax</b> — air in pleural cavity → lung collapse</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Special Facts for MCQs</div>
+      <ul>
+        <li>Inhaled air: O₂ 21%, CO₂ 0.04% · Exhaled: O₂ ~16%, CO₂ ~4%</li>
+        <li><b>RQ</b>: Carbohydrate = 1.0 · Fat = 0.7 · Protein = 0.8</li>
+        <li>Surfactant — Type II pneumocytes; absent in premature babies → IRDS</li>
+        <li>High altitude → EPO from kidneys → ↑ RBC production (acclimatisation)</li>
+        <li>Normal Hb: males 14–16 g/dL · females 12–14 g/dL</li>
+        <li>Dead space volume = ~150 mL (air in airways, no gas exchange)</li>
+      </ul>
+    </div>
+
+  </div>
+</div><!-- /quickref -->
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  QUIZ PANE                                                -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="pane" id="quiz">
+
+  <div class="quiz-stats">
+    <div class="qs-cell"><div class="qs-val" id="s-att">0</div><div class="qs-lbl">Attempted</div></div>
+    <div class="qs-cell"><div class="qs-val g" id="s-cor">0</div><div class="qs-lbl">Correct</div></div>
+    <div class="qs-cell"><div class="qs-val r" id="s-wrg">0</div><div class="qs-lbl">Wrong</div></div>
+    <div class="qs-cell"><div class="qs-val a" id="s-tot">15</div><div class="qs-lbl">Total</div></div>
+  </div>
+
+  <div class="prog-wrap">
+    <div class="prog-label" id="prog-label">0 of 15 answered</div>
+    <div class="prog-bar"><div class="prog-fill" id="prog"></div></div>
+  </div>
+
+  <div class="quiz-actions">
+    <button class="btn btn-primary" onclick="submitAll()">Submit All &amp; Check</button>
+    <button class="btn btn-ghost" onclick="resetQuiz()">↺ Reset Quiz</button>
+  </div>
+
+  <div id="results"></div>
+  <div id="q-area"></div>
+
+</div><!-- /quiz -->
+</div><!-- /page -->
+
+<script>
+const QS = [
+
+{d:'EASY',e:'NDA 2023',
+q:'The primary site of gas exchange in the human respiratory system is:',
+opts:['Trachea','Bronchi','Bronchioles','Alveoli'],ans:3,
+rule:'Alveoli = primary site of gas exchange; ~300 million per lung; ~70 m² surface area',
+exp:'Gas exchange (O₂ entering blood, CO₂ leaving blood) occurs exclusively in the ALVEOLI — tiny air sacs at the end of the bronchiole tree. Each lung has approximately 300 million alveoli, providing a total surface area of about 70 m². Their walls are one cell thick (simple squamous epithelium), minimising the diffusion distance. The trachea, bronchi, and bronchioles are conducting airways — they carry air but do not perform gas exchange (they form the anatomical dead space).'},
+
+{d:'EASY',e:'CDS 2022',
+q:'The tidal volume of a normal adult at rest is approximately:',
+opts:['150 mL','500 mL','1200 mL','4600 mL'],ans:1,
+rule:'Tidal Volume (TV) = 500 mL per breath at rest',
+exp:'Tidal volume is the volume of air inhaled or exhaled in a single normal, relaxed breath. In a normal adult at rest, this is approximately 500 mL (0.5 litres). Of this 500 mL, about 150 mL fills the conducting airways (dead space) and does not participate in gas exchange. The remaining ~350 mL reaches the alveoli. 1200 mL is the expiratory reserve volume. 4600 mL is the vital capacity. 150 mL is the dead space volume.'},
+
+{d:'EASY',e:'AFCAT 2023',
+q:'Which muscle is the PRIMARY muscle of respiration responsible for breathing?',
+opts:['External intercostal muscles','Internal intercostal muscles','Diaphragm','Abdominal muscles'],ans:2,
+rule:'Diaphragm = primary muscle of breathing; innervated by phrenic nerve (C3–C5)',
+exp:'The diaphragm is the most important muscle of respiration. It is a dome-shaped muscular sheet separating the thoracic and abdominal cavities. During inspiration, it contracts and flattens downward, increasing thoracic volume and decreasing lung pressure, allowing air to flow in. It is innervated by the phrenic nerve (C3, C4, C5 — "C3, 4, 5 keeps the diaphragm alive"). External intercostals assist by lifting the ribs. Internal intercostals and abdominal muscles are used only during forced expiration.'},
+
+{d:'EASY',e:'CDS 2023',
+q:'Which of the following prevents the trachea from collapsing during breathing?',
+opts:[
+  'Smooth muscle rings completely surrounding the trachea',
+  'Incomplete C-shaped cartilage rings',
+  'Elastic fibres in the tracheal wall',
+  'Negative pleural pressure'
+],ans:1,
+rule:'Trachea: C-shaped (incomplete) cartilage rings — open posteriorly to allow oesophageal expansion',
+exp:'The trachea is kept open by C-SHAPED (incomplete) cartilage rings — 16 to 20 of them. They are "C" shaped (not complete rings) because they are open at the back (posterior). This gap allows the oesophagus, which runs directly behind the trachea, to expand when food is swallowed. The posterior wall of the trachea contains smooth muscle (trachealis muscle) and elastic tissue. The cartilage prevents the trachea from collapsing inward during the negative pressure of inspiration.'},
+
+{d:'EASY',e:'NDA 2022',
+q:'The causative organism of Tuberculosis (TB) is:',
+opts:['Streptococcus pneumoniae','Mycobacterium tuberculosis','Influenza virus','Aspergillus fumigatus'],ans:1,
+rule:'TB = Mycobacterium tuberculosis (Koch\'s bacillus); BCG vaccine provides protection',
+exp:'Tuberculosis (TB) is caused by Mycobacterium tuberculosis, discovered by Robert Koch in 1882 (hence called Koch\'s bacillus). TB is an airborne disease spread by droplet nuclei when an infected person coughs or sneezes. It primarily affects the lungs (pulmonary TB) but can affect other organs. BCG (Bacille Calmette-Guérin) vaccine provides protection against TB and is given at birth in India. Streptococcus pneumoniae causes pneumonia. Influenza virus causes flu. Aspergillus causes fungal lung infection.'},
+
+{d:'MEDIUM',e:'CDS 2023',
+q:'During normal (quiet) expiration, which of the following is TRUE?',
+opts:[
+  'The diaphragm contracts and moves downward',
+  'External intercostal muscles contract',
+  'No muscular contraction is required — it is driven by elastic recoil',
+  'Internal intercostal muscles contract to push air out'
+],ans:2,
+rule:'Normal expiration = passive (elastic recoil of lungs) — NO active muscle contraction',
+exp:'During normal quiet expiration, NO muscles actively contract. The process is PASSIVE — when the inspiratory muscles (diaphragm and external intercostals) relax, the thorax returns to its resting size and the elastic recoil of the stretched lung tissue drives air outward. This is why breathing is energy-efficient at rest. Only FORCED expiration (during exercise, blowing, coughing) requires active contraction of the internal intercostal and abdominal muscles. This distinction is one of the most commonly tested points in respiratory physiology.'},
+
+{d:'MEDIUM',e:'AFCAT 2022',
+q:'The majority of carbon dioxide is transported in the blood as:',
+opts:[
+  'Dissolved CO₂ in plasma',
+  'Carbaminohaemoglobin bound to haemoglobin',
+  'Bicarbonate ions (HCO₃⁻) in plasma',
+  'Carboxyhaemoglobin'
+],ans:2,
+rule:'CO₂ transport: 70% as HCO₃⁻ · 23% carbaminoHb · 7% dissolved',
+exp:'Approximately 70% of CO₂ is transported as BICARBONATE IONS (HCO₃⁻). Inside red blood cells, CO₂ combines with water to form carbonic acid (H₂CO₃), catalysed by the enzyme carbonic anhydrase. H₂CO₃ then dissociates into H⁺ and HCO₃⁻. The bicarbonate ions move into the plasma (chloride shift). About 23% of CO₂ binds to the protein (globin) part of haemoglobin as carbaminohaemoglobin. Only about 7% is dissolved directly in plasma. Carboxyhaemoglobin is formed with carbon MONOXIDE (CO) — a toxic form.'},
+
+{d:'MEDIUM',e:'NDA 2023',
+q:'The Bohr Effect describes which of the following?',
+opts:[
+  'Increased CO₂ in blood causes increased O₂ loading onto haemoglobin',
+  'Increased CO₂ / decreased pH causes haemoglobin to release more O₂ to tissues',
+  'Falling O₂ levels in the lungs trigger faster breathing',
+  'Carbon monoxide binds haemoglobin more strongly than oxygen'
+],ans:1,
+rule:'Bohr Effect: ↑CO₂/↓pH → ↓Hb-O₂ affinity → more O₂ released to active tissues',
+exp:'The Bohr Effect states that an increase in CO₂ concentration or a decrease in pH (more acidic conditions) DECREASES haemoglobin\'s affinity for oxygen, causing it to release more O₂. This is physiologically perfect — active tissues produce more CO₂ and H⁺, which signals Hb to release more O₂ exactly where it is needed most. In the lungs, CO₂ is exhaled, pH rises, and Hb readily picks up O₂ again. This is a right-shift of the oxygen-dissociation curve. Temperature increase has a similar effect.'},
+
+{d:'MEDIUM',e:'CDS 2024',
+q:'Which of the following lung volumes CANNOT be measured by a simple spirometer?',
+opts:['Tidal Volume','Inspiratory Reserve Volume','Expiratory Reserve Volume','Residual Volume'],ans:3,
+rule:'Residual Volume (RV) cannot be measured by spirometry — air always remains in lungs',
+exp:'Residual Volume (RV) is the air that remains in the lungs even after a maximum forced expiration. Because you can never completely empty your lungs (the airways would collapse), spirometry — which measures air you breathe in and out — cannot measure RV. Special techniques like helium dilution or body plethysmography are required. Since Total Lung Capacity = Vital Capacity + RV, and Functional Residual Capacity = ERV + RV, these too cannot be measured by spirometry alone. Tidal Volume, IRV, and ERV can all be directly measured by spirometry.'},
+
+{d:'MEDIUM',e:'AFCAT 2024',
+q:'An inhaled foreign object (like a peanut) is MORE likely to enter the right bronchus than the left. Why?',
+opts:[
+  'The right bronchus is longer and narrower',
+  'The right bronchus is shorter, wider and more vertical than the left',
+  'The left bronchus has no cartilage rings',
+  'The right lung has more lobes and draws more air'
+],ans:1,
+rule:'Right bronchus = shorter + wider + more vertical → foreign bodies more likely to lodge here',
+exp:'The RIGHT primary bronchus is: (1) SHORTER — about 2.5 cm vs 5 cm for the left, (2) WIDER — larger lumen, (3) MORE VERTICAL — deviates less from the trachea (25° vs 45° for the left). These three features mean that an inhaled object falling under gravity takes the path of least resistance — straight into the right bronchus. This is clinically important and commonly tested. Surgeons performing bronchoscopy to retrieve foreign bodies always check the right bronchus first.'},
+
+{d:'MEDIUM',e:'NDA 2024',
+q:'Vital Capacity of the lungs is defined as:',
+opts:[
+  'The total amount of air the lungs can hold',
+  'The air remaining in lungs after maximum expiration',
+  'The maximum volume of air that can be exhaled after a maximum inhalation',
+  'The air exchanged in one normal breath'
+],ans:2,
+rule:'Vital Capacity (VC) = TV + IRV + ERV ≈ 4600 mL; max air moved in one breath cycle',
+exp:'Vital Capacity (VC) is the maximum volume of air that can be exhaled after a maximum inhalation. Numerically: VC = Tidal Volume (500 mL) + Inspiratory Reserve Volume (2500–3000 mL) + Expiratory Reserve Volume (1000–1200 mL) ≈ 4600 mL. It does NOT include the residual volume. Total Lung Capacity (TLC) = VC + RV ≈ 5800 mL. Vital Capacity decreases in restrictive lung diseases (fibrosis, obesity) and is measured clinically by spirometry. Athletes have higher VC due to better respiratory muscle strength.'},
+
+{d:'HARD',e:'CDS 2024',
+q:'In patients with Chronic Obstructive Pulmonary Disease (COPD), giving high-flow oxygen can paradoxically suppress breathing. The physiological reason is:',
+opts:[
+  'O₂ directly inhibits the medulla\'s respiratory centre',
+  'These patients rely on hypoxic drive (low O₂) rather than CO₂ drive; removing hypoxia removes their stimulus to breathe',
+  'High O₂ causes bronchoconstriction',
+  'COPD patients have damaged phrenic nerves'
+],ans:1,
+rule:'COPD: CO₂-insensitive → relies on hypoxic drive; high O₂ removes this drive → respiratory depression',
+exp:'Normally, rising CO₂ is the primary stimulus for breathing. In COPD patients who chronically retain CO₂, central chemoreceptors become desensitised (tolerant) to high CO₂ levels. These patients then shift to a HYPOXIC DRIVE — their mild chronic hypoxia (low O₂) sensed by peripheral chemoreceptors (carotid and aortic bodies) becomes their main stimulus to breathe. If you give such a patient high-flow O₂ without monitoring, you correct their hypoxia, removing this last respiratory drive, and their breathing rate may dangerously fall (hypercapnic respiratory failure). This is a classic applied question.'},
+
+{d:'HARD',e:'NDA 2024',
+q:'Surfactant in the alveoli performs which critical function, and which cells produce it?',
+opts:[
+  'Increases surface tension; produced by Type I pneumocytes',
+  'Reduces surface tension, preventing alveolar collapse; produced by Type II pneumocytes',
+  'Transports O₂ across the alveolar membrane; produced by goblet cells',
+  'Filters pathogens; produced by alveolar macrophages'
+],ans:1,
+rule:'Surfactant: reduces surface tension → prevents alveolar collapse; Type II pneumocytes produce it',
+exp:'Surfactant is a phospholipid mixture (mainly dipalmitoylphosphatidylcholine, DPPC) that lines the alveolar surface. Water has a high surface tension that would cause alveoli to collapse (like a wet paper bag) during expiration — surfactant reduces this surface tension dramatically, keeping alveoli open. It is produced by TYPE II PNEUMOCYTES (Type II alveolar cells). Absence of surfactant in premature infants causes Infant Respiratory Distress Syndrome (IRDS) / Hyaline Membrane Disease — the alveoli collapse with every breath. Treatment involves exogenous surfactant therapy. Type I pneumocytes are the thin squamous cells forming most of the alveolar wall.'},
+
+{d:'HARD',e:'AFCAT 2024',
+q:'During high-altitude acclimatisation, the kidneys respond to hypoxia by secreting a hormone that increases red blood cell production. This hormone is:',
+opts:['Aldosterone','Antidiuretic Hormone (ADH)','Erythropoietin (EPO)','Thrombopoietin'],ans:2,
+rule:'Hypoxia → kidneys secrete EPO (erythropoietin) → ↑ RBC production (erythropoiesis) → acclimatisation',
+exp:'At high altitude, reduced atmospheric pO₂ causes tissue hypoxia. The KIDNEYS detect this low oxygen tension and secrete ERYTHROPOIETIN (EPO) — a hormone that stimulates the bone marrow to produce more red blood cells (erythropoiesis). Over days to weeks, this increases the RBC count and haemoglobin concentration in blood, improving O₂-carrying capacity. This is the key long-term acclimatisation mechanism. EPO is also the substance athletes illegally use for blood doping in endurance sports. Aldosterone regulates sodium/water balance. ADH controls water retention. Thrombopoietin regulates platelet production.'},
+
+{d:'HARD',e:'CDS 2024',
+q:'In a spirometry test, the FEV₁/FVC ratio is used to distinguish obstructive from restrictive lung disease. Which pattern correctly describes OBSTRUCTIVE disease (e.g., asthma, COPD)?',
+opts:[
+  'FVC is reduced; FEV₁/FVC ratio is normal or increased',
+  'Both FVC and FEV₁ are reduced proportionally; FEV₁/FVC ratio is normal',
+  'FEV₁ is disproportionately reduced; FEV₁/FVC ratio is <70%',
+  'Residual volume is reduced; vital capacity is increased'
+],ans:2,
+rule:'Obstructive: FEV₁↓↓ / FVC↓ → ratio <70% · Restrictive: both ↓ proportionally → normal ratio',
+exp:'FEV₁ = Forced Expiratory Volume in 1 second (how much air expelled in first second of forced breath). FVC = Forced Vital Capacity. In OBSTRUCTIVE diseases (asthma, COPD, emphysema), the airways are narrowed, limiting airflow rate. FEV₁ falls disproportionately compared to FVC, giving FEV₁/FVC < 70% (normal ≥ 70–80%). In RESTRICTIVE diseases (pulmonary fibrosis, obesity), the lungs are stiff and small — both FEV₁ and FVC decrease proportionally, so the ratio remains normal. This is one of the most tested concepts in applied respiratory physiology for competitive exams.'},
+
+];
+
+const answers  = new Array(QS.length).fill(null);
+const revealed = new Array(QS.length).fill(false);
+const LABS = ['A','B','C','D'];
+
+function build(){
+  const area = document.getElementById('q-area');
+  area.innerHTML = '';
+  QS.forEach((q,i)=>{
+    const dc = q.d==='EASY'?'diff-e':q.d==='MEDIUM'?'diff-m':'diff-h';
+    const div = document.createElement('div');
+    div.className='q-card'; div.id=`qc${i}`;
+    div.innerHTML=`
+      <div class="q-meta">
+        <span class="q-num">Q.${String(i+1).padStart(2,'0')}</span>
+        <span class="q-diff ${dc}">${q.d}</span>
+        <span class="q-exam">${q.e}</span>
+      </div>
+      <div class="q-body">
+        <div class="q-text">${q.q}</div>
+        <div class="opts" id="opts${i}">
+          ${q.opts.map((o,j)=>`
+            <button class="opt" id="o${i}_${j}" onclick="pick(${i},${j})">
+              <span class="opt-lbl">${LABS[j]}</span>${o}
+            </button>`).join('')}
+        </div>
+        <div class="exp-panel" id="ex${i}">
+          <div class="exp-tag">Explanation</div>
+          <div class="exp-rule">${q.rule}</div>
+          <p>${q.exp}</p>
+        </div>
+      </div>
+      <div class="q-foot">
+        <span style="font-size:11px;color:var(--dim);font-weight:700">Biology · B05</span>
+        <span id="ai${i}" class="q-status">—</span>
+      </div>`;
+    area.appendChild(div);
+  });
+}
+
+function pick(qi,oi){
+  if(revealed[qi]) return;
+  answers[qi]=oi;
+  document.querySelectorAll(`#opts${qi} .opt`).forEach((b,j)=>{
+    b.classList.remove('sel');
+    if(j===oi) b.classList.add('sel');
+  });
+  document.getElementById(`qc${qi}`).classList.add('answered');
+  const ai=document.getElementById(`ai${qi}`);
+  ai.textContent=`Selected: ${LABS[oi]}`;
+  ai.style.color='var(--primary)';
+  updateStats();
+}
+
+function updateStats(){
+  const att=answers.filter(a=>a!==null).length;
+  document.getElementById('s-att').textContent=att;
+  document.getElementById('prog').style.width=(att/QS.length*100)+'%';
+  document.getElementById('prog-label').textContent=`${att} of ${QS.length} answered`;
+  let c=0,w=0;
+  answers.forEach((a,i)=>{ if(a===null)return; if(a===QS[i].ans)c++; else w++; });
+  document.getElementById('s-cor').textContent=c;
+  document.getElementById('s-wrg').textContent=w;
+}
+
+function submitAll(){
+  let cor=0,wrg=0,skp=0;
+  QS.forEach((q,i)=>{
+    revealed[i]=true;
+    const opts=document.querySelectorAll(`#opts${i} .opt`);
+    opts.forEach(b=>{b.disabled=true;b.classList.remove('sel')});
+    opts[q.ans].classList.add('ok');
+    if(answers[i]!==null && answers[i]!==q.ans) opts[answers[i]].classList.add('bad');
+    document.getElementById(`ex${i}`).classList.add('show');
+    const ai=document.getElementById(`ai${i}`);
+    const card=document.getElementById(`qc${i}`);
+    card.classList.remove('answered');
+    if(answers[i]===null){skp++;ai.textContent='Skipped';ai.style.color='var(--dim)';}
+    else if(answers[i]===q.ans){cor++;card.classList.add('correct');ai.textContent='✓ Correct';ai.style.color='var(--green)';}
+    else{wrg++;card.classList.add('wrong');ai.textContent='✗ Wrong';ai.style.color='var(--red)';}
+  });
+  updateStats();
+  showResults(cor,wrg,skp);
+}
+
+function showResults(cor,wrg,skp){
+  const pct=Math.round(cor/QS.length*100);
+  let grade,msg;
+  if(pct>=88){grade='Excellent';msg='Outstanding! You have mastered the Respiratory System.'}
+  else if(pct>=70){grade='Good';msg='Well done. Review the questions you got wrong.'}
+  else if(pct>=50){grade='Average';msg='Good start. Revisit the theory cards and try again.'}
+  else{grade='Needs Work';msg="Don't worry — go through the Quick Ref and try again."}
+  const res=document.getElementById('results');
+  res.innerHTML=`
+    <div class="res-hero">
+      <div class="res-score">${cor}<span style="font-size:36px;opacity:.5">/${QS.length}</span></div>
+      <div class="res-grade">${grade} · ${pct}%</div>
+      <div class="res-msg">${msg}</div>
+    </div>
+    <div class="res-stats">
+      <div class="qs-cell"><div class="qs-val g">${cor}</div><div class="qs-lbl">Correct</div></div>
+      <div class="qs-cell"><div class="qs-val r">${wrg}</div><div class="qs-lbl">Wrong</div></div>
+      <div class="qs-cell"><div class="qs-val a">${skp}</div><div class="qs-lbl">Skipped</div></div>
+      <div class="qs-cell"><div class="qs-val">${pct}%</div><div class="qs-lbl">Score</div></div>
+    </div>
+    <div style="text-align:center;margin:16px 0">
+      <button class="btn btn-ghost" onclick="document.getElementById('q-area').scrollIntoView({behavior:'smooth'})">📖 Review All Answers</button>
+    </div>`;
+  res.style.display='block';
+  res.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function resetQuiz(){
+  answers.fill(null); revealed.fill(false);
+  build();
+  document.getElementById('results').style.display='none';
+  document.getElementById('results').innerHTML='';
+  ['s-att','s-cor','s-wrg'].forEach(id=>document.getElementById(id).textContent='0');
+  document.getElementById('prog').style.width='0%';
+  document.getElementById('prog-label').textContent=`0 of ${QS.length} answered`;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function switchTab(id){
+  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  const idx={theory:0,quickref:1,quiz:2}[id];
+  document.querySelectorAll('.tab')[idx].classList.add('on');
+}
+
+function tog(hd){
+  const bd=hd.nextElementSibling;
+  const isOpen=bd.classList.contains('open');
+  bd.classList.toggle('open',!isOpen);
+  hd.classList.toggle('open',!isOpen);
+}
+
+build();
+</script>
+</body>
+</html>

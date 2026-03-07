@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B09 · Endocrine System | Olive Defence</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+
+:root{
+  /* ── THEME B09: Deep Amber-Copper + Warm Ivory — hormonal, rich ── */
+  --bg:        #F5F0E8;
+  --bg2:       #EDE5D8;
+  --bg3:       #E0D5C2;
+  --white:     #FDFAF5;
+  --ink:       #1A1208;
+  --ink2:      #2C1E0A;
+  --muted:     #7A5C28;
+  --dim:       #B08A50;
+  --border:    #D8C49A;
+
+  --primary:      #7A3A00;
+  --primaryLt:    #A04A00;
+  --primaryPale:  #FBF0E4;
+
+  --amber:        #8A6008;
+  --amberLt:      #B07A10;
+  --amberPale:    #FDF4DC;
+
+  --green:        #1A5C30;
+  --greenLt:      #227840;
+  --greenPale:    #E4F4EC;
+
+  --red:          #8A1A1A;
+  --redLt:        #B02020;
+  --redPale:      #FAEAEA;
+
+  --blue:         #1A3A72;
+  --bluePale:     #E6EEF8;
+
+  --purple:       #5A1878;
+  --purplePale:   #F2E8F8;
+
+  --teal:         #0D5050;
+  --tealPale:     #E0F2F2;
+
+  --radius:    12px;
+  --shadow:    0 2px 12px rgba(26,18,8,.09);
+  --shadow-md: 0 4px 20px rgba(26,18,8,.14);
+}
+
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--ink);font-size:17px;line-height:1.75;min-height:100vh}
+.page{max-width:680px;margin:0 auto;padding:0 16px 80px}
+
+/* ── HERO ─────────────────────────────────────────────────────── */
+.hero{
+  background:linear-gradient(135deg,#1A0800 0%,#7A3A00 52%,#A05000 100%);
+  margin:0 -16px;padding:28px 20px 26px;position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 78% 18%,rgba(255,200,100,.10) 0%,transparent 55%),
+    radial-gradient(ellipse at 6% 82%,rgba(255,160,60,.07) 0%,transparent 50%);
+  pointer-events:none;
+}
+.hero::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(255,200,100,.35),transparent);
+  pointer-events:none;
+}
+.hero-kicker{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.50);margin-bottom:8px;display:flex;align-items:center;gap:8px;position:relative;z-index:1}
+.hero-kicker::before{content:'';width:18px;height:2px;background:rgba(255,255,255,.28)}
+.hero-title{font-family:'Lora',serif;font-size:clamp(24px,5.5vw,34px);font-weight:700;color:#fff;line-height:1.2;margin-bottom:10px;position:relative;z-index:1}
+.hero-title span{color:#FFD898;font-style:italic}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.66);margin-bottom:18px;line-height:1.65;position:relative;z-index:1}
+.hero-chips{display:flex;flex-wrap:wrap;gap:7px;position:relative;z-index:1}
+.chip{font-size:11px;font-weight:700;letter-spacing:1px;padding:4px 12px;border-radius:20px;text-transform:uppercase}
+.chip-w{background:rgba(255,255,255,.12);color:rgba(255,255,255,.88)}
+.chip-a{background:rgba(255,216,152,.18);color:#FFD898}
+.chip-g{background:rgba(100,240,150,.11);color:#80E890}
+
+/* ── TAB BAR ─────────────────────────────────────────────────── */
+.tab-bar{position:sticky;top:0;z-index:50;background:var(--white);border-bottom:2px solid var(--border);margin:0 -16px;display:flex;overflow-x:auto;box-shadow:0 2px 8px rgba(26,18,8,.07);-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.tab-bar::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;padding:14px 18px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);border:none;background:transparent;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;white-space:nowrap}
+.tab:hover{color:var(--ink);background:var(--bg)}
+.tab.on{color:var(--primary);border-bottom-color:var(--primary)}
+
+/* ── PANES ───────────────────────────────────────────────────── */
+.pane{display:none;padding-top:24px;animation:fadeUp .3s ease}
+.pane.on{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ── SECTION LABEL ───────────────────────────────────────────── */
+.sec-label{font-size:10px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--primary);margin:28px 0 12px;display:flex;align-items:center;gap:10px}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* ── INTRO BOX ───────────────────────────────────────────────── */
+.intro-box{background:var(--primaryPale);border:1.5px solid rgba(122,58,0,.20);border-radius:var(--radius);padding:20px;margin-bottom:8px}
+.intro-box p{font-size:16px;color:var(--ink2);line-height:1.8}
+.intro-box strong{color:var(--primary)}
+
+/* ── CONCEPT CARDS ───────────────────────────────────────────── */
+.c-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;box-shadow:var(--shadow);overflow:hidden}
+.c-head{display:flex;align-items:center;gap:12px;padding:16px 18px;cursor:pointer;border-left:4px solid transparent;transition:all .15s;-webkit-tap-highlight-color:transparent}
+.c-head:hover,.c-head.open{background:var(--bg);border-left-color:var(--primary)}
+.c-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.c-title{font-size:17px;font-weight:700;color:var(--ink);flex:1}
+.c-sub{font-size:12px;color:var(--dim);font-weight:600;margin-top:2px}
+.c-arrow{font-size:12px;color:var(--dim);transition:transform .2s;flex-shrink:0}
+.c-head.open .c-arrow{transform:rotate(180deg)}
+.c-body{display:none;padding:4px 18px 20px;border-top:1px solid var(--border)}
+.c-body.open{display:block;animation:fadeUp .2s ease}
+.c-body p{font-size:16px;color:var(--ink2);line-height:1.85;margin-bottom:12px}
+.c-body p:last-child{margin-bottom:0}
+.c-body strong{color:var(--primary);font-weight:700}
+.c-body em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* ── CONTENT BLOCKS ──────────────────────────────────────────── */
+.fact-box{background:var(--amberPale);border:1.5px solid rgba(138,96,8,.22);border-radius:10px;padding:16px 18px;margin:14px 0}
+.fact-box .fb-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--amber);text-transform:uppercase;margin-bottom:8px}
+.fact-box ul{list-style:none;padding:0}
+.fact-box li{font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;position:relative;line-height:1.7}
+.fact-box li::before{content:'→';position:absolute;left:0;color:var(--amber);font-weight:700;font-size:13px}
+
+.eg-box{background:var(--greenPale);border-left:4px solid var(--green);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.eg-box .eg-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--green);text-transform:uppercase;margin-bottom:6px}
+.eg-box ul{list-style:none;padding:0}
+.eg-box li{font-size:15px;color:var(--ink2);padding:4px 0 4px 18px;position:relative;line-height:1.65}
+.eg-box li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:800;font-size:12px}
+.eg-box p{font-size:15px;color:var(--ink2);line-height:1.75}
+
+.trap-box{background:var(--redPale);border:1.5px solid rgba(138,26,26,.20);border-radius:10px;padding:16px 18px;margin:14px 0}
+.trap-box .tr-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--red);text-transform:uppercase;margin-bottom:8px}
+.trap-box p,.trap-box li{font-size:15.5px;color:var(--ink2);line-height:1.75}
+.trap-box ul{list-style:none;padding:0}
+.trap-box li{padding:5px 0 5px 22px;position:relative}
+.trap-box li::before{content:'⚑';position:absolute;left:0;font-size:12px;color:var(--red)}
+
+.rule-box{background:var(--bluePale);border:1.5px solid rgba(26,58,114,.17);border-radius:10px;padding:16px 18px;margin:14px 0}
+.rule-box .rl-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--blue);text-transform:uppercase;margin-bottom:8px}
+.rule-box p{font-size:15.5px;color:var(--ink2);line-height:1.8}
+.rule-box strong{color:var(--blue)}
+
+.purple-box{background:var(--purplePale);border:1.5px solid rgba(90,24,120,.17);border-radius:10px;padding:16px 18px;margin:14px 0}
+.purple-box .pl-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--purple);text-transform:uppercase;margin-bottom:8px}
+.purple-box ul{list-style:none;padding:0}
+.purple-box li{font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;position:relative;line-height:1.8}
+.purple-box li::before{content:'◆';position:absolute;left:0;font-size:9px;color:var(--purple);top:10px}
+
+.analogy-box{background:var(--primaryPale);border-left:4px solid var(--primary);border-radius:0 8px 8px 0;padding:14px 16px;margin:12px 0}
+.analogy-box .an-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--primary);text-transform:uppercase;margin-bottom:6px}
+.analogy-box p{font-size:15.5px;color:var(--ink2);line-height:1.75}
+.analogy-box strong{color:var(--primary)}
+
+/* hormone pathway strip */
+.journey{margin:16px 0;display:flex;flex-direction:column}
+.j-step{display:flex;align-items:stretch;gap:14px}
+.j-line{display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:28px}
+.j-dot{width:28px;height:28px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;margin-top:2px}
+.j-connector{width:2px;flex:1;background:var(--border);margin:2px 0}
+.j-step:last-child .j-connector{display:none}
+.j-content{padding:2px 0 18px;flex:1}
+.j-title{font-size:15px;font-weight:800;color:var(--ink);margin-bottom:3px}
+.j-desc{font-size:14.5px;color:var(--ink2);line-height:1.7}
+.j-desc strong{color:var(--primary)}
+.j-desc em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* gland mini-cards */
+.gland-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}
+.gland-card{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:13px 14px;position:relative;overflow:hidden}
+.gland-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--primary)}
+.gland-card .gland-name{font-size:13px;font-weight:800;color:var(--primary);margin-bottom:2px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.gland-card .gland-loc{font-size:10px;font-weight:700;color:var(--amber);background:var(--amberPale);border-radius:4px;padding:1px 7px;letter-spacing:.5px;text-transform:uppercase}
+.gland-card p{font-size:13.5px;color:var(--ink2);line-height:1.6;margin-top:4px}
+
+.compare-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
+.compare-table th{background:var(--primary);color:#fff;padding:10px 12px;text-align:left;font-size:13px;font-weight:700;letter-spacing:.5px}
+.compare-table td{padding:10px 12px;border:1px solid var(--border);color:var(--ink2);vertical-align:top;line-height:1.65}
+.compare-table tr:nth-child(even) td{background:var(--bg)}
+.compare-table td b{color:var(--primary)}
+.compare-table td em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* stat band */
+.stat-band{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border-radius:var(--radius);overflow:hidden;margin:16px 0}
+.stat-cell{background:var(--white);padding:12px 8px;text-align:center}
+.stat-val{font-family:'Lora',serif;font-size:16px;font-weight:700;color:var(--primary);line-height:1;margin-bottom:4px}
+.stat-lbl{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:.4px;line-height:1.3}
+
+/* ── QUICK REFERENCE ─────────────────────────────────────────── */
+.ref-grid{display:grid;gap:10px;margin:8px 0}
+.ref-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+.ref-card-title{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--primary);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.ref-card ul{list-style:none;padding:0}
+.ref-card li{font-size:15px;color:var(--ink2);padding:5px 0 5px 16px;position:relative;line-height:1.65;border-bottom:1px solid var(--bg2)}
+.ref-card li:last-child{border-bottom:none}
+.ref-card li::before{content:'·';position:absolute;left:4px;color:var(--primary);font-weight:900;font-size:18px;line-height:1.3}
+.ref-card li b{color:var(--ink);font-weight:700}
+.ref-card li em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* ── QUIZ ────────────────────────────────────────────────────── */
+.quiz-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:16px;box-shadow:var(--shadow)}
+.qs-cell{background:var(--white);padding:12px 8px;text-align:center}
+.qs-val{font-family:'Lora',serif;font-size:22px;font-weight:700;color:var(--primary);line-height:1}
+.qs-val.g{color:var(--green)}.qs-val.r{color:var(--red)}.qs-val.a{color:var(--amber)}
+.qs-lbl{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:1px;margin-top:4px;text-transform:uppercase}
+.prog-wrap{margin-bottom:20px}
+.prog-bar{height:6px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;background:var(--primary);border-radius:3px;transition:width .4s ease;width:0%}
+.prog-label{font-size:12px;color:var(--muted);font-weight:700;margin-bottom:6px}
+.q-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:12px;box-shadow:var(--shadow);overflow:hidden;border-left:4px solid transparent;transition:border-color .15s}
+.q-card.answered{border-left-color:var(--primary)}
+.q-card.correct{border-left-color:var(--green)}
+.q-card.wrong{border-left-color:var(--red)}
+.q-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 16px;background:var(--bg);border-bottom:1px solid var(--border)}
+.q-num{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:1px}
+.q-diff{font-size:10px;font-weight:800;padding:2px 10px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase}
+.diff-e{background:var(--greenPale);color:var(--green)}
+.diff-m{background:var(--amberPale);color:var(--amber)}
+.diff-h{background:var(--redPale);color:var(--red)}
+.q-exam{font-size:11px;color:var(--dim);margin-left:auto;font-weight:600}
+.q-body{padding:16px}
+.q-text{font-size:17px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:14px 16px;cursor:pointer;display:flex;align-items:flex-start;gap:12px;font-size:16px;color:var(--ink2);text-align:left;width:100%;transition:all .15s;-webkit-tap-highlight-color:transparent;min-height:48px;line-height:1.6}
+.opt:hover:not(:disabled){border-color:var(--primary);background:var(--primaryPale)}
+.opt:disabled{cursor:default}
+.opt.sel{border-color:var(--primary);background:var(--primaryPale);color:var(--primary)}
+.opt.ok{border-color:var(--green)!important;background:var(--greenPale)!important;color:var(--green)!important}
+.opt.bad{border-color:var(--red)!important;background:var(--redPale)!important;color:var(--red)!important}
+.opt-lbl{min-width:28px;height:28px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--muted);flex-shrink:0;transition:all .15s}
+.opt.sel .opt-lbl{background:var(--primary);color:#fff;border-color:var(--primary)}
+.opt.ok .opt-lbl{background:var(--green);color:#fff;border-color:var(--green)}
+.opt.bad .opt-lbl{background:var(--red);color:#fff;border-color:var(--red)}
+.exp-panel{display:none;margin-top:12px;background:var(--bg);border-radius:10px;padding:14px 16px;border:1px solid var(--border)}
+.exp-panel.show{display:block;animation:fadeUp .2s ease}
+.exp-tag{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--primary);margin-bottom:6px}
+.exp-rule{font-size:13px;font-weight:800;color:var(--ink);background:var(--primaryPale);border-radius:6px;padding:6px 10px;margin-bottom:8px;border-left:3px solid var(--primary)}
+.exp-panel p{font-size:15px;color:var(--ink2);line-height:1.8}
+.q-foot{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-top:1px solid var(--border);background:var(--bg)}
+.q-status{font-size:12px;font-weight:700}
+.btn{padding:12px 24px;border-radius:10px;font-size:14px;font-weight:800;letter-spacing:.5px;border:none;cursor:pointer;transition:all .15s}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:var(--primaryLt)}
+.btn-ghost{background:var(--bg2);color:var(--ink2);border:1.5px solid var(--border)}
+.btn-ghost:hover{background:var(--bg3)}
+.quiz-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+#results{display:none;background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:20px;box-shadow:var(--shadow-md)}
+.res-hero{text-align:center;padding-bottom:20px;border-bottom:1px solid var(--border);margin-bottom:16px}
+.res-score{font-family:'Lora',serif;font-size:64px;font-weight:700;color:var(--primary);line-height:1}
+.res-grade{font-size:16px;font-weight:800;color:var(--ink);margin:8px 0 6px;letter-spacing:.5px}
+.res-msg{font-size:15px;color:var(--muted)}
+.res-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-kicker">Biology · Lesson B09 · Olive Defence</div>
+  <div class="hero-title">The <span>Endocrine System</span></div>
+  <div class="hero-sub">Endocrine glands, hormones, feedback mechanisms, pituitary axis, thyroid, adrenal, pancreas, gonads and hormonal disorders — focussed on CDS &amp; NDA exam patterns.</div>
+  <div class="hero-chips">
+    <span class="chip chip-w">CDS</span>
+    <span class="chip chip-w">NDA</span>
+    <span class="chip chip-w">AFCAT</span>
+    <span class="chip chip-a">Hormones</span>
+    <span class="chip chip-g">Glands</span>
+    <span class="chip chip-a">Feedback</span>
+  </div>
+</div>
+
+<!-- TAB BAR -->
+<div class="tab-bar">
+  <button class="tab on" onclick="switchTab('theory')">📖 Theory</button>
+  <button class="tab" onclick="switchTab('quickref')">⚡ Quick Ref</button>
+  <button class="tab" onclick="switchTab('quiz')">✏️ Quiz</button>
+</div>
+
+<!-- ═══════════════════════════════ THEORY ═══════════════════════ -->
+<div class="pane on" id="theory">
+
+  <div class="intro-box">
+    <p>The <strong>endocrine system</strong> is the body's slow, long-range chemical signalling network. It consists of <strong>ductless glands</strong> that secrete <strong>hormones</strong> directly into the bloodstream. Hormones travel to <strong>target organs</strong> and produce effects. Unlike the nervous system (milliseconds), hormonal effects take seconds to hours but last much longer.</p>
+  </div>
+
+  <!-- SECTION 1 -->
+  <div class="sec-label">Section 1 — Endocrine vs Exocrine &amp; Hormone Basics</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#FBF0E4">🔬</div>
+      <div style="flex:1">
+        <div class="c-title">Glands, Hormones &amp; Feedback Control</div>
+        <div class="c-sub">Ductless glands, chemical messengers, negative feedback</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Feature</th><th>Endocrine Glands</th><th>Exocrine Glands</th></tr>
+          <tr><td>Duct</td><td><b>Ductless</b> — secrete directly into blood</td><td>Have ducts — secrete into body cavities or surface</td></tr>
+          <tr><td>Secretion</td><td>Hormones (chemical messengers)</td><td>Enzymes, sweat, tears, saliva, bile</td></tr>
+          <tr><td>Transport</td><td>Via bloodstream to target organs</td><td>Via ducts to site of action</td></tr>
+          <tr><td>Examples</td><td>Thyroid, adrenal, pituitary, pancreatic islets</td><td>Salivary glands, sweat glands, liver (bile), exocrine pancreas</td></tr>
+        </table>
+      </div>
+
+      <div class="fact-box">
+        <div class="fb-label">Properties of Hormones</div>
+        <ul>
+          <li>Secreted in <strong>very small quantities</strong> but produce large effects</li>
+          <li>Act on specific <strong>target cells/organs</strong> that have complementary receptors</li>
+          <li>Are <strong>non-nutritive</strong> — they carry information, not energy</li>
+          <li><strong>Chemical nature</strong>: (a) <em>Protein/Peptide hormones</em> — insulin, glucagon, ADH, oxytocin, FSH, LH, GH, PTH, calcitonin — water-soluble, bind surface receptors; (b) <em>Steroid hormones</em> — cortisol, aldosterone, testosterone, oestrogen, progesterone — lipid-soluble, enter cell and bind nuclear receptors; (c) <em>Amino acid derivatives</em> — adrenaline, noradrenaline (from tyrosine); thyroid hormones T₃ and T₄ (from tyrosine + iodine)</li>
+          <li>Hormones are inactivated in the <strong>liver</strong> and excreted by kidneys</li>
+        </ul>
+      </div>
+
+      <div class="rule-box">
+        <div class="rl-label">Negative Feedback — The Master Control Principle</div>
+        <p>Most hormone secretion is controlled by <strong>negative feedback</strong>: when the level of a hormone (or its effect) rises sufficiently, it signals back to inhibit further secretion. Example: <strong>High blood glucose → insulin released → glucose falls → insulin secretion stops</strong>. This prevents over-secretion and maintains homeostasis. <strong>Positive feedback</strong> (rare) amplifies a response: e.g., oxytocin during labour — more contractions → more oxytocin → stronger contractions.</p>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Mixed Glands — Exam Trap</div>
+        <ul>
+          <li><strong>Pancreas</strong> — both endocrine (islets of Langerhans → insulin, glucagon) and exocrine (acini → digestive enzymes). Most tested mixed gland.</li>
+          <li><strong>Gonads</strong> (testes, ovaries) — both endocrine (testosterone, oestrogen) and exocrine (sperm, eggs)</li>
+          <li><strong>Liver</strong> — mostly exocrine (bile) but also produces some hormones (IGF-1, thrombopoietin)</li>
+          <li><strong>Hypothalamus</strong> — part of the nervous system BUT also produces hormones → it is the master link between nervous and endocrine systems</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="sec-label">Section 2 — The Pituitary Gland: Master Gland</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#FBF0E4">👑</div>
+      <div style="flex:1">
+        <div class="c-title">Pituitary Gland — Anterior &amp; Posterior</div>
+        <div class="c-sub">Hypophysis — controls most other endocrine glands</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>The <strong>pituitary gland (hypophysis)</strong> is called the <strong>"master gland"</strong> because it secretes hormones that control other endocrine glands. It lies at the base of the brain in a bony cavity called the <strong>sella turcica</strong> and is connected to the <strong>hypothalamus</strong> by the infundibulum (pituitary stalk). It has two lobes with completely different functions.</p>
+
+      <div class="sec-label" style="font-size:9px;margin-top:16px">Anterior Pituitary (Adenohypophysis) — controlled by hypothalamic releasing/inhibiting hormones</div>
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Hormone</th><th>Full Name</th><th>Target &amp; Action</th><th>Disorder</th></tr>
+          <tr><td><b>GH</b></td><td>Growth Hormone (Somatotropin)</td><td>All tissues — stimulates growth, protein synthesis, fat breakdown</td><td>Excess in childhood: <em>Gigantism</em>; excess in adults: <em>Acromegaly</em>; deficiency in childhood: <em>Pituitary dwarfism</em></td></tr>
+          <tr><td><b>TSH</b></td><td>Thyroid Stimulating Hormone (Thyrotropin)</td><td>Thyroid gland — stimulates T₃/T₄ secretion</td><td>High TSH → hypothyroidism; Low TSH → hyperthyroidism</td></tr>
+          <tr><td><b>ACTH</b></td><td>Adrenocorticotrophic Hormone</td><td>Adrenal cortex — stimulates cortisol and androgens</td><td>Excess ACTH → Cushing's disease</td></tr>
+          <tr><td><b>FSH</b></td><td>Follicle Stimulating Hormone</td><td>Gonads — sperm production (males); follicle development and oestrogen (females)</td><td>Deficiency → infertility</td></tr>
+          <tr><td><b>LH</b></td><td>Luteinising Hormone</td><td>Gonads — testosterone (males); ovulation and corpus luteum (females)</td><td>Deficiency → anovulation, infertility</td></tr>
+          <tr><td><b>Prolactin (PRL)</b></td><td>Lactogenic Hormone</td><td>Mammary glands — milk production after childbirth</td><td>Excess → galactorrhoea; inhibits ovulation (post-partum)</td></tr>
+          <tr><td><b>MSH</b></td><td>Melanocyte Stimulating Hormone</td><td>Melanocytes in skin — stimulates melanin production</td><td>Excess → skin darkening (as in Addison's disease)</td></tr>
+        </table>
+      </div>
+
+      <div class="sec-label" style="font-size:9px;margin-top:16px">Posterior Pituitary (Neurohypophysis) — stores and releases hypothalamic hormones</div>
+      <div class="fact-box">
+        <div class="fb-label">Posterior Pituitary Hormones — Made in Hypothalamus, Stored Here</div>
+        <ul>
+          <li><strong>ADH (Antidiuretic Hormone / Vasopressin)</strong> — acts on kidney collecting duct → water reabsorption → concentrated urine. Deficiency → Diabetes Insipidus (polyuria with dilute urine)</li>
+          <li><strong>Oxytocin</strong> — (a) stimulates uterine contractions during labour (positive feedback); (b) milk ejection reflex (let-down) during breastfeeding. Called the "love hormone" — also involved in bonding and trust.</li>
+        </ul>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Pituitary Exam Traps</div>
+        <ul>
+          <li>The <strong>posterior pituitary does NOT synthesise ADH or oxytocin</strong> — it only stores and releases them. These hormones are MADE by the hypothalamus (supraoptic and paraventricular nuclei).</li>
+          <li><strong>Pituitary = "master gland"</strong> but the <strong>hypothalamus controls the pituitary</strong> → hypothalamus is the actual master. Hypothalamic releasing hormones (CRH, TRH, GnRH, GHRH) stimulate anterior pituitary; inhibiting hormones (somatostatin, dopamine) suppress it.</li>
+          <li><strong>Gigantism vs Acromegaly</strong>: Both caused by excess GH. Gigantism = excess GH <em>before</em> puberty (growth plates open → tall stature). Acromegaly = excess GH <em>after</em> puberty (growth plates closed → enlarged hands, feet, jaw, forehead).</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="sec-label">Section 3 — Thyroid &amp; Parathyroid Glands</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#FBF0E4">🦋</div>
+      <div style="flex:1">
+        <div class="c-title">Thyroid Gland — Metabolism Regulator</div>
+        <div class="c-sub">T₃, T₄, calcitonin and iodine connection</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>The <strong>thyroid gland</strong> is a butterfly-shaped gland located in the neck, anterior to the trachea. It is the <strong>largest purely endocrine gland</strong> in the body. It secretes three hormones: <strong>T₃ (triiodothyronine)</strong>, <strong>T₄ (thyroxine/tetraiodothyronine)</strong> and <strong>calcitonin</strong>.</p>
+
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Hormone</th><th>Cells</th><th>Key Actions</th><th>Requires</th></tr>
+          <tr><td><b>T₃ &amp; T₄</b></td><td>Follicular cells</td><td>↑ Basal metabolic rate (BMR); ↑ heat production; normal growth and development; essential for CNS maturation in foetus/infants; ↑ heart rate</td><td><b>Iodine</b> (T₃=3 iodines; T₄=4 iodines); Tyrosine</td></tr>
+          <tr><td><b>Calcitonin</b></td><td>Parafollicular cells (C cells)</td><td>↓ Blood calcium — inhibits osteoclasts (bone resorption), promotes Ca²⁺ deposition in bone</td><td>—</td></tr>
+        </table>
+      </div>
+
+      <div class="fact-box">
+        <div class="fb-label">Thyroid Disorders — Most Tested</div>
+        <ul>
+          <li><strong>Hypothyroidism</strong> (T₃/T₄ deficiency): low BMR, weight gain, lethargy, cold intolerance, constipation, bradycardia, dry skin, hair loss, myxoedema (non-pitting oedema) in adults. In infants: <strong>Cretinism</strong> — stunted growth, intellectual disability, protruding tongue, pot-bellied. Treated with levothyroxine.</li>
+          <li><strong>Hyperthyroidism</strong> (T₃/T₄ excess): high BMR, weight loss, heat intolerance, sweating, tachycardia, anxiety, exophthalmos (bulging eyes). <strong>Graves' disease</strong> = commonest cause (autoimmune — antibodies stimulate TSH receptor). Treated with antithyroid drugs (carbimazole), radioiodine or surgery.</li>
+          <li><strong>Goitre</strong> — enlarged thyroid gland. Simple/endemic goitre = iodine deficiency → low T₃/T₄ → high TSH → gland hypertrophies. Prevented by <strong>iodised salt</strong>.</li>
+          <li><strong>Cretinism</strong> — hypothyroidism in infants/foetuses; iodine deficiency during pregnancy; most common preventable cause of intellectual disability worldwide.</li>
+        </ul>
+      </div>
+
+      <div class="rule-box">
+        <div class="rl-label">Parathyroid Glands — Calcium Controllers</div>
+        <p>Four small <strong>parathyroid glands</strong> are embedded in the posterior surface of the thyroid. They secrete <strong>PTH (Parathyroid Hormone / Parathormone)</strong> — the main hormone for raising blood calcium: (1) Stimulates osteoclasts → bone resorption → Ca²⁺ into blood. (2) ↑ Ca²⁺ reabsorption in kidney DCT. (3) ↑ Vitamin D activation in kidney → ↑ Ca²⁺ absorption from intestine. <strong>Hyperparathyroidism</strong> → hypercalcaemia → kidney stones, bone loss ("bones, groans, moans, stones"). <strong>Hypoparathyroidism</strong> → hypocalcaemia → tetany (involuntary muscle spasms), laryngospasm — life-threatening.</p>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Calcitonin vs PTH — Opposite Actions</div>
+        <ul>
+          <li><strong>PTH</strong> (parathyroid) = <em>raises</em> blood Ca²⁺ — mnemonic: <em>PTH = Please Take it Higher</em></li>
+          <li><strong>Calcitonin</strong> (thyroid C cells) = <em>lowers</em> blood Ca²⁺ — mnemonic: <em>Calcitonin = Calcium Toned down</em></li>
+          <li>They are antagonistic — PTH is far more powerful physiologically; calcitonin is a minor regulator in adults but important during pregnancy and growth.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="sec-label">Section 4 — Adrenal Glands</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#FBF0E4">⚡</div>
+      <div style="flex:1">
+        <div class="c-title">Adrenal Glands — Cortex &amp; Medulla</div>
+        <div class="c-sub">Two glands in one — stress hormones and mineralocorticoids</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>The two <strong>adrenal (suprarenal) glands</strong> sit atop each kidney. Each has two distinct regions with completely different embryological origins, cell types and hormones — the outer <strong>cortex</strong> (80%) and inner <strong>medulla</strong> (20%).</p>
+
+      <div class="sec-label" style="font-size:9px;margin-top:16px">Adrenal Cortex — 3 Zones (GFR mnemonic: Go Find Receptors)</div>
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Zone</th><th>Mnemonic</th><th>Hormone(s)</th><th>Function</th></tr>
+          <tr><td><b>Zona Glomerulosa</b> (outer)</td><td><em>G</em>o</td><td><b>Aldosterone</b> (mineralocorticoid)</td><td>Na⁺ retention, K⁺ excretion in kidney DCT → ↑ blood volume and pressure (RAAS)</td></tr>
+          <tr><td><b>Zona Fasciculata</b> (middle, largest)</td><td><em>F</em>ind</td><td><b>Cortisol</b> (glucocorticoid); small amounts of androgens</td><td>↑ blood glucose (gluconeogenesis); anti-inflammatory; immunosuppressive; stress response</td></tr>
+          <tr><td><b>Zona Reticularis</b> (inner)</td><td><em>R</em>eceptors</td><td><b>Androgens</b> (DHEA); small cortisol</td><td>Sex hormone precursors; pubic/axillary hair in females; libido</td></tr>
+        </table>
+      </div>
+
+      <div class="sec-label" style="font-size:9px;margin-top:14px">Adrenal Medulla — Modified Sympathetic Ganglion</div>
+      <div class="fact-box">
+        <div class="fb-label">Adrenal Medulla Hormones — Catecholamines</div>
+        <ul>
+          <li><strong>Adrenaline (Epinephrine)</strong> — 80% of medullary secretion. "Fight-or-flight" hormone: ↑ heart rate, ↑ BP, ↑ blood glucose (glycogenolysis), dilates bronchi, dilates pupils, redirects blood to muscles. Secreted during acute stress.</li>
+          <li><strong>Noradrenaline (Norepinephrine)</strong> — 20% of medullary secretion. Mainly causes vasoconstriction → ↑ BP. Also a CNS neurotransmitter.</li>
+          <li>Adrenal medulla is <strong>controlled by pre-ganglionic sympathetic neurons</strong> — it is essentially a modified sympathetic ganglion that secretes hormones instead of having a post-ganglionic nerve.</li>
+        </ul>
+      </div>
+
+      <div class="purple-box">
+        <div class="pl-label">Adrenal Disorders — High CDS/NDA Frequency</div>
+        <ul>
+          <li><strong>Addison's Disease</strong> — adrenal cortex insufficiency (often autoimmune). Deficiency of both cortisol AND aldosterone. Features: hypoglycaemia, hypotension, hyperkalaemia, hyponatraemia, weight loss, fatigue, <em>bronze skin hyperpigmentation</em> (↑ ACTH/MSH). Life-threatening adrenal crisis with stress.</li>
+          <li><strong>Cushing's Syndrome</strong> — excess cortisol (from adrenal tumour, ACTH-secreting pituitary tumour, or prolonged steroid use). Features: moon face (round puffy face), buffalo hump (fat on upper back), central obesity, thin skin, striae, hypertension, hyperglycaemia, osteoporosis, immunosuppression.</li>
+          <li><strong>Conn's Syndrome (Primary Hyperaldosteronism)</strong> — excess aldosterone from adrenal adenoma. Features: hypertension, hypokalaemia (muscle weakness, cramps), metabolic alkalosis.</li>
+          <li><strong>Phaeochromocytoma</strong> — tumour of adrenal medulla secreting excess adrenaline/noradrenaline. Features: episodic severe hypertension, headache, sweating, palpitations. Treated surgically.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5 -->
+  <div class="sec-label">Section 5 — Pancreas (Islets of Langerhans)</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E4F4EC">🩺</div>
+      <div style="flex:1">
+        <div class="c-title">Pancreas — Insulin, Glucagon &amp; Diabetes</div>
+        <div class="c-sub">Blood glucose regulation and most-tested endocrine topic</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>The endocrine pancreas consists of ~1 million clusters of cells called <strong>Islets of Langerhans</strong> (discovered by Paul Langerhans, 1869). They comprise ~2% of pancreatic mass.</p>
+
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Cell Type</th><th>Hormone</th><th>Stimulus for Secretion</th><th>Action</th></tr>
+          <tr><td><b>β (Beta) cells</b> — 70%</td><td><b>Insulin</b></td><td>↑ Blood glucose (after meals)</td><td>↓ Blood glucose: promotes glucose uptake into cells (muscle, liver, fat); promotes glycogen synthesis (glycogenesis); inhibits glycogenolysis and gluconeogenesis; promotes fat and protein synthesis</td></tr>
+          <tr><td><b>α (Alpha) cells</b> — 25%</td><td><b>Glucagon</b></td><td>↓ Blood glucose (fasting/starvation)</td><td>↑ Blood glucose: promotes glycogen breakdown (glycogenolysis); promotes glucose synthesis from non-carb sources (gluconeogenesis); promotes fat breakdown (lipolysis)</td></tr>
+          <tr><td><b>δ (Delta) cells</b> — 5%</td><td><b>Somatostatin</b></td><td>High glucose/amino acids</td><td>Inhibits both insulin and glucagon secretion (paracrine); slows digestion</td></tr>
+        </table>
+      </div>
+
+      <div class="analogy-box">
+        <div class="an-label">Think of it this way</div>
+        <p><strong>Insulin</strong> is the key that unlocks cells to let glucose in — it lowers blood sugar. <strong>Glucagon</strong> is the alarm that raises blood sugar when it falls. They are <strong>antagonistic hormones</strong> working together to keep blood glucose in the normal range (70–100 mg/dL fasting).</p>
+      </div>
+
+      <div class="purple-box">
+        <div class="pl-label">Diabetes Mellitus — Type 1 vs Type 2</div>
+        <ul>
+          <li><strong>Type 1 DM (Insulin-Dependent / Juvenile)</strong>: Autoimmune destruction of β cells → absolute insulin deficiency. Onset typically in childhood/adolescence. Must inject insulin to survive. Prone to diabetic ketoacidosis (DKA).</li>
+          <li><strong>Type 2 DM (Non-Insulin-Dependent / Adult-onset)</strong>: Insulin resistance (cells don't respond to insulin) + relative insulin deficiency. Most common type (~90–95% of DM). Associated with obesity, sedentary lifestyle, family history. Treated initially with lifestyle changes, then oral hypoglycaemics (metformin), then insulin if needed.</li>
+          <li><strong>Gestational Diabetes</strong>: Develops during pregnancy; usually resolves after delivery; ↑ risk of Type 2 DM later.</li>
+          <li><strong>Key complications of DM</strong>: Diabetic neuropathy (nerve damage), nephropathy (kidney damage → most common cause of CKD), retinopathy (eye damage → leading cause of new blindness in adults), cardiovascular disease, foot ulcers.</li>
+          <li>Nobel Prize 1923: <strong>Frederick Banting &amp; John Macleod</strong> — discovery of insulin.</li>
+        </ul>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Insulin Traps</div>
+        <ul>
+          <li><strong>Insulin is a protein hormone</strong> — it CANNOT be taken orally (would be digested by proteases). Must be injected. This is why Type 1 diabetics inject insulin.</li>
+          <li><strong>β cells make insulin; α cells make glucagon</strong> — do not confuse these. β cells are the MAJORITY (70%).</li>
+          <li><strong>Hypoglycaemia</strong> (low blood sugar) triggers glucagon release AND adrenaline release — both raise blood glucose. Symptoms of hypoglycaemia: sweating, trembling, confusion — due to adrenaline release.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6 -->
+  <div class="sec-label">Section 6 — Other Important Glands</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#FBF0E4">🌐</div>
+      <div style="flex:1">
+        <div class="c-title">Pineal, Thymus, Gonads &amp; Other Hormones</div>
+        <div class="c-sub">Melatonin, sex hormones, local hormones</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <div class="gland-grid">
+        <div class="gland-card">
+          <div class="gland-name">Pineal Gland <span class="gland-loc">Brain — Epithalamus</span></div>
+          <p>Secretes <strong>Melatonin</strong>. Controls <strong>circadian rhythm</strong> (sleep-wake cycle) and seasonal biological rhythms. Secretion ↑ in darkness, ↓ in light. Called the "third eye." Regulates puberty onset.</p>
+        </div>
+        <div class="gland-card">
+          <div class="gland-name">Thymus <span class="gland-loc">Thorax</span></div>
+          <p>Secretes <strong>Thymosin, Thymopoietin</strong>. Site of T-lymphocyte maturation. Most active during childhood; involutes after puberty. Essential for immune system development.</p>
+        </div>
+        <div class="gland-card">
+          <div class="gland-name">Testes <span class="gland-loc">Scrotum</span></div>
+          <p><strong>Testosterone</strong> from Leydig (interstitial) cells. Controls: male secondary sexual characteristics, spermatogenesis, libido, muscle mass, bone density. Inhibin from Sertoli cells inhibits FSH.</p>
+        </div>
+        <div class="gland-card">
+          <div class="gland-name">Ovaries <span class="gland-loc">Pelvis</span></div>
+          <p><strong>Oestrogen</strong> (follicle cells) — female secondary sexual characteristics, uterine lining growth, bone density. <strong>Progesterone</strong> (corpus luteum) — maintains pregnancy, prepares uterus. <strong>Relaxin</strong> — relaxes pelvic ligaments during childbirth.</p>
+        </div>
+        <div class="gland-card">
+          <div class="gland-name">Placenta <span class="gland-loc">Uterus in pregnancy</span></div>
+          <p>Temporary endocrine organ. Secretes: <strong>hCG</strong> (human chorionic gonadotropin — basis of pregnancy test; maintains corpus luteum in 1st trimester), oestrogen, progesterone, hPL.</p>
+        </div>
+        <div class="gland-card">
+          <div class="gland-name">Kidney &amp; Heart <span class="gland-loc">Organ hormones</span></div>
+          <p>Kidney: <strong>Renin</strong> (RAAS), <strong>Erythropoietin / EPO</strong> (stimulates RBC production in bone marrow). Heart atria: <strong>ANP</strong> (atrial natriuretic peptide — lowers BP by ↑ Na⁺ excretion).</p>
+        </div>
+      </div>
+
+      <div class="fact-box">
+        <div class="fb-label">Prostaglandins — Local Hormones</div>
+        <ul>
+          <li>Prostaglandins are <strong>local hormones</strong> (also called tissue hormones or paracrine factors) — they act near their site of production, not via bloodstream</li>
+          <li>Derived from arachidonic acid (a fatty acid); found in almost all tissues</li>
+          <li>Functions: regulate inflammation, pain, fever; stimulate uterine contractions; regulate blood pressure; involved in blood clotting</li>
+          <li><strong>NSAIDs</strong> (aspirin, ibuprofen) work by inhibiting COX enzymes that synthesise prostaglandins → reduce pain and inflammation</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 7 -->
+  <div class="sec-label">Section 7 — Master Hormone Comparison Table</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E6EEF8">📋</div>
+      <div style="flex:1">
+        <div class="c-title">All Major Hormones at a Glance</div>
+        <div class="c-sub">Quick-access gland → hormone → function → disorder table</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Gland</th><th>Hormone</th><th>Key Action</th><th>Deficiency</th><th>Excess</th></tr>
+          <tr><td><b>Hypothalamus</b></td><td>Releasing hormones (CRH, TRH, GnRH, GHRH)</td><td>Control anterior pituitary</td><td>Hormonal deficiencies cascade</td><td>—</td></tr>
+          <tr><td rowspan="2"><b>Ant. Pituitary</b></td><td>GH</td><td>Growth, protein synthesis</td><td><em>Pituitary dwarfism</em></td><td><em>Gigantism</em> (pre-puberty) / <em>Acromegaly</em> (post-puberty)</td></tr>
+          <tr><td>Prolactin</td><td>Milk production</td><td>Failure to lactate</td><td>Galactorrhoea</td></tr>
+          <tr><td><b>Post. Pituitary</b></td><td>ADH (Vasopressin)</td><td>Water reabsorption in kidney</td><td><em>Diabetes Insipidus</em></td><td>SIADH (water retention, hyponatraemia)</td></tr>
+          <tr><td><b>Post. Pituitary</b></td><td>Oxytocin</td><td>Labour contractions; milk ejection</td><td>Prolonged labour</td><td>—</td></tr>
+          <tr><td><b>Thyroid</b></td><td>T₃ / T₄</td><td>↑ BMR, growth, CNS development</td><td><em>Hypothyroidism</em>; <em>Cretinism</em> (infant); Goitre</td><td><em>Hyperthyroidism / Graves' disease</em></td></tr>
+          <tr><td><b>Thyroid</b></td><td>Calcitonin</td><td>↓ Blood Ca²⁺</td><td>Hypercalcaemia</td><td>Hypocalcaemia</td></tr>
+          <tr><td><b>Parathyroid</b></td><td>PTH</td><td>↑ Blood Ca²⁺</td><td><em>Tetany</em>, laryngospasm</td><td>Kidney stones, bone loss</td></tr>
+          <tr><td><b>Adrenal Cortex</b></td><td>Cortisol</td><td>↑ Blood glucose; anti-inflammatory</td><td><em>Addison's disease</em></td><td><em>Cushing's syndrome</em></td></tr>
+          <tr><td><b>Adrenal Cortex</b></td><td>Aldosterone</td><td>Na⁺ retention, K⁺ excretion</td><td>Hypotension, hyperkalaemia</td><td><em>Conn's syndrome</em> (hypertension)</td></tr>
+          <tr><td><b>Adrenal Medulla</b></td><td>Adrenaline</td><td>Fight-or-flight; ↑ HR, ↑ glucose</td><td>Impaired stress response</td><td><em>Phaeochromocytoma</em></td></tr>
+          <tr><td><b>Pancreas β</b></td><td>Insulin</td><td>↓ Blood glucose</td><td><em>Diabetes mellitus</em></td><td>Hypoglycaemia</td></tr>
+          <tr><td><b>Pancreas α</b></td><td>Glucagon</td><td>↑ Blood glucose</td><td>Hypoglycaemia</td><td>Hyperglycaemia</td></tr>
+          <tr><td><b>Pineal</b></td><td>Melatonin</td><td>Circadian rhythm, sleep</td><td>Sleep disorders, early puberty</td><td>Delayed puberty</td></tr>
+          <tr><td><b>Thymus</b></td><td>Thymosin</td><td>T-cell maturation (immunity)</td><td>Immunodeficiency</td><td>—</td></tr>
+          <tr><td><b>Kidney</b></td><td>EPO (Erythropoietin)</td><td>↑ RBC production</td><td>Anaemia of CKD</td><td>Polycythaemia; misused as doping agent</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /theory -->
+
+<!-- ════════════════════════════ QUICK REF ══════════════════════ -->
+<div class="pane" id="quickref">
+  <div class="ref-grid">
+
+    <div class="ref-card">
+      <div class="ref-card-title">Pituitary — "Master Gland"</div>
+      <ul>
+        <li>Controlled by <b>hypothalamus</b> via releasing/inhibiting hormones</li>
+        <li>Ant. pituitary: <b>GH</b>, TSH, ACTH, FSH, LH, Prolactin, MSH</li>
+        <li><b>GH excess</b> — Gigantism (pre-puberty) · Acromegaly (post-puberty)</li>
+        <li><b>GH deficiency</b> — Pituitary dwarfism</li>
+        <li>Post. pituitary: <b>ADH</b> (water) + <b>Oxytocin</b> (labour/milk) — made in hypothalamus!</li>
+        <li>No ADH → <em>Diabetes Insipidus</em> (dilute polyuria; NOT blood glucose)</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Thyroid &amp; Parathyroid</div>
+      <ul>
+        <li>Largest pure endocrine gland; butterfly-shaped; anterior neck</li>
+        <li><b>T₃/T₄</b> need <em>iodine</em> + tyrosine; ↑ BMR, growth, CNS maturation</li>
+        <li>Hypothyroidism → <em>Cretinism</em> (infant); Myxoedema (adult); <em>Goitre</em></li>
+        <li>Hyperthyroidism → <em>Graves' disease</em>; exophthalmos; tachycardia</li>
+        <li><b>Calcitonin</b> (thyroid C cells) → ↓ Ca²⁺ · <b>PTH</b> (parathyroid) → ↑ Ca²⁺</li>
+        <li>Hypoparathyroidism → <em>Tetany</em>; Hyperparathyroidism → kidney stones</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Adrenal Glands</div>
+      <ul>
+        <li>Cortex 3 zones (outer to inner): <em>Glomerulosa</em> (Aldosterone) → <em>Fasciculata</em> (Cortisol) → <em>Reticularis</em> (Androgens)</li>
+        <li>Medulla: <b>Adrenaline</b> (80%) + Noradrenaline (20%) — fight-or-flight</li>
+        <li><b>Addison's disease</b> — cortex failure; bronze skin, hypotension, hypoglycaemia</li>
+        <li><b>Cushing's syndrome</b> — excess cortisol; moon face, buffalo hump, striae</li>
+        <li><b>Conn's syndrome</b> — excess aldosterone; hypertension + hypokalaemia</li>
+        <li>Phaeochromocytoma — medulla tumour; episodic hypertension + sweating</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Pancreas — Blood Glucose Control</div>
+      <ul>
+        <li><b>β cells (70%)</b> → <b>Insulin</b> → ↓ glucose (after meals; anabolic)</li>
+        <li><b>α cells (25%)</b> → <b>Glucagon</b> → ↑ glucose (fasting; catabolic)</li>
+        <li>Insulin is a <em>protein</em> — cannot be taken orally; must be injected</li>
+        <li><b>Type 1 DM</b> — autoimmune β cell destruction; insulin dependent</li>
+        <li><b>Type 2 DM</b> — insulin resistance; most common; lifestyle-related</li>
+        <li>Nobel 1923: Banting &amp; Macleod — discovery of insulin</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Other Glands &amp; Hormones</div>
+      <ul>
+        <li><b>Pineal</b> — Melatonin → sleep-wake cycle (↑ in dark)</li>
+        <li><b>Thymus</b> — Thymosin → T-cell maturation; most active in childhood</li>
+        <li><b>Testes</b> — Testosterone (Leydig cells); Inhibin (Sertoli cells)</li>
+        <li><b>Ovaries</b> — Oestrogen (follicle cells) + Progesterone (corpus luteum)</li>
+        <li><b>Kidney</b> — EPO (↑ RBC production); Renin (RAAS)</li>
+        <li><b>hCG</b> (placenta) — basis of pregnancy test; maintains corpus luteum</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Feedback &amp; Disorders Summary</div>
+      <ul>
+        <li>Most hormones = <b>negative feedback</b>; Oxytocin (labour) = positive feedback</li>
+        <li>Steroid hormones — lipid-soluble; bind nuclear receptors (enter cell)</li>
+        <li>Protein hormones — water-soluble; bind surface receptors</li>
+        <li><b>Goitre</b> — iodine deficiency → ↑ TSH → thyroid enlarges; prevented by iodised salt</li>
+        <li>ACTH/MSH excess (Addison's) → <em>bronze skin pigmentation</em></li>
+        <li>Prostaglandins = local hormones; NSAIDs inhibit their synthesis</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════ QUIZ ═════════════════════════ -->
+<div class="pane" id="quiz">
+
+  <div class="quiz-stats">
+    <div class="qs-cell"><div class="qs-val" id="s-att">0</div><div class="qs-lbl">Attempted</div></div>
+    <div class="qs-cell"><div class="qs-val g" id="s-cor">0</div><div class="qs-lbl">Correct</div></div>
+    <div class="qs-cell"><div class="qs-val r" id="s-wrg">0</div><div class="qs-lbl">Wrong</div></div>
+    <div class="qs-cell"><div class="qs-val a" id="s-tot">15</div><div class="qs-lbl">Total</div></div>
+  </div>
+
+  <div class="prog-wrap">
+    <div class="prog-label" id="prog-label">0 of 15 answered</div>
+    <div class="prog-bar"><div class="prog-fill" id="prog"></div></div>
+  </div>
+
+  <div class="quiz-actions">
+    <button class="btn btn-primary" onclick="submitAll()">Submit All &amp; Check</button>
+    <button class="btn btn-ghost" onclick="resetQuiz()">↺ Reset Quiz</button>
+  </div>
+
+  <div id="results"></div>
+  <div id="q-area"></div>
+</div>
+</div><!-- /page -->
+
+<script>
+const QS = [
+
+/* ─── EASY ─────────────────────────────────────────────────────── */
+{d:'EASY',e:'NDA 2023',
+q:'Which gland is called the "master gland" of the endocrine system?',
+opts:['Thyroid gland','Adrenal gland','Pituitary gland','Pineal gland'],ans:2,
+rule:'Pituitary gland = "master gland" — its hormones regulate most other endocrine glands',
+exp:'The PITUITARY GLAND (hypophysis) is called the master gland because it secretes hormones that directly control and regulate other endocrine glands — including the thyroid (via TSH), adrenal cortex (via ACTH), and gonads (via FSH and LH). It lies at the base of the brain in the sella turcica of the sphenoid bone, connected to the hypothalamus by the pituitary stalk. However, the hypothalamus itself controls the pituitary via releasing and inhibiting hormones — so the hypothalamus is the true "master of the master gland." The thyroid is the largest purely endocrine gland. The adrenal gland produces stress hormones. The pineal gland produces melatonin.'},
+
+{d:'EASY',e:'CDS 2022',
+q:'Insulin is secreted by which cells of the islets of Langerhans in the pancreas?',
+opts:['Alpha (α) cells','Beta (β) cells','Delta (δ) cells','Gamma (γ) cells'],ans:1,
+rule:'β (Beta) cells → Insulin (↓ blood glucose); α (Alpha) cells → Glucagon (↑ blood glucose)',
+exp:'The islets of Langerhans contain three main cell types: BETA (β) cells (70%) secrete INSULIN when blood glucose rises (after meals). Insulin promotes glucose uptake into cells, glycogen synthesis and inhibits gluconeogenesis — it LOWERS blood glucose. ALPHA (α) cells (25%) secrete GLUCAGON when blood glucose falls (fasting). Glucagon promotes glycogenolysis and gluconeogenesis — it RAISES blood glucose. Delta (δ) cells secrete somatostatin, which inhibits both insulin and glucagon. Beta cell destruction by autoimmune attack causes Type 1 Diabetes Mellitus. Named after Paul Langerhans who discovered these cell clusters in 1869.'},
+
+{d:'EASY',e:'AFCAT 2023',
+q:'Goitre (enlargement of the thyroid gland) is commonly caused by deficiency of which element?',
+opts:['Iron','Calcium','Iodine','Zinc'],ans:2,
+rule:'Iodine deficiency → low T₃/T₄ → ↑ TSH (negative feedback fails) → thyroid hypertrophy → goitre',
+exp:'The thyroid gland produces T₃ (triiodothyronine) and T₄ (thyroxine), both of which require IODINE as an essential component (T₃ has 3 iodine atoms; T₄ has 4). When dietary iodine is insufficient, the thyroid cannot produce adequate T₃/T₄. Low blood levels of thyroid hormones trigger the pituitary to release MORE TSH (negative feedback mechanism fails). This chronic high TSH stimulation causes the thyroid gland to enlarge in an attempt to capture more iodine — resulting in GOITRE. Endemic goitre is common in mountainous and inland regions where iodine content in soil and water is low. It is prevented by IODISED SALT. Advanced iodine deficiency in pregnancy causes cretinism in the infant.'},
+
+{d:'EASY',e:'CDS 2023',
+q:'Adrenaline (Epinephrine) is secreted by which part of the adrenal gland?',
+opts:['Zona glomerulosa of adrenal cortex','Zona fasciculata of adrenal cortex','Adrenal medulla','Zona reticularis of adrenal cortex'],ans:2,
+rule:'Adrenal MEDULLA → Adrenaline (80%) + Noradrenaline (20%); adrenal CORTEX → steroid hormones',
+exp:'The adrenal gland has two distinct parts: the outer CORTEX (which secretes steroid hormones — aldosterone, cortisol and androgens from its three zones) and the inner MEDULLA. The ADRENAL MEDULLA is a modified sympathetic ganglion that secretes CATECHOLAMINES — predominantly ADRENALINE (epinephrine, 80%) and noradrenaline (norepinephrine, 20%) — in response to acute stress or sympathetic nerve stimulation. Adrenaline produces the classic fight-or-flight response: increased heart rate, raised blood pressure, dilated pupils, elevated blood glucose, redirected blood flow to muscles. The adrenal cortex zones produce: glomerulosa (aldosterone), fasciculata (cortisol), reticularis (androgens).'},
+
+{d:'EASY',e:'NDA 2022',
+q:'The hormone responsible for regulating the sleep-wake cycle (circadian rhythm) is:',
+opts:['Cortisol','Melatonin','Serotonin','Prolactin'],ans:1,
+rule:'Melatonin (pineal gland) controls circadian rhythm; secretion ↑ in darkness, ↓ in light',
+exp:'MELATONIN is produced by the PINEAL GLAND, a small structure in the brain\'s epithalamus. Its secretion is controlled by light: it INCREASES in darkness and DECREASES in bright light, signalling the body that it is time to sleep. Melatonin synchronises the body\'s circadian rhythm (internal 24-hour biological clock) with the external light-dark cycle. It also regulates seasonal biological rhythms and influences the timing of puberty onset. The pineal gland is sometimes called the "third eye" because its light-sensitivity evolved from a photoreceptive organ. Cortisol peaks in the early morning (helps wake you up). Serotonin is a neurotransmitter that also influences mood and sleep. Prolactin stimulates milk production.'},
+
+/* ─── MEDIUM ────────────────────────────────────────────────────── */
+{d:'MEDIUM',e:'CDS 2023',
+q:'A child presents with stunted growth, intellectual disability, pot-belly and a protruding tongue. Which hormonal deficiency is responsible?',
+opts:['Growth Hormone deficiency (Pituitary dwarfism)','Thyroid hormone deficiency (Cretinism)','Insulin deficiency (Type 1 Diabetes)','ADH deficiency (Diabetes Insipidus)'],ans:1,
+rule:'Cretinism = hypothyroidism in infancy; iodine deficiency in pregnancy → stunted growth + intellectual disability',
+exp:'CRETINISM is caused by THYROID HORMONE (T₃/T₄) DEFICIENCY during foetal life or early infancy. Thyroid hormones are essential for normal brain development and bone growth. Key features: stunted physical growth (short stature, pot belly), severe intellectual disability, coarse facial features, protruding tongue, myxoedema, umbilical hernia, and delayed milestones. The most common preventable cause worldwide is IODINE DEFICIENCY during pregnancy. It must be distinguished from PITUITARY DWARFISM (GH deficiency) which causes proportionate short stature but NORMAL intelligence. Cretinism causes BOTH physical AND mental underdevelopment. Early detection via neonatal screening and prompt thyroid hormone replacement can prevent irreversible damage. Cretinism is distinct from myxoedema, which is adult-onset severe hypothyroidism.'},
+
+{d:'MEDIUM',e:'AFCAT 2022',
+q:'The condition characterised by moon face, buffalo hump (fat on upper back), central obesity, purple striae and hypertension is called:',
+opts:['Addison\'s disease','Cushing\'s syndrome','Conn\'s syndrome','Acromegaly'],ans:1,
+rule:'Cushing\'s syndrome = excess cortisol; classic features: moon face, buffalo hump, central obesity, striae, hyperglycaemia',
+exp:'CUSHING\'S SYNDROME is caused by CHRONIC EXCESS CORTISOL. It can result from: (1) a cortisol-secreting adrenal tumour, (2) an ACTH-secreting pituitary tumour (specifically called Cushing\'s DISEASE), or (3) prolonged external glucocorticoid therapy (iatrogenic — the most common cause). Classic features: MOON FACE (round, puffy face), BUFFALO HUMP (fat deposit on upper back), CENTRAL OBESITY (fat accumulates on trunk not limbs), PURPLE STRIAE (stretch marks), hypertension, hyperglycaemia (cortisol raises blood glucose), thin fragile skin, easy bruising, osteoporosis, immunosuppression, muscle wasting, hirsutism. ADDISON\'S DISEASE is the OPPOSITE — adrenal insufficiency causing weight loss, hypotension, bronze skin. Conn\'s = excess aldosterone. Acromegaly = excess GH.'},
+
+{d:'MEDIUM',e:'NDA 2023',
+q:'Type 1 Diabetes Mellitus differs from Type 2 primarily because:',
+opts:[
+  'Type 1 is caused by insulin resistance in target tissues; Type 2 is caused by autoimmune β cell destruction',
+  'Type 1 is caused by autoimmune destruction of β cells causing absolute insulin deficiency; Type 2 involves insulin resistance with relative insulin deficiency',
+  'Type 1 only affects adults over 40; Type 2 only affects children',
+  'Type 1 is managed by diet alone; Type 2 always requires insulin injections'
+],ans:1,
+rule:'Type 1 DM = autoimmune β cell destruction → absolute insulin deficiency; Type 2 = insulin resistance + relative deficiency',
+exp:'TYPE 1 DM is an AUTOIMMUNE disease in which the immune system attacks and destroys the pancreatic BETA CELLS. This results in ABSOLUTE INSULIN DEFICIENCY — the body produces essentially no insulin. It typically onset in childhood or adolescence, hence formerly called "juvenile-onset." Patients MUST inject insulin to survive and are prone to Diabetic Ketoacidosis (DKA). TYPE 2 DM involves INSULIN RESISTANCE — target cells (muscle, liver, fat) fail to respond normally to insulin. The pancreas initially compensates by producing more insulin, but eventually β cells become exhausted. This is associated with obesity, physical inactivity, and genetic factors. It is managed with lifestyle modification, oral drugs (metformin first-line), and insulin if needed. Type 2 accounts for ~90–95% of all diabetes cases worldwide.'},
+
+{d:'MEDIUM',e:'CDS 2024',
+q:'Addison\'s disease causes a characteristic bronze/dark pigmentation of the skin. What is the mechanism behind this?',
+opts:[
+  'Excess melanin is produced as a direct toxic effect of low cortisol on melanocytes',
+  'Low cortisol → ↑ ACTH from pituitary (negative feedback) → ↑ MSH activity → excess melanin',
+  'Excess aldosterone causes copper deposition in the skin',
+  'Adrenal androgens directly stimulate melanin production'
+],ans:1,
+rule:'Addison\'s: low cortisol → ↑ ACTH → ACTH shares precursor (POMC) with MSH → ↑ melanin → bronze skin',
+exp:'In ADDISON\'S DISEASE (primary adrenal insufficiency), the adrenal cortex is destroyed (often autoimmune), causing deficiency of BOTH CORTISOL and ALDOSTERONE. Low cortisol removes negative feedback on the hypothalamus-pituitary axis → the pituitary produces EXCESS ACTH. The key: ACTH and MSH (Melanocyte Stimulating Hormone) are both derived from the same precursor molecule — POMC (Pro-opiomelanocortin). When ACTH is produced in excess, so is MSH. MSH stimulates MELANOCYTES in the skin to produce more MELANIN → characteristic BRONZE/DARK SKIN PIGMENTATION (especially in sun-exposed areas, scars, skin folds, gums). This is a unique and high-yield exam feature of Addison\'s — differentiating it from other causes of adrenal insufficiency.'},
+
+{d:'MEDIUM',e:'AFCAT 2024',
+q:'Oxytocin is produced in the hypothalamus but released from the posterior pituitary. During labour, oxytocin stimulates stronger uterine contractions. More contractions lead to more oxytocin release. This is an example of:',
+opts:['Negative feedback — to prevent over-contraction','Positive feedback — amplifying the response until delivery','Paracrine signalling — local hormone action','Autocrine regulation — cell stimulating itself'],ans:1,
+rule:'Oxytocin during labour = positive feedback — more contractions → more oxytocin → even stronger contractions until delivery',
+exp:'Most hormone regulation uses NEGATIVE FEEDBACK (rising hormone levels inhibit further secretion). However, OXYTOCIN during labour is the classic example of POSITIVE FEEDBACK in physiology. During labour: uterine contractions stretch the cervix → stretch receptors send signals to hypothalamus → more oxytocin released from posterior pituitary → stronger uterine contractions → more cervical stretching → yet more oxytocin. This cycle AMPLIFIES itself progressively until the baby is delivered, which removes the stretch stimulus and breaks the positive feedback loop. Other examples of positive feedback: LH surge triggering ovulation; blood clotting cascade; nerve action potential generation (Na⁺ influx triggering more Na⁺ channels to open). Positive feedback always has a self-terminating endpoint.'},
+
+{d:'MEDIUM',e:'NDA 2024',
+q:'Which of the following correctly describes the function of erythropoietin (EPO)?',
+opts:[
+  'EPO is secreted by the liver and stimulates white blood cell production during infection',
+  'EPO is secreted mainly by the kidneys in response to low oxygen levels and stimulates red blood cell production in bone marrow',
+  'EPO is a pituitary hormone that stimulates the adrenal gland to secrete cortisol',
+  'EPO is secreted by the bone marrow itself and regulates platelet production'
+],ans:1,
+rule:'EPO = kidney hormone; secreted in response to hypoxia; stimulates RBC production in red bone marrow',
+exp:'ERYTHROPOIETIN (EPO) is a glycoprotein hormone produced primarily by peritubular interstitial cells of the KIDNEYS (approximately 90%, with ~10% from liver) in response to HYPOXIA (low blood oxygen levels — from anaemia, high altitude, lung disease, etc.). EPO travels via blood to the RED BONE MARROW where it stimulates the proliferation and differentiation of erythroid progenitor cells → increased production of RED BLOOD CELLS (erythrocytes) → increased oxygen-carrying capacity. Clinical importance: (1) In Chronic Kidney Disease (CKD), damaged kidneys cannot produce adequate EPO → ANAEMIA OF CKD — treated with synthetic EPO injections. (2) EPO is misused as a PERFORMANCE-ENHANCING DRUG (doping) in endurance sports (cycling, distance running) because more RBCs = more oxygen delivery = better performance. (3) Altitude training raises EPO naturally.'},
+
+/* ─── HARD ──────────────────────────────────────────────────────── */
+{d:'HARD',e:'CDS 2024',
+q:'A patient develops hypertension, low serum potassium (hypokalaemia) and metabolic alkalosis. Plasma aldosterone is very high but plasma renin is very low. What is the most likely diagnosis?',
+opts:[
+  'Secondary hyperaldosteronism (due to renal artery stenosis causing high renin)',
+  'Primary hyperaldosteronism (Conn\'s syndrome) — adrenal adenoma autonomously secreting aldosterone',
+  'Cushing\'s syndrome — excess cortisol causing sodium retention',
+  'Phaeochromocytoma — excess adrenaline causing vasoconstriction'
+],ans:1,
+rule:'Conn\'s syndrome: autonomous aldosterone excess → ↑ Na⁺ retention → hypertension + low K⁺; low renin distinguishes it from secondary hyperaldosteronism',
+exp:'The key discriminating clue is HIGH ALDOSTERONE + LOW RENIN. In PRIMARY HYPERALDOSTERONISM (CONN\'S SYNDROME), an adrenal adenoma (benign tumour) or bilateral adrenal hyperplasia autonomously secretes excess ALDOSTERONE independently of the RAAS. This excess aldosterone causes: Na⁺ and water retention → HYPERTENSION, and K⁺ secretion → HYPOKALAEMIA (muscle weakness, cramps, cardiac arrhythmias) → loss of H⁺ along with K⁺ → METABOLIC ALKALOSIS. The high aldosterone SUPPRESSES renin release (negative feedback on RAAS) → LOW PLASMA RENIN. This differentiates it from SECONDARY hyperaldosteronism (e.g., renal artery stenosis) where BOTH aldosterone AND renin are high. Treatment: surgical removal of the adenoma or aldosterone antagonists (spironolactone). Classic CDS exam trapping question using the renin level as the distinguishing clue.'},
+
+{d:'HARD',e:'NDA 2024',
+q:'The Hypothalamic-Pituitary-Thyroid (HPT) axis controls thyroid hormone levels. A patient is found to have high TSH, low T₃/T₄ and a very large thyroid gland (goitre). Which of the following BEST explains this pattern?',
+opts:[
+  'The pituitary is over-secreting TSH autonomously, causing the thyroid to enlarge and over-produce T₃/T₄',
+  'Iodine deficiency impairs T₃/T₄ synthesis → low T₃/T₄ removes negative feedback → pituitary releases excess TSH → chronic TSH stimulation causes thyroid hypertrophy (goitre)',
+  'The thyroid is producing too much T₃/T₄, which feeds back positively to increase TSH and enlarge the gland',
+  'Excess TSH destroys thyroid follicular cells, causing low T₃/T₄'
+],ans:1,
+rule:'Low T₃/T₄ (due to iodine deficiency) → removes negative feedback → ↑ TSH → thyroid hypertrophy → goitre',
+exp:'This question tests understanding of the NEGATIVE FEEDBACK axis in the HPT axis. Normally: Hypothalamus secretes TRH → Anterior pituitary secretes TSH → Thyroid produces T₃/T₄ → High T₃/T₄ feeds back to inhibit both TRH and TSH (negative feedback). In IODINE DEFICIENCY: Thyroid cannot synthesise T₃/T₄ (iodine is essential) → Blood T₃/T₄ levels fall → Negative feedback on pituitary is REMOVED → Anterior pituitary releases EXCESS TSH → This excess TSH chronically stimulates thyroid follicular cells to enlarge and multiply → GOITRE (enlarged thyroid). The thyroid is working maximally but still cannot make enough hormone because iodine is unavailable. Pattern: ↑ TSH + ↓ T₃/T₄ + goitre = PRIMARY HYPOTHYROIDISM (usually iodine deficiency or Hashimoto\'s thyroiditis). This triad is directly tested in CDS/NDA applied questions.'},
+
+{d:'HARD',e:'AFCAT 2024',
+q:'An athlete is found to have used synthetic EPO (erythropoietin) for performance enhancement. This gives an unfair advantage primarily because:',
+opts:[
+  'EPO increases muscle strength directly by binding to muscle receptors',
+  'EPO stimulates bone marrow to produce more RBCs → increased haemoglobin → greater O₂ carrying capacity → improved endurance performance',
+  'EPO increases glucagon secretion, raising blood glucose for more energy',
+  'EPO suppresses the immune system, allowing faster recovery from training'
+],ans:1,
+rule:'EPO doping → ↑ RBC production → ↑ Hb and O₂ delivery → enhanced aerobic endurance capacity',
+exp:'ERYTHROPOIETIN (EPO) doping enhances performance in ENDURANCE sports (cycling, marathon, cross-country skiing) through a specific physiological pathway: Injected synthetic EPO → stimulates red bone marrow → dramatically increases RBC and HAEMOGLOBIN production → INCREASED OXYGEN-CARRYING CAPACITY of blood → muscles receive more O₂ per litre of blood → aerobic energy production improves → endurance and VO₂ max increase significantly. This is why EPO is banned in sports by WADA. The risks of EPO doping are severe: blood becomes viscous (thick) due to high RBC count → risk of THROMBOSIS (blood clots), pulmonary embolism, stroke, heart attack — especially during sleep when heart rate is low. Several competitive cyclists died in the early EPO era from nocturnal thrombosis. Athletes sometimes inject EPO then sleep with an alarm to wake and exercise, keeping heart rate and blood flow up to prevent clotting.'},
+
+{d:'HARD',e:'CDS 2024',
+q:'Why must insulin be injected rather than taken as an oral tablet, even though oral drug delivery is more convenient?',
+opts:[
+  'Insulin is destroyed by stomach acid before it reaches the intestine',
+  'Insulin is a protein hormone that would be digested by proteases in the gastrointestinal tract before absorption, rendering it inactive',
+  'Insulin binds irreversibly to intestinal cells and cannot enter the bloodstream via the gut',
+  'The liver would metabolise all orally absorbed insulin before it could reach target tissues (first-pass effect is 100%)'
+],ans:1,
+rule:'Insulin is a protein (51 amino acids) — digestive proteases (pepsin, trypsin) break it down → inactive fragments → cannot be given orally',
+exp:'INSULIN is a PROTEIN HORMONE consisting of two polypeptide chains (A chain = 21 amino acids; B chain = 30 amino acids) linked by disulfide bonds. When taken orally, it encounters the hostile environment of the gastrointestinal tract: (1) Pepsin in the stomach begins protein digestion. (2) Trypsin and chymotrypsin in the small intestine break down proteins into amino acids and small peptides. Insulin would be COMPLETELY HYDROLYSED into its constituent amino acids — biologically inactive fragments that cannot bind insulin receptors. This is why insulin MUST be delivered by SUBCUTANEOUS INJECTION (bypassing the gut) to reach the bloodstream intact. Current research is exploring: nasal sprays, buccal (oral mucosa) absorption, inhaled insulin (Afrezza is approved), and oral coated tablet formulations using nanoparticle delivery — but injectable remains standard. This question directly tests understanding of the chemical nature of hormone classes and their pharmacological implications.'},
+
+{d:'HARD',e:'NDA 2024',
+q:'A patient with a pituitary tumour (adenoma) secreting excess ACTH is found to have bilateral adrenal enlargement, high cortisol, high ACTH and features of Cushing\'s syndrome. This specific condition is called Cushing\'s DISEASE (not syndrome). After successful removal of the pituitary tumour, what would be expected in the immediate post-operative period?',
+opts:[
+  'Blood cortisol would immediately rise further as the adrenals are now "freed" from pituitary control',
+  'Blood cortisol would fall sharply — the patient would need cortisol replacement because the chronically suppressed normal corticotrophs cannot immediately secrete ACTH',
+  'Blood glucose would rise because ACTH directly stimulates glucagon secretion',
+  'The patient would develop hypertension because without ACTH, the adrenals produce excess aldosterone'
+],ans:1,
+rule:'After removing ACTH-secreting tumour: cortisol falls sharply; normal pituitary corticotrophs were suppressed → adrenal insufficiency requires steroid replacement',
+exp:'In CUSHING\'S DISEASE: the pituitary ADENOMA has been autonomously secreting excess ACTH for months to years. This high ACTH has been: (1) causing bilateral adrenal HYPERTROPHY and excess cortisol secretion, and (2) SUPPRESSING the normal ACTH-secreting corticotroph cells of the pituitary via negative feedback (the normal cells "switch off" because cortisol levels are always high). After SURGICAL REMOVAL of the tumour: the source of excess ACTH disappears → ACTH levels plummet → cortisol falls sharply. But the normal pituitary corticotrophs have been suppressed for so long they CANNOT immediately recover → TEMPORARY SECONDARY ADRENAL INSUFFICIENCY. The adrenal glands, although enlarged, are now without ACTH stimulation. The patient MUST receive CORTICOSTEROID REPLACEMENT THERAPY (hydrocortisone) post-operatively to prevent a life-threatening adrenal crisis (hypotension, hypoglycaemia, electrolyte imbalance). Recovery of the normal HPA axis may take 6–18 months. This is a high-level applied physiology question reflecting the deep understanding expected in CDS written exams.'},
+
+];
+
+const answers  = new Array(QS.length).fill(null);
+const revealed = new Array(QS.length).fill(false);
+const LABS = ['A','B','C','D'];
+
+function build(){
+  const area = document.getElementById('q-area');
+  area.innerHTML = '';
+  QS.forEach((q,i)=>{
+    const dc = q.d==='EASY'?'diff-e':q.d==='MEDIUM'?'diff-m':'diff-h';
+    const div = document.createElement('div');
+    div.className='q-card'; div.id=`qc${i}`;
+    div.innerHTML=`
+      <div class="q-meta">
+        <span class="q-num">Q.${String(i+1).padStart(2,'0')}</span>
+        <span class="q-diff ${dc}">${q.d}</span>
+        <span class="q-exam">${q.e}</span>
+      </div>
+      <div class="q-body">
+        <div class="q-text">${q.q}</div>
+        <div class="opts" id="opts${i}">
+          ${q.opts.map((o,j)=>`
+            <button class="opt" id="o${i}_${j}" onclick="pick(${i},${j})">
+              <span class="opt-lbl">${LABS[j]}</span>${o}
+            </button>`).join('')}
+        </div>
+        <div class="exp-panel" id="ex${i}">
+          <div class="exp-tag">Explanation</div>
+          <div class="exp-rule">${q.rule}</div>
+          <p>${q.exp}</p>
+        </div>
+      </div>
+      <div class="q-foot">
+        <span style="font-size:11px;color:var(--dim);font-weight:700">Biology · B09</span>
+        <span id="ai${i}" class="q-status">—</span>
+      </div>`;
+    area.appendChild(div);
+  });
+}
+
+function pick(qi,oi){
+  if(revealed[qi]) return;
+  answers[qi]=oi;
+  document.querySelectorAll(`#opts${qi} .opt`).forEach((b,j)=>{b.classList.remove('sel');if(j===oi)b.classList.add('sel')});
+  document.getElementById(`qc${qi}`).classList.add('answered');
+  const ai=document.getElementById(`ai${qi}`);
+  ai.textContent=`Selected: ${LABS[oi]}`;
+  ai.style.color='var(--primary)';
+  updateStats();
+}
+
+function updateStats(){
+  const att=answers.filter(a=>a!==null).length;
+  document.getElementById('s-att').textContent=att;
+  document.getElementById('prog').style.width=(att/QS.length*100)+'%';
+  document.getElementById('prog-label').textContent=`${att} of ${QS.length} answered`;
+  let c=0,w=0;
+  answers.forEach((a,i)=>{if(a===null)return;if(a===QS[i].ans)c++;else w++;});
+  document.getElementById('s-cor').textContent=c;
+  document.getElementById('s-wrg').textContent=w;
+}
+
+function submitAll(){
+  let cor=0,wrg=0,skp=0;
+  QS.forEach((q,i)=>{
+    revealed[i]=true;
+    const opts=document.querySelectorAll(`#opts${i} .opt`);
+    opts.forEach(b=>{b.disabled=true;b.classList.remove('sel')});
+    opts[q.ans].classList.add('ok');
+    if(answers[i]!==null && answers[i]!==q.ans) opts[answers[i]].classList.add('bad');
+    document.getElementById(`ex${i}`).classList.add('show');
+    const ai=document.getElementById(`ai${i}`);
+    const card=document.getElementById(`qc${i}`);
+    card.classList.remove('answered');
+    if(answers[i]===null){skp++;ai.textContent='Skipped';ai.style.color='var(--dim)';}
+    else if(answers[i]===q.ans){cor++;card.classList.add('correct');ai.textContent='✓ Correct';ai.style.color='var(--green)';}
+    else{wrg++;card.classList.add('wrong');ai.textContent='✗ Wrong';ai.style.color='var(--red)';}
+  });
+  updateStats();
+  showResults(cor,wrg,skp);
+}
+
+function showResults(cor,wrg,skp){
+  const pct=Math.round(cor/QS.length*100);
+  let grade,msg;
+  if(pct>=88){grade='Excellent';msg='Outstanding! You have mastered the Endocrine System.'}
+  else if(pct>=70){grade='Good';msg='Well done. Review the questions you got wrong.'}
+  else if(pct>=50){grade='Average';msg='Good start. Revisit the theory cards and try again.'}
+  else{grade='Needs Work';msg="Don't worry — go through the Quick Ref and try again."}
+  const res=document.getElementById('results');
+  res.innerHTML=`
+    <div class="res-hero">
+      <div class="res-score">${cor}<span style="font-size:36px;opacity:.5">/${QS.length}</span></div>
+      <div class="res-grade">${grade} · ${pct}%</div>
+      <div class="res-msg">${msg}</div>
+    </div>
+    <div class="res-stats">
+      <div class="qs-cell"><div class="qs-val g">${cor}</div><div class="qs-lbl">Correct</div></div>
+      <div class="qs-cell"><div class="qs-val r">${wrg}</div><div class="qs-lbl">Wrong</div></div>
+      <div class="qs-cell"><div class="qs-val a">${skp}</div><div class="qs-lbl">Skipped</div></div>
+      <div class="qs-cell"><div class="qs-val">${pct}%</div><div class="qs-lbl">Score</div></div>
+    </div>
+    <div style="text-align:center;margin:16px 0">
+      <button class="btn btn-ghost" onclick="document.getElementById('q-area').scrollIntoView({behavior:'smooth'})">📖 Review All Answers</button>
+    </div>`;
+  res.style.display='block';
+  res.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function resetQuiz(){
+  answers.fill(null); revealed.fill(false);
+  build();
+  document.getElementById('results').style.display='none';
+  document.getElementById('results').innerHTML='';
+  ['s-att','s-cor','s-wrg'].forEach(id=>document.getElementById(id).textContent='0');
+  document.getElementById('prog').style.width='0%';
+  document.getElementById('prog-label').textContent=`0 of ${QS.length} answered`;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function switchTab(id){
+  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  const idx={theory:0,quickref:1,quiz:2}[id];
+  document.querySelectorAll('.tab')[idx].classList.add('on');
+}
+
+function tog(hd){
+  const bd=hd.nextElementSibling;
+  const isOpen=bd.classList.contains('open');
+  bd.classList.toggle('open',!isOpen);
+  hd.classList.toggle('open',!isOpen);
+}
+
+build();
+</script>
+</body>
+</html>

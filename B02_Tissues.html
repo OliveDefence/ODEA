@@ -1,0 +1,1210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B02 · Tissues | Olive Defence</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+
+:root{
+  --bg:        #F3F5F0;
+  --bg2:       #E8EDE3;
+  --bg3:       #DCE3D5;
+  --white:     #FFFFFF;
+  --ink:       #1A2214;
+  --ink2:      #2C3A22;
+  --muted:     #6A7A5A;
+  --dim:       #9AAA85;
+  --border:    #C8D4BC;
+  --teal:      #1F6B4A;
+  --tealLt:    #27854E;
+  --tealPale:  #E6F4EE;
+  --amber:     #9A6010;
+  --amberLt:   #BF7812;
+  --amberPale: #FDF4E3;
+  --green:     #2A6835;
+  --greenLt:   #348040;
+  --greenPale: #EAF5EC;
+  --red:       #8B2020;
+  --redLt:     #AC2828;
+  --redPale:   #FCEAEA;
+  --blue:      #1A3F72;
+  --bluePale:  #EAF0FA;
+  --purple:    #5B2D8E;
+  --purplePale:#F3EEFB;
+  --radius:    12px;
+  --shadow:    0 2px 12px rgba(26,34,20,.09);
+  --shadow-md: 0 4px 20px rgba(26,34,20,.13);
+}
+
+body{
+  font-family:'Nunito',sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  font-size:17px;
+  line-height:1.75;
+  min-height:100vh;
+}
+
+.page{max-width:680px;margin:0 auto;padding:0 16px 80px}
+
+/* ── HERO ─────────────────────────────────────────────────────── */
+.hero{
+  background:var(--teal);
+  margin:0 -16px;
+  padding:28px 20px 26px;
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 80% 20%,rgba(255,255,255,.06) 0%,transparent 60%);
+  pointer-events:none;
+}
+.hero-kicker{
+  font-size:11px;font-weight:700;letter-spacing:3px;
+  text-transform:uppercase;color:rgba(255,255,255,.58);
+  margin-bottom:8px;display:flex;align-items:center;gap:8px;
+}
+.hero-kicker::before{content:'';width:18px;height:2px;background:rgba(255,255,255,.35)}
+.hero-title{
+  font-family:'Lora',serif;
+  font-size:clamp(24px,5.5vw,34px);
+  font-weight:700;color:#fff;line-height:1.2;margin-bottom:10px;
+}
+.hero-title span{color:#C8F0A0;font-style:italic}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.70);margin-bottom:18px;line-height:1.65}
+.hero-chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{font-size:11px;font-weight:700;letter-spacing:1px;padding:4px 12px;border-radius:20px;text-transform:uppercase}
+.chip-w{background:rgba(255,255,255,.14);color:rgba(255,255,255,.88)}
+.chip-y{background:rgba(200,240,160,.18);color:#C8F0A0}
+.chip-g{background:rgba(100,220,130,.13);color:#7ADEA0}
+
+/* ── TAB BAR ──────────────────────────────────────────────────── */
+.tab-bar{
+  position:sticky;top:0;z-index:50;
+  background:var(--white);border-bottom:2px solid var(--border);
+  margin:0 -16px;display:flex;overflow-x:auto;
+  box-shadow:0 2px 8px rgba(26,34,20,.07);
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;
+}
+.tab-bar::-webkit-scrollbar{display:none}
+.tab{
+  flex-shrink:0;padding:14px 18px;
+  font-size:12px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--muted);
+  border:none;background:transparent;cursor:pointer;
+  border-bottom:3px solid transparent;margin-bottom:-2px;
+  transition:all .2s;white-space:nowrap;
+}
+.tab:hover{color:var(--ink);background:var(--bg)}
+.tab.on{color:var(--teal);border-bottom-color:var(--teal)}
+
+/* ── PANES ────────────────────────────────────────────────────── */
+.pane{display:none;padding-top:24px;animation:fadeUp .3s ease}
+.pane.on{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── SECTION LABEL ────────────────────────────────────────────── */
+.sec-label{
+  font-size:10px;font-weight:800;letter-spacing:3px;
+  text-transform:uppercase;color:var(--teal);
+  margin:28px 0 12px;display:flex;align-items:center;gap:10px;
+}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* ── INTRO BOX ────────────────────────────────────────────────── */
+.intro-box{
+  background:var(--tealPale);border:1.5px solid rgba(31,107,74,.2);
+  border-radius:var(--radius);padding:20px;margin-bottom:8px;
+}
+.intro-box p{font-size:16px;color:var(--ink2);line-height:1.8}
+.intro-box strong{color:var(--teal)}
+
+/* ── CONCEPT CARDS ────────────────────────────────────────────── */
+.c-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius);margin-bottom:10px;
+  box-shadow:var(--shadow);overflow:hidden;
+}
+.c-head{
+  display:flex;align-items:center;gap:12px;padding:16px 18px;
+  cursor:pointer;border-left:4px solid transparent;
+  transition:all .15s;-webkit-tap-highlight-color:transparent;
+}
+.c-head:hover,.c-head.open{background:var(--bg);border-left-color:var(--teal)}
+.c-icon{
+  width:38px;height:38px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;
+}
+.c-title{font-size:17px;font-weight:700;color:var(--ink);flex:1}
+.c-sub{font-size:12px;color:var(--dim);font-weight:600;margin-top:2px}
+.c-arrow{font-size:12px;color:var(--dim);transition:transform .2s;flex-shrink:0}
+.c-head.open .c-arrow{transform:rotate(180deg)}
+.c-body{display:none;padding:4px 18px 20px;border-top:1px solid var(--border)}
+.c-body.open{display:block;animation:fadeUp .2s ease}
+.c-body p{font-size:16px;color:var(--ink2);line-height:1.85;margin-bottom:12px}
+.c-body p:last-child{margin-bottom:0}
+.c-body strong{color:var(--teal);font-weight:700}
+.c-body em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* ── CONTENT BLOCKS ───────────────────────────────────────────── */
+.fact-box{
+  background:var(--amberPale);border:1.5px solid rgba(154,96,16,.2);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.fact-box .fb-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--amber);text-transform:uppercase;margin-bottom:8px;
+}
+.fact-box ul{list-style:none;padding:0}
+.fact-box li{
+  font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;
+  position:relative;line-height:1.7;
+}
+.fact-box li::before{content:'→';position:absolute;left:0;color:var(--amber);font-weight:700;font-size:13px}
+
+.eg-box{
+  background:var(--greenPale);border-left:4px solid var(--green);
+  border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0;
+}
+.eg-box .eg-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--green);text-transform:uppercase;margin-bottom:6px;
+}
+.eg-box p{font-size:15px;color:var(--ink2);line-height:1.75}
+.eg-box ul{list-style:none;padding:0}
+.eg-box li{font-size:15px;color:var(--ink2);padding:4px 0 4px 18px;position:relative;line-height:1.65}
+.eg-box li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:800;font-size:12px}
+
+.trap-box{
+  background:var(--redPale);border:1.5px solid rgba(139,32,32,.2);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.trap-box .tr-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--red);text-transform:uppercase;margin-bottom:8px;
+}
+.trap-box p,.trap-box li{font-size:15.5px;color:var(--ink2);line-height:1.75}
+.trap-box ul{list-style:none;padding:0}
+.trap-box li{padding:5px 0 5px 22px;position:relative}
+.trap-box li::before{content:'⚑';position:absolute;left:0;font-size:12px;color:var(--red)}
+
+.rule-box{
+  background:var(--bluePale);border:1.5px solid rgba(26,63,114,.18);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.rule-box .rl-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--blue);text-transform:uppercase;margin-bottom:8px;
+}
+.rule-box p{font-size:15.5px;color:var(--ink2);line-height:1.8}
+.rule-box strong{color:var(--blue)}
+
+.purple-box{
+  background:var(--purplePale);border:1.5px solid rgba(91,45,142,.18);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.purple-box .pl-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--purple);text-transform:uppercase;margin-bottom:8px;
+}
+.purple-box ul{list-style:none;padding:0}
+.purple-box li{font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;position:relative;line-height:1.8}
+.purple-box li::before{content:'◆';position:absolute;left:0;font-size:9px;color:var(--purple);top:10px}
+
+.analogy-box{
+  background:#F0F7FF;border-left:4px solid var(--blue);
+  border-radius:0 8px 8px 0;padding:14px 16px;margin:12px 0;
+}
+.analogy-box .an-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--blue);text-transform:uppercase;margin-bottom:6px;
+}
+.analogy-box p{font-size:15.5px;color:var(--ink2);line-height:1.75}
+
+.compare-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
+.compare-table th{
+  background:var(--teal);color:#fff;
+  padding:10px 12px;text-align:left;
+  font-size:13px;font-weight:700;letter-spacing:.5px;
+}
+.compare-table td{
+  padding:10px 12px;border:1px solid var(--border);
+  color:var(--ink2);vertical-align:top;line-height:1.65;
+}
+.compare-table tr:nth-child(even) td{background:var(--bg)}
+.compare-table td b{color:var(--teal)}
+
+/* tissue mini-cards */
+.org-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}
+.org-card{
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:10px;padding:13px 14px;
+}
+.org-card .org-name{
+  font-size:13px;font-weight:800;color:var(--teal);
+  margin-bottom:4px;display:flex;align-items:center;gap:6px;
+}
+.org-card .org-nick{
+  font-size:11px;font-weight:700;color:var(--amber);
+  background:var(--amberPale);border-radius:4px;
+  padding:1px 7px;
+}
+.org-card p{font-size:14px;color:var(--ink2);line-height:1.6}
+
+/* ── QUICK REFERENCE ──────────────────────────────────────────── */
+.ref-grid{display:grid;gap:10px;margin:8px 0}
+.ref-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);
+}
+.ref-card-title{
+  font-size:11px;font-weight:800;letter-spacing:2px;
+  text-transform:uppercase;color:var(--teal);
+  margin-bottom:10px;padding-bottom:8px;
+  border-bottom:1px solid var(--border);
+}
+.ref-card ul{list-style:none;padding:0}
+.ref-card li{
+  font-size:15px;color:var(--ink2);padding:5px 0 5px 16px;
+  position:relative;line-height:1.65;
+  border-bottom:1px solid var(--bg2);
+}
+.ref-card li:last-child{border-bottom:none}
+.ref-card li::before{content:'·';position:absolute;left:4px;color:var(--teal);font-weight:900;font-size:18px;line-height:1.3}
+.ref-card li b{color:var(--ink);font-weight:700}
+.ref-card li em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* ── QUIZ ─────────────────────────────────────────────────────── */
+.quiz-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:2px;background:var(--border);
+  border-radius:var(--radius);overflow:hidden;
+  margin-bottom:16px;box-shadow:var(--shadow);
+}
+.qs-cell{background:var(--white);padding:12px 8px;text-align:center}
+.qs-val{font-family:'Lora',serif;font-size:22px;font-weight:700;color:var(--teal);line-height:1}
+.qs-val.g{color:var(--green)}.qs-val.r{color:var(--red)}.qs-val.a{color:var(--amber)}
+.qs-lbl{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:1px;margin-top:4px;text-transform:uppercase}
+
+.prog-wrap{margin-bottom:20px}
+.prog-bar{height:6px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;background:var(--teal);border-radius:3px;transition:width .4s ease;width:0%}
+.prog-label{font-size:12px;color:var(--muted);font-weight:700;margin-bottom:6px}
+
+.q-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius);margin-bottom:12px;
+  box-shadow:var(--shadow);overflow:hidden;
+  border-left:4px solid transparent;transition:border-color .15s;
+}
+.q-card.answered{border-left-color:var(--teal)}
+.q-card.correct{border-left-color:var(--green)}
+.q-card.wrong{border-left-color:var(--red)}
+
+.q-meta{
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  padding:10px 16px;background:var(--bg);
+  border-bottom:1px solid var(--border);
+}
+.q-num{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:1px}
+.q-diff{font-size:10px;font-weight:800;padding:2px 10px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase}
+.diff-e{background:var(--greenPale);color:var(--green)}
+.diff-m{background:var(--amberPale);color:var(--amber)}
+.diff-h{background:var(--redPale);color:var(--red)}
+.q-exam{font-size:11px;color:var(--dim);margin-left:auto;font-weight:600}
+
+.q-body{padding:16px}
+.q-text{font-size:17px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-weight:600}
+
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{
+  background:var(--bg);border:1.5px solid var(--border);
+  border-radius:10px;padding:14px 16px;
+  cursor:pointer;display:flex;align-items:flex-start;gap:12px;
+  font-size:16px;color:var(--ink2);text-align:left;width:100%;
+  transition:all .15s;-webkit-tap-highlight-color:transparent;
+  min-height:48px;line-height:1.6;
+}
+.opt:hover:not(:disabled){border-color:var(--teal);background:var(--tealPale)}
+.opt:disabled{cursor:default}
+.opt.sel{border-color:var(--teal);background:var(--tealPale);color:var(--teal)}
+.opt.ok{border-color:var(--green)!important;background:var(--greenPale)!important;color:var(--green)!important}
+.opt.bad{border-color:var(--red)!important;background:var(--redPale)!important;color:var(--red)!important}
+
+.opt-lbl{
+  min-width:28px;height:28px;border-radius:8px;
+  background:var(--bg3);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:800;color:var(--muted);
+  flex-shrink:0;transition:all .15s;
+}
+.opt.sel .opt-lbl{background:var(--teal);color:#fff;border-color:var(--teal)}
+.opt.ok .opt-lbl{background:var(--green);color:#fff;border-color:var(--green)}
+.opt.bad .opt-lbl{background:var(--red);color:#fff;border-color:var(--red)}
+
+.exp-panel{display:none;margin-top:12px;background:var(--bg);border-radius:10px;padding:14px 16px;border:1px solid var(--border)}
+.exp-panel.show{display:block;animation:fadeUp .2s ease}
+.exp-tag{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:6px}
+.exp-rule{font-size:13px;font-weight:800;color:var(--ink);background:var(--tealPale);border-radius:6px;padding:6px 10px;margin-bottom:8px;border-left:3px solid var(--teal)}
+.exp-panel p{font-size:15px;color:var(--ink2);line-height:1.8}
+
+.q-foot{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-top:1px solid var(--border);background:var(--bg)}
+.q-status{font-size:12px;font-weight:700}
+
+.btn{
+  padding:12px 24px;border-radius:10px;font-size:14px;font-weight:800;
+  letter-spacing:.5px;border:none;cursor:pointer;transition:all .15s;
+}
+.btn-primary{background:var(--teal);color:#fff}
+.btn-primary:hover{background:var(--tealLt)}
+.btn-ghost{background:var(--bg2);color:var(--ink2);border:1.5px solid var(--border)}
+.btn-ghost:hover{background:var(--bg3)}
+.btn-danger{background:var(--redPale);color:var(--red);border:1.5px solid rgba(139,32,32,.2)}
+
+.quiz-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+
+#results{display:none;background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:20px;box-shadow:var(--shadow-md)}
+.res-hero{text-align:center;padding-bottom:20px;border-bottom:1px solid var(--border);margin-bottom:16px}
+.res-score{font-family:'Lora',serif;font-size:64px;font-weight:700;color:var(--teal);line-height:1}
+.res-grade{font-size:16px;font-weight:800;color:var(--ink);margin:8px 0 6px;letter-spacing:.5px}
+.res-msg{font-size:15px;color:var(--muted)}
+.res-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-kicker">Biology · Lesson B02 · Olive Defence</div>
+  <div class="hero-title">The Study of <span>Tissues</span></div>
+  <div class="hero-sub">From individual cells to organised groups — how the body builds its functional layers. Essential for CDS, NDA & AFCAT.</div>
+  <div class="hero-chips">
+    <span class="chip chip-w">CDS</span>
+    <span class="chip chip-w">NDA</span>
+    <span class="chip chip-w">AFCAT</span>
+    <span class="chip chip-y">Plant Tissues</span>
+    <span class="chip chip-g">Animal Tissues</span>
+  </div>
+</div>
+
+<!-- TAB BAR -->
+<div class="tab-bar">
+  <button class="tab on" onclick="switchTab('theory')">📖 Theory</button>
+  <button class="tab" onclick="switchTab('quickref')">⚡ Quick Ref</button>
+  <button class="tab" onclick="switchTab('quiz')">✏️ Quiz</button>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!--  THEORY PANE                                               -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div class="pane on" id="theory">
+
+  <div class="intro-box">
+    <p>A <strong>tissue</strong> is a group of similar cells that work together to perform a specific function. Tissues are the next level of organisation above cells — cells → tissues → organs → organ systems → organism. The study of tissues is called <strong>Histology</strong>.</p>
+  </div>
+
+  <!-- SECTION 1 -->
+  <div class="sec-label">Section 1 — What is a Tissue?</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E6F4EE">🔬</div>
+      <div style="flex:1">
+        <div class="c-title">Definition & Levels of Organisation</div>
+        <div class="c-sub">Where tissues fit in the hierarchy of life</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>Tissues arise when cells of the same type group together and become specialised for a common task. This division of labour makes multicellular organisms far more efficient.</p>
+      <div class="analogy-box">
+        <div class="an-label">Think of it this way</div>
+        <p>If cells are soldiers, then a tissue is a <strong>regiment</strong>. All soldiers in the regiment are trained for the same job — together they're far more effective than operating alone.</p>
+      </div>
+      <div class="fact-box">
+        <div class="fb-label">Levels of Biological Organisation</div>
+        <ul>
+          <li><strong>Cell</strong> → smallest unit of life</li>
+          <li><strong>Tissue</strong> → group of similar cells performing one function</li>
+          <li><strong>Organ</strong> → group of tissues performing a related set of functions</li>
+          <li><strong>Organ System</strong> → group of organs working together</li>
+          <li><strong>Organism</strong> → complete, independent living being</li>
+        </ul>
+      </div>
+      <div class="rule-box">
+        <div class="rl-label">Histology — The Science of Tissues</div>
+        <p><strong>Histology</strong> (from Greek: histos = tissue, logos = study) is the branch of biology that studies the microscopic structure of tissues. It is also called <strong>microscopic anatomy</strong>. Marcello Malpighi is regarded as the father of histology.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="sec-label">Section 2 — Plant Tissues</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#EAF5EC">🌿</div>
+      <div style="flex:1">
+        <div class="c-title">Classification of Plant Tissues</div>
+        <div class="c-sub">Meristematic vs Permanent — the key division</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>Plant tissues are broadly divided into two types based on their ability to divide:</p>
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Feature</th><th>Meristematic Tissue</th><th>Permanent Tissue</th></tr>
+          <tr><td>Cell division</td><td><b>Active — cells keep dividing</b></td><td>No division — cells are fixed</td></tr>
+          <tr><td>Cell wall</td><td>Thin, cellulose</td><td>Thin or thick depending on type</td></tr>
+          <tr><td>Vacuole</td><td>Small or absent</td><td>Large central vacuole</td></tr>
+          <tr><td>Cytoplasm</td><td>Dense, no intercellular spaces</td><td>May have intercellular spaces</td></tr>
+          <tr><td>Function</td><td>Growth — adds new cells to plant body</td><td>Support, conduction, storage, protection</td></tr>
+          <tr><td>Location</td><td>Root tip, shoot tip, vascular cambium</td><td>Everywhere else in the plant</td></tr>
+        </table>
+      </div>
+      <div class="trap-box">
+        <div class="tr-label">⚑ Exam Trap</div>
+        <p><strong>Meristematic cells are NOT differentiated</strong> — they are undifferentiated (like stem cells). Once a meristematic cell matures and stops dividing, it becomes a permanent tissue cell. This distinction is frequently tested.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#EAF5EC">🌱</div>
+      <div style="flex:1">
+        <div class="c-title">Meristematic Tissue — Types & Locations</div>
+        <div class="c-sub">Apical, Lateral & Intercalary</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>Based on their <strong>position in the plant</strong>, meristematic tissues are classified into three types:</p>
+      <div class="org-grid">
+        <div class="org-card">
+          <div class="org-name">Apical Meristem <span class="org-nick">Primary Growth</span></div>
+          <p>Found at the <strong>tips of roots and shoots</strong>. Responsible for increase in <strong>length</strong> of the plant.</p>
+        </div>
+        <div class="org-card">
+          <div class="org-name">Lateral Meristem <span class="org-nick">Secondary Growth</span></div>
+          <p>Found along the sides (vascular & cork cambium). Responsible for increase in <strong>girth (width)</strong>.</p>
+        </div>
+        <div class="org-card">
+          <div class="org-name">Intercalary Meristem <span class="org-nick">Leaf base / nodes</span></div>
+          <p>Found at the <strong>base of leaves and internodes</strong>. Helps grasses and monocots grow after grazing or cutting.</p>
+        </div>
+      </div>
+      <div class="fact-box">
+        <div class="fb-label">Memory Trick — ALI</div>
+        <ul>
+          <li><strong>A</strong>pical = tip = length</li>
+          <li><strong>L</strong>ateral = sides = girth</li>
+          <li><strong>I</strong>ntercalary = internodes = re-growth</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#F3EEFB">🌾</div>
+      <div style="flex:1">
+        <div class="c-title">Permanent Tissues — Simple Tissues</div>
+        <div class="c-sub">Parenchyma, Collenchyma & Sclerenchyma</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p><strong>Simple permanent tissues</strong> are made of only one type of cell. There are three types:</p>
+
+      <div class="sec-label" style="margin-top:16px">Parenchyma</div>
+      <p><strong>Parenchyma</strong> is the most common plant tissue. Cells are thin-walled, living, loosely packed with large intercellular spaces.</p>
+      <div class="eg-box">
+        <div class="eg-label">Functions & Key Points</div>
+        <ul>
+          <li>Storage of food (starch, water)</li>
+          <li>When it contains chloroplasts → called <strong>Chlorenchyma</strong> (photosynthesis)</li>
+          <li>When it has large air cavities → called <strong>Aerenchyma</strong> (buoyancy in aquatic plants)</li>
+          <li>Provides turgidity and softness to the plant</li>
+        </ul>
+      </div>
+
+      <div class="sec-label" style="margin-top:16px">Collenchyma</div>
+      <p><strong>Collenchyma</strong> cells have unevenly thickened cell walls (at corners). Cells are living.</p>
+      <div class="eg-box">
+        <div class="eg-label">Functions & Key Points</div>
+        <ul>
+          <li>Provides <strong>mechanical support with flexibility</strong> to young stems and leaves</li>
+          <li>Found in the leaf stalks (petioles) and young stems</li>
+          <li>Cells are elongated with irregular, corner-thickened walls</li>
+          <li>Living cells — can also do photosynthesis when containing chloroplasts</li>
+        </ul>
+      </div>
+
+      <div class="sec-label" style="margin-top:16px">Sclerenchyma</div>
+      <p><strong>Sclerenchyma</strong> cells have uniformly thick, lignified walls. Cells are <strong>dead at maturity</strong>.</p>
+      <div class="eg-box">
+        <div class="eg-label">Functions & Key Points</div>
+        <ul>
+          <li>Provides <strong>rigidity and hardness</strong> — makes plant body hard and stiff</li>
+          <li>Found in seed coats, nutshells, coconut husk fibres</li>
+          <li>Two types: <strong>Fibres</strong> (elongated) and <strong>Sclereids / Stone cells</strong> (isodiametric)</li>
+          <li>Dead cells — no cytoplasm at maturity</li>
+        </ul>
+      </div>
+
+      <div style="overflow-x:auto;margin-top:10px">
+        <table class="compare-table">
+          <tr><th>Feature</th><th>Parenchyma</th><th>Collenchyma</th><th>Sclerenchyma</th></tr>
+          <tr><td>Cell wall</td><td>Thin, cellulose</td><td>Unevenly thick (corners)</td><td>Uniformly thick, lignified</td></tr>
+          <tr><td>Living/Dead</td><td><b>Living</b></td><td><b>Living</b></td><td><b>Dead</b></td></tr>
+          <tr><td>Intercellular spaces</td><td>Large</td><td>Few</td><td>Absent</td></tr>
+          <tr><td>Function</td><td>Storage, photosynthesis</td><td>Flexible support</td><td>Rigid support</td></tr>
+        </table>
+      </div>
+      <div class="trap-box">
+        <div class="tr-label">⚑ Top Exam Trap</div>
+        <ul>
+          <li><strong>Sclerenchyma</strong> = dead cells. Parenchyma and collenchyma = living cells. This is the most commonly tested fact.</li>
+          <li><strong>Chlorenchyma</strong> is a modified parenchyma — NOT a separate tissue type.</li>
+          <li>Collenchyma is found in <strong>dicot stems and leaf petioles only</strong> — NOT in roots or monocot stems (which have sclerenchyma instead).</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#EAF0FA">💧</div>
+      <div style="flex:1">
+        <div class="c-title">Permanent Tissues — Complex Tissues</div>
+        <div class="c-sub">Xylem & Phloem — the Vascular System</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p><strong>Complex permanent tissues</strong> are made of more than one type of cell working together. The two main types are <strong>Xylem</strong> and <strong>Phloem</strong> — together they form the <strong>vascular bundle</strong> of a plant.</p>
+
+      <div class="sec-label" style="margin-top:16px">Xylem — Water Conducting Tissue</div>
+      <p>Xylem conducts water and dissolved minerals <strong>upward</strong> from roots to leaves (upward, unidirectional transport). It is also called <strong>wood</strong>.</p>
+      <div class="purple-box">
+        <div class="pl-label">Components of Xylem (4 types)</div>
+        <ul>
+          <li><strong>Tracheids</strong> — elongated, dead cells with tapering ends; main water-conducting element in gymnosperms</li>
+          <li><strong>Vessels (Xylem vessels)</strong> — wider, dead cells joined end-to-end forming tubes; main water-conducting element in angiosperms</li>
+          <li><strong>Xylem Fibres</strong> — dead cells providing mechanical support</li>
+          <li><strong>Xylem Parenchyma</strong> — only <strong>living cells</strong> in xylem; stores food, assists in lateral conduction</li>
+        </ul>
+      </div>
+
+      <div class="sec-label" style="margin-top:16px">Phloem — Food Conducting Tissue</div>
+      <p>Phloem conducts food (sucrose) <strong>both up and down</strong> the plant (bidirectional transport). It is also called <strong>bast</strong>.</p>
+      <div class="purple-box">
+        <div class="pl-label">Components of Phloem (4 types)</div>
+        <ul>
+          <li><strong>Sieve Tubes</strong> — main food-conducting cells; living but no nucleus at maturity; have sieve plates at ends</li>
+          <li><strong>Companion Cells</strong> — living cells that help sieve tubes function (sieve tubes lack nucleus, so companion cells assist)</li>
+          <li><strong>Phloem Fibres</strong> — dead cells for support; commercial fibres like jute, flax come from here</li>
+          <li><strong>Phloem Parenchyma</strong> — living cells; storage and lateral conduction</li>
+        </ul>
+      </div>
+
+      <div style="overflow-x:auto;margin-top:10px">
+        <table class="compare-table">
+          <tr><th>Feature</th><th>Xylem</th><th>Phloem</th></tr>
+          <tr><td>What it transports</td><td><b>Water + minerals</b></td><td><b>Food (sugars/sucrose)</b></td></tr>
+          <tr><td>Direction</td><td>Upward only (unidirectional)</td><td>Both directions (bidirectional)</td></tr>
+          <tr><td>Main conducting cells</td><td>Tracheids, Vessels (dead)</td><td>Sieve tubes (living, no nucleus)</td></tr>
+          <tr><td>Living/dead cells</td><td>Mostly dead (except xylem parenchyma)</td><td>Mostly living (except phloem fibres)</td></tr>
+          <tr><td>Also called</td><td>Wood</td><td>Bast</td></tr>
+        </table>
+      </div>
+      <div class="trap-box">
+        <div class="tr-label">⚑ Exam Traps — Xylem & Phloem</div>
+        <ul>
+          <li>Xylem parenchyma = <strong>living</strong>. All other xylem cells = dead. Don't say "all xylem cells are dead."</li>
+          <li>Sieve tubes are living but have <strong>no nucleus</strong> at maturity — assisted by companion cells.</li>
+          <li>Xylem = unidirectional (up only). Phloem = bidirectional. This is very frequently tested.</li>
+          <li><strong>Jute, hemp, flax, coir</strong> are all obtained from phloem fibres — frequently asked in exam context.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="sec-label">Section 3 — Animal Tissues</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#EAF0FA">🏗️</div>
+      <div style="flex:1">
+        <div class="c-title">Epithelial Tissue</div>
+        <div class="c-sub">The covering and lining tissue</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p><strong>Epithelial tissue</strong> covers the external surface of the body and lines the internal cavities of organs. Cells are tightly packed with very little intercellular space, and rest on a <strong>basement membrane</strong>.</p>
+      <div class="analogy-box">
+        <div class="an-label">Think of it this way</div>
+        <p>Epithelial tissue is like the <strong>tiles on a floor</strong> — cells fit tightly together to form a continuous protective layer, preventing anything from getting through unless allowed.</p>
+      </div>
+      <div class="fact-box">
+        <div class="fb-label">Types of Epithelial Tissue — By Shape</div>
+        <ul>
+          <li><strong>Squamous (Pavement)</strong> — flat, scale-like cells. Found in: skin, walls of blood capillaries, lung alveoli. Function: diffusion, filtration.</li>
+          <li><strong>Cuboidal</strong> — cube-shaped cells. Found in: kidney tubules, salivary glands. Function: secretion, absorption.</li>
+          <li><strong>Columnar</strong> — tall, column-shaped cells. Found in: inner lining of intestine, stomach. Function: secretion, absorption.</li>
+          <li><strong>Ciliated</strong> — columnar cells with cilia. Found in: trachea, fallopian tubes. Function: moves mucus/particles.</li>
+          <li><strong>Glandular</strong> — specialised for secretion. Forms glands (sweat, saliva, etc.).</li>
+        </ul>
+      </div>
+      <div class="trap-box">
+        <div class="tr-label">⚑ Exam Trap</div>
+        <p>Epithelial tissue is <strong>avascular</strong> (no blood vessels). It gets nutrients by diffusion from underlying connective tissue. This is a commonly tested fact.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#FDF4E3">🕸️</div>
+      <div style="flex:1">
+        <div class="c-title">Connective Tissue</div>
+        <div class="c-sub">Binding, supporting and transporting tissue</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p><strong>Connective tissue</strong> is the most abundant tissue in the body. It connects, supports, and binds other tissues. Unlike epithelial tissue, cells are <strong>scattered in a matrix</strong> (not packed tightly).</p>
+
+      <div class="org-grid">
+        <div class="org-card">
+          <div class="org-name">Blood <span class="org-nick">Fluid connective</span></div>
+          <p>Plasma = matrix. Transports O₂, CO₂, nutrients, hormones. RBCs, WBCs, platelets are cells.</p>
+        </div>
+        <div class="org-card">
+          <div class="org-name">Bone <span class="org-nick">Dense connective</span></div>
+          <p>Matrix of <strong>calcium phosphate</strong> + collagen fibres. Osteoblasts make bone, osteoclasts break it.</p>
+        </div>
+        <div class="org-card">
+          <div class="org-name">Cartilage <span class="org-nick">Semi-rigid</span></div>
+          <p>Matrix = <strong>chondrin</strong>. Flexible support — found in ear pinna, tip of nose, between vertebrae.</p>
+        </div>
+        <div class="org-card">
+          <div class="org-name">Adipose <span class="org-nick">Fat storage</span></div>
+          <p>Stores fat (energy), insulates the body, cushions organs. Found below skin, around kidneys.</p>
+        </div>
+        <div class="org-card">
+          <div class="org-name">Areolar <span class="org-nick">Loose connective</span></div>
+          <p>Fills spaces between organs. Contains fibroblasts, mast cells. Found in skin, around blood vessels.</p>
+        </div>
+        <div class="org-card">
+          <div class="org-name">Tendons & Ligaments <span class="org-nick">Dense fibrous</span></div>
+          <p><b>Tendons</b>: connect muscle to bone (collagen). <b>Ligaments</b>: connect bone to bone (elastin + collagen).</p>
+        </div>
+      </div>
+
+      <div class="rule-box">
+        <div class="rl-label">Blood — A Special Connective Tissue</div>
+        <p>Blood is classified as <strong>fluid connective tissue</strong>. Its matrix is called <strong>plasma</strong> (liquid). The cells floating in plasma are <strong>RBCs</strong> (erythrocytes), <strong>WBCs</strong> (leukocytes) and <strong>Platelets</strong> (thrombocytes). This classification is frequently tested in MCQs.</p>
+      </div>
+      <div class="trap-box">
+        <div class="tr-label">⚑ Exam Traps — Connective Tissue</div>
+        <ul>
+          <li><strong>Tendons</strong> = muscle to bone. <strong>Ligaments</strong> = bone to bone. Getting these reversed is the #1 mistake.</li>
+          <li><strong>Cartilage has no blood vessels</strong> — it is avascular (nutrients by diffusion).</li>
+          <li>Cartilage cells are called <strong>chondrocytes</strong>; bone cells are called <strong>osteocytes</strong>.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#FCEAEA">💪</div>
+      <div style="flex:1">
+        <div class="c-title">Muscular Tissue</div>
+        <div class="c-sub">Skeletal, Smooth & Cardiac</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p><strong>Muscular tissue</strong> is specialised for contraction and movement. All muscle cells contain <strong>contractile proteins — actin and myosin</strong>. There are three types:</p>
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Feature</th><th>Skeletal (Striated)</th><th>Smooth (Unstriated)</th><th>Cardiac</th></tr>
+          <tr><td>Location</td><td>Attached to skeleton</td><td>Walls of hollow organs (intestine, blood vessels)</td><td>Heart wall only</td></tr>
+          <tr><td>Control</td><td><b>Voluntary</b> (under will)</td><td><b>Involuntary</b></td><td><b>Involuntary</b></td></tr>
+          <tr><td>Appearance</td><td>Striated (striped)</td><td>Non-striated (smooth)</td><td>Striated + branched</td></tr>
+          <tr><td>Nuclei</td><td>Multi-nucleated, peripheral</td><td>Single, central nucleus</td><td>Single/double, central</td></tr>
+          <tr><td>Fatigue</td><td>Fatigues quickly</td><td>Does not fatigue</td><td>Never fatigues (rhythmic)</td></tr>
+          <tr><td>Speed</td><td>Fast contraction</td><td>Slow contraction</td><td>Rhythmic, moderate</td></tr>
+        </table>
+      </div>
+      <div class="trap-box">
+        <div class="tr-label">⚑ Exam Traps — Muscle Tissue</div>
+        <ul>
+          <li>Cardiac muscle is <strong>involuntary + striated</strong> — it shares features of both other types. Don't say it's non-striated.</li>
+          <li>Skeletal muscle fibres are <strong>multi-nucleated</strong> (syncytium) — each fibre has many nuclei.</li>
+          <li>Smooth muscle = <strong>spindle-shaped</strong> cells. Cardiac muscle = <strong>branched</strong> cells (intercalated discs connect them).</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#F3EEFB">🧠</div>
+      <div style="flex:1">
+        <div class="c-title">Nervous Tissue</div>
+        <div class="c-sub">The communication tissue of the body</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p><strong>Nervous tissue</strong> is the most specialised tissue in the animal body. It receives stimuli and transmits signals (nerve impulses) throughout the body.</p>
+      <div class="fact-box">
+        <div class="fb-label">Key Facts About Nervous Tissue</div>
+        <ul>
+          <li>The basic structural and functional unit is the <strong>Neuron</strong> (nerve cell)</li>
+          <li>A neuron has three parts: <strong>Cell body (Cyton/Soma)</strong>, <strong>Dendrites</strong> (receive signals), <strong>Axon</strong> (transmit signals away)</li>
+          <li>The junction between two neurons is called a <strong>Synapse</strong></li>
+          <li>Nerve impulse travels: <strong>dendrite → cell body → axon → synapse → next neuron</strong></li>
+          <li><strong>Myelin sheath</strong> — fatty covering on some axons; increases speed of impulse conduction; formed by Schwann cells</li>
+          <li>Supporting cells of the nervous system = <strong>Neuroglia (Glial cells)</strong> — outnumber neurons 10:1</li>
+        </ul>
+      </div>
+      <div class="rule-box">
+        <div class="rl-label">Types of Neurons — by Function</div>
+        <p><strong>Sensory (Afferent)</strong> neurons carry impulses from sense organs <em>to</em> the brain. <strong>Motor (Efferent)</strong> neurons carry impulses <em>from</em> the brain to muscles/glands. <strong>Relay (Interneurons)</strong> connect sensory and motor neurons inside the spinal cord and brain.</p>
+      </div>
+      <div class="trap-box">
+        <div class="tr-label">⚑ Exam Trap</div>
+        <p>Neurons are <strong>non-dividing cells</strong> — adult neurons do not regenerate (with very limited exceptions). Loss of neurons is <strong>permanent</strong>. This is frequently tested in context of brain injury or ageing questions.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="sec-label">Section 4 — High-Value Comparisons</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#EAF0FA">📊</div>
+      <div style="flex:1">
+        <div class="c-title">Plant vs Animal Tissues — Master Comparison</div>
+        <div class="c-sub">The most tested cross-topic comparison</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Feature</th><th>Plant Tissues</th><th>Animal Tissues</th></tr>
+          <tr><td>Dead cells common?</td><td><b>Yes</b> — sclerenchyma, xylem vessels, tracheids</td><td>Rare (only RBCs and platelets lack nucleus)</td></tr>
+          <tr><td>Growth after maturity</td><td><b>Yes</b> — meristematic tissue allows continuous growth</td><td>Limited — most cells do not divide after development</td></tr>
+          <tr><td>Intercellular spaces</td><td>Common (especially parenchyma)</td><td>Rare — cells are packed tightly (especially epithelium)</td></tr>
+          <tr><td>Types</td><td>Meristematic, Simple permanent, Complex permanent</td><td>Epithelial, Connective, Muscular, Nervous</td></tr>
+          <tr><td>Cell wall</td><td>Present (cellulose)</td><td>Absent</td></tr>
+        </table>
+      </div>
+      <div class="fact-box">
+        <div class="fb-label">4 Types of Animal Tissue — Memory Aid</div>
+        <ul>
+          <li><strong>E</strong>pithelial — <em>E</em>xternal covering and lining</li>
+          <li><strong>C</strong>onnective — <em>C</em>onnects and supports</li>
+          <li><strong>M</strong>uscular — <em>M</em>ovement and contraction</li>
+          <li><strong>N</strong>ervous — <em>N</em>erve signals and coordination</li>
+          <li>Memory: <strong>ECMN</strong> → "Every Cell Makes Noise"</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /theory -->
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!--  QUICK REFERENCE PANE                                      -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div class="pane" id="quickref">
+  <div class="ref-grid">
+
+    <div class="ref-card">
+      <div class="ref-card-title">Plant Tissue — Master Summary</div>
+      <ul>
+        <li><b>Meristematic</b> — dividing, undifferentiated; Apical (length), Lateral (girth), Intercalary (nodes)</li>
+        <li><b>Parenchyma</b> — thin wall, <em>living</em>, storage; chlorenchyma (photosynthesis), aerenchyma (buoyancy)</li>
+        <li><b>Collenchyma</b> — uneven wall at corners, <em>living</em>, flexible support</li>
+        <li><b>Sclerenchyma</b> — lignified, uniformly thick, <em>dead</em>, rigid support</li>
+        <li><b>Xylem</b> — water upward; tracheids + vessels (<em>dead</em>) + xylem parenchyma (<em>living</em>)</li>
+        <li><b>Phloem</b> — food both directions; sieve tubes (<em>living, no nucleus</em>) + companion cells + phloem fibres (<em>dead</em>)</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Animal Tissue — Master Summary</div>
+      <ul>
+        <li><b>Epithelial</b> — covering/lining, tightly packed, avascular, on basement membrane</li>
+        <li><b>Squamous</b> — flat; skin, alveoli, capillaries</li>
+        <li><b>Cuboidal</b> — cube; kidney tubules, glands</li>
+        <li><b>Columnar</b> — tall; intestine (absorption); ciliated → trachea, fallopian tube</li>
+        <li><b>Connective</b> — scattered cells in matrix; blood (fluid), bone (Ca₃PO₄), cartilage (chondrin)</li>
+        <li><b>Tendon</b> = muscle to bone · <b>Ligament</b> = bone to bone</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Muscle Tissue Comparison</div>
+      <ul>
+        <li><b>Skeletal</b> — voluntary, striated, multi-nucleated, fatigues</li>
+        <li><b>Smooth</b> — involuntary, non-striated, single nucleus, does not fatigue</li>
+        <li><b>Cardiac</b> — involuntary, striated, branched, intercalated discs, never fatigues</li>
+        <li><em>All muscles have actin + myosin proteins</em></li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Nervous Tissue Key Points</div>
+      <ul>
+        <li><b>Neuron</b> = cell body (cyton) + dendrites (receive) + axon (transmit)</li>
+        <li><b>Synapse</b> = gap between two neurons</li>
+        <li><b>Sensory</b> = afferent (toward brain) · <b>Motor</b> = efferent (away from brain)</li>
+        <li><b>Myelin sheath</b> — speeds impulse; made by Schwann cells</li>
+        <li>Neurons are non-dividing — <em>permanent loss when damaged</em></li>
+        <li><b>Neuroglia</b> = supporting cells of nervous system (not neurons)</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">High-Frequency Exam Facts</div>
+      <ul>
+        <li><b>Histology</b> = study of tissues; Father = Marcello Malpighi</li>
+        <li>Only <em>living</em> xylem cell = <b>xylem parenchyma</b></li>
+        <li>Sieve tubes = <em>living but no nucleus</em> — companion cells assist</li>
+        <li>Xylem = unidirectional (up); Phloem = bidirectional</li>
+        <li>Blood = <b>fluid connective tissue</b> (matrix = plasma)</li>
+        <li>Cartilage = avascular; cells = chondrocytes; matrix = chondrin</li>
+        <li>Sclerenchyma, xylem vessels, tracheids = <em>dead</em> plant cells</li>
+        <li>Intercalary meristem → allows grasses to regrow after cutting</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Commercial & Applied Tissue Facts</div>
+      <ul>
+        <li><b>Jute, Flax, Hemp, Coir</b> — obtained from phloem fibres (sclerenchyma)</li>
+        <li><b>Cotton</b> — obtained from seed hair (epidermal cell extensions)</li>
+        <li>Coconut husk = sclerenchyma fibres</li>
+        <li>Aerenchyma — helps aquatic plants float (lotus, water hyacinth)</li>
+        <li>Bone marrow — produces blood cells (haematopoiesis)</li>
+        <li>Dendrites receive; axons transmit — never reverse these in MCQs</li>
+      </ul>
+    </div>
+
+  </div>
+</div><!-- /quickref -->
+
+<!-- ════════════════════════════════════════════════════════════ -->
+<!--  QUIZ PANE                                                 -->
+<!-- ════════════════════════════════════════════════════════════ -->
+<div class="pane" id="quiz">
+
+  <div class="quiz-stats">
+    <div class="qs-cell"><div class="qs-val" id="s-att">0</div><div class="qs-lbl">Attempted</div></div>
+    <div class="qs-cell"><div class="qs-val g" id="s-cor">0</div><div class="qs-lbl">Correct</div></div>
+    <div class="qs-cell"><div class="qs-val r" id="s-wrg">0</div><div class="qs-lbl">Wrong</div></div>
+    <div class="qs-cell"><div class="qs-val a" id="s-tot">15</div><div class="qs-lbl">Total</div></div>
+  </div>
+
+  <div class="prog-wrap">
+    <div class="prog-label" id="prog-label">0 of 15 answered</div>
+    <div class="prog-bar"><div class="prog-fill" id="prog"></div></div>
+  </div>
+
+  <div class="quiz-actions">
+    <button class="btn btn-primary" onclick="submitAll()">Submit All &amp; Check</button>
+    <button class="btn btn-ghost" onclick="resetQuiz()">↺ Reset Quiz</button>
+  </div>
+
+  <div id="results"></div>
+  <div id="q-area"></div>
+
+</div><!-- /quiz -->
+
+</div><!-- /page -->
+
+<script>
+const QS = [
+
+{d:'EASY',e:'NDA 2023',
+q:'The study of tissues is called:',
+opts:['Cytology','Histology','Ecology','Physiology'],ans:1,
+rule:'Histology = study of tissues',
+exp:'Histology (Greek: histos = tissue; logos = study) is the branch of biology that deals with the microscopic structure of tissues. Cytology is the study of cells, ecology is the study of environment-organism relationships, and physiology is the study of body functions.'},
+
+{d:'EASY',e:'CDS 2023',
+q:'Which of the following is NOT a type of simple permanent plant tissue?',
+opts:['Parenchyma','Collenchyma','Xylem','Sclerenchyma'],ans:2,
+rule:'Xylem is a complex permanent tissue (made of multiple cell types)',
+exp:'Simple permanent tissues are made of one type of cell — parenchyma, collenchyma, and sclerenchyma are all simple tissues. Xylem is a COMPLEX permanent tissue because it is made of multiple cell types (tracheids, vessels, xylem fibres, xylem parenchyma). This is a common exam trap.'},
+
+{d:'EASY',e:'AFCAT 2023',
+q:'Which type of meristematic tissue is responsible for the increase in girth (thickness) of a plant?',
+opts:['Apical meristem','Intercalary meristem','Lateral meristem','Parenchyma'],ans:2,
+rule:'Lateral meristem = increase in girth (secondary growth)',
+exp:'Apical meristem (at root/shoot tips) causes increase in LENGTH (primary growth). Lateral meristem (vascular cambium and cork cambium) causes increase in GIRTH or WIDTH (secondary growth). Intercalary meristem is found at nodes/leaf bases and helps grasses regrow. Parenchyma is a permanent tissue, not meristematic.'},
+
+{d:'EASY',e:'NDA 2022',
+q:'Which of the following plant tissue cells are DEAD at maturity?',
+opts:['Parenchyma','Collenchyma','Sclerenchyma','Companion cells'],ans:2,
+rule:'Sclerenchyma = dead cells at maturity (lignified walls)',
+exp:'Sclerenchyma cells have thick, lignified cell walls that leave no room for living cytoplasm — they are dead at maturity. Their function is to provide rigid mechanical support. Parenchyma and collenchyma are living cells. Companion cells are living and assist sieve tubes in phloem.'},
+
+{d:'EASY',e:'CDS 2022',
+q:'Blood is classified as which type of tissue?',
+opts:['Epithelial tissue','Muscular tissue','Fluid connective tissue','Nervous tissue'],ans:2,
+rule:'Blood = fluid connective tissue; matrix = plasma',
+exp:'Blood is classified as a FLUID CONNECTIVE TISSUE. Its extracellular matrix is liquid plasma, in which blood cells (RBCs, WBCs, platelets) float. This question is a favourite in CDS and NDA papers because students often think blood is a separate category rather than a connective tissue.'},
+
+{d:'MEDIUM',e:'CDS 2023',
+q:'Which of the following is the ONLY living cell type found in xylem tissue?',
+opts:['Tracheids','Vessel elements','Xylem fibres','Xylem parenchyma'],ans:3,
+rule:'Xylem parenchyma = only living xylem cells',
+exp:'Xylem tracheids and vessel elements are dead at maturity (their walls are lignified and cytoplasm is absent). Xylem fibres are also dead. Only XYLEM PARENCHYMA cells remain alive — they are responsible for lateral conduction and storage of food. This is a high-frequency exam fact.'},
+
+{d:'MEDIUM',e:'NDA 2023',
+q:'A soldier sustains a nerve injury. The doctor says the damaged neurons will not regenerate. What property of neurons explains this?',
+opts:[
+  'Neurons are the largest cells in the body',
+  'Neurons are non-mitotic (do not undergo cell division)',
+  'Neurons have no nucleus',
+  'Neurons are involuntary cells'
+],ans:1,
+rule:'Neurons are amitotic — they do not divide after maturity',
+exp:'Neurons are amitotic — they permanently lose the ability to divide once they are fully differentiated. This means nerve damage is largely irreversible (with very limited exceptions in peripheral nerves). Neurons do have a nucleus. Their size varies. They are not "involuntary" — that term applies to muscle, not neurons.'},
+
+{d:'MEDIUM',e:'AFCAT 2022',
+q:'Jute, flax, and hemp fibres used in making ropes and sacks are obtained from which plant tissue?',
+opts:['Xylem parenchyma','Phloem fibres (sclerenchyma)','Collenchyma','Apical meristem'],ans:1,
+rule:'Commercial plant fibres (jute, hemp, flax) = phloem fibres (sclerenchyma)',
+exp:'Commercial plant fibres like jute, hemp, flax, and coir are obtained from PHLOEM FIBRES, which are a type of sclerenchyma. These fibres have thick, lignified walls and are dead at maturity, giving them tensile strength. Collenchyma provides flexible (not rigid) support. Xylem parenchyma is involved in conduction, not fibre production.'},
+
+{d:'MEDIUM',e:'CDS 2024',
+q:'The transport of food (sucrose) in phloem is described as bidirectional. What does this mean?',
+opts:[
+  'Food moves only upward from roots to leaves',
+  'Food moves only downward from leaves to roots',
+  'Food can move both upward and downward depending on the source-sink relationship',
+  'Food moves laterally between adjacent cells only'
+],ans:2,
+rule:'Phloem transport = bidirectional (source to sink, up or down)',
+exp:'Phloem transport is bidirectional because food moves from the SOURCE (where it is made or stored) to the SINK (where it is needed or stored). In summer, leaves make food → it moves DOWN to roots (downward). In spring, stored food in roots → moves UP to growing buds (upward). This is in contrast to xylem, which is strictly unidirectional (upward only).'},
+
+{d:'MEDIUM',e:'NDA 2022',
+q:'Tendons connect:',
+opts:[
+  'Bone to bone',
+  'Muscle to bone',
+  'Nerve to muscle',
+  'Cartilage to bone'
+],ans:1,
+rule:'Tendon = muscle to bone · Ligament = bone to bone',
+exp:'TENDONS connect muscles to bones and are made of COLLAGEN fibres (inelastic but strong). LIGAMENTS connect bone to bone and contain both collagen and elastin (slightly elastic). Confusing tendons and ligaments is the most common mistake in this topic. Remember: Tendons = muscle To bone (T for Two different T-words — Tendon and Tibia/bone).'},
+
+{d:'MEDIUM',e:'AFCAT 2023',
+q:'Which muscle tissue is both STRIATED and INVOLUNTARY?',
+opts:['Skeletal muscle','Smooth muscle','Cardiac muscle','All of the above'],ans:2,
+rule:'Cardiac muscle = striated + involuntary (unique combination)',
+exp:'Cardiac muscle is unique because it is BOTH striated (has alternating light and dark bands like skeletal muscle) AND involuntary (not under conscious control, like smooth muscle). Skeletal muscle is striated but voluntary. Smooth muscle is involuntary but not striated. Cardiac muscle shares one feature with each type, making it a favourite exam question.'},
+
+{d:'HARD',e:'CDS 2024',
+q:'A botanist is studying cross-sections of a plant stem. She notes that the cells in one region have: (i) uniformly thickened walls made of lignin, (ii) no living cytoplasm, and (iii) no intercellular spaces. Which tissue is she observing?',
+opts:['Parenchyma','Collenchyma','Sclerenchyma','Meristematic tissue'],ans:2,
+rule:'Sclerenchyma = uniformly thick lignified walls + dead + no intercellular spaces',
+exp:'Sclerenchyma is identified by three key features: (1) uniformly thickened cell walls made of LIGNIN (not just cellulose), (2) cells are dead at maturity — no cytoplasm, and (3) no intercellular spaces. Collenchyma has UNEVENLY thickened walls (at corners) and cells are LIVING. Parenchyma has thin walls, living cells, and large intercellular spaces. Meristematic tissue has thin walls and divides actively.'},
+
+{d:'HARD',e:'NDA 2024',
+q:'Which of the following statements about sieve tubes in phloem is CORRECT?',
+opts:[
+  'Sieve tubes are dead cells with lignified walls',
+  'Sieve tubes are living cells with a prominent nucleus',
+  'Sieve tubes are living cells without a nucleus at maturity, assisted by companion cells',
+  'Sieve tubes can photosynthesise because they contain chloroplasts'
+],ans:2,
+rule:'Sieve tubes = living, no nucleus at maturity → companion cells compensate',
+exp:'Sieve tubes are LIVING cells but they lose their nucleus (and most other organelles) at maturity. Because they lack a nucleus, they cannot function independently — COMPANION CELLS (which have a nucleus) assist them with metabolic activities. Sieve tubes have sieve plates at their ends through which food-laden sap flows. They are not dead, they are not lignified, and they do not have chloroplasts.'},
+
+{d:'HARD',e:'AFCAT 2024',
+q:'Which of the following combinations is CORRECT for cardiac muscle tissue?',
+opts:[
+  'Voluntary, striated, uninucleate, intercalated discs',
+  'Involuntary, non-striated, multinucleate, no intercalated discs',
+  'Involuntary, striated, uninucleate/binucleate, intercalated discs present',
+  'Voluntary, non-striated, multinucleate, intercalated discs absent'
+],ans:2,
+rule:'Cardiac = involuntary + striated + 1-2 nuclei + intercalated discs',
+exp:'Cardiac muscle is: (1) INVOLUNTARY — you cannot consciously control your heartbeat; (2) STRIATED — has light and dark bands like skeletal muscle; (3) UNINUCLEATE or BINUCLEATE (1–2 central nuclei per cell, unlike skeletal which is multinucleate with peripheral nuclei); (4) has INTERCALATED DISCS — specialised junctions between cardiac cells that allow rapid, coordinated contraction. This combination is unique to cardiac muscle.'},
+
+{d:'HARD',e:'CDS 2024',
+q:'In which of the following locations would you MOST LIKELY find ciliated epithelium?',
+opts:[
+  'Inner lining of the urinary bladder',
+  'Skin (epidermis)',
+  'Fallopian tube (oviduct)',
+  'Walls of blood capillaries'
+],ans:2,
+rule:'Ciliated epithelium = trachea + fallopian tubes (moves particles/egg)',
+exp:'Ciliated columnar epithelium is found in locations where movement of substances along the surface is required. The FALLOPIAN TUBE (oviduct) is lined with ciliated epithelium — the cilia beat to move the egg from the ovary toward the uterus. The trachea also has ciliated epithelium that sweeps mucus (with trapped particles) upward. The urinary bladder has transitional epithelium, skin has stratified squamous epithelium, and capillary walls have simple squamous epithelium.'},
+
+];
+
+// ── ENGINE ─────────────────────────────────────────────────────────────────
+const answers  = new Array(QS.length).fill(null);
+const revealed = new Array(QS.length).fill(false);
+const LABS = ['A','B','C','D'];
+
+function build(){
+  const area = document.getElementById('q-area');
+  area.innerHTML = '';
+  QS.forEach((q,i)=>{
+    const dc = q.d==='EASY'?'diff-e':q.d==='MEDIUM'?'diff-m':'diff-h';
+    const div = document.createElement('div');
+    div.className='q-card'; div.id=`qc${i}`;
+    div.innerHTML=`
+      <div class="q-meta">
+        <span class="q-num">Q.${String(i+1).padStart(2,'0')}</span>
+        <span class="q-diff ${dc}">${q.d}</span>
+        <span class="q-exam">${q.e}</span>
+      </div>
+      <div class="q-body">
+        <div class="q-text">${q.q}</div>
+        <div class="opts" id="opts${i}">
+          ${q.opts.map((o,j)=>`
+            <button class="opt" id="o${i}_${j}" onclick="pick(${i},${j})">
+              <span class="opt-lbl">${LABS[j]}</span>${o}
+            </button>`).join('')}
+        </div>
+        <div class="exp-panel" id="ex${i}">
+          <div class="exp-tag">Explanation</div>
+          <div class="exp-rule">${q.rule}</div>
+          <p>${q.exp}</p>
+        </div>
+      </div>
+      <div class="q-foot">
+        <span style="font-size:11px;color:var(--dim);font-weight:700">Biology · B02</span>
+        <span id="ai${i}" class="q-status">—</span>
+      </div>`;
+    area.appendChild(div);
+  });
+}
+
+function pick(qi,oi){
+  if(revealed[qi]) return;
+  answers[qi]=oi;
+  document.querySelectorAll(`#opts${qi} .opt`).forEach((b,j)=>{
+    b.classList.remove('sel');
+    if(j===oi) b.classList.add('sel');
+  });
+  document.getElementById(`qc${qi}`).classList.add('answered');
+  const ai=document.getElementById(`ai${qi}`);
+  ai.textContent=`Selected: ${LABS[oi]}`;
+  ai.style.color='var(--teal)';
+  updateStats();
+}
+
+function updateStats(){
+  const att=answers.filter(a=>a!==null).length;
+  document.getElementById('s-att').textContent=att;
+  document.getElementById('prog').style.width=(att/QS.length*100)+'%';
+  document.getElementById('prog-label').textContent=`${att} of ${QS.length} answered`;
+  let c=0,w=0;
+  answers.forEach((a,i)=>{ if(a===null)return; if(a===QS[i].ans)c++; else w++; });
+  document.getElementById('s-cor').textContent=c;
+  document.getElementById('s-wrg').textContent=w;
+}
+
+function submitAll(){
+  let cor=0,wrg=0,skp=0;
+  QS.forEach((q,i)=>{
+    revealed[i]=true;
+    const opts=document.querySelectorAll(`#opts${i} .opt`);
+    opts.forEach(b=>{b.disabled=true;b.classList.remove('sel')});
+    opts[q.ans].classList.add('ok');
+    if(answers[i]!==null && answers[i]!==q.ans) opts[answers[i]].classList.add('bad');
+    document.getElementById(`ex${i}`).classList.add('show');
+    const ai=document.getElementById(`ai${i}`);
+    const card=document.getElementById(`qc${i}`);
+    card.classList.remove('answered');
+    if(answers[i]===null){skp++;ai.textContent='Skipped';ai.style.color='var(--dim)';}
+    else if(answers[i]===q.ans){cor++;card.classList.add('correct');ai.textContent='✓ Correct';ai.style.color='var(--green)';}
+    else{wrg++;card.classList.add('wrong');ai.textContent='✗ Wrong';ai.style.color='var(--red)';}
+  });
+  updateStats();
+  showResults(cor,wrg,skp);
+}
+
+function showResults(cor,wrg,skp){
+  const pct=Math.round(cor/QS.length*100);
+  let grade,msg;
+  if(pct>=88){grade='Excellent';msg='Outstanding! You have mastered the basics of Tissues.'}
+  else if(pct>=70){grade='Good';msg='Well done. Review the questions you got wrong.'}
+  else if(pct>=50){grade='Average';msg='Good start. Revisit the theory cards and try again.'}
+  else{grade='Needs Work';msg="Don't worry — go through the Quick Ref and try again."}
+  const res=document.getElementById('results');
+  res.innerHTML=`
+    <div class="res-hero">
+      <div class="res-score">${cor}<span style="font-size:36px;opacity:.5">/${QS.length}</span></div>
+      <div class="res-grade">${grade} · ${pct}%</div>
+      <div class="res-msg">${msg}</div>
+    </div>
+    <div class="res-stats">
+      <div class="qs-cell"><div class="qs-val g">${cor}</div><div class="qs-lbl">Correct</div></div>
+      <div class="qs-cell"><div class="qs-val r">${wrg}</div><div class="qs-lbl">Wrong</div></div>
+      <div class="qs-cell"><div class="qs-val a">${skp}</div><div class="qs-lbl">Skipped</div></div>
+      <div class="qs-cell"><div class="qs-val">${pct}%</div><div class="qs-lbl">Score</div></div>
+    </div>
+    <div style="text-align:center;margin:16px 0">
+      <button class="btn btn-ghost" onclick="document.getElementById('q-area').scrollIntoView({behavior:'smooth'})">📖 Review All Answers</button>
+    </div>`;
+  res.style.display='block';
+  res.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function resetQuiz(){
+  answers.fill(null); revealed.fill(false);
+  build();
+  document.getElementById('results').style.display='none';
+  document.getElementById('results').innerHTML='';
+  ['s-att','s-cor','s-wrg'].forEach(id=>document.getElementById(id).textContent='0');
+  document.getElementById('prog').style.width='0%';
+  document.getElementById('prog-label').textContent=`0 of ${QS.length} answered`;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function switchTab(id){
+  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  const idx={theory:0,quickref:1,quiz:2}[id];
+  document.querySelectorAll('.tab')[idx].classList.add('on');
+}
+
+function tog(hd){
+  const bd=hd.nextElementSibling;
+  const isOpen=bd.classList.contains('open');
+  bd.classList.toggle('open',!isOpen);
+  hd.classList.toggle('open',!isOpen);
+}
+
+build();
+</script>
+</body>
+</html>

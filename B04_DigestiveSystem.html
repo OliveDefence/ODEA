@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B04 · Digestive System | Olive Defence</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+
+:root{
+  /* ── THEME: Deep Crimson + Warm Cream — anatomical & clinical ── */
+  --bg:        #F7F2F2;
+  --bg2:       #EFE7E7;
+  --bg3:       #E5D8D8;
+  --white:     #FDFAFA;
+  --ink:       #1A0D0D;
+  --ink2:      #321818;
+  --muted:     #7A5858;
+  --dim:       #AA8888;
+  --border:    #D9C4C4;
+
+  /* Primary — deep crimson */
+  --primary:      #7A1A1A;
+  --primaryLt:    #9C2222;
+  --primaryPale:  #FAEAEA;
+
+  /* Accent 1 — warm amber */
+  --amber:        #9A5C08;
+  --amberLt:      #BE7210;
+  --amberPale:    #FEF3DC;
+
+  /* Accent 2 — pine green */
+  --green:        #2A6040;
+  --greenLt:      #357A52;
+  --greenPale:    #E8F4EE;
+
+  /* Accent 3 — brick red */
+  --red:          #8B2020;
+  --redLt:        #AC2A2A;
+  --redPale:      #FAEAEA;
+
+  /* Accent 4 — deep navy */
+  --blue:         #1E3A6A;
+  --bluePale:     #E8EEF8;
+
+  /* Accent 5 — dusty plum */
+  --purple:       #622A72;
+  --purplePale:   #F3EAF7;
+
+  --radius:    12px;
+  --shadow:    0 2px 12px rgba(26,13,13,.09);
+  --shadow-md: 0 4px 20px rgba(26,13,13,.14);
+}
+
+body{
+  font-family:'Nunito',sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  font-size:17px;
+  line-height:1.75;
+  min-height:100vh;
+}
+
+.page{max-width:680px;margin:0 auto;padding:0 16px 80px}
+
+/* ── HERO ─────────────────────────────────────────────────────── */
+.hero{
+  background:linear-gradient(135deg,#3D0A0A 0%,#7A1A1A 55%,#9C2A2A 100%);
+  margin:0 -16px;
+  padding:28px 20px 26px;
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 80% 20%,rgba(255,180,140,.07) 0%,transparent 55%),
+    radial-gradient(ellipse at 5% 85%,rgba(255,220,180,.05) 0%,transparent 50%);
+  pointer-events:none;
+}
+.hero::after{
+  content:'';position:absolute;right:-20px;top:-20px;
+  width:180px;height:180px;
+  border-radius:50%;
+  background:rgba(255,255,255,.03);
+  pointer-events:none;
+}
+.hero-kicker{
+  font-size:11px;font-weight:700;letter-spacing:3px;
+  text-transform:uppercase;color:rgba(255,255,255,.52);
+  margin-bottom:8px;display:flex;align-items:center;gap:8px;
+}
+.hero-kicker::before{content:'';width:18px;height:2px;background:rgba(255,255,255,.30)}
+.hero-title{
+  font-family:'Lora',serif;
+  font-size:clamp(24px,5.5vw,34px);
+  font-weight:700;color:#fff;line-height:1.2;margin-bottom:10px;
+}
+.hero-title span{color:#FFCDB2;font-style:italic}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.68);margin-bottom:18px;line-height:1.65}
+.hero-chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{font-size:11px;font-weight:700;letter-spacing:1px;padding:4px 12px;border-radius:20px;text-transform:uppercase}
+.chip-w{background:rgba(255,255,255,.13);color:rgba(255,255,255,.88)}
+.chip-r{background:rgba(255,200,160,.16);color:#FFCDB2}
+.chip-g{background:rgba(120,220,160,.12);color:#90E8A8}
+
+/* ── TAB BAR ──────────────────────────────────────────────────── */
+.tab-bar{
+  position:sticky;top:0;z-index:50;
+  background:var(--white);border-bottom:2px solid var(--border);
+  margin:0 -16px;display:flex;overflow-x:auto;
+  box-shadow:0 2px 8px rgba(26,13,13,.07);
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;
+}
+.tab-bar::-webkit-scrollbar{display:none}
+.tab{
+  flex-shrink:0;padding:14px 18px;
+  font-size:12px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--muted);
+  border:none;background:transparent;cursor:pointer;
+  border-bottom:3px solid transparent;margin-bottom:-2px;
+  transition:all .2s;white-space:nowrap;
+}
+.tab:hover{color:var(--ink);background:var(--bg)}
+.tab.on{color:var(--primary);border-bottom-color:var(--primary)}
+
+/* ── PANES ────────────────────────────────────────────────────── */
+.pane{display:none;padding-top:24px;animation:fadeUp .3s ease}
+.pane.on{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── SECTION LABEL ────────────────────────────────────────────── */
+.sec-label{
+  font-size:10px;font-weight:800;letter-spacing:3px;
+  text-transform:uppercase;color:var(--primary);
+  margin:28px 0 12px;display:flex;align-items:center;gap:10px;
+}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* ── INTRO BOX ────────────────────────────────────────────────── */
+.intro-box{
+  background:var(--primaryPale);border:1.5px solid rgba(122,26,26,.20);
+  border-radius:var(--radius);padding:20px;margin-bottom:8px;
+}
+.intro-box p{font-size:16px;color:var(--ink2);line-height:1.8}
+.intro-box strong{color:var(--primary)}
+
+/* ── CONCEPT CARDS ────────────────────────────────────────────── */
+.c-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius);margin-bottom:10px;
+  box-shadow:var(--shadow);overflow:hidden;
+}
+.c-head{
+  display:flex;align-items:center;gap:12px;padding:16px 18px;
+  cursor:pointer;border-left:4px solid transparent;
+  transition:all .15s;-webkit-tap-highlight-color:transparent;
+}
+.c-head:hover,.c-head.open{background:var(--bg);border-left-color:var(--primary)}
+.c-icon{
+  width:38px;height:38px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;
+}
+.c-title{font-size:17px;font-weight:700;color:var(--ink);flex:1}
+.c-sub{font-size:12px;color:var(--dim);font-weight:600;margin-top:2px}
+.c-arrow{font-size:12px;color:var(--dim);transition:transform .2s;flex-shrink:0}
+.c-head.open .c-arrow{transform:rotate(180deg)}
+.c-body{display:none;padding:4px 18px 20px;border-top:1px solid var(--border)}
+.c-body.open{display:block;animation:fadeUp .2s ease}
+.c-body p{font-size:16px;color:var(--ink2);line-height:1.85;margin-bottom:12px}
+.c-body p:last-child{margin-bottom:0}
+.c-body strong{color:var(--primary);font-weight:700}
+.c-body em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* ── CONTENT BLOCKS ───────────────────────────────────────────── */
+.fact-box{
+  background:var(--amberPale);border:1.5px solid rgba(154,92,8,.20);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.fact-box .fb-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--amber);text-transform:uppercase;margin-bottom:8px;
+}
+.fact-box ul{list-style:none;padding:0}
+.fact-box li{
+  font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;
+  position:relative;line-height:1.7;
+}
+.fact-box li::before{content:'→';position:absolute;left:0;color:var(--amber);font-weight:700;font-size:13px}
+
+.eg-box{
+  background:var(--greenPale);border-left:4px solid var(--green);
+  border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0;
+}
+.eg-box .eg-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--green);text-transform:uppercase;margin-bottom:6px;
+}
+.eg-box p{font-size:15px;color:var(--ink2);line-height:1.75}
+.eg-box ul{list-style:none;padding:0}
+.eg-box li{font-size:15px;color:var(--ink2);padding:4px 0 4px 18px;position:relative;line-height:1.65}
+.eg-box li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:800;font-size:12px}
+
+.trap-box{
+  background:var(--redPale);border:1.5px solid rgba(139,32,32,.20);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.trap-box .tr-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--red);text-transform:uppercase;margin-bottom:8px;
+}
+.trap-box p,.trap-box li{font-size:15.5px;color:var(--ink2);line-height:1.75}
+.trap-box ul{list-style:none;padding:0}
+.trap-box li{padding:5px 0 5px 22px;position:relative}
+.trap-box li::before{content:'⚑';position:absolute;left:0;font-size:12px;color:var(--red)}
+
+.rule-box{
+  background:var(--bluePale);border:1.5px solid rgba(30,58,106,.17);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.rule-box .rl-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--blue);text-transform:uppercase;margin-bottom:8px;
+}
+.rule-box p{font-size:15.5px;color:var(--ink2);line-height:1.8}
+.rule-box strong{color:var(--blue)}
+
+.purple-box{
+  background:var(--purplePale);border:1.5px solid rgba(98,42,114,.17);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.purple-box .pl-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--purple);text-transform:uppercase;margin-bottom:8px;
+}
+.purple-box ul{list-style:none;padding:0}
+.purple-box li{font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;position:relative;line-height:1.8}
+.purple-box li::before{content:'◆';position:absolute;left:0;font-size:9px;color:var(--purple);top:10px}
+
+.analogy-box{
+  background:#EDF2FB;border-left:4px solid var(--blue);
+  border-radius:0 8px 8px 0;padding:14px 16px;margin:12px 0;
+}
+.analogy-box .an-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--blue);text-transform:uppercase;margin-bottom:6px;
+}
+.analogy-box p{font-size:15.5px;color:var(--ink2);line-height:1.75}
+
+/* primary-tone box */
+.primary-box{
+  background:var(--primaryPale);border-left:4px solid var(--primary);
+  border-radius:0 8px 8px 0;padding:14px 16px;margin:12px 0;
+}
+.primary-box .pb-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--primary);text-transform:uppercase;margin-bottom:6px;
+}
+.primary-box p{font-size:15.5px;color:var(--ink2);line-height:1.75}
+.primary-box strong{color:var(--primary)}
+
+/* journey strip — linear flow element */
+.journey{
+  margin:16px 0;display:flex;flex-direction:column;gap:0;
+}
+.j-step{
+  display:flex;align-items:stretch;gap:14px;
+}
+.j-line{
+  display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:28px;
+}
+.j-dot{
+  width:28px;height:28px;border-radius:50%;
+  background:var(--primary);color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:800;flex-shrink:0;margin-top:2px;
+}
+.j-connector{width:2px;flex:1;background:var(--border);margin:2px 0}
+.j-step:last-child .j-connector{display:none}
+.j-content{padding:2px 0 18px;flex:1}
+.j-title{font-size:15px;font-weight:800;color:var(--ink);margin-bottom:3px}
+.j-desc{font-size:14.5px;color:var(--ink2);line-height:1.7}
+.j-desc strong{color:var(--primary)}
+.j-desc em{color:var(--amber);font-style:normal;font-weight:700}
+
+.compare-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
+.compare-table th{
+  background:var(--primary);color:#fff;
+  padding:10px 12px;text-align:left;
+  font-size:13px;font-weight:700;letter-spacing:.5px;
+}
+.compare-table td{
+  padding:10px 12px;border:1px solid var(--border);
+  color:var(--ink2);vertical-align:top;line-height:1.65;
+}
+.compare-table tr:nth-child(even) td{background:var(--bg)}
+.compare-table td b{color:var(--primary)}
+
+/* organ mini-cards */
+.org-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}
+.org-card{
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:10px;padding:13px 14px;
+}
+.org-card .org-name{
+  font-size:13px;font-weight:800;color:var(--primary);
+  margin-bottom:4px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;
+}
+.org-card .org-nick{
+  font-size:11px;font-weight:700;color:var(--amber);
+  background:var(--amberPale);border-radius:4px;padding:1px 7px;
+}
+.org-card p{font-size:14px;color:var(--ink2);line-height:1.6}
+
+/* ── QUICK REFERENCE ──────────────────────────────────────────── */
+.ref-grid{display:grid;gap:10px;margin:8px 0}
+.ref-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);
+}
+.ref-card-title{
+  font-size:11px;font-weight:800;letter-spacing:2px;
+  text-transform:uppercase;color:var(--primary);
+  margin-bottom:10px;padding-bottom:8px;
+  border-bottom:1px solid var(--border);
+}
+.ref-card ul{list-style:none;padding:0}
+.ref-card li{
+  font-size:15px;color:var(--ink2);padding:5px 0 5px 16px;
+  position:relative;line-height:1.65;
+  border-bottom:1px solid var(--bg2);
+}
+.ref-card li:last-child{border-bottom:none}
+.ref-card li::before{content:'·';position:absolute;left:4px;color:var(--primary);font-weight:900;font-size:18px;line-height:1.3}
+.ref-card li b{color:var(--ink);font-weight:700}
+.ref-card li em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* ── QUIZ ─────────────────────────────────────────────────────── */
+.quiz-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:2px;background:var(--border);
+  border-radius:var(--radius);overflow:hidden;
+  margin-bottom:16px;box-shadow:var(--shadow);
+}
+.qs-cell{background:var(--white);padding:12px 8px;text-align:center}
+.qs-val{font-family:'Lora',serif;font-size:22px;font-weight:700;color:var(--primary);line-height:1}
+.qs-val.g{color:var(--green)}.qs-val.r{color:var(--red)}.qs-val.a{color:var(--amber)}
+.qs-lbl{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:1px;margin-top:4px;text-transform:uppercase}
+
+.prog-wrap{margin-bottom:20px}
+.prog-bar{height:6px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;background:var(--primary);border-radius:3px;transition:width .4s ease;width:0%}
+.prog-label{font-size:12px;color:var(--muted);font-weight:700;margin-bottom:6px}
+
+.q-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius);margin-bottom:12px;
+  box-shadow:var(--shadow);overflow:hidden;
+  border-left:4px solid transparent;transition:border-color .15s;
+}
+.q-card.answered{border-left-color:var(--primary)}
+.q-card.correct{border-left-color:var(--green)}
+.q-card.wrong{border-left-color:var(--red)}
+
+.q-meta{
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  padding:10px 16px;background:var(--bg);
+  border-bottom:1px solid var(--border);
+}
+.q-num{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:1px}
+.q-diff{font-size:10px;font-weight:800;padding:2px 10px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase}
+.diff-e{background:var(--greenPale);color:var(--green)}
+.diff-m{background:var(--amberPale);color:var(--amber)}
+.diff-h{background:var(--redPale);color:var(--red)}
+.q-exam{font-size:11px;color:var(--dim);margin-left:auto;font-weight:600}
+
+.q-body{padding:16px}
+.q-text{font-size:17px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-weight:600}
+
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{
+  background:var(--bg);border:1.5px solid var(--border);
+  border-radius:10px;padding:14px 16px;
+  cursor:pointer;display:flex;align-items:flex-start;gap:12px;
+  font-size:16px;color:var(--ink2);text-align:left;width:100%;
+  transition:all .15s;-webkit-tap-highlight-color:transparent;
+  min-height:48px;line-height:1.6;
+}
+.opt:hover:not(:disabled){border-color:var(--primary);background:var(--primaryPale)}
+.opt:disabled{cursor:default}
+.opt.sel{border-color:var(--primary);background:var(--primaryPale);color:var(--primary)}
+.opt.ok{border-color:var(--green)!important;background:var(--greenPale)!important;color:var(--green)!important}
+.opt.bad{border-color:var(--red)!important;background:var(--redPale)!important;color:var(--red)!important}
+
+.opt-lbl{
+  min-width:28px;height:28px;border-radius:8px;
+  background:var(--bg3);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:800;color:var(--muted);
+  flex-shrink:0;transition:all .15s;
+}
+.opt.sel .opt-lbl{background:var(--primary);color:#fff;border-color:var(--primary)}
+.opt.ok .opt-lbl{background:var(--green);color:#fff;border-color:var(--green)}
+.opt.bad .opt-lbl{background:var(--red);color:#fff;border-color:var(--red)}
+
+.exp-panel{display:none;margin-top:12px;background:var(--bg);border-radius:10px;padding:14px 16px;border:1px solid var(--border)}
+.exp-panel.show{display:block;animation:fadeUp .2s ease}
+.exp-tag{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--primary);margin-bottom:6px}
+.exp-rule{font-size:13px;font-weight:800;color:var(--ink);background:var(--primaryPale);border-radius:6px;padding:6px 10px;margin-bottom:8px;border-left:3px solid var(--primary)}
+.exp-panel p{font-size:15px;color:var(--ink2);line-height:1.8}
+
+.q-foot{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-top:1px solid var(--border);background:var(--bg)}
+.q-status{font-size:12px;font-weight:700}
+
+.btn{padding:12px 24px;border-radius:10px;font-size:14px;font-weight:800;letter-spacing:.5px;border:none;cursor:pointer;transition:all .15s}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:var(--primaryLt)}
+.btn-ghost{background:var(--bg2);color:var(--ink2);border:1.5px solid var(--border)}
+.btn-ghost:hover{background:var(--bg3)}
+.quiz-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+
+#results{display:none;background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:20px;box-shadow:var(--shadow-md)}
+.res-hero{text-align:center;padding-bottom:20px;border-bottom:1px solid var(--border);margin-bottom:16px}
+.res-score{font-family:'Lora',serif;font-size:64px;font-weight:700;color:var(--primary);line-height:1}
+.res-grade{font-size:16px;font-weight:800;color:var(--ink);margin:8px 0 6px;letter-spacing:.5px}
+.res-msg{font-size:15px;color:var(--muted)}
+.res-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-kicker">Biology · Lesson B04 · Olive Defence</div>
+  <div class="hero-title">The <span>Digestive System</span></div>
+  <div class="hero-sub">From mouth to absorption — organs, enzymes, secretions and the complete journey of food through the human body. Essential for CDS, NDA &amp; AFCAT.</div>
+  <div class="hero-chips">
+    <span class="chip chip-w">CDS</span>
+    <span class="chip chip-w">NDA</span>
+    <span class="chip chip-w">AFCAT</span>
+    <span class="chip chip-r">Organs</span>
+    <span class="chip chip-g">Enzymes</span>
+    <span class="chip chip-r">Absorption</span>
+  </div>
+</div>
+
+<!-- TAB BAR -->
+<div class="tab-bar">
+  <button class="tab on" onclick="switchTab('theory')">📖 Theory</button>
+  <button class="tab" onclick="switchTab('quickref')">⚡ Quick Ref</button>
+  <button class="tab" onclick="switchTab('quiz')">✏️ Quiz</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  THEORY PANE                                              -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="pane on" id="theory">
+
+  <div class="intro-box">
+    <p><strong>Digestion</strong> is the process of breaking down complex food molecules into simpler, absorbable forms. The human digestive system consists of the <strong>alimentary canal</strong> (a ~9-metre tube from mouth to anus) and associated <strong>accessory glands</strong> (salivary glands, liver, pancreas). Digestion is both <strong>mechanical</strong> (physical breaking) and <strong>chemical</strong> (enzymatic breakdown).</p>
+  </div>
+
+  <!-- SECTION 1 -->
+  <div class="sec-label">Section 1 — The Alimentary Canal: Journey of Food</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#FAEAEA">🗺️</div>
+      <div style="flex:1">
+        <div class="c-title">The Complete Digestive Pathway</div>
+        <div class="c-sub">From ingestion to egestion — step by step</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>Food travels through a series of organs, each performing a specific role in digestion or absorption. The movement of food through the alimentary canal is driven by <strong>peristalsis</strong> — rhythmic, wave-like muscle contractions of the gut wall.</p>
+      <div class="journey">
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">1</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Mouth (Buccal Cavity)</div>
+            <div class="j-desc"><strong>Mechanical:</strong> teeth chew food (mastication), tongue mixes it. <strong>Chemical:</strong> <em>Salivary amylase (ptyalin)</em> begins starch → maltose digestion. Saliva also contains lysozyme (antibacterial) and mucin (lubrication). Food is shaped into a <strong>bolus</strong>.</div>
+          </div>
+        </div>
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">2</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Pharynx &amp; Oesophagus</div>
+            <div class="j-desc">Bolus passes through the pharynx (throat) and down the <strong>oesophagus</strong> (food pipe) by peristalsis. No digestion occurs here. The <strong>epiglottis</strong> closes the trachea during swallowing to prevent choking.</div>
+          </div>
+        </div>
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">3</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Stomach</div>
+            <div class="j-desc"><strong>Mechanical:</strong> churning. <strong>Chemical:</strong> <em>gastric juice</em> contains HCl (kills bacteria, activates pepsinogen), <em>pepsin</em> (proteins → peptides), <em>renin</em> (milk protein casein in infants). Food becomes a semi-liquid <strong>chyme</strong>. HCl creates pH ~2.</div>
+          </div>
+        </div>
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">4</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Small Intestine (Duodenum → Jejunum → Ileum)</div>
+            <div class="j-desc">The <strong>primary site of digestion AND absorption</strong>. Receives secretions from the pancreas and liver (bile). <em>Pancreatic juice</em> neutralises acidic chyme. <em>Intestinal juice (succus entericus)</em> completes digestion. Absorption occurs in the <strong>ileum</strong> via villi and microvilli.</div>
+          </div>
+        </div>
+        <div class="j-step">
+          <div class="j-line"><div class="j-dot">5</div><div class="j-connector"></div></div>
+          <div class="j-content">
+            <div class="j-title">Large Intestine (Colon → Rectum → Anus)</div>
+            <div class="j-desc"><strong>No enzymatic digestion.</strong> Main function: absorption of <strong>water and minerals</strong> from undigested food. Remaining waste is compacted into <strong>faeces</strong> and stored in the rectum before egestion through the anus. Gut bacteria here produce some <strong>Vitamin K and B12</strong>.</div>
+          </div>
+        </div>
+      </div>
+      <div class="analogy-box">
+        <div class="an-label">Think of it this way</div>
+        <p>The alimentary canal is like an <strong>assembly line in reverse</strong> — instead of building something, it disassembles complex food molecules progressively. Each station (organ) has its own tools (enzymes) and does one specific job before passing the material forward.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="sec-label">Section 2 — Digestive Glands &amp; Their Secretions</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#FAEAEA">🫙</div>
+      <div style="flex:1">
+        <div class="c-title">Salivary Glands</div>
+        <div class="c-sub">Three pairs — the first digestive secretion</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>There are <strong>three pairs of salivary glands</strong> that secrete saliva into the mouth:</p>
+      <div class="org-grid">
+        <div class="org-card">
+          <div class="org-name">Parotid <span class="org-nick">Largest</span></div>
+          <p>Largest salivary gland. Located in front of and below the ear. Site of mumps infection.</p>
+        </div>
+        <div class="org-card">
+          <div class="org-name">Submandibular <span class="org-nick">Under jaw</span></div>
+          <p>Below the mandible (lower jaw). Produces mixed serous + mucous secretion.</p>
+        </div>
+        <div class="org-card">
+          <div class="org-name">Sublingual <span class="org-nick">Smallest</span></div>
+          <p>Under the tongue. Smallest of the three. Primarily mucous secretion.</p>
+        </div>
+      </div>
+      <div class="fact-box">
+        <div class="fb-label">Composition &amp; Function of Saliva</div>
+        <ul>
+          <li><strong>Salivary amylase (Ptyalin)</strong> — digests starch → maltose (begins carbohydrate digestion)</li>
+          <li><strong>Mucin</strong> — lubricates food, helps form bolus</li>
+          <li><strong>Lysozyme</strong> — antibacterial enzyme in saliva</li>
+          <li><strong>pH of saliva:</strong> 6.8–7.0 (slightly acidic to neutral)</li>
+          <li>Saliva production: ~1–1.5 litres per day</li>
+        </ul>
+      </div>
+      <div class="trap-box">
+        <div class="tr-label">⚑ Exam Trap</div>
+        <p>Salivary amylase only acts on <strong>starch</strong> — it does NOT digest proteins or fats. Also, its action <strong>stops in the stomach</strong> because the acidic pH (HCl) denatures the enzyme. Starch digestion is then completed later in the small intestine by pancreatic amylase.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E8EEF8">🫀</div>
+      <div style="flex:1">
+        <div class="c-title">Stomach — Gastric Glands</div>
+        <div class="c-sub">HCl, pepsin, renin and gastric juice</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>The stomach wall contains <strong>gastric glands</strong> with three types of secretory cells:</p>
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Cell Type</th><th>Secretion</th><th>Function</th></tr>
+          <tr><td><b>Oxyntic / Parietal cells</b></td><td>Hydrochloric acid (HCl)</td><td>Creates acidic pH (~2); kills bacteria; activates pepsinogen → pepsin; denatures proteins</td></tr>
+          <tr><td><b>Chief / Peptic cells (Zymogen cells)</b></td><td>Pepsinogen (inactive)</td><td>Activated by HCl → Pepsin; digests proteins → peptides</td></tr>
+          <tr><td><b>Mucous neck cells</b></td><td>Mucus</td><td>Protects stomach lining from acid (prevents self-digestion)</td></tr>
+          <tr><td><b>G-cells</b></td><td>Gastrin (hormone)</td><td>Stimulates further HCl secretion</td></tr>
+        </table>
+      </div>
+      <div class="fact-box">
+        <div class="fb-label">Renin — Special Role in Infants</div>
+        <ul>
+          <li><strong>Renin</strong> is a proteolytic enzyme secreted by the stomach of <strong>infants (not adults)</strong></li>
+          <li>It coagulates (curdles) milk protein <strong>casein</strong> into calcium paracaseinate</li>
+          <li>This slows the passage of milk through the stomach, allowing proper digestion</li>
+          <li>Not present in significant amounts in adult human stomach</li>
+        </ul>
+      </div>
+      <div class="trap-box">
+        <div class="tr-label">⚑ Exam Trap</div>
+        <ul>
+          <li><strong>Pepsin</strong> is secreted as an <strong>inactive precursor (pepsinogen)</strong> — activated by HCl. This is to prevent the enzyme from digesting the stomach wall itself.</li>
+          <li>The stomach produces <strong>pepsin</strong> (not trypsin). Trypsin is from the pancreas. Getting these mixed up is the #1 mistake here.</li>
+          <li>HCl is produced by <strong>parietal (oxyntic) cells</strong>, NOT by chief cells.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E8F4EE">🟤</div>
+      <div style="flex:1">
+        <div class="c-title">Liver &amp; Bile</div>
+        <div class="c-sub">The largest gland — bile production and liver functions</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>The <strong>liver</strong> is the <strong>largest gland</strong> and the <strong>largest internal organ</strong> in the human body. It performs over 500 functions. In digestion, its key role is producing <strong>bile</strong>.</p>
+      <div class="primary-box">
+        <div class="pb-label">Bile — Key Facts</div>
+        <p><strong>Bile</strong> is produced by the <strong>liver</strong>, stored in the <strong>gall bladder</strong>, and released into the duodenum. It is <strong>alkaline</strong> (pH ~7.7–8.0) and contains <strong>bile salts</strong> (sodium glycocholate and sodium taurocholate).</p>
+      </div>
+      <div class="fact-box">
+        <div class="fb-label">Functions of Bile</div>
+        <ul>
+          <li><strong>Emulsification of fats</strong> — breaks large fat globules into tiny droplets (increases surface area for lipase action). NOT actual digestion.</li>
+          <li><strong>Neutralises acidic chyme</strong> from the stomach — makes duodenum slightly alkaline for pancreatic enzyme activity</li>
+          <li><strong>Activates pancreatic lipase</strong></li>
+          <li>Contains <strong>bile pigments</strong> (bilirubin, biliverdin) — breakdown products of haemoglobin; give faeces their colour</li>
+          <li>Bile has <strong>NO digestive enzymes</strong></li>
+        </ul>
+      </div>
+      <div class="purple-box">
+        <div class="pl-label">Other Major Functions of the Liver</div>
+        <ul>
+          <li><strong>Glycogen storage</strong> — stores excess glucose as glycogen; releases it when blood sugar falls</li>
+          <li><strong>Detoxification</strong> — breaks down alcohol, drugs, ammonia (urea cycle)</li>
+          <li><strong>Synthesis of plasma proteins</strong> — albumin, fibrinogen, prothrombin</li>
+          <li><strong>Production of bile</strong> (~600–1200 mL/day)</li>
+          <li><strong>Urea formation</strong> — converts toxic ammonia (from amino acid breakdown) into urea for excretion</li>
+          <li><strong>Vitamin storage</strong> — stores vitamins A, D, B12</li>
+          <li><strong>Heat production</strong> — metabolically very active; major heat source in the body</li>
+        </ul>
+      </div>
+      <div class="trap-box">
+        <div class="tr-label">⚑ Exam Trap</div>
+        <p>Bile does NOT contain any <strong>digestive enzymes</strong>. It <strong>emulsifies</strong> fats (physical process) but does NOT chemically digest them — that is the job of <strong>lipase</strong>. This distinction is tested directly. Also: bile is produced by the <strong>liver</strong>, stored in the <strong>gall bladder</strong> — these are two different organs.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E8EEF8">🔵</div>
+      <div style="flex:1">
+        <div class="c-title">Pancreas — The Mixed Gland</div>
+        <div class="c-sub">Both exocrine (digestive) and endocrine (hormonal)</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>The <strong>pancreas</strong> is a <strong>mixed gland</strong> — it has both exocrine functions (produces digestive enzymes) and endocrine functions (secretes hormones into blood).</p>
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Function</th><th>Cells Responsible</th><th>Secretion</th><th>Role</th></tr>
+          <tr><td><b>Exocrine</b></td><td>Acinar cells</td><td>Pancreatic juice (into duodenum)</td><td>Digestion of carbohydrates, proteins, fats</td></tr>
+          <tr><td><b>Endocrine</b></td><td>Islets of Langerhans — α cells</td><td>Glucagon</td><td>Raises blood glucose (glycogenolysis)</td></tr>
+          <tr><td><b>Endocrine</b></td><td>Islets of Langerhans — β cells</td><td>Insulin</td><td>Lowers blood glucose; promotes glycogen storage</td></tr>
+        </table>
+      </div>
+      <div class="fact-box">
+        <div class="fb-label">Pancreatic Juice — Enzyme Contents</div>
+        <ul>
+          <li><strong>Pancreatic amylase</strong> — digests remaining starch → maltose</li>
+          <li><strong>Trypsin</strong> (from trypsinogen) + <strong>Chymotrypsin</strong> — digest proteins → smaller peptides</li>
+          <li><strong>Pancreatic lipase</strong> — digests fats (emulsified by bile) → fatty acids + glycerol</li>
+          <li><strong>Nucleases (DNase, RNase)</strong> — digest nucleic acids</li>
+          <li><strong>Sodium bicarbonate (NaHCO₃)</strong> — neutralises acidic chyme; makes pH alkaline (~8) for enzyme activity</li>
+        </ul>
+      </div>
+      <div class="trap-box">
+        <div class="tr-label">⚑ Exam Trap</div>
+        <ul>
+          <li><strong>Trypsinogen</strong> (inactive) is secreted by the pancreas → activated to <strong>trypsin</strong> by <strong>enterokinase</strong> (secreted by intestinal lining). This cascade prevents self-digestion of the pancreas.</li>
+          <li>Insulin is secreted by <strong>β (beta) cells</strong>. Glucagon by <strong>α (alpha) cells</strong>. Never reverse these.</li>
+          <li>Deficiency of insulin → <strong>Diabetes mellitus</strong>. This is the most tested clinical link from the pancreas.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="sec-label">Section 3 — Small Intestine: Digestion &amp; Absorption</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E8F4EE">🧫</div>
+      <div style="flex:1">
+        <div class="c-title">Intestinal Juice &amp; Final Digestion</div>
+        <div class="c-sub">Succus entericus — the intestinal enzymes</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>The <strong>small intestine</strong> itself secretes <strong>intestinal juice</strong> (succus entericus) from glands in its wall. This completes digestion.</p>
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Enzyme</th><th>Substrate</th><th>Product</th></tr>
+          <tr><td><b>Maltase</b></td><td>Maltose</td><td>Glucose + Glucose</td></tr>
+          <tr><td><b>Sucrase (Invertase)</b></td><td>Sucrose (cane sugar)</td><td>Glucose + Fructose</td></tr>
+          <tr><td><b>Lactase</b></td><td>Lactose (milk sugar)</td><td>Glucose + Galactose</td></tr>
+          <tr><td><b>Peptidases (Erepsin)</b></td><td>Peptides</td><td>Amino acids</td></tr>
+          <tr><td><b>Enterokinase</b></td><td>Trypsinogen</td><td>Trypsin (activates pancreatic enzyme)</td></tr>
+          <tr><td><b>Nucleotidases/Nucleosidases</b></td><td>Nucleotides</td><td>Sugars + Nitrogenous bases</td></tr>
+        </table>
+      </div>
+      <div class="trap-box">
+        <div class="tr-label">⚑ Exam Trap — Lactose Intolerance</div>
+        <p>Lactose intolerance occurs when <strong>lactase enzyme is absent or insufficient</strong> — lactose in milk cannot be digested, causing bloating, gas and diarrhoea. The problem is with the <strong>enzyme lactase</strong>, not with calcium or milk allergy. This is a frequently tested applied question.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E8F4EE">🔬</div>
+      <div style="flex:1">
+        <div class="c-title">Absorption — Villi &amp; Microvilli</div>
+        <div class="c-sub">How digested nutrients enter the bloodstream</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>Absorption of digested nutrients primarily occurs in the <strong>ileum</strong> (last part of the small intestine). The inner lining (mucosa) is highly folded and covered with <strong>villi</strong> and further with <strong>microvilli</strong> (forming the brush border), dramatically increasing surface area.</p>
+      <div class="rule-box">
+        <div class="rl-label">Increasing Surface Area — Three Levels</div>
+        <p><strong>Circular folds (plicae circulares)</strong> → <strong>Villi</strong> (finger-like projections, ~0.5–1 mm tall) → <strong>Microvilli</strong> (brush border on each villus cell). Together, these increase the absorptive surface area from ~0.3 m² (flat tube) to approximately <strong>250 m²</strong> — the size of a tennis court.</p>
+      </div>
+      <div class="fact-box">
+        <div class="fb-label">What is Absorbed — Where and How</div>
+        <ul>
+          <li><strong>Glucose &amp; amino acids</strong> → absorbed into <strong>blood capillaries</strong> in villi → portal vein → liver</li>
+          <li><strong>Fatty acids &amp; glycerol</strong> → reassembled into triglycerides → enter <strong>lacteals</strong> (lymph vessels in villi) as chylomicrons → thoracic duct → blood</li>
+          <li><strong>Water-soluble vitamins (B, C)</strong> → blood capillaries</li>
+          <li><strong>Fat-soluble vitamins (A, D, E, K)</strong> → lacteals (along with fat)</li>
+          <li><strong>Water &amp; minerals</strong> → mainly in large intestine (and partly small intestine)</li>
+        </ul>
+      </div>
+      <div class="trap-box">
+        <div class="tr-label">⚑ Exam Trap</div>
+        <p>Fats are absorbed into <strong>lacteals (lymph)</strong>, NOT directly into blood. Glucose and amino acids go into <strong>blood capillaries</strong>. This distinction is directly tested. The lymph eventually drains into blood via the thoracic duct — so fats do reach blood, but via lymph first.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="sec-label">Section 4 — Master Enzyme Summary</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#F3EAF7">📋</div>
+      <div style="flex:1">
+        <div class="c-title">All Digestive Enzymes — Organ by Organ</div>
+        <div class="c-sub">The complete enzyme reference table</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Source</th><th>Enzyme</th><th>Substrate</th><th>Product</th></tr>
+          <tr><td rowspan="2"><b>Salivary Glands</b></td><td>Salivary amylase (Ptyalin)</td><td>Starch</td><td>Maltose</td></tr>
+          <tr><td>Lysozyme</td><td>Bacteria (cell walls)</td><td>Antibacterial</td></tr>
+          <tr><td rowspan="2"><b>Stomach</b></td><td>Pepsin (from pepsinogen + HCl)</td><td>Proteins</td><td>Peptides</td></tr>
+          <tr><td>Renin (infants only)</td><td>Casein (milk protein)</td><td>Paracasein (curdled)</td></tr>
+          <tr><td rowspan="4"><b>Pancreas</b></td><td>Pancreatic amylase</td><td>Starch</td><td>Maltose</td></tr>
+          <tr><td>Trypsin + Chymotrypsin</td><td>Proteins / Peptides</td><td>Smaller peptides</td></tr>
+          <tr><td>Pancreatic lipase (Steapsin)</td><td>Emulsified fats</td><td>Fatty acids + Glycerol</td></tr>
+          <tr><td>Nucleases (DNase, RNase)</td><td>DNA, RNA</td><td>Nucleotides</td></tr>
+          <tr><td rowspan="5"><b>Small Intestine</b></td><td>Enterokinase</td><td>Trypsinogen</td><td>Trypsin</td></tr>
+          <tr><td>Maltase</td><td>Maltose</td><td>Glucose</td></tr>
+          <tr><td>Sucrase</td><td>Sucrose</td><td>Glucose + Fructose</td></tr>
+          <tr><td>Lactase</td><td>Lactose</td><td>Glucose + Galactose</td></tr>
+          <tr><td>Peptidases (Erepsin)</td><td>Peptides</td><td>Amino acids</td></tr>
+        </table>
+      </div>
+      <div class="fact-box">
+        <div class="fb-label">Memory Trick — 3 Types of Food &amp; Final Products</div>
+        <ul>
+          <li><strong>Carbohydrates</strong> → final product: <em>Glucose</em> (monosaccharides)</li>
+          <li><strong>Proteins</strong> → final product: <em>Amino acids</em></li>
+          <li><strong>Fats (Lipids)</strong> → final product: <em>Fatty acids + Glycerol</em></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5 -->
+  <div class="sec-label">Section 5 — Digestive Disorders &amp; Applied Facts</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#FAEAEA">🩺</div>
+      <div style="flex:1">
+        <div class="c-title">Key Disorders &amp; Clinical Links</div>
+        <div class="c-sub">High-frequency applied questions in CDS / NDA</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Condition</th><th>Cause</th><th>Organ/System</th></tr>
+          <tr><td><b>Jaundice</b></td><td>Excess bilirubin in blood; bile not properly excreted → yellowing of skin and eyes</td><td>Liver / Bile ducts</td></tr>
+          <tr><td><b>Peptic Ulcer</b></td><td>HCl erodes stomach/duodenal lining; often linked to <em>Helicobacter pylori</em> bacteria</td><td>Stomach / Duodenum</td></tr>
+          <tr><td><b>Gallstones</b></td><td>Solidified cholesterol/bile pigments blocking gall bladder or bile duct</td><td>Gall bladder</td></tr>
+          <tr><td><b>Diabetes Mellitus</b></td><td>Type 1: no insulin production (β cells destroyed). Type 2: insulin resistance</td><td>Pancreas (endocrine)</td></tr>
+          <tr><td><b>Lactose Intolerance</b></td><td>Deficiency of lactase enzyme — cannot digest lactose in milk</td><td>Small intestine</td></tr>
+          <tr><td><b>Constipation</b></td><td>Excess water reabsorption in large intestine → hard, dry stools</td><td>Large intestine</td></tr>
+          <tr><td><b>Appendicitis</b></td><td>Inflammation of the appendix (vestigial organ in caecum)</td><td>Caecum / Large intestine</td></tr>
+          <tr><td><b>Acidity / GERD</b></td><td>Backflow of stomach acid into oesophagus; lower oesophageal sphincter weakness</td><td>Oesophagus / Stomach</td></tr>
+        </table>
+      </div>
+      <div class="eg-box">
+        <div class="eg-label">Vestigial Organs in the Digestive System</div>
+        <ul>
+          <li><strong>Appendix (Vermiform appendix)</strong> — small finger-like projection from the caecum; considered vestigial in humans; plays a role in gut immunity (lymphoid tissue) but is not essential</li>
+          <li>Removal (appendectomy) causes no long-term digestive problems</li>
+        </ul>
+      </div>
+      <div class="rule-box">
+        <div class="rl-label">Hormonal Control of Digestion</div>
+        <p><strong>Gastrin</strong> (from stomach G-cells) → stimulates HCl secretion. <strong>Secretin</strong> (from duodenum) → stimulates pancreatic NaHCO₃ secretion to neutralise chyme. <strong>Cholecystokinin (CCK)</strong> (from duodenum) → stimulates gall bladder to release bile AND pancreas to release digestive enzymes. <strong>GIP (Gastric Inhibitory Peptide)</strong> → inhibits gastric secretion when food enters the small intestine.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6 -->
+  <div class="sec-label">Section 6 — Nutrition: Vitamins &amp; Deficiencies</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#FEF3DC">💊</div>
+      <div style="flex:1">
+        <div class="c-title">Vitamins — Types, Sources &amp; Deficiency Diseases</div>
+        <div class="c-sub">Fat-soluble vs Water-soluble — highly tested in MCQs</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Vitamin</th><th>Type</th><th>Deficiency Disease</th><th>Key Source</th></tr>
+          <tr><td><b>A (Retinol)</b></td><td>Fat-soluble</td><td>Night blindness, Xerophthalmia</td><td>Carrots, liver, eggs</td></tr>
+          <tr><td><b>B1 (Thiamine)</b></td><td>Water-soluble</td><td>Beriberi (nervous system)</td><td>Rice husk, cereals</td></tr>
+          <tr><td><b>B2 (Riboflavin)</b></td><td>Water-soluble</td><td>Ariboflavinosis (cracked lips, sore throat)</td><td>Dairy, leafy greens</td></tr>
+          <tr><td><b>B3 (Niacin)</b></td><td>Water-soluble</td><td>Pellagra (3 Ds: Dermatitis, Diarrhoea, Dementia)</td><td>Meat, fish, nuts</td></tr>
+          <tr><td><b>B12 (Cobalamin)</b></td><td>Water-soluble</td><td>Pernicious anaemia</td><td>Meat, dairy (not in plants)</td></tr>
+          <tr><td><b>C (Ascorbic acid)</b></td><td>Water-soluble</td><td>Scurvy (bleeding gums, weak connective tissue)</td><td>Citrus fruits, amla</td></tr>
+          <tr><td><b>D (Calciferol)</b></td><td>Fat-soluble</td><td>Rickets (children), Osteomalacia (adults)</td><td>Sunlight, fish oil, eggs</td></tr>
+          <tr><td><b>E (Tocopherol)</b></td><td>Fat-soluble</td><td>Sterility, muscle weakness (rare)</td><td>Vegetable oils, nuts</td></tr>
+          <tr><td><b>K (Phylloquinone)</b></td><td>Fat-soluble</td><td>Impaired blood clotting (haemorrhage)</td><td>Leafy greens; produced by gut bacteria</td></tr>
+        </table>
+      </div>
+      <div class="fact-box">
+        <div class="fb-label">Memory — Fat-Soluble Vitamins: ADEK</div>
+        <ul>
+          <li>Fat-soluble: <strong>A, D, E, K</strong> — "A Dog Eats Kibble"</li>
+          <li>All others (B-complex, C) are <strong>water-soluble</strong></li>
+          <li>Fat-soluble vitamins are absorbed along with fats via <strong>lacteals</strong></li>
+          <li>Fat-soluble vitamins can accumulate (toxicity risk); water-soluble are excreted in urine (lower toxicity risk)</li>
+        </ul>
+      </div>
+      <div class="trap-box">
+        <div class="tr-label">⚑ Top Vitamin Exam Traps</div>
+        <ul>
+          <li><strong>Scurvy = Vitamin C</strong>. <strong>Rickets = Vitamin D</strong>. <strong>Night blindness = Vitamin A</strong>. These three pairs are the most tested.</li>
+          <li>Vitamin D is synthesised in <strong>skin by sunlight</strong> (UV radiation converts 7-dehydrocholesterol). It is also called the <strong>"sunshine vitamin"</strong>.</li>
+          <li><strong>Vitamin K</strong> is essential for blood clotting (activates clotting factors). Produced by gut bacteria. Newborns get a Vitamin K injection at birth because they lack gut bacteria.</li>
+          <li>Vitamin B12 is NOT found in plant foods — vegans are at risk of pernicious anaemia.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /theory -->
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  QUICK REFERENCE PANE                                     -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="pane" id="quickref">
+  <div class="ref-grid">
+
+    <div class="ref-card">
+      <div class="ref-card-title">Alimentary Canal — Organs &amp; Roles</div>
+      <ul>
+        <li><b>Mouth</b> — mastication; salivary amylase digests starch; bolus formed</li>
+        <li><b>Oesophagus</b> — peristalsis only; no digestion</li>
+        <li><b>Stomach</b> — HCl + pepsin (protein → peptides); chyme formed; renin in infants</li>
+        <li><b>Small intestine</b> — <em>main site</em> of digestion + absorption; villi + microvilli</li>
+        <li><b>Large intestine</b> — water + mineral absorption; no enzymes; faeces formed</li>
+        <li>Peristalsis = wave-like muscle contractions propel food forward</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Accessory Glands at a Glance</div>
+      <ul>
+        <li><b>Salivary glands (3 pairs)</b> — parotid (largest), submandibular, sublingual</li>
+        <li><b>Liver</b> — largest gland; produces bile (stored in gall bladder)</li>
+        <li>Bile: emulsifies fats; neutralises chyme; <em>NO digestive enzymes</em></li>
+        <li>Bile pigments (bilirubin/biliverdin) → faeces colour</li>
+        <li><b>Pancreas</b> — mixed gland; amylase, trypsin, lipase, NaHCO₃</li>
+        <li>Trypsinogen → trypsin (by <em>enterokinase</em>); insulin (β cells), glucagon (α cells)</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Enzyme Quick-Fire</div>
+      <ul>
+        <li><b>Ptyalin</b> — starch → maltose (mouth)</li>
+        <li><b>Pepsin</b> — proteins → peptides (stomach); activated by HCl</li>
+        <li><b>Trypsin</b> — proteins → peptides (pancreas/duodenum)</li>
+        <li><b>Lipase</b> — fats → fatty acids + glycerol (pancreas)</li>
+        <li><b>Maltase</b> → glucose · <b>Sucrase</b> → glucose+fructose · <b>Lactase</b> → glucose+galactose</li>
+        <li><b>Erepsin (peptidases)</b> — peptides → amino acids (small intestine)</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Absorption Routes</div>
+      <ul>
+        <li>Glucose + amino acids → <em>blood capillaries</em> → portal vein → liver</li>
+        <li>Fatty acids + glycerol → <em>lacteals (lymph)</em> → thoracic duct → blood</li>
+        <li>Fat-soluble vitamins (A,D,E,K) → lacteals</li>
+        <li>Water-soluble vitamins (B,C) → blood capillaries</li>
+        <li>Water + minerals → large intestine → blood</li>
+        <li>Surface area of small intestine: ~<em>250 m²</em> (due to villi + microvilli)</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Fat-Soluble Vitamins (ADEK)</div>
+      <ul>
+        <li><b>Vitamin A</b> — Night blindness, Xerophthalmia</li>
+        <li><b>Vitamin D</b> — Rickets (child), Osteomalacia (adult); <em>"sunshine vitamin"</em></li>
+        <li><b>Vitamin E</b> — sterility, muscle weakness</li>
+        <li><b>Vitamin K</b> — impaired clotting; produced by gut bacteria</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Water-Soluble Vitamins + Key Disorders</div>
+      <ul>
+        <li><b>B1 (Thiamine)</b> — Beriberi</li>
+        <li><b>B3 (Niacin)</b> — Pellagra (dermatitis, diarrhoea, dementia)</li>
+        <li><b>B12 (Cobalamin)</b> — Pernicious anaemia; absent in plant food</li>
+        <li><b>Vitamin C</b> — Scurvy (bleeding gums)</li>
+        <li>Diabetes mellitus — insulin deficiency (β cells of pancreas)</li>
+        <li>Jaundice — excess bilirubin; liver/bile duct disorder</li>
+      </ul>
+    </div>
+
+  </div>
+</div><!-- /quickref -->
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  QUIZ PANE                                                -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="pane" id="quiz">
+
+  <div class="quiz-stats">
+    <div class="qs-cell"><div class="qs-val" id="s-att">0</div><div class="qs-lbl">Attempted</div></div>
+    <div class="qs-cell"><div class="qs-val g" id="s-cor">0</div><div class="qs-lbl">Correct</div></div>
+    <div class="qs-cell"><div class="qs-val r" id="s-wrg">0</div><div class="qs-lbl">Wrong</div></div>
+    <div class="qs-cell"><div class="qs-val a" id="s-tot">15</div><div class="qs-lbl">Total</div></div>
+  </div>
+
+  <div class="prog-wrap">
+    <div class="prog-label" id="prog-label">0 of 15 answered</div>
+    <div class="prog-bar"><div class="prog-fill" id="prog"></div></div>
+  </div>
+
+  <div class="quiz-actions">
+    <button class="btn btn-primary" onclick="submitAll()">Submit All &amp; Check</button>
+    <button class="btn btn-ghost" onclick="resetQuiz()">↺ Reset Quiz</button>
+  </div>
+
+  <div id="results"></div>
+  <div id="q-area"></div>
+
+</div><!-- /quiz -->
+
+</div><!-- /page -->
+
+<script>
+const QS = [
+
+{d:'EASY',e:'NDA 2023',
+q:'Which enzyme in saliva begins the digestion of starch?',
+opts:['Pepsin','Salivary amylase (Ptyalin)','Lipase','Trypsin'],ans:1,
+rule:'Salivary amylase (ptyalin) = starch → maltose; begins in the mouth',
+exp:'Salivary amylase, also called ptyalin, is secreted by the salivary glands and acts on starch, breaking it down into maltose. This is the first chemical digestion step and it begins in the mouth. Pepsin is a gastric enzyme that digests proteins in the stomach. Lipase digests fats (from the pancreas). Trypsin is a pancreatic enzyme for protein digestion in the small intestine.'},
+
+{d:'EASY',e:'CDS 2022',
+q:'Which is the largest gland in the human body?',
+opts:['Pancreas','Kidney','Liver','Thyroid'],ans:2,
+rule:'Liver = largest gland AND largest internal organ in the human body',
+exp:'The liver is both the largest gland and the largest internal organ in the human body, weighing approximately 1.5 kg in adults. It performs over 500 functions including bile production, detoxification, glycogen storage, synthesis of plasma proteins, and urea formation. The pancreas is a much smaller gland. The kidneys are organs of excretion. The thyroid is an endocrine gland in the neck.'},
+
+{d:'EASY',e:'AFCAT 2023',
+q:'Bile is produced by the liver but stored in which organ before release into the duodenum?',
+opts:['Pancreas','Spleen','Gall bladder','Appendix'],ans:2,
+rule:'Bile: produced by liver → stored in gall bladder → released into duodenum',
+exp:'Bile is continuously produced by the liver but is stored and concentrated in the gall bladder. When fatty food enters the duodenum, the hormone CCK (Cholecystokinin) triggers the gall bladder to contract and release bile into the duodenum through the bile duct. The pancreas produces pancreatic juice (separate from bile). The spleen is involved in blood cell destruction and immunity, not digestion. The appendix is a vestigial structure attached to the caecum.'},
+
+{d:'EASY',e:'CDS 2023',
+q:'The deficiency of which vitamin causes Scurvy?',
+opts:['Vitamin A','Vitamin B12','Vitamin C','Vitamin D'],ans:2,
+rule:'Scurvy = Vitamin C deficiency (ascorbic acid)',
+exp:'Scurvy is caused by a deficiency of Vitamin C (ascorbic acid). Vitamin C is essential for the synthesis of collagen, which forms the basis of connective tissue, gums, skin, and blood vessels. Deficiency leads to bleeding gums, weakened blood vessels, poor wound healing, and general weakness. Vitamin A deficiency causes night blindness. Vitamin B12 deficiency causes pernicious anaemia. Vitamin D deficiency causes rickets in children and osteomalacia in adults.'},
+
+{d:'EASY',e:'NDA 2022',
+q:'Where does the primary absorption of digested food take place?',
+opts:['Stomach','Large intestine','Small intestine (ileum)','Oesophagus'],ans:2,
+rule:'Primary absorption of nutrients = small intestine (ileum), via villi',
+exp:'The small intestine, particularly the ileum (last and longest segment), is the primary site of absorption of digested nutrients. Its inner lining has folds (plicae circulares), finger-like projections (villi), and further microvilli (brush border), creating a massive surface area (~250 m²) for absorption. The stomach primarily digests proteins. The large intestine absorbs water and minerals. The oesophagus only transports food and does no absorption.'},
+
+{d:'MEDIUM',e:'CDS 2023',
+q:'Which cells of the stomach lining produce hydrochloric acid (HCl)?',
+opts:['Chief cells (peptic cells)','Mucous neck cells','Parietal cells (oxyntic cells)','G-cells'],ans:2,
+rule:'HCl = parietal (oxyntic) cells · Pepsinogen = chief (peptic) cells',
+exp:'Parietal cells (also called oxyntic cells) in the gastric glands of the stomach produce HCl. HCl maintains the acidic pH (~2) of the stomach, kills ingested bacteria, denatures proteins, and converts inactive pepsinogen into active pepsin. Chief cells (peptic/zymogen cells) produce pepsinogen. Mucous neck cells produce mucus to protect the stomach lining. G-cells produce the hormone gastrin, which stimulates further HCl secretion.'},
+
+{d:'MEDIUM',e:'AFCAT 2022',
+q:'Which of the following correctly describes the function of bile in digestion?',
+opts:[
+  'Bile chemically digests fats using its digestive enzymes',
+  'Bile emulsifies fats, increasing their surface area for lipase action',
+  'Bile digests proteins in the duodenum',
+  'Bile neutralises the alkaline environment of the small intestine'
+],ans:1,
+rule:'Bile emulsifies fats (physical, NOT chemical) — bile has NO enzymes',
+exp:'Bile emulsifies fats — it physically breaks large fat globules into tiny droplets, which dramatically increases the surface area available for lipase enzyme action. This is a PHYSICAL process, not chemical digestion. Bile does NOT contain any digestive enzymes. Bile is actually alkaline and it neutralises the ACIDIC chyme coming from the stomach (not the alkaline environment). Proteins are not digested by bile.'},
+
+{d:'MEDIUM',e:'NDA 2023',
+q:'The pancreas is described as a "mixed gland." Which of the following CORRECTLY pairs the cell type with its secretion?',
+opts:[
+  'α (alpha) cells → Insulin; β (beta) cells → Glucagon',
+  'β (beta) cells → Insulin; α (alpha) cells → Glucagon',
+  'Acinar cells → Insulin; Islet cells → Pancreatic juice',
+  'β cells → Glucagon; Acinar cells → Bile'
+],ans:1,
+rule:'β (beta) cells → Insulin (lowers glucose) · α (alpha) cells → Glucagon (raises glucose)',
+exp:'In the Islets of Langerhans of the pancreas: BETA (β) cells secrete INSULIN, which lowers blood glucose by promoting glucose uptake and glycogen synthesis. ALPHA (α) cells secrete GLUCAGON, which raises blood glucose by stimulating glycogen breakdown (glycogenolysis). Acinar cells are the exocrine cells that secrete pancreatic juice (digestive enzymes) into the duodenum. Confusing α and β cells is the most common exam mistake here.'},
+
+{d:'MEDIUM',e:'CDS 2024',
+q:'After digestion, fatty acids and glycerol are absorbed differently from glucose and amino acids. Which of the following is CORRECT?',
+opts:[
+  'Fatty acids enter blood capillaries; glucose enters lacteals',
+  'Fatty acids and glycerol enter lacteals (lymph vessels); glucose and amino acids enter blood capillaries',
+  'All nutrients are absorbed into blood capillaries in the villi',
+  'Fatty acids are absorbed in the large intestine, not the small intestine'
+],ans:1,
+rule:'Fats → lacteals (lymph) · Glucose + amino acids → blood capillaries',
+exp:'After digestion, fatty acids and glycerol are reassembled into triglycerides inside intestinal cells and packaged into chylomicrons, which enter LACTEALS — the lymph vessels inside each villus. They travel through the lymphatic system and eventually reach the blood via the thoracic duct. Glucose and amino acids are small, water-soluble molecules that are directly absorbed into blood CAPILLARIES in the villi and transported to the liver via the hepatic portal vein.'},
+
+{d:'MEDIUM',e:'AFCAT 2024',
+q:'Vitamin D deficiency in adults causes:',
+opts:['Rickets','Osteomalacia','Scurvy','Beriberi'],ans:1,
+rule:'Vitamin D deficiency: Rickets (children) vs Osteomalacia (adults)',
+exp:'Vitamin D deficiency causes different conditions depending on age. In CHILDREN: Rickets — soft, weak bones that bow under body weight. In ADULTS: Osteomalacia — softening of bones due to inadequate mineralisation. Both are due to insufficient calcium and phosphate deposition in bones. Scurvy is caused by Vitamin C deficiency. Beriberi is caused by Vitamin B1 (Thiamine) deficiency. Vitamin D is called the sunshine vitamin as it is synthesised in the skin when exposed to UV radiation.'},
+
+{d:'MEDIUM',e:'NDA 2024',
+q:'A person cannot digest milk sugar (lactose) and experiences bloating and diarrhoea after drinking milk. This condition is most likely due to:',
+opts:[
+  'Excess HCl production in the stomach',
+  'Absence or deficiency of the enzyme lactase in the small intestine',
+  'A blockage in the bile duct preventing fat digestion',
+  'Damage to the salivary glands'
+],ans:1,
+rule:'Lactose intolerance = deficiency of lactase enzyme in small intestine',
+exp:'Lactose intolerance occurs when the small intestine lacks sufficient LACTASE enzyme to digest lactose (the sugar in milk). Undigested lactose passes into the large intestine where gut bacteria ferment it, producing gas (causing bloating and flatulence) and drawing water into the colon (causing diarrhoea). The problem is specifically with the enzyme lactase — not with acid, bile, or salivary glands. This is a common applied question in CDS/NDA.'},
+
+{d:'HARD',e:'CDS 2024',
+q:'Trypsinogen is secreted by the pancreas in its inactive form. What activates it, and why is it secreted in inactive form?',
+opts:[
+  'Activated by HCl in the stomach; to prevent intestinal damage',
+  'Activated by enterokinase secreted by the intestinal lining; to prevent self-digestion of the pancreas',
+  'Activated by bile salts; to increase fat emulsification',
+  'Activated by pepsin; to continue protein digestion from the stomach'
+],ans:1,
+rule:'Trypsinogen → trypsin via enterokinase; inactive to protect pancreas from self-digestion',
+exp:'Trypsinogen is secreted in inactive (zymogen) form by pancreatic acinar cells to prevent the pancreas from digesting itself (autodigestion). Once it reaches the duodenum, the enzyme ENTEROKINASE (enteropeptidase), secreted by the intestinal lining, activates trypsinogen into TRYPSIN. Trypsin then activates other zymogens (chymotrypsinogen → chymotrypsin, proelastase → elastase). This protective cascade is clinically relevant — failure of this mechanism can cause acute pancreatitis, where pancreatic enzymes digest the pancreas itself.'},
+
+{d:'HARD',e:'NDA 2024',
+q:'Which of the following statements about pepsin is CORRECT?',
+opts:[
+  'Pepsin digests starch in the stomach at alkaline pH',
+  'Pepsin is secreted in active form directly by chief cells',
+  'Pepsin is a protease enzyme activated by HCl from inactive pepsinogen; it works optimally at acidic pH',
+  'Pepsin is produced by the pancreas and works in the duodenum'
+],ans:2,
+rule:'Pepsin: protease from stomach chief cells; pepsinogen + HCl → pepsin; pH ~2',
+exp:'Pepsin is a PROTEASE (protein-digesting enzyme) secreted by CHIEF CELLS (peptic cells) of the stomach in its INACTIVE form, pepsinogen. HCl (from parietal cells) activates pepsinogen → pepsin. Pepsin works optimally at very ACIDIC pH (~1.5–2.0) and digests proteins into peptides. It is NOT produced by the pancreas (that produces trypsin and chymotrypsin). It does NOT digest starch. It is NOT secreted in active form — being inactive protects the stomach wall from self-digestion.'},
+
+{d:'HARD',e:'AFCAT 2024',
+q:'The hormone that stimulates the gall bladder to release bile AND the pancreas to release digestive enzymes upon entry of fatty chyme into the duodenum is:',
+opts:['Gastrin','Secretin','Cholecystokinin (CCK)','Insulin'],ans:2,
+rule:'CCK (Cholecystokinin) = stimulates gall bladder contraction + pancreatic enzyme release',
+exp:'Cholecystokinin (CCK), secreted by I-cells of the duodenal mucosa in response to fatty and protein-rich chyme, has two key actions: (1) stimulates the GALL BLADDER to contract and release bile into the duodenum, and (2) stimulates the PANCREAS to secrete digestive enzymes. Gastrin (from stomach) stimulates HCl secretion. Secretin (from duodenum) specifically stimulates pancreatic BICARBONATE secretion (not enzymes) to neutralise acidic chyme. Insulin regulates blood glucose and is secreted by the pancreas, not the gut mucosa.'},
+
+{d:'HARD',e:'CDS 2024',
+q:'A patient is found to have excess bilirubin in the blood, causing yellowing of the skin and eyes. Which of the following is the MOST LIKELY cause?',
+opts:[
+  'Excess pepsin production in the stomach',
+  'Deficiency of amylase in the pancreas',
+  'Liver disease or blockage of the bile duct preventing normal bile excretion',
+  'Deficiency of lactase in the small intestine'
+],ans:2,
+rule:'Jaundice = excess bilirubin in blood → liver disease or bile duct obstruction',
+exp:'Jaundice is characterised by yellowing of skin, eyes, and mucous membranes due to excessive bilirubin (a bile pigment, breakdown product of haemoglobin) accumulating in the blood. Normal bilirubin is processed by the liver and excreted in bile into the intestine. Jaundice occurs when: (1) the liver is damaged (hepatitis, cirrhosis) and cannot process bilirubin, (2) the bile duct is blocked (gallstones) preventing excretion, or (3) excessive RBC breakdown overwhelms the liver. None of the other options involve bilirubin metabolism.'},
+
+];
+
+// ── ENGINE ─────────────────────────────────────────────────────────────────
+const answers  = new Array(QS.length).fill(null);
+const revealed = new Array(QS.length).fill(false);
+const LABS = ['A','B','C','D'];
+
+function build(){
+  const area = document.getElementById('q-area');
+  area.innerHTML = '';
+  QS.forEach((q,i)=>{
+    const dc = q.d==='EASY'?'diff-e':q.d==='MEDIUM'?'diff-m':'diff-h';
+    const div = document.createElement('div');
+    div.className='q-card'; div.id=`qc${i}`;
+    div.innerHTML=`
+      <div class="q-meta">
+        <span class="q-num">Q.${String(i+1).padStart(2,'0')}</span>
+        <span class="q-diff ${dc}">${q.d}</span>
+        <span class="q-exam">${q.e}</span>
+      </div>
+      <div class="q-body">
+        <div class="q-text">${q.q}</div>
+        <div class="opts" id="opts${i}">
+          ${q.opts.map((o,j)=>`
+            <button class="opt" id="o${i}_${j}" onclick="pick(${i},${j})">
+              <span class="opt-lbl">${LABS[j]}</span>${o}
+            </button>`).join('')}
+        </div>
+        <div class="exp-panel" id="ex${i}">
+          <div class="exp-tag">Explanation</div>
+          <div class="exp-rule">${q.rule}</div>
+          <p>${q.exp}</p>
+        </div>
+      </div>
+      <div class="q-foot">
+        <span style="font-size:11px;color:var(--dim);font-weight:700">Biology · B04</span>
+        <span id="ai${i}" class="q-status">—</span>
+      </div>`;
+    area.appendChild(div);
+  });
+}
+
+function pick(qi,oi){
+  if(revealed[qi]) return;
+  answers[qi]=oi;
+  document.querySelectorAll(`#opts${qi} .opt`).forEach((b,j)=>{
+    b.classList.remove('sel');
+    if(j===oi) b.classList.add('sel');
+  });
+  document.getElementById(`qc${qi}`).classList.add('answered');
+  const ai=document.getElementById(`ai${qi}`);
+  ai.textContent=`Selected: ${LABS[oi]}`;
+  ai.style.color='var(--primary)';
+  updateStats();
+}
+
+function updateStats(){
+  const att=answers.filter(a=>a!==null).length;
+  document.getElementById('s-att').textContent=att;
+  document.getElementById('prog').style.width=(att/QS.length*100)+'%';
+  document.getElementById('prog-label').textContent=`${att} of ${QS.length} answered`;
+  let c=0,w=0;
+  answers.forEach((a,i)=>{ if(a===null)return; if(a===QS[i].ans)c++; else w++; });
+  document.getElementById('s-cor').textContent=c;
+  document.getElementById('s-wrg').textContent=w;
+}
+
+function submitAll(){
+  let cor=0,wrg=0,skp=0;
+  QS.forEach((q,i)=>{
+    revealed[i]=true;
+    const opts=document.querySelectorAll(`#opts${i} .opt`);
+    opts.forEach(b=>{b.disabled=true;b.classList.remove('sel')});
+    opts[q.ans].classList.add('ok');
+    if(answers[i]!==null && answers[i]!==q.ans) opts[answers[i]].classList.add('bad');
+    document.getElementById(`ex${i}`).classList.add('show');
+    const ai=document.getElementById(`ai${i}`);
+    const card=document.getElementById(`qc${i}`);
+    card.classList.remove('answered');
+    if(answers[i]===null){skp++;ai.textContent='Skipped';ai.style.color='var(--dim)';}
+    else if(answers[i]===q.ans){cor++;card.classList.add('correct');ai.textContent='✓ Correct';ai.style.color='var(--green)';}
+    else{wrg++;card.classList.add('wrong');ai.textContent='✗ Wrong';ai.style.color='var(--red)';}
+  });
+  updateStats();
+  showResults(cor,wrg,skp);
+}
+
+function showResults(cor,wrg,skp){
+  const pct=Math.round(cor/QS.length*100);
+  let grade,msg;
+  if(pct>=88){grade='Excellent';msg='Outstanding! You have mastered the Digestive System.'}
+  else if(pct>=70){grade='Good';msg='Well done. Review the questions you got wrong.'}
+  else if(pct>=50){grade='Average';msg='Good start. Revisit the theory cards and try again.'}
+  else{grade='Needs Work';msg="Don't worry — go through the Quick Ref and try again."}
+  const res=document.getElementById('results');
+  res.innerHTML=`
+    <div class="res-hero">
+      <div class="res-score">${cor}<span style="font-size:36px;opacity:.5">/${QS.length}</span></div>
+      <div class="res-grade">${grade} · ${pct}%</div>
+      <div class="res-msg">${msg}</div>
+    </div>
+    <div class="res-stats">
+      <div class="qs-cell"><div class="qs-val g">${cor}</div><div class="qs-lbl">Correct</div></div>
+      <div class="qs-cell"><div class="qs-val r">${wrg}</div><div class="qs-lbl">Wrong</div></div>
+      <div class="qs-cell"><div class="qs-val a">${skp}</div><div class="qs-lbl">Skipped</div></div>
+      <div class="qs-cell"><div class="qs-val">${pct}%</div><div class="qs-lbl">Score</div></div>
+    </div>
+    <div style="text-align:center;margin:16px 0">
+      <button class="btn btn-ghost" onclick="document.getElementById('q-area').scrollIntoView({behavior:'smooth'})">📖 Review All Answers</button>
+    </div>`;
+  res.style.display='block';
+  res.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function resetQuiz(){
+  answers.fill(null); revealed.fill(false);
+  build();
+  document.getElementById('results').style.display='none';
+  document.getElementById('results').innerHTML='';
+  ['s-att','s-cor','s-wrg'].forEach(id=>document.getElementById(id).textContent='0');
+  document.getElementById('prog').style.width='0%';
+  document.getElementById('prog-label').textContent=`0 of ${QS.length} answered`;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function switchTab(id){
+  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  const idx={theory:0,quickref:1,quiz:2}[id];
+  document.querySelectorAll('.tab')[idx].classList.add('on');
+}
+
+function tog(hd){
+  const bd=hd.nextElementSibling;
+  const isOpen=bd.classList.contains('open');
+  bd.classList.toggle('open',!isOpen);
+  hd.classList.toggle('open',!isOpen);
+}
+
+build();
+</script>
+</body>
+</html>

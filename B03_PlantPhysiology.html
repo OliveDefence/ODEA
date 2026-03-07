@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B03 · Plant Physiology | Olive Defence</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+
+:root{
+  /* ── NEW THEME: Warm Botanical — deep ochre + forest brown + sage ── */
+  --bg:        #F5F2EC;
+  --bg2:       #EDE8DF;
+  --bg3:       #E2DBCE;
+  --white:     #FDFBF7;
+  --ink:       #1E1A0F;
+  --ink2:      #352E1A;
+  --muted:     #7A6E52;
+  --dim:       #A89C80;
+  --border:    #D4C9B0;
+
+  /* Primary — deep forest ochre */
+  --primary:      #5C4A1E;
+  --primaryLt:    #7A6228;
+  --primaryPale:  #F5EDD8;
+
+  /* Accent 1 — warm amber highlight */
+  --amber:        #A0620A;
+  --amberLt:      #C07C12;
+  --amberPale:    #FEF3DC;
+
+  /* Accent 2 — sage green */
+  --green:        #3A6B3A;
+  --greenLt:      #4A8A4A;
+  --greenPale:    #EAF4E8;
+
+  /* Accent 3 — terracotta red */
+  --red:          #8B3120;
+  --redLt:        #AC3E2A;
+  --redPale:      #FAEAE6;
+
+  /* Accent 4 — slate blue */
+  --blue:         #2A4A72;
+  --bluePale:     #E8EFF8;
+
+  /* Accent 5 — muted plum */
+  --purple:       #6B3A72;
+  --purplePale:   #F4EDF6;
+
+  --radius:    12px;
+  --shadow:    0 2px 12px rgba(30,26,15,.09);
+  --shadow-md: 0 4px 20px rgba(30,26,15,.13);
+}
+
+body{
+  font-family:'Nunito',sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  font-size:17px;
+  line-height:1.75;
+  min-height:100vh;
+}
+
+.page{max-width:680px;margin:0 auto;padding:0 16px 80px}
+
+/* ── HERO ─────────────────────────────────────────────────────── */
+.hero{
+  background:linear-gradient(135deg,#3B2E0D 0%,#5C4A1E 55%,#7A6228 100%);
+  margin:0 -16px;
+  padding:28px 20px 26px;
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 85% 15%,rgba(255,210,100,.08) 0%,transparent 55%),
+    radial-gradient(ellipse at 10% 90%,rgba(100,180,80,.06) 0%,transparent 50%);
+  pointer-events:none;
+}
+.hero-kicker{
+  font-size:11px;font-weight:700;letter-spacing:3px;
+  text-transform:uppercase;color:rgba(255,255,255,.55);
+  margin-bottom:8px;display:flex;align-items:center;gap:8px;
+}
+.hero-kicker::before{content:'';width:18px;height:2px;background:rgba(255,255,255,.32)}
+.hero-title{
+  font-family:'Lora',serif;
+  font-size:clamp(24px,5.5vw,34px);
+  font-weight:700;color:#fff;line-height:1.2;margin-bottom:10px;
+}
+.hero-title span{color:#F5D87A;font-style:italic}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.68);margin-bottom:18px;line-height:1.65}
+.hero-chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{font-size:11px;font-weight:700;letter-spacing:1px;padding:4px 12px;border-radius:20px;text-transform:uppercase}
+.chip-w{background:rgba(255,255,255,.13);color:rgba(255,255,255,.88)}
+.chip-y{background:rgba(245,216,122,.18);color:#F5D87A}
+.chip-g{background:rgba(100,200,90,.13);color:#8BE07A}
+
+/* ── TAB BAR ──────────────────────────────────────────────────── */
+.tab-bar{
+  position:sticky;top:0;z-index:50;
+  background:var(--white);border-bottom:2px solid var(--border);
+  margin:0 -16px;display:flex;overflow-x:auto;
+  box-shadow:0 2px 8px rgba(30,26,15,.07);
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;
+}
+.tab-bar::-webkit-scrollbar{display:none}
+.tab{
+  flex-shrink:0;padding:14px 18px;
+  font-size:12px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--muted);
+  border:none;background:transparent;cursor:pointer;
+  border-bottom:3px solid transparent;margin-bottom:-2px;
+  transition:all .2s;white-space:nowrap;
+}
+.tab:hover{color:var(--ink);background:var(--bg)}
+.tab.on{color:var(--primary);border-bottom-color:var(--primary)}
+
+/* ── PANES ────────────────────────────────────────────────────── */
+.pane{display:none;padding-top:24px;animation:fadeUp .3s ease}
+.pane.on{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── SECTION LABEL ────────────────────────────────────────────── */
+.sec-label{
+  font-size:10px;font-weight:800;letter-spacing:3px;
+  text-transform:uppercase;color:var(--primary);
+  margin:28px 0 12px;display:flex;align-items:center;gap:10px;
+}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* ── INTRO BOX ────────────────────────────────────────────────── */
+.intro-box{
+  background:var(--primaryPale);border:1.5px solid rgba(92,74,30,.22);
+  border-radius:var(--radius);padding:20px;margin-bottom:8px;
+}
+.intro-box p{font-size:16px;color:var(--ink2);line-height:1.8}
+.intro-box strong{color:var(--primary)}
+
+/* ── CONCEPT CARDS ────────────────────────────────────────────── */
+.c-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius);margin-bottom:10px;
+  box-shadow:var(--shadow);overflow:hidden;
+}
+.c-head{
+  display:flex;align-items:center;gap:12px;padding:16px 18px;
+  cursor:pointer;border-left:4px solid transparent;
+  transition:all .15s;-webkit-tap-highlight-color:transparent;
+}
+.c-head:hover,.c-head.open{background:var(--bg);border-left-color:var(--primary)}
+.c-icon{
+  width:38px;height:38px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;
+}
+.c-title{font-size:17px;font-weight:700;color:var(--ink);flex:1}
+.c-sub{font-size:12px;color:var(--dim);font-weight:600;margin-top:2px}
+.c-arrow{font-size:12px;color:var(--dim);transition:transform .2s;flex-shrink:0}
+.c-head.open .c-arrow{transform:rotate(180deg)}
+.c-body{display:none;padding:4px 18px 20px;border-top:1px solid var(--border)}
+.c-body.open{display:block;animation:fadeUp .2s ease}
+.c-body p{font-size:16px;color:var(--ink2);line-height:1.85;margin-bottom:12px}
+.c-body p:last-child{margin-bottom:0}
+.c-body strong{color:var(--primary);font-weight:700}
+.c-body em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* ── CONTENT BLOCKS ───────────────────────────────────────────── */
+.fact-box{
+  background:var(--amberPale);border:1.5px solid rgba(160,98,10,.2);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.fact-box .fb-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--amber);text-transform:uppercase;margin-bottom:8px;
+}
+.fact-box ul{list-style:none;padding:0}
+.fact-box li{
+  font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;
+  position:relative;line-height:1.7;
+}
+.fact-box li::before{content:'→';position:absolute;left:0;color:var(--amber);font-weight:700;font-size:13px}
+
+.eg-box{
+  background:var(--greenPale);border-left:4px solid var(--green);
+  border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0;
+}
+.eg-box .eg-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--green);text-transform:uppercase;margin-bottom:6px;
+}
+.eg-box p{font-size:15px;color:var(--ink2);line-height:1.75}
+.eg-box ul{list-style:none;padding:0}
+.eg-box li{font-size:15px;color:var(--ink2);padding:4px 0 4px 18px;position:relative;line-height:1.65}
+.eg-box li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:800;font-size:12px}
+
+.trap-box{
+  background:var(--redPale);border:1.5px solid rgba(139,49,32,.2);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.trap-box .tr-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--red);text-transform:uppercase;margin-bottom:8px;
+}
+.trap-box p,.trap-box li{font-size:15.5px;color:var(--ink2);line-height:1.75}
+.trap-box ul{list-style:none;padding:0}
+.trap-box li{padding:5px 0 5px 22px;position:relative}
+.trap-box li::before{content:'⚑';position:absolute;left:0;font-size:12px;color:var(--red)}
+
+.rule-box{
+  background:var(--bluePale);border:1.5px solid rgba(42,74,114,.18);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.rule-box .rl-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--blue);text-transform:uppercase;margin-bottom:8px;
+}
+.rule-box p{font-size:15.5px;color:var(--ink2);line-height:1.8}
+.rule-box strong{color:var(--blue)}
+
+.purple-box{
+  background:var(--purplePale);border:1.5px solid rgba(107,58,114,.18);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.purple-box .pl-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--purple);text-transform:uppercase;margin-bottom:8px;
+}
+.purple-box ul{list-style:none;padding:0}
+.purple-box li{font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;position:relative;line-height:1.8}
+.purple-box li::before{content:'◆';position:absolute;left:0;font-size:9px;color:var(--purple);top:10px}
+
+.analogy-box{
+  background:#F0F5FF;border-left:4px solid var(--blue);
+  border-radius:0 8px 8px 0;padding:14px 16px;margin:12px 0;
+}
+.analogy-box .an-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--blue);text-transform:uppercase;margin-bottom:6px;
+}
+.analogy-box p{font-size:15.5px;color:var(--ink2);line-height:1.75}
+
+/* primary-tone analogy variant */
+.plant-box{
+  background:var(--primaryPale);border-left:4px solid var(--primary);
+  border-radius:0 8px 8px 0;padding:14px 16px;margin:12px 0;
+}
+.plant-box .pt-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--primary);text-transform:uppercase;margin-bottom:6px;
+}
+.plant-box p{font-size:15.5px;color:var(--ink2);line-height:1.75}
+.plant-box strong{color:var(--primary)}
+
+.compare-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
+.compare-table th{
+  background:var(--primary);color:#fff;
+  padding:10px 12px;text-align:left;
+  font-size:13px;font-weight:700;letter-spacing:.5px;
+}
+.compare-table td{
+  padding:10px 12px;border:1px solid var(--border);
+  color:var(--ink2);vertical-align:top;line-height:1.65;
+}
+.compare-table tr:nth-child(even) td{background:var(--bg)}
+.compare-table td b{color:var(--primary)}
+
+/* mini-cards grid */
+.org-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}
+.org-card{
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:10px;padding:13px 14px;
+}
+.org-card .org-name{
+  font-size:13px;font-weight:800;color:var(--primary);
+  margin-bottom:4px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;
+}
+.org-card .org-nick{
+  font-size:11px;font-weight:700;color:var(--amber);
+  background:var(--amberPale);border-radius:4px;
+  padding:1px 7px;
+}
+.org-card p{font-size:14px;color:var(--ink2);line-height:1.6}
+
+/* ── QUICK REFERENCE ──────────────────────────────────────────── */
+.ref-grid{display:grid;gap:10px;margin:8px 0}
+.ref-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);
+}
+.ref-card-title{
+  font-size:11px;font-weight:800;letter-spacing:2px;
+  text-transform:uppercase;color:var(--primary);
+  margin-bottom:10px;padding-bottom:8px;
+  border-bottom:1px solid var(--border);
+}
+.ref-card ul{list-style:none;padding:0}
+.ref-card li{
+  font-size:15px;color:var(--ink2);padding:5px 0 5px 16px;
+  position:relative;line-height:1.65;
+  border-bottom:1px solid var(--bg2);
+}
+.ref-card li:last-child{border-bottom:none}
+.ref-card li::before{content:'·';position:absolute;left:4px;color:var(--primary);font-weight:900;font-size:18px;line-height:1.3}
+.ref-card li b{color:var(--ink);font-weight:700}
+.ref-card li em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* ── QUIZ ─────────────────────────────────────────────────────── */
+.quiz-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:2px;background:var(--border);
+  border-radius:var(--radius);overflow:hidden;
+  margin-bottom:16px;box-shadow:var(--shadow);
+}
+.qs-cell{background:var(--white);padding:12px 8px;text-align:center}
+.qs-val{font-family:'Lora',serif;font-size:22px;font-weight:700;color:var(--primary);line-height:1}
+.qs-val.g{color:var(--green)}.qs-val.r{color:var(--red)}.qs-val.a{color:var(--amber)}
+.qs-lbl{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:1px;margin-top:4px;text-transform:uppercase}
+
+.prog-wrap{margin-bottom:20px}
+.prog-bar{height:6px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;background:var(--primary);border-radius:3px;transition:width .4s ease;width:0%}
+.prog-label{font-size:12px;color:var(--muted);font-weight:700;margin-bottom:6px}
+
+.q-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius);margin-bottom:12px;
+  box-shadow:var(--shadow);overflow:hidden;
+  border-left:4px solid transparent;transition:border-color .15s;
+}
+.q-card.answered{border-left-color:var(--primary)}
+.q-card.correct{border-left-color:var(--green)}
+.q-card.wrong{border-left-color:var(--red)}
+
+.q-meta{
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  padding:10px 16px;background:var(--bg);
+  border-bottom:1px solid var(--border);
+}
+.q-num{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:1px}
+.q-diff{font-size:10px;font-weight:800;padding:2px 10px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase}
+.diff-e{background:var(--greenPale);color:var(--green)}
+.diff-m{background:var(--amberPale);color:var(--amber)}
+.diff-h{background:var(--redPale);color:var(--red)}
+.q-exam{font-size:11px;color:var(--dim);margin-left:auto;font-weight:600}
+
+.q-body{padding:16px}
+.q-text{font-size:17px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-weight:600}
+
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{
+  background:var(--bg);border:1.5px solid var(--border);
+  border-radius:10px;padding:14px 16px;
+  cursor:pointer;display:flex;align-items:flex-start;gap:12px;
+  font-size:16px;color:var(--ink2);text-align:left;width:100%;
+  transition:all .15s;-webkit-tap-highlight-color:transparent;
+  min-height:48px;line-height:1.6;
+}
+.opt:hover:not(:disabled){border-color:var(--primary);background:var(--primaryPale)}
+.opt:disabled{cursor:default}
+.opt.sel{border-color:var(--primary);background:var(--primaryPale);color:var(--primary)}
+.opt.ok{border-color:var(--green)!important;background:var(--greenPale)!important;color:var(--green)!important}
+.opt.bad{border-color:var(--red)!important;background:var(--redPale)!important;color:var(--red)!important}
+
+.opt-lbl{
+  min-width:28px;height:28px;border-radius:8px;
+  background:var(--bg3);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:800;color:var(--muted);
+  flex-shrink:0;transition:all .15s;
+}
+.opt.sel .opt-lbl{background:var(--primary);color:#fff;border-color:var(--primary)}
+.opt.ok .opt-lbl{background:var(--green);color:#fff;border-color:var(--green)}
+.opt.bad .opt-lbl{background:var(--red);color:#fff;border-color:var(--red)}
+
+.exp-panel{display:none;margin-top:12px;background:var(--bg);border-radius:10px;padding:14px 16px;border:1px solid var(--border)}
+.exp-panel.show{display:block;animation:fadeUp .2s ease}
+.exp-tag{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--primary);margin-bottom:6px}
+.exp-rule{font-size:13px;font-weight:800;color:var(--ink);background:var(--primaryPale);border-radius:6px;padding:6px 10px;margin-bottom:8px;border-left:3px solid var(--primary)}
+.exp-panel p{font-size:15px;color:var(--ink2);line-height:1.8}
+
+.q-foot{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-top:1px solid var(--border);background:var(--bg)}
+.q-status{font-size:12px;font-weight:700}
+
+.btn{
+  padding:12px 24px;border-radius:10px;font-size:14px;font-weight:800;
+  letter-spacing:.5px;border:none;cursor:pointer;transition:all .15s;
+}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:var(--primaryLt)}
+.btn-ghost{background:var(--bg2);color:var(--ink2);border:1.5px solid var(--border)}
+.btn-ghost:hover{background:var(--bg3)}
+
+.quiz-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+
+#results{display:none;background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:20px;box-shadow:var(--shadow-md)}
+.res-hero{text-align:center;padding-bottom:20px;border-bottom:1px solid var(--border);margin-bottom:16px}
+.res-score{font-family:'Lora',serif;font-size:64px;font-weight:700;color:var(--primary);line-height:1}
+.res-grade{font-size:16px;font-weight:800;color:var(--ink);margin:8px 0 6px;letter-spacing:.5px}
+.res-msg{font-size:15px;color:var(--muted)}
+.res-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-kicker">Biology · Lesson B03 · Olive Defence</div>
+  <div class="hero-title">Plant <span>Physiology</span></div>
+  <div class="hero-sub">How plants breathe, feed, move water, grow and respond — the complete functional biology of the plant body. Essential for CDS, NDA & AFCAT.</div>
+  <div class="hero-chips">
+    <span class="chip chip-w">CDS</span>
+    <span class="chip chip-w">NDA</span>
+    <span class="chip chip-w">AFCAT</span>
+    <span class="chip chip-y">Photosynthesis</span>
+    <span class="chip chip-g">Transport</span>
+    <span class="chip chip-y">Hormones</span>
+  </div>
+</div>
+
+<!-- TAB BAR -->
+<div class="tab-bar">
+  <button class="tab on" onclick="switchTab('theory')">📖 Theory</button>
+  <button class="tab" onclick="switchTab('quickref')">⚡ Quick Ref</button>
+  <button class="tab" onclick="switchTab('quiz')">✏️ Quiz</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  THEORY PANE                                              -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="pane on" id="theory">
+
+  <div class="intro-box">
+    <p><strong>Plant Physiology</strong> is the study of the functional processes that occur within plants — how they make food, absorb and transport water and minerals, exchange gases, grow and respond to their environment. These processes are governed by physics, chemistry, and biology all at once.</p>
+  </div>
+
+  <!-- SECTION 1 -->
+  <div class="sec-label">Section 1 — Photosynthesis</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#EAF4E8">☀️</div>
+      <div style="flex:1">
+        <div class="c-title">Photosynthesis — Overview & Equation</div>
+        <div class="c-sub">How plants convert sunlight into food</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p><strong>Photosynthesis</strong> is the process by which green plants (and some algae/bacteria) convert light energy into chemical energy stored as glucose. It takes place in the <strong>chloroplasts</strong>, specifically in the <strong>thylakoid membranes</strong> and <strong>stroma</strong>.</p>
+      <div class="plant-box">
+        <div class="pt-label">Overall Equation</div>
+        <p><strong>6CO₂ + 6H₂O + Light Energy → C₆H₁₂O₆ (Glucose) + 6O₂</strong></p>
+      </div>
+      <div class="fact-box">
+        <div class="fb-label">Key Facts — Frequently Tested</div>
+        <ul>
+          <li>Raw materials: <strong>Carbon dioxide (CO₂)</strong> from air + <strong>Water (H₂O)</strong> from soil</li>
+          <li>Site: <strong>Chloroplast</strong> — the green pigment <strong>chlorophyll</strong> absorbs light</li>
+          <li>Chlorophyll absorbs mainly <strong>red and blue light</strong>; reflects green (that's why leaves look green)</li>
+          <li>O₂ released is a <strong>by-product</strong> — it comes from the splitting of water (<strong>photolysis</strong>)</li>
+          <li>Carbon is fixed from CO₂ into organic compounds (sugars)</li>
+        </ul>
+      </div>
+      <div class="analogy-box">
+        <div class="an-label">Think of it this way</div>
+        <p>A plant is like a <strong>solar-powered factory</strong>. Sunlight is the electricity, CO₂ and water are the raw materials, and glucose is the finished product stored in the warehouse.</p>
+      </div>
+      <div class="trap-box">
+        <div class="tr-label">⚑ Exam Trap</div>
+        <p>The <strong>oxygen released in photosynthesis comes from water (H₂O)</strong>, NOT from CO₂. This is confirmed by isotope labelling experiments (using ¹⁸O). This is one of the most frequently tested misconceptions.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#EAF4E8">🔄</div>
+      <div style="flex:1">
+        <div class="c-title">Light Reactions vs Dark Reactions</div>
+        <div class="c-sub">The two stages of photosynthesis</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>Photosynthesis occurs in <strong>two main stages</strong>:</p>
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Feature</th><th>Light Reactions (Photo-phase)</th><th>Dark Reactions (Thermo-phase / Calvin Cycle)</th></tr>
+          <tr><td>Requires light?</td><td><b>Yes</b> — directly needs light</td><td>Does not directly need light (but depends on products of light reactions)</td></tr>
+          <tr><td>Location</td><td>Thylakoid membranes (grana)</td><td>Stroma of chloroplast</td></tr>
+          <tr><td>What happens</td><td>Water is split (photolysis) → O₂ released, ATP and NADPH formed</td><td>CO₂ is fixed into glucose using ATP and NADPH</td></tr>
+          <tr><td>Products</td><td>ATP, NADPH, O₂</td><td>Glucose (C₆H₁₂O₆), ADP, NADP⁺</td></tr>
+          <tr><td>Key cycle/process</td><td>Photosystems I and II (Z-scheme)</td><td>Calvin Cycle (C3 pathway); discovered by Melvin Calvin</td></tr>
+        </table>
+      </div>
+      <div class="purple-box">
+        <div class="pl-label">C3 vs C4 Plants — Exam Favourite</div>
+        <ul>
+          <li><strong>C3 plants</strong> — first product of CO₂ fixation is a 3-carbon compound (3-PGA). Most common. Examples: wheat, rice, potato, most trees</li>
+          <li><strong>C4 plants</strong> — first product is a 4-carbon compound (OAA). Adapted to hot, dry conditions; more efficient. Examples: maize (corn), sugarcane, sorghum, millets</li>
+          <li><strong>CAM plants</strong> (Crassulacean Acid Metabolism) — fix CO₂ at night (stomata open at night to reduce water loss). Examples: cacti, pineapple, succulents</li>
+        </ul>
+      </div>
+      <div class="trap-box">
+        <div class="tr-label">⚑ Exam Traps</div>
+        <ul>
+          <li>"Dark reactions" does NOT mean they happen only at night — they happen in the light too, just don't directly need light.</li>
+          <li><strong>Maize and sugarcane</strong> are C4 plants — NOT C3. Rice and wheat are C3. This specific comparison is tested.</li>
+          <li>The Calvin cycle was discovered by <strong>Melvin Calvin</strong> — he received the Nobel Prize for this.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#F5EDD8">🌿</div>
+      <div style="flex:1">
+        <div class="c-title">Factors Affecting Photosynthesis</div>
+        <div class="c-sub">Blackman's Law of Limiting Factors</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>The rate of photosynthesis is controlled by several environmental and internal factors. <strong>Blackman's Law of Limiting Factors (1905)</strong> states that when a process is conditioned by several factors, the rate is limited by the factor that is at its minimum.</p>
+      <div class="org-grid">
+        <div class="org-card">
+          <div class="org-name">Light Intensity <span class="org-nick">Key factor</span></div>
+          <p>Rate increases with light intensity up to a <strong>light saturation point</strong>, after which it plateaus.</p>
+        </div>
+        <div class="org-card">
+          <div class="org-name">CO₂ Concentration <span class="org-nick">Most limiting</span></div>
+          <p>CO₂ is the most common limiting factor under natural conditions. Increasing CO₂ boosts rate.</p>
+        </div>
+        <div class="org-card">
+          <div class="org-name">Temperature <span class="org-nick">Optimum 25–35°C</span></div>
+          <p>Affects enzyme-driven dark reactions. Optimum around 25–35°C; too high denatures enzymes.</p>
+        </div>
+        <div class="org-card">
+          <div class="org-name">Water <span class="org-nick">Indirect</span></div>
+          <p>Severe water stress closes stomata (to prevent water loss), limiting CO₂ entry and thus photosynthesis.</p>
+        </div>
+      </div>
+      <div class="rule-box">
+        <div class="rl-label">Compensation Point</div>
+        <p>The <strong>compensation point</strong> is the light intensity at which the rate of photosynthesis exactly equals the rate of respiration. Below this, the plant consumes more O₂ than it produces. Above it, net O₂ is released to the environment.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="sec-label">Section 2 — Respiration in Plants</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#FAEAE6">🔥</div>
+      <div style="flex:1">
+        <div class="c-title">Cellular Respiration</div>
+        <div class="c-sub">How plants release energy from glucose</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p><strong>Respiration</strong> is the process by which living cells break down glucose to release energy in the form of <strong>ATP</strong>. Plants (and ALL living organisms) respire. Unlike photosynthesis, respiration occurs in ALL cells, ALL the time (day and night).</p>
+      <div class="plant-box">
+        <div class="pt-label">Overall Equation (Aerobic Respiration)</div>
+        <p><strong>C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + Energy (38 ATP)</strong></p>
+      </div>
+      <div style="overflow-x:auto;margin-top:14px">
+        <table class="compare-table">
+          <tr><th>Feature</th><th>Aerobic Respiration</th><th>Anaerobic Respiration</th></tr>
+          <tr><td>Oxygen needed?</td><td><b>Yes</b></td><td><b>No</b></td></tr>
+          <tr><td>Location</td><td>Cytoplasm (glycolysis) + Mitochondria</td><td>Cytoplasm only</td></tr>
+          <tr><td>ATP yield</td><td><b>36–38 ATP</b> per glucose</td><td><b>2 ATP</b> per glucose</td></tr>
+          <tr><td>End products</td><td>CO₂ + H₂O</td><td>CO₂ + Ethanol (in plants/yeast) OR Lactic acid (in animals)</td></tr>
+          <tr><td>Examples</td><td>Normal plant and animal cells</td><td>Yeast (fermentation), germinating seeds, waterlogged roots</td></tr>
+        </table>
+      </div>
+      <div class="fact-box">
+        <div class="fb-label">Stages of Aerobic Respiration</div>
+        <ul>
+          <li><strong>Glycolysis</strong> — in cytoplasm; glucose (6C) → 2 pyruvate (3C) + 2 ATP + 2 NADH</li>
+          <li><strong>Krebs Cycle (TCA Cycle)</strong> — in mitochondrial matrix; pyruvate fully oxidised; produces NADH, FADH₂, CO₂, 2 ATP</li>
+          <li><strong>Electron Transport Chain (ETC)</strong> — in inner mitochondrial membrane; uses NADH and FADH₂ to produce bulk of ATP (34 ATP); O₂ is the final electron acceptor → forms H₂O</li>
+        </ul>
+      </div>
+      <div class="trap-box">
+        <div class="tr-label">⚑ Exam Trap</div>
+        <p>Plants carry out <strong>both photosynthesis AND respiration</strong>. During the day, both occur simultaneously. At night, only respiration occurs. The net exchange depends on which process dominates — at the compensation point, they are equal.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="sec-label">Section 3 — Transport in Plants</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E8EFF8">💧</div>
+      <div style="flex:1">
+        <div class="c-title">Osmosis, Diffusion & Active Transport</div>
+        <div class="c-sub">How water and substances move in and out of cells</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Process</th><th>Definition</th><th>Energy needed?</th><th>Example in plants</th></tr>
+          <tr><td><b>Diffusion</b></td><td>Movement of molecules from high to low concentration</td><td>No (passive)</td><td>CO₂ enters leaf through stomata; O₂ exits</td></tr>
+          <tr><td><b>Osmosis</b></td><td>Diffusion of water through a semi-permeable membrane from high water potential to low</td><td>No (passive)</td><td>Water absorption by root hair cells from soil</td></tr>
+          <tr><td><b>Active Transport</b></td><td>Movement from low to high concentration against the gradient</td><td>Yes (ATP)</td><td>Mineral ion absorption by root cells</td></tr>
+        </table>
+      </div>
+      <div class="rule-box">
+        <div class="rl-label">Osmosis — Key Terms</div>
+        <p><strong>Turgid</strong>: cell full of water, firm (ideal state for most plant cells). <strong>Flaccid</strong>: cell has lost water, limp. <strong>Plasmolysis</strong>: cell placed in hypertonic solution → cell membrane pulls away from cell wall (can kill cells). <strong>Turgor pressure</strong>: pressure of cell contents against cell wall — gives rigidity to herbaceous plants (wilting = loss of turgor).</p>
+      </div>
+      <div class="trap-box">
+        <div class="tr-label">⚑ Exam Trap</div>
+        <p><strong>Osmosis</strong> is always about <strong>water movement only</strong>, not solutes. The direction is: water moves from <strong>hypotonic</strong> (dilute, high water potential) to <strong>hypertonic</strong> (concentrated, low water potential) solution. Plant cells in pure water become turgid (not bursting, because cell wall prevents lysis).</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E8EFF8">🌊</div>
+      <div style="flex:1">
+        <div class="c-title">Ascent of Sap — Water Transport in Xylem</div>
+        <div class="c-sub">How water rises against gravity to the top of tall trees</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>Water absorbed by roots must travel up through xylem to leaves — sometimes 100+ metres in tall trees. This upward movement of water is called <strong>Ascent of Sap</strong>.</p>
+      <div class="purple-box">
+        <div class="pl-label">The Cohesion-Tension Theory (Dixon & Joly) — Most Accepted</div>
+        <ul>
+          <li><strong>Transpiration</strong> from leaves creates a pull (tension/negative pressure) at the top</li>
+          <li><strong>Cohesion</strong> — water molecules stick to each other (H-bonds), forming an unbroken water column</li>
+          <li><strong>Adhesion</strong> — water molecules stick to xylem walls, preventing column collapse</li>
+          <li>This creates a continuous water column pulled upward by transpiration pull</li>
+          <li>Also called <strong>TACT</strong> mechanism: Transpiration pull + Adhesion + Cohesion + Tension</li>
+        </ul>
+      </div>
+      <div class="eg-box">
+        <div class="eg-label">Other Forces Contributing to Ascent of Sap</div>
+        <ul>
+          <li><strong>Root pressure</strong> — osmotic pressure generated in roots pushes water upward; effective only in short plants or at night</li>
+          <li><strong>Capillary action</strong> — minor contribution due to narrow xylem vessels</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#EAF4E8">🌬️</div>
+      <div style="flex:1">
+        <div class="c-title">Transpiration</div>
+        <div class="c-sub">The loss of water vapour from plant surfaces</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p><strong>Transpiration</strong> is the evaporation of water from the aerial parts of a plant, mainly through <strong>stomata</strong>. It is sometimes called the <em>"necessary evil"</em> — unavoidable but also essential for water transport.</p>
+      <div class="fact-box">
+        <div class="fb-label">Types of Transpiration</div>
+        <ul>
+          <li><strong>Stomatal transpiration</strong> — through stomata; accounts for <strong>80–90%</strong> of total transpiration</li>
+          <li><strong>Cuticular transpiration</strong> — through the waxy cuticle on leaf surface; 5–10%</li>
+          <li><strong>Lenticular transpiration</strong> — through lenticels on stems; negligible</li>
+        </ul>
+      </div>
+      <div class="fact-box">
+        <div class="fb-label">Factors Affecting Transpiration Rate</div>
+        <ul>
+          <li><strong>Temperature ↑</strong> → transpiration rate ↑ (more evaporation)</li>
+          <li><strong>Humidity ↑</strong> → transpiration rate ↓ (less gradient for evaporation)</li>
+          <li><strong>Wind speed ↑</strong> → transpiration rate ↑ (removes humid air from leaf surface)</li>
+          <li><strong>Light ↑</strong> → stomata open → transpiration ↑</li>
+          <li><strong>Water stress</strong> → stomata close → transpiration ↓</li>
+        </ul>
+      </div>
+      <div class="rule-box">
+        <div class="rl-label">Stomata — Guard Cells & Opening Mechanism</div>
+        <p>Stomata are pores in the leaf epidermis flanked by two <strong>guard cells</strong>. When guard cells are <strong>turgid</strong> (full of water), they bow outward → stomata <strong>open</strong>. When <strong>flaccid</strong>, they collapse → stomata <strong>close</strong>. Light triggers K⁺ ion uptake into guard cells, increasing osmotic pressure, drawing water in → turgidity → opening.</p>
+      </div>
+      <div class="trap-box">
+        <div class="tr-label">⚑ Exam Trap</div>
+        <p>Transpiration serves a <strong>cooling function</strong> (like sweating in animals) AND drives the ascent of sap. However, it also causes <strong>water loss</strong> which is detrimental in dry conditions. <strong>ABA (Abscisic acid)</strong> is the hormone that causes stomata to CLOSE under water stress — frequently tested.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="sec-label">Section 4 — Mineral Nutrition</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#F5EDD8">🌱</div>
+      <div style="flex:1">
+        <div class="c-title">Essential Mineral Elements</div>
+        <div class="c-sub">Macronutrients, Micronutrients & Deficiency Symptoms</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>Plants require <strong>17 essential elements</strong> for normal growth. These are divided into <strong>Macronutrients</strong> (needed in large amounts) and <strong>Micronutrients / Trace elements</strong> (needed in tiny amounts).</p>
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Nutrient</th><th>Element</th><th>Key Role</th><th>Deficiency Symptom</th></tr>
+          <tr><td><b>Macro</b></td><td>Nitrogen (N)</td><td>Proteins, chlorophyll, nucleic acids</td><td>Yellowing of older (lower) leaves — <em>Chlorosis</em></td></tr>
+          <tr><td><b>Macro</b></td><td>Phosphorus (P)</td><td>ATP, DNA, cell membranes</td><td>Purple/reddish leaves, stunted roots</td></tr>
+          <tr><td><b>Macro</b></td><td>Potassium (K)</td><td>Stomatal opening, enzyme activation</td><td>Brown leaf margins, wilting</td></tr>
+          <tr><td><b>Macro</b></td><td>Calcium (Ca)</td><td>Cell wall formation, middle lamella</td><td>Distorted young leaves, blossom end rot</td></tr>
+          <tr><td><b>Macro</b></td><td>Magnesium (Mg)</td><td>Central atom of chlorophyll</td><td>Interveinal chlorosis — yellowing between veins</td></tr>
+          <tr><td><b>Micro</b></td><td>Iron (Fe)</td><td>Chlorophyll synthesis (not part of it)</td><td>Chlorosis of young leaves</td></tr>
+          <tr><td><b>Micro</b></td><td>Boron (B)</td><td>Pollen germination, cell wall</td><td>Death of growing tips — <em>die-back</em></td></tr>
+          <tr><td><b>Micro</b></td><td>Molybdenum (Mo)</td><td>Nitrogen fixation enzyme (nitrogenase)</td><td>Whiptail in cauliflower</td></tr>
+        </table>
+      </div>
+      <div class="trap-box">
+        <div class="tr-label">⚑ Exam Traps — Mineral Nutrition</div>
+        <ul>
+          <li><strong>Magnesium</strong> is the central element of chlorophyll — NOT iron. Iron helps in chlorophyll SYNTHESIS but is not part of the chlorophyll molecule.</li>
+          <li>Nitrogen deficiency shows in <strong>older (lower) leaves first</strong> because N is mobile and moves from old to new leaves.</li>
+          <li>Calcium and boron deficiencies appear in <strong>young/growing parts first</strong> — they are immobile elements.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#EAF4E8">🔬</div>
+      <div style="flex:1">
+        <div class="c-title">Nitrogen Fixation & Nitrogen Cycle</div>
+        <div class="c-sub">How atmospheric N₂ becomes usable for plants</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>Plants cannot use atmospheric nitrogen (N₂) directly. It must be <strong>fixed</strong> — converted to ammonia (NH₃) or nitrates (NO₃⁻) — before plants can absorb it.</p>
+      <div class="eg-box">
+        <div class="eg-label">Nitrogen Fixation — Types & Key Organisms</div>
+        <ul>
+          <li><strong>Biological N-fixation</strong> — most important; by bacteria using enzyme <strong>nitrogenase</strong></li>
+          <li><strong>Rhizobium</strong> — lives in root nodules of legumes (pea, bean, soybean); symbiotic relationship</li>
+          <li><strong>Azotobacter</strong> — free-living in soil (aerobic)</li>
+          <li><strong>Clostridium</strong> — free-living in soil (anaerobic)</li>
+          <li><strong>Nostoc, Anabaena</strong> — cyanobacteria; fix N₂ in paddy fields and aquatic ecosystems</li>
+          <li><strong>Frankia</strong> — fixes N₂ in non-legume plants (e.g., Alnus)</li>
+        </ul>
+      </div>
+      <div class="purple-box">
+        <div class="pl-label">Nitrogen Cycle — Key Steps</div>
+        <ul>
+          <li><strong>Nitrogen Fixation</strong>: N₂ → NH₃ (by bacteria or lightning)</li>
+          <li><strong>Nitrification</strong>: NH₃ → NO₂⁻ → NO₃⁻ (by Nitrosomonas and Nitrobacter bacteria)</li>
+          <li><strong>Assimilation</strong>: plants absorb NO₃⁻, incorporate into proteins</li>
+          <li><strong>Ammonification</strong>: dead organic matter → NH₃ (by decomposers)</li>
+          <li><strong>Denitrification</strong>: NO₃⁻ → N₂ back to atmosphere (by Pseudomonas, Thiobacillus denitrificans)</li>
+        </ul>
+      </div>
+      <div class="trap-box">
+        <div class="tr-label">⚑ Exam Trap</div>
+        <p><strong>Nitrification</strong> (NH₃ → NO₃⁻) and <strong>Denitrification</strong> (NO₃⁻ → N₂) are opposite processes. Confusing these is extremely common. Nitrification = good for plants (makes usable nitrates). Denitrification = reduces soil fertility.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5 -->
+  <div class="sec-label">Section 5 — Plant Growth Regulators (Hormones)</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#F4EDF6">🧪</div>
+      <div style="flex:1">
+        <div class="c-title">Plant Hormones — Overview</div>
+        <div class="c-sub">The 5 major classes and their roles</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p><strong>Plant Growth Regulators (PGRs)</strong> or plant hormones are small organic molecules that coordinate plant growth and development. They act at very low concentrations and may be <strong>promoters</strong> or <strong>inhibitors</strong> of growth.</p>
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Hormone</th><th>Nature</th><th>Key Functions</th><th>Exam-Important Detail</th></tr>
+          <tr><td><b>Auxins (IAA)</b></td><td>Promoter</td><td>Cell elongation, phototropism, apical dominance, root initiation</td><td>Produced at shoot tip; high concentration inhibits lateral bud growth (<em>apical dominance</em>)</td></tr>
+          <tr><td><b>Gibberellins (GA)</b></td><td>Promoter</td><td>Stem elongation, seed germination, breaking dormancy, fruit development</td><td>Cause <em>bolting</em> (sudden stem elongation) in rosette plants; discovered in Gibberella fujikuroi (foolish seedling disease of rice)</td></tr>
+          <tr><td><b>Cytokinins</b></td><td>Promoter</td><td>Cell division (cytokinesis), delay leaf senescence, promote lateral bud growth</td><td>Antagonistic to auxins for lateral bud growth; delay ageing</td></tr>
+          <tr><td><b>Ethylene</b></td><td>Promoter/Inhibitor</td><td>Fruit ripening, abscission (leaf/fruit fall), promotes senescence</td><td>Only <em>gaseous</em> plant hormone; responsible for "one rotten apple spoils the barrel"</td></tr>
+          <tr><td><b>ABA (Abscisic Acid)</b></td><td>Inhibitor</td><td>Stomatal closure under stress, seed dormancy, inhibits growth</td><td>Called the <em>"stress hormone"</em> or <em>"dormin"</em>; causes wilting</td></tr>
+        </table>
+      </div>
+      <div class="fact-box">
+        <div class="fb-label">Memory Tricks — Plant Hormones</div>
+        <ul>
+          <li><strong>A</strong>uxin — <strong>A</strong>pical dominance; <strong>A</strong>llows elongation</li>
+          <li><strong>G</strong>ibberellin — <strong>G</strong>rowth in height; <strong>G</strong>ermination</li>
+          <li><strong>C</strong>ytokinin — <strong>C</strong>ell division; <strong>C</strong>ounters ageing</li>
+          <li><strong>E</strong>thylene — <strong>E</strong>arly ripening; <strong>E</strong>xit (abscission)</li>
+          <li><strong>ABA</strong> — <strong>A</strong>lways <strong>B</strong>locks <strong>A</strong>ction (inhibitor, closes stomata)</li>
+        </ul>
+      </div>
+      <div class="trap-box">
+        <div class="tr-label">⚑ Exam Traps — Hormones</div>
+        <ul>
+          <li>Ethylene is a <strong>gas</strong> — the only gaseous plant hormone. All others are not gaseous.</li>
+          <li><strong>ABA causes stomata to CLOSE</strong> — not open. Never reverse this.</li>
+          <li>Gibberellins discovered in a <strong>fungus</strong> (Gibberella) that caused "bakanae" (foolish seedling disease) in rice — plants grew abnormally tall.</li>
+          <li>Auxin at HIGH concentration <strong>inhibits</strong> lateral roots and shoots but <strong>promotes</strong> root initiation at low concentration.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6 -->
+  <div class="sec-label">Section 6 — Plant Movements & Responses</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#EAF4E8">🌻</div>
+      <div style="flex:1">
+        <div class="c-title">Tropisms & Nastic Movements</div>
+        <div class="c-sub">How plants move and respond to stimuli</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>Plants cannot run from danger, but they <strong>grow and respond</strong> directionally to stimuli. These movements are called <strong>tropic movements (tropisms)</strong> — growth movements controlled by the direction of the stimulus.</p>
+      <div class="org-grid">
+        <div class="org-card">
+          <div class="org-name">Phototropism <span class="org-nick">Light</span></div>
+          <p>Shoots grow <strong>toward light</strong> (positive). Roots grow away (negative). Controlled by <strong>auxin</strong>.</p>
+        </div>
+        <div class="org-card">
+          <div class="org-name">Geotropism <span class="org-nick">Gravity</span></div>
+          <p>Roots grow downward = positive geotropism. Shoots grow upward = negative geotropism.</p>
+        </div>
+        <div class="org-card">
+          <div class="org-name">Thigmotropism <span class="org-nick">Touch</span></div>
+          <p>Climbing plants wrap around supports. Tendrils of pea plants are the classic example.</p>
+        </div>
+        <div class="org-card">
+          <div class="org-name">Hydrotropism <span class="org-nick">Water</span></div>
+          <p>Roots grow toward water — positive hydrotropism. Helps roots find water in soil.</p>
+        </div>
+        <div class="org-card">
+          <div class="org-name">Chemotropism <span class="org-nick">Chemical</span></div>
+          <p>Growth toward or away from a chemical. Example: pollen tube grows toward the ovule.</p>
+        </div>
+        <div class="org-card">
+          <div class="org-name">Nastic Movements <span class="org-nick">Non-directional</span></div>
+          <p>Response NOT related to direction of stimulus. Example: <em>Mimosa pudica</em> (touch-me-not) — leaves fold inward when touched.</p>
+        </div>
+      </div>
+      <div class="rule-box">
+        <div class="rl-label">Photoperiodism & Vernalisation</div>
+        <p><strong>Photoperiodism</strong>: the response of plants to the relative duration of light and dark periods — controls flowering. <strong>Long-day plants</strong> (spinach, radish) flower with long days. <strong>Short-day plants</strong> (rice, soybean, chrysanthemum) flower with short days. <strong>Day-neutral plants</strong> (tomato, sunflower) flower regardless. <strong>Vernalisation</strong>: exposure to prolonged cold temperature promotes flowering (e.g., wheat, rye).</p>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /theory -->
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  QUICK REFERENCE PANE                                     -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="pane" id="quickref">
+  <div class="ref-grid">
+
+    <div class="ref-card">
+      <div class="ref-card-title">Photosynthesis — Must-Know Facts</div>
+      <ul>
+        <li><b>Equation:</b> 6CO₂ + 6H₂O + Light → C₆H₁₂O₆ + 6O₂</li>
+        <li>O₂ released comes from <em>water (H₂O)</em>, not CO₂</li>
+        <li>Light reactions → thylakoid; Dark reactions (Calvin) → stroma</li>
+        <li><b>C3 plants:</b> rice, wheat, potato · <b>C4:</b> maize, sugarcane, sorghum</li>
+        <li>CAM plants open stomata <em>at night</em> (cacti, pineapple)</li>
+        <li>Chlorophyll absorbs <em>red + blue</em> light; reflects green</li>
+        <li>Blackman's Law: rate limited by the factor at minimum</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Respiration — Key Points</div>
+      <ul>
+        <li><b>Aerobic:</b> C₆H₁₂O₆ + 6O₂ → 6CO₂ + 6H₂O + <em>38 ATP</em></li>
+        <li><b>Anaerobic:</b> glucose → CO₂ + ethanol (plants/yeast) + <em>2 ATP</em></li>
+        <li>Glycolysis → cytoplasm · Krebs cycle → mitochondrial matrix</li>
+        <li>ETC → inner mitochondrial membrane; O₂ = final electron acceptor</li>
+        <li>Plants respire ALL the time (day + night)</li>
+        <li>Compensation point = photosynthesis rate = respiration rate</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Water Transport & Transpiration</div>
+      <ul>
+        <li>Osmosis = water movement through semi-permeable membrane</li>
+        <li>Active transport needs ATP; moves against concentration gradient</li>
+        <li>Ascent of sap: <em>Cohesion-Tension theory</em> (Dixon & Joly) — TACT</li>
+        <li>Root pressure = minor force; effective in short plants / at night</li>
+        <li>80–90% transpiration through <em>stomata</em></li>
+        <li>Guard cells turgid → stomata open · flaccid → closed</li>
+        <li><em>ABA</em> causes stomata closure under drought stress</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Plant Hormones — Quick Table</div>
+      <ul>
+        <li><b>Auxin (IAA)</b> — elongation, apical dominance, phototropism</li>
+        <li><b>Gibberellin</b> — height, germination, bolting; from fungus Gibberella</li>
+        <li><b>Cytokinin</b> — cell division, delays senescence, lateral buds</li>
+        <li><b>Ethylene</b> — fruit ripening, abscission; only <em>gaseous</em> hormone</li>
+        <li><b>ABA</b> — stress hormone; closes stomata; seed dormancy</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Nitrogen & Mineral Nutrition</div>
+      <ul>
+        <li>Mg = central atom of <em>chlorophyll</em> · Fe = needed for chlorophyll synthesis</li>
+        <li>N deficiency → chlorosis (older leaves first — N is mobile)</li>
+        <li>Ca, B deficiency → young/growing parts first (immobile)</li>
+        <li><b>Rhizobium</b> — symbiotic in legume root nodules</li>
+        <li><b>Azotobacter</b> — free-living, aerobic · <b>Clostridium</b> — anaerobic</li>
+        <li>Nitrification (NH₃→NO₃⁻): Nitrosomonas + Nitrobacter</li>
+        <li>Denitrification (NO₃⁻→N₂): Pseudomonas, Thiobacillus</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Tropisms & Responses</div>
+      <ul>
+        <li><b>Phototropism</b> — light; shoot = positive; controlled by auxin</li>
+        <li><b>Geotropism</b> — gravity; root = positive (downward)</li>
+        <li><b>Thigmotropism</b> — touch; climbing plants, tendrils</li>
+        <li><b>Nastic</b> — non-directional; Mimosa (touch-me-not) folds</li>
+        <li>Long-day plants: spinach, radish · Short-day: rice, soybean</li>
+        <li><b>Vernalisation</b> — cold exposure promotes flowering (wheat, rye)</li>
+      </ul>
+    </div>
+
+  </div>
+</div><!-- /quickref -->
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!--  QUIZ PANE                                                -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="pane" id="quiz">
+
+  <div class="quiz-stats">
+    <div class="qs-cell"><div class="qs-val" id="s-att">0</div><div class="qs-lbl">Attempted</div></div>
+    <div class="qs-cell"><div class="qs-val g" id="s-cor">0</div><div class="qs-lbl">Correct</div></div>
+    <div class="qs-cell"><div class="qs-val r" id="s-wrg">0</div><div class="qs-lbl">Wrong</div></div>
+    <div class="qs-cell"><div class="qs-val a" id="s-tot">15</div><div class="qs-lbl">Total</div></div>
+  </div>
+
+  <div class="prog-wrap">
+    <div class="prog-label" id="prog-label">0 of 15 answered</div>
+    <div class="prog-bar"><div class="prog-fill" id="prog"></div></div>
+  </div>
+
+  <div class="quiz-actions">
+    <button class="btn btn-primary" onclick="submitAll()">Submit All &amp; Check</button>
+    <button class="btn btn-ghost" onclick="resetQuiz()">↺ Reset Quiz</button>
+  </div>
+
+  <div id="results"></div>
+  <div id="q-area"></div>
+
+</div><!-- /quiz -->
+
+</div><!-- /page -->
+
+<script>
+const QS = [
+
+{d:'EASY',e:'NDA 2023',
+q:'Which pigment is primarily responsible for capturing light energy during photosynthesis?',
+opts:['Carotene','Xanthophyll','Chlorophyll','Anthocyanin'],ans:2,
+rule:'Chlorophyll = primary photosynthetic pigment; absorbs red and blue light',
+exp:'Chlorophyll is the primary pigment that captures light energy for photosynthesis. It is found in chloroplasts and absorbs mainly red and blue wavelengths of light, while reflecting green (which is why leaves appear green). Carotene and xanthophyll are accessory pigments that transfer energy to chlorophyll but do not directly drive photosynthesis. Anthocyanin is a pigment responsible for red/purple colours in flowers and fruits, not photosynthesis.'},
+
+{d:'EASY',e:'CDS 2022',
+q:'In photosynthesis, the oxygen (O₂) released as a by-product comes from:',
+opts:['Carbon dioxide (CO₂)','Water (H₂O)','Glucose','Atmospheric oxygen'],ans:1,
+rule:'O₂ in photosynthesis comes from photolysis of water (H₂O), NOT CO₂',
+exp:'The oxygen released during photosynthesis comes from the splitting of water molecules (H₂O) in a process called photolysis, which occurs during the light reactions. This was confirmed using isotope labelling experiments with heavy oxygen (¹⁸O). CO₂ donates its carbon to form glucose in the dark reactions; the oxygen in CO₂ does NOT become the released O₂. This is one of the most commonly tested misconceptions in biology.'},
+
+{d:'EASY',e:'AFCAT 2023',
+q:'Which of the following is the ONLY gaseous plant hormone?',
+opts:['Auxin','Gibberellin','Cytokinin','Ethylene'],ans:3,
+rule:'Ethylene = only gaseous plant hormone; responsible for fruit ripening',
+exp:'Ethylene (C₂H₄) is the only plant hormone that is a gas at room temperature. It plays a key role in fruit ripening, leaf and fruit abscission (falling), and promotes senescence. All other plant hormones (auxins, gibberellins, cytokinins, ABA) are non-gaseous organic molecules. The phrase "one rotten apple spoils the barrel" refers to the fact that a ripe/rotting apple releases ethylene gas, which triggers ripening in surrounding fruits.'},
+
+{d:'EASY',e:'CDS 2023',
+q:'Which bacteria is responsible for nitrogen fixation in the root nodules of leguminous plants?',
+opts:['Nitrosomonas','Rhizobium','Pseudomonas','Azotobacter'],ans:1,
+rule:'Rhizobium = symbiotic N-fixing bacteria in legume root nodules',
+exp:'Rhizobium is a symbiotic nitrogen-fixing bacterium that lives in the root nodules of leguminous plants (pea, soybean, chickpea, etc.). It converts atmospheric nitrogen (N₂) into ammonia (NH₃) using the enzyme nitrogenase. This is one of the most important biological nitrogen fixation relationships. Nitrosomonas converts NH₃ to NO₂⁻ (nitrification). Pseudomonas is a denitrifying bacterium. Azotobacter is a free-living (non-symbiotic) nitrogen fixer in the soil.'},
+
+{d:'EASY',e:'NDA 2022',
+q:'The movement of water from a region of high water concentration to low water concentration through a semi-permeable membrane is called:',
+opts:['Diffusion','Active transport','Osmosis','Plasmolysis'],ans:2,
+rule:'Osmosis = passive movement of water through a semi-permeable membrane',
+exp:'Osmosis is the passive diffusion of water molecules through a selectively (semi-) permeable membrane from a region of high water potential (dilute/hypotonic solution) to a region of low water potential (concentrated/hypertonic solution). No energy (ATP) is required. Diffusion is the general movement of any molecules from high to low concentration. Active transport requires ATP and moves molecules against the concentration gradient. Plasmolysis is what happens when a plant cell loses water and the plasma membrane shrinks away from the cell wall.'},
+
+{d:'MEDIUM',e:'CDS 2023',
+q:'Which of the following plants follows the C4 pathway of photosynthesis?',
+opts:['Rice','Wheat','Sugarcane','Potato'],ans:2,
+rule:'C4 plants: sugarcane, maize, sorghum, millets — C3: rice, wheat, potato',
+exp:'C4 plants fix CO₂ into a 4-carbon compound (oxaloacetate/OAA) as the first stable product. C4 plants are more efficient in hot, bright, dry conditions. Sugarcane and maize are the most commonly cited C4 plants. Rice, wheat, and potato are C3 plants (first stable product is a 3-carbon compound, 3-PGA). This distinction is frequently tested, especially the contrast between rice (C3) and sugarcane (C4).'},
+
+{d:'MEDIUM',e:'AFCAT 2022',
+q:'The plant hormone responsible for causing stomatal closure under water stress conditions is:',
+opts:['Auxin','Gibberellin','Ethylene','Abscisic Acid (ABA)'],ans:3,
+rule:'ABA = stress hormone → causes stomata to CLOSE under water stress',
+exp:'Abscisic Acid (ABA) is called the "stress hormone" because it is produced in large amounts when plants are under water stress. ABA triggers a signal cascade in guard cells that causes K⁺ ions to leave, reducing osmotic pressure, leading to water loss from guard cells and stomatal closure. This reduces transpiration and conserves water. Auxin causes elongation. Gibberellins promote growth and germination. Ethylene causes ripening and abscission.'},
+
+{d:'MEDIUM',e:'NDA 2023',
+q:'The "foolish seedling disease" (Bakanae disease) of rice, where plants grow abnormally tall, led to the discovery of which plant hormone?',
+opts:['Auxin','Cytokinin','Gibberellin','ABA'],ans:2,
+rule:'Gibberellin discovered from Gibberella fujikuroi — causes "bakanae" in rice',
+exp:'Gibberellins were discovered by Japanese scientists studying "bakanae" (foolish seedling disease) of rice. The fungus Gibberella fujikuroi caused rice seedlings to grow abnormally tall and spindly. The substance causing this excessive growth was isolated and named gibberellin. Gibberellins are now known to promote stem elongation, seed germination, fruit development, and "bolting" (sudden stem elongation in rosette plants). Auxin was discovered earlier by Went in oat coleoptile experiments.'},
+
+{d:'MEDIUM',e:'CDS 2024',
+q:'During the light reactions of photosynthesis, water molecules are split in a process called photolysis. What are the direct products of this splitting?',
+opts:[
+  'CO₂ and ATP',
+  'O₂, H⁺ (protons) and electrons',
+  'Glucose and H₂O',
+  'NADPH and CO₂'
+],ans:1,
+rule:'Photolysis of water: H₂O → O₂ + H⁺ + electrons (used in ETC)',
+exp:'During the light reactions, water molecules are split by light energy in the process of photolysis: 2H₂O → O₂ + 4H⁺ + 4e⁻. The oxygen is released as a by-product (what we breathe). The protons (H⁺) and electrons are used to reduce NADP⁺ to NADPH, and the electrons pass through the electron transport chain to generate ATP. This is why O₂ comes from water, not CO₂.'},
+
+{d:'MEDIUM',e:'AFCAT 2024',
+q:'Which of the following describes APICAL DOMINANCE in plants?',
+opts:[
+  'The root tip grows faster than the shoot tip',
+  'The presence of the apical bud suppresses the growth of lateral buds',
+  'Leaves at the apex grow larger than lower leaves',
+  'The apex of the plant bends toward light'
+],ans:1,
+rule:'Apical dominance = apical (terminal) bud suppresses lateral bud growth via auxin',
+exp:'Apical dominance is the phenomenon where the apical (terminal/top) bud of a plant produces auxin, which diffuses downward and suppresses the growth of lateral (side) buds. This keeps the plant growing primarily upward. Gardeners exploit this knowledge — removing the apical bud (pinching/pruning) removes the source of auxin, releasing lateral buds from inhibition, leading to bushier growth. This is why pruned plants grow outward more than unpruned ones.'},
+
+{d:'MEDIUM',e:'NDA 2024',
+q:'In the nitrogen cycle, which bacteria is responsible for converting nitrates (NO₃⁻) back to atmospheric nitrogen (N₂)?',
+opts:['Nitrosomonas','Rhizobium','Pseudomonas (denitrifying bacteria)','Azotobacter'],ans:2,
+rule:'Denitrification (NO₃⁻ → N₂): Pseudomonas, Thiobacillus denitrificans',
+exp:'Denitrification is the process by which nitrates (NO₃⁻) in the soil are converted back to atmospheric nitrogen gas (N₂) by bacteria under anaerobic conditions. The key denitrifying bacteria are Pseudomonas and Thiobacillus denitrificans. This process reduces soil fertility. Nitrosomonas converts NH₃ to NO₂⁻ (nitrification step 1). Rhizobium fixes N₂ into NH₃ (nitrogen fixation). Azotobacter is also a nitrogen-fixer, not a denitrifier.'},
+
+{d:'HARD',e:'CDS 2024',
+q:'The Cohesion-Tension theory explains the ascent of sap in tall plants. Which of the following is the PRIMARY driving force in this theory?',
+opts:[
+  'Root pressure generated by osmosis in root cells',
+  'Capillary action due to narrow xylem vessels',
+  'Transpiration pull creating negative pressure (tension) in xylem',
+  'Active pumping of water by xylem parenchyma cells'
+],ans:2,
+rule:'Cohesion-Tension theory: transpiration pull at leaves = primary driving force',
+exp:'In the Cohesion-Tension (CT) theory proposed by Dixon and Joly, the primary driving force is TRANSPIRATION PULL — as water evaporates from leaf cells into air spaces and exits through stomata, it creates a negative pressure (tension) at the top of the xylem column. Because water molecules are strongly cohesive (stick to each other via hydrogen bonds) and adhesive (stick to xylem walls), this tension pulls the entire water column upward. Root pressure is a minor secondary force effective only in shorter plants or at night when transpiration is low.'},
+
+{d:'HARD',e:'NDA 2024',
+q:'A student tests two leaf samples — one from a paddy (rice) plant and one from maize plant — for the presence of bundle sheath cells around vascular bundles. What result would she find, and what does this indicate?',
+opts:[
+  'Both plants have bundle sheath cells — both are C4 plants',
+  'Only rice has bundle sheath cells — rice is a C3 plant',
+  'Only maize has prominent bundle sheath cells — maize is a C4 plant with Kranz anatomy',
+  'Neither plant has bundle sheath cells — both are C3 plants'
+],ans:2,
+rule:'C4 plants (maize) have Kranz anatomy — prominent bundle sheath cells; C3 (rice) do not',
+exp:'C4 plants like maize have a characteristic leaf structure called KRANZ ANATOMY (German for wreath/crown) in which vascular bundles are surrounded by a prominent ring of bundle sheath cells. The initial CO₂ fixation into C4 compounds happens in mesophyll cells, and the C4 acids are then shuttled to bundle sheath cells where the Calvin cycle occurs. This concentrates CO₂ around RuBisCO, preventing photorespiration and making C4 plants more efficient. Rice is a C3 plant and lacks well-developed bundle sheath cells. This is a very high-level UPSC question.'},
+
+{d:'HARD',e:'AFCAT 2024',
+q:'Photoperiodism controls flowering in plants. Which of the following plants is correctly classified?',
+opts:[
+  'Rice is a long-day plant; spinach is a short-day plant',
+  'Chrysanthemum is a long-day plant; wheat is a short-day plant',
+  'Spinach is a long-day plant; rice and chrysanthemum are short-day plants',
+  'Tomato is a short-day plant; soybean is a long-day plant'
+],ans:2,
+rule:'Long-day: spinach, radish, wheat · Short-day: rice, soybean, chrysanthemum · Neutral: tomato',
+exp:'Photoperiodism classifies plants by their flowering response to day length (actually the length of darkness): LONG-DAY plants (spinach, radish, wheat, barley, sugar beet) require short nights / long days to flower. SHORT-DAY plants (rice, soybean, chrysanthemum, tobacco) require long nights / short days to flower. DAY-NEUTRAL plants (tomato, sunflower, maize) flower regardless of day length. Option C is correct: spinach is long-day; rice and chrysanthemum are both short-day plants. This is a favourite trick question.'},
+
+{d:'HARD',e:'CDS 2024',
+q:'A plant shows the following symptoms: yellowing begins in older (lower) leaves while younger leaves remain green; growth is stunted. Which nutrient is most likely deficient?',
+opts:['Calcium','Boron','Iron','Nitrogen'],ans:3,
+rule:'N deficiency: chlorosis starts in older leaves first (N is mobile — redistributed to younger growth)',
+exp:'Nitrogen deficiency is identified by chlorosis (yellowing) starting in OLDER leaves first. This is because nitrogen is a MOBILE element — when it is scarce, the plant remobilises N from older (expendable) leaves to younger, actively growing tissues. Calcium and Boron are IMMOBILE elements, so their deficiencies appear in YOUNG leaves and growing tips first. Iron deficiency also causes chlorosis but it appears in YOUNG leaves because iron is also relatively immobile. The combination of chlorosis in older leaves + stunted growth = classic nitrogen deficiency.'},
+
+];
+
+// ── ENGINE ─────────────────────────────────────────────────────────────────
+const answers  = new Array(QS.length).fill(null);
+const revealed = new Array(QS.length).fill(false);
+const LABS = ['A','B','C','D'];
+
+function build(){
+  const area = document.getElementById('q-area');
+  area.innerHTML = '';
+  QS.forEach((q,i)=>{
+    const dc = q.d==='EASY'?'diff-e':q.d==='MEDIUM'?'diff-m':'diff-h';
+    const div = document.createElement('div');
+    div.className='q-card'; div.id=`qc${i}`;
+    div.innerHTML=`
+      <div class="q-meta">
+        <span class="q-num">Q.${String(i+1).padStart(2,'0')}</span>
+        <span class="q-diff ${dc}">${q.d}</span>
+        <span class="q-exam">${q.e}</span>
+      </div>
+      <div class="q-body">
+        <div class="q-text">${q.q}</div>
+        <div class="opts" id="opts${i}">
+          ${q.opts.map((o,j)=>`
+            <button class="opt" id="o${i}_${j}" onclick="pick(${i},${j})">
+              <span class="opt-lbl">${LABS[j]}</span>${o}
+            </button>`).join('')}
+        </div>
+        <div class="exp-panel" id="ex${i}">
+          <div class="exp-tag">Explanation</div>
+          <div class="exp-rule">${q.rule}</div>
+          <p>${q.exp}</p>
+        </div>
+      </div>
+      <div class="q-foot">
+        <span style="font-size:11px;color:var(--dim);font-weight:700">Biology · B03</span>
+        <span id="ai${i}" class="q-status">—</span>
+      </div>`;
+    area.appendChild(div);
+  });
+}
+
+function pick(qi,oi){
+  if(revealed[qi]) return;
+  answers[qi]=oi;
+  document.querySelectorAll(`#opts${qi} .opt`).forEach((b,j)=>{
+    b.classList.remove('sel');
+    if(j===oi) b.classList.add('sel');
+  });
+  document.getElementById(`qc${qi}`).classList.add('answered');
+  const ai=document.getElementById(`ai${qi}`);
+  ai.textContent=`Selected: ${LABS[oi]}`;
+  ai.style.color='var(--primary)';
+  updateStats();
+}
+
+function updateStats(){
+  const att=answers.filter(a=>a!==null).length;
+  document.getElementById('s-att').textContent=att;
+  document.getElementById('prog').style.width=(att/QS.length*100)+'%';
+  document.getElementById('prog-label').textContent=`${att} of ${QS.length} answered`;
+  let c=0,w=0;
+  answers.forEach((a,i)=>{ if(a===null)return; if(a===QS[i].ans)c++; else w++; });
+  document.getElementById('s-cor').textContent=c;
+  document.getElementById('s-wrg').textContent=w;
+}
+
+function submitAll(){
+  let cor=0,wrg=0,skp=0;
+  QS.forEach((q,i)=>{
+    revealed[i]=true;
+    const opts=document.querySelectorAll(`#opts${i} .opt`);
+    opts.forEach(b=>{b.disabled=true;b.classList.remove('sel')});
+    opts[q.ans].classList.add('ok');
+    if(answers[i]!==null && answers[i]!==q.ans) opts[answers[i]].classList.add('bad');
+    document.getElementById(`ex${i}`).classList.add('show');
+    const ai=document.getElementById(`ai${i}`);
+    const card=document.getElementById(`qc${i}`);
+    card.classList.remove('answered');
+    if(answers[i]===null){skp++;ai.textContent='Skipped';ai.style.color='var(--dim)';}
+    else if(answers[i]===q.ans){cor++;card.classList.add('correct');ai.textContent='✓ Correct';ai.style.color='var(--green)';}
+    else{wrg++;card.classList.add('wrong');ai.textContent='✗ Wrong';ai.style.color='var(--red)';}
+  });
+  updateStats();
+  showResults(cor,wrg,skp);
+}
+
+function showResults(cor,wrg,skp){
+  const pct=Math.round(cor/QS.length*100);
+  let grade,msg;
+  if(pct>=88){grade='Excellent';msg='Outstanding! You have mastered Plant Physiology.'}
+  else if(pct>=70){grade='Good';msg='Well done. Review the questions you got wrong.'}
+  else if(pct>=50){grade='Average';msg='Good start. Revisit the theory cards and try again.'}
+  else{grade='Needs Work';msg="Don't worry — go through the Quick Ref and try again."}
+  const res=document.getElementById('results');
+  res.innerHTML=`
+    <div class="res-hero">
+      <div class="res-score">${cor}<span style="font-size:36px;opacity:.5">/${QS.length}</span></div>
+      <div class="res-grade">${grade} · ${pct}%</div>
+      <div class="res-msg">${msg}</div>
+    </div>
+    <div class="res-stats">
+      <div class="qs-cell"><div class="qs-val g">${cor}</div><div class="qs-lbl">Correct</div></div>
+      <div class="qs-cell"><div class="qs-val r">${wrg}</div><div class="qs-lbl">Wrong</div></div>
+      <div class="qs-cell"><div class="qs-val a">${skp}</div><div class="qs-lbl">Skipped</div></div>
+      <div class="qs-cell"><div class="qs-val">${pct}%</div><div class="qs-lbl">Score</div></div>
+    </div>
+    <div style="text-align:center;margin:16px 0">
+      <button class="btn btn-ghost" onclick="document.getElementById('q-area').scrollIntoView({behavior:'smooth'})">📖 Review All Answers</button>
+    </div>`;
+  res.style.display='block';
+  res.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function resetQuiz(){
+  answers.fill(null); revealed.fill(false);
+  build();
+  document.getElementById('results').style.display='none';
+  document.getElementById('results').innerHTML='';
+  ['s-att','s-cor','s-wrg'].forEach(id=>document.getElementById(id).textContent='0');
+  document.getElementById('prog').style.width='0%';
+  document.getElementById('prog-label').textContent=`0 of ${QS.length} answered`;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function switchTab(id){
+  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  const idx={theory:0,quickref:1,quiz:2}[id];
+  document.querySelectorAll('.tab')[idx].classList.add('on');
+}
+
+function tog(hd){
+  const bd=hd.nextElementSibling;
+  const isOpen=bd.classList.contains('open');
+  bd.classList.toggle('open',!isOpen);
+  hd.classList.toggle('open',!isOpen);
+}
+
+build();
+</script>
+</body>
+</html>

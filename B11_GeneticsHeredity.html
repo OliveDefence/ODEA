@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B11 · Genetics &amp; Heredity | Olive Defence</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+
+:root{
+  /* ── THEME B11: Deep Forest-Emerald + Sage Green — genetic, precise ── */
+  --bg:        #EBF2EE;
+  --bg2:       #DDEAE2;
+  --bg3:       #CCDDD4;
+  --white:     #F5FAF7;
+  --ink:       #081A0E;
+  --ink2:      #102018;
+  --muted:     #3A6650;
+  --dim:       #789E8A;
+  --border:    #AECEBE;
+
+  --primary:      #0D5C38;
+  --primaryLt:    #147A4A;
+  --primaryPale:  #E2F4EC;
+
+  --amber:        #7A5A08;
+  --amberLt:      #9E7210;
+  --amberPale:    #FBF2DC;
+
+  --green:        #145C20;
+  --greenLt:      #1A7828;
+  --greenPale:    #E0F2E4;
+
+  --red:          #881A1A;
+  --redLt:        #AE2020;
+  --redPale:      #FAECEC;
+
+  --blue:         #1A3870;
+  --bluePale:     #E4EDF8;
+
+  --purple:       #581270;
+  --purplePale:   #F0E8F8;
+
+  --teal:         #0A4848;
+  --tealPale:     #DCF0F0;
+
+  --radius:    12px;
+  --shadow:    0 2px 12px rgba(8,26,14,.09);
+  --shadow-md: 0 4px 20px rgba(8,26,14,.14);
+}
+
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--ink);font-size:17px;line-height:1.75;min-height:100vh}
+.page{max-width:680px;margin:0 auto;padding:0 16px 80px}
+
+/* ── HERO ─────────────────────────────────────────────────────── */
+.hero{
+  background:linear-gradient(135deg,#020E06 0%,#0D5C38 52%,#187848 100%);
+  margin:0 -16px;padding:28px 20px 26px;position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 78% 18%,rgba(140,255,180,.09) 0%,transparent 55%),
+    radial-gradient(ellipse at 8% 82%,rgba(80,200,140,.06) 0%,transparent 50%);
+  pointer-events:none;
+}
+/* DNA helix dots pattern */
+.hero::after{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(circle,rgba(255,255,255,.05) 1px,transparent 1px);
+  background-size:24px 24px;
+  pointer-events:none;
+}
+.hero-kicker{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.50);margin-bottom:8px;display:flex;align-items:center;gap:8px;position:relative;z-index:1}
+.hero-kicker::before{content:'';width:18px;height:2px;background:rgba(255,255,255,.28)}
+.hero-title{font-family:'Lora',serif;font-size:clamp(24px,5.5vw,34px);font-weight:700;color:#fff;line-height:1.2;margin-bottom:10px;position:relative;z-index:1}
+.hero-title span{color:#A8FFCC;font-style:italic}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.66);margin-bottom:18px;line-height:1.65;position:relative;z-index:1}
+.hero-chips{display:flex;flex-wrap:wrap;gap:7px;position:relative;z-index:1}
+.chip{font-size:11px;font-weight:700;letter-spacing:1px;padding:4px 12px;border-radius:20px;text-transform:uppercase}
+.chip-w{background:rgba(255,255,255,.12);color:rgba(255,255,255,.88)}
+.chip-g{background:rgba(168,255,204,.18);color:#A8FFCC}
+.chip-y{background:rgba(255,228,140,.14);color:#FFE48C}
+
+/* ── TAB BAR ─────────────────────────────────────────────────── */
+.tab-bar{position:sticky;top:0;z-index:50;background:var(--white);border-bottom:2px solid var(--border);margin:0 -16px;display:flex;overflow-x:auto;box-shadow:0 2px 8px rgba(8,26,14,.07);-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.tab-bar::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;padding:14px 18px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);border:none;background:transparent;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;white-space:nowrap}
+.tab:hover{color:var(--ink);background:var(--bg)}
+.tab.on{color:var(--primary);border-bottom-color:var(--primary)}
+
+/* ── PANES ───────────────────────────────────────────────────── */
+.pane{display:none;padding-top:24px;animation:fadeUp .3s ease}
+.pane.on{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ── SECTION LABEL ───────────────────────────────────────────── */
+.sec-label{font-size:10px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--primary);margin:28px 0 12px;display:flex;align-items:center;gap:10px}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* ── INTRO BOX ───────────────────────────────────────────────── */
+.intro-box{background:var(--primaryPale);border:1.5px solid rgba(13,92,56,.20);border-radius:var(--radius);padding:20px;margin-bottom:8px}
+.intro-box p{font-size:16px;color:var(--ink2);line-height:1.8}
+.intro-box strong{color:var(--primary)}
+
+/* ── CONCEPT CARDS ───────────────────────────────────────────── */
+.c-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;box-shadow:var(--shadow);overflow:hidden}
+.c-head{display:flex;align-items:center;gap:12px;padding:16px 18px;cursor:pointer;border-left:4px solid transparent;transition:all .15s;-webkit-tap-highlight-color:transparent}
+.c-head:hover,.c-head.open{background:var(--bg);border-left-color:var(--primary)}
+.c-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.c-title{font-size:17px;font-weight:700;color:var(--ink);flex:1}
+.c-sub{font-size:12px;color:var(--dim);font-weight:600;margin-top:2px}
+.c-arrow{font-size:12px;color:var(--dim);transition:transform .2s;flex-shrink:0}
+.c-head.open .c-arrow{transform:rotate(180deg)}
+.c-body{display:none;padding:4px 18px 20px;border-top:1px solid var(--border)}
+.c-body.open{display:block;animation:fadeUp .2s ease}
+.c-body p{font-size:16px;color:var(--ink2);line-height:1.85;margin-bottom:12px}
+.c-body p:last-child{margin-bottom:0}
+.c-body strong{color:var(--primary);font-weight:700}
+.c-body em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* ── CONTENT BLOCKS ──────────────────────────────────────────── */
+.fact-box{background:var(--amberPale);border:1.5px solid rgba(122,90,8,.22);border-radius:10px;padding:16px 18px;margin:14px 0}
+.fact-box .fb-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--amber);text-transform:uppercase;margin-bottom:8px}
+.fact-box ul{list-style:none;padding:0}
+.fact-box li{font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;position:relative;line-height:1.7}
+.fact-box li::before{content:'→';position:absolute;left:0;color:var(--amber);font-weight:700;font-size:13px}
+
+.eg-box{background:var(--greenPale);border-left:4px solid var(--green);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.eg-box .eg-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--green);text-transform:uppercase;margin-bottom:6px}
+.eg-box ul{list-style:none;padding:0}
+.eg-box li{font-size:15px;color:var(--ink2);padding:4px 0 4px 18px;position:relative;line-height:1.65}
+.eg-box li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:800;font-size:12px}
+.eg-box p{font-size:15px;color:var(--ink2);line-height:1.75}
+
+.trap-box{background:var(--redPale);border:1.5px solid rgba(136,26,26,.20);border-radius:10px;padding:16px 18px;margin:14px 0}
+.trap-box .tr-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--red);text-transform:uppercase;margin-bottom:8px}
+.trap-box p,.trap-box li{font-size:15.5px;color:var(--ink2);line-height:1.75}
+.trap-box ul{list-style:none;padding:0}
+.trap-box li{padding:5px 0 5px 22px;position:relative}
+.trap-box li::before{content:'⚑';position:absolute;left:0;font-size:12px;color:var(--red)}
+
+.rule-box{background:var(--bluePale);border:1.5px solid rgba(26,56,112,.17);border-radius:10px;padding:16px 18px;margin:14px 0}
+.rule-box .rl-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--blue);text-transform:uppercase;margin-bottom:8px}
+.rule-box p{font-size:15.5px;color:var(--ink2);line-height:1.8}
+.rule-box strong{color:var(--blue)}
+
+.purple-box{background:var(--purplePale);border:1.5px solid rgba(88,18,112,.17);border-radius:10px;padding:16px 18px;margin:14px 0}
+.purple-box .pl-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--purple);text-transform:uppercase;margin-bottom:8px}
+.purple-box ul{list-style:none;padding:0}
+.purple-box li{font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;position:relative;line-height:1.8}
+.purple-box li::before{content:'◆';position:absolute;left:0;font-size:9px;color:var(--purple);top:10px}
+
+.analogy-box{background:var(--primaryPale);border-left:4px solid var(--primary);border-radius:0 8px 8px 0;padding:14px 16px;margin:12px 0}
+.analogy-box .an-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--primary);text-transform:uppercase;margin-bottom:6px}
+.analogy-box p{font-size:15.5px;color:var(--ink2);line-height:1.75}
+.analogy-box strong{color:var(--primary)}
+
+/* Punnett square */
+.punnett-wrap{margin:16px 0;overflow-x:auto}
+.punnett{border-collapse:collapse;font-size:15px;min-width:260px}
+.punnett th{background:var(--primary);color:#fff;padding:10px 18px;font-weight:800;font-size:14px;border:2px solid var(--primary)}
+.punnett td{padding:12px 18px;border:2px solid var(--border);text-align:center;font-weight:700;font-size:15px;background:var(--white)}
+.punnett td.dom{color:var(--primary)}
+.punnett td.rec{color:var(--red)}
+.punnett td.het{color:var(--amber)}
+
+/* journey strip */
+.journey{margin:16px 0;display:flex;flex-direction:column}
+.j-step{display:flex;align-items:stretch;gap:14px}
+.j-line{display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:28px}
+.j-dot{width:28px;height:28px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;margin-top:2px}
+.j-connector{width:2px;flex:1;background:var(--border);margin:2px 0}
+.j-step:last-child .j-connector{display:none}
+.j-content{padding:2px 0 18px;flex:1}
+.j-title{font-size:15px;font-weight:800;color:var(--ink);margin-bottom:3px}
+.j-desc{font-size:14.5px;color:var(--ink2);line-height:1.7}
+.j-desc strong{color:var(--primary)}
+.j-desc em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* stat band */
+.stat-band{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border-radius:var(--radius);overflow:hidden;margin:16px 0}
+.stat-cell{background:var(--white);padding:12px 8px;text-align:center}
+.stat-val{font-family:'Lora',serif;font-size:16px;font-weight:700;color:var(--primary);line-height:1;margin-bottom:4px}
+.stat-lbl{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:.4px;line-height:1.3}
+
+.compare-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
+.compare-table th{background:var(--primary);color:#fff;padding:10px 12px;text-align:left;font-size:13px;font-weight:700;letter-spacing:.5px}
+.compare-table td{padding:10px 12px;border:1px solid var(--border);color:var(--ink2);vertical-align:top;line-height:1.65}
+.compare-table tr:nth-child(even) td{background:var(--bg)}
+.compare-table td b{color:var(--primary)}
+.compare-table td em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* ratio badges */
+.ratio-strip{display:flex;gap:8px;margin:12px 0;flex-wrap:wrap}
+.ratio-badge{background:var(--primary);color:#fff;border-radius:8px;padding:8px 14px;font-size:13px;font-weight:800;text-align:center;flex:1;min-width:100px}
+.ratio-badge .rb-ratio{font-family:'Lora',serif;font-size:20px;display:block;margin-bottom:2px}
+.ratio-badge .rb-label{font-size:11px;opacity:.85;letter-spacing:.5px}
+.ratio-badge.amber{background:var(--amber)}
+.ratio-badge.blue{background:var(--blue)}
+.ratio-badge.purple{background:var(--purple)}
+
+/* ── QUICK REFERENCE ─────────────────────────────────────────── */
+.ref-grid{display:grid;gap:10px;margin:8px 0}
+.ref-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+.ref-card-title{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--primary);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.ref-card ul{list-style:none;padding:0}
+.ref-card li{font-size:15px;color:var(--ink2);padding:5px 0 5px 16px;position:relative;line-height:1.65;border-bottom:1px solid var(--bg2)}
+.ref-card li:last-child{border-bottom:none}
+.ref-card li::before{content:'·';position:absolute;left:4px;color:var(--primary);font-weight:900;font-size:18px;line-height:1.3}
+.ref-card li b{color:var(--ink);font-weight:700}
+.ref-card li em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* ── QUIZ ────────────────────────────────────────────────────── */
+.quiz-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:16px;box-shadow:var(--shadow)}
+.qs-cell{background:var(--white);padding:12px 8px;text-align:center}
+.qs-val{font-family:'Lora',serif;font-size:22px;font-weight:700;color:var(--primary);line-height:1}
+.qs-val.g{color:var(--green)}.qs-val.r{color:var(--red)}.qs-val.a{color:var(--amber)}
+.qs-lbl{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:1px;margin-top:4px;text-transform:uppercase}
+.prog-wrap{margin-bottom:20px}
+.prog-bar{height:6px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;background:var(--primary);border-radius:3px;transition:width .4s ease;width:0%}
+.prog-label{font-size:12px;color:var(--muted);font-weight:700;margin-bottom:6px}
+.q-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:12px;box-shadow:var(--shadow);overflow:hidden;border-left:4px solid transparent;transition:border-color .15s}
+.q-card.answered{border-left-color:var(--primary)}
+.q-card.correct{border-left-color:var(--green)}
+.q-card.wrong{border-left-color:var(--red)}
+.q-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 16px;background:var(--bg);border-bottom:1px solid var(--border)}
+.q-num{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:1px}
+.q-diff{font-size:10px;font-weight:800;padding:2px 10px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase}
+.diff-e{background:var(--greenPale);color:var(--green)}
+.diff-m{background:var(--amberPale);color:var(--amber)}
+.diff-h{background:var(--redPale);color:var(--red)}
+.q-exam{font-size:11px;color:var(--dim);margin-left:auto;font-weight:600}
+.q-body{padding:16px}
+.q-text{font-size:17px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:14px 16px;cursor:pointer;display:flex;align-items:flex-start;gap:12px;font-size:16px;color:var(--ink2);text-align:left;width:100%;transition:all .15s;-webkit-tap-highlight-color:transparent;min-height:48px;line-height:1.6}
+.opt:hover:not(:disabled){border-color:var(--primary);background:var(--primaryPale)}
+.opt:disabled{cursor:default}
+.opt.sel{border-color:var(--primary);background:var(--primaryPale);color:var(--primary)}
+.opt.ok{border-color:var(--green)!important;background:var(--greenPale)!important;color:var(--green)!important}
+.opt.bad{border-color:var(--red)!important;background:var(--redPale)!important;color:var(--red)!important}
+.opt-lbl{min-width:28px;height:28px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--muted);flex-shrink:0;transition:all .15s}
+.opt.sel .opt-lbl{background:var(--primary);color:#fff;border-color:var(--primary)}
+.opt.ok .opt-lbl{background:var(--green);color:#fff;border-color:var(--green)}
+.opt.bad .opt-lbl{background:var(--red);color:#fff;border-color:var(--red)}
+.exp-panel{display:none;margin-top:12px;background:var(--bg);border-radius:10px;padding:14px 16px;border:1px solid var(--border)}
+.exp-panel.show{display:block;animation:fadeUp .2s ease}
+.exp-tag{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--primary);margin-bottom:6px}
+.exp-rule{font-size:13px;font-weight:800;color:var(--ink);background:var(--primaryPale);border-radius:6px;padding:6px 10px;margin-bottom:8px;border-left:3px solid var(--primary)}
+.exp-panel p{font-size:15px;color:var(--ink2);line-height:1.8}
+.q-foot{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-top:1px solid var(--border);background:var(--bg)}
+.q-status{font-size:12px;font-weight:700}
+.btn{padding:12px 24px;border-radius:10px;font-size:14px;font-weight:800;letter-spacing:.5px;border:none;cursor:pointer;transition:all .15s}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:var(--primaryLt)}
+.btn-ghost{background:var(--bg2);color:var(--ink2);border:1.5px solid var(--border)}
+.btn-ghost:hover{background:var(--bg3)}
+.quiz-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+#results{display:none;background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:20px;box-shadow:var(--shadow-md)}
+.res-hero{text-align:center;padding-bottom:20px;border-bottom:1px solid var(--border);margin-bottom:16px}
+.res-score{font-family:'Lora',serif;font-size:64px;font-weight:700;color:var(--primary);line-height:1}
+.res-grade{font-size:16px;font-weight:800;color:var(--ink);margin:8px 0 6px;letter-spacing:.5px}
+.res-msg{font-size:15px;color:var(--muted)}
+.res-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-kicker">Biology · Lesson B11 · Olive Defence</div>
+  <div class="hero-title">Genetics &amp; <span>Heredity</span></div>
+  <div class="hero-sub">Mendel's laws, monohybrid &amp; dihybrid crosses, DNA structure, mutations, sex-linked inheritance, blood groups, chromosomal disorders and molecular genetics — at CDS, NDA &amp; AFCAT exam depth.</div>
+  <div class="hero-chips">
+    <span class="chip chip-w">CDS</span>
+    <span class="chip chip-w">NDA</span>
+    <span class="chip chip-w">AFCAT</span>
+    <span class="chip chip-g">Mendel</span>
+    <span class="chip chip-y">DNA</span>
+    <span class="chip chip-g">Inheritance</span>
+  </div>
+</div>
+
+<!-- TAB BAR -->
+<div class="tab-bar">
+  <button class="tab on" onclick="switchTab('theory')">📖 Theory</button>
+  <button class="tab" onclick="switchTab('quickref')">⚡ Quick Ref</button>
+  <button class="tab" onclick="switchTab('quiz')">✏️ Quiz</button>
+</div>
+
+<!-- ══════════════════════════ THEORY ═══════════════════════════ -->
+<div class="pane on" id="theory">
+
+  <div class="intro-box">
+    <p><strong>Genetics</strong> is the science of heredity and variation — how traits are passed from parents to offspring. <strong>Gregor Johann Mendel</strong> (1822–1884), an Augustinian monk working with garden peas (<em>Pisum sativum</em>), discovered the fundamental laws of inheritance through meticulous experimentation. His work, published in 1866, was rediscovered in 1900 and forms the foundation of modern genetics.</p>
+  </div>
+
+  <!-- SECTION 1 -->
+  <div class="sec-label">Section 1 — Mendel's Experiments &amp; Laws</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E2F4EC">🌿</div>
+      <div style="flex:1">
+        <div class="c-title">Why Mendel Succeeded — His Experimental Design</div>
+        <div class="c-sub">Choice of organism, seven traits and true-breeding lines</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>Mendel chose <em>Pisum sativum</em> (garden pea) for excellent reasons: short generation time, easy cultivation, naturally self-fertilising (could control crosses), large number of offspring (good statistics), and crucially — <strong>seven pairs of contrasting traits</strong> that happened to be on different chromosomes (independent assortment).</p>
+
+      <div class="fact-box">
+        <div class="fb-label">Mendel's Seven Traits in Pea Plants</div>
+        <ul>
+          <li><strong>Seed shape</strong> — Round (dominant) vs Wrinkled (recessive)</li>
+          <li><strong>Seed colour</strong> — Yellow (dominant) vs Green (recessive)</li>
+          <li><strong>Seed coat colour</strong> — Grey/coloured (dominant) vs White (recessive)</li>
+          <li><strong>Pod shape</strong> — Inflated (dominant) vs Constricted (recessive)</li>
+          <li><strong>Pod colour</strong> — Green (dominant) vs Yellow (recessive)</li>
+          <li><strong>Flower position</strong> — Axial/along stem (dominant) vs Terminal/at tip (recessive)</li>
+          <li><strong>Plant height</strong> — Tall (dominant) vs Dwarf/short (recessive)</li>
+        </ul>
+      </div>
+
+      <div class="rule-box">
+        <div class="rl-label">Key Genetic Terminology</div>
+        <p><strong>Gene</strong> — unit of heredity; segment of DNA coding for a trait. <strong>Allele</strong> — alternative forms of a gene (e.g., T for tall, t for dwarf). <strong>Locus</strong> — specific position of a gene on a chromosome. <strong>Homozygous</strong> — both alleles identical (TT or tt). <strong>Heterozygous</strong> — two different alleles (Tt). <strong>Dominant</strong> — allele expressed in heterozygote (T). <strong>Recessive</strong> — allele masked in heterozygote, expressed only in homozygous state (tt). <strong>Genotype</strong> — genetic makeup (TT, Tt, tt). <strong>Phenotype</strong> — observable/expressed trait (Tall or Dwarf). <strong>F₁</strong> — first filial generation. <strong>F₂</strong> — second filial generation. <strong>P</strong> — parental generation.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E2F4EC">⚖️</div>
+      <div style="flex:1">
+        <div class="c-title">Law of Segregation — Monohybrid Cross</div>
+        <div class="c-sub">Mendel's First Law — 3:1 phenotypic ratio in F₂</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p><strong>Law of Segregation</strong> (Mendel's First Law): During gamete formation, the two alleles of a gene <strong>separate (segregate)</strong> so that each gamete receives only one allele. The alleles reunite randomly at fertilisation.</p>
+
+      <div class="analogy-box">
+        <div class="an-label">Think of it this way</div>
+        <p>Imagine you have a pair of socks — one red, one blue. When you "make gametes," you can only put ONE sock in each bag. Each gamete carries only <strong>one allele</strong>, never a pair. At fertilisation, two gametes combine → the offspring gets a pair again.</p>
+      </div>
+
+      <p>Cross: <strong>Tall (TT) × Dwarf (tt)</strong></p>
+      <p>P generation: TT × tt → all F₁ gametes are T from tall parent and t from dwarf parent → <strong>F₁ = all Tt (Tall)</strong> — dominant trait expressed.</p>
+      <p>F₁ × F₁: <strong>Tt × Tt</strong> → Punnett square:</p>
+
+      <div class="punnett-wrap">
+        <table class="punnett">
+          <tr><th></th><th>T (gamete)</th><th>t (gamete)</th></tr>
+          <tr><th>T (gamete)</th><td class="dom">TT (Tall)</td><td class="het">Tt (Tall)</td></tr>
+          <tr><th>t (gamete)</th><td class="het">Tt (Tall)</td><td class="rec">tt (Dwarf)</td></tr>
+        </table>
+      </div>
+
+      <div class="ratio-strip">
+        <div class="ratio-badge"><span class="rb-ratio">3:1</span><span class="rb-label">Phenotypic ratio (F₂)</span></div>
+        <div class="ratio-badge amber"><span class="rb-ratio">1:2:1</span><span class="rb-label">Genotypic ratio (TT:Tt:tt)</span></div>
+        <div class="ratio-badge blue"><span class="rb-ratio">75%</span><span class="rb-label">Dominant phenotype</span></div>
+        <div class="ratio-badge purple"><span class="rb-ratio">25%</span><span class="rb-label">Recessive phenotype</span></div>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Test Cross — Detecting Hidden Recessives</div>
+        <p>A <strong>test cross</strong> crosses an individual of unknown genotype (tall — either TT or Tt) with a <strong>homozygous recessive</strong> (tt). If all offspring are Tall → parent was TT. If offspring are 50% Tall : 50% Dwarf → parent was Tt. Test crosses are fundamental to breeding programmes and genetics experiments.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E2F4EC">🔀</div>
+      <div style="flex:1">
+        <div class="c-title">Law of Independent Assortment — Dihybrid Cross</div>
+        <div class="c-sub">Mendel's Second Law — 9:3:3:1 ratio in F₂</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p><strong>Law of Independent Assortment</strong> (Mendel's Second Law): Genes for different traits <strong>assort independently</strong> of one another during gamete formation — provided they are on different chromosomes (non-linked).</p>
+
+      <p>Cross: <strong>Round Yellow (RRYY) × Wrinkled Green (rryy)</strong></p>
+      <p>F₁ = all RrYy (Round Yellow) — both dominant traits expressed. F₁ × F₁ → F₂ has 16 combinations (4 gamete types × 4 gamete types).</p>
+
+      <div class="ratio-strip">
+        <div class="ratio-badge"><span class="rb-ratio">9</span><span class="rb-label">Round Yellow (R_Y_)</span></div>
+        <div class="ratio-badge amber"><span class="rb-ratio">3</span><span class="rb-label">Round Green (R_yy)</span></div>
+        <div class="ratio-badge blue"><span class="rb-ratio">3</span><span class="rb-label">Wrinkled Yellow (rrY_)</span></div>
+        <div class="ratio-badge purple"><span class="rb-ratio">1</span><span class="rb-label">Wrinkled Green (rryy)</span></div>
+      </div>
+
+      <div class="fact-box">
+        <div class="fb-label">F₁ Dihybrid Gametes — 4 Types (FOIL method)</div>
+        <ul>
+          <li>RY — Round Yellow (9/16)</li>
+          <li>Ry — Round Green (3/16)</li>
+          <li>rY — Wrinkled Yellow (3/16)</li>
+          <li>ry — Wrinkled Green (1/16)</li>
+        </ul>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ When Independent Assortment FAILS — Linkage</div>
+        <ul>
+          <li>Mendel's second law only applies to genes on <strong>different chromosomes</strong> (or far apart on the same chromosome).</li>
+          <li>When two genes are on the <strong>same chromosome</strong>, they are <strong>linked</strong> and tend to be inherited together — they do NOT assort independently.</li>
+          <li><strong>Thomas Hunt Morgan</strong> discovered gene linkage and sex-linked inheritance using <em>Drosophila melanogaster</em> (fruit fly) — Nobel Prize 1933.</li>
+          <li><strong>Crossing over</strong> (recombination) during meiosis I can separate linked genes → recombinant offspring.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="sec-label">Section 2 — Exceptions to Mendel's Laws</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E2F4EC">🔬</div>
+      <div style="flex:1">
+        <div class="c-title">Incomplete Dominance, Codominance &amp; Epistasis</div>
+        <div class="c-sub">When 3:1 ratios break down</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Phenomenon</th><th>Definition</th><th>Example</th><th>F₂ Ratio</th></tr>
+          <tr><td><b>Complete Dominance</b></td><td>Dominant allele completely masks recessive allele in heterozygote</td><td>Tall/dwarf in pea plants</td><td>3:1 phenotypic</td></tr>
+          <tr><td><b>Incomplete Dominance</b></td><td>Neither allele completely dominant; heterozygote is intermediate between two homozygotes</td><td>Snapdragon flower colour: Red (RR) × White (rr) → Pink (Rr) in F₁; F₂ = 1 Red : 2 Pink : 1 White</td><td><em>1:2:1</em> (phenotypic = genotypic)</td></tr>
+          <tr><td><b>Codominance</b></td><td>Both alleles are fully expressed simultaneously in heterozygote; neither masks the other</td><td>ABO blood group: I^A I^B → Blood group AB (both A and B antigens expressed)</td><td>Variable</td></tr>
+          <tr><td><b>Multiple Alleles</b></td><td>Gene has more than two alleles in the population (though individual only carries two)</td><td>ABO blood group system: I^A, I^B, i — three alleles</td><td>Variable</td></tr>
+          <tr><td><b>Epistasis</b></td><td>One gene masks/modifies expression of another gene at a different locus</td><td>Coat colour in Labrador dogs; combs in poultry; albinism in some organisms</td><td>9:3:4 or 9:7 or 12:3:1 etc.</td></tr>
+          <tr><td><b>Pleiotropy</b></td><td>A single gene affects multiple phenotypic traits</td><td>Sickle cell anaemia gene — affects RBC shape, anaemia, organ damage; PKU gene affects multiple metabolic pathways</td><td>—</td></tr>
+        </table>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Incomplete Dominance vs Codominance — Critical Distinction</div>
+        <ul>
+          <li><strong>Incomplete dominance</strong> — blending; heterozygote has <em>intermediate</em> phenotype (pink flower = blend of red and white pigment). Pink is a NEW phenotype not seen in either parent.</li>
+          <li><strong>Codominance</strong> — BOTH parental phenotypes expressed <em>simultaneously</em>; no blending. Blood group AB expresses BOTH A AND B antigens — not some new intermediate antigen. A roan horse has both red and white hairs (not pink hairs).</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="sec-label">Section 3 — DNA Structure &amp; Molecular Genetics</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E4EDF8">🧬</div>
+      <div style="flex:1">
+        <div class="c-title">DNA — Structure, Replication &amp; the Genetic Code</div>
+        <div class="c-sub">Watson-Crick double helix, base pairing and central dogma</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p><strong>DNA (Deoxyribonucleic Acid)</strong> is the hereditary material in most organisms. Its structure was elucidated by <strong>James Watson and Francis Crick</strong> in 1953 (using X-ray crystallography data from <strong>Rosalind Franklin</strong>). Nobel Prize 1962: Watson, Crick and Maurice Wilkins.</p>
+
+      <div class="stat-band">
+        <div class="stat-cell"><div class="stat-val">1953</div><div class="stat-lbl">DNA structure by Watson &amp; Crick</div></div>
+        <div class="stat-cell"><div class="stat-val">46</div><div class="stat-lbl">Human chromosomes (23 pairs)</div></div>
+        <div class="stat-cell"><div class="stat-val">~3 billion</div><div class="stat-lbl">Base pairs in human genome</div></div>
+        <div class="stat-cell"><div class="stat-val">~20,000–25,000</div><div class="stat-lbl">Human protein-coding genes</div></div>
+      </div>
+
+      <div class="fact-box">
+        <div class="fb-label">DNA Structure — Key Points</div>
+        <ul>
+          <li><strong>Double helix</strong> — two antiparallel strands wound around each other; backbone = deoxyribose sugar + phosphate; rungs = nitrogenous base pairs</li>
+          <li><strong>Nitrogenous bases</strong>: Purines (<strong>A</strong>denine, <strong>G</strong>uanine — double ring); Pyrimidines (<strong>T</strong>hymine, <strong>C</strong>ytosine — single ring)</li>
+          <li><strong>Chargaff's Rules</strong>: A always pairs with T (2 hydrogen bonds); G always pairs with C (3 hydrogen bonds). Therefore: %A = %T and %G = %C in any double-stranded DNA</li>
+          <li><strong>Antiparallel</strong>: one strand runs 5'→3', the complementary strand runs 3'→5'</li>
+          <li><strong>RNA vs DNA</strong>: RNA uses <strong>Uracil (U)</strong> instead of Thymine (T); RNA has ribose sugar (not deoxyribose); RNA is usually single-stranded</li>
+        </ul>
+      </div>
+
+      <div class="rule-box">
+        <div class="rl-label">Central Dogma of Molecular Biology (Francis Crick, 1958)</div>
+        <p><strong>DNA → RNA → Protein</strong></p>
+        <p><strong>Transcription</strong>: DNA used as template to make mRNA (messenger RNA); occurs in nucleus; enzyme = RNA polymerase. <strong>Translation</strong>: mRNA decoded by ribosomes in cytoplasm to assemble amino acids into protein; tRNA brings amino acids; codon (3 bases on mRNA) = 1 amino acid. <strong>Reverse Transcription</strong>: RNA → DNA; done by <strong>reverse transcriptase</strong> enzyme (in retroviruses like HIV). Note: protein sequence CANNOT be reverse-translated back to DNA — information flow is one-way in normal cells.</p>
+      </div>
+
+      <div class="purple-box">
+        <div class="pl-label">Genetic Code — Key Facts</div>
+        <ul>
+          <li>A <strong>codon</strong> = 3 nucleotides on mRNA; codes for one amino acid</li>
+          <li>Total codons: 4³ = <strong>64 codons</strong>; only 20 amino acids → code is <strong>degenerate</strong> (multiple codons per amino acid)</li>
+          <li><strong>Start codon</strong>: AUG (codes for Methionine — starts translation)</li>
+          <li><strong>Stop codons</strong>: UAA, UAG, UGA (terminate translation; no amino acid)</li>
+          <li>Code is <strong>universal</strong> — same codons code for same amino acids in virtually all organisms (from bacteria to humans)</li>
+          <li>Code is <strong>non-overlapping</strong> and <strong>comma-free</strong> — read sequentially without gaps</li>
+        </ul>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ DNA Replication — Semi-Conservative</div>
+        <ul>
+          <li>DNA replication is <strong>semi-conservative</strong> — each new DNA molecule contains one original (template) strand and one newly synthesised strand. Proved by Meselson &amp; Stahl (1958) using ¹⁵N/¹⁴N labelling in <em>E. coli</em>.</li>
+          <li>Enzyme: <strong>DNA polymerase</strong> synthesises new strand; can only add nucleotides in 5'→3' direction. Also requires a short RNA primer.</li>
+          <li><strong>Helicase</strong> unwinds the double helix; <strong>ligase</strong> joins Okazaki fragments on the lagging strand.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="sec-label">Section 4 — Sex-Linked Inheritance</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#F0E8F8">🔗</div>
+      <div style="flex:1">
+        <div class="c-title">Sex Chromosomes &amp; X-Linked Disorders</div>
+        <div class="c-sub">Colour blindness, haemophilia and why males are more affected</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>Humans have <strong>46 chromosomes (23 pairs)</strong>: 22 pairs of <strong>autosomes</strong> and 1 pair of <strong>sex chromosomes</strong>. Females = <strong>XX</strong>; Males = <strong>XY</strong>. The Y chromosome is much smaller and carries very few genes (mainly SRY). Genes on the X chromosome that have no corresponding allele on Y are called <strong>X-linked</strong>.</p>
+
+      <div class="analogy-box">
+        <div class="an-label">Why Males are More Affected by X-linked Recessive Disorders</div>
+        <p>Females (XX) have <strong>two copies</strong> of every X-linked gene — if one X has a faulty allele, the healthy allele on the other X can compensate (carrier female). Males (XY) have <strong>only one X</strong> — if that X carries the faulty allele, there is no back-up → disease expressed. Males are called <strong>hemizygous</strong> for X-linked genes.</p>
+      </div>
+
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Disorder</th><th>Inheritance</th><th>Gene / Defect</th><th>Affected</th><th>Key Facts</th></tr>
+          <tr><td><b>Red-Green Colour Blindness</b></td><td>X-linked recessive</td><td>Opsin pigment genes on X chromosome</td><td>~8% males; ~0.5% females</td><td>Cannot distinguish red from green. Females can be carriers (X^N X^cb). Karl Dalton — first described; also called Daltonism.</td></tr>
+          <tr><td><b>Haemophilia A</b></td><td>X-linked recessive</td><td>Factor VIII gene on X chromosome</td><td>Males (~1 in 5,000)</td><td>Blood clotting deficiency; prolonged bleeding. Queen Victoria was a carrier — affected her royal descendants (Alexei Romanov). Treated with Factor VIII replacement.</td></tr>
+          <tr><td><b>Haemophilia B (Christmas disease)</b></td><td>X-linked recessive</td><td>Factor IX gene on X chromosome</td><td>Males (~1 in 30,000)</td><td>Rarer than Haemophilia A. Same clinical presentation.</td></tr>
+          <tr><td><b>Duchenne Muscular Dystrophy (DMD)</b></td><td>X-linked recessive</td><td>Dystrophin gene (largest known human gene) on X chromosome</td><td>Males (~1 in 3,500)</td><td>Progressive muscle weakness from childhood. Absent/non-functional dystrophin. Most die before 30.</td></tr>
+          <tr><td><b>Baldness (pattern)</b></td><td>Autosomal; sex-influenced</td><td>Androgens influence expression</td><td>More common in males</td><td>NOT X-linked; autosomal gene whose expression is influenced by testosterone levels.</td></tr>
+        </table>
+      </div>
+
+      <div class="eg-box">
+        <div class="eg-label">Carrier Female Cross — Colour Blindness</div>
+        <p>Carrier mother (X^N X^cb) × Normal father (X^N Y):</p>
+        <div class="punnett-wrap">
+          <table class="punnett" style="font-size:13px">
+            <tr><th></th><th>X^N</th><th>Y</th></tr>
+            <tr><th>X^N</th><td class="dom">X^N X^N (Normal female)</td><td class="dom">X^N Y (Normal male)</td></tr>
+            <tr><th>X^cb</th><td class="het">X^N X^cb (Carrier female)</td><td class="rec">X^cb Y (Colour blind male)</td></tr>
+          </table>
+        </div>
+        <p style="margin-top:8px;font-size:14.5px;color:var(--ink2)">Result: 50% sons affected; daughters not affected but 50% are carriers. A colour-blind daughter can only result if the father is colour blind AND the mother is at least a carrier.</p>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ X-Linked Inheritance Exam Traps</div>
+        <ul>
+          <li>Affected father CANNOT pass X-linked recessive disorder to his sons (sons get Y from father, not X). He passes the X^cb to ALL daughters (who become carriers).</li>
+          <li>An affected male gets the disorder from his <strong>carrier mother</strong> (who is phenotypically normal).</li>
+          <li>A colour-blind female must have been born to a colour-blind father AND a carrier/affected mother — both X chromosomes must carry the cb allele.</li>
+          <li><strong>Y-linked (holandric) inheritance</strong>: only males affected; passed from father to ALL sons (e.g., hairy pinna in some populations).</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5 -->
+  <div class="sec-label">Section 5 — ABO Blood Groups &amp; Rh Factor</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#FAECEC">🩸</div>
+      <div style="flex:1">
+        <div class="c-title">ABO Blood Groups, Rh Factor &amp; Genetics</div>
+        <div class="c-sub">Codominance, multiple alleles and transfusion compatibility</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Blood Group</th><th>Genotype(s)</th><th>Antigens on RBC</th><th>Antibodies in Plasma</th><th>Can Donate To</th><th>Can Receive From</th></tr>
+          <tr><td><b>A</b></td><td>I^A I^A or I^A i</td><td>A antigen</td><td>Anti-B</td><td>A, AB</td><td>A, O</td></tr>
+          <tr><td><b>B</b></td><td>I^B I^B or I^B i</td><td>B antigen</td><td>Anti-A</td><td>B, AB</td><td>B, O</td></tr>
+          <tr><td><b>AB</b></td><td>I^A I^B</td><td>Both A and B</td><td>Neither (no antibodies)</td><td>AB only</td><td>A, B, AB, O — <b>Universal Recipient</b></td></tr>
+          <tr><td><b>O</b></td><td>ii</td><td>Neither A nor B</td><td>Both Anti-A and Anti-B</td><td>A, B, AB, O — <b>Universal Donor</b></td><td>O only</td></tr>
+        </table>
+      </div>
+
+      <div class="fact-box">
+        <div class="fb-label">ABO Genetics — Codominance &amp; Multiple Alleles</div>
+        <ul>
+          <li>ABO is controlled by a <strong>single gene</strong> with <strong>three alleles</strong>: I^A, I^B and i (multiple allelism)</li>
+          <li>I^A and I^B are <strong>codominant</strong> — both expressed equally in AB individuals</li>
+          <li>i is <strong>recessive</strong> to both I^A and I^B; only expressed in homozygous state (ii = Group O)</li>
+          <li>Discovered by <strong>Karl Landsteiner</strong> — Nobel Prize 1930</li>
+          <li>Group O (ii) = <strong>Universal Donor</strong> for packed RBCs (no antigens to cause reaction), but O plasma contains BOTH anti-A and anti-B antibodies</li>
+          <li>Group AB = <strong>Universal Recipient</strong> (no antibodies in plasma to attack donor's RBCs)</li>
+        </ul>
+      </div>
+
+      <div class="rule-box">
+        <div class="rl-label">Rh Blood Group System</div>
+        <p>The <strong>Rh factor</strong> (Rhesus factor) is a separate antigen on RBCs, controlled by the RHD gene. <strong>Rh+ (Rh positive)</strong> — RhD antigen present (dominant, ~85% of people). <strong>Rh− (Rh negative)</strong> — no RhD antigen (recessive, ~15%). Unlike ABO, Rh− individuals do not naturally have anti-Rh antibodies — they develop them only after exposure to Rh+ blood. Critical in pregnancy: <strong>Erythroblastosis Foetalis (Haemolytic Disease of the Newborn)</strong> — Rh− mother + Rh+ foetus: first pregnancy usually safe (initial sensitisation only); second Rh+ pregnancy → maternal anti-Rh IgG crosses placenta → attacks foetal RBCs → severe haemolytic anaemia, jaundice, even death. Prevented by administering <strong>Anti-D immunoglobulin (RhoGAM)</strong> to Rh− mother within 72 hours of delivery.</p>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Blood Group Exam Traps</div>
+        <ul>
+          <li>Blood group O is the <strong>Universal Donor for packed RBCs</strong> but NOT for whole blood or plasma (O plasma has both antibodies).</li>
+          <li>AB is the <strong>Universal Recipient</strong> for RBCs but AB plasma is universal donor (no antibodies).</li>
+          <li>Blood group is determined by <strong>antigens on RBCs</strong> — NOT antibodies in plasma.</li>
+          <li>A child with blood group O (ii) cannot have a parent who is I^A I^A (pure AA) or I^B I^B (pure BB) — at least one parent must carry the 'i' allele.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6 -->
+  <div class="sec-label">Section 6 — Chromosomal &amp; Gene Mutations</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E2F4EC">⚠️</div>
+      <div style="flex:1">
+        <div class="c-title">Mutations — Gene &amp; Chromosomal Disorders</div>
+        <div class="c-sub">Down's syndrome, Turner's, Klinefelter's and point mutations</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>A <strong>mutation</strong> is a heritable change in the DNA sequence or chromosome number/structure. Mutations can be spontaneous or caused by <strong>mutagens</strong> (UV radiation, X-rays, chemicals like benzene).</p>
+
+      <div class="fact-box">
+        <div class="fb-label">Types of Gene (Point) Mutations</div>
+        <ul>
+          <li><strong>Substitution</strong> — one base replaced by another. If in coding region → may change amino acid (missense mutation) or create stop codon (nonsense mutation). Example: <em>Sickle Cell Anaemia</em> — single base change in codon 6 of beta-globin gene (GAG → GTG) → glutamic acid replaced by valine → HbS (sickle haemoglobin)</li>
+          <li><strong>Insertion</strong> — extra base(s) added → shifts reading frame (frameshift mutation) → completely altered protein</li>
+          <li><strong>Deletion</strong> — base(s) removed → also causes frameshift mutation</li>
+          <li><strong>Silent mutation</strong> — base change does NOT alter amino acid (due to degeneracy of genetic code) → no effect on protein</li>
+        </ul>
+      </div>
+
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Disorder</th><th>Chromosomal Basis</th><th>Karyotype</th><th>Key Features</th></tr>
+          <tr><td><b>Down's Syndrome</b> (Trisomy 21)</td><td>Extra chromosome 21 (non-disjunction usually during maternal meiosis I)</td><td>47, +21</td><td>Intellectual disability; flat facial features; almond eyes; single palmar crease; heart defects; risk increases with maternal age. Most common chromosomal disorder in live births.</td></tr>
+          <tr><td><b>Turner's Syndrome</b></td><td>Missing X chromosome in females (45,X); non-disjunction</td><td>45, X (monosomy X)</td><td>Short stature; webbed neck; shield-shaped chest; primary amenorrhoea; infertility; no secondary sexual development. Phenotypically female.</td></tr>
+          <tr><td><b>Klinefelter's Syndrome</b></td><td>Extra X in males (XXY); non-disjunction</td><td>47, XXY</td><td>Tall; gynecomastia (breast development); small testes; infertility; reduced body/facial hair. Phenotypically male.</td></tr>
+          <tr><td><b>Edwards' Syndrome</b> (Trisomy 18)</td><td>Extra chromosome 18</td><td>47, +18</td><td>Severe intellectual disability; multiple organ defects; most survive only weeks. Second most common autosomal trisomy.</td></tr>
+          <tr><td><b>Patau's Syndrome</b> (Trisomy 13)</td><td>Extra chromosome 13</td><td>47, +13</td><td>Cleft lip/palate; eye defects; heart defects; most survive only days to weeks.</td></tr>
+        </table>
+      </div>
+
+      <div class="purple-box">
+        <div class="pl-label">Sickle Cell Anaemia — Genetics &amp; Biology</div>
+        <ul>
+          <li>Caused by <strong>point mutation</strong> in the <em>HBB</em> gene (beta-globin): GAG → GUG (codon 6); glutamic acid → valine</li>
+          <li><strong>Autosomal recessive</strong>: heterozygotes (HbA/HbS) are carriers — have <em>sickle cell trait</em> (largely normal but partial protection against malaria)</li>
+          <li>Homozygous affected (HbS/HbS): RBCs sickle in low O₂ → block capillaries → pain crises, organ damage, stroke, anaemia</li>
+          <li>High frequency in malaria-endemic regions (Africa, India) — <strong>balanced polymorphism</strong>: heterozygotes have selective advantage against <em>Plasmodium falciparum</em></li>
+        </ul>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Non-Disjunction — Chromosomal Number Errors</div>
+        <ul>
+          <li><strong>Non-disjunction</strong> = failure of chromosomes or chromatids to separate during meiosis → gametes with too many or too few chromosomes → aneuploid offspring</li>
+          <li>Down's syndrome risk increases dramatically with <strong>maternal age</strong> (especially after 35) — because oocytes are arrested in prophase I from birth; older oocytes accumulate errors in meiotic spindle</li>
+          <li><strong>Trisomy</strong> = extra chromosome (2n+1). <strong>Monosomy</strong> = missing chromosome (2n−1). <strong>Turner's (45,X)</strong> is the only viable monosomy in humans.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 7 -->
+  <div class="sec-label">Section 7 — Human Genome &amp; Applied Genetics</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E4EDF8">🗺️</div>
+      <div style="flex:1">
+        <div class="c-title">Human Genome Project, Biotechnology &amp; Genetic Disorders</div>
+        <div class="c-sub">HGP, PCR, recombinant DNA, genetic fingerprinting</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <div class="fact-box">
+        <div class="fb-label">Human Genome Project (HGP) — Key Facts</div>
+        <ul>
+          <li>International collaborative project — launched <strong>1990</strong>, completed <strong>2003</strong></li>
+          <li>Goal: sequence ALL ~3 billion base pairs of the human genome and map all human genes</li>
+          <li>Findings: ~<strong>20,000–25,000 protein-coding genes</strong>; only ~1.5% of genome codes for proteins; ~98.5% was initially called "junk DNA" (now known to have regulatory roles)</li>
+          <li><strong>India's contribution</strong>: CSIR labs sequenced chromosome 1 portion</li>
+          <li>Applications: identifying disease genes, personalised medicine, gene therapy, forensic science</li>
+        </ul>
+      </div>
+
+      <div class="purple-box">
+        <div class="pl-label">Key Biotechnology Techniques — CDS/NDA Frequency</div>
+        <ul>
+          <li><strong>PCR (Polymerase Chain Reaction)</strong> — amplifies specific DNA sequences millions of times in vitro using thermostable Taq polymerase; invented by <strong>Kary Mullis</strong> (Nobel 1993); used in forensics, COVID-19 testing, paternity testing, disease diagnosis</li>
+          <li><strong>Gel Electrophoresis</strong> — separates DNA fragments by size (smaller fragments move farther through gel toward positive electrode); used in DNA fingerprinting</li>
+          <li><strong>DNA Fingerprinting (DNA Profiling)</strong> — uses variable number tandem repeats (VNTRs) / STRs that are unique to each individual; used in forensics, paternity disputes, wildlife crime; developed by <strong>Alec Jeffreys</strong> (1984, UK); in India, first used in a court case in 1989</li>
+          <li><strong>Recombinant DNA Technology (rDNA)</strong> — cutting DNA with restriction enzymes (molecular scissors) and inserting it into a vector (plasmid) → transformed into host cells to produce desired protein. Example: human insulin produced by <em>E. coli</em> (Humulin) — first commercially available rDNA product (1982)</li>
+          <li><strong>CRISPR-Cas9</strong> — revolutionary gene-editing tool; allows precise DNA cutting and editing at specific sites; developed by <strong>Jennifer Doudna and Emmanuelle Charpentier</strong> (Nobel 2020)</li>
+          <li><strong>Gene Therapy</strong> — introducing correct copies of a defective gene into a patient's cells; used for certain immunodeficiencies (SCID), haemophilia</li>
+        </ul>
+      </div>
+
+      <div class="eg-box">
+        <div class="eg-label">Important Autosomal Genetic Disorders Summary</div>
+        <ul>
+          <li><strong>Phenylketonuria (PKU)</strong> — autosomal recessive; deficiency of phenylalanine hydroxylase → toxic phenylalanine accumulation → intellectual disability; detected by newborn screening; managed by low-phenylalanine diet</li>
+          <li><strong>Cystic Fibrosis (CF)</strong> — autosomal recessive; defective CFTR chloride channel gene → thick mucus in lungs, pancreas, GI tract; most common life-limiting autosomal recessive in Caucasians</li>
+          <li><strong>Huntington's Disease</strong> — autosomal <em>dominant</em>; CAG trinucleotide repeat expansion in HTT gene → progressive neurodegeneration, onset typically 30–50 years; affected individuals have 50% chance of passing it to each child regardless of sex</li>
+          <li><strong>Albinism</strong> — autosomal recessive; deficiency of tyrosinase → no melanin production → white skin, hair, pink eyes; photophobia; high skin cancer risk</li>
+          <li><strong>Thalassaemia</strong> — autosomal recessive; reduced/absent globin chain synthesis → haemolytic anaemia; common in Mediterranean, Middle East, India; managed with transfusions + chelation</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /theory -->
+
+<!-- ════════════════════════════ QUICK REF ══════════════════════ -->
+<div class="pane" id="quickref">
+  <div class="ref-grid">
+
+    <div class="ref-card">
+      <div class="ref-card-title">Mendel's Laws &amp; Ratios</div>
+      <ul>
+        <li><b>Law of Segregation</b> — alleles separate during gamete formation; F₂ phenotypic ratio = <em>3:1</em>; genotypic = 1:2:1</li>
+        <li><b>Law of Independent Assortment</b> — genes on different chromosomes assort independently; dihybrid F₂ = <em>9:3:3:1</em></li>
+        <li>Test cross: unknown genotype × homozygous recessive (tt)</li>
+        <li>Incomplete dominance: F₂ = <em>1:2:1</em> (new intermediate phenotype)</li>
+        <li>Codominance: both alleles expressed simultaneously (e.g., AB blood group)</li>
+        <li>Linkage: genes on same chromosome → Morgan; Drosophila; Nobel 1933</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">DNA Structure &amp; Central Dogma</div>
+      <ul>
+        <li>Watson &amp; Crick (1953) — double helix; Nobel 1962; X-ray data from Rosalind Franklin</li>
+        <li>Base pairs: <b>A–T</b> (2H bonds) · <b>G–C</b> (3H bonds); Chargaff's Rules: %A=%T, %G=%C</li>
+        <li>Purines: Adenine, Guanine (double ring) · Pyrimidines: Thymine, Cytosine (Uracil in RNA)</li>
+        <li>Central Dogma: <em>DNA → RNA → Protein</em> (Transcription → Translation)</li>
+        <li>Replication is <em>semi-conservative</em> (Meselson &amp; Stahl, 1958)</li>
+        <li>Codon = 3 bases; 64 codons for 20 amino acids; AUG = start; UAA/UAG/UGA = stop</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Sex-Linked Inheritance</div>
+      <ul>
+        <li>Females = XX; Males = XY; X-linked recessive = more males affected (hemizygous)</li>
+        <li><b>Colour blindness</b> — X-linked recessive; ~8% males; ~0.5% females; also called Daltonism</li>
+        <li><b>Haemophilia A</b> — Factor VIII deficiency; X-linked recessive; Queen Victoria was a carrier</li>
+        <li><b>DMD</b> — Duchenne Muscular Dystrophy; dystrophin gene; largest known human gene</li>
+        <li>Affected father → all daughters become carriers; sons get Y from father, NOT X</li>
+        <li>Colour-blind female: father must be colour blind + mother at least carrier</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">ABO Blood Groups &amp; Rh Factor</div>
+      <ul>
+        <li><b>O</b> = ii (universal donor RBC, no antigens); <b>AB</b> = I^A I^B (universal recipient, no antibodies)</li>
+        <li>ABO = codominance + multiple alleles (I^A, I^B, i); Landsteiner — Nobel 1930</li>
+        <li>Rh+ = RhD antigen present (dominant); Rh− = absent (recessive)</li>
+        <li>Erythroblastosis foetalis: Rh− mother + Rh+ foetus (2nd pregnancy risk)</li>
+        <li>Prevention: Anti-D immunoglobulin (RhoGAM) within 72 hours of delivery</li>
+        <li>Blood group determined by antigens on RBC, NOT antibodies in plasma</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Chromosomal Disorders</div>
+      <ul>
+        <li><b>Down's syndrome</b> — Trisomy 21 (47,+21); ↑ risk with maternal age; most common chromosomal disorder in live births</li>
+        <li><b>Turner's syndrome</b> — 45,X (monosomy X); short stature, webbed neck, infertility; phenotypically female</li>
+        <li><b>Klinefelter's</b> — 47,XXY; gynecomastia, infertility; phenotypically male</li>
+        <li>Non-disjunction = failure of chromosomes to separate in meiosis</li>
+        <li><b>Sickle cell anaemia</b> — autosomal recessive; point mutation HBB gene (Glu→Val); protection against malaria in heterozygotes</li>
+        <li>Huntington's = autosomal dominant; onset 30–50 years; trinucleotide repeat</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Applied Genetics &amp; Biotechnology</div>
+      <ul>
+        <li><b>HGP</b> — 1990–2003; ~3 billion bp; ~20,000–25,000 genes; only ~1.5% codes for proteins</li>
+        <li><b>PCR</b> — amplifies DNA; Kary Mullis (Nobel 1993); uses Taq polymerase; used in COVID testing, forensics</li>
+        <li><b>DNA Fingerprinting</b> — Alec Jeffreys (1984); VNTRs/STRs; first Indian court use 1989</li>
+        <li><b>rDNA technology</b> — restriction enzymes + plasmid vector; human insulin from E. coli (Humulin, 1982)</li>
+        <li><b>CRISPR-Cas9</b> — gene editing; Doudna &amp; Charpentier (Nobel 2020)</li>
+        <li>CF — most common autosomal recessive in Caucasians; CFTR gene; thick mucus</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════ QUIZ ═════════════════════════ -->
+<div class="pane" id="quiz">
+  <div class="quiz-stats">
+    <div class="qs-cell"><div class="qs-val" id="s-att">0</div><div class="qs-lbl">Attempted</div></div>
+    <div class="qs-cell"><div class="qs-val g" id="s-cor">0</div><div class="qs-lbl">Correct</div></div>
+    <div class="qs-cell"><div class="qs-val r" id="s-wrg">0</div><div class="qs-lbl">Wrong</div></div>
+    <div class="qs-cell"><div class="qs-val a" id="s-tot">15</div><div class="qs-lbl">Total</div></div>
+  </div>
+  <div class="prog-wrap">
+    <div class="prog-label" id="prog-label">0 of 15 answered</div>
+    <div class="prog-bar"><div class="prog-fill" id="prog"></div></div>
+  </div>
+  <div class="quiz-actions">
+    <button class="btn btn-primary" onclick="submitAll()">Submit All &amp; Check</button>
+    <button class="btn btn-ghost" onclick="resetQuiz()">↺ Reset Quiz</button>
+  </div>
+  <div id="results"></div>
+  <div id="q-area"></div>
+</div>
+</div><!-- /page -->
+
+<script>
+const QS = [
+
+/* ── EASY ─────────────────────────────────────────────────────── */
+{d:'EASY',e:'NDA 2023',
+q:'In a monohybrid cross between a homozygous tall plant (TT) and a dwarf plant (tt), what will be the phenotypic ratio in the F₂ generation?',
+opts:['1 Tall : 1 Dwarf','1 Tall : 2 Medium : 1 Dwarf','3 Tall : 1 Dwarf','All Tall'],ans:2,
+rule:'F₁ = all Tt (Tall); F₁ × F₁ → F₂ phenotypic ratio = 3 Tall : 1 Dwarf (Mendel\'s Law of Segregation)',
+exp:'Step-by-step: P generation: TT (tall) × tt (dwarf) → F₁: all Tt (all tall, because T is dominant over t). F₁ × F₁: Tt × Tt → Punnett square gives TT : Tt : tt = 1:2:1 (genotypic ratio). Phenotypically: TT = Tall, Tt = Tall (T is dominant), tt = Dwarf. So phenotypic ratio = 3 Tall : 1 Dwarf. This is MENDEL\'S LAW OF SEGREGATION at work — alleles separate into gametes and reunite randomly at fertilisation. The 3:1 ratio is the hallmark of a monohybrid F₂ cross with complete dominance. Note: if the question asked for the genotypic ratio, the answer would be 1 TT : 2 Tt : 1 tt.'},
+
+{d:'EASY',e:'CDS 2022',
+q:'Haemophilia A is a blood clotting disorder caused by deficiency of Factor VIII. It is inherited as an X-linked recessive trait. Which of the following is correct?',
+opts:[
+  'Haemophilia equally affects males and females because it is a dominant disorder',
+  'Haemophilia A is more common in males because males are hemizygous for X-linked genes (only one X chromosome)',
+  'An affected father passes haemophilia directly to all his sons',
+  'Females cannot carry the haemophilia allele because they have two X chromosomes which always compensate'
+],ans:1,
+rule:'X-linked recessive: males are hemizygous (one X) so a single faulty allele causes disease; females need two copies of the faulty allele',
+exp:'HAEMOPHILIA A is X-linked recessive. Males have only one X chromosome (XY) — if it carries the defective Factor VIII gene, there is no second X to provide a normal copy. Males are HEMIZYGOUS for X-linked genes. Therefore, a single recessive allele causes disease in males. Females (XX) need BOTH X chromosomes to carry the faulty allele to be affected — having one normal X means they are carriers (phenotypically normal but can pass the allele to offspring). This is why X-linked recessive disorders like haemophilia, colour blindness and DMD are much more common in males. An affected father passes his X chromosome to ALL DAUGHTERS (who become carriers) and his Y chromosome to ALL SONS (who are unaffected) — so an affected father CANNOT pass the disorder to sons. Queen Victoria (carrier) passed haemophilia to several royal families across Europe.'},
+
+{d:'EASY',e:'AFCAT 2023',
+q:'What does Chargaff\'s Rule state about the base composition of DNA?',
+opts:[
+  'The amount of adenine always equals the amount of guanine in any DNA molecule',
+  'The amount of adenine equals the amount of thymine, and the amount of guanine equals the amount of cytosine (%A=%T; %G=%C)',
+  'All four bases are present in equal proportions in any DNA molecule',
+  'Purines and pyrimidines are always present in a 2:1 ratio'
+],ans:1,
+rule:'Chargaff\'s Rules: A pairs with T (2H bonds), G pairs with C (3H bonds) → %A=%T and %G=%C in double-stranded DNA',
+exp:'CHARGAFF\'S RULES (Erwin Chargaff, 1950) state that in any double-stranded DNA: (1) The amount of ADENINE (A) equals the amount of THYMINE (T): %A = %T. (2) The amount of GUANINE (G) equals the amount of CYTOSINE (C): %G = %C. This is because in the DNA double helix, bases pair in a complementary and specific manner: A always bonds with T (via 2 hydrogen bonds) and G always bonds with C (via 3 hydrogen bonds — stronger bond). These rules were crucial data that helped Watson and Crick deduce the double helix structure in 1953. Note: these ratios apply to double-stranded DNA; in single-stranded DNA or RNA, A need not equal T/U. From Chargaff\'s Rules: if you know %A, you know %T; if you know %G, you know %C; and (A+G) = (T+C) = 50% of all bases.'},
+
+{d:'EASY',e:'CDS 2023',
+q:'A person with blood group AB is called the "Universal Recipient." What is the genetic basis and reason for this?',
+opts:[
+  'AB individuals have the strongest immune system and can fight off all blood antigens',
+  'AB individuals (genotype I^A I^B) have both A and B antigens on their RBCs and NO antibodies in their plasma, so they cannot mount a reaction against any donor blood type',
+  'AB individuals can donate blood to any recipient because their blood contains no antigens',
+  'AB is the rarest blood group so hospitals keep it for emergencies, making AB individuals always first in line'
+],ans:1,
+rule:'Blood group AB (I^A I^B codominance) has both A and B antigens on RBCs and neither anti-A nor anti-B antibodies in plasma → accepts all ABO blood types',
+exp:'BLOOD GROUP AB (genotype I^A I^B) — a classic example of CODOMINANCE: both I^A and I^B alleles are fully expressed, so AB individuals have BOTH A AND B ANTIGENS on their red blood cells. Crucially, because the immune system has been exposed to both A and B antigens throughout life, it does not produce antibodies against either. AB plasma contains NEITHER ANTI-A NOR ANTI-B ANTIBODIES. In transfusion, it is the RECIPIENT\'S antibodies that attack DONOR\'S antigens. Since AB individuals have no antibodies against A or B, they cannot react against A, B, AB or O red blood cells → UNIVERSAL RECIPIENT for packed RBCs. BLOOD GROUP O (genotype ii) is the Universal DONOR for packed RBCs — O RBCs have no antigens, so no recipient antibodies can attack them. However, O whole blood contains both anti-A and anti-B antibodies, which can cause reactions if given in large volumes. Discovered by Karl Landsteiner (Nobel 1930).'},
+
+{d:'EASY',e:'NDA 2022',
+q:'Down\'s syndrome is caused by which chromosomal abnormality?',
+opts:['Monosomy of chromosome 21 (only one copy instead of two)','Trisomy of chromosome 21 (three copies instead of two)','Deletion of part of chromosome 21','Translocation of chromosome 21 to chromosome 14 only (never trisomy)'],ans:1,
+rule:'Down\'s syndrome = Trisomy 21 (47,+21); caused by non-disjunction; risk increases with maternal age',
+exp:'DOWN\'S SYNDROME (first described by John Langdon Down in 1866; chromosomal cause identified by Jérôme Lejeune in 1959) is caused by TRISOMY 21 — the presence of THREE COPIES of chromosome 21 instead of the normal two. Karyotype: 47,+21. The most common mechanism is NON-DISJUNCTION during maternal MEIOSIS I — the two homologues of chromosome 21 fail to separate, producing an egg with two copies of chromosome 21. When fertilised by a normal sperm, the resulting zygote has three copies. Less commonly, trisomy 21 can result from translocation (chromosome 21 attached to another chromosome) — this form is familial and NOT age-dependent. KEY EXAM FACT: Risk increases significantly with MATERNAL AGE — from ~1 in 1,500 at age 20 to ~1 in 100 at age 40. It is the most common chromosomal disorder in live births and the most common genetic cause of intellectual disability.'},
+
+/* ── MEDIUM ─────────────────────────────────────────────────────── */
+{d:'MEDIUM',e:'CDS 2023',
+q:'In snapdragons, red flower (RR) crossed with white flower (rr) gives pink flowers (Rr) in F₁. When F₁ plants are self-crossed, what phenotypic ratio is expected in F₂, and what genetic phenomenon does this illustrate?',
+opts:[
+  '3 Red : 1 White — complete dominance; red is dominant over white',
+  '1 Red : 2 Pink : 1 White — incomplete dominance; neither allele is fully dominant, giving an intermediate phenotype in heterozygotes',
+  '1 Red : 1 Pink : 1 White : 1 Magenta — codominance; four distinct phenotypes appear',
+  'All Pink — the pink colour is a new dominant trait that breeds true'
+],ans:1,
+rule:'Incomplete dominance: Rr × Rr → 1RR (Red) : 2Rr (Pink) : 1rr (White); phenotypic ratio = genotypic ratio = 1:2:1',
+exp:'INCOMPLETE DOMINANCE occurs when neither allele is completely dominant over the other in the heterozygote. Instead of one masking the other (as in Mendel\'s peas), the heterozygote shows an INTERMEDIATE PHENOTYPE. In snapdragons: R (red pigment allele) and r (no pigment/white allele) — in Rr, only half the normal pigment is produced → PINK. F₁ cross: Rr × Rr Punnett square: TT = RR (Red), Tt = Rr (Pink), tt = rr (White). PHENOTYPIC RATIO = 1 Red : 2 Pink : 1 White — crucially, this equals the GENOTYPIC RATIO (1:2:1), because each genotype has a distinct phenotype. Compare to complete dominance where phenotypic = 3:1 but genotypic = 1:2:1. This is distinct from CODOMINANCE (e.g., blood group AB) where BOTH parental phenotypes are expressed simultaneously — in AB blood group, both A AND B antigens are present, not an intermediate "AB antigen." Key distinction for exams.'},
+
+{d:'MEDIUM',e:'AFCAT 2022',
+q:'A woman is a carrier for colour blindness (X^N X^cb). Her husband has normal colour vision (X^N Y). What is the probability that their son will be colour blind?',
+opts:['0% — sons get Y chromosome from father; colour blindness is on X, so father cannot contribute','25% of all children; 50% of their sons','100% — if the mother is a carrier, all sons will be colour blind','75% — because colour blindness is common in males'],ans:1,
+rule:'Carrier mother (X^N X^cb) × normal father (X^N Y): 50% of sons are colour blind (get X^cb from mother + Y from father)',
+exp:'Let\'s work through this systematically. Mother\'s gametes: X^N (50%) or X^cb (50%). Father\'s gametes: X^N (50%) or Y (50%). Punnett square outcomes: X^N X^N = normal female (25%), X^N X^cb = carrier female (25%), X^N Y = normal male (25%), X^cb Y = colour blind male (25%). Looking at SONS ONLY (half of all children): 50% of sons are X^N Y (normal) and 50% of sons are X^cb Y (colour blind). So the probability that a SPECIFIC SON is colour blind = 50%. As a fraction of ALL children: 25% (1 in 4). KEY PRINCIPLE: A colour-blind son inherited his X^cb FROM HIS MOTHER (the carrier), NOT from his normal-vision father. The father contributes the Y chromosome to sons. This is a classic exam calculation that requires careful enumeration of gametes and their probabilities.'},
+
+{d:'MEDIUM',e:'NDA 2023',
+q:'The "Central Dogma of Molecular Biology" describes information flow in cells. Which of the following statements about it is CORRECT?',
+opts:[
+  'Information flows: Protein → RNA → DNA (proteins are read back to produce RNA, which then makes DNA)',
+  'Information flows: DNA → RNA → Protein; DNA is transcribed to mRNA in the nucleus; mRNA is translated to protein at ribosomes in cytoplasm; information cannot normally flow from protein back to nucleic acids',
+  'Information flows equally in both directions; cells regularly reverse-translate proteins back into RNA',
+  'RNA is transcribed directly from proteins using reverse ribosomes; this is the main pathway in eukaryotes'
+],ans:1,
+rule:'Central Dogma (Crick, 1958): DNA → RNA (transcription) → Protein (translation); reverse translation does NOT occur',
+exp:'The CENTRAL DOGMA OF MOLECULAR BIOLOGY (proposed by Francis Crick in 1958, published 1970) describes the normal flow of genetic information: DNA → RNA → PROTEIN. Step 1: TRANSCRIPTION — the DNA sequence of a gene is used as a template by RNA POLYMERASE to produce a complementary mRNA (messenger RNA) strand. Occurs in the NUCLEUS in eukaryotes. Step 2: TRANSLATION — mRNA travels to ribosomes in the cytoplasm; ribosomes read codons (3-base sequences) on mRNA; tRNA molecules bring matching amino acids; amino acids are linked into a POLYPEPTIDE chain (protein). There are TWO legitimate exceptions to the original central dogma: (1) REVERSE TRANSCRIPTION: RNA → DNA, done by REVERSE TRANSCRIPTASE enzyme in retroviruses like HIV — this is why HIV can integrate into the host genome. (2) RNA REPLICATION: RNA → RNA in RNA viruses. However, PROTEIN → DNA or PROTEIN → RNA (reverse translation) does NOT occur in any known organism — the sequence information in proteins cannot be read back into nucleic acid sequences.'},
+
+{d:'MEDIUM',e:'CDS 2024',
+q:'In the ABO blood group system, a mother is blood group A (genotype I^A i) and the father is blood group B (genotype I^B i). What are the possible blood groups of their children?',
+opts:[
+  'Only A and B — the parents can only pass their dominant alleles',
+  'A, B, AB and O — all four blood groups are possible',
+  'Only AB — because one parent has A and one has B, the child must have AB',
+  'Only O — because both parents carry the recessive i allele, all children will be ii'
+],ans:1,
+rule:'I^A i × I^B i → I^A I^B (AB), I^A i (A), I^B i (B), ii (O) — all four blood groups possible in 1:1:1:1 ratio',
+exp:'Both parents are HETEROZYGOUS — each carries both a dominant allele and the recessive i allele. Mother\'s gametes: I^A (50%) or i (50%). Father\'s gametes: I^B (50%) or i (50%). Punnett square: I^A × I^B = I^A I^B (Blood group AB, 25%), I^A × i = I^A i (Blood group A, 25%), i × I^B = I^B i (Blood group B, 25%), i × i = ii (Blood group O, 25%). ALL FOUR BLOOD GROUPS are possible in equal proportions (1:1:1:1). This is directly applicable in paternity disputes — if a child has blood group O, the father MUST contribute an i allele. A man who is I^A I^A (pure) cannot be the father of an O-group child. Conversely, this cross proves that two parents with different blood groups (A and B) can produce a child with neither of their blood groups (O) — a common misconception that blood group is always "between" the parents.'},
+
+{d:'MEDIUM',e:'AFCAT 2024',
+q:'Sickle cell anaemia provides a classic example of "balanced polymorphism." What does this mean in the context of malaria-endemic regions?',
+opts:[
+  'The sickle cell allele is gradually being eliminated from the population because it is always harmful',
+  'Heterozygotes (HbA/HbS — sickle cell trait) have a selective advantage over both homozygotes in malaria-endemic areas — they are partially protected against malaria while not suffering the full disease, maintaining both alleles in the population',
+  'Sickle cell anaemia and malaria cancel each other out, so people in affected regions are completely healthy',
+  'The malaria parasite cannot enter any red blood cells that contain any haemoglobin S, so even homozygous HbS individuals are fully protected'
+],ans:1,
+rule:'Balanced polymorphism: HbA/HbS heterozygotes have selective advantage in malaria regions → both alleles maintained at high frequency in population',
+exp:'BALANCED POLYMORPHISM occurs when TWO OR MORE ALLELES of a gene are maintained at appreciable frequencies in a population because the HETEROZYGOTE (carrier) has a HIGHER FITNESS than either homozygote in a particular environment. Sickle cell anaemia: HbS/HbS HOMOZYGOTES — severe sickle cell anaemia; reduced survival; frequent pain crises, organ damage. HbA/HbA HOMOZYGOTES — normal haemoglobin; susceptible to severe malaria from Plasmodium falciparum (which invades normal RBCs easily). HbA/HbS HETEROZYGOTES (sickle cell trait) — mild or no anaemia symptoms; sickling only in extreme conditions; SIGNIFICANTLY PROTECTED against cerebral malaria (sickle-shaped RBCs are less hospitable to parasites, rupture faster, have different oxygen environment). In malaria-endemic Africa and India, HbS/HbS individuals die young, HbA/HbA are more likely to die from malaria, but HbA/HbS individuals survive both conditions best → natural selection MAINTAINS BOTH ALLELES in the population at high frequencies. This explains why the otherwise deleterious HbS allele reaches frequencies of 10–40% in some African populations.'},
+
+{d:'MEDIUM',e:'NDA 2024',
+q:'PCR (Polymerase Chain Reaction) is a powerful molecular biology technique. Which of the following correctly describes its principle?',
+opts:[
+  'PCR clones entire living bacteria to amplify DNA naturally inside bacterial cells',
+  'PCR uses thermostable DNA polymerase (Taq polymerase) and repeated cycles of denaturation, annealing and extension to exponentially amplify a specific DNA sequence in vitro',
+  'PCR separates DNA fragments by size using an electrical field through a gel matrix',
+  'PCR inserts foreign DNA into a plasmid vector which is then transformed into E. coli for amplification'
+],ans:1,
+rule:'PCR = in vitro DNA amplification; 3 steps per cycle: denature (95°C), anneal primers (50–65°C), extend (72°C) with Taq polymerase; 2ⁿ amplification',
+exp:'POLYMERASE CHAIN REACTION (PCR), invented by KARY MULLIS in 1983 (Nobel Prize 1993), is a technique for exponentially amplifying a specific DNA sequence IN VITRO (outside a living cell). The Three Steps of each PCR cycle: (1) DENATURATION (~95°C): Heat separates the double-stranded DNA template into two single strands. (2) ANNEALING (~50–65°C): Short single-stranded DNA sequences called PRIMERS bind to their complementary sequences flanking the target region on each template strand. (3) EXTENSION (~72°C): TAQ POLYMERASE (thermostable DNA polymerase from the bacterium Thermus aquaticus — isolated from hot springs) extends from the primers, synthesising new complementary DNA strands. After n cycles: 2ⁿ copies of the target sequence. 30 cycles → ~1 billion copies from a single DNA molecule. APPLICATIONS: forensic DNA fingerprinting, COVID-19 testing, paternity testing, genetic disease diagnosis, archaeological DNA analysis. Option C describes GEL ELECTROPHORESIS. Option D describes RECOMBINANT DNA TECHNOLOGY.'},
+
+/* ── HARD ──────────────────────────────────────────────────────── */
+{d:'HARD',e:'CDS 2024',
+q:'A dihybrid cross is performed between two plants heterozygous for both seed colour (Yy) and seed shape (Rr). The expected F₂ ratio is 9:3:3:1. However, the observed ratio is 9:3:4. What phenomenon does the 9:3:4 ratio suggest, and what is its mechanism?',
+opts:[
+  'Incomplete dominance — the y allele shows partial dominance over Y in some combinations',
+  'Recessive epistasis — the homozygous recessive genotype at one locus (yy) masks the expression of the other gene (R_), producing fewer phenotypic classes than expected from independent assortment',
+  'Codominance — both Y and y alleles are expressed in yy individuals, creating a new phenotype counted in the fourth class',
+  'Linkage — the Y and R genes are on the same chromosome and cannot assort independently'
+],ans:1,
+rule:'9:3:4 = recessive epistasis; yyrr and yyR_ are both phenotypically identical (yy masks R gene) → 3+1 = 4 in the fourth class',
+exp:'The standard dihybrid F₂ ratio is 9:3:3:1 (9 A_B_ : 3 A_bb : 3 aaB_ : 1 aabb) when both genes assort independently without interaction. EPISTASIS occurs when one gene MASKS or MODIFIES the expression of a SECOND GENE at a different locus. In RECESSIVE EPISTASIS (9:3:4): the homozygous recessive genotype at one locus (yy) masks the expression of the other gene (R or rr). For example, in a flower pigment pathway, gene Y produces a pigment precursor and gene R converts it to coloured product. If yy → no precursor is made → regardless of R or rr genotype → no colour (both yyR_ and yyrr are colourless/same phenotype). Result: 9 Y_R_ (coloured A), 3 Y_rr (another colour B), 3 yyR_ (white/colourless — same as 4th class), 1 yyrr (also white) → 9:3:(3+1) = 9:3:4. Other epistasis ratios: 12:3:1 (dominant epistasis); 9:7 (complementary genes); 15:1 (duplicate genes). This is advanced genetics directly tested in CDS Paper 1 General Science.'},
+
+{d:'HARD',e:'NDA 2024',
+q:'The Meselson-Stahl experiment (1958) proved that DNA replication is semi-conservative. What was the experimental design and what result would have been seen if replication were conservative (not semi-conservative)?',
+opts:[
+  'E. coli was grown in normal ¹⁴N, then switched to heavy ¹⁵N. After one generation, all DNA was heavy (¹⁵N/¹⁵N), proving conservative replication',
+  'E. coli was grown in heavy ¹⁵N then switched to light ¹⁴N. After ONE generation of semi-conservative replication, all DNA was hybrid (¹⁵N/¹⁴N, intermediate density). Conservative replication would have given TWO bands: one all-heavy (original) and one all-light (new)',
+  'E. coli DNA was extracted and mixed with ¹⁵N solution. The binding pattern proved semi-conservative replication by mass spectrometry',
+  'They irradiated E. coli DNA with UV light and measured repair rates, which were higher in semi-conservative than conservative models'
+],ans:1,
+rule:'Meselson-Stahl: ¹⁵N → ¹⁴N switch; after 1 generation semi-conservative gives ONE hybrid band; conservative would give heavy + light bands',
+exp:'The MESELSON-STAHL EXPERIMENT (1958) used DENSITY GRADIENT CENTRIFUGATION (CsCl gradient) to distinguish DNA of different densities. DESIGN: E. coli were grown for many generations in ¹⁵N (heavy nitrogen) medium until all DNA was uniformly heavy (¹⁵N/¹⁵N). Then switched to ¹⁴N (light nitrogen) medium for one generation of replication. SEMI-CONSERVATIVE PREDICTION (correct): Each new DNA molecule = one old ¹⁵N strand + one new ¹⁴N strand → ALL DNA has intermediate (hybrid) density after generation 1 → ONE BAND at intermediate position. After generation 2: 50% hybrid + 50% light → TWO BANDS. CONSERVATIVE REPLICATION PREDICTION (wrong): The original double helix stays intact; new DNA is made entirely from new ¹⁴N nucleotides → after generation 1: TWO BANDS — one heavy (original) and one light (new). DISPERSIVE REPLICATION PREDICTION (wrong): Both strands of both daughter molecules have a mixture of old and new nucleotides → after each generation, ONE band of decreasing density. RESULT: After 1 generation, ONE HYBRID BAND — proving semi-conservative replication. This experiment is considered one of the most elegant in biology.'},
+
+{d:'HARD',e:'AFCAT 2024',
+q:'A couple seeks genetic counselling. The father has Huntington\'s disease (autosomal dominant, late onset). The mother is unaffected. The father is heterozygous (Hh). What is the probability that their child will develop Huntington\'s disease, and what makes this disorder unusual in terms of Mendelian inheritance?',
+opts:[
+  '25% probability; Huntington\'s is unusual because it requires homozygous dominant (HH) genotype to show symptoms',
+  '50% probability; Huntington\'s is unusual because it is an autosomal dominant disorder with late onset (30–50 years) caused by a trinucleotide (CAG) repeat expansion — the number of repeats correlates with age of onset and severity (anticipation)',
+  '100% probability; since the father has the gene, all children will definitely be affected',
+  '0% probability if the child is female; Huntington\'s only affects males because it requires testosterone for expression'
+],ans:1,
+rule:'Huntington\'s disease: autosomal dominant (Hh × hh → 50% affected); CAG repeat expansion in HTT gene; anticipation; late onset 30–50 years',
+exp:'HUNTINGTON\'S DISEASE (HD) is caused by an AUTOSOMAL DOMINANT mutation in the HTT gene on chromosome 4 — specifically, an EXPANSION of a CAG trinucleotide repeat. Normal individuals have 10–35 CAG repeats; HD patients have 36+ repeats (full penetrance above 40 repeats). PROBABILITY CALCULATION: Father is Hh (heterozygous, affected); mother is hh (unaffected). Cross: Hh × hh → 50% Hh (affected) + 50% hh (unaffected). Each child has a 50% CHANCE of inheriting the disease, regardless of sex (autosomal). WHAT MAKES IT UNUSUAL: (1) AUTOSOMAL DOMINANT — only one copy of the mutant allele is needed (unlike most serious disorders which are recessive). (2) LATE ONSET — symptoms typically begin at age 30–50, so individuals may have already had children before knowing they are affected. (3) ANTICIPATION — the number of CAG repeats tends to INCREASE with each generation (especially when transmitted by the father) → earlier onset and greater severity in subsequent generations. This is a hallmark of trinucleotide repeat disorders (also seen in Fragile X syndrome, myotonic dystrophy). (4) Complete PENETRANCE — everyone with >40 repeats WILL develop HD if they live long enough. There is currently no cure; genetic testing can detect the mutation before symptoms appear (creating ethical dilemmas).'},
+
+{d:'HARD',e:'CDS 2024',
+q:'DNA fingerprinting uses variable regions in the genome to identify individuals. What are VNTRs (Variable Number Tandem Repeats), why are they useful for identification, and what are the standard applications in the Indian legal system?',
+opts:[
+  'VNTRs are mutations in the coding regions of genes; they are used to diagnose genetic diseases; the Indian legal system uses them only for criminal identification',
+  'VNTRs are short repetitive DNA sequences whose number of repeats varies between individuals (highly polymorphic); because the probability of two unrelated individuals having the same VNTR profile is vanishingly small, they uniquely identify individuals; used in India for forensics, paternity disputes and establishing identity of crime victims',
+  'VNTRs are viral DNA sequences inserted into the human genome; they spread between individuals and can be used to track infection chains in epidemics',
+  'VNTRs code for blood group antigens; they are the molecular basis of ABO typing used in transfusion medicine'
+],ans:1,
+rule:'VNTRs = non-coding repetitive sequences of variable repeat number between individuals; highly polymorphic → unique "genetic fingerprint"; used in forensics and paternity testing',
+exp:'DNA FINGERPRINTING (DNA PROFILING) was developed by ALEC JEFFREYS at the University of Leicester (UK) in 1984. It exploits VARIABLE NUMBER TANDEM REPEATS (VNTRs) — short (2–60 bp) DNA sequences that are repeated in tandem arrays at specific chromosomal locations. KEY BIOLOGY: (1) VNTRs are in NON-CODING (intergenic) regions — NOT in protein-coding genes. (2) The NUMBER OF REPEATS at any given VNTR locus varies enormously between unrelated individuals — inherited in Mendelian fashion (one allele from each parent). (3) By analysing multiple VNTR loci simultaneously, the probability of two unrelated individuals having IDENTICAL profiles is astronomically small (1 in 10¹⁰ or less). Modern forensics uses STRs (Short Tandem Repeats, 2–7 bp per repeat) via PCR amplification + gel electrophoresis. INDIA: DNA fingerprinting was first used in an Indian COURT OF LAW in 1989 (a paternity dispute case in Hyderabad). The Centre for DNA Fingerprinting and Diagnostics (CDFD) in Hyderabad was established in 1995 for forensic, paternity and immigration applications. APPLICATIONS: (1) Forensic criminal investigations (matching crime scene DNA to suspects). (2) Paternity and maternity disputes. (3) Identifying victims of mass disasters. (4) Wildlife forensics (poaching cases). (5) Immigration disputes (establishing family relationships).'},
+
+{d:'HARD',e:'NDA 2024',
+q:'A genetics student is studying a family with a rare autosomal recessive disorder. Both parents are unaffected carriers (Aa × Aa). Their first child is affected (aa). What is the probability that their SECOND child will be both unaffected AND a carrier (Aa)?',
+opts:[
+  '25% — because 1 in 4 of all children from this cross will be Aa',
+  '50% — because among the possible offspring (AA, Aa, Aa, aa), two out of four are Aa; probability of being Aa from this cross is 2/4 = 1/2',
+  '67% (2/3) — because AMONG UNAFFECTED CHILDREN ONLY, 2 out of 3 are Aa (1 AA : 2 Aa) from this cross; and the question asks for unaffected AND carrier, not just carrier among all children',
+  '100% — because the parents are both carriers, all unaffected children must be carriers'
+],ans:2,
+rule:'Aa × Aa → 1AA:2Aa:1aa; P(unaffected AND carrier Aa) = 2/4 = 50%; P(carrier | unaffected) = 2/3 = 67%',
+exp:'This question has a subtle but critical distinction. From the cross Aa × Aa: genotypic ratio = 1 AA : 2 Aa : 1 aa. Phenotypic ratio: 3 unaffected (AA + Aa) : 1 affected (aa). The question asks: "probability that the SECOND CHILD will be both UNAFFECTED AND a CARRIER (Aa)." This means we want: P(second child is Aa) — not conditional on being unaffected. P(Aa) = 2/4 = 1/2 = 50%. Note: the FIRST child\'s genotype does NOT affect the second child (each birth is INDEPENDENT — previous outcomes do not change gamete frequencies). If the question had asked "given that the second child is UNAFFECTED, what is the probability they are a carrier?" — that would be CONDITIONAL PROBABILITY = P(Aa | unaffected) = P(Aa and unaffected) / P(unaffected) = (2/4) / (3/4) = 2/3 = 67%. The distinction between "probability of being both unaffected and a carrier" (joint probability = 2/4 = 50%) versus "probability of being a carrier given unaffected" (conditional probability = 2/3 = 67%) is a classic exam trap in genetics probability questions. Read questions very carefully.'},
+
+];
+
+const answers  = new Array(QS.length).fill(null);
+const revealed = new Array(QS.length).fill(false);
+const LABS = ['A','B','C','D'];
+
+function build(){
+  const area=document.getElementById('q-area');
+  area.innerHTML='';
+  QS.forEach((q,i)=>{
+    const dc=q.d==='EASY'?'diff-e':q.d==='MEDIUM'?'diff-m':'diff-h';
+    const div=document.createElement('div');
+    div.className='q-card';div.id=`qc${i}`;
+    div.innerHTML=`
+      <div class="q-meta">
+        <span class="q-num">Q.${String(i+1).padStart(2,'0')}</span>
+        <span class="q-diff ${dc}">${q.d}</span>
+        <span class="q-exam">${q.e}</span>
+      </div>
+      <div class="q-body">
+        <div class="q-text">${q.q}</div>
+        <div class="opts" id="opts${i}">
+          ${q.opts.map((o,j)=>`
+            <button class="opt" id="o${i}_${j}" onclick="pick(${i},${j})">
+              <span class="opt-lbl">${LABS[j]}</span>${o}
+            </button>`).join('')}
+        </div>
+        <div class="exp-panel" id="ex${i}">
+          <div class="exp-tag">Explanation</div>
+          <div class="exp-rule">${q.rule}</div>
+          <p>${q.exp}</p>
+        </div>
+      </div>
+      <div class="q-foot">
+        <span style="font-size:11px;color:var(--dim);font-weight:700">Biology · B11</span>
+        <span id="ai${i}" class="q-status">—</span>
+      </div>`;
+    area.appendChild(div);
+  });
+}
+
+function pick(qi,oi){
+  if(revealed[qi])return;
+  answers[qi]=oi;
+  document.querySelectorAll(`#opts${qi} .opt`).forEach((b,j)=>{b.classList.remove('sel');if(j===oi)b.classList.add('sel')});
+  document.getElementById(`qc${qi}`).classList.add('answered');
+  const ai=document.getElementById(`ai${qi}`);
+  ai.textContent=`Selected: ${LABS[oi]}`;
+  ai.style.color='var(--primary)';
+  updateStats();
+}
+
+function updateStats(){
+  const att=answers.filter(a=>a!==null).length;
+  document.getElementById('s-att').textContent=att;
+  document.getElementById('prog').style.width=(att/QS.length*100)+'%';
+  document.getElementById('prog-label').textContent=`${att} of ${QS.length} answered`;
+  let c=0,w=0;
+  answers.forEach((a,i)=>{if(a===null)return;if(a===QS[i].ans)c++;else w++;});
+  document.getElementById('s-cor').textContent=c;
+  document.getElementById('s-wrg').textContent=w;
+}
+
+function submitAll(){
+  let cor=0,wrg=0,skp=0;
+  QS.forEach((q,i)=>{
+    revealed[i]=true;
+    const opts=document.querySelectorAll(`#opts${i} .opt`);
+    opts.forEach(b=>{b.disabled=true;b.classList.remove('sel')});
+    opts[q.ans].classList.add('ok');
+    if(answers[i]!==null&&answers[i]!==q.ans)opts[answers[i]].classList.add('bad');
+    document.getElementById(`ex${i}`).classList.add('show');
+    const ai=document.getElementById(`ai${i}`);
+    const card=document.getElementById(`qc${i}`);
+    card.classList.remove('answered');
+    if(answers[i]===null){skp++;ai.textContent='Skipped';ai.style.color='var(--dim)';}
+    else if(answers[i]===q.ans){cor++;card.classList.add('correct');ai.textContent='✓ Correct';ai.style.color='var(--green)';}
+    else{wrg++;card.classList.add('wrong');ai.textContent='✗ Wrong';ai.style.color='var(--red)';}
+  });
+  updateStats();
+  showResults(cor,wrg,skp);
+}
+
+function showResults(cor,wrg,skp){
+  const pct=Math.round(cor/QS.length*100);
+  let grade,msg;
+  if(pct>=88){grade='Excellent';msg='Outstanding! You have mastered Genetics & Heredity.'}
+  else if(pct>=70){grade='Good';msg='Well done. Review the questions you missed.'}
+  else if(pct>=50){grade='Average';msg='Good effort. Revisit the theory cards and try again.'}
+  else{grade='Needs Work';msg="Don't worry — review the Quick Ref carefully and try again."}
+  const res=document.getElementById('results');
+  res.innerHTML=`
+    <div class="res-hero">
+      <div class="res-score">${cor}<span style="font-size:36px;opacity:.5">/${QS.length}</span></div>
+      <div class="res-grade">${grade} · ${pct}%</div>
+      <div class="res-msg">${msg}</div>
+    </div>
+    <div class="res-stats">
+      <div class="qs-cell"><div class="qs-val g">${cor}</div><div class="qs-lbl">Correct</div></div>
+      <div class="qs-cell"><div class="qs-val r">${wrg}</div><div class="qs-lbl">Wrong</div></div>
+      <div class="qs-cell"><div class="qs-val a">${skp}</div><div class="qs-lbl">Skipped</div></div>
+      <div class="qs-cell"><div class="qs-val">${pct}%</div><div class="qs-lbl">Score</div></div>
+    </div>
+    <div style="text-align:center;margin:16px 0">
+      <button class="btn btn-ghost" onclick="document.getElementById('q-area').scrollIntoView({behavior:'smooth'})">📖 Review All Answers</button>
+    </div>`;
+  res.style.display='block';
+  res.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function resetQuiz(){
+  answers.fill(null);revealed.fill(false);
+  build();
+  document.getElementById('results').style.display='none';
+  document.getElementById('results').innerHTML='';
+  ['s-att','s-cor','s-wrg'].forEach(id=>document.getElementById(id).textContent='0');
+  document.getElementById('prog').style.width='0%';
+  document.getElementById('prog-label').textContent=`0 of ${QS.length} answered`;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function switchTab(id){
+  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  const idx={theory:0,quickref:1,quiz:2}[id];
+  document.querySelectorAll('.tab')[idx].classList.add('on');
+}
+
+function tog(hd){
+  const bd=hd.nextElementSibling;
+  const isOpen=bd.classList.contains('open');
+  bd.classList.toggle('open',!isOpen);
+  hd.classList.toggle('open',!isOpen);
+}
+
+build();
+</script>
+</body>
+</html>

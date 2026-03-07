@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B07 · Excretory System | Olive Defence</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+
+:root{
+  /* ── THEME B07: Deep Teal-Jade + Warm Sand — renal, filtration ── */
+  --bg:        #EEF5F4;
+  --bg2:       #E0EEEC;
+  --bg3:       #CDE3E0;
+  --white:     #F7FDFB;
+  --ink:       #091A18;
+  --ink2:      #122820;
+  --muted:     #416A64;
+  --dim:       #7AABA4;
+  --border:    #B8D8D4;
+
+  --primary:      #0D5C52;
+  --primaryLt:    #127A6E;
+  --primaryPale:  #E0F4F2;
+
+  --amber:        #8A6008;
+  --amberLt:      #AE7A0E;
+  --amberPale:    #FDF4DC;
+
+  --green:        #1A6038;
+  --greenLt:      #22804A;
+  --greenPale:    #E4F4EC;
+
+  --red:          #8A1A1A;
+  --redLt:        #B02020;
+  --redPale:      #FAEAEA;
+
+  --blue:         #1A3C72;
+  --bluePale:     #E6EEF8;
+
+  --purple:       #5C2080;
+  --purplePale:   #F0E8F8;
+
+  --radius:    12px;
+  --shadow:    0 2px 12px rgba(9,26,24,.09);
+  --shadow-md: 0 4px 20px rgba(9,26,24,.14);
+}
+
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--ink);font-size:17px;line-height:1.75;min-height:100vh}
+.page{max-width:680px;margin:0 auto;padding:0 16px 80px}
+
+/* ── HERO ─────────────────────────────────────────────────────── */
+.hero{
+  background:linear-gradient(135deg,#041810 0%,#0D5C52 52%,#147A6C 100%);
+  margin:0 -16px;padding:28px 20px 26px;position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 78% 20%,rgba(100,240,220,.08) 0%,transparent 55%),
+    radial-gradient(ellipse at 6% 80%,rgba(180,255,200,.05) 0%,transparent 50%);
+  pointer-events:none;
+}
+.hero::after{
+  content:'';position:absolute;right:-30px;bottom:-30px;
+  width:160px;height:160px;border-radius:50%;
+  border:2px solid rgba(255,255,255,.05);
+  pointer-events:none;
+}
+.hero-kicker{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.50);margin-bottom:8px;display:flex;align-items:center;gap:8px;position:relative;z-index:1}
+.hero-kicker::before{content:'';width:18px;height:2px;background:rgba(255,255,255,.28)}
+.hero-title{font-family:'Lora',serif;font-size:clamp(24px,5.5vw,34px);font-weight:700;color:#fff;line-height:1.2;margin-bottom:10px;position:relative;z-index:1}
+.hero-title span{color:#A8EDDE;font-style:italic}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.66);margin-bottom:18px;line-height:1.65;position:relative;z-index:1}
+.hero-chips{display:flex;flex-wrap:wrap;gap:7px;position:relative;z-index:1}
+.chip{font-size:11px;font-weight:700;letter-spacing:1px;padding:4px 12px;border-radius:20px;text-transform:uppercase}
+.chip-w{background:rgba(255,255,255,.12);color:rgba(255,255,255,.88)}
+.chip-t{background:rgba(168,237,222,.15);color:#A8EDDE}
+.chip-g{background:rgba(130,240,180,.11);color:#90E8B8}
+
+/* ── TAB BAR ─────────────────────────────────────────────────── */
+.tab-bar{position:sticky;top:0;z-index:50;background:var(--white);border-bottom:2px solid var(--border);margin:0 -16px;display:flex;overflow-x:auto;box-shadow:0 2px 8px rgba(9,26,24,.07);-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.tab-bar::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;padding:14px 18px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);border:none;background:transparent;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;white-space:nowrap}
+.tab:hover{color:var(--ink);background:var(--bg)}
+.tab.on{color:var(--primary);border-bottom-color:var(--primary)}
+
+/* ── PANES ───────────────────────────────────────────────────── */
+.pane{display:none;padding-top:24px;animation:fadeUp .3s ease}
+.pane.on{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ── SECTION LABEL ───────────────────────────────────────────── */
+.sec-label{font-size:10px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--primary);margin:28px 0 12px;display:flex;align-items:center;gap:10px}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* ── INTRO BOX ───────────────────────────────────────────────── */
+.intro-box{background:var(--primaryPale);border:1.5px solid rgba(13,92,82,.20);border-radius:var(--radius);padding:20px;margin-bottom:8px}
+.intro-box p{font-size:16px;color:var(--ink2);line-height:1.8}
+.intro-box strong{color:var(--primary)}
+
+/* ── CONCEPT CARDS ───────────────────────────────────────────── */
+.c-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;box-shadow:var(--shadow);overflow:hidden}
+.c-head{display:flex;align-items:center;gap:12px;padding:16px 18px;cursor:pointer;border-left:4px solid transparent;transition:all .15s;-webkit-tap-highlight-color:transparent}
+.c-head:hover,.c-head.open{background:var(--bg);border-left-color:var(--primary)}
+.c-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.c-title{font-size:17px;font-weight:700;color:var(--ink);flex:1}
+.c-sub{font-size:12px;color:var(--dim);font-weight:600;margin-top:2px}
+.c-arrow{font-size:12px;color:var(--dim);transition:transform .2s;flex-shrink:0}
+.c-head.open .c-arrow{transform:rotate(180deg)}
+.c-body{display:none;padding:4px 18px 20px;border-top:1px solid var(--border)}
+.c-body.open{display:block;animation:fadeUp .2s ease}
+.c-body p{font-size:16px;color:var(--ink2);line-height:1.85;margin-bottom:12px}
+.c-body p:last-child{margin-bottom:0}
+.c-body strong{color:var(--primary);font-weight:700}
+.c-body em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* ── CONTENT BLOCKS ──────────────────────────────────────────── */
+.fact-box{background:var(--amberPale);border:1.5px solid rgba(138,96,8,.20);border-radius:10px;padding:16px 18px;margin:14px 0}
+.fact-box .fb-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--amber);text-transform:uppercase;margin-bottom:8px}
+.fact-box ul{list-style:none;padding:0}
+.fact-box li{font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;position:relative;line-height:1.7}
+.fact-box li::before{content:'→';position:absolute;left:0;color:var(--amber);font-weight:700;font-size:13px}
+
+.eg-box{background:var(--greenPale);border-left:4px solid var(--green);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.eg-box .eg-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--green);text-transform:uppercase;margin-bottom:6px}
+.eg-box p{font-size:15px;color:var(--ink2);line-height:1.75}
+.eg-box ul{list-style:none;padding:0}
+.eg-box li{font-size:15px;color:var(--ink2);padding:4px 0 4px 18px;position:relative;line-height:1.65}
+.eg-box li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:800;font-size:12px}
+
+.trap-box{background:var(--redPale);border:1.5px solid rgba(138,26,26,.20);border-radius:10px;padding:16px 18px;margin:14px 0}
+.trap-box .tr-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--red);text-transform:uppercase;margin-bottom:8px}
+.trap-box p,.trap-box li{font-size:15.5px;color:var(--ink2);line-height:1.75}
+.trap-box ul{list-style:none;padding:0}
+.trap-box li{padding:5px 0 5px 22px;position:relative}
+.trap-box li::before{content:'⚑';position:absolute;left:0;font-size:12px;color:var(--red)}
+
+.rule-box{background:var(--bluePale);border:1.5px solid rgba(26,60,114,.17);border-radius:10px;padding:16px 18px;margin:14px 0}
+.rule-box .rl-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--blue);text-transform:uppercase;margin-bottom:8px}
+.rule-box p{font-size:15.5px;color:var(--ink2);line-height:1.8}
+.rule-box strong{color:var(--blue)}
+
+.purple-box{background:var(--purplePale);border:1.5px solid rgba(92,32,128,.17);border-radius:10px;padding:16px 18px;margin:14px 0}
+.purple-box .pl-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--purple);text-transform:uppercase;margin-bottom:8px}
+.purple-box ul{list-style:none;padding:0}
+.purple-box li{font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;position:relative;line-height:1.8}
+.purple-box li::before{content:'◆';position:absolute;left:0;font-size:9px;color:var(--purple);top:10px}
+
+.analogy-box{background:var(--primaryPale);border-left:4px solid var(--primary);border-radius:0 8px 8px 0;padding:14px 16px;margin:12px 0}
+.analogy-box .an-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--primary);text-transform:uppercase;margin-bottom:6px}
+.analogy-box p{font-size:15.5px;color:var(--ink2);line-height:1.75}
+.analogy-box strong{color:var(--primary)}
+
+/* nephron filtration strip */
+.journey{margin:16px 0;display:flex;flex-direction:column}
+.j-step{display:flex;align-items:stretch;gap:14px}
+.j-line{display:flex;flex-direction:column;align-items:center;flex-shrink:0;width:28px}
+.j-dot{width:28px;height:28px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0;margin-top:2px}
+.j-connector{width:2px;flex:1;background:var(--border);margin:2px 0}
+.j-step:last-child .j-connector{display:none}
+.j-content{padding:2px 0 18px;flex:1}
+.j-title{font-size:15px;font-weight:800;color:var(--ink);margin-bottom:3px}
+.j-desc{font-size:14.5px;color:var(--ink2);line-height:1.7}
+.j-desc strong{color:var(--primary)}
+.j-desc em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* stat band */
+.stat-band{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border-radius:var(--radius);overflow:hidden;margin:16px 0}
+.stat-cell{background:var(--white);padding:12px 8px;text-align:center}
+.stat-val{font-family:'Lora',serif;font-size:18px;font-weight:700;color:var(--primary);line-height:1;margin-bottom:4px}
+.stat-lbl{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:.4px;line-height:1.3}
+
+.org-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}
+.org-card{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:13px 14px}
+.org-card .org-name{font-size:13px;font-weight:800;color:var(--primary);margin-bottom:4px;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.org-card .org-nick{font-size:11px;font-weight:700;color:var(--amber);background:var(--amberPale);border-radius:4px;padding:1px 7px}
+.org-card p{font-size:14px;color:var(--ink2);line-height:1.6}
+
+.compare-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
+.compare-table th{background:var(--primary);color:#fff;padding:10px 12px;text-align:left;font-size:13px;font-weight:700;letter-spacing:.5px}
+.compare-table td{padding:10px 12px;border:1px solid var(--border);color:var(--ink2);vertical-align:top;line-height:1.65}
+.compare-table tr:nth-child(even) td{background:var(--bg)}
+.compare-table td b{color:var(--primary)}
+
+/* ── QUICK REFERENCE ─────────────────────────────────────────── */
+.ref-grid{display:grid;gap:10px;margin:8px 0}
+.ref-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+.ref-card-title{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--primary);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.ref-card ul{list-style:none;padding:0}
+.ref-card li{font-size:15px;color:var(--ink2);padding:5px 0 5px 16px;position:relative;line-height:1.65;border-bottom:1px solid var(--bg2)}
+.ref-card li:last-child{border-bottom:none}
+.ref-card li::before{content:'·';position:absolute;left:4px;color:var(--primary);font-weight:900;font-size:18px;line-height:1.3}
+.ref-card li b{color:var(--ink);font-weight:700}
+.ref-card li em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* ── QUIZ ────────────────────────────────────────────────────── */
+.quiz-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:16px;box-shadow:var(--shadow)}
+.qs-cell{background:var(--white);padding:12px 8px;text-align:center}
+.qs-val{font-family:'Lora',serif;font-size:22px;font-weight:700;color:var(--primary);line-height:1}
+.qs-val.g{color:var(--green)}.qs-val.r{color:var(--red)}.qs-val.a{color:var(--amber)}
+.qs-lbl{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:1px;margin-top:4px;text-transform:uppercase}
+.prog-wrap{margin-bottom:20px}
+.prog-bar{height:6px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;background:var(--primary);border-radius:3px;transition:width .4s ease;width:0%}
+.prog-label{font-size:12px;color:var(--muted);font-weight:700;margin-bottom:6px}
+.q-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:12px;box-shadow:var(--shadow);overflow:hidden;border-left:4px solid transparent;transition:border-color .15s}
+.q-card.answered{border-left-color:var(--primary)}
+.q-card.correct{border-left-color:var(--green)}
+.q-card.wrong{border-left-color:var(--red)}
+.q-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 16px;background:var(--bg);border-bottom:1px solid var(--border)}
+.q-num{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:1px}
+.q-diff{font-size:10px;font-weight:800;padding:2px 10px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase}
+.diff-e{background:var(--greenPale);color:var(--green)}
+.diff-m{background:var(--amberPale);color:var(--amber)}
+.diff-h{background:var(--redPale);color:var(--red)}
+.q-exam{font-size:11px;color:var(--dim);margin-left:auto;font-weight:600}
+.q-body{padding:16px}
+.q-text{font-size:17px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:14px 16px;cursor:pointer;display:flex;align-items:flex-start;gap:12px;font-size:16px;color:var(--ink2);text-align:left;width:100%;transition:all .15s;-webkit-tap-highlight-color:transparent;min-height:48px;line-height:1.6}
+.opt:hover:not(:disabled){border-color:var(--primary);background:var(--primaryPale)}
+.opt:disabled{cursor:default}
+.opt.sel{border-color:var(--primary);background:var(--primaryPale);color:var(--primary)}
+.opt.ok{border-color:var(--green)!important;background:var(--greenPale)!important;color:var(--green)!important}
+.opt.bad{border-color:var(--red)!important;background:var(--redPale)!important;color:var(--red)!important}
+.opt-lbl{min-width:28px;height:28px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--muted);flex-shrink:0;transition:all .15s}
+.opt.sel .opt-lbl{background:var(--primary);color:#fff;border-color:var(--primary)}
+.opt.ok .opt-lbl{background:var(--green);color:#fff;border-color:var(--green)}
+.opt.bad .opt-lbl{background:var(--red);color:#fff;border-color:var(--red)}
+.exp-panel{display:none;margin-top:12px;background:var(--bg);border-radius:10px;padding:14px 16px;border:1px solid var(--border)}
+.exp-panel.show{display:block;animation:fadeUp .2s ease}
+.exp-tag{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--primary);margin-bottom:6px}
+.exp-rule{font-size:13px;font-weight:800;color:var(--ink);background:var(--primaryPale);border-radius:6px;padding:6px 10px;margin-bottom:8px;border-left:3px solid var(--primary)}
+.exp-panel p{font-size:15px;color:var(--ink2);line-height:1.8}
+.q-foot{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-top:1px solid var(--border);background:var(--bg)}
+.q-status{font-size:12px;font-weight:700}
+.btn{padding:12px 24px;border-radius:10px;font-size:14px;font-weight:800;letter-spacing:.5px;border:none;cursor:pointer;transition:all .15s}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:var(--primaryLt)}
+.btn-ghost{background:var(--bg2);color:var(--ink2);border:1.5px solid var(--border)}
+.btn-ghost:hover{background:var(--bg3)}
+.quiz-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+#results{display:none;background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:20px;box-shadow:var(--shadow-md)}
+.res-hero{text-align:center;padding-bottom:20px;border-bottom:1px solid var(--border);margin-bottom:16px}
+.res-score{font-family:'Lora',serif;font-size:64px;font-weight:700;color:var(--primary);line-height:1}
+.res-grade{font-size:16px;font-weight:800;color:var(--ink);margin:8px 0 6px;letter-spacing:.5px}
+.res-msg{font-size:15px;color:var(--muted)}
+.res-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-kicker">Biology · Lesson B07 · Olive Defence</div>
+  <div class="hero-title">The <span>Excretory System</span></div>
+  <div class="hero-sub">Organs of excretion, kidney structure, nephron filtration, urine formation, osmoregulation and excretory disorders — at CDS, NDA &amp; AFCAT exam depth.</div>
+  <div class="hero-chips">
+    <span class="chip chip-w">CDS</span>
+    <span class="chip chip-w">NDA</span>
+    <span class="chip chip-w">AFCAT</span>
+    <span class="chip chip-t">Kidney</span>
+    <span class="chip chip-g">Nephron</span>
+    <span class="chip chip-t">Osmoregulation</span>
+  </div>
+</div>
+
+<!-- TAB BAR -->
+<div class="tab-bar">
+  <button class="tab on" onclick="switchTab('theory')">📖 Theory</button>
+  <button class="tab" onclick="switchTab('quickref')">⚡ Quick Ref</button>
+  <button class="tab" onclick="switchTab('quiz')">✏️ Quiz</button>
+</div>
+
+<!-- ═══════════════════════════════ THEORY ══════════════════════ -->
+<div class="pane on" id="theory">
+
+  <div class="intro-box">
+    <p><strong>Excretion</strong> is the removal of metabolic waste products from the body. It is different from <strong>egestion</strong> (removal of undigested food). The human excretory system primarily involves the <strong>kidneys</strong> (nitrogenous waste + water balance), but the <strong>lungs</strong> (CO₂), <strong>skin</strong> (salts, water via sweat) and <strong>liver</strong> (urea synthesis, bile pigments) are also organs of excretion.</p>
+  </div>
+
+  <!-- SECTION 1 -->
+  <div class="sec-label">Section 1 — Organs of Excretion</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E0F4F2">🫘</div>
+      <div style="flex:1">
+        <div class="c-title">Overview — All Excretory Organs</div>
+        <div class="c-sub">What each organ excretes and how</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Organ</th><th>Waste Excreted</th><th>Key Point</th></tr>
+          <tr><td><b>Kidneys</b></td><td>Urea, uric acid, creatinine, excess salts and water (as urine)</td><td>Primary excretory organ; also regulates blood pressure and RBC production</td></tr>
+          <tr><td><b>Lungs</b></td><td>CO₂ and water vapour</td><td>Also the organ of external respiration</td></tr>
+          <tr><td><b>Skin (sweat glands)</b></td><td>Water, NaCl, small amounts of urea and lactic acid (as sweat)</td><td>Also helps in thermoregulation; minor excretory role</td></tr>
+          <tr><td><b>Liver</b></td><td>Bile pigments (bilirubin, biliverdin from Hb breakdown); converts ammonia → urea</td><td>Synthesises urea (urea cycle); bile pigments excreted via faeces</td></tr>
+          <tr><td><b>Large intestine</b></td><td>Bile salts, bile pigments, some minerals (Ca, Fe, Mg) via faeces</td><td>Minor route; not a primary excretory organ</td></tr>
+        </table>
+      </div>
+      <div class="fact-box">
+        <div class="fb-label">Types of Nitrogenous Waste — Excretory Patterns</div>
+        <ul>
+          <li><strong>Ammonotelic</strong> — excretes <em>ammonia</em> directly; most toxic, needs lots of water. Examples: bony fish, aquatic invertebrates</li>
+          <li><strong>Ureotelic</strong> — excretes <em>urea</em>; less toxic than ammonia; moderately water soluble. Examples: <strong>humans, mammals, adult amphibians, cartilaginous fish</strong></li>
+          <li><strong>Uricotelic</strong> — excretes <em>uric acid</em>; least toxic; almost insoluble in water; least water required. Examples: <strong>birds, reptiles, insects, terrestrial snails</strong></li>
+        </ul>
+      </div>
+      <div class="trap-box">
+        <div class="tr-label">⚑ Exam Trap — Excretion vs Egestion</div>
+        <p><strong>Excretion</strong> = removal of <strong>metabolic waste</strong> produced by body cells (e.g., urea from amino acid breakdown, CO₂ from respiration). <strong>Egestion</strong> = removal of <strong>undigested food</strong> material via the anus (faeces). Faeces is NOT metabolic waste — it was never absorbed. Most exam MCQs deliberately try to confuse these two terms.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="sec-label">Section 2 — The Kidneys</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E0F4F2">🫘</div>
+      <div style="flex:1">
+        <div class="c-title">Kidney — Structure &amp; Key Facts</div>
+        <div class="c-sub">Position, gross anatomy and blood supply</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>Humans have two <strong>bean-shaped kidneys</strong> located in the <strong>retroperitoneal</strong> space (behind the peritoneum) on either side of the vertebral column. The <strong>right kidney</strong> is slightly lower than the left (displaced downward by the liver).</p>
+
+      <div class="stat-band">
+        <div class="stat-cell"><div class="stat-val">10–12 cm</div><div class="stat-lbl">Kidney length</div></div>
+        <div class="stat-cell"><div class="stat-val">~150 g</div><div class="stat-lbl">Weight each</div></div>
+        <div class="stat-cell"><div class="stat-val">~1 million</div><div class="stat-lbl">Nephrons per kidney</div></div>
+        <div class="stat-cell"><div class="stat-val">1–1.8 L</div><div class="stat-lbl">Urine per day</div></div>
+      </div>
+
+      <div class="fact-box">
+        <div class="fb-label">Gross Anatomy of the Kidney</div>
+        <ul>
+          <li><strong>Cortex</strong> — outer region; contains <em>Bowman's capsule, glomerulus</em> and proximal + distal convoluted tubules of nephrons; lighter in colour</li>
+          <li><strong>Medulla</strong> — inner region; contains <em>loops of Henle and collecting ducts</em>; organised into cone-shaped <strong>renal pyramids</strong></li>
+          <li><strong>Pelvis (Renal pelvis)</strong> — funnel-shaped chamber at hilum; collects urine from medulla → ureter</li>
+          <li><strong>Hilum</strong> — medial indentation; entry/exit point for renal artery, renal vein, ureter and nerves</li>
+          <li>Each kidney is covered by a <strong>fibrous renal capsule</strong></li>
+        </ul>
+      </div>
+
+      <div class="rule-box">
+        <div class="rl-label">Kidney's Blood Supply — Extraordinarily Rich</div>
+        <p>The kidneys receive about <strong>20–25% of cardiac output</strong> (~1.2 L/min) despite being small organs. Blood enters via the <strong>renal artery</strong> (from the aorta) and leaves via the <strong>renal vein</strong> (to the inferior vena cava). This massive blood supply allows the kidneys to filter the entire blood volume approximately <strong>60 times per day</strong>. Glomerular Filtration Rate (GFR) = ~125 mL/min = ~180 litres/day of filtrate.</p>
+      </div>
+
+      <div class="eg-box">
+        <div class="eg-label">The Urinary Tract — Path of Urine</div>
+        <ul>
+          <li>Kidney → <strong>ureter</strong> (muscular tube, peristalsis moves urine down) → <strong>urinary bladder</strong> (stores 300–500 mL) → <strong>urethra</strong> (exits body)</li>
+          <li>Urethra length: males ~20 cm · females ~4 cm (shorter → more prone to UTIs)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="sec-label">Section 3 — The Nephron: Structural &amp; Functional Unit</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E0F4F2">🔬</div>
+      <div style="flex:1">
+        <div class="c-title">Nephron — Structure</div>
+        <div class="c-sub">The filtration unit — every part and its location</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>The <strong>nephron</strong> is the structural and functional unit of the kidney. Each kidney contains about <strong>1 million nephrons</strong>. A nephron consists of a <strong>renal corpuscle</strong> (Bowman's capsule + glomerulus) and a <strong>renal tubule</strong>.</p>
+
+      <div class="org-grid">
+        <div class="org-card">
+          <div class="org-name">Glomerulus <span class="org-nick">Cortex</span></div>
+          <p>Tuft of <strong>capillaries</strong> enclosed in Bowman's capsule. Site of <strong>ultrafiltration</strong>. Blood pressure forces fluid out of capillaries into the capsular space.</p>
+        </div>
+        <div class="org-card">
+          <div class="org-name">Bowman's Capsule <span class="org-nick">Cortex</span></div>
+          <p>Cup-shaped double-walled structure surrounding the glomerulus. Collects the <strong>glomerular filtrate</strong>. Inner layer = podocytes (filtration cells).</p>
+        </div>
+        <div class="org-card">
+          <div class="org-name">PCT <span class="org-nick">Cortex</span></div>
+          <p><strong>Proximal Convoluted Tubule</strong>. First reabsorption zone. Reabsorbs ~65–70% of filtered water, glucose, amino acids, Na⁺ and other ions.</p>
+        </div>
+        <div class="org-card">
+          <div class="org-name">Loop of Henle <span class="org-nick">Medulla</span></div>
+          <p>Hairpin-shaped tubule dipping into the medulla. Creates a <strong>concentration gradient</strong> in the medullary interstitium. Descending limb permeable to water; ascending limb impermeable to water (pumps ions out).</p>
+        </div>
+        <div class="org-card">
+          <div class="org-name">DCT <span class="org-nick">Cortex</span></div>
+          <p><strong>Distal Convoluted Tubule</strong>. Fine-tunes reabsorption of water and Na⁺ under hormonal control (ADH, aldosterone). Also secretes H⁺ and K⁺ ions.</p>
+        </div>
+        <div class="org-card">
+          <div class="org-name">Collecting Duct <span class="org-nick">Medulla</span></div>
+          <p>Final concentration of urine. Very responsive to <strong>ADH (Antidiuretic Hormone)</strong>. Drains into renal pelvis. Multiple nephrons share one collecting duct.</p>
+        </div>
+      </div>
+
+      <div class="fact-box">
+        <div class="fb-label">Two Types of Nephron</div>
+        <ul>
+          <li><strong>Cortical nephrons (~85%)</strong> — glomerulus in outer cortex; short loop of Henle that barely enters medulla; mainly involved in filtration</li>
+          <li><strong>Juxtamedullary nephrons (~15%)</strong> — glomerulus near corticomedullary junction; long loop of Henle that dips deep into medulla; essential for producing <strong>concentrated urine</strong>; have vasa recta (capillary loops alongside loop of Henle)</li>
+        </ul>
+      </div>
+
+      <div class="analogy-box">
+        <div class="an-label">Think of it this way</div>
+        <p>The nephron is like a <strong>highly selective coffee filter</strong>. First, everything (blood minus large proteins and cells) is forced through (filtration). Then the filter carefully <strong>takes back</strong> useful things like glucose, water and amino acids (reabsorption). Finally, a few extra toxins are <strong>added in</strong> through the wall (secretion). What remains is urine — exactly what the body doesn't need.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="sec-label">Section 4 — Urine Formation: Three Processes</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E6EEF8">💧</div>
+      <div style="flex:1">
+        <div class="c-title">Glomerular Filtration — Step 1</div>
+        <div class="c-sub">Ultrafiltration under hydrostatic pressure</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p><strong>Glomerular filtration</strong> is the first step — blood is filtered under high pressure as it passes through the glomerular capillaries into Bowman's capsule. The process is <strong>non-selective</strong> for small molecules.</p>
+      <div class="rule-box">
+        <div class="rl-label">What Passes Into the Filtrate vs What Stays in Blood</div>
+        <p><strong>Passes into filtrate (glomerular filtrate):</strong> water, glucose, amino acids, urea, uric acid, creatinine, ions (Na⁺, K⁺, Cl⁻), small hormones.<br><strong>Stays in blood (cannot pass):</strong> <strong>plasma proteins</strong> (albumin, globulin — too large), <strong>RBCs and WBCs</strong> (too large). <br>Filtrate is essentially <strong>plasma minus proteins and cells</strong>.</p>
+      </div>
+      <div class="stat-band">
+        <div class="stat-cell"><div class="stat-val">125 mL/min</div><div class="stat-lbl">GFR (normal)</div></div>
+        <div class="stat-cell"><div class="stat-val">180 L/day</div><div class="stat-lbl">Filtrate formed</div></div>
+        <div class="stat-cell"><div class="stat-val">1–1.8 L/day</div><div class="stat-lbl">Urine produced</div></div>
+        <div class="stat-cell"><div class="stat-val">&gt;99%</div><div class="stat-lbl">Filtrate reabsorbed</div></div>
+      </div>
+      <div class="trap-box">
+        <div class="tr-label">⚑ Exam Trap</div>
+        <p>The kidneys filter ~<strong>180 litres</strong> of filtrate per day but produce only ~<strong>1.5 litres of urine</strong>. This means over <strong>99%</strong> of the filtrate is reabsorbed. If proteins appear in urine (<strong>proteinuria</strong>), it indicates damaged glomerular filtration membrane — a sign of kidney disease.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E6EEF8">♻️</div>
+      <div style="flex:1">
+        <div class="c-title">Tubular Reabsorption — Step 2</div>
+        <div class="c-sub">Reclaiming useful substances from filtrate back into blood</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>As filtrate flows through the tubules, useful substances are <strong>transported back into the peritubular capillaries</strong> (capillary network surrounding the tubules). This is a highly selective and energy-dependent process.</p>
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Tubule Segment</th><th>What is Reabsorbed</th><th>Mechanism</th></tr>
+          <tr><td><b>PCT</b></td><td>Glucose (all), amino acids (all), ~65–70% water, Na⁺, K⁺, HCO₃⁻, Cl⁻, urea (some)</td><td>Active transport (Na⁺ pump drives most); obligatory water reabsorption</td></tr>
+          <tr><td><b>Descending Loop of Henle</b></td><td>Water (passively)</td><td>Osmosis — hyperosmotic medullary interstitium draws water out</td></tr>
+          <tr><td><b>Ascending Loop of Henle</b></td><td>Na⁺, K⁺, Cl⁻ (ions, NOT water)</td><td>Active (thick limb); impermeable to water</td></tr>
+          <tr><td><b>DCT</b></td><td>Na⁺ (aldosterone-controlled), water (ADH-controlled), HCO₃⁻; secretes H⁺ and K⁺</td><td>Hormonally regulated</td></tr>
+          <tr><td><b>Collecting Duct</b></td><td>Water (ADH-controlled), urea (some)</td><td>ADH makes duct permeable to water → concentrated urine</td></tr>
+        </table>
+      </div>
+      <div class="trap-box">
+        <div class="tr-label">⚑ Key Reabsorption Traps</div>
+        <ul>
+          <li><strong>Glucose is completely reabsorbed</strong> in the PCT in normal conditions — therefore, no glucose in normal urine. Glucose appears in urine (<strong>glucosuria</strong>) only when blood glucose exceeds the <strong>renal threshold (~180 mg/dL)</strong> as in diabetes mellitus.</li>
+          <li><strong>Ascending limb of loop of Henle is impermeable to water</strong> — it actively pumps out ions (Na⁺, K⁺, Cl⁻) to create the medullary concentration gradient needed for water reabsorption in the collecting duct.</li>
+          <li>Urea is NOT fully reabsorbed — it is the main nitrogenous waste in urine.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E6EEF8">➕</div>
+      <div style="flex:1">
+        <div class="c-title">Tubular Secretion — Step 3</div>
+        <div class="c-sub">Moving extra waste from blood into the tubule</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p><strong>Tubular secretion</strong> is the movement of substances <strong>from peritubular capillaries into the tubule lumen</strong>. This is essentially the opposite of reabsorption — it adds more waste to the filtrate for excretion.</p>
+      <div class="fact-box">
+        <div class="fb-label">Substances Secreted Into Tubules</div>
+        <ul>
+          <li><strong>H⁺ ions</strong> — helps regulate blood pH (acid-base balance)</li>
+          <li><strong>K⁺ ions</strong> — regulated by aldosterone; DCT secretes K⁺ when Na⁺ is reabsorbed</li>
+          <li><strong>Ammonia (NH₃)</strong> — produced by tubule cells; combines with H⁺ → NH₄⁺ for excretion</li>
+          <li><strong>Creatinine</strong> — metabolic waste from muscle; both filtered AND secreted</li>
+          <li><strong>Drugs and foreign substances</strong> — penicillin, aspirin, certain toxins</li>
+          <li>Tubular secretion is why <strong>creatinine clearance</strong> slightly overestimates GFR</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5 -->
+  <div class="sec-label">Section 5 — Hormonal Regulation of Kidney Function</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#F0E8F8">🧪</div>
+      <div style="flex:1">
+        <div class="c-title">ADH, Aldosterone &amp; the RAAS</div>
+        <div class="c-sub">The hormones that control urine concentration</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Hormone</th><th>Source</th><th>Stimulus</th><th>Action on Kidney</th><th>Effect</th></tr>
+          <tr><td><b>ADH (Antidiuretic Hormone / Vasopressin)</b></td><td>Hypothalamus (stored in posterior pituitary)</td><td>↑ blood osmolarity (dehydration); ↓ blood volume</td><td>Makes collecting duct &amp; DCT permeable to water → water reabsorbed</td><td>↓ urine volume; <b>concentrated urine</b></td></tr>
+          <tr><td><b>Aldosterone</b></td><td>Adrenal cortex</td><td>↑ angiotensin II; ↓ blood Na⁺; ↑ blood K⁺</td><td>↑ Na⁺ reabsorption and K⁺ secretion in DCT and collecting duct</td><td>↑ blood volume and pressure; dilute urine</td></tr>
+          <tr><td><b>ANP (Atrial Natriuretic Peptide)</b></td><td>Heart atria (when stretched by high BP)</td><td>↑ blood pressure/volume</td><td>↑ Na⁺ and water excretion; ↓ aldosterone release</td><td>↓ blood pressure; ↑ urine volume</td></tr>
+          <tr><td><b>PTH (Parathyroid Hormone)</b></td><td>Parathyroid glands</td><td>↓ blood Ca²⁺</td><td>↑ Ca²⁺ reabsorption in DCT; ↑ phosphate excretion</td><td>↑ blood calcium</td></tr>
+        </table>
+      </div>
+      <div class="purple-box">
+        <div class="pl-label">RAAS — Renin-Angiotensin-Aldosterone System</div>
+        <ul>
+          <li>↓ Blood pressure / ↓ Na⁺ detected by <strong>juxtaglomerular (JG) cells</strong> in afferent arteriole</li>
+          <li>JG cells secrete <strong>Renin</strong> (enzyme)</li>
+          <li>Renin converts <strong>Angiotensinogen</strong> (liver) → <strong>Angiotensin I</strong></li>
+          <li>Angiotensin I → <strong>Angiotensin II</strong> (by ACE — Angiotensin Converting Enzyme, mainly in lungs)</li>
+          <li>Angiotensin II: (a) stimulates adrenal cortex → <strong>Aldosterone</strong> → Na⁺ reabsorption → ↑ BP, (b) causes vasoconstriction → ↑ BP directly</li>
+          <li><strong>ACE inhibitors</strong> (e.g., enalapril) block this pathway → used as antihypertensive drugs</li>
+        </ul>
+      </div>
+      <div class="trap-box">
+        <div class="tr-label">⚑ ADH vs Aldosterone — The Most Tested Pair</div>
+        <ul>
+          <li><strong>ADH</strong> controls <em>water</em> reabsorption (responds to osmolarity/dehydration). Absent ADH → <strong>Diabetes Insipidus</strong> (large volumes of very dilute urine, up to 20 L/day — NOT diabetes mellitus which is about glucose)</li>
+          <li><strong>Aldosterone</strong> controls <em>sodium</em> reabsorption (responds to blood pressure/volume via RAAS)</li>
+          <li>Both act on DCT and collecting duct — but for different substances and different stimuli.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6 -->
+  <div class="sec-label">Section 6 — Composition &amp; Properties of Urine</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#FDF4DC">🧫</div>
+      <div style="flex:1">
+        <div class="c-title">Normal Urine Composition</div>
+        <div class="c-sub">What's in urine — and what should never be there</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Property / Component</th><th>Normal Value / Finding</th></tr>
+          <tr><td><b>Colour</b></td><td>Pale yellow (due to urochrome pigment)</td></tr>
+          <tr><td><b>pH</b></td><td>4.6–8.0; average ~6.0 (slightly acidic)</td></tr>
+          <tr><td><b>Specific gravity</b></td><td>1.001–1.035</td></tr>
+          <tr><td><b>Volume</b></td><td>1–1.8 litres/day (varies with fluid intake)</td></tr>
+          <tr><td><b>Water</b></td><td>~95%</td></tr>
+          <tr><td><b>Urea</b></td><td>~2% — main nitrogenous waste</td></tr>
+          <tr><td><b>Creatinine</b></td><td>Present — from muscle metabolism; used to measure GFR</td></tr>
+          <tr><td><b>Uric acid</b></td><td>Small amounts</td></tr>
+          <tr><td><b>Salts (Na⁺, K⁺, Cl⁻)</b></td><td>Present (variable with diet)</td></tr>
+          <tr><td><b>Glucose</b></td><td><b>Absent</b> (completely reabsorbed in PCT)</td></tr>
+          <tr><td><b>Proteins</b></td><td><b>Absent</b> (too large to filter)</td></tr>
+          <tr><td><b>RBCs / WBCs</b></td><td><b>Absent</b> in normal urine</td></tr>
+        </table>
+      </div>
+      <div class="trap-box">
+        <div class="tr-label">⚑ Abnormal Urine — Clinical Significance</div>
+        <ul>
+          <li><strong>Glucosuria</strong> (glucose in urine) → Diabetes mellitus (blood glucose &gt; renal threshold ~180 mg/dL)</li>
+          <li><strong>Proteinuria</strong> (protein in urine) → Glomerulonephritis, nephrotic syndrome (damaged filter)</li>
+          <li><strong>Haematuria</strong> (blood/RBCs in urine) → Kidney stones, infection, cancer</li>
+          <li><strong>Ketonuria</strong> (ketone bodies) → Uncontrolled diabetes, starvation</li>
+          <li><strong>Bilirubinuria</strong> (bilirubin in urine) → Liver disease, obstructive jaundice</li>
+          <li><strong>Polyuria</strong> (excess urine &gt;3 L/day) → Diabetes insipidus, diabetes mellitus</li>
+          <li><strong>Oliguria</strong> (&lt;400 mL/day) → Dehydration, acute kidney failure</li>
+          <li><strong>Anuria</strong> (&lt;100 mL/day) → Complete kidney failure, medical emergency</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 7 -->
+  <div class="sec-label">Section 7 — Kidney Disorders &amp; Treatments</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#FAEAEA">🩺</div>
+      <div style="flex:1">
+        <div class="c-title">Renal Disorders &amp; Applied Facts</div>
+        <div class="c-sub">Stones, failure, dialysis and transplant</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Condition</th><th>Cause / Mechanism</th><th>Key Exam Point</th></tr>
+          <tr><td><b>Renal Calculi (Kidney Stones)</b></td><td>Precipitation of salts (calcium oxalate most common) in renal pelvis or ureter</td><td>Severe flank pain (renal colic); haematuria; may obstruct urine flow</td></tr>
+          <tr><td><b>Glomerulonephritis</b></td><td>Inflammation of glomeruli; often post-streptococcal; immune complex deposition</td><td>Proteinuria, haematuria, oedema; can progress to renal failure</td></tr>
+          <tr><td><b>Nephrotic Syndrome</b></td><td>Massive proteinuria (&gt;3.5g/day) → low plasma proteins → oedema</td><td>Generalised oedema (anasarca), especially periorbital (around eyes); frothy urine</td></tr>
+          <tr><td><b>Urinary Tract Infection (UTI)</b></td><td>Bacterial infection (E. coli most common); more frequent in females (short urethra)</td><td>Dysuria, frequency, urgency; can ascend to kidneys (pyelonephritis)</td></tr>
+          <tr><td><b>Acute Kidney Injury (AKI)</b></td><td>Sudden loss of kidney function; dehydration, infection, toxins, obstruction</td><td>Rapidly rising creatinine and urea; oliguria/anuria; reversible</td></tr>
+          <tr><td><b>Chronic Kidney Disease (CKD)</b></td><td>Gradual loss of kidney function (diabetes, hypertension most common causes)</td><td>GFR progressively falls; irreversible; leads to end-stage renal disease (ESRD)</td></tr>
+          <tr><td><b>Gout</b></td><td>Excess uric acid in blood (hyperuricaemia) → urate crystals deposit in joints</td><td>Intensely painful joints especially big toe; treated with allopurinol</td></tr>
+        </table>
+      </div>
+      <div class="rule-box">
+        <div class="rl-label">Dialysis — Artificial Kidney</div>
+        <p><strong>Haemodialysis</strong>: blood is removed from the body and filtered through an artificial semipermeable membrane (dialyser) which removes waste products (urea, creatinine, excess ions) by diffusion into the dialysis fluid. The cleaned blood is returned to the body. Typically done 3 times/week for 3–4 hours per session for patients with ESRD.</p>
+        <p style="margin-top:10px"><strong>Peritoneal dialysis</strong>: the peritoneum (abdominal membrane) is used as the dialysing membrane; dialysis fluid is infused into the abdominal cavity, waste diffuses into the fluid, which is then drained out. Can be done at home.</p>
+      </div>
+      <div class="eg-box">
+        <div class="eg-label">Kidney Transplant — Key Facts</div>
+        <ul>
+          <li>Best treatment for end-stage renal disease; one functioning kidney is sufficient for survival</li>
+          <li>Recipient needs <strong>immunosuppressive drugs</strong> lifelong to prevent rejection</li>
+          <li>Donor kidney can be from a <strong>living donor</strong> (related/unrelated) or <strong>cadaveric donor</strong></li>
+          <li>India has the 3rd highest number of kidney transplants globally</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 8 -->
+  <div class="sec-label">Section 8 — Other Excretory Routes &amp; Osmoregulation</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E4F4EC">🌡️</div>
+      <div style="flex:1">
+        <div class="c-title">Osmoregulation &amp; Excretion in Other Animals</div>
+        <div class="c-sub">Comparative excretory organs across the animal kingdom</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p><strong>Osmoregulation</strong> is the process of maintaining the osmotic concentration (water and ion balance) of body fluids. In humans, the kidneys are the primary osmoregulatory organs, controlled mainly by ADH and aldosterone.</p>
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Animal Group</th><th>Excretory Organ</th><th>Waste Product</th></tr>
+          <tr><td><b>Protozoa (Amoeba, Paramecium)</b></td><td>Contractile vacuole (osmotic regulation); diffusion through cell surface</td><td>Ammonia</td></tr>
+          <tr><td><b>Flatworms (Planaria)</b></td><td>Flame cells (protonephridia)</td><td>Ammonia</td></tr>
+          <tr><td><b>Earthworm</b></td><td>Nephridia (segmental)</td><td>Urea / ammonia</td></tr>
+          <tr><td><b>Insects</b></td><td>Malpighian tubules</td><td>Uric acid</td></tr>
+          <tr><td><b>Crustaceans (Prawn, Crab)</b></td><td>Green glands (antennal glands)</td><td>Ammonia</td></tr>
+          <tr><td><b>Bony fish (teleosts)</b></td><td>Kidneys + gills + skin</td><td>Ammonia (mainly via gills)</td></tr>
+          <tr><td><b>Reptiles &amp; Birds</b></td><td>Kidneys (metanephros)</td><td>Uric acid (paste-like; conserves water)</td></tr>
+          <tr><td><b>Mammals (including humans)</b></td><td>Kidneys (metanephros)</td><td>Urea (dissolved in urine)</td></tr>
+        </table>
+      </div>
+      <div class="fact-box">
+        <div class="fb-label">Additional Excretory Functions — Skin &amp; Liver</div>
+        <ul>
+          <li><strong>Skin</strong> — sweat glands produce sweat: mainly water and NaCl; also small amounts of urea and lactic acid. Sweat is primarily for <strong>thermoregulation</strong>, with excretion being a secondary function</li>
+          <li><strong>Liver</strong> — converts toxic <strong>ammonia → urea</strong> (via the <strong>ornithine cycle / urea cycle</strong>); bile pigments (bilirubin from Hb breakdown) excreted via bile into intestine → faeces give brown colour</li>
+          <li><strong>Lungs</strong> — excrete CO₂ (~200 mL/min) and water vapour; primary function is gas exchange but CO₂ elimination = excretory function</li>
+        </ul>
+      </div>
+      <div class="trap-box">
+        <div class="tr-label">⚑ Malpighian Tubules — Frequently Tested</div>
+        <p><strong>Malpighian tubules</strong> are the excretory organs of <strong>insects and spiders</strong> (arachnids). They are slender tubules arising from the junction of the midgut and hindgut. They absorb nitrogenous waste from the haemolymph (insect blood) and release uric acid into the hindgut, where water is reabsorbed. This allows insects to excrete nearly dry waste — a key adaptation to terrestrial life. Named after Marcello Malpighi.</p>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /theory -->
+
+<!-- ═══════════════════════════════ QUICK REF ════════════════════ -->
+<div class="pane" id="quickref">
+  <div class="ref-grid">
+
+    <div class="ref-card">
+      <div class="ref-card-title">Excretory Types &amp; Organs</div>
+      <ul>
+        <li><b>Ammonotelic</b> — ammonia; bony fish, aquatic invertebrates</li>
+        <li><b>Ureotelic</b> — urea; humans, mammals, adult amphibians</li>
+        <li><b>Uricotelic</b> — uric acid; birds, reptiles, insects</li>
+        <li>Excretion ≠ Egestion — metabolic waste vs undigested food</li>
+        <li>Malpighian tubules — insects &amp; spiders; uric acid</li>
+        <li>Flame cells — flatworms · Nephridia — earthworm · Green glands — crustaceans</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Kidney — Numbers &amp; Anatomy</div>
+      <ul>
+        <li>~1 million nephrons per kidney; right kidney slightly lower than left</li>
+        <li>GFR = <em>125 mL/min</em> = 180 L/day filtrate; only ~1.5 L urine produced</li>
+        <li>Cortex: glomerulus, PCT, DCT · Medulla: loop of Henle, collecting duct</li>
+        <li>Hilum: entry point for renal artery, renal vein, ureter</li>
+        <li>Juxtamedullary nephrons (15%) — produce concentrated urine via long loop</li>
+        <li>Kidneys receive ~<em>20–25% of cardiac output</em> (~1.2 L/min)</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Urine Formation — 3 Steps</div>
+      <ul>
+        <li><b>Filtration</b> (Bowman's capsule) — plasma minus proteins/cells = filtrate</li>
+        <li><b>Reabsorption</b> — PCT reabsorbs all glucose, amino acids, 65–70% water</li>
+        <li>Ascending loop: impermeable to water; pumps Na⁺/K⁺/Cl⁻ ions out</li>
+        <li><b>Secretion</b> — H⁺, K⁺, NH₃, creatinine, drugs added to filtrate</li>
+        <li>Glucosuria: blood glucose &gt; renal threshold <em>180 mg/dL</em></li>
+        <li>Normal urine: water 95%, urea 2%, creatinine, salts; NO glucose/protein</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Hormonal Regulation</div>
+      <ul>
+        <li><b>ADH (Vasopressin)</b> — dehydration → posterior pituitary → DCT/CD water reabsorption → concentrated urine</li>
+        <li>No ADH → <em>Diabetes Insipidus</em> (large dilute urine; NOT blood glucose)</li>
+        <li><b>Aldosterone</b> — adrenal cortex → Na⁺ reabsorption; K⁺ secretion in DCT</li>
+        <li>RAAS: ↓BP → JG cells → Renin → Angiotensin I → ACE → Angiotensin II → Aldosterone</li>
+        <li><b>ANP</b> — heart stretches → ↑ Na⁺ excretion → ↓ BP</li>
+        <li>ACE inhibitors block RAAS → antihypertensive drugs</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Abnormal Urine — Clinical Links</div>
+      <ul>
+        <li><b>Glucosuria</b> → Diabetes mellitus</li>
+        <li><b>Proteinuria</b> → Glomerulonephritis / nephrotic syndrome</li>
+        <li><b>Haematuria</b> → Kidney stones, infection, cancer</li>
+        <li><b>Polyuria</b> (&gt;3 L/day) → Diabetes insipidus or mellitus</li>
+        <li><b>Oliguria</b> (&lt;400 mL/day) → Dehydration / AKI</li>
+        <li><b>Anuria</b> (&lt;100 mL/day) → Complete kidney failure (emergency)</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Disorders &amp; Treatments</div>
+      <ul>
+        <li><b>Kidney stones</b> — calcium oxalate most common; flank pain, haematuria</li>
+        <li><b>Gout</b> — excess uric acid → joint crystals; big toe; treated with allopurinol</li>
+        <li><b>UTI</b> — E. coli; more in females (short urethra); dysuria, frequency</li>
+        <li><b>CKD</b> — diabetes + hypertension = top 2 causes; irreversible</li>
+        <li><b>Dialysis</b> — haemodialysis (machine) or peritoneal dialysis (abdominal membrane)</li>
+        <li>Urea cycle (liver): ammonia → urea; aka ornithine cycle</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════════════════════ QUIZ ════════════════════════ -->
+<div class="pane" id="quiz">
+
+  <div class="quiz-stats">
+    <div class="qs-cell"><div class="qs-val" id="s-att">0</div><div class="qs-lbl">Attempted</div></div>
+    <div class="qs-cell"><div class="qs-val g" id="s-cor">0</div><div class="qs-lbl">Correct</div></div>
+    <div class="qs-cell"><div class="qs-val r" id="s-wrg">0</div><div class="qs-lbl">Wrong</div></div>
+    <div class="qs-cell"><div class="qs-val a" id="s-tot">15</div><div class="qs-lbl">Total</div></div>
+  </div>
+
+  <div class="prog-wrap">
+    <div class="prog-label" id="prog-label">0 of 15 answered</div>
+    <div class="prog-bar"><div class="prog-fill" id="prog"></div></div>
+  </div>
+
+  <div class="quiz-actions">
+    <button class="btn btn-primary" onclick="submitAll()">Submit All &amp; Check</button>
+    <button class="btn btn-ghost" onclick="resetQuiz()">↺ Reset Quiz</button>
+  </div>
+
+  <div id="results"></div>
+  <div id="q-area"></div>
+
+</div>
+</div><!-- /page -->
+
+<script>
+const QS = [
+
+{d:'EASY',e:'NDA 2023',
+q:'The structural and functional unit of the kidney is the:',
+opts:['Nephron','Glomerulus','Bowman\'s capsule','Loop of Henle'],ans:0,
+rule:'Nephron = structural AND functional unit of kidney; ~1 million per kidney',
+exp:'The nephron is the structural and functional unit of the kidney. Each kidney contains approximately 1 million nephrons. A nephron consists of a renal corpuscle (Bowman\'s capsule enclosing the glomerulus) and a renal tubule (PCT → Loop of Henle → DCT → Collecting duct). The glomerulus is only one component of the nephron (the filtering capillary tuft). Bowman\'s capsule is the cup-shaped structure surrounding the glomerulus. The Loop of Henle is a section of the tubule. Together, these structures form the nephron.'},
+
+{d:'EASY',e:'CDS 2022',
+q:'Which nitrogenous waste product is primarily excreted by birds and reptiles?',
+opts:['Ammonia','Urea','Uric acid','Creatinine'],ans:2,
+rule:'Birds and reptiles = uricotelic → excrete uric acid; conserves water; paste-like waste',
+exp:'Birds and reptiles are URICOTELIC — they excrete nitrogenous waste mainly as URIC ACID. Uric acid is the least toxic form of nitrogenous waste and is nearly insoluble in water, so it can be excreted as a semi-solid paste with minimal water loss. This is a critical adaptation for terrestrial and flying animals where water conservation is essential. Humans and mammals are UREOTELIC (excrete urea). Most aquatic animals (bony fish) are AMMONOTELIC (excrete ammonia, which requires large amounts of water to dilute its toxicity).'},
+
+{d:'EASY',e:'AFCAT 2023',
+q:'Which hormone is responsible for increasing water reabsorption in the collecting duct and distal convoluted tubule of the nephron?',
+opts:['Aldosterone','Insulin','ADH (Antidiuretic Hormone)','Glucagon'],ans:2,
+rule:'ADH (Vasopressin) → makes DCT and collecting duct permeable to water → concentrated urine',
+exp:'ADH (Antidiuretic Hormone), also called vasopressin, is produced by the hypothalamus and stored in the posterior pituitary. When blood osmolarity increases (dehydration) or blood volume falls, ADH is released. It makes the collecting duct and DCT more permeable to water by inserting water channels (aquaporins) into their cell membranes. Water then moves by osmosis from the filtrate back into the blood, producing small volumes of concentrated urine. Absence or deficiency of ADH causes Diabetes Insipidus — large volumes (up to 20 L/day) of very dilute urine. Aldosterone controls sodium, not water directly.'},
+
+{d:'EASY',e:'CDS 2023',
+q:'The excretory organs of insects are:',
+opts:['Nephridia','Green glands','Malpighian tubules','Flame cells'],ans:2,
+rule:'Malpighian tubules = excretory organs of insects and spiders; excrete uric acid',
+exp:'Malpighian tubules are the excretory organs of INSECTS (and arachnids/spiders). They are slender tubules that open into the junction of the midgut and hindgut. They absorb nitrogenous waste (uric acid) from the haemolymph (insect blood) and pass it into the hindgut, where water is reabsorbed, leaving semi-solid uric acid to be excreted. This is an excellent water-conserving adaptation. Named after Italian scientist Marcello Malpighi. Nephridia are the excretory organs of earthworms. Green glands (antennal glands) are found in crustaceans. Flame cells are found in flatworms (Planaria).'},
+
+{d:'EASY',e:'NDA 2022',
+q:'Glucose is normally absent in human urine because:',
+opts:[
+  'Glucose is too large to be filtered in the glomerulus',
+  'All filtered glucose is completely reabsorbed in the proximal convoluted tubule',
+  'Glucose is converted to urea before reaching the kidney',
+  'The kidney does not allow glucose to enter the filtrate at all'
+],ans:1,
+rule:'All filtered glucose is 100% reabsorbed in PCT under normal blood glucose levels',
+exp:'Glucose is a small molecule and IS freely filtered through the glomerulus into the filtrate. However, the proximal convoluted tubule (PCT) has sodium-glucose cotransporters (SGLT2) that completely reabsorb ALL filtered glucose back into the blood under normal conditions. So while glucose enters the filtrate, none reaches the urine. This normal maximum reabsorption capacity is called the renal threshold for glucose (~180 mg/dL). When blood glucose exceeds this threshold (as in diabetes mellitus), the transporters become saturated and glucose spills into urine (glucosuria). Glucosuria is therefore a classic sign of uncontrolled diabetes mellitus.'},
+
+{d:'MEDIUM',e:'CDS 2023',
+q:'The process of ultrafiltration in the kidney takes place in the:',
+opts:[
+  'Proximal convoluted tubule',
+  'Loop of Henle',
+  'Glomerulus and Bowman\'s capsule',
+  'Distal convoluted tubule'
+],ans:2,
+rule:'Ultrafiltration = Glomerulus (pressure filtration) + Bowman\'s capsule (collects filtrate)',
+exp:'Ultrafiltration occurs at the GLOMERULUS — a tuft of fenestrated (leaky) capillaries enclosed within Bowman\'s capsule. Blood enters the glomerulus via the afferent arteriole under HIGH hydrostatic pressure (aided by the narrower efferent arteriole). This pressure forces water, small molecules (glucose, amino acids, ions, urea, uric acid) through the glomerular filtration membrane into Bowman\'s capsular space. Large molecules (plasma proteins) and blood cells cannot pass through. The rate at which this filtrate is produced is the Glomerular Filtration Rate (GFR) = ~125 mL/min = ~180 L/day. The PCT, Loop of Henle, and DCT are all tubular reabsorption/secretion regions, NOT filtration sites.'},
+
+{d:'MEDIUM',e:'AFCAT 2022',
+q:'Which of the following correctly describes the function of aldosterone?',
+opts:[
+  'It promotes water reabsorption in the collecting duct by increasing aquaporin expression',
+  'It promotes sodium reabsorption and potassium secretion in the DCT and collecting duct',
+  'It increases urine output by inhibiting Na⁺ reabsorption',
+  'It is secreted by the posterior pituitary in response to dehydration'
+],ans:1,
+rule:'Aldosterone (adrenal cortex) → ↑ Na⁺ reabsorption and ↑ K⁺ secretion in DCT → ↑ blood volume',
+exp:'Aldosterone is a mineralocorticoid hormone secreted by the ADRENAL CORTEX (not the pituitary). Its main action is on the DCT and collecting duct: it increases Na⁺ reabsorption (by upregulating Na⁺/K⁺ ATPase pumps and Na⁺ channels on the luminal membrane) and simultaneously promotes K⁺ and H⁺ secretion into the tubule. The net effect is retention of sodium (and water follows osmotically) → increased blood volume and blood pressure. It is the central hormone of the RAAS system. ADH (not aldosterone) promotes water reabsorption via aquaporins. Excess aldosterone → Conn\'s syndrome (hypertension + low K⁺).'},
+
+{d:'MEDIUM',e:'NDA 2023',
+q:'The ascending limb of the Loop of Henle is described as "impermeable to water." What is the physiological significance of this?',
+opts:[
+  'It allows water to be wasted in urine, preventing the body from becoming too hydrated',
+  'It pumps ions (Na⁺, K⁺, Cl⁻) out of the tubule without water following, creating a hyperosmotic medullary gradient needed for water reabsorption in the collecting duct',
+  'It reabsorbs all the glucose remaining in the filtrate at this stage',
+  'It secretes ADH directly into the filtrate to stimulate reabsorption'
+],ans:1,
+rule:'Ascending limb impermeable to water → ions pumped out → medullary gradient → drives water reabsorption in collecting duct',
+exp:'The ascending limb of the Loop of Henle actively pumps Na⁺, K⁺, and Cl⁻ out of the tubule lumen into the medullary interstitium, BUT it is impermeable to water — water cannot follow these ions. This creates a progressively HYPEROSMOTIC (concentrated) environment in the medullary interstitium. This concentration gradient is maintained by the countercurrent multiplier system. When filtrate flows through the collecting duct (which is permeable to water under ADH), the hyperosmotic medullary interstitium draws water out of the collecting duct by osmosis, concentrating the urine. Without this medullary gradient (built by the ascending limb), the kidney could not produce concentrated urine.'},
+
+{d:'MEDIUM',e:'CDS 2024',
+q:'Diabetes Insipidus is characterised by production of large amounts of very dilute urine. The MOST LIKELY cause is:',
+opts:[
+  'Excess glucose in blood exceeding the renal threshold',
+  'Deficiency or insensitivity to ADH (Antidiuretic Hormone)',
+  'Overproduction of aldosterone causing excess water excretion',
+  'Blockage of the renal artery reducing GFR'
+],ans:1,
+rule:'Diabetes Insipidus = absent/deficient ADH → collecting duct impermeable to water → massive dilute urine',
+exp:'Diabetes Insipidus (DI) occurs when ADH (Antidiuretic Hormone/Vasopressin) is either absent (central DI — hypothalamic/pituitary problem) or the kidneys fail to respond to it (nephrogenic DI). Without ADH, the collecting duct and DCT remain impermeable to water. Water that would normally be reabsorbed stays in the filtrate and is lost as urine. Patients produce 5–20 litres of very dilute urine per day and feel extremely thirsty. This is completely different from Diabetes MELLITUS, which involves high blood glucose and glucosuria. The key distinguishing fact: DI urine has no glucose; DM urine has glucose.'},
+
+{d:'MEDIUM',e:'AFCAT 2024',
+q:'In the RAAS (Renin-Angiotensin-Aldosterone System), Angiotensin Converting Enzyme (ACE) is found mainly in which organ?',
+opts:['Kidney','Liver','Lungs','Adrenal gland'],ans:2,
+rule:'ACE is mainly in lung capillary endothelium; converts Angiotensin I → Angiotensin II',
+exp:'ACE (Angiotensin Converting Enzyme) is found mainly in the endothelial cells of PULMONARY (lung) capillaries, though it is also present in smaller amounts in blood vessels elsewhere. In the RAAS pathway: (1) Low BP → kidneys secrete RENIN → (2) Renin converts liver-derived Angiotensinogen → Angiotensin I → (3) As blood passes through the lungs, ACE converts Angiotensin I → Angiotensin II → (4) Angiotensin II causes vasoconstriction AND stimulates adrenal cortex → Aldosterone → Na⁺ retention → ↑ BP. ACE inhibitors (enalapril, lisinopril) block step 3, reducing blood pressure, and are widely used antihypertensive drugs.'},
+
+{d:'MEDIUM',e:'NDA 2024',
+q:'Which of the following is NOT normally present in urine?',
+opts:['Urea','Creatinine','Urochrome','Plasma proteins (albumin)'],ans:3,
+rule:'Plasma proteins (albumin) are too large to filter through the glomerulus → absent in normal urine',
+exp:'Plasma proteins such as albumin are large molecules that CANNOT pass through the normal glomerular filtration membrane. Therefore, they are absent from normal urine. Urea is the main nitrogenous waste and is present in urine (~2%). Creatinine is a waste product of muscle metabolism that is both filtered and secreted, and it is present in urine. Urochrome is a yellow pigment (breakdown product of urobilin from haemoglobin metabolism) that gives urine its characteristic pale yellow colour. The appearance of proteins in urine (proteinuria) is always abnormal and indicates damage to the glomerular filtration barrier, as seen in glomerulonephritis or nephrotic syndrome.'},
+
+{d:'HARD',e:'CDS 2024',
+q:'A patient has persistently high blood pressure. Her doctor prescribes an ACE inhibitor. Which step in the RAAS pathway does this drug block, and what is the net effect on the kidney?',
+opts:[
+  'Blocks renin secretion → reduces Angiotensin I → less aldosterone → less Na⁺ reabsorption',
+  'Blocks conversion of Angiotensin I to Angiotensin II → less aldosterone → more Na⁺/water excretion → lower BP',
+  'Blocks aldosterone directly → prevents Na⁺ reabsorption without affecting angiotensin',
+  'Stimulates ADH release → more water reabsorption → dilutes blood pressure'
+],ans:1,
+rule:'ACE inhibitor → blocks Ang I → Ang II conversion → ↓ aldosterone → ↑ Na⁺/water excretion → ↓ BP',
+exp:'ACE (Angiotensin Converting Enzyme) inhibitors (like enalapril, lisinopril, ramipril) block the conversion of Angiotensin I to Angiotensin II in the lung capillaries. Without Angiotensin II: (1) No vasoconstriction → peripheral resistance falls. (2) Adrenal cortex receives no signal to secrete Aldosterone. (3) Without aldosterone, the DCT and collecting duct do NOT reabsorb as much Na⁺. (4) Water follows the unretained Na⁺ → more water excreted → lower blood volume → lower blood pressure. ACE inhibitors also prevent bradykinin breakdown (bradykinin is normally broken down by ACE) → excess bradykinin causes the classic dry cough side effect of ACE inhibitors.'},
+
+{d:'HARD',e:'NDA 2024',
+q:'The GFR in a healthy adult is approximately 125 mL/min. The kidneys produce only about 1.5 litres of urine per day. What percentage of the filtered load is reabsorbed, and which tubular segment performs the greatest reabsorption?',
+opts:[
+  'About 50% reabsorbed; Loop of Henle reabsorbs the most',
+  'About 80% reabsorbed; DCT reabsorbs the most under hormonal control',
+  'Over 99% reabsorbed; PCT performs the greatest bulk reabsorption (~65–70%)',
+  'About 90% reabsorbed; Collecting duct reabsorbs the most with ADH'
+],ans:2,
+rule:'99%+ filtrate reabsorbed; PCT does bulk reabsorption (~65–70%) — glucose 100%, most water/ions',
+exp:'GFR = 125 mL/min × 60 min × 24 hr = 180,000 mL = 180 litres/day of filtrate. Final urine = ~1.5 L/day. Fraction excreted = 1.5/180 = 0.83%. Fraction reabsorbed = 99.17% — over 99%. The PROXIMAL CONVOLUTED TUBULE (PCT) performs the greatest bulk reabsorption: it reabsorbs 100% of glucose and amino acids, 65–70% of filtered water (obligatory, not regulated), most Na⁺, K⁺, HCO₃⁻ and Cl⁻. This bulk reabsorption is isoosmotic (water follows solutes). Fine-tuning of water (by ADH) and sodium (by aldosterone) occurs later in DCT and collecting duct — but in smaller volumes. The Loop of Henle primarily creates the medullary gradient, not bulk reabsorption.'},
+
+{d:'HARD',e:'AFCAT 2024',
+q:'Juxtamedullary nephrons are essential for producing concentrated urine. What structural feature makes them uniquely suited for this role compared to cortical nephrons?',
+opts:[
+  'They have a larger Bowman\'s capsule that filters more blood',
+  'They have a longer loop of Henle that dips deep into the hypertonic medulla, along with vasa recta that maintain the medullary concentration gradient',
+  'They have more mitochondria in the PCT to reabsorb glucose faster',
+  'Their collecting ducts are permanently impermeable to water regardless of ADH levels'
+],ans:1,
+rule:'Juxtamedullary nephrons: long loop of Henle + vasa recta → build and maintain medullary osmotic gradient → concentrated urine',
+exp:'Juxtamedullary nephrons (about 15% of nephrons) have their glomeruli located near the corticomedullary junction. Their KEY distinguishing feature is a LONG LOOP OF HENLE that descends deep into the hypertonic medulla, accompanied by specialised capillaries called VASA RECTA (hairpin-shaped capillaries that run parallel to the loop). The long ascending limb pumps large amounts of Na⁺, K⁺, and Cl⁻ into the medullary interstitium without water following (as it is impermeable to water), building up the steep osmotic gradient. The vasa recta act as countercurrent exchangers — they prevent washout of this gradient while supplying nutrients. When filtrate passes through the collecting duct in the presence of ADH, water moves out into this hyperosmotic medullary space, producing highly concentrated urine. Cortical nephrons (85%) have short loops that barely enter the medulla and mainly handle filtration, not concentration.'},
+
+{d:'HARD',e:'CDS 2024',
+q:'A patient presents with massive swelling (oedema) throughout the body, frothy urine and low plasma albumin. Urine analysis reveals more than 3.5 g of protein per day. Which condition does this describe, and what is the primary mechanism?',
+opts:[
+  'Diabetes Insipidus — ADH deficiency causes excessive water loss and protein in urine',
+  'Nephrotic Syndrome — massive proteinuria due to damaged glomerular filtration barrier reduces plasma oncotic pressure, causing fluid shift into tissues',
+  'Gout — uric acid crystals damage the glomerulus causing protein leakage',
+  'Renal Calculi — stones block urine flow causing back-pressure and protein leakage'
+],ans:1,
+rule:'Nephrotic syndrome: glomerular damage → massive proteinuria → ↓ plasma oncotic pressure → generalised oedema',
+exp:'This is a classic presentation of NEPHROTIC SYNDROME. The key findings: proteinuria &gt;3.5 g/day, hypoalbuminaemia (low plasma albumin), generalised oedema (anasarca), frothy urine (due to protein). Mechanism: damage to the glomerular filtration barrier (podocyte injury, basement membrane damage) allows large protein molecules (especially albumin) to leak into the filtrate and appear in urine. Loss of plasma proteins reduces plasma ONCOTIC PRESSURE (the osmotic force that keeps fluid in blood vessels). With reduced oncotic pressure, fluid shifts from blood vessels into tissue spaces → oedema. Periorbital oedema (around eyes, worse in the morning) is classic. Common causes include minimal change disease (children), membranous nephropathy, diabetic nephropathy.'},
+
+];
+
+const answers  = new Array(QS.length).fill(null);
+const revealed = new Array(QS.length).fill(false);
+const LABS = ['A','B','C','D'];
+
+function build(){
+  const area = document.getElementById('q-area');
+  area.innerHTML = '';
+  QS.forEach((q,i)=>{
+    const dc = q.d==='EASY'?'diff-e':q.d==='MEDIUM'?'diff-m':'diff-h';
+    const div = document.createElement('div');
+    div.className='q-card'; div.id=`qc${i}`;
+    div.innerHTML=`
+      <div class="q-meta">
+        <span class="q-num">Q.${String(i+1).padStart(2,'0')}</span>
+        <span class="q-diff ${dc}">${q.d}</span>
+        <span class="q-exam">${q.e}</span>
+      </div>
+      <div class="q-body">
+        <div class="q-text">${q.q}</div>
+        <div class="opts" id="opts${i}">
+          ${q.opts.map((o,j)=>`
+            <button class="opt" id="o${i}_${j}" onclick="pick(${i},${j})">
+              <span class="opt-lbl">${LABS[j]}</span>${o}
+            </button>`).join('')}
+        </div>
+        <div class="exp-panel" id="ex${i}">
+          <div class="exp-tag">Explanation</div>
+          <div class="exp-rule">${q.rule}</div>
+          <p>${q.exp}</p>
+        </div>
+      </div>
+      <div class="q-foot">
+        <span style="font-size:11px;color:var(--dim);font-weight:700">Biology · B07</span>
+        <span id="ai${i}" class="q-status">—</span>
+      </div>`;
+    area.appendChild(div);
+  });
+}
+
+function pick(qi,oi){
+  if(revealed[qi]) return;
+  answers[qi]=oi;
+  document.querySelectorAll(`#opts${qi} .opt`).forEach((b,j)=>{b.classList.remove('sel');if(j===oi)b.classList.add('sel')});
+  document.getElementById(`qc${qi}`).classList.add('answered');
+  const ai=document.getElementById(`ai${qi}`);
+  ai.textContent=`Selected: ${LABS[oi]}`;
+  ai.style.color='var(--primary)';
+  updateStats();
+}
+
+function updateStats(){
+  const att=answers.filter(a=>a!==null).length;
+  document.getElementById('s-att').textContent=att;
+  document.getElementById('prog').style.width=(att/QS.length*100)+'%';
+  document.getElementById('prog-label').textContent=`${att} of ${QS.length} answered`;
+  let c=0,w=0;
+  answers.forEach((a,i)=>{if(a===null)return;if(a===QS[i].ans)c++;else w++;});
+  document.getElementById('s-cor').textContent=c;
+  document.getElementById('s-wrg').textContent=w;
+}
+
+function submitAll(){
+  let cor=0,wrg=0,skp=0;
+  QS.forEach((q,i)=>{
+    revealed[i]=true;
+    const opts=document.querySelectorAll(`#opts${i} .opt`);
+    opts.forEach(b=>{b.disabled=true;b.classList.remove('sel')});
+    opts[q.ans].classList.add('ok');
+    if(answers[i]!==null && answers[i]!==q.ans) opts[answers[i]].classList.add('bad');
+    document.getElementById(`ex${i}`).classList.add('show');
+    const ai=document.getElementById(`ai${i}`);
+    const card=document.getElementById(`qc${i}`);
+    card.classList.remove('answered');
+    if(answers[i]===null){skp++;ai.textContent='Skipped';ai.style.color='var(--dim)';}
+    else if(answers[i]===q.ans){cor++;card.classList.add('correct');ai.textContent='✓ Correct';ai.style.color='var(--green)';}
+    else{wrg++;card.classList.add('wrong');ai.textContent='✗ Wrong';ai.style.color='var(--red)';}
+  });
+  updateStats();
+  showResults(cor,wrg,skp);
+}
+
+function showResults(cor,wrg,skp){
+  const pct=Math.round(cor/QS.length*100);
+  let grade,msg;
+  if(pct>=88){grade='Excellent';msg='Outstanding! You have mastered the Excretory System.'}
+  else if(pct>=70){grade='Good';msg='Well done. Review the questions you got wrong.'}
+  else if(pct>=50){grade='Average';msg='Good start. Revisit the theory cards and try again.'}
+  else{grade='Needs Work';msg="Don't worry — go through the Quick Ref and try again."}
+  const res=document.getElementById('results');
+  res.innerHTML=`
+    <div class="res-hero">
+      <div class="res-score">${cor}<span style="font-size:36px;opacity:.5">/${QS.length}</span></div>
+      <div class="res-grade">${grade} · ${pct}%</div>
+      <div class="res-msg">${msg}</div>
+    </div>
+    <div class="res-stats">
+      <div class="qs-cell"><div class="qs-val g">${cor}</div><div class="qs-lbl">Correct</div></div>
+      <div class="qs-cell"><div class="qs-val r">${wrg}</div><div class="qs-lbl">Wrong</div></div>
+      <div class="qs-cell"><div class="qs-val a">${skp}</div><div class="qs-lbl">Skipped</div></div>
+      <div class="qs-cell"><div class="qs-val">${pct}%</div><div class="qs-lbl">Score</div></div>
+    </div>
+    <div style="text-align:center;margin:16px 0">
+      <button class="btn btn-ghost" onclick="document.getElementById('q-area').scrollIntoView({behavior:'smooth'})">📖 Review All Answers</button>
+    </div>`;
+  res.style.display='block';
+  res.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function resetQuiz(){
+  answers.fill(null); revealed.fill(false);
+  build();
+  document.getElementById('results').style.display='none';
+  document.getElementById('results').innerHTML='';
+  ['s-att','s-cor','s-wrg'].forEach(id=>document.getElementById(id).textContent='0');
+  document.getElementById('prog').style.width='0%';
+  document.getElementById('prog-label').textContent=`0 of ${QS.length} answered`;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function switchTab(id){
+  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  const idx={theory:0,quickref:1,quiz:2}[id];
+  document.querySelectorAll('.tab')[idx].classList.add('on');
+}
+
+function tog(hd){
+  const bd=hd.nextElementSibling;
+  const isOpen=bd.classList.contains('open');
+  bd.classList.toggle('open',!isOpen);
+  hd.classList.toggle('open',!isOpen);
+}
+
+build();
+</script>
+</body>
+</html>

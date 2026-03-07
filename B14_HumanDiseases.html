@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B13 · Human Diseases | Olive Defence</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+
+:root{
+  /* ── THEME B13: Deep Teal-Crimson + Clinical Ivory — medical, precise ── */
+  --bg:        #EDF0F2;
+  --bg2:       #DDE3E8;
+  --bg3:       #C8D2DA;
+  --white:     #F8FAFB;
+  --ink:       #080E14;
+  --ink2:      #121C26;
+  --muted:     #4A6070;
+  --dim:       #7A9AAA;
+  --border:    #B0C4CC;
+
+  --primary:      #0A3D52;
+  --primaryLt:    #145A74;
+  --primaryPale:  #E0EEF4;
+
+  --amber:        #8A5A08;
+  --amberLt:      #AE7010;
+  --amberPale:    #FDF3DC;
+
+  --green:        #1A5A28;
+  --greenLt:      #227838;
+  --greenPale:    #E2F2E8;
+
+  --red:          #8A1A10;
+  --redLt:        #AE2018;
+  --redPale:      #FAECEA;
+
+  --blue:         #1A3868;
+  --bluePale:     #E4ECF6;
+
+  --purple:       #501870;
+  --purplePale:   #EEE8F6;
+
+  --teal:         #0A4840;
+  --tealPale:     #DCF0EE;
+
+  --slate:        #3A4858;
+  --slatePale:    #E8ECF2;
+
+  --radius:    12px;
+  --shadow:    0 2px 12px rgba(8,14,20,.09);
+  --shadow-md: 0 4px 20px rgba(8,14,20,.14);
+}
+
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--ink);font-size:17px;line-height:1.75;min-height:100vh}
+.page{max-width:680px;margin:0 auto;padding:0 16px 80px}
+
+/* ── HERO ─────────────────────────────────────────────────────── */
+.hero{
+  background:linear-gradient(135deg,#04121A 0%,#0A3D52 50%,#145A74 100%);
+  margin:0 -16px;padding:28px 20px 26px;position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 76% 20%,rgba(140,220,255,.08) 0%,transparent 55%),
+    radial-gradient(ellipse at 8% 80%,rgba(80,160,200,.06) 0%,transparent 50%);
+  pointer-events:none;
+}
+.hero::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,transparent,rgba(120,210,255,.35),transparent);
+  pointer-events:none;
+}
+.hero-kicker{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.50);margin-bottom:8px;display:flex;align-items:center;gap:8px;position:relative;z-index:1}
+.hero-kicker::before{content:'';width:18px;height:2px;background:rgba(255,255,255,.28)}
+.hero-title{font-family:'Lora',serif;font-size:clamp(24px,5.5vw,34px);font-weight:700;color:#fff;line-height:1.2;margin-bottom:10px;position:relative;z-index:1}
+.hero-title span{color:#9EEAFF;font-style:italic}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.66);margin-bottom:18px;line-height:1.65;position:relative;z-index:1}
+.hero-chips{display:flex;flex-wrap:wrap;gap:7px;position:relative;z-index:1}
+.chip{font-size:11px;font-weight:700;letter-spacing:1px;padding:4px 12px;border-radius:20px;text-transform:uppercase}
+.chip-w{background:rgba(255,255,255,.12);color:rgba(255,255,255,.88)}
+.chip-a{background:rgba(158,234,255,.18);color:#9EEAFF}
+.chip-g{background:rgba(140,240,160,.11);color:#90E8A8}
+
+/* ── TAB BAR ─────────────────────────────────────────────────── */
+.tab-bar{position:sticky;top:0;z-index:50;background:var(--white);border-bottom:2px solid var(--border);margin:0 -16px;display:flex;overflow-x:auto;box-shadow:0 2px 8px rgba(8,14,20,.07);-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.tab-bar::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;padding:14px 18px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);border:none;background:transparent;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;white-space:nowrap}
+.tab:hover{color:var(--ink);background:var(--bg)}
+.tab.on{color:var(--primary);border-bottom-color:var(--primary)}
+
+/* ── PANES ───────────────────────────────────────────────────── */
+.pane{display:none;padding-top:24px;animation:fadeUp .3s ease}
+.pane.on{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ── SECTION LABEL ───────────────────────────────────────────── */
+.sec-label{font-size:10px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--primary);margin:28px 0 12px;display:flex;align-items:center;gap:10px}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* ── INTRO BOX ───────────────────────────────────────────────── */
+.intro-box{background:var(--primaryPale);border:1.5px solid rgba(10,61,82,.20);border-radius:var(--radius);padding:20px;margin-bottom:8px}
+.intro-box p{font-size:16px;color:var(--ink2);line-height:1.8}
+.intro-box strong{color:var(--primary)}
+
+/* ── CONCEPT CARDS ───────────────────────────────────────────── */
+.c-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;box-shadow:var(--shadow);overflow:hidden}
+.c-head{display:flex;align-items:center;gap:12px;padding:16px 18px;cursor:pointer;border-left:4px solid transparent;transition:all .15s;-webkit-tap-highlight-color:transparent}
+.c-head:hover,.c-head.open{background:var(--bg);border-left-color:var(--primary)}
+.c-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.c-title{font-size:17px;font-weight:700;color:var(--ink);flex:1}
+.c-sub{font-size:12px;color:var(--dim);font-weight:600;margin-top:2px}
+.c-arrow{font-size:12px;color:var(--dim);transition:transform .2s;flex-shrink:0}
+.c-head.open .c-arrow{transform:rotate(180deg)}
+.c-body{display:none;padding:4px 18px 20px;border-top:1px solid var(--border)}
+.c-body.open{display:block;animation:fadeUp .2s ease}
+.c-body p{font-size:16px;color:var(--ink2);line-height:1.85;margin-bottom:12px}
+.c-body p:last-child{margin-bottom:0}
+.c-body strong{color:var(--primary);font-weight:700}
+.c-body em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* ── CONTENT BLOCKS ──────────────────────────────────────────── */
+.fact-box{background:var(--amberPale);border:1.5px solid rgba(138,90,8,.22);border-radius:10px;padding:16px 18px;margin:14px 0}
+.fact-box .fb-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--amber);text-transform:uppercase;margin-bottom:8px}
+.fact-box ul{list-style:none;padding:0}
+.fact-box li{font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;position:relative;line-height:1.7}
+.fact-box li::before{content:'→';position:absolute;left:0;color:var(--amber);font-weight:700;font-size:13px}
+
+.eg-box{background:var(--greenPale);border-left:4px solid var(--green);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.eg-box .eg-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--green);text-transform:uppercase;margin-bottom:6px}
+.eg-box ul{list-style:none;padding:0}
+.eg-box li{font-size:15px;color:var(--ink2);padding:4px 0 4px 18px;position:relative;line-height:1.65}
+.eg-box li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:800;font-size:12px}
+.eg-box p{font-size:15px;color:var(--ink2);line-height:1.75}
+
+.trap-box{background:var(--redPale);border:1.5px solid rgba(138,26,16,.20);border-radius:10px;padding:16px 18px;margin:14px 0}
+.trap-box .tr-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--red);text-transform:uppercase;margin-bottom:8px}
+.trap-box p,.trap-box li{font-size:15.5px;color:var(--ink2);line-height:1.75}
+.trap-box ul{list-style:none;padding:0}
+.trap-box li{padding:5px 0 5px 22px;position:relative}
+.trap-box li::before{content:'⚑';position:absolute;left:0;font-size:12px;color:var(--red)}
+
+.rule-box{background:var(--bluePale);border:1.5px solid rgba(26,56,104,.17);border-radius:10px;padding:16px 18px;margin:14px 0}
+.rule-box .rl-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--blue);text-transform:uppercase;margin-bottom:8px}
+.rule-box p{font-size:15.5px;color:var(--ink2);line-height:1.8}
+.rule-box strong{color:var(--blue)}
+
+.purple-box{background:var(--purplePale);border:1.5px solid rgba(80,24,112,.17);border-radius:10px;padding:16px 18px;margin:14px 0}
+.purple-box .pl-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--purple);text-transform:uppercase;margin-bottom:8px}
+.purple-box ul{list-style:none;padding:0}
+.purple-box li{font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;position:relative;line-height:1.8}
+.purple-box li::before{content:'◆';position:absolute;left:0;font-size:9px;color:var(--purple);top:10px}
+
+.slate-box{background:var(--slatePale);border:1.5px solid rgba(58,72,88,.17);border-radius:10px;padding:16px 18px;margin:14px 0}
+.slate-box .sl-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--slate);text-transform:uppercase;margin-bottom:8px}
+.slate-box p{font-size:15.5px;color:var(--ink2);line-height:1.8}
+.slate-box strong{color:var(--slate)}
+.slate-box ul{list-style:none;padding:0}
+.slate-box li{font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;position:relative;line-height:1.8}
+.slate-box li::before{content:'▸';position:absolute;left:0;color:var(--slate);font-size:12px;top:8px}
+
+.teal-box{background:var(--tealPale);border:1.5px solid rgba(10,72,64,.17);border-radius:10px;padding:16px 18px;margin:14px 0}
+.teal-box .tl-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--teal);text-transform:uppercase;margin-bottom:8px}
+.teal-box ul{list-style:none;padding:0}
+.teal-box li{font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;position:relative;line-height:1.8}
+.teal-box li::before{content:'●';position:absolute;left:0;font-size:7px;color:var(--teal);top:11px}
+.teal-box p{font-size:15.5px;color:var(--ink2);line-height:1.8}
+.teal-box strong{color:var(--teal)}
+
+.analogy-box{background:var(--primaryPale);border-left:4px solid var(--primary);border-radius:0 8px 8px 0;padding:14px 16px;margin:12px 0}
+.analogy-box .an-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--primary);text-transform:uppercase;margin-bottom:6px}
+.analogy-box p{font-size:15.5px;color:var(--ink2);line-height:1.75}
+.analogy-box strong{color:var(--primary)}
+
+/* stat band */
+.stat-band{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border-radius:var(--radius);overflow:hidden;margin:16px 0}
+.stat-cell{background:var(--white);padding:12px 8px;text-align:center}
+.stat-val{font-family:'Lora',serif;font-size:15px;font-weight:700;color:var(--primary);line-height:1;margin-bottom:4px}
+.stat-lbl{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:.4px;line-height:1.3}
+
+.compare-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
+.compare-table th{background:var(--primary);color:#fff;padding:10px 12px;text-align:left;font-size:13px;font-weight:700;letter-spacing:.5px}
+.compare-table td{padding:10px 12px;border:1px solid var(--border);color:var(--ink2);vertical-align:top;line-height:1.65}
+.compare-table tr:nth-child(even) td{background:var(--bg)}
+.compare-table td b{color:var(--primary)}
+.compare-table td em{color:var(--amber);font-style:normal;font-weight:700}
+
+.org-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}
+.org-card{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:13px 14px;position:relative;overflow:hidden}
+.org-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--primary)}
+.org-card .org-name{font-size:13px;font-weight:800;color:var(--primary);margin-bottom:3px}
+.org-card p{font-size:13.5px;color:var(--ink2);line-height:1.6;margin-top:2px}
+
+/* ── QUICK REFERENCE ─────────────────────────────────────────── */
+.ref-grid{display:grid;gap:10px;margin:8px 0}
+.ref-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+.ref-card-title{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--primary);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.ref-card ul{list-style:none;padding:0}
+.ref-card li{font-size:15px;color:var(--ink2);padding:5px 0 5px 16px;position:relative;line-height:1.65;border-bottom:1px solid var(--bg2)}
+.ref-card li:last-child{border-bottom:none}
+.ref-card li::before{content:'·';position:absolute;left:4px;color:var(--primary);font-weight:900;font-size:18px;line-height:1.3}
+.ref-card li b{color:var(--ink);font-weight:700}
+.ref-card li em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* ── QUIZ ────────────────────────────────────────────────────── */
+.quiz-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:16px;box-shadow:var(--shadow)}
+.qs-cell{background:var(--white);padding:12px 8px;text-align:center}
+.qs-val{font-family:'Lora',serif;font-size:22px;font-weight:700;color:var(--primary);line-height:1}
+.qs-val.g{color:var(--green)}.qs-val.r{color:var(--red)}.qs-val.a{color:var(--amber)}
+.qs-lbl{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:1px;margin-top:4px;text-transform:uppercase}
+.prog-wrap{margin-bottom:20px}
+.prog-bar{height:6px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;background:var(--primary);border-radius:3px;transition:width .4s ease;width:0%}
+.prog-label{font-size:12px;color:var(--muted);font-weight:700;margin-bottom:6px}
+.q-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:12px;box-shadow:var(--shadow);overflow:hidden;border-left:4px solid transparent;transition:border-color .15s}
+.q-card.answered{border-left-color:var(--primary)}
+.q-card.correct{border-left-color:var(--green)}
+.q-card.wrong{border-left-color:var(--red)}
+.q-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 16px;background:var(--bg);border-bottom:1px solid var(--border)}
+.q-num{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:1px}
+.q-diff{font-size:10px;font-weight:800;padding:2px 10px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase}
+.diff-e{background:var(--greenPale);color:var(--green)}
+.diff-m{background:var(--amberPale);color:var(--amber)}
+.diff-h{background:var(--redPale);color:var(--red)}
+.q-exam{font-size:10px;font-weight:700;color:var(--muted);letter-spacing:.5px;margin-left:auto}
+.q-body{padding:16px}
+.q-text{font-size:16px;font-weight:600;color:var(--ink);line-height:1.7;margin-bottom:14px}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{display:flex;align-items:flex-start;gap:10px;padding:11px 14px;background:var(--bg);border:1.5px solid var(--border);border-radius:10px;cursor:pointer;text-align:left;font-family:'Nunito',sans-serif;font-size:15px;color:var(--ink2);line-height:1.6;transition:all .15s;-webkit-tap-highlight-color:transparent}
+.opt:hover{border-color:var(--primary);background:var(--primaryPale)}
+.opt.sel{border-color:var(--primary);background:var(--primaryPale);color:var(--primary)}
+.opt.ok{border-color:var(--green);background:var(--greenPale);color:var(--green)}
+.opt.bad{border-color:var(--red);background:var(--redPale);color:var(--red);text-decoration:line-through}
+.opt:disabled,.opt[disabled]{cursor:default}
+.opt-lbl{font-size:11px;font-weight:800;color:var(--dim);flex-shrink:0;padding-top:1px;min-width:16px}
+.opt.sel .opt-lbl{color:var(--primary)}
+.opt.ok .opt-lbl{color:var(--green)}
+.opt.bad .opt-lbl{color:var(--red)}
+.exp-panel{display:none;margin-top:14px;background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:14px}
+.exp-panel.show{display:block;animation:fadeUp .2s ease}
+.exp-tag{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--primary);text-transform:uppercase;margin-bottom:8px}
+.exp-rule{font-size:13.5px;font-weight:700;color:var(--ink);background:var(--primaryPale);border-left:3px solid var(--primary);padding:8px 12px;border-radius:0 6px 6px 0;margin-bottom:10px;line-height:1.6}
+.exp-panel p{font-size:14.5px;color:var(--ink2);line-height:1.8}
+.q-foot{display:flex;align-items:center;justify-content:space-between;padding:8px 16px;border-top:1px solid var(--border);background:var(--bg)}
+.q-status{font-size:12px;font-weight:700}
+.quiz-actions{display:flex;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.btn{padding:11px 20px;border-radius:10px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;cursor:pointer;border:none;transition:all .15s}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:var(--primaryLt)}
+.btn-ghost{background:var(--white);color:var(--primary);border:1.5px solid var(--border)}
+.btn-ghost:hover{border-color:var(--primary);background:var(--primaryPale)}
+.res-hero{background:var(--primary);border-radius:var(--radius);padding:28px;text-align:center;margin-bottom:12px}
+.res-score{font-family:'Lora',serif;font-size:64px;font-weight:700;color:#fff;line-height:1}
+.res-grade{font-size:18px;font-weight:700;color:#9EEAFF;margin:8px 0 4px}
+.res-msg{font-size:15px;color:rgba(255,255,255,.75);line-height:1.6}
+.res-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:14px}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ══════════════════════════ HERO ═════════════════════════════ -->
+<div class="hero">
+  <div class="hero-kicker">Biology · Chapter B13 · Olive Defence</div>
+  <div class="hero-title">Human <span>Diseases</span></div>
+  <div class="hero-sub">Infectious & non-infectious diseases, pathogens, immunity, vaccines and high-yield facts for CDS · NDA · AFCAT</div>
+  <div class="hero-chips">
+    <span class="chip chip-w">CDS</span>
+    <span class="chip chip-w">NDA</span>
+    <span class="chip chip-w">AFCAT</span>
+    <span class="chip chip-a">Theory</span>
+    <span class="chip chip-g">15 MCQs</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════ TAB BAR ══════════════════════════ -->
+<div class="tab-bar">
+  <button class="tab on" onclick="switchTab('theory')">📖 Theory</button>
+  <button class="tab" onclick="switchTab('quickref')">⚡ Quick Ref</button>
+  <button class="tab" onclick="switchTab('quiz')">✏️ Quiz</button>
+</div>
+
+<!-- ══════════════════════════ THEORY ═══════════════════════════ -->
+<div class="pane on" id="theory">
+
+  <div class="intro-box">
+    <p>A <strong>disease</strong> is any condition that impairs the normal functioning of the body. Diseases are broadly classified as <strong>infectious (communicable)</strong> — caused by pathogens and transmissible — and <strong>non-infectious (non-communicable)</strong> — caused by genetic defects, nutritional deficiencies, physiological disorders or environmental factors. Understanding the causative agent, mode of transmission and prevention is essential for every defence exam.</p>
+  </div>
+
+  <!-- SECTION 1 -->
+  <div class="sec-label">Section 1 — Classification of Diseases</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E0EEF4">🦠</div>
+      <div style="flex:1">
+        <div class="c-title">Types of Diseases — Overview</div>
+        <div class="c-sub">Infectious vs non-infectious, acute vs chronic, congenital vs acquired</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>Diseases are classified on several bases. The most important classification for exams is <strong>infectious vs non-infectious</strong>.</p>
+
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Basis</th><th>Type</th><th>Description &amp; Examples</th></tr>
+          <tr><td><b>Causative Agent</b></td><td><b>Infectious</b></td><td>Caused by pathogens (bacteria, viruses, fungi, protozoa, helminths); transmissible. E.g., TB, malaria, cholera, COVID-19</td></tr>
+          <tr><td></td><td><b>Non-infectious</b></td><td>Not transmissible; caused by genetic defects, nutritional deficiency, physiological dysfunction, degenerative changes. E.g., diabetes, cancer, anaemia, kwashiorkor</td></tr>
+          <tr><td><b>Duration</b></td><td><b>Acute</b></td><td>Short duration, sudden onset, severe symptoms. E.g., influenza, cholera</td></tr>
+          <tr><td></td><td><b>Chronic</b></td><td>Long duration, slow onset, persistent. E.g., tuberculosis, diabetes, asthma</td></tr>
+          <tr><td><b>Origin</b></td><td><b>Congenital</b></td><td>Present at birth; genetic or developmental. E.g., haemophilia, Down syndrome, cleft palate</td></tr>
+          <tr><td></td><td><b>Acquired</b></td><td>Develops after birth due to infection, lifestyle or environment. E.g., AIDS, scurvy, malaria</td></tr>
+        </table>
+      </div>
+
+      <div class="fact-box">
+        <div class="fb-label">Key Pathogen Categories</div>
+        <ul>
+          <li><strong>Viruses</strong> — smallest; obligate intracellular parasites; no cells; replicate inside host cells. Examples: Influenza, HIV, Polio, Dengue, Hepatitis B, Rabies, Measles, Smallpox</li>
+          <li><strong>Bacteria</strong> — prokaryotes; single-celled; treated with antibiotics. Examples: TB (<em>Mycobacterium tuberculosis</em>), Typhoid (<em>Salmonella typhi</em>), Cholera (<em>Vibrio cholerae</em>), Plague (<em>Yersinia pestis</em>)</li>
+          <li><strong>Fungi (Mycoses)</strong> — eukaryotes; treated with antifungals. Examples: Ringworm (<em>Tinea</em>), Athlete's foot, Candidiasis (<em>Candida albicans</em>)</li>
+          <li><strong>Protozoa</strong> — unicellular eukaryotes; treated with antiprotozoal drugs. Examples: Malaria (<em>Plasmodium</em>), Amoebic dysentery (<em>Entamoeba histolytica</em>), Sleeping sickness (<em>Trypanosoma</em>), Kala-azar (<em>Leishmania donovani</em>)</li>
+          <li><strong>Helminths (Worms)</strong> — multicellular parasites. Examples: Ascariasis (<em>Ascaris lumbricoides</em>), Filariasis (<em>Wuchereria bancrofti</em>), Tapeworm (<em>Taenia</em>)</li>
+        </ul>
+      </div>
+
+      <div class="analogy-box">
+        <div class="an-label">Memory Tip — VBFPH</div>
+        <p><strong>V</strong>ery <strong>B</strong>ad <strong>F</strong>ood <strong>P</strong>roduces <strong>H</strong>arm → <strong>V</strong>iruses · <strong>B</strong>acteria · <strong>F</strong>ungi · <strong>P</strong>rotozoa · <strong>H</strong>elminths — the five categories of pathogens.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="sec-label">Section 2 — Bacterial Diseases</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E4ECF6">🧫</div>
+      <div style="flex:1">
+        <div class="c-title">Major Bacterial Diseases</div>
+        <div class="c-sub">TB, Typhoid, Cholera, Plague, Tetanus, Leprosy — causative agents, vectors, symptoms</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>Bacterial diseases are caused by <strong>prokaryotic pathogens</strong> and are generally treatable with <strong>antibiotics</strong> (unlike viral diseases, which have no antibiotic treatment). Alexander Fleming discovered penicillin in 1928.</p>
+
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Disease</th><th>Causative Agent</th><th>Mode of Transmission</th><th>Key Features</th></tr>
+          <tr><td><b>Tuberculosis (TB)</b></td><td><em>Mycobacterium tuberculosis</em></td><td>Airborne droplets (coughing, sneezing)</td><td>Affects lungs primarily; Koch's disease; BCG vaccine; DOTS treatment; MDR-TB is drug-resistant</td></tr>
+          <tr><td><b>Typhoid (Enteric Fever)</b></td><td><em>Salmonella typhi</em></td><td>Contaminated food &amp; water (faecal-oral)</td><td>Rose spots on abdomen; Widal test for diagnosis; fever rises in steps; Typhoid Mary — famous asymptomatic carrier</td></tr>
+          <tr><td><b>Cholera</b></td><td><em>Vibrio cholerae</em></td><td>Contaminated water; faecal-oral</td><td>Rice-water stools; severe dehydration; discovered by Robert Koch (1883); ORS is treatment</td></tr>
+          <tr><td><b>Plague (Black Death)</b></td><td><em>Yersinia pestis</em></td><td>Bite of rat flea (<em>Xenopsylla cheopis</em>); rats are reservoir</td><td>Three forms: Bubonic (swollen lymph nodes/buboes), Pneumonic (lungs), Septicaemic (blood); killed ~50 million in 14th century Europe</td></tr>
+          <tr><td><b>Tetanus (Lockjaw)</b></td><td><em>Clostridium tetani</em></td><td>Wound contamination; spores in soil</td><td>Toxin causes muscle spasms; jaw locks (trismus); DPT vaccine; not transmitted person-to-person</td></tr>
+          <tr><td><b>Leprosy (Hansen's Disease)</b></td><td><em>Mycobacterium leprae</em></td><td>Prolonged skin contact with nasal secretions</td><td>Nerve damage; skin lesions; loss of sensation; discovered by Armauer Hansen (1873); MDT (multi-drug therapy) cures it; not highly contagious</td></tr>
+          <tr><td><b>Diphtheria</b></td><td><em>Corynebacterium diphtheriae</em></td><td>Airborne droplets</td><td>Pseudomembrane in throat; toxin causes heart/nerve damage; DPT vaccine</td></tr>
+          <tr><td><b>Whooping Cough (Pertussis)</b></td><td><em>Bordetella pertussis</em></td><td>Airborne droplets</td><td>Severe coughing fits with "whoop" sound; DPT vaccine</td></tr>
+        </table>
+      </div>
+
+      <div class="rule-box">
+        <div class="rl-label">DPT Vaccine — Triple Protection</div>
+        <p>The <strong>DPT (Diphtheria-Pertussis-Tetanus)</strong> vaccine provides combined protection against three bacterial diseases. It is given as part of the Universal Immunisation Programme (UIP) in India. <strong>BCG (Bacillus Calmette-Guérin)</strong> vaccine protects against tuberculosis and is given at birth under UIP.</p>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Bacterial Disease Exam Traps</div>
+        <ul>
+          <li>Cholera was discovered by <strong>Robert Koch</strong> (1883) — the same Koch who discovered TB's causative agent. "Koch's disease" refers to TB, not cholera.</li>
+          <li>Plague vector is the <strong>rat flea</strong> (<em>Xenopsylla cheopis</em>) — NOT mosquito, NOT louse. Rats are the reservoir host.</li>
+          <li>Tetanus spores survive in <strong>soil</strong> — it is a wound infection, NOT airborne. A rusty nail is a classic trigger.</li>
+          <li>Leprosy is caused by a <strong>bacterium</strong> (<em>M. leprae</em>), NOT a virus or fungus. It is NOT highly contagious.</li>
+          <li>Typhoid carrier state: a person can carry <em>Salmonella typhi</em> without symptoms (like "Typhoid Mary") — important concept for exam.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="sec-label">Section 3 — Viral Diseases</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#EEE8F6">🔬</div>
+      <div style="flex:1">
+        <div class="c-title">Major Viral Diseases</div>
+        <div class="c-sub">HIV/AIDS, Dengue, Polio, Hepatitis, Rabies, Influenza, Smallpox</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>Viruses are <strong>non-cellular, obligate intracellular parasites</strong>. They have no metabolism of their own and hijack host cell machinery to replicate. Antibiotics are <strong>ineffective</strong> against viruses. Treatment is with antiviral drugs; prevention is mainly through vaccines.</p>
+
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Disease</th><th>Virus / Causative Agent</th><th>Vector / Mode</th><th>Key Facts</th></tr>
+          <tr><td><b>AIDS</b></td><td>HIV (Human Immunodeficiency Virus) — Retrovirus</td><td>Blood, sexual contact, mother-to-child; NOT casual contact</td><td>Destroys CD4⁺ T-helper lymphocytes; ELISA test for diagnosis; ART (antiretroviral therapy); discovered 1983 by Montagnier &amp; Barré-Sinoussi (Nobel 2008)</td></tr>
+          <tr><td><b>Dengue Fever</b></td><td>Dengue virus (4 serotypes; Flavivirus)</td><td><em>Aedes aegypti</em> mosquito (day-biter)</td><td>Breakbone fever; thrombocytopenia (low platelets); no specific antiviral; same vector as Chikungunya, Zika, Yellow fever</td></tr>
+          <tr><td><b>Malaria</b>*</td><td><em>Plasmodium</em> spp. (Protozoan — but vector is a virus carrier mosquito)</td><td><em>Female Anopheles</em> mosquito (night-biter)</td><td>*Technically protozoan; see Section 5</td></tr>
+          <tr><td><b>Poliomyelitis (Polio)</b></td><td>Poliovirus (Enterovirus)</td><td>Faecal-oral; contaminated water</td><td>Attacks motor neurons; irreversible paralysis; OPV (Sabin oral) and IPV (Salk injectable) vaccines; India polio-free since 2014</td></tr>
+          <tr><td><b>Hepatitis B</b></td><td>HBV (Hepadnavirus)</td><td>Blood, sexual contact, mother-to-child</td><td>Liver inflammation; can cause cirrhosis and liver cancer; vaccine available; Hepatitis A is faecal-oral route</td></tr>
+          <tr><td><b>Rabies</b></td><td>Rabies virus (Lyssavirus)</td><td>Bite of infected animal (dog, bat, fox)</td><td>100% fatal once symptoms appear; attacks nervous system; hydrophobia (fear of water); post-exposure prophylaxis (PEP) vaccine effective if given early</td></tr>
+          <tr><td><b>Smallpox</b></td><td>Variola virus (Orthopoxvirus)</td><td>Airborne droplets; contact</td><td>Eradicated globally in <em>1980</em> (declared by WHO); last natural case 1977 in Somalia; Edward Jenner developed first vaccine (cowpox, 1796)</td></tr>
+          <tr><td><b>Influenza</b></td><td>Influenza A/B/C virus (Orthomyxovirus)</td><td>Airborne droplets</td><td>High mutation rate (antigenic shift and drift); Pandemic strains: H1N1 (Spanish flu 1918 — killed ~50 million; Swine flu 2009)</td></tr>
+          <tr><td><b>Measles</b></td><td>Measles virus (Paramyxovirus)</td><td>Airborne droplets — highly contagious</td><td>Koplik's spots in mouth; rash; MMR vaccine (Measles-Mumps-Rubella)</td></tr>
+          <tr><td><b>Chickenpox</b></td><td>Varicella-Zoster Virus (VZV)</td><td>Airborne; contact with lesions</td><td>Itchy vesicular rash; reactivates as <em>Shingles (Herpes Zoster)</em> in adults; vaccine available</td></tr>
+        </table>
+      </div>
+
+      <div class="fact-box">
+        <div class="fb-label">HIV / AIDS — High-Yield Details</div>
+        <ul>
+          <li>HIV = <strong>Human Immunodeficiency Virus</strong>; a <strong>retrovirus</strong> (RNA virus that uses reverse transcriptase to make DNA from RNA)</li>
+          <li>Attacks <strong>CD4⁺ T-helper lymphocytes</strong> → progressive destruction of immune system</li>
+          <li>AIDS diagnosed when CD4 count &lt;200 cells/μL (normal: 500–1500 cells/μL)</li>
+          <li>Transmission: blood transfusion, sharing needles, unprotected sex, mother-to-child (vertical). <strong>Not transmitted</strong> by hugging, handshaking, mosquitoes, sharing food/utensils</li>
+          <li>Diagnosis: <strong>ELISA test</strong> (screening), confirmed by <strong>Western Blot</strong></li>
+          <li>Treatment: <strong>ART (Antiretroviral Therapy)</strong> — controls but does not cure HIV</li>
+          <li>Discovered: 1983 by <strong>Luc Montagnier &amp; Françoise Barré-Sinoussi</strong> (Institut Pasteur, France) — Nobel Prize 2008</li>
+        </ul>
+      </div>
+
+      <div class="stat-band">
+        <div class="stat-cell"><div class="stat-val">1980</div><div class="stat-lbl">Smallpox eradicated</div></div>
+        <div class="stat-cell"><div class="stat-val">1796</div><div class="stat-lbl">Jenner's vaccine</div></div>
+        <div class="stat-cell"><div class="stat-val">2014</div><div class="stat-lbl">India polio-free</div></div>
+        <div class="stat-cell"><div class="stat-val">~50M</div><div class="stat-lbl">1918 flu deaths</div></div>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Viral Disease Exam Traps</div>
+        <ul>
+          <li>Dengue vector is <em>Aedes aegypti</em> — a <strong>DAY-biting</strong> mosquito. Malaria vector (<em>Anopheles</em>) bites at <strong>night</strong>.</li>
+          <li>Smallpox was eradicated in <strong>1980</strong> (WHO declaration), NOT 1977. Last natural case was 1977; global eradication certified 1980.</li>
+          <li>Polio vaccines: <strong>Sabin = oral (OPV)</strong>; <strong>Salk = injectable (IPV)</strong>. "S" for Sabin = Swallow; "S" for Salk = Shot.</li>
+          <li>Rabies is <strong>100% fatal</strong> once clinical symptoms appear — but is preventable with post-exposure vaccine. A bitten person <strong>can</strong> be saved if vaccinated promptly.</li>
+          <li>Hepatitis <strong>A</strong> = faecal-oral (dirty water); Hepatitis <strong>B</strong> = blood/sexual (like HIV). Different viruses, different routes.</li>
+          <li>HIV is a <strong>retrovirus</strong> — it has RNA as genetic material and uses <strong>reverse transcriptase</strong> to convert RNA → DNA.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 4 -->
+  <div class="sec-label">Section 4 — Fungal &amp; Protozoan Diseases</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#DCF0EE">🦟</div>
+      <div style="flex:1">
+        <div class="c-title">Fungal, Protozoan &amp; Helminth Diseases</div>
+        <div class="c-sub">Malaria, Amoebic dysentery, Kala-azar, Filariasis, Ringworm</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+
+      <div class="purple-box">
+        <div class="pl-label">Protozoan Diseases — High Yield</div>
+        <ul>
+          <li><strong>Malaria</strong> — Causative agent: <em>Plasmodium</em> spp. (P. falciparum most dangerous — causes cerebral malaria); Vector: <em>female Anopheles</em> mosquito; Symptoms: cyclic fever (48 hrs in P. vivax/ovale, 72 hrs in P. malariae), chills, sweating; Treatment: Chloroquine, Artemisinin combination therapy (ACT); RDT (Rapid Diagnostic Test); Female Anopheles bites at dusk/night; Ross discovered malaria parasite in Anopheles in 1897 (Nobel Prize 1902)</li>
+          <li><strong>Amoebic Dysentery (Amoebiasis)</strong> — Agent: <em>Entamoeba histolytica</em>; Route: contaminated food/water (faecal-oral); Symptoms: bloody diarrhoea (dysentery), abdominal cramps; can cause liver abscess; Treatment: Metronidazole</li>
+          <li><strong>Kala-azar (Visceral Leishmaniasis)</strong> — Agent: <em>Leishmania donovani</em>; Vector: <em>Phlebotomus</em> (sandfly); Symptoms: irregular fever, enlarged spleen/liver, weight loss; endemic in Bihar, Jharkhand; Treatment: Amphotericin B, Miltefosine</li>
+          <li><strong>Sleeping Sickness (African Trypanosomiasis)</strong> — Agent: <em>Trypanosoma brucei</em>; Vector: <em>Tsetse fly</em>; Attacks nervous system → daytime sleepiness, coma; found in sub-Saharan Africa</li>
+          <li><strong>Giardiasis</strong> — Agent: <em>Giardia lamblia</em>; Route: contaminated water; Symptoms: fatty, foul-smelling diarrhoea; common in travellers ("Traveller's diarrhoea")</li>
+        </ul>
+      </div>
+
+      <div class="slate-box">
+        <div class="sl-label">Helminth (Worm) Diseases</div>
+        <ul>
+          <li><strong>Ascariasis</strong> — Roundworm (<em>Ascaris lumbricoides</em>); most common intestinal worm in humans; contaminated soil/food; larvae migrate through lungs → coughing; treated with Albendazole/Mebendazole</li>
+          <li><strong>Filariasis (Elephantiasis)</strong> — <em>Wuchereria bancrofti</em>; vector: <em>Culex</em> mosquito; lymphatic blockage → swelling of limbs/scrotum (elephantiasis); treated with DEC (Diethylcarbamazine)</li>
+          <li><strong>Tapeworm (Taeniasis/Cysticercosis)</strong> — <em>Taenia solium</em> (pork) or <em>T. saginata</em> (beef); ingestion of infected undercooked meat; larvae can enter brain (<em>Neurocysticercosis</em>); treated with Praziquantel</li>
+          <li><strong>Hookworm</strong> — <em>Ancylostoma duodenale</em>; penetrates skin of bare feet from soil; causes anaemia by sucking blood</li>
+          <li><strong>Pinworm</strong> — <em>Enterobius vermicularis</em>; anal itching at night; common in children; faecal-oral spread</li>
+        </ul>
+      </div>
+
+      <div class="teal-box">
+        <div class="tl-label">Fungal Diseases (Mycoses)</div>
+        <ul>
+          <li><strong>Ringworm (Tinea)</strong> — Not a worm! Caused by <em>Trichophyton</em> / <em>Microsporum</em> fungi; ring-shaped skin lesions; types: Tinea capitis (scalp), Tinea pedis = Athlete's foot, Tinea corporis (body), Tinea cruris = Jock itch; treated with antifungals (clotrimazole, fluconazole)</li>
+          <li><strong>Candidiasis</strong> — <em>Candida albicans</em>; thrush (oral/vaginal); common in immunocompromised patients (e.g., AIDS); treated with Fluconazole/Nystatin</li>
+          <li><strong>Aspergillosis</strong> — <em>Aspergillus fumigatus</em>; primarily affects immunocompromised individuals; can invade lungs</li>
+        </ul>
+      </div>
+
+      <div class="fact-box">
+        <div class="fb-label">Malaria — Life Cycle Essentials</div>
+        <ul>
+          <li>Sporozoites injected by mosquito → liver (pre-erythrocytic stage) → merozoites → RBCs (erythrocytic stage) → rupture of RBCs releases toxins → fever episode</li>
+          <li><em>P. vivax / P. ovale</em> — 48-hour cycle → tertian malaria; can cause relapses (hypnozoites persist in liver)</li>
+          <li><em>P. malariae</em> — 72-hour cycle → quartan malaria</li>
+          <li><em>P. falciparum</em> — malignant tertian (most dangerous); blocks capillaries → cerebral malaria, black-water fever</li>
+          <li><strong>Ronald Ross</strong> discovered role of Anopheles mosquito in 1897 → Nobel Prize in Medicine, 1902</li>
+        </ul>
+      </div>
+
+      <div class="eg-box">
+        <div class="eg-label">Disease-Vector Summary</div>
+        <ul>
+          <li><em>Female Anopheles</em> mosquito → Malaria</li>
+          <li><em>Aedes aegypti</em> mosquito → Dengue, Chikungunya, Zika, Yellow fever</li>
+          <li><em>Culex</em> mosquito → Filariasis (Elephantiasis), Japanese Encephalitis</li>
+          <li><em>Xenopsylla cheopis</em> (rat flea) → Plague</li>
+          <li><em>Phlebotomus</em> (sandfly) → Kala-azar (Leishmaniasis)</li>
+          <li><em>Tsetse fly</em> → Sleeping Sickness</li>
+          <li><em>Ixodes</em> tick → Lyme Disease</li>
+          <li>House fly (<em>Musca domestica</em>) → Typhoid, Cholera, Dysentery (mechanical carrier)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 5 -->
+  <div class="sec-label">Section 5 — Non-Infectious Diseases</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#FAECEA">🩺</div>
+      <div style="flex:1">
+        <div class="c-title">Non-Infectious Diseases — Nutritional, Genetic &amp; Lifestyle</div>
+        <div class="c-sub">Deficiency diseases, diabetes, cancer, cardiovascular, genetic disorders</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Disease / Disorder</th><th>Cause / Deficiency</th><th>Key Features</th></tr>
+          <tr><td><b>Scurvy</b></td><td>Vitamin C (Ascorbic acid) deficiency</td><td>Bleeding gums, poor wound healing, swollen joints; common in sailors historically; citrus fruits prevent it</td></tr>
+          <tr><td><b>Rickets (children) / Osteomalacia (adults)</b></td><td>Vitamin D deficiency (or Ca/P)</td><td>Soft, deformed bones; bow legs in children; sunlight exposure + dietary Vitamin D prevent it</td></tr>
+          <tr><td><b>Beriberi</b></td><td>Vitamin B₁ (Thiamine) deficiency</td><td>Wet beriberi (heart failure, oedema); Dry beriberi (nerve damage, muscle weakness); common in polished rice-eating populations</td></tr>
+          <tr><td><b>Pellagra</b></td><td>Vitamin B₃ (Niacin) deficiency</td><td>3 Ds: Dermatitis, Diarrhoea, Dementia; also called "4th D" = Death if untreated</td></tr>
+          <tr><td><b>Night Blindness / Xerophthalmia</b></td><td>Vitamin A (Retinol) deficiency</td><td>Night blindness; Bitot's spots; xerophthalmia (dry eye) → corneal ulceration → blindness; common cause of preventable blindness in children</td></tr>
+          <tr><td><b>Anaemia</b></td><td>Iron (most common), Vitamin B₁₂, or Folic acid deficiency</td><td>Low haemoglobin; fatigue, pallor; B₁₂ deficiency = Pernicious anaemia (megaloblastic)</td></tr>
+          <tr><td><b>Goitre</b></td><td>Iodine deficiency</td><td>Enlarged thyroid gland; endemic in regions far from sea; iodised salt prevents it; cretinism in newborns of iodine-deficient mothers</td></tr>
+          <tr><td><b>Kwashiorkor</b></td><td>Protein deficiency (adequate calories)</td><td>Oedema (swollen belly), skin lesions, hair discolouration; seen in weaned children in developing countries</td></tr>
+          <tr><td><b>Marasmus</b></td><td>Protein-energy malnutrition (both calories and protein)</td><td>Severe wasting, "old man" appearance, no oedema; seen in infants</td></tr>
+          <tr><td><b>Diabetes Mellitus</b></td><td>Type 1: Autoimmune destruction of β cells (insulin deficiency); Type 2: Insulin resistance</td><td>Hyperglycaemia; polyuria, polydipsia, polyphagia; chronic complications: retinopathy, nephropathy, neuropathy; insulin discovered by Banting &amp; Best (1921)</td></tr>
+          <tr><td><b>Cancer</b></td><td>Uncontrolled cell division; oncogenes; carcinogens</td><td>Types: Carcinoma (epithelial), Sarcoma (connective tissue), Leukaemia (blood), Lymphoma (lymphatic); treatment: surgery, chemotherapy, radiation, immunotherapy</td></tr>
+          <tr><td><b>Hypertension</b></td><td>Persistent high blood pressure (&gt;140/90 mmHg)</td><td>"Silent killer"; risk factor for heart attack, stroke; normal BP: 120/80 mmHg</td></tr>
+        </table>
+      </div>
+
+      <div class="fact-box">
+        <div class="fb-label">Genetic / Hereditary Disorders</div>
+        <ul>
+          <li><strong>Haemophilia</strong> — X-linked recessive; deficiency of clotting factor VIII (Haemophilia A) or IX (Haemophilia B); excessive bleeding; "Royal Disease" — affected Queen Victoria's descendants</li>
+          <li><strong>Sickle Cell Anaemia</strong> — autosomal recessive; point mutation in β-globin gene (Val→Glu); RBCs become sickle-shaped; provides partial protection against malaria; common in malaria-endemic regions</li>
+          <li><strong>Thalassaemia</strong> — autosomal recessive; reduced/absent globin chain production; microcytic anaemia; requires blood transfusions; common in Mediterranean and South-East Asian populations</li>
+          <li><strong>Down Syndrome (Trisomy 21)</strong> — extra chromosome 21 (47 chromosomes); intellectual disability, characteristic facial features; risk increases with maternal age; discovered by John Langdon Down (1866)</li>
+          <li><strong>Turner Syndrome</strong> — 45,XO (missing one X chromosome); affects females only; short stature, infertility, webbed neck</li>
+          <li><strong>Klinefelter Syndrome</strong> — 47,XXY; affects males; infertility, gynecomastia, tall stature</li>
+          <li><strong>Phenylketonuria (PKU)</strong> — autosomal recessive; cannot metabolise phenylalanine (PAH enzyme deficient); intellectual disability if untreated; detected by newborn screening</li>
+        </ul>
+      </div>
+
+      <div class="rule-box">
+        <div class="rl-label">Vitamin Summary for Exams</div>
+        <p><strong>Fat-soluble vitamins: A, D, E, K</strong> — stored in body fat; overdose possible. <strong>Water-soluble: B complex, C</strong> — not stored; regular dietary intake needed. Key deficiency diseases: <strong>A</strong> = night blindness; <strong>B₁</strong> = Beriberi; <strong>B₃</strong> = Pellagra; <strong>B₁₂</strong> = Pernicious anaemia; <strong>C</strong> = Scurvy; <strong>D</strong> = Rickets/Osteomalacia; <strong>K</strong> = Impaired blood clotting.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 6 -->
+  <div class="sec-label">Section 6 — Immunity, Vaccines &amp; Public Health</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E2F2E8">💉</div>
+      <div style="flex:1">
+        <div class="c-title">Immunity — Innate vs Adaptive; Active vs Passive</div>
+        <div class="c-sub">How the body defends itself; vaccines, serum, antibodies</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>Immunity is the ability of the body to resist infection. It has two major branches: <strong>Innate (non-specific)</strong> immunity and <strong>Adaptive (specific/acquired)</strong> immunity.</p>
+
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Type</th><th>Mechanism</th><th>Features</th></tr>
+          <tr><td><b>Innate Immunity</b></td><td>Physical barriers (skin, mucus), fever, inflammation, phagocytes (neutrophils, macrophages), NK cells, complement system</td><td>Present from birth; non-specific (acts against all pathogens); no memory; fast response (immediate)</td></tr>
+          <tr><td><b>Adaptive Immunity</b></td><td>T lymphocytes (cell-mediated immunity) and B lymphocytes (humoral immunity — produces antibodies)</td><td>Specific to each pathogen; has memory (memory cells → faster response on re-exposure); develops after exposure</td></tr>
+          <tr><td><b>Active Immunity</b></td><td>Body produces its own antibodies after exposure to antigen (natural infection or vaccination)</td><td>Long-lasting; memory cells formed; slower to develop; Examples: BCG vaccine, COVID vaccine, MMR</td></tr>
+          <tr><td><b>Passive Immunity</b></td><td>Pre-formed antibodies transferred from another source</td><td>Immediate but short-lived (no memory cells); Examples: Maternal antibodies (IgG across placenta; IgA in breast milk); anti-rabies serum; anti-tetanus serum (ATS)</td></tr>
+        </table>
+      </div>
+
+      <div class="fact-box">
+        <div class="fb-label">Key Vaccines &amp; Discoverers</div>
+        <ul>
+          <li><strong>Smallpox vaccine (1796)</strong> — <strong>Edward Jenner</strong>; used cowpox (Vaccinia) to immunise against smallpox; the word "vaccine" comes from <em>vacca</em> (Latin: cow)</li>
+          <li><strong>Rabies vaccine (1885)</strong> — <strong>Louis Pasteur</strong>; first laboratory-made vaccine; also developed vaccines for anthrax and chicken cholera</li>
+          <li><strong>BCG (Bacillus Calmette-Guérin)</strong> — Albert Calmette &amp; Camille Guérin (1921); live attenuated <em>M. bovis</em>; protects against TB</li>
+          <li><strong>Polio vaccine — OPV (Oral)</strong> — <strong>Albert Sabin</strong> (1957); live attenuated; oral drops; used in India's pulse polio programme</li>
+          <li><strong>Polio vaccine — IPV (Injectable)</strong> — <strong>Jonas Salk</strong> (1955); killed virus; injectable</li>
+          <li><strong>DPT vaccine</strong> — combined diphtheria toxoid + pertussis + tetanus toxoid</li>
+          <li><strong>MMR vaccine</strong> — combined Measles + Mumps + Rubella (live attenuated)</li>
+          <li><strong>Hepatitis B vaccine</strong> — recombinant DNA technology (first vaccine made by genetic engineering)</li>
+        </ul>
+      </div>
+
+      <div class="slate-box">
+        <div class="sl-label">India's Universal Immunisation Programme (UIP)</div>
+        <ul>
+          <li>Launched 1985; one of the world's largest public health programmes</li>
+          <li>Vaccines at birth: <strong>BCG, OPV-0, Hepatitis B (HepB-0)</strong></li>
+          <li>6, 10, 14 weeks: <strong>OPV, Pentavalent (DPT+HepB+Hib), Rotavirus, PCV</strong></li>
+          <li>9–12 months: <strong>MR vaccine (Measles-Rubella)</strong></li>
+          <li>India declared <strong>polio-free by WHO on 27 March 2014</strong></li>
+          <li>Mission Indradhanush — intensified immunisation drive from 2014 to increase vaccine coverage</li>
+        </ul>
+      </div>
+
+      <div class="purple-box">
+        <div class="pl-label">Allergy &amp; Autoimmune Conditions</div>
+        <ul>
+          <li><strong>Allergy (Hypersensitivity)</strong> — exaggerated immune response to harmless substances (allergens like pollen, dust, food). Mediated by IgE antibodies and mast cells; histamine release → symptoms. Anaphylaxis = severe systemic allergic reaction; treat with adrenaline (epinephrine)</li>
+          <li><strong>Autoimmune Disease</strong> — immune system attacks body's own cells (failure of self-tolerance). Examples: Rheumatoid Arthritis (joints), Type 1 Diabetes (β cells), Multiple Sclerosis (myelin sheaths), Lupus (SLE — multiple organs), Graves' disease (thyroid)</li>
+          <li><strong>Immunodeficiency</strong> — weakened immune system; can be congenital (SCID — Severe Combined Immunodeficiency) or acquired (AIDS)</li>
+        </ul>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Immunity &amp; Vaccine Exam Traps</div>
+        <ul>
+          <li>Jenner used <strong>cowpox</strong> (Vaccinia virus) to immunise against <strong>smallpox</strong> (Variola) — not the other way round. Both are related Orthopoxviruses.</li>
+          <li>Pasteur developed the <strong>rabies vaccine</strong> — NOT the smallpox vaccine. Pasteur also coined "vaccine" as a general term (honouring Jenner).</li>
+          <li>Passive immunity is <strong>short-lived</strong> because no memory cells are formed. Maternal antibodies (IgG) protect infants for ~6 months.</li>
+          <li>The word "vaccine" derives from <em>vacca</em> (cow) — named after Jenner's use of cowpox by Pasteur.</li>
+          <li>OPV = Sabin (oral/swallowed); IPV = Salk (injectable/shot). Salk's is killed, Sabin's is live attenuated.</li>
+          <li>Hepatitis B vaccine is the first vaccine produced using <strong>recombinant DNA technology</strong> — NOT a live or killed whole organism.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 7 -->
+  <div class="sec-label">Section 7 — Drug Abuse &amp; Addiction</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#FDF3DC">⚠️</div>
+      <div style="flex:1">
+        <div class="c-title">Drug Abuse — Types, Effects &amp; Consequences</div>
+        <div class="c-sub">Opioids, cannabinoids, stimulants, hallucinogens, depressants</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>Drug abuse is the use of substances in a manner that harms health or functioning. Psychoactive drugs act on the <strong>central nervous system (CNS)</strong>, altering mood, perception or behaviour. They cause <strong>tolerance</strong> (needing more for same effect), <strong>dependence</strong> (psychological/physical), and <strong>withdrawal symptoms</strong> on stopping.</p>
+
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Category</th><th>Examples</th><th>Source / Effect</th></tr>
+          <tr><td><b>Opioids (Narcotics)</b></td><td>Heroin (diacetylmorphine), Morphine, Codeine, Opium</td><td>From opium poppy (<em>Papaver somniferum</em>); pain relief, euphoria; highly addictive; respiratory depression; overdose = death; heroin made by acetylation of morphine</td></tr>
+          <tr><td><b>Cannabinoids</b></td><td>Cannabis (marijuana, hashish/charas, ganja)</td><td>From <em>Cannabis sativa</em>; active ingredient THC (Tetrahydrocannabinol); euphoria, altered perception; affects cardiovascular system; short-term memory impairment</td></tr>
+          <tr><td><b>Stimulants</b></td><td>Cocaine, Amphetamines, Ecstasy (MDMA), Nicotine</td><td>Cocaine from <em>Erythroxylum coca</em>; increases dopamine/norepinephrine; increases heart rate, BP; cocaine — "crack cocaine" is smoked form; highly addictive</td></tr>
+          <tr><td><b>Hallucinogens</b></td><td>LSD (Lysergic Acid Diethylamide), Mescaline, Psilocybin</td><td>Distort sensory perception; hallucinations; LSD is synthetic; mescaline from peyote cactus; psilocybin from "magic mushrooms"</td></tr>
+          <tr><td><b>Depressants</b></td><td>Barbiturates, Benzodiazepines (Valium), Alcohol</td><td>Slow CNS activity; sedation, sleep; alcohol causes liver cirrhosis, Wernicke's encephalopathy (Vitamin B₁ deficiency)</td></tr>
+        </table>
+      </div>
+
+      <div class="eg-box">
+        <div class="eg-label">Source Plants of Major Drugs</div>
+        <ul>
+          <li>Opium, Morphine, Heroin → <em>Papaver somniferum</em> (Opium poppy)</li>
+          <li>Cocaine → <em>Erythroxylum coca</em></li>
+          <li>Cannabis (Marijuana, Hashish, Ganja) → <em>Cannabis sativa</em> / <em>Cannabis indica</em></li>
+          <li>Caffeine → <em>Coffea arabica</em> (Coffee), <em>Camellia sinensis</em> (Tea)</li>
+          <li>Nicotine → <em>Nicotiana tabacum</em> (Tobacco)</li>
+          <li>Quinine (antimalarial) → <em>Cinchona</em> bark</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /theory -->
+
+<!-- ════════════════════════════ QUICK REF ══════════════════════ -->
+<div class="pane" id="quickref">
+  <div class="ref-grid">
+
+    <div class="ref-card">
+      <div class="ref-card-title">Bacterial Diseases — Key Facts</div>
+      <ul>
+        <li><b>TB</b> — <em>Mycobacterium tuberculosis</em>; airborne; BCG vaccine; Koch's disease</li>
+        <li><b>Typhoid</b> — <em>Salmonella typhi</em>; contaminated water; Widal test; rose spots</li>
+        <li><b>Cholera</b> — <em>Vibrio cholerae</em>; contaminated water; rice-water stools; ORS; Koch (1883)</li>
+        <li><b>Plague</b> — <em>Yersinia pestis</em>; rat flea (<em>Xenopsylla cheopis</em>); 3 forms: Bubonic, Pneumonic, Septicaemic</li>
+        <li><b>Tetanus</b> — <em>Clostridium tetani</em>; soil spores; lockjaw; DPT vaccine</li>
+        <li><b>Leprosy</b> — <em>Mycobacterium leprae</em>; skin contact; nerve damage; MDT treatment; Hansen (1873)</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Viral Diseases — Key Facts</div>
+      <ul>
+        <li><b>AIDS</b> — HIV (retrovirus); CD4⁺ T-cells destroyed; ELISA test; ART treatment; Montagnier &amp; Barré-Sinoussi (Nobel 2008)</li>
+        <li><b>Dengue</b> — <em>Aedes aegypti</em> (day-biter); 4 serotypes; thrombocytopenia; no antiviral</li>
+        <li><b>Polio</b> — faecal-oral; Sabin (OPV oral) and Salk (IPV injectable) vaccines; India free 2014</li>
+        <li><b>Smallpox</b> — Variola virus; eradicated <em>1980</em>; Jenner vaccine 1796 using cowpox</li>
+        <li><b>Rabies</b> — Lyssavirus; animal bite; 100% fatal after onset; Pasteur vaccine 1885</li>
+        <li><b>Hepatitis A</b> = faecal-oral; <b>Hepatitis B</b> = blood/sexual (HBV recombinant vaccine)</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Protozoan &amp; Helminth Diseases</div>
+      <ul>
+        <li><b>Malaria</b> — <em>Plasmodium</em>; <em>female Anopheles</em> (night); P. falciparum = most dangerous; Ross Nobel 1902</li>
+        <li><b>Kala-azar</b> — <em>Leishmania donovani</em>; <em>Phlebotomus</em> sandfly; endemic Bihar/Jharkhand</li>
+        <li><b>Amoebic dysentery</b> — <em>Entamoeba histolytica</em>; bloody diarrhoea; faecal-oral</li>
+        <li><b>Sleeping sickness</b> — <em>Trypanosoma</em>; tsetse fly; Africa</li>
+        <li><b>Filariasis</b> — <em>Wuchereria bancrofti</em>; <em>Culex</em> mosquito; elephantiasis; DEC treatment</li>
+        <li><b>Ascariasis</b> — <em>Ascaris lumbricoides</em>; soil-transmitted; Albendazole treatment</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Deficiency Diseases — Vitamins</div>
+      <ul>
+        <li><b>Vit A</b> — Night blindness, Xerophthalmia, Bitot's spots</li>
+        <li><b>Vit B₁ (Thiamine)</b> — Beriberi (wet = heart; dry = nerves)</li>
+        <li><b>Vit B₃ (Niacin)</b> — Pellagra (3 Ds: Dermatitis, Diarrhoea, Dementia)</li>
+        <li><b>Vit B₁₂</b> — Pernicious anaemia (megaloblastic)</li>
+        <li><b>Vit C</b> — Scurvy (bleeding gums, poor wound healing)</li>
+        <li><b>Vit D</b> — Rickets (children), Osteomalacia (adults)</li>
+        <li><b>Iodine</b> — Goitre (enlarged thyroid); Cretinism in newborns</li>
+        <li><b>Iron</b> — Iron-deficiency anaemia (most common nutritional deficiency)</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Immunity &amp; Vaccines</div>
+      <ul>
+        <li><b>Active immunity</b> — body makes antibodies (vaccine/infection); long-lasting; memory</li>
+        <li><b>Passive immunity</b> — preformed antibodies given; immediate, short-lived (no memory)</li>
+        <li><b>Jenner 1796</b> — cowpox → smallpox protection; "vaccine" from <em>vacca</em> (cow)</li>
+        <li><b>Pasteur 1885</b> — Rabies vaccine; coined "vaccine" as general term</li>
+        <li><b>Sabin = OPV</b> (oral, swallowed); <b>Salk = IPV</b> (injectable shot)</li>
+        <li><b>BCG</b> = Calmette &amp; Guérin (1921); against TB; given at birth in India</li>
+        <li>HepB vaccine = first <em>recombinant DNA</em> vaccine</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Genetic &amp; Lifestyle Disorders</div>
+      <ul>
+        <li><b>Down Syndrome</b> — Trisomy 21 (47 chromosomes); John Langdon Down (1866)</li>
+        <li><b>Haemophilia</b> — X-linked recessive; clotting factor deficiency; "Royal Disease"</li>
+        <li><b>Sickle Cell Anaemia</b> — autosomal recessive; β-globin mutation; protective against malaria</li>
+        <li><b>Turner</b> — 45,XO; female; infertility, short stature, webbed neck</li>
+        <li><b>Klinefelter</b> — 47,XXY; male; infertility, gynecomastia</li>
+        <li><b>Normal BP</b> = 120/80 mmHg; Hypertension &gt;140/90 mmHg; "silent killer"</li>
+        <li>Insulin discovered by <b>Banting &amp; Best</b> (1921); Nobel Prize 1923</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Disease Vectors — Summary</div>
+      <ul>
+        <li><em>Female Anopheles</em> (night) → <b>Malaria</b></li>
+        <li><em>Aedes aegypti</em> (day) → <b>Dengue, Chikungunya, Zika, Yellow Fever</b></li>
+        <li><em>Culex</em> → <b>Filariasis, Japanese Encephalitis</b></li>
+        <li><em>Xenopsylla cheopis</em> (rat flea) → <b>Plague</b></li>
+        <li><em>Phlebotomus</em> (sandfly) → <b>Kala-azar</b></li>
+        <li><em>Tsetse fly</em> → <b>Sleeping Sickness</b></li>
+        <li><em>Musca domestica</em> (house fly) → <b>Typhoid, Cholera</b> (mechanical)</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══════════════════════════════ QUIZ ═════════════════════════ -->
+<div class="pane" id="quiz">
+  <div class="quiz-stats">
+    <div class="qs-cell"><div class="qs-val" id="s-att">0</div><div class="qs-lbl">Attempted</div></div>
+    <div class="qs-cell"><div class="qs-val g" id="s-cor">0</div><div class="qs-lbl">Correct</div></div>
+    <div class="qs-cell"><div class="qs-val r" id="s-wrg">0</div><div class="qs-lbl">Wrong</div></div>
+    <div class="qs-cell"><div class="qs-val a" id="s-tot">15</div><div class="qs-lbl">Total</div></div>
+  </div>
+  <div class="prog-wrap">
+    <div class="prog-label" id="prog-label">0 of 15 answered</div>
+    <div class="prog-bar"><div class="prog-fill" id="prog"></div></div>
+  </div>
+  <div class="quiz-actions">
+    <button class="btn btn-primary" onclick="submitAll()">Submit All &amp; Check</button>
+    <button class="btn btn-ghost" onclick="resetQuiz()">↺ Reset Quiz</button>
+  </div>
+  <div id="results"></div>
+  <div id="q-area"></div>
+</div>
+
+</div><!-- /page -->
+
+<script>
+const QS=[
+
+/* Q1 EASY */
+{d:"EASY",e:"NDA 2022",
+q:"Which of the following diseases is caused by a protozoan parasite transmitted by the female Anopheles mosquito?",
+opts:[
+  "Dengue fever",
+  "Malaria",
+  "Filariasis",
+  "Kala-azar"
+],ans:1,
+rule:"Malaria = Plasmodium (protozoan) + female Anopheles mosquito (vector); Dengue = Aedes aegypti; Filariasis = Culex; Kala-azar = sandfly",
+exp:"MALARIA is caused by the protozoan parasite PLASMODIUM (species: P. vivax, P. falciparum, P. malariae, P. ovale) and is transmitted by the bite of the FEMALE ANOPHELES mosquito. The male Anopheles does not bite humans. Ronald Ross demonstrated the role of Anopheles in malaria transmission in 1897 and was awarded the Nobel Prize in 1902. DENGUE is caused by the Dengue virus (a Flavivirus) and is transmitted by Aedes aegypti. FILARIASIS (elephantiasis) is caused by the helminth Wuchereria bancrofti and is transmitted by the Culex mosquito. KALA-AZAR (visceral leishmaniasis) is caused by the protozoan Leishmania donovani and is transmitted by the Phlebotomus sandfly — not a mosquito."},
+
+/* Q2 EASY */
+{d:"EASY",e:"CDS 2023",
+q:"The disease caused by Mycobacterium tuberculosis and commonly affecting the lungs is known as:",
+opts:[
+  "Leprosy",
+  "Typhoid",
+  "Tuberculosis (TB)",
+  "Pneumonia"
+],ans:2,
+rule:"M. tuberculosis → TB (Koch's disease); M. leprae → Leprosy; S. typhi → Typhoid",
+exp:"TUBERCULOSIS (TB) — also called Koch's disease — is caused by MYCOBACTERIUM TUBERCULOSIS (MTB), a rod-shaped, acid-fast bacterium. It primarily affects the LUNGS (pulmonary TB) but can affect other organs (extra-pulmonary TB). Transmission is via airborne droplets produced when an infected person coughs, sneezes, or speaks. LEPROSY is caused by Mycobacterium LEPRAE (note: different species). TYPHOID is caused by Salmonella typhi. The BCG (Bacillus Calmette-Guérin) vaccine protects against TB and is given at birth under India's Universal Immunisation Programme. Treatment uses DOTS (Directly Observed Treatment, Short-course) — a combination of antibiotics (HRZE: isoniazid, rifampicin, pyrazinamide, ethambutol). MDR-TB (Multi-Drug Resistant TB) is a growing public health concern."},
+
+/* Q3 EASY */
+{d:"EASY",e:"AFCAT 2022",
+q:"Smallpox was declared globally eradicated by the World Health Organization (WHO) in the year:",
+opts:[
+  "1967",
+  "1977",
+  "1980",
+  "1990"
+],ans:2,
+rule:"Smallpox eradicated: last natural case 1977 (Somalia); WHO certified global eradication in 1980",
+exp:"SMALLPOX (caused by Variola virus) was declared globally ERADICATED by the WHO in 1980 — the first and only human disease to be completely eradicated worldwide. The last naturally occurring case was reported in Ali Maow Maalin in Somalia in 1977. The global eradication campaign was intensified from 1967. The eradication was achieved through mass VACCINATION using the vaccinia (cowpox) virus vaccine, first developed by EDWARD JENNER in 1796. After eradication, routine smallpox vaccination was discontinued worldwide. Today, the only known stocks of Variola virus are maintained in two WHO-approved repositories: the CDC (Atlanta, USA) and the VECTOR Institute (Russia)."},
+
+/* Q4 MEDIUM */
+{d:"MEDIUM",e:"NDA 2021",
+q:"Which test is used for the diagnosis of Typhoid fever?",
+opts:[
+  "ELISA test",
+  "Widal test",
+  "Mantoux test",
+  "Dick test"
+],ans:1,
+rule:"Typhoid = Widal test; AIDS = ELISA; TB exposure = Mantoux (tuberculin) test",
+exp:"The WIDAL TEST is the standard serological diagnostic test for TYPHOID FEVER (caused by Salmonella typhi). It detects the presence of agglutinating antibodies (O and H antibodies) in the patient's serum that react with Salmonella antigens — a rise in titre (≥1:160) is significant. ELISA (Enzyme-Linked Immunosorbent Assay) is used for AIDS/HIV diagnosis (screening test — confirmed by Western Blot). MANTOUX TEST (tuberculin skin test) is used to detect past exposure to Mycobacterium tuberculosis (TB). The DICK TEST was historically used to assess susceptibility to scarlet fever (caused by Streptococcus pyogenes) — rarely used today. Classic symptoms of Typhoid: stepladder fever (rising progressively), rose spots on abdomen, relative bradycardia (slow pulse for the degree of fever), Peyer's patch ulceration."},
+
+/* Q5 MEDIUM */
+{d:"MEDIUM",e:"CDS 2022",
+q:"HIV (Human Immunodeficiency Virus) is classified as a retrovirus because it:",
+opts:[
+  "Infects the retina and causes visual impairment",
+  "Carries RNA as its genetic material and uses reverse transcriptase to convert RNA into DNA inside the host cell",
+  "Only reproduces in the reticuloendothelial system",
+  "Is transmitted via the respiratory route, unlike other viruses"
+],ans:1,
+rule:"Retrovirus = RNA virus + reverse transcriptase (RNA → DNA); HIV attacks CD4⁺ T-lymphocytes",
+exp:"HIV is classified as a RETROVIRUS because it carries SINGLE-STRANDED RNA as its genetic material and possesses the enzyme REVERSE TRANSCRIPTASE, which converts its RNA into DNA inside the host cell. This is the reverse of the normal central dogma (DNA → RNA). The viral DNA (provirus) then integrates into the host cell's chromosome and directs production of new viral particles. HIV specifically targets and destroys CD4⁺ T-HELPER LYMPHOCYTES (also called CD4 cells or T4 cells), which are critical coordinators of the immune response. Normal CD4 count is 500–1500 cells/μL; AIDS is diagnosed when CD4 count falls below 200 cells/μL, leaving the patient susceptible to opportunistic infections (e.g., Pneumocystis jirovecii pneumonia, toxoplasmosis). Treatment with ART (Antiretroviral Therapy) suppresses viral replication but cannot eliminate the integrated provirus — so HIV infection is lifelong."},
+
+/* Q6 MEDIUM */
+{d:"MEDIUM",e:"NDA 2023",
+q:"Dengue fever differs from Malaria in that:",
+opts:[
+  "Dengue is caused by a bacterium while Malaria is caused by a virus",
+  "Dengue is transmitted by Aedes aegypti (a day-biting mosquito) while Malaria is transmitted by female Anopheles (which bites at night)",
+  "Dengue can be treated with antibiotics while Malaria cannot",
+  "Dengue does not cause fever but Malaria causes high fever"
+],ans:1,
+rule:"Dengue = Flavivirus + Aedes aegypti (day-biting); Malaria = Plasmodium (protozoan) + female Anopheles (night-biting)",
+exp:"The key distinction here is the CAUSATIVE AGENT and VECTOR: DENGUE is caused by the Dengue virus (a Flavivirus — there are 4 serotypes: DENV 1-4) and is transmitted by the AEDES AEGYPTI mosquito, which is a DAY-BITING mosquito (peak biting times: 2 hours after sunrise and 2 hours before sunset). Dengue is characterised by high fever, severe joint/muscle pain ('breakbone fever'), skin rash, and thrombocytopenia (low platelet count). There is no specific antiviral treatment. MALARIA is caused by PLASMODIUM (a protozoan parasite, NOT a virus or bacterium) and is transmitted by the FEMALE ANOPHELES mosquito, which bites primarily at NIGHT. Both diseases CANNOT be treated with antibiotics (which only work against bacteria). Prevention of both involves mosquito control and personal protection, but different mosquitoes are targeted."},
+
+/* Q7 MEDIUM */
+{d:"MEDIUM",e:"AFCAT 2021",
+q:"Which vitamin deficiency causes Scurvy, and what are its characteristic symptoms?",
+opts:[
+  "Vitamin A deficiency — night blindness and skin keratin build-up",
+  "Vitamin B₁ deficiency — peripheral neuropathy and cardiac failure",
+  "Vitamin C deficiency — bleeding gums, poor wound healing and petechiae",
+  "Vitamin D deficiency — soft bones and muscle weakness"
+],ans:2,
+rule:"Scurvy = Vitamin C (Ascorbic acid) deficiency; bleeding gums, poor wound healing; Vit A = night blindness; B₁ = Beriberi; D = Rickets",
+exp:"SCURVY is caused by deficiency of VITAMIN C (Ascorbic acid). Vitamin C is essential for the synthesis of COLLAGEN — the structural protein of connective tissue, skin, blood vessel walls and wound healing. Without adequate Vitamin C, collagen cannot be properly synthesised, leading to: BLEEDING GUMS (gingivae become swollen, purple, and bleed easily), PETECHIAE and ecchymoses (subcutaneous bleeding), POOR WOUND HEALING, PERIFOLLICULAR haemorrhages (bleeding around hair follicles), joint pain and SWOLLEN JOINTS (haemarthrosis). Scurvy was historically common among sailors on long voyages without fresh produce — hence the British Navy's use of LIME JUICE (British sailors called 'Limeys'). Vitamin C is a WATER-SOLUBLE antioxidant. Rich sources: citrus fruits, guava, amla (Indian gooseberry — highest Vit C content), capsicum, kiwi. Vitamin A = night blindness; B₁ = Beriberi; D = Rickets/Osteomalacia."},
+
+/* Q8 MEDIUM */
+{d:"MEDIUM",e:"CDS 2021",
+q:"The vector responsible for transmitting Kala-azar (Visceral Leishmaniasis) is:",
+opts:[
+  "Female Anopheles mosquito",
+  "Aedes aegypti mosquito",
+  "Phlebotomus sandfly",
+  "Tsetse fly"
+],ans:2,
+rule:"Kala-azar = Leishmania donovani + Phlebotomus sandfly; Tsetse fly → Sleeping sickness (Trypanosoma)",
+exp:"KALA-AZAR (Visceral Leishmaniasis) is caused by the protozoan parasite LEISHMANIA DONOVANI and is transmitted by the bite of the PHLEBOTOMUS SANDFLY (a tiny, 2–3 mm insect, also called Phlebotomus argentipes in India). Kala-azar means 'black fever' in Hindi/Bengali — referring to the darkening of the skin seen in advanced disease. SYMPTOMS: irregular prolonged fever, massive enlargement of the SPLEEN (splenomegaly) and liver (hepatomegaly), weight loss, anaemia, and weakness. ENDEMIC in: Bihar, Jharkhand, West Bengal, Uttar Pradesh in India. TREATMENT: Amphotericin B (drug of choice), Miltefosine (oral). FEMALE ANOPHELES → Malaria; AEDES AEGYPTI → Dengue/Chikungunya/Zika; TSETSE FLY → Sleeping sickness (caused by Trypanosoma brucei). India has committed to eliminating Kala-azar by 2030."},
+
+/* Q9 HARD */
+{d:"HARD",e:"NDA 2022",
+q:"Which of the following correctly matches the disease with its causative agent AND mode of transmission?",
+opts:[
+  "Plague — Yersinia pestis — transmitted by bite of infected Aedes mosquito",
+  "Filariasis — Wuchereria bancrofti — transmitted by Culex mosquito",
+  "Cholera — Salmonella typhi — transmitted by contaminated water",
+  "Tetanus — Clostridium botulinum — transmitted by soil-contaminated wounds"
+],ans:1,
+rule:"Filariasis = Wuchereria bancrofti + Culex mosquito ✓; Plague = rat flea (Xenopsylla), not Aedes; Cholera = Vibrio cholerae (not Salmonella); Tetanus = C. tetani (not C. botulinum)",
+exp:"OPTION B is correct: FILARIASIS (Lymphatic filariasis / Elephantiasis) is caused by WUCHERERIA BANCROFTI (a nematode helminth/roundworm) and is transmitted by the CULEX MOSQUITO (specifically Culex quinquefasciatus in India). The microfilariae circulate in blood at night (nocturnal periodicity) when Culex mosquitoes are active. The worms block lymphatic vessels → lymphoedema → elephantiasis (gross swelling of limbs, scrotum). Treatment: DEC (Diethylcarbamazine) + Albendazole. WHY OTHERS ARE WRONG: OPTION A — Plague (Yersinia pestis) is transmitted by the bite of XENOPSYLLA CHEOPIS (rat flea), NOT an Aedes mosquito. Aedes = dengue/chikungunya. OPTION C — Cholera is caused by VIBRIO CHOLERAE, NOT Salmonella typhi. Salmonella typhi causes TYPHOID. Both diseases are water-borne, making this a common exam trap. OPTION D — Tetanus is caused by CLOSTRIDIUM TETANI (not C. botulinum). C. botulinum causes Botulism (food poisoning via botulinum toxin). Both are anaerobic Gram-positive bacilli, hence the confusion."},
+
+/* Q10 HARD */
+{d:"HARD",e:"CDS 2022",
+q:"Regarding polio vaccination, which of the following statements is CORRECT?",
+opts:[
+  "The OPV (Oral Polio Vaccine) was developed by Jonas Salk and contains killed poliovirus",
+  "The IPV (Inactivated Polio Vaccine) was developed by Albert Sabin and is given orally",
+  "The OPV (Oral Polio Vaccine) was developed by Albert Sabin and contains live attenuated poliovirus",
+  "Both OPV and IPV contain killed (inactivated) poliovirus and provide identical levels of protection"
+],ans:2,
+rule:"Sabin = OPV (oral, live attenuated); Salk = IPV (injectable, killed/inactivated); India uses OPV in pulse polio",
+exp:"OPTION C is correct: The ORAL POLIO VACCINE (OPV) — also called the Sabin vaccine — was developed by ALBERT SABIN and contains LIVE ATTENUATED (weakened) poliovirus. It is given as oral drops (2 drops in the mouth). Advantages: cheap, easy to administer, stimulates both systemic and gut immunity, can spread to contacts ('community immunity'). Rare risk: Vaccine-Associated Paralytic Poliomyelitis (VAPP) in ~1 per 2.7 million doses. WHY OTHERS ARE WRONG: OPTION A is doubly wrong — OPV was NOT developed by Salk, and OPV does NOT contain killed virus. OPTION B is doubly wrong — IPV was NOT developed by Sabin, and IPV is NOT oral. The INACTIVATED POLIO VACCINE (IPV) — the SALK vaccine — was developed by JONAS SALK (1955) and contains KILLED (inactivated) poliovirus, given by INJECTION. IPV cannot cause VAPP and is now recommended by WHO for all countries. India's pulse polio programme used OPV and India was declared polio-free on 27 March 2014. Memory trick: 'S' for Sabin = Swallow (oral); 'S' for Salk = Shot (injection)."},
+
+/* Q11 HARD */
+{d:"HARD",e:"AFCAT 2023",
+q:"Which of the following is correctly matched regarding Plasmodium species, fever cycle, and severity?",
+opts:[
+  "Plasmodium falciparum — 48-hour (tertian) cycle — most dangerous; causes cerebral malaria",
+  "Plasmodium malariae — 48-hour (tertian) cycle — causes kidney complications",
+  "Plasmodium vivax — 72-hour (quartan) cycle — causes relapse via hypnozoites",
+  "Plasmodium ovale — 72-hour (quartan) cycle — most common in Africa"
+],ans:0,
+rule:"P. falciparum = 48-hr cycle (malignant tertian), most dangerous, cerebral malaria; P. malariae = 72-hr (quartan); P. vivax/ovale = 48-hr (benign tertian), relapse via hypnozoites",
+exp:"OPTION A is correct: PLASMODIUM FALCIPARUM causes MALIGNANT TERTIAN MALARIA with a 48-HOUR (tertian) RBC rupture cycle. It is by far the MOST DANGEROUS species because: (1) it infects RBCs of ALL ages (vivax only infects young RBCs), leading to high parasite densities; (2) infected RBCs develop knobs that cause cytoadherence — sticking to capillary walls of the BRAIN → CEREBRAL MALARIA (potentially fatal); (3) causes 'blackwater fever' (haemoglobinuria from massive haemolysis); (4) no hypnozoite stage → no true relapses, but recrudescence possible. WHY OTHERS ARE WRONG: OPTION B — P. malariae causes QUARTAN malaria (72-HOUR cycle — not 48-hour). It is associated with nephrotic syndrome (kidney disease), not the 48-hour cycle. OPTION C — P. vivax causes BENIGN TERTIAN malaria with a 48-HOUR cycle (NOT 72-hour). It CAN cause RELAPSE via dormant liver stage parasites called HYPNOZOITES — treated with Primaquine to eliminate the liver stage. OPTION D — P. ovale also causes BENIGN TERTIAN malaria (48-HOUR cycle, not 72-hour) and also forms hypnozoites. It is mainly found in West Africa."},
+
+/* Q12 HARD */
+{d:"HARD",e:"NDA 2023",
+q:"Down syndrome is caused by a chromosomal abnormality. Which of the following correctly describes this condition?",
+opts:[
+  "Monosomy of chromosome 21 (45 chromosomes total); affects males only",
+  "Trisomy of chromosome 21 (47 chromosomes total); can affect both males and females; risk increases with paternal age",
+  "Trisomy of chromosome 21 (47 chromosomes total); can affect both males and females; risk increases with maternal age",
+  "Deletion of a portion of chromosome 5; associated with a distinctive 'cat-cry' at birth"
+],ans:2,
+rule:"Down syndrome = Trisomy 21 (47 chromosomes); both sexes; maternal age increases risk; Cri du chat = chromosome 5 deletion",
+exp:"OPTION C is correct: DOWN SYNDROME (Trisomy 21) is caused by the presence of THREE copies of chromosome 21 instead of two, giving a total of 47 chromosomes. It was first described by John Langdon Down in 1866 (the chromosomal basis was discovered by Jérôme Lejeune in 1959). KEY FEATURES: intellectual disability (varying degrees), characteristic facial features (flat face, epicanthal folds, upward-slanting eyes), short stature, single palmar crease (simian crease), congenital heart defects (present in ~40-50% — most commonly AVSD/VSD), increased risk of leukaemia and Alzheimer's disease later in life. WHY A IS WRONG: It is TRISOMY (3 copies), not MONOSOMY (1 copy). Monosomy 21 is lethal. Down syndrome affects BOTH sexes equally. WHY B IS WRONG: The risk of trisomy 21 increases with MATERNAL AGE (not paternal age) — due to errors in maternal meiosis (nondisjunction), particularly meiosis I. Risk: ~1 in 1500 at age 20; ~1 in 400 at age 35; ~1 in 100 at age 40. WHY D IS WRONG: The 'cat-cry' (French: cri du chat) at birth describes CRI DU CHAT SYNDROME — caused by deletion of the short arm of chromosome 5 (not chromosome 21)."},
+
+/* Q13 MEDIUM */
+{d:"MEDIUM",e:"CDS 2023",
+q:"The first vaccine ever developed was by Edward Jenner in 1796. Which disease did it protect against, and what was the key principle he exploited?",
+opts:[
+  "Against smallpox, by using live smallpox virus in an attenuated (weakened) form",
+  "Against smallpox, by using cowpox virus — exploiting cross-immunity between related Orthopoxviruses",
+  "Against rabies, by injecting dried spinal cord material from infected rabbits",
+  "Against cholera, by injecting killed Vibrio cholerae bacteria"
+],ans:1,
+rule:"Jenner 1796 = cowpox (vaccinia) → cross-protection against smallpox; not attenuated smallpox; Pasteur = rabies vaccine (1885)",
+exp:"OPTION B is correct: Edward Jenner (1796) developed the first vaccine by inoculating James Phipps (a farm boy) with COWPOX (Vaccinia virus) pus taken from a milkmaid (Sarah Nelmes) who had cowpox lesions. He then challenged the boy with SMALLPOX — and the boy did not develop the disease. KEY PRINCIPLE: COWPOX VIRUS (Vaccinia — an Orthopoxvirus) is closely related to SMALLPOX VIRUS (Variola — also Orthopoxvirus). Exposure to cowpox stimulates the immune system to produce antibodies that CROSS-REACT with smallpox antigens — providing protection against smallpox without the risk of the deadly disease itself. The word VACCINE comes from 'vacca' (Latin for cow). WHY A IS WRONG: Jenner did NOT use attenuated smallpox — he used a DIFFERENT but related virus (cowpox). Using attenuated smallpox would have been dangerous. WHY C IS WRONG: The rabies vaccine (dried spinal cord from infected rabbits) was developed by LOUIS PASTEUR in 1885 — 89 years after Jenner's work. WHY D IS WRONG: Pasteur developed cholera/anthrax vaccines (killed bacteria), not Jenner."},
+
+/* Q14 MEDIUM */
+{d:"MEDIUM",e:"AFCAT 2022",
+q:"Which of the following is the CORRECT match of a deficiency disease with its causing nutritional deficiency?",
+opts:[
+  "Pellagra — Vitamin B₁ (Thiamine) deficiency",
+  "Beriberi — Vitamin B₃ (Niacin) deficiency",
+  "Kwashiorkor — Protein deficiency with adequate caloric intake",
+  "Marasmus — Protein deficiency with adequate caloric intake"
+],ans:2,
+rule:"Kwashiorkor = protein deficiency (adequate calories); Marasmus = protein + calorie deficiency; Pellagra = Niacin (B₃); Beriberi = Thiamine (B₁)",
+exp:"OPTION C is correct: KWASHIORKOR is caused by PROTEIN DEFICIENCY despite relatively adequate total caloric intake (the diet may have sufficient carbohydrates but lacks protein). It is seen in children after weaning (when they are switched from protein-rich breast milk to starchy gruel). HALLMARKS: (1) OEDEMA (pitting, especially in legs and abdomen — 'pot belly') — due to low serum albumin; (2) SKIN LESIONS (flaky paint dermatosis); (3) HAIR CHANGES (loss of colour/pigmentation — 'flag sign': alternate bands of normal and depigmented hair); (4) HEPATOMEGALY (fatty liver). WHY A AND B ARE WRONG: PELLAGRA is caused by NIACIN (Vitamin B₃) deficiency — the '3 Ds': Dermatitis, Diarrhoea, Dementia. BERIBERI is caused by THIAMINE (Vitamin B₁) deficiency — wet beriberi (heart failure, oedema) and dry beriberi (peripheral neuropathy). A and B have the vitamins swapped — a classic exam trap. WHY D IS WRONG: MARASMUS is caused by combined PROTEIN AND CALORIE deficiency (overall starvation). Unlike kwashiorkor, marasmus has NO oedema; the child appears skeletal ('old man appearance') with loss of subcutaneous fat and muscle wasting."},
+
+/* Q15 HARD */
+{d:"HARD",e:"NDA 2021",
+q:"Regarding the type of immunity, which of the following is an example of NATURALLY ACQUIRED PASSIVE immunity?",
+opts:[
+  "A child receiving the MMR vaccine",
+  "A person recovering from influenza and developing long-term immunity",
+  "A newborn receiving maternal IgG antibodies across the placenta",
+  "A patient receiving anti-tetanus serum (ATS) after a wound injury"
+],ans:2,
+rule:"Naturally acquired passive = maternal IgG via placenta (or IgA via breast milk); Artificially acquired passive = ATS, antiserum; Active (natural) = recovering from infection; Active (artificial) = vaccine",
+exp:"OPTION C is correct: A NEWBORN RECEIVING MATERNAL IgG ANTIBODIES ACROSS THE PLACENTA is the classic example of NATURALLY ACQUIRED PASSIVE IMMUNITY. These are pre-formed antibodies produced by the MOTHER that are transferred to the foetus via the placenta during pregnancy (primarily in the third trimester). IgG is the ONLY immunoglobulin class that crosses the placental barrier. The infant also receives IgA (secretory) through BREAST MILK/COLOSTRUM, providing mucosal protection. These maternal antibodies protect the newborn for approximately 3–6 months. Key features of PASSIVE immunity: immediate protection (antibodies are ready-made); SHORT-LIVED (no memory B cells formed, antibodies gradually degrade); does not involve the recipient's immune system making its own antibodies. WHY A IS WRONG: MMR vaccine = ARTIFICIALLY ACQUIRED ACTIVE immunity (body makes its own antibodies after vaccine). WHY B IS WRONG: Recovering from influenza = NATURALLY ACQUIRED ACTIVE immunity (own immune response + memory cells). WHY D IS WRONG: ATS (Anti-Tetanus Serum) = ARTIFICIALLY ACQUIRED PASSIVE immunity (pre-formed antibodies from an external source, given artificially by injection)."}
+
+];
+
+const answers=new Array(QS.length).fill(null);
+const revealed=new Array(QS.length).fill(false);
+const LABS=["A","B","C","D"];
+
+function build(){
+  const area=document.getElementById("q-area");
+  area.innerHTML="";
+  QS.forEach((q,i)=>{
+    const dc=q.d==="EASY"?"diff-e":q.d==="MEDIUM"?"diff-m":"diff-h";
+    const div=document.createElement("div");
+    div.className="q-card";div.id="qc"+i;
+    div.innerHTML=`
+      <div class="q-meta">
+        <span class="q-num">Q.${String(i+1).padStart(2,"0")}</span>
+        <span class="q-diff ${dc}">${q.d}</span>
+        <span class="q-exam">${q.e}</span>
+      </div>
+      <div class="q-body">
+        <div class="q-text">${q.q}</div>
+        <div class="opts" id="opts${i}">
+          ${q.opts.map((o,j)=>`
+            <button class="opt" id="o${i}_${j}" onclick="pick(${i},${j})">
+              <span class="opt-lbl">${LABS[j]}</span>${o}
+            </button>`).join("")}
+        </div>
+        <div class="exp-panel" id="ex${i}">
+          <div class="exp-tag">Explanation</div>
+          <div class="exp-rule">${q.rule}</div>
+          <p>${q.exp}</p>
+        </div>
+      </div>
+      <div class="q-foot">
+        <span style="font-size:11px;color:var(--dim);font-weight:700">Biology · B13</span>
+        <span id="ai${i}" class="q-status">&mdash;</span>
+      </div>`;
+    area.appendChild(div);
+  });
+}
+
+function pick(qi,oi){
+  if(revealed[qi])return;
+  answers[qi]=oi;
+  document.querySelectorAll("#opts"+qi+" .opt").forEach((b,j)=>{b.classList.remove("sel");if(j===oi)b.classList.add("sel")});
+  document.getElementById("qc"+qi).classList.add("answered");
+  const ai=document.getElementById("ai"+qi);
+  ai.textContent="Selected: "+LABS[oi];
+  ai.style.color="var(--primary)";
+  updateStats();
+}
+
+function updateStats(){
+  const att=answers.filter(a=>a!==null).length;
+  document.getElementById("s-att").textContent=att;
+  document.getElementById("prog").style.width=(att/QS.length*100)+"%";
+  document.getElementById("prog-label").textContent=att+" of "+QS.length+" answered";
+  let c=0,w=0;
+  answers.forEach((a,i)=>{if(a===null)return;if(a===QS[i].ans)c++;else w++;});
+  document.getElementById("s-cor").textContent=c;
+  document.getElementById("s-wrg").textContent=w;
+}
+
+function submitAll(){
+  let cor=0,wrg=0,skp=0;
+  QS.forEach((q,i)=>{
+    revealed[i]=true;
+    const opts=document.querySelectorAll("#opts"+i+" .opt");
+    opts.forEach(b=>{b.disabled=true;b.classList.remove("sel")});
+    opts[q.ans].classList.add("ok");
+    if(answers[i]!==null&&answers[i]!==q.ans)opts[answers[i]].classList.add("bad");
+    document.getElementById("ex"+i).classList.add("show");
+    const ai=document.getElementById("ai"+i);
+    const card=document.getElementById("qc"+i);
+    card.classList.remove("answered");
+    if(answers[i]===null){skp++;ai.textContent="Skipped";ai.style.color="var(--dim)";}
+    else if(answers[i]===q.ans){cor++;card.classList.add("correct");ai.textContent="\u2713 Correct";ai.style.color="var(--green)";}
+    else{wrg++;card.classList.add("wrong");ai.textContent="\u2717 Wrong";ai.style.color="var(--red)";}
+  });
+  updateStats();
+  showResults(cor,wrg,skp);
+}
+
+function showResults(cor,wrg,skp){
+  const pct=Math.round(cor/QS.length*100);
+  let grade,msg;
+  if(pct>=88){grade="Excellent";msg="Outstanding! You have mastered Human Diseases.";}
+  else if(pct>=70){grade="Good";msg="Well done. Review the questions you missed.";}
+  else if(pct>=50){grade="Average";msg="Good effort. Revisit the theory cards and try again.";}
+  else{grade="Needs Work";msg="Review the Quick Ref carefully and try again.";}
+  const res=document.getElementById("results");
+  res.innerHTML=`
+    <div class="res-hero">
+      <div class="res-score">${cor}<span style="font-size:36px;opacity:.5">/${QS.length}</span></div>
+      <div class="res-grade">${grade} &middot; ${pct}%</div>
+      <div class="res-msg">${msg}</div>
+    </div>
+    <div class="res-stats">
+      <div class="qs-cell"><div class="qs-val g">${cor}</div><div class="qs-lbl">Correct</div></div>
+      <div class="qs-cell"><div class="qs-val r">${wrg}</div><div class="qs-lbl">Wrong</div></div>
+      <div class="qs-cell"><div class="qs-val a">${skp}</div><div class="qs-lbl">Skipped</div></div>
+      <div class="qs-cell"><div class="qs-val">${pct}%</div><div class="qs-lbl">Score</div></div>
+    </div>
+    <div style="text-align:center;margin:16px 0">
+      <button class="btn btn-ghost" onclick="document.getElementById('q-area').scrollIntoView({behavior:'smooth'})">Review All Answers</button>
+    </div>`;
+  res.style.display="block";
+  res.scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+function resetQuiz(){
+  answers.fill(null);revealed.fill(false);
+  build();
+  document.getElementById("results").style.display="none";
+  document.getElementById("results").innerHTML="";
+  ["s-att","s-cor","s-wrg"].forEach(id=>document.getElementById(id).textContent="0");
+  document.getElementById("prog").style.width="0%";
+  document.getElementById("prog-label").textContent="0 of "+QS.length+" answered";
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function switchTab(id){
+  document.querySelectorAll(".pane").forEach(p=>p.classList.remove("on"));
+  document.querySelectorAll(".tab").forEach(b=>b.classList.remove("on"));
+  document.getElementById(id).classList.add("on");
+  const idx={theory:0,quickref:1,quiz:2}[id];
+  document.querySelectorAll(".tab")[idx].classList.add("on");
+}
+
+function tog(hd){
+  const bd=hd.nextElementSibling;
+  const isOpen=bd.classList.contains("open");
+  bd.classList.toggle("open",!isOpen);
+  hd.classList.toggle("open",!isOpen);
+}
+
+build();
+</script>
+</body>
+</html>

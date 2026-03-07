@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>B13 · Microorganisms | Olive Defence</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+:root{
+  --bg:#EEF4F0;--bg2:#E0EAE4;--bg3:#C8D8CC;--white:#F6FAF7;
+  --ink:#080F0A;--ink2:#152010;--muted:#3A6045;--dim:#7A9A82;--border:#A8C8B0;
+  --primary:#0D5C2A;--primaryLt:#147835;--primaryPale:#E2F0E8;
+  --amber:#6A5A00;--amberLt:#8A7800;--amberPale:#F8F4DC;
+  --green:#0A5020;--greenLt:#147030;--greenPale:#DCF0E4;
+  --red:#7A1010;--redLt:#A01818;--redPale:#FAE8E8;
+  --blue:#0A2860;--bluePale:#E0E8F8;
+  --purple:#480870;--purplePale:#EDE0F8;
+  --teal:#085048;--tealPale:#D8F0EC;
+  --slate:#384858;--slatePale:#E4EAF2;
+  --radius:12px;--shadow:0 2px 12px rgba(8,15,10,.09);--shadow-md:0 4px 20px rgba(8,15,10,.14);
+}
+body{font-family:"Nunito",sans-serif;background:var(--bg);color:var(--ink);font-size:17px;line-height:1.75;min-height:100vh}
+.page{max-width:680px;margin:0 auto;padding:0 16px 80px}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#020A04 0%,#0D5C2A 55%,#147835 100%);margin:0 -16px;padding:28px 20px 26px;position:relative;overflow:hidden}
+.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 78% 18%,rgba(180,255,200,.08) 0%,transparent 55%),radial-gradient(ellipse at 6% 82%,rgba(100,200,120,.06) 0%,transparent 50%);pointer-events:none}
+.hero::after{content:"";position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(160,255,180,.3),transparent);pointer-events:none}
+.hero-kicker{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.48);margin-bottom:8px;display:flex;align-items:center;gap:8px;position:relative;z-index:1}
+.hero-kicker::before{content:"";width:18px;height:2px;background:rgba(255,255,255,.26)}
+.hero-title{font-family:"Lora",serif;font-size:clamp(24px,5.5vw,34px);font-weight:700;color:#fff;line-height:1.2;margin-bottom:10px;position:relative;z-index:1}
+.hero-title span{color:#90FFB4;font-style:italic}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.64);margin-bottom:18px;line-height:1.65;position:relative;z-index:1}
+.hero-chips{display:flex;flex-wrap:wrap;gap:7px;position:relative;z-index:1}
+.chip{font-size:11px;font-weight:700;letter-spacing:1px;padding:4px 12px;border-radius:20px;text-transform:uppercase}
+.chip-w{background:rgba(255,255,255,.12);color:rgba(255,255,255,.88)}
+.chip-a{background:rgba(144,255,180,.16);color:#90FFB4}
+.chip-g{background:rgba(180,255,200,.11);color:#A0FFB8}
+
+/* TAB BAR */
+.tab-bar{position:sticky;top:0;z-index:50;background:var(--white);border-bottom:2px solid var(--border);margin:0 -16px;display:flex;overflow-x:auto;box-shadow:0 2px 8px rgba(8,15,10,.07);-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.tab-bar::-webkit-scrollbar{display:none}
+.tab{flex-shrink:0;padding:14px 18px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);border:none;background:transparent;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;white-space:nowrap}
+.tab:hover{color:var(--ink);background:var(--bg)}
+.tab.on{color:var(--primary);border-bottom-color:var(--primary)}
+
+/* PANES */
+.pane{display:none;padding-top:24px;animation:fadeUp .3s ease}
+.pane.on{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* SEC LABEL */
+.sec-label{font-size:10px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--primary);margin:28px 0 12px;display:flex;align-items:center;gap:10px}
+.sec-label::after{content:"";flex:1;height:1px;background:var(--border)}
+
+/* INTRO BOX */
+.intro-box{background:var(--primaryPale);border:1.5px solid rgba(13,92,42,.20);border-radius:var(--radius);padding:20px;margin-bottom:8px}
+.intro-box p{font-size:16px;color:var(--ink2);line-height:1.8}
+.intro-box strong{color:var(--primary)}
+
+/* C-CARDS */
+.c-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:10px;box-shadow:var(--shadow);overflow:hidden}
+.c-head{display:flex;align-items:center;gap:12px;padding:16px 18px;cursor:pointer;border-left:4px solid transparent;transition:all .15s;-webkit-tap-highlight-color:transparent}
+.c-head:hover,.c-head.open{background:var(--bg);border-left-color:var(--primary)}
+.c-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.c-title{font-size:17px;font-weight:700;color:var(--ink);flex:1}
+.c-sub{font-size:12px;color:var(--dim);font-weight:600;margin-top:2px}
+.c-arrow{font-size:12px;color:var(--dim);transition:transform .2s;flex-shrink:0}
+.c-head.open .c-arrow{transform:rotate(180deg)}
+.c-body{display:none;padding:4px 18px 20px;border-top:1px solid var(--border)}
+.c-body.open{display:block;animation:fadeUp .2s ease}
+.c-body p{font-size:16px;color:var(--ink2);line-height:1.85;margin-bottom:12px}
+.c-body p:last-child{margin-bottom:0}
+.c-body strong{color:var(--primary);font-weight:700}
+.c-body em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* CONTENT BOXES */
+.fact-box{background:var(--amberPale);border:1.5px solid rgba(106,90,0,.20);border-radius:10px;padding:16px 18px;margin:14px 0}
+.fact-box .fb-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--amber);text-transform:uppercase;margin-bottom:8px}
+.fact-box ul{list-style:none;padding:0}
+.fact-box li{font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;position:relative;line-height:1.7}
+.fact-box li::before{content:"→";position:absolute;left:0;color:var(--amber);font-weight:700;font-size:13px}
+
+.eg-box{background:var(--greenPale);border-left:4px solid var(--green);border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0}
+.eg-box .eg-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--green);text-transform:uppercase;margin-bottom:6px}
+.eg-box ul{list-style:none;padding:0}
+.eg-box li{font-size:15px;color:var(--ink2);padding:4px 0 4px 18px;position:relative;line-height:1.65}
+.eg-box li::before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:800;font-size:12px}
+.eg-box p{font-size:15px;color:var(--ink2);line-height:1.75}
+
+.trap-box{background:var(--redPale);border:1.5px solid rgba(122,16,16,.20);border-radius:10px;padding:16px 18px;margin:14px 0}
+.trap-box .tr-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--red);text-transform:uppercase;margin-bottom:8px}
+.trap-box p,.trap-box li{font-size:15.5px;color:var(--ink2);line-height:1.75}
+.trap-box ul{list-style:none;padding:0}
+.trap-box li{padding:5px 0 5px 22px;position:relative}
+.trap-box li::before{content:"\u26D1";position:absolute;left:0;font-size:12px;color:var(--red)}
+
+.rule-box{background:var(--bluePale);border:1.5px solid rgba(10,40,96,.17);border-radius:10px;padding:16px 18px;margin:14px 0}
+.rule-box .rl-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--blue);text-transform:uppercase;margin-bottom:8px}
+.rule-box p{font-size:15.5px;color:var(--ink2);line-height:1.8}
+.rule-box strong{color:var(--blue)}
+
+.purple-box{background:var(--purplePale);border:1.5px solid rgba(72,8,112,.17);border-radius:10px;padding:16px 18px;margin:14px 0}
+.purple-box .pl-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--purple);text-transform:uppercase;margin-bottom:8px}
+.purple-box ul{list-style:none;padding:0}
+.purple-box li{font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;position:relative;line-height:1.8}
+.purple-box li::before{content:"\u25C6";position:absolute;left:0;font-size:9px;color:var(--purple);top:10px}
+
+.teal-box{background:var(--tealPale);border:1.5px solid rgba(8,80,72,.17);border-radius:10px;padding:16px 18px;margin:14px 0}
+.teal-box .tl-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--teal);text-transform:uppercase;margin-bottom:8px}
+.teal-box p{font-size:15.5px;color:var(--ink2);line-height:1.8}
+.teal-box strong{color:var(--teal)}
+.teal-box ul{list-style:none;padding:0}
+.teal-box li{font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;position:relative;line-height:1.8}
+.teal-box li::before{content:"\u25B8";position:absolute;left:0;color:var(--teal);font-size:12px;top:8px}
+
+.compare-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
+.compare-table th{background:var(--primary);color:#fff;padding:10px 12px;text-align:left;font-size:13px;font-weight:700;letter-spacing:.5px}
+.compare-table td{padding:10px 12px;border:1px solid var(--border);color:var(--ink2);vertical-align:top;line-height:1.65}
+.compare-table tr:nth-child(even) td{background:var(--bg)}
+.compare-table td b{color:var(--primary)}
+.compare-table td em{color:var(--amber);font-style:normal;font-weight:700}
+
+.org-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}
+.org-card{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:13px 14px;position:relative;overflow:hidden}
+.org-card::before{content:"";position:absolute;top:0;left:0;width:3px;height:100%;background:var(--primary)}
+.org-card .org-name{font-size:13px;font-weight:800;color:var(--primary);margin-bottom:3px}
+.org-card p{font-size:13.5px;color:var(--ink2);line-height:1.6;margin-top:2px}
+
+.stat-band{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border-radius:var(--radius);overflow:hidden;margin:16px 0}
+.stat-cell{background:var(--white);padding:12px 8px;text-align:center}
+.stat-val{font-family:"Lora",serif;font-size:15px;font-weight:700;color:var(--primary);line-height:1;margin-bottom:4px}
+.stat-lbl{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:.4px;line-height:1.3}
+
+/* QUICK REF */
+.ref-grid{display:grid;gap:10px;margin:8px 0}
+.ref-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+.ref-card-title{font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--primary);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.ref-card ul{list-style:none;padding:0}
+.ref-card li{font-size:15px;color:var(--ink2);padding:5px 0 5px 16px;position:relative;line-height:1.65;border-bottom:1px solid var(--bg2)}
+.ref-card li:last-child{border-bottom:none}
+.ref-card li::before{content:"\u00B7";position:absolute;left:4px;color:var(--primary);font-weight:900;font-size:18px;line-height:1.3}
+.ref-card li b{color:var(--ink);font-weight:700}
+.ref-card li em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* QUIZ */
+.quiz-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border-radius:var(--radius);overflow:hidden;margin-bottom:16px;box-shadow:var(--shadow)}
+.qs-cell{background:var(--white);padding:12px 8px;text-align:center}
+.qs-val{font-family:"Lora",serif;font-size:22px;font-weight:700;color:var(--primary);line-height:1}
+.qs-val.g{color:var(--green)}.qs-val.r{color:var(--red)}.qs-val.a{color:var(--amber)}
+.qs-lbl{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:1px;margin-top:4px;text-transform:uppercase}
+.prog-wrap{margin-bottom:20px}
+.prog-bar{height:6px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;background:var(--primary);border-radius:3px;transition:width .4s ease;width:0%}
+.prog-label{font-size:12px;color:var(--muted);font-weight:700;margin-bottom:6px}
+.q-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius);margin-bottom:12px;box-shadow:var(--shadow);overflow:hidden;border-left:4px solid transparent;transition:border-color .15s}
+.q-card.answered{border-left-color:var(--primary)}
+.q-card.correct{border-left-color:var(--green)}
+.q-card.wrong{border-left-color:var(--red)}
+.q-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 16px;background:var(--bg);border-bottom:1px solid var(--border)}
+.q-num{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:1px}
+.q-diff{font-size:10px;font-weight:800;padding:2px 10px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase}
+.diff-e{background:var(--greenPale);color:var(--green)}
+.diff-m{background:var(--amberPale);color:var(--amber)}
+.diff-h{background:var(--redPale);color:var(--red)}
+.q-exam{font-size:11px;color:var(--dim);margin-left:auto;font-weight:600}
+.q-body{padding:16px}
+.q-text{font-size:17px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-weight:600}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{background:var(--bg);border:1.5px solid var(--border);border-radius:10px;padding:14px 16px;cursor:pointer;display:flex;align-items:flex-start;gap:12px;font-size:16px;color:var(--ink2);text-align:left;width:100%;transition:all .15s;-webkit-tap-highlight-color:transparent;min-height:48px;line-height:1.6}
+.opt:hover:not(:disabled){border-color:var(--primary);background:var(--primaryPale)}
+.opt:disabled{cursor:default}
+.opt.sel{border-color:var(--primary);background:var(--primaryPale);color:var(--primary)}
+.opt.ok{border-color:var(--green)!important;background:var(--greenPale)!important;color:var(--green)!important}
+.opt.bad{border-color:var(--red)!important;background:var(--redPale)!important;color:var(--red)!important}
+.opt-lbl{min-width:28px;height:28px;border-radius:8px;background:var(--bg3);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--muted);flex-shrink:0;transition:all .15s}
+.opt.sel .opt-lbl{background:var(--primary);color:#fff;border-color:var(--primary)}
+.opt.ok .opt-lbl{background:var(--green);color:#fff;border-color:var(--green)}
+.opt.bad .opt-lbl{background:var(--red);color:#fff;border-color:var(--red)}
+.exp-panel{display:none;margin-top:12px;background:var(--bg);border-radius:10px;padding:14px 16px;border:1px solid var(--border)}
+.exp-panel.show{display:block;animation:fadeUp .2s ease}
+.exp-tag{font-size:10px;font-weight:800;letter-spacing:2px;text-transform:uppercase;color:var(--primary);margin-bottom:6px}
+.exp-rule{font-size:13px;font-weight:800;color:var(--ink);background:var(--primaryPale);border-radius:6px;padding:6px 10px;margin-bottom:8px;border-left:3px solid var(--primary)}
+.exp-panel p{font-size:15px;color:var(--ink2);line-height:1.8}
+.q-foot{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-top:1px solid var(--border);background:var(--bg)}
+.q-status{font-size:12px;font-weight:700}
+.btn{padding:12px 24px;border-radius:10px;font-size:14px;font-weight:800;letter-spacing:.5px;border:none;cursor:pointer;transition:all .15s}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:var(--primaryLt)}
+.btn-ghost{background:var(--bg2);color:var(--ink2);border:1.5px solid var(--border)}
+.btn-ghost:hover{background:var(--bg3)}
+.quiz-actions{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+#results{display:none;background:var(--white);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:20px;box-shadow:var(--shadow-md)}
+.res-hero{text-align:center;padding-bottom:20px;border-bottom:1px solid var(--border);margin-bottom:16px}
+.res-score{font-family:"Lora",serif;font-size:64px;font-weight:700;color:var(--primary);line-height:1}
+.res-grade{font-size:16px;font-weight:800;color:var(--ink);margin:8px 0 6px;letter-spacing:.5px}
+.res-msg{font-size:15px;color:var(--muted)}
+.res-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;background:var(--border);border-radius:10px;overflow:hidden;margin-bottom:12px}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-kicker">Biology &middot; Lesson B13 &middot; Olive Defence</div>
+  <div class="hero-title"><span>Microorganisms</span> &mdash; Bacteria, Viruses &amp; Beyond</div>
+  <div class="hero-sub">Bacteria, viruses, fungi, protozoa, algae &mdash; their structure, diseases, beneficial roles, antibiotics, vaccines and immunity &mdash; at CDS, NDA &amp; AFCAT exam depth.</div>
+  <div class="hero-chips">
+    <span class="chip chip-w">CDS</span>
+    <span class="chip chip-w">NDA</span>
+    <span class="chip chip-w">AFCAT</span>
+    <span class="chip chip-a">Bacteria</span>
+    <span class="chip chip-g">Viruses</span>
+    <span class="chip chip-a">Immunity</span>
+  </div>
+</div>
+
+<!-- TAB BAR -->
+<div class="tab-bar">
+  <button class="tab on" onclick="switchTab('theory')">&#128214; Theory</button>
+  <button class="tab" onclick="switchTab('quickref')">&#9889; Quick Ref</button>
+  <button class="tab" onclick="switchTab('quiz')">&#9999;&#65039; Quiz</button>
+</div>
+
+<!-- ═══════════ THEORY ═══════════ -->
+<div class="pane on" id="theory">
+
+<div class="intro-box">
+  <p><strong>Microorganisms</strong> (microbes) are living organisms too small to be seen with the naked eye &mdash; typically &lt;1 mm. They include <strong>bacteria, viruses, fungi, protozoa, algae</strong> and <strong>prions</strong>. The study of microorganisms is <strong>microbiology</strong>, founded by <strong>Antonie van Leeuwenhoek</strong> (1670s &mdash; first to observe bacteria and protozoa using his hand-crafted microscope) and advanced by <strong>Louis Pasteur</strong> and <strong>Robert Koch</strong>. Microbes are both the cause of devastating diseases and essential partners in nutrient cycling, food production, and medicine.</p>
+</div>
+
+<!-- SECTION 1 -->
+<div class="sec-label">Section 1 &mdash; Classification of Microorganisms</div>
+
+<div class="c-card">
+  <div class="c-head" onclick="tog(this)">
+    <div class="c-icon" style="background:#E2F0E8">&#129440;</div>
+    <div style="flex:1">
+      <div class="c-title">Major Groups of Microorganisms</div>
+      <div class="c-sub">Bacteria, viruses, fungi, protozoa, algae, prions &mdash; key features at a glance</div>
+    </div>
+    <span class="c-arrow">&#9662;</span>
+  </div>
+  <div class="c-body">
+    <div style="overflow-x:auto">
+      <table class="compare-table">
+        <tr><th>Group</th><th>Cell Type</th><th>Key Features</th><th>Disease Examples</th><th>Beneficial Roles</th></tr>
+        <tr><td><b>Bacteria</b></td><td>Prokaryote</td><td>Cell wall (peptidoglycan); no nucleus; 1&ndash;10 &mu;m; reproduce by binary fission; can be aerobic/anaerobic</td><td>TB, cholera, typhoid, plague, tetanus, diphtheria, leprosy</td><td>Nitrogen fixation, dairy fermentation, gut microbiome, antibiotics production</td></tr>
+        <tr><td><b>Viruses</b></td><td>Acellular (non-living outside host)</td><td>Protein coat (capsid) + nucleic acid (DNA or RNA); no metabolism; obligate intracellular parasites; 20&ndash;300 nm; replicate using host machinery</td><td>Influenza, HIV, COVID-19, rabies, polio, dengue, smallpox, hepatitis</td><td>Bacteriophages in phage therapy; vaccine platforms; gene therapy vectors</td></tr>
+        <tr><td><b>Fungi</b></td><td>Eukaryote</td><td>Cell wall of chitin; heterotrophic; unicellular (yeast) or multicellular (mould/mushroom); reproduce by spores</td><td>Ringworm, athlete's foot, candidiasis, aspergillosis, cryptococcal meningitis</td><td>Bread/beer/wine (yeast); antibiotics (penicillin from <em>Penicillium</em>); cheese; decomposers</td></tr>
+        <tr><td><b>Protozoa</b></td><td>Eukaryote</td><td>Unicellular; heterotrophic; motile (pseudopodia/cilia/flagella); no cell wall; mostly aquatic</td><td>Malaria (<em>Plasmodium</em>), amoebic dysentery, sleeping sickness (<em>Trypanosoma</em>), leishmaniasis (<em>Leishmania</em>), giardia</td><td>Link in aquatic food chains; soil nutrient cycling</td></tr>
+        <tr><td><b>Algae</b></td><td>Eukaryote (most)</td><td>Photosynthetic; aquatic; cell wall of cellulose/silica; produce ~50% of Earth's O&#8322;</td><td>Harmful algal blooms (HABs); red tide (paralytic shellfish poisoning)</td><td>Primary producers; agar (from <em>Gelidium</em>); biofuel; spirulina food supplement</td></tr>
+        <tr><td><b>Prions</b></td><td>Acellular (protein only)</td><td>Misfolded proteins; no nucleic acid; cause other proteins to misfold; extremely heat-resistant; cannot be killed by standard sterilisation</td><td>Mad cow disease (BSE), Creutzfeldt-Jakob disease (CJD), kuru, scrapie</td><td>None known</td></tr>
+      </table>
+    </div>
+
+    <div class="trap-box">
+      <div class="tr-label">&#9873; Critical Exam Traps &mdash; Classification</div>
+      <ul>
+        <li>Viruses are <strong>NOT cells</strong> &mdash; they are acellular and considered non-living outside a host cell. They have no metabolism, no ribosomes, and cannot reproduce independently.</li>
+        <li>Fungi cell walls are made of <strong>chitin</strong> (NOT cellulose like plants; NOT peptidoglycan like bacteria).</li>
+        <li>Bacteria cell walls are made of <strong>peptidoglycan</strong> (also called murein). This is the target of penicillin antibiotics.</li>
+        <li>Prions contain <strong>NO nucleic acid</strong> (no DNA, no RNA) &mdash; they are infectious proteins only. This makes them unique among all infectious agents.</li>
+        <li>Algae are <strong>NOT plants</strong> &mdash; they are classified in Kingdom Protista (or their own kingdoms in modern classification). However, they are photosynthetic like plants.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 2 -->
+<div class="sec-label">Section 2 &mdash; Bacteria in Depth</div>
+
+<div class="c-card">
+  <div class="c-head" onclick="tog(this)">
+    <div class="c-icon" style="background:#E2F0E8">&#129440;</div>
+    <div style="flex:1">
+      <div class="c-title">Bacterial Structure, Types &amp; Gram Staining</div>
+      <div class="c-sub">Shapes, Gram +ve vs &minus;ve, cell wall, flagella, endospores</div>
+    </div>
+    <span class="c-arrow">&#9662;</span>
+  </div>
+  <div class="c-body">
+    <div class="fact-box">
+      <div class="fb-label">Bacterial Shapes (Morphology)</div>
+      <ul>
+        <li><strong>Coccus</strong> (spherical): Staphylococcus (grape-like clusters), Streptococcus (chains), Diplococcus (pairs &mdash; e.g. <em>Neisseria gonorrhoeae</em>)</li>
+        <li><strong>Bacillus</strong> (rod-shaped): <em>E. coli</em>, <em>Mycobacterium tuberculosis</em>, <em>Bacillus anthracis</em>, <em>Lactobacillus</em></li>
+        <li><strong>Spirillum / Spirochete</strong> (spiral): <em>Treponema pallidum</em> (syphilis), <em>Vibrio cholerae</em> (comma-shaped variant)</li>
+        <li><strong>Vibrio</strong> (comma-shaped): <em>Vibrio cholerae</em> &mdash; causes cholera</li>
+      </ul>
+    </div>
+
+    <div style="overflow-x:auto">
+      <table class="compare-table">
+        <tr><th>Feature</th><th>Gram-Positive (+ve)</th><th>Gram-Negative (&minus;ve)</th></tr>
+        <tr><td><b>Cell wall</b></td><td>Thick peptidoglycan layer (20&ndash;80 nm); no outer membrane</td><td>Thin peptidoglycan (2&ndash;7 nm) + outer lipopolysaccharide (LPS) membrane</td></tr>
+        <tr><td><b>Gram stain</b></td><td>Retains crystal violet dye &rarr; stains <em>purple/violet</em></td><td>Loses crystal violet; counterstained with safranin &rarr; stains <em>pink/red</em></td></tr>
+        <tr><td><b>Antibiotic sensitivity</b></td><td>More sensitive to penicillin (targets peptidoglycan synthesis)</td><td>Less sensitive to penicillin; more resistant due to outer membrane barrier</td></tr>
+        <tr><td><b>Endotoxin</b></td><td>No LPS endotoxin; may produce exotoxins</td><td>LPS in outer membrane = endotoxin; causes fever, septic shock</td></tr>
+        <tr><td><b>Examples</b></td><td><em>Staphylococcus aureus</em>, <em>Streptococcus pneumoniae</em>, <em>Bacillus anthracis</em>, <em>Clostridium tetani</em>, <em>Lactobacillus</em></td><td><em>E. coli</em>, <em>Salmonella</em>, <em>Vibrio cholerae</em>, <em>Neisseria</em>, <em>Pseudomonas</em>, <em>Helicobacter pylori</em></td></tr>
+      </table>
+    </div>
+
+    <div class="fact-box">
+      <div class="fb-label">Key Bacterial Structures &mdash; Functions</div>
+      <ul>
+        <li><strong>Cell wall (peptidoglycan)</strong> &mdash; maintains shape and prevents osmotic lysis; target of penicillin/cephalosporins (inhibit cell wall synthesis)</li>
+        <li><strong>Flagella</strong> &mdash; whip-like appendages for motility; composed of flagellin protein; <em>Vibrio cholerae</em> is highly motile via single polar flagellum</li>
+        <li><strong>Pili (fimbriae)</strong> &mdash; hair-like projections for attachment to host cells and conjugation (gene transfer); important for virulence (e.g. <em>Neisseria gonorrhoeae</em>)</li>
+        <li><strong>Plasmids</strong> &mdash; small circular extra-chromosomal DNA; carry antibiotic resistance genes; transferred by conjugation &mdash; key mechanism of antibiotic resistance spread</li>
+        <li><strong>Endospores</strong> &mdash; dormant, highly resistant structures formed by <em>Bacillus</em> and <em>Clostridium</em> species; survive boiling, drying, UV radiation, disinfectants; destroyed only by autoclaving (121&deg;C, 15 psi, 15 min). Examples: <em>B. anthracis</em> (anthrax), <em>C. tetani</em> (tetanus), <em>C. botulinum</em> (botulism)</li>
+        <li><strong>Capsule</strong> &mdash; polysaccharide outer layer; protects against phagocytosis by host immune cells; virulence factor. Examples: <em>Streptococcus pneumoniae</em> (pneumonia), <em>Bacillus anthracis</em></li>
+      </ul>
+    </div>
+
+    <div class="rule-box">
+      <div class="rl-label">Gram Staining Procedure &mdash; Hans Christian Gram (1884)</div>
+      <p><strong>Step 1:</strong> Apply crystal violet (primary stain) &mdash; all bacteria stain purple. <strong>Step 2:</strong> Add iodine (mordant) &mdash; fixes crystal violet. <strong>Step 3:</strong> Alcohol wash (decolouriser) &mdash; Gram+ve retain purple (thick wall); Gram&minus;ve lose colour. <strong>Step 4:</strong> Safranin counterstain &mdash; Gram&minus;ve pick up pink/red. <strong>Result:</strong> Gram+ve = purple; Gram&minus;ve = pink. Clinical importance: determines which antibiotics to use.</p>
+    </div>
+
+    <div class="eg-box">
+      <div class="eg-label">Special Cases &mdash; Mycobacterium &amp; Mycoplasma</div>
+      <ul>
+        <li><strong>Mycobacterium tuberculosis</strong> (TB) and <strong>M. leprae</strong> (leprosy) &mdash; Gram staining unreliable; use <strong>Ziehl-Neelsen (acid-fast) stain</strong> (stains red due to waxy mycolic acid cell wall). Hence called <em>acid-fast bacteria</em>.</li>
+        <li><strong>Mycoplasma</strong> &mdash; the <em>smallest known free-living bacterium</em>; has <strong>NO cell wall</strong> at all; naturally resistant to penicillin (which targets cell walls); causes atypical pneumonia (walking pneumonia); treated with macrolides or tetracyclines.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="c-card">
+  <div class="c-head" onclick="tog(this)">
+    <div class="c-icon" style="background:#E0E8F8">&#129440;</div>
+    <div style="flex:1">
+      <div class="c-title">Important Bacterial Diseases &mdash; CDS/NDA Focus</div>
+      <div class="c-sub">Causative agent, transmission, symptoms, treatment, key Nobel facts</div>
+    </div>
+    <span class="c-arrow">&#9662;</span>
+  </div>
+  <div class="c-body">
+    <div style="overflow-x:auto">
+      <table class="compare-table">
+        <tr><th>Disease</th><th>Causative Bacterium</th><th>Key Facts for Exam</th></tr>
+        <tr><td><b>Tuberculosis (TB)</b></td><td><em>Mycobacterium tuberculosis</em></td><td>Airborne droplets; acid-fast bacillus; BCG vaccine; Robert Koch identified 1882 &rarr; Nobel 1905; Mantoux test (tuberculin skin test); treated with RIPE drugs (Rifampicin, Isoniazid, Pyrazinamide, Ethambutol)</td></tr>
+        <tr><td><b>Cholera</b></td><td><em>Vibrio cholerae</em></td><td>Contaminated water/food; comma-shaped Gram&minus;ve; rice-water stools; oral rehydration therapy (ORT); Robert Koch identified 1883; cholera toxin activates adenylyl cyclase &rarr; massive Cl&minus; secretion &rarr; water loss</td></tr>
+        <tr><td><b>Typhoid</b></td><td><em>Salmonella typhi</em></td><td>Contaminated food/water; Gram&minus;ve rod; Widal test (agglutination test for diagnosis); Rose spots on abdomen; treated with antibiotics (chloramphenicol, ciprofloxacin)</td></tr>
+        <tr><td><b>Plague</b></td><td><em>Yersinia pestis</em></td><td>Flea bite (from infected rats); three forms: bubonic (lymph node swelling = bubo), pneumonic (airborne), septicaemic; Black Death killed ~1/3 of Europe in 14th century; zoonosis</td></tr>
+        <tr><td><b>Tetanus</b></td><td><em>Clostridium tetani</em></td><td>Gram+ve; spore-former; soil-borne; toxin (tetanospasmin) causes spastic paralysis (lock jaw); DPT vaccine prevents it; anaerobic bacterium</td></tr>
+        <tr><td><b>Diphtheria</b></td><td><em>Corynebacterium diphtheriae</em></td><td>Gram+ve rod; respiratory tract; forms pseudomembrane in throat; exotoxin causes heart damage; DPT vaccine; Schick test</td></tr>
+        <tr><td><b>Leprosy</b></td><td><em>Mycobacterium leprae</em></td><td>Acid-fast bacillus; slowest-growing bacterium (12&ndash;14 day doubling time); attacks peripheral nerves and skin; Multi-Drug Therapy (MDT); G.H. Armauer Hansen (1873) &rarr; also called Hansen's disease</td></tr>
+        <tr><td><b>Anthrax</b></td><td><em>Bacillus anthracis</em></td><td>Gram+ve spore-former; endospores can survive decades in soil; three forms: cutaneous (most common), pulmonary (woolsorters' disease), gastrointestinal; potential bioweapon; ciprofloxacin treatment</td></tr>
+        <tr><td><b>Food poisoning</b></td><td><em>Staphylococcus aureus</em>, <em>Salmonella</em>, <em>Clostridium botulinum</em></td><td><em>C. botulinum</em> produces botulinum toxin (most potent known toxin; blocks ACh release at neuromuscular junction &rarr; flaccid paralysis); <em>S. aureus</em> exotoxin is heat-stable</td></tr>
+        <tr><td><b>Lyme disease</b></td><td><em>Borrelia burgdorferi</em></td><td>Tick-borne (Ixodes ticks); spirochete bacterium; characteristic bull's-eye (erythema migrans) rash; can affect joints, heart, nervous system; treated with doxycycline</td></tr>
+      </table>
+    </div>
+
+    <div class="trap-box">
+      <div class="tr-label">&#9873; Nobel Prizes Related to Bacteria &mdash; Direct Exam Questions</div>
+      <ul>
+        <li><strong>Robert Koch &mdash; Nobel 1905</strong>: Discovery of <em>Mycobacterium tuberculosis</em> (1882) and <em>Vibrio cholerae</em> (1883). Formulated <strong>Koch's Postulates</strong> &mdash; criteria to establish a microorganism as the cause of a disease.</li>
+        <li><strong>Alexander Fleming &mdash; Nobel 1945</strong> (shared with Florey &amp; Chain): Discovery of penicillin in 1928 from the mould <em>Penicillium notatum</em>. Fleming noticed that the mould contaminating his <em>Staphylococcus</em> culture plates killed the bacteria around it.</li>
+        <li><strong>Selman Waksman &mdash; Nobel 1952</strong>: Discovered streptomycin (1943), the first antibiotic effective against TB, from soil bacterium <em>Streptomyces griseus</em>. Coined the term &ldquo;antibiotic.&rdquo;</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 3 -->
+<div class="sec-label">Section 3 &mdash; Viruses in Depth</div>
+
+<div class="c-card">
+  <div class="c-head" onclick="tog(this)">
+    <div class="c-icon" style="background:#EDE0F8">&#129440;</div>
+    <div style="flex:1">
+      <div class="c-title">Viral Structure, Classification &amp; Replication</div>
+      <div class="c-sub">Capsid, envelope, DNA/RNA viruses, lytic vs lysogenic cycles</div>
+    </div>
+    <span class="c-arrow">&#9662;</span>
+  </div>
+  <div class="c-body">
+    <div class="fact-box">
+      <div class="fb-label">Viral Structure &mdash; Components</div>
+      <ul>
+        <li><strong>Nucleic acid core</strong> &mdash; genetic material, either DNA or RNA (never both); single-stranded (ss) or double-stranded (ds)</li>
+        <li><strong>Capsid</strong> &mdash; protein coat surrounding the nucleic acid; protects genetic material; composed of protein subunits called <em>capsomeres</em>; shapes: icosahedral (spherical-like), helical, or complex (e.g. bacteriophage T4)</li>
+        <li><strong>Envelope</strong> &mdash; lipid bilayer membrane derived from host cell membrane; present in enveloped viruses (HIV, influenza, herpes, COVID-19); absent in non-enveloped viruses (polio, rotavirus, adenovirus)</li>
+        <li><strong>Spikes/glycoproteins</strong> &mdash; project from envelope; used for host cell recognition and attachment. Examples: Haemagglutinin (H) and Neuraminidase (N) in influenza virus (hence H1N1, H3N2 subtypes); Spike protein in SARS-CoV-2</li>
+      </ul>
+    </div>
+
+    <div style="overflow-x:auto">
+      <table class="compare-table">
+        <tr><th>Feature</th><th>DNA Viruses</th><th>RNA Viruses</th></tr>
+        <tr><td><b>Genetic material</b></td><td>DNA (ss or ds)</td><td>RNA (ss or ds)</td></tr>
+        <tr><td><b>Mutation rate</b></td><td>Lower (DNA repair mechanisms)</td><td>HIGHER (RNA polymerase lacks proofreading) &rarr; rapid evolution, vaccine challenges</td></tr>
+        <tr><td><b>Examples</b></td><td>Smallpox (<em>Variola</em>), chickenpox (<em>Varicella zoster</em>), hepatitis B, herpes simplex, adenovirus, papillomavirus (HPV)</td><td>HIV, influenza, polio, rabies, measles, mumps, rubella, dengue, COVID-19 (<em>SARS-CoV-2</em>), hepatitis A &amp; C, Ebola</td></tr>
+        <tr><td><b>Special class</b></td><td>&mdash;</td><td><strong>Retroviruses</strong> (HIV) &mdash; RNA genome; use reverse transcriptase to make DNA from RNA (reverse of central dogma); Nobel 1975 (Baltimore &amp; Temin for reverse transcriptase)</td></tr>
+      </table>
+    </div>
+
+    <div class="rule-box">
+      <div class="rl-label">Bacteriophage Replication Cycles</div>
+      <p><strong>Lytic cycle:</strong> Phage injects DNA &rarr; host cell machinery used to make phage copies &rarr; cell lyses (bursts) &rarr; new phages released. <strong>End result: host cell death.</strong></p>
+      <p><strong>Lysogenic cycle:</strong> Phage DNA integrates into host chromosome as a <em>prophage</em> &rarr; replicates silently with host DNA for many generations &rarr; triggered by stress into lytic cycle. <strong>End result: long-term viral persistence.</strong> Viral DNA integrated in host = prophage in bacteria; provirus in eukaryotes (e.g. HIV provirus in CD4+ T cells).</p>
+    </div>
+
+    <div class="trap-box">
+      <div class="tr-label">&#9873; Viruses &mdash; Critical Exam Points</div>
+      <ul>
+        <li>Viruses are <strong>NOT killed by antibiotics</strong> (antibiotics target bacterial cell walls, ribosomes, etc. &mdash; viruses have none). Antivirals target specific viral enzymes (e.g. oseltamivir/Tamiflu targets neuraminidase in influenza; AZT/zidovudine inhibits HIV reverse transcriptase).</li>
+        <li><strong>Tobacco Mosaic Virus (TMV)</strong> &mdash; first virus to be discovered (Dmitri Ivanovsky, 1892; confirmed by Beijerinck, 1898). It is an RNA virus. Infects tobacco plants.</li>
+        <li><strong>Viroids</strong> &mdash; smaller than viruses; consist of ONLY RNA (no protein coat); infect plants; e.g. Potato spindle tuber viroid. Not to be confused with viruses.</li>
+        <li><strong>Bacteriophages</strong> (phages) &mdash; viruses that infect bacteria. The T4 phage is the classic example. Used in <em>phage therapy</em> as an alternative to antibiotics.</li>
+        <li>HIV destroys <strong>CD4+ T helper cells</strong> (not B cells or cytotoxic T cells), causing immunodeficiency. Normal CD4 count: 500&ndash;1500 cells/&mu;L; AIDS diagnosed at &lt;200 cells/&mu;L.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="c-card">
+  <div class="c-head" onclick="tog(this)">
+    <div class="c-icon" style="background:#EDE0F8">&#129440;</div>
+    <div style="flex:1">
+      <div class="c-title">Important Viral Diseases &mdash; CDS/NDA Focus</div>
+      <div class="c-sub">Causative virus, transmission, vaccine status, key facts</div>
+    </div>
+    <span class="c-arrow">&#9662;</span>
+  </div>
+  <div class="c-body">
+    <div style="overflow-x:auto">
+      <table class="compare-table">
+        <tr><th>Disease</th><th>Virus</th><th>Key Exam Facts</th></tr>
+        <tr><td><b>AIDS</b></td><td>HIV (Retrovirus; RNA)</td><td>Discovered 1983 (Montagnier &amp; Barre-Sinoussi, Nobel 2008); transmitted by blood, sexual contact, mother to child; destroys CD4+ T cells; no cure; treated with Antiretroviral Therapy (ART); ELISA test for diagnosis</td></tr>
+        <tr><td><b>Polio</b></td><td>Poliovirus (Picornavirus; RNA)</td><td>Faecal-oral route; attacks motor neurons in spinal cord &rarr; flaccid paralysis; Salk vaccine (IPV, 1955 &mdash; inactivated); Sabin vaccine (OPV, 1961 &mdash; oral, live attenuated); India declared polio-free 2014; eradicated in most countries</td></tr>
+        <tr><td><b>Smallpox</b></td><td>Variola virus (DNA)</td><td>First disease eradicated by vaccination (WHO declared eradicated 1980); Edward Jenner developed first vaccine in 1796 using cowpox (<em>Vaccinia</em>) virus &mdash; marks the birth of immunology; last natural case: Somalia, 1977</td></tr>
+        <tr><td><b>Rabies</b></td><td>Rabies virus (Rhabdovirus; RNA)</td><td>Transmitted by bite of infected animal (dogs, bats, foxes); attacks CNS; 100% fatal once symptoms appear; post-exposure prophylaxis (PEP) prevents if given before symptom onset; Louis Pasteur developed first rabies vaccine (1885)</td></tr>
+        <tr><td><b>Influenza</b></td><td>Influenza A, B, C (Orthomyxovirus; RNA)</td><td>Droplet transmission; H and N antigens (haemagglutinin and neuraminidase); H1N1 &mdash; 1918 Spanish Flu (50&ndash;100 million deaths); H5N1 &mdash; bird flu; antigenic shift (new pandemic strains) vs antigenic drift (seasonal variation)</td></tr>
+        <tr><td><b>Dengue</b></td><td>Dengue virus (Flavivirus; RNA)</td><td>Transmitted by <em>Aedes aegypti</em> mosquito; 4 serotypes (DENV 1&ndash;4); secondary infection with different serotype causes severe dengue/dengue haemorrhagic fever; no specific antiviral; Platelet count drops dramatically</td></tr>
+        <tr><td><b>Hepatitis</b></td><td>Hep A (RNA), B (DNA), C (RNA), D, E</td><td>Hep A &amp; E: faecal-oral; Hep B &amp; C: blood/sexual; Hep B: most common cause of liver cancer; Hep B vaccine available; no vaccine for Hep C; Hep D (delta) requires Hep B co-infection</td></tr>
+        <tr><td><b>COVID-19</b></td><td>SARS-CoV-2 (Coronavirus; RNA)</td><td>Spike protein binds ACE2 receptor; declared pandemic March 2020 by WHO; mRNA vaccines (Pfizer-BioNTech, Moderna) &mdash; first mRNA vaccines approved for human use; Nobel 2023 (Kariko &amp; Weissman) for mRNA vaccine technology</td></tr>
+        <tr><td><b>Chickenpox &amp; Shingles</b></td><td>Varicella-Zoster virus (DNA; Herpesvirus)</td><td>Primary infection = chickenpox; virus remains latent in dorsal root ganglia; reactivates as shingles (herpes zoster) in elderly/immunocompromised; vaccine available; treated with acyclovir</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 4 -->
+<div class="sec-label">Section 4 &mdash; Protozoan &amp; Fungal Diseases</div>
+
+<div class="c-card">
+  <div class="c-head" onclick="tog(this)">
+    <div class="c-icon" style="background:#F8F4DC">&#129440;</div>
+    <div style="flex:1">
+      <div class="c-title">Protozoan Diseases &mdash; Malaria &amp; Beyond</div>
+      <div class="c-sub">Malaria life cycle, Plasmodium species, vectors, treatment</div>
+    </div>
+    <span class="c-arrow">&#9662;</span>
+  </div>
+  <div class="c-body">
+    <div class="fact-box">
+      <div class="fb-label">Malaria &mdash; Most Important Protozoan Disease for Exams</div>
+      <ul>
+        <li><strong>Causative agent:</strong> <em>Plasmodium</em> species &mdash; 4 main species: <em>P. falciparum</em> (most dangerous; cerebral malaria; drug-resistant), <em>P. vivax</em> (most common globally; relapses from dormant hypnozoites in liver), <em>P. malariae</em> (quartan malaria &mdash; 72-hour cycle), <em>P. ovale</em></li>
+        <li><strong>Vector:</strong> Female <em>Anopheles</em> mosquito (male mosquitoes feed on nectar, NOT blood). Bites at night. Named mosquito genera for other diseases: <em>Aedes</em> = dengue, Zika, yellow fever, chikungunya; <em>Culex</em> = filariasis, Japanese encephalitis</li>
+        <li><strong>Life cycle &mdash; two hosts:</strong> (1) In mosquito: sexual reproduction &rarr; sporozoites in salivary glands. (2) In human: sporozoites &rarr; <strong>liver</strong> (schizogony; no symptoms) &rarr; merozoites released &rarr; <strong>RBCs</strong> (asexual cycle; schizogony in RBCs &rarr; rupture &rarr; fever)</li>
+        <li><strong>Fever pattern:</strong> Quotidian (daily) in <em>P. falciparum</em>; Tertian (every 48 h) in <em>P. vivax</em>/<em>P. ovale</em>; Quartan (every 72 h) in <em>P. malariae</em></li>
+        <li><strong>Diagnosis:</strong> Peripheral blood smear (gold standard); Rapid Diagnostic Tests (RDTs); PCR</li>
+        <li><strong>Treatment:</strong> Chloroquine (sensitive strains); Artemisinin-based Combination Therapy (ACT) for resistant <em>P. falciparum</em>; Primaquine for liver-stage <em>P. vivax</em> (kills hypnozoites)</li>
+        <li><strong>Ronald Ross (Nobel 1902):</strong> Proved that malaria is transmitted by <em>Anopheles</em> mosquito (1897, Secunderabad, India); first Indian Nobel Prize location</li>
+      </ul>
+    </div>
+
+    <div style="overflow-x:auto">
+      <table class="compare-table">
+        <tr><th>Disease</th><th>Causative Protozoan</th><th>Vector/Route</th><th>Key Features</th></tr>
+        <tr><td><b>Amoebic Dysentery</b></td><td><em>Entamoeba histolytica</em></td><td>Contaminated food/water (faecal-oral)</td><td>Bloody diarrhoea; liver abscess possible; treated with metronidazole; cysts infective form; trophozoites cause disease</td></tr>
+        <tr><td><b>Sleeping Sickness</b></td><td><em>Trypanosoma brucei</em></td><td>Tsetse fly (Africa)</td><td>Causes neurological symptoms (daytime sleeping); affects cattle too (nagana); suramin/melarsoprol treatment</td></tr>
+        <tr><td><b>Kala-azar (Leishmaniasis)</b></td><td><em>Leishmania donovani</em></td><td>Sandfly bite</td><td>Visceral leishmaniasis; splenomegaly, anaemia, fever; treated with sodium stibogluconate, miltefosine; endemic in Bihar, India</td></tr>
+        <tr><td><b>Giardiasis</b></td><td><em>Giardia lamblia</em></td><td>Contaminated water (faecal-oral)</td><td>Traveller's diarrhoea; fatty stools (steatorrhoea); cysts survive in cold water; treated with metronidazole</td></tr>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 5 -->
+<div class="sec-label">Section 5 &mdash; Antibiotics, Vaccines &amp; Immunity</div>
+
+<div class="c-card">
+  <div class="c-head" onclick="tog(this)">
+    <div class="c-icon" style="background:#D8F0EC">&#129440;</div>
+    <div style="flex:1">
+      <div class="c-title">Antibiotics &mdash; Discovery, Mechanism &amp; Resistance</div>
+      <div class="c-sub">Penicillin, streptomycin, modes of action, antibiotic resistance</div>
+    </div>
+    <span class="c-arrow">&#9662;</span>
+  </div>
+  <div class="c-body">
+    <p><strong>Antibiotics</strong> are chemical substances produced by microorganisms that kill or inhibit the growth of other microorganisms. The term was coined by <strong>Selman Waksman</strong> (1942). They work ONLY on bacteria, NOT viruses, fungi (antifungals needed) or parasites.</p>
+
+    <div style="overflow-x:auto">
+      <table class="compare-table">
+        <tr><th>Antibiotic</th><th>Source</th><th>Target / Mechanism</th><th>Key Uses</th></tr>
+        <tr><td><b>Penicillin</b></td><td><em>Penicillium notatum</em> (Fleming, 1928)</td><td>Inhibits cell wall synthesis (peptidoglycan cross-linking); bactericidal</td><td>Gram+ve infections; streptococcal, staphylococcal infections; syphilis</td></tr>
+        <tr><td><b>Streptomycin</b></td><td><em>Streptomyces griseus</em> (Waksman, 1943)</td><td>Binds 30S ribosomal subunit &rarr; inhibits protein synthesis; bactericidal</td><td>First anti-TB drug; also plague, tularaemia</td></tr>
+        <tr><td><b>Tetracycline</b></td><td><em>Streptomyces</em> spp.</td><td>Binds 30S ribosomal subunit; bacteriostatic</td><td>Broad spectrum; cholera, Lyme disease, Mycoplasma, chlamydia</td></tr>
+        <tr><td><b>Chloramphenicol</b></td><td><em>Streptomyces venezuelae</em></td><td>Binds 50S ribosomal subunit; bacteriostatic</td><td>Typhoid (historically); now used cautiously (bone marrow toxicity)</td></tr>
+        <tr><td><b>Erythromycin</b></td><td><em>Streptomyces erythreus</em></td><td>Binds 50S ribosomal subunit; bacteriostatic</td><td>Penicillin-allergic patients; Mycoplasma, Legionella, Campylobacter</td></tr>
+        <tr><td><b>Ciprofloxacin</b></td><td>Synthetic fluoroquinolone</td><td>Inhibits DNA gyrase (topoisomerase II) &rarr; prevents DNA replication</td><td>Anthrax, UTI, typhoid, TB (second-line)</td></tr>
+      </table>
+    </div>
+
+    <div class="purple-box">
+      <div class="pl-label">Antibiotic Resistance &mdash; Mechanisms &amp; Why It Matters</div>
+      <ul>
+        <li><strong>Enzymatic inactivation</strong>: bacteria produce enzymes that destroy antibiotic. e.g. <em>beta-lactamase</em> enzymes destroy the beta-lactam ring of penicillin &rarr; MRSA (<em>Methicillin-Resistant Staphylococcus aureus</em>) produces extended-spectrum beta-lactamases.</li>
+        <li><strong>Target modification</strong>: bacteria alter the antibiotic&rsquo;s binding site (e.g. altered penicillin-binding proteins in MRSA).</li>
+        <li><strong>Efflux pumps</strong>: bacteria pump antibiotics out of the cell before they can act.</li>
+        <li><strong>Reduced permeability</strong>: Gram&minus;ve bacteria reduce outer membrane permeability to block antibiotic entry.</li>
+        <li><strong>Spread of resistance:</strong> Resistance genes on <em>plasmids</em> spread between bacteria by <strong>conjugation</strong> (horizontal gene transfer). This is why resistance spreads rapidly.</li>
+        <li><strong>MRSA</strong> (Methicillin-Resistant <em>Staphylococcus aureus</em>) and <strong>NDMR TB</strong> (Non-Drug-Resistant Mycobacterium tuberculosis) are critical global health threats.</li>
+      </ul>
+    </div>
+
+    <div class="trap-box">
+      <div class="tr-label">&#9873; Antibiotic Targets &mdash; Most-Tested Facts</div>
+      <ul>
+        <li>Penicillin &rarr; <strong>cell wall synthesis</strong> (peptidoglycan). Works on Gram+ve; poor on Gram&minus;ve; useless on Mycoplasma (no cell wall) and viruses.</li>
+        <li>Streptomycin, Tetracycline &rarr; <strong>30S ribosomal subunit</strong>. Chloramphenicol, Erythromycin, Linezolid &rarr; <strong>50S ribosomal subunit</strong>. (Mnemonic: 30S = StrEpTomycin, TEtracycline = S-T-3-0)</li>
+        <li>Ciprofloxacin &rarr; <strong>DNA gyrase</strong> (topoisomerase II). Rifampicin &rarr; <strong>RNA polymerase</strong>.</li>
+        <li>Human cells have <strong>80S ribosomes</strong>; bacteria have <strong>70S</strong> (30S + 50S). Antibiotics targeting 70S ribosomes don&rsquo;t affect human cells &mdash; this is the basis of selective toxicity.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="c-card">
+  <div class="c-head" onclick="tog(this)">
+    <div class="c-icon" style="background:#E2F0E8">&#129440;</div>
+    <div style="flex:1">
+      <div class="c-title">Vaccines, Immunity &amp; Louis Pasteur&rsquo;s Contributions</div>
+      <div class="c-sub">Types of vaccines, active vs passive immunity, herd immunity, important vaccines</div>
+    </div>
+    <span class="c-arrow">&#9662;</span>
+  </div>
+  <div class="c-body">
+    <p><strong>Vaccination</strong> is the process of stimulating the immune system to produce immunity to a disease without causing the disease. <strong>Edward Jenner</strong> (1796) created the first vaccine (against smallpox, using cowpox). The word &ldquo;vaccine&rdquo; comes from <em>vacca</em> (Latin: cow). <strong>Louis Pasteur</strong> developed vaccines for cholera (chickens, 1879), anthrax (1881), and rabies (humans, 1885) &mdash; and generalised the germ theory of disease.</p>
+
+    <div style="overflow-x:auto">
+      <table class="compare-table">
+        <tr><th>Type of Immunity</th><th>Definition</th><th>Examples</th></tr>
+        <tr><td><b>Active Natural</b></td><td>Immunity acquired after recovering from an infection &mdash; body makes its own antibodies</td><td>Recovery from chickenpox, measles, COVID-19</td></tr>
+        <tr><td><b>Active Artificial</b></td><td>Immunity acquired through vaccination &mdash; body makes its own antibodies in response to vaccine</td><td>BCG (TB), OPV/IPV (polio), MMR (measles/mumps/rubella), hepatitis B vaccine</td></tr>
+        <tr><td><b>Passive Natural</b></td><td>Antibodies transferred from mother to baby &mdash; no antibody production by the recipient</td><td>IgG across placenta; IgA in breast milk/colostrum; temporary, lasts 3&ndash;6 months</td></tr>
+        <tr><td><b>Passive Artificial</b></td><td>Ready-made antibodies (antiserum/immunoglobulin) injected &mdash; immediate protection but short-lived</td><td>Anti-venom, anti-rabies immunoglobulin, tetanus antitoxin; used when immediate protection needed</td></tr>
+      </table>
+    </div>
+
+    <div class="fact-box">
+      <div class="fb-label">Types of Vaccines</div>
+      <ul>
+        <li><strong>Live Attenuated</strong> &mdash; weakened (attenuated) live pathogen; produces strong, long-lasting immunity; single dose often sufficient. Examples: OPV (Sabin polio), BCG (TB), MMR (measles/mumps/rubella), yellow fever, varicella. <em>Risk:</em> can revert to virulence in immunocompromised; not given in pregnancy.</li>
+        <li><strong>Inactivated (Killed)</strong> &mdash; killed pathogen; safer but weaker immunity; requires booster doses. Examples: IPV (Salk polio), influenza (injected), rabies (IPV), hepatitis A, whole-cell pertussis.</li>
+        <li><strong>Subunit / Component</strong> &mdash; only specific antigens (proteins/polysaccharides) of the pathogen; very safe; requires adjuvant. Examples: Hepatitis B surface antigen (HBsAg), HPV vaccine (Gardasil &mdash; capsid proteins), acellular pertussis.</li>
+        <li><strong>Toxoid</strong> &mdash; inactivated toxin; stimulates anti-toxin antibodies. Examples: Diphtheria toxoid, Tetanus toxoid (DPT vaccine).</li>
+        <li><strong>mRNA Vaccines (newest)</strong> &mdash; mRNA encoding a viral protein (e.g. SARS-CoV-2 spike protein) injected; cells read mRNA and produce antigen &rarr; immune response. No live pathogen; cannot integrate into DNA; degraded rapidly. Examples: Pfizer-BioNTech (BNT162b2), Moderna (mRNA-1273) COVID-19 vaccines. Nobel 2023 &mdash; Katalin Karik&oacute; &amp; Drew Weissman.</li>
+      </ul>
+    </div>
+
+    <div class="rule-box">
+      <div class="rl-label">Herd Immunity &mdash; Concept for Exams</div>
+      <p><strong>Herd immunity</strong> (community immunity) occurs when a sufficiently large proportion of a population is immune to an infection (through vaccination or prior infection) that the spread of the pathogen is blocked, indirectly protecting unvaccinated individuals. The <strong>herd immunity threshold (HIT)</strong> is the proportion of population that must be immune to stop transmission: HIT = 1 &minus; (1/R&#8320;), where R&#8320; is the basic reproduction number. For measles (R&#8320; ~15): HIT = ~93&ndash;95%. For COVID-19 (R&#8320; ~2&ndash;3): HIT = ~50&ndash;67%. For smallpox: global herd immunity via vaccination led to eradication by 1980.</p>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 6 -->
+<div class="sec-label">Section 6 &mdash; Beneficial Microorganisms &amp; Biotechnology</div>
+
+<div class="c-card">
+  <div class="c-head" onclick="tog(this)">
+    <div class="c-icon" style="background:#E2F0E8">&#129440;</div>
+    <div style="flex:1">
+      <div class="c-title">Beneficial Roles of Microorganisms</div>
+      <div class="c-sub">Nitrogen fixation, fermentation, decomposition, industrial applications</div>
+    </div>
+    <span class="c-arrow">&#9662;</span>
+  </div>
+  <div class="c-body">
+    <div class="teal-box">
+      <div class="tl-label">Nitrogen Fixation &mdash; Critical for Agriculture</div>
+      <p><strong>Biological nitrogen fixation</strong> is the conversion of atmospheric N&#8322; (inert) to ammonia (NH&#8323;) usable by plants. Only certain prokaryotes possess the enzyme <strong>nitrogenase</strong>.</p>
+      <ul>
+        <li><strong>Free-living (non-symbiotic):</strong> <em>Azotobacter</em> (aerobic, soil), <em>Clostridium</em> (anaerobic, soil), <em>Anabaena</em> and <em>Nostoc</em> (cyanobacteria, free-living; also in rice paddies)</li>
+        <li><strong>Symbiotic:</strong> <em>Rhizobium</em> &mdash; lives in <strong>root nodules of legumes</strong> (peas, beans, peanuts, soybean); most efficient nitrogen fixer in agriculture; mutualistic relationship (plant provides carbohydrates; bacteria provide fixed nitrogen)</li>
+        <li><strong>Anabaena-Azolla association:</strong> Cyanobacterium <em>Anabaena azollae</em> lives in water fern <em>Azolla</em>; used as biofertiliser in rice cultivation in Asia</li>
+        <li><strong>Mycorrhizae:</strong> Fungal associations with plant roots that enhance phosphorus absorption; not nitrogen fixation but critical for plant nutrition</li>
+      </ul>
+    </div>
+
+    <div class="org-grid">
+      <div class="org-card">
+        <div class="org-name">&#127863; Fermentation &mdash; Food &amp; Drink</div>
+        <p><em>Saccharomyces cerevisiae</em> (yeast) &mdash; bread rising (CO&#8322;), beer/wine (ethanol). <em>Lactobacillus</em> &mdash; curd/yogurt (lactic acid). <em>Acetobacter</em> &mdash; vinegar (acetic acid). <em>Streptococcus thermophilus + Lactobacillus bulgaricus</em> &mdash; yogurt. <em>Aspergillus</em> &mdash; soy sauce, sake.</p>
+      </div>
+      <div class="org-card">
+        <div class="org-name">&#9879;&#65039; Industrial Microorganisms</div>
+        <p><em>Penicillium</em> &mdash; penicillin antibiotic. <em>Streptomyces</em> &mdash; streptomycin, erythromycin, tetracycline. <em>E. coli</em> &mdash; recombinant insulin (Humulin), interferon. <em>Saccharomyces</em> &mdash; insulin, hepatitis B vaccine (recombinant). <em>Aspergillus niger</em> &mdash; citric acid production.</p>
+      </div>
+      <div class="org-card">
+        <div class="org-name">&#127758; Decomposers &amp; Nutrient Cycling</div>
+        <p>Bacteria and fungi decompose dead organic matter &rarr; release nutrients (carbon, nitrogen, phosphorus) back into ecosystem. <em>Bacillus</em>, <em>Pseudomonas</em>, <em>Trichoderma</em>. Sewage treatment uses bacteria to break down organic waste aerobically and anaerobically.</p>
+      </div>
+      <div class="org-card">
+        <div class="org-name">&#127807; Biocontrol &amp; Biofertilisers</div>
+        <p><em>Bacillus thuringiensis</em> (Bt) &mdash; produces Cry proteins that kill insect pests; used in Bt cotton and Bt brinjal. <em>Trichoderma</em> &mdash; fungal biocontrol agent against plant pathogens. Biofertilisers: <em>Rhizobium</em>, <em>Azotobacter</em>, <em>Anabaena</em>, mycorrhizae &mdash; reduce dependence on chemical fertilisers.</p>
+      </div>
+    </div>
+
+    <div class="stat-band">
+      <div class="stat-cell"><div class="stat-val">~10&sup3;&sup0;</div><div class="stat-lbl">Total bacteria on Earth</div></div>
+      <div class="stat-cell"><div class="stat-val">~38 trillion</div><div class="stat-lbl">Bacteria in human gut</div></div>
+      <div class="stat-cell"><div class="stat-val">150&ndash;200M tonnes</div><div class="stat-lbl">N fixed biologically/year</div></div>
+      <div class="stat-cell"><div class="stat-val">~50%</div><div class="stat-lbl">Earth O&#8322; from algae/cyano</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 7 -->
+<div class="sec-label">Section 7 &mdash; Disease Transmission &amp; Control</div>
+
+<div class="c-card">
+  <div class="c-head" onclick="tog(this)">
+    <div class="c-icon" style="background:#FAE8E8">&#129440;</div>
+    <div style="flex:1">
+      <div class="c-title">Disease Transmission, Vectors &amp; Control Measures</div>
+      <div class="c-sub">Zoonoses, vector-borne diseases, WHO programmes, sterilisation methods</div>
+    </div>
+    <span class="c-arrow">&#9662;</span>
+  </div>
+  <div class="c-body">
+    <div style="overflow-x:auto">
+      <table class="compare-table">
+        <tr><th>Transmission Route</th><th>Examples of Diseases</th><th>Control Measures</th></tr>
+        <tr><td><b>Airborne (droplets/aerosols)</b></td><td>TB, influenza, COVID-19, measles, diphtheria, chickenpox, whooping cough</td><td>Masks, ventilation, isolation, vaccination</td></tr>
+        <tr><td><b>Faecal-Oral (contaminated food/water)</b></td><td>Cholera, typhoid, polio, hepatitis A&amp;E, giardia, amoebic dysentery</td><td>Safe water supply, sanitation, hand hygiene, ORS</td></tr>
+        <tr><td><b>Vector-Borne</b></td><td><em>Anopheles</em>&rarr;malaria; <em>Aedes</em>&rarr;dengue/Zika/yellow fever; <em>Culex</em>&rarr;filariasis; Tsetse&rarr;sleeping sickness; Sandfly&rarr;kala-azar; Tick&rarr;Lyme/plague; Flea&rarr;plague</td><td>Vector control (insecticides, bed nets, DDT historically), eliminating breeding sites</td></tr>
+        <tr><td><b>Contact (direct/indirect)</b></td><td>HIV, hepatitis B/C, herpes, gonorrhoea, syphilis, ringworm</td><td>Condoms, sterilised needles, screening blood</td></tr>
+        <tr><td><b>Zoonotic (animal-to-human)</b></td><td>Rabies (dogs/bats), plague (rats/fleas), anthrax (livestock), bird flu, COVID-19 (probable bat origin), Ebola</td><td>Veterinary surveillance, avoiding contact with sick animals, culling</td></tr>
+      </table>
+    </div>
+
+    <div class="fact-box">
+      <div class="fb-label">Sterilisation vs Disinfection &mdash; Key Distinctions</div>
+      <ul>
+        <li><strong>Sterilisation</strong> &mdash; complete destruction of ALL microorganisms including endospores. Methods: Autoclaving (121&deg;C, 15 psi, 15 min &mdash; gold standard), dry heat oven (160&deg;C, 2h), incineration, filtration (Seitz filter/membrane filter).</li>
+        <li><strong>Disinfection</strong> &mdash; destruction of most pathogenic microorganisms from non-living surfaces (does NOT kill all spores). Agents: bleach (NaOCl), phenol, alcohol (70% ethanol), formaldehyde, glutaraldehyde.</li>
+        <li><strong>Pasteurisation</strong> &mdash; mild heat treatment to reduce pathogen load without full sterilisation. HTST (72&deg;C for 15 sec); UHT (135&deg;C for 2 sec); developed by <strong>Louis Pasteur</strong>; used for milk, wine, beer.</li>
+        <li><strong>Antiseptic</strong> &mdash; chemical applied to living tissue to prevent infection (e.g. iodine solution, hydrogen peroxide, Dettol). Joseph Lister (1867) introduced carbolic acid (phenol) as surgical antiseptic &mdash; founded antiseptic surgery.</li>
+      </ul>
+    </div>
+
+    <div class="eg-box">
+      <div class="eg-label">Important WHO &amp; India Health Programmes</div>
+      <ul>
+        <li><strong>Pulse Polio Programme:</strong> India &mdash; led to India being declared polio-free on 27 March 2014 by WHO</li>
+        <li><strong>RNTCP/NTP:</strong> Revised National TB Control Programme &mdash; DOTS (Directly Observed Treatment Short-course)</li>
+        <li><strong>National Vector Borne Disease Control Programme:</strong> Covers malaria, dengue, filariasis, kala-azar, Japanese encephalitis, chikungunya</li>
+        <li><strong>Smallpox eradication:</strong> WHO declared eradicated 1980 &mdash; first and only human disease ever eradicated; last case 1977 (Somalia); variola virus stocks kept only at CDC (Atlanta) and VECTOR Institute (Russia)</li>
+        <li><strong>Rinderpest eradication:</strong> 2011 &mdash; cattle virus; second disease (first animal disease) to be eradicated globally</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+</div><!-- /theory -->
+
+<!-- ════ QUICK REF ════ -->
+<div class="pane" id="quickref">
+  <div class="ref-grid">
+
+    <div class="ref-card">
+      <div class="ref-card-title">Major Groups &mdash; Quick Identifiers</div>
+      <ul>
+        <li><b>Bacteria</b>: prokaryote; peptidoglycan cell wall; 1&ndash;10 &mu;m; binary fission</li>
+        <li><b>Viruses</b>: acellular; DNA or RNA + capsid; 20&ndash;300 nm; obligate intracellular parasites</li>
+        <li><b>Fungi</b>: eukaryote; <em>chitin</em> cell wall; heterotrophic; spores</li>
+        <li><b>Protozoa</b>: eukaryote; unicellular; heterotrophic; no cell wall; motile</li>
+        <li><b>Prions</b>: protein only; NO nucleic acid; extremely resistant; BSE, CJD</li>
+        <li><b>Viroids</b>: RNA only; no protein coat; infect plants only; e.g. potato spindle tuber viroid</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Bacterial Diseases &mdash; Causative Agents</div>
+      <ul>
+        <li><b>TB</b>: <em>M. tuberculosis</em>; acid-fast; BCG vaccine; Koch 1882; Nobel 1905</li>
+        <li><b>Cholera</b>: <em>V. cholerae</em>; comma-shaped; Gram&minus;ve; ORT; Koch 1883</li>
+        <li><b>Typhoid</b>: <em>Salmonella typhi</em>; Widal test; rose spots</li>
+        <li><b>Tetanus</b>: <em>C. tetani</em>; spore-former; spastic paralysis; DPT vaccine</li>
+        <li><b>Plague</b>: <em>Yersinia pestis</em>; flea bite; bubonic/pneumonic/septicaemic</li>
+        <li><b>Leprosy</b>: <em>M. leprae</em>; Hansen's disease; MDT treatment</li>
+        <li><b>Botulism</b>: <em>C. botulinum</em>; most potent toxin; blocks ACh &rarr; flaccid paralysis</li>
+        <li><b>Lyme disease</b>: <em>Borrelia burgdorferi</em>; tick bite; bull's-eye rash</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Viral Diseases &mdash; Key Facts</div>
+      <ul>
+        <li><b>AIDS/HIV</b>: retrovirus (RNA); CD4+ T cells; Nobel 2008; ART treatment</li>
+        <li><b>Polio</b>: RNA; faecal-oral; Salk (IPV 1955) &amp; Sabin (OPV 1961) vaccines; India polio-free 2014</li>
+        <li><b>Smallpox</b>: DNA; eradicated 1980; Jenner&rsquo;s cowpox vaccine 1796</li>
+        <li><b>Rabies</b>: RNA; Rhabdovirus; 100% fatal after symptoms; Pasteur vaccine 1885</li>
+        <li><b>Dengue</b>: RNA; <em>Aedes</em> mosquito; 4 serotypes; platelet count drops</li>
+        <li><b>Influenza</b>: RNA; H and N antigens; H1N1 Spanish Flu 1918; antigenic shift/drift</li>
+        <li><b>COVID-19</b>: SARS-CoV-2; RNA; ACE2 receptor; mRNA vaccines; Nobel 2023 (Karik&oacute; &amp; Weissman)</li>
+        <li><b>TMV</b>: first virus discovered (Ivanovsky 1892); RNA; infects tobacco</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Antibiotics &mdash; Targets</div>
+      <ul>
+        <li><b>Cell wall synthesis</b>: Penicillin, Cephalosporins, Vancomycin</li>
+        <li><b>30S ribosome</b>: Streptomycin, Tetracycline, Aminoglycosides</li>
+        <li><b>50S ribosome</b>: Chloramphenicol, Erythromycin, Linezolid</li>
+        <li><b>DNA gyrase</b>: Ciprofloxacin (fluoroquinolones)</li>
+        <li><b>RNA polymerase</b>: Rifampicin (used in TB)</li>
+        <li><b>Penicillin source</b>: <em>Penicillium notatum</em>; Fleming 1928; Nobel 1945</li>
+        <li><b>Streptomycin source</b>: <em>Streptomyces griseus</em>; Waksman 1943; Nobel 1952</li>
+        <li><b>Mycoplasma</b>: NO cell wall &rarr; naturally resistant to penicillin</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Vaccines &mdash; Types &amp; Examples</div>
+      <ul>
+        <li><b>Live attenuated</b>: BCG, OPV (Sabin), MMR, yellow fever, varicella &mdash; strong immunity; risk of reversion</li>
+        <li><b>Inactivated</b>: IPV (Salk), inactivated flu, rabies &mdash; safe; need boosters</li>
+        <li><b>Subunit</b>: Hepatitis B, HPV (Gardasil), acellular pertussis</li>
+        <li><b>Toxoid</b>: Diphtheria toxoid, Tetanus toxoid (DPT)</li>
+        <li><b>mRNA</b>: Pfizer &amp; Moderna COVID-19; Nobel 2023</li>
+        <li><b>Passive immunity</b>: anti-venom, anti-rabies Ig, tetanus antitoxin &mdash; immediate but short-lived</li>
+        <li><b>Herd immunity</b>: for measles ~93&ndash;95%; depends on R&#8320;</li>
+      </ul>
+    </div>
+
+    <div class="ref-card">
+      <div class="ref-card-title">Protozoa, Vectors &amp; Nobel Prizes</div>
+      <ul>
+        <li><b>Malaria</b>: <em>Plasmodium</em>; female <em>Anopheles</em>; Ronald Ross Nobel 1902; <em>P. falciparum</em> most dangerous; ACT treatment</li>
+        <li><b>Dengue/Zika/Chikungunya</b>: <em>Aedes aegypti</em> mosquito</li>
+        <li><b>Filariasis</b>: <em>Culex</em> mosquito; <em>Wuchereria bancrofti</em></li>
+        <li><b>Sleeping sickness</b>: <em>Trypanosoma brucei</em>; tsetse fly</li>
+        <li><b>Kala-azar</b>: <em>Leishmania donovani</em>; sandfly; endemic Bihar</li>
+        <li><b>Koch Nobel 1905</b>: TB + cholera discovery; Koch&rsquo;s Postulates</li>
+        <li><b>HIV Nobel 2008</b>: Montagnier &amp; Barre-Sinoussi</li>
+        <li><b>mRNA Nobel 2023</b>: Karik&oacute; &amp; Weissman</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- ════ QUIZ ════ -->
+<div class="pane" id="quiz">
+  <div class="quiz-stats">
+    <div class="qs-cell"><div class="qs-val" id="s-att">0</div><div class="qs-lbl">Attempted</div></div>
+    <div class="qs-cell"><div class="qs-val g" id="s-cor">0</div><div class="qs-lbl">Correct</div></div>
+    <div class="qs-cell"><div class="qs-val r" id="s-wrg">0</div><div class="qs-lbl">Wrong</div></div>
+    <div class="qs-cell"><div class="qs-val a" id="s-tot">15</div><div class="qs-lbl">Total</div></div>
+  </div>
+  <div class="prog-wrap">
+    <div class="prog-label" id="prog-label">0 of 15 answered</div>
+    <div class="prog-bar"><div class="prog-fill" id="prog"></div></div>
+  </div>
+  <div class="quiz-actions">
+    <button class="btn btn-primary" onclick="submitAll()">Submit All &amp; Check</button>
+    <button class="btn btn-ghost" onclick="resetQuiz()">&#8634; Reset Quiz</button>
+  </div>
+  <div id="results"></div>
+  <div id="q-area"></div>
+</div>
+
+</div><!-- /page -->
+
+<script>
+const QS=[
+
+/* EASY */
+{d:"EASY",e:"NDA 2023",
+q:"Which of the following is the SMALLEST known free-living organism, and what is its unique structural characteristic that makes it naturally resistant to penicillin?",
+opts:[
+  "Mycobacterium tuberculosis \u2014 it has a very thick waxy cell wall made of mycolic acid",
+  "Mycoplasma \u2014 it has NO cell wall at all, which makes penicillin (which targets cell wall synthesis) ineffective against it",
+  "Rickettsia \u2014 it is an obligate intracellular bacterium that lacks many metabolic pathways",
+  "Chlamydia \u2014 it exists in two forms (elementary body and reticulate body) and has no peptidoglycan"
+],ans:1,
+rule:"Mycoplasma = smallest free-living bacterium; NO cell wall; naturally penicillin-resistant; causes atypical pneumonia",
+exp:"MYCOPLASMA is the smallest known FREE-LIVING (not obligate intracellular) bacterium. Its most critical structural characteristic is that it has ABSOLUTELY NO CELL WALL. This has two major consequences: (1) It is NATURALLY RESISTANT TO PENICILLIN and all other beta-lactam antibiotics (cephalosporins, carbapenems), which work by inhibiting peptidoglycan cell wall synthesis. No cell wall = no target for penicillin. (2) It is PLEOMORPHIC \u2014 it has no fixed shape because without a rigid cell wall, it can take any form. Mycoplasma pneumoniae causes ATYPICAL PNEUMONIA (also called walking pneumonia or primary atypical pneumonia) \u2014 a milder form of pneumonia where patients can often still walk around. It is treated with MACROLIDES (erythromycin, azithromycin) or TETRACYCLINES \u2014 antibiotics that target the 50S or 30S ribosomal subunits. Mycobacterium tuberculosis (Option A) DOES have a cell wall but it is made of mycolic acid instead of the usual peptidoglycan; this makes it acid-fast and less susceptible to penicillin, but for different reasons. Rickettsiae and Chlamydiae are obligate intracellular parasites, not the smallest free-living organisms."},
+
+{d:"EASY",e:"CDS 2022",
+q:"Edward Jenner is credited with developing the world's first vaccine in 1796. What disease did he vaccinate against, and what material did he use to create immunity?",
+opts:[
+  "Smallpox, using attenuated smallpox (variola) virus that had been weakened by serial passage",
+  "Smallpox, using cowpox (vaccinia) virus from pustules on the hands of milkmaids who had contracted cowpox",
+  "Rabies, using spinal cord material from rabies-infected rabbits that had been dried and weakened",
+  "Cholera, using killed Vibrio cholerae bacteria mixed with a mild acid solution"
+],ans:1,
+rule:"Jenner 1796: smallpox vaccine using cowpox virus; word vaccine from vacca (Latin: cow); smallpox eradicated 1980",
+exp:"EDWARD JENNER (1749\u20131823) made a revolutionary observation: milkmaids who contracted COWPOX (a mild skin infection from cattle) seemed to be immune to SMALLPOX (a deadly disease). In 1796, he took pustule material from the hand of a milkmaid named Sarah Nelmes who had cowpox and inoculated it into an 8-year-old boy named James Phipps. The boy developed mild cowpox symptoms but when Jenner later exposed him to smallpox, he was protected. This was the FIRST VACCINE. The word VACCINE comes from the Latin VACCA (cow), in honour of the cowpox (Vaccinia virus) material used. Cowpox and smallpox viruses are closely related (both are Orthopoxviruses), so immunity to one provides cross-protection against the other. This work became the foundation of immunology. Jenner did NOT use attenuated smallpox virus \u2014 that method (attenuation by serial passage) was later developed by Pasteur. Pasteur developed the RABIES vaccine in 1885 (Option C) using desiccated spinal cord material. Pasteur also developed the CHOLERA vaccine (Option D). The ultimate result of Jenner's discovery: smallpox was the FIRST DISEASE TO BE ERADICATED GLOBALLY, declared by WHO in 1980."},
+
+{d:"EASY",e:"AFCAT 2023",
+q:"Ronald Ross received the Nobel Prize in Physiology or Medicine in 1902 for his work on malaria. What was his specific discovery, and where was his key observation made?",
+opts:[
+  "He identified Plasmodium falciparum as the most dangerous malaria parasite and developed the first anti-malarial drug quinine, working in Lagos, Nigeria",
+  "He proved that malaria is transmitted by the female Anopheles mosquito, demonstrating that mosquitoes that fed on malaria patients harboured the Plasmodium parasite in their stomachs, working in Secunderabad, India (1897)",
+  "He discovered that malaria parasites complete their sexual reproductive cycle in the human liver, explaining why relapses occur, working in Calcutta, India",
+  "He developed the Rapid Diagnostic Test (RDT) for malaria that identifies Plasmodium antigens in blood samples, working in London, England"
+],ans:1,
+rule:"Ronald Ross Nobel 1902: proved malaria transmitted by female Anopheles mosquito; key work done in Secunderabad, India (1897)",
+exp:"RONALD ROSS (1857\u20131932) made his pivotal discovery on August 20, 1897 \u2014 now celebrated as WORLD MOSQUITO DAY \u2014 while working at the Secunderabad Military Hospital (now in Telangana, India). He dissected the stomach of a female Anopheles mosquito that had fed on a malaria patient and found the characteristic oocysts (encysted Plasmodium parasites) on the stomach wall. This PROVED that malaria is transmitted by the FEMALE Anopheles mosquito (male mosquitoes do NOT feed on blood \u2014 they feed on nectar; only females need blood for egg development). Ross received the Nobel Prize in 1902 for this work. He was the first person to receive a Nobel Prize for work primarily conducted in India. KEY EXAM FACTS: (1) Vector for malaria = FEMALE Anopheles (not male, not Aedes, not Culex). (2) Aedes aegypti = dengue, Zika, yellow fever, chikungunya. (3) Culex mosquito = filariasis (Wuchereria bancrofti), Japanese encephalitis. (4) Quinine, derived from cinchona bark, was the traditional anti-malarial; it was discovered long before Ross (used by indigenous South Americans for centuries). Artemisinin-based combination therapy (ACT) is now first-line for falciparum malaria."},
+
+{d:"EASY",e:"CDS 2023",
+q:"Alexander Fleming discovered penicillin in 1928. Which of the following CORRECTLY describes the circumstances of his discovery and the source organism?",
+opts:[
+  "Fleming deliberately mixed various soil bacteria with Staphylococcus cultures and observed that one bacterial species produced a substance inhibiting Staphylococcal growth",
+  "Fleming noticed that a Penicillium mould had contaminated his Staphylococcus culture plates and was producing a zone of bacterial inhibition (clear area) around it; this led him to isolate the active substance, later named penicillin",
+  "Fleming synthesised penicillin chemically after observing that certain bread moulds produced compounds that inhibited bacterial growth in food preservation",
+  "Fleming discovered penicillin while testing soil samples for antibacterial compounds, isolating the active substance from Streptomyces notatus found in Scottish soil"
+],ans:1,
+rule:"Fleming 1928: Penicillium notatum mould contaminated Staphylococcus plate \u2192 zone of inhibition observed \u2192 penicillin named; Nobel 1945 (Fleming, Florey, Chain)",
+exp:"ALEXANDER FLEMING's discovery of penicillin in 1928 is one of the most famous accidental discoveries in science. Fleming was working with STAPHYLOCOCCUS AUREUS cultures at St Mary's Hospital, London. When he returned from a vacation, he noticed that one of his culture plates had been contaminated by a blue-green MOULD (later identified as PENICILLIUM NOTATUM, now reclassified as P. chrysogenum). Around this mould, there was a clear ZONE OF INHIBITION \u2014 the bacteria had been killed or prevented from growing. Fleming recognised this as significant and isolated the active substance, naming it PENICILLIN. He published his findings in 1929 but was unable to purify or concentrate penicillin sufficiently for clinical use. It was HOWARD FLOREY and ERNST BORIS CHAIN at Oxford who purified and clinically tested penicillin during World War II (1940\u20131941). Fleming, Florey and Chain shared the Nobel Prize in Physiology or Medicine in 1945. SELMAN WAKSMAN (Option D) discovered STREPTOMYCIN from Streptomyces griseus (not Streptomyces notatus) in 1943 \u2014 he coined the term antibiotic and received the Nobel Prize in 1952. Penicillin is produced from Penicillium, NOT Streptomyces."},
+
+{d:"EASY",e:"NDA 2022",
+q:"Which of the following correctly matches the mosquito vector with the disease it transmits?",
+opts:[
+  "Female Culex mosquito \u2014 malaria; Female Anopheles \u2014 dengue; Female Aedes \u2014 filariasis",
+  "Female Anopheles \u2014 malaria; Female Aedes aegypti \u2014 dengue, Zika, yellow fever; Female Culex \u2014 filariasis (Wuchereria bancrofti) and Japanese encephalitis",
+  "Female Anopheles \u2014 malaria and dengue; Female Aedes \u2014 Zika and Japanese encephalitis; Female Culex \u2014 filariasis only",
+  "All three mosquito genera (Anopheles, Aedes, Culex) transmit malaria but in different geographic regions"
+],ans:1,
+rule:"Anopheles \u2192 malaria; Aedes aegypti \u2192 dengue/Zika/yellow fever/chikungunya; Culex \u2192 filariasis/Japanese encephalitis",
+exp:"This is a very commonly tested matching question in CDS and NDA exams. ANOPHELES (female) \u2192 MALARIA (Plasmodium spp.). Anopheles mosquitoes breed in clean, stagnant water. Females bite primarily at night (dusk to dawn). AEDES AEGYPTI (female) \u2192 DENGUE (4 serotypes), ZIKA virus, YELLOW FEVER, CHIKUNGUNYA. Aedes mosquitoes have distinctive black and white stripes; breed in small collections of clear water (flower pots, old tyres, coconut shells); bite during DAY (unlike Anopheles). Aedes albopictus (Asian tiger mosquito) also transmits dengue and chikungunya. CULEX (female) \u2192 FILARIASIS (caused by the nematode worm Wuchereria bancrofti \u2014 NOT a protozoan) and JAPANESE ENCEPHALITIS (a viral brain infection). Culex breeds in dirty, stagnant water including sewage. EXAM TIP: Many students confuse Culex with Aedes for dengue. Dengue = Aedes ONLY. Also note: filariasis (elephantiasis) is not caused by a protozoan or bacterium \u2014 it is caused by a parasitic worm (helminth). The vector is Culex mosquito but the parasite is Wuchereria bancrofti (a nematode)."},
+
+/* MEDIUM */
+{d:"MEDIUM",e:"CDS 2023",
+q:"Gram staining divides bacteria into Gram-positive and Gram-negative groups. A hospital patient has a severe infection. The Gram stain shows pink/red (Gram-negative) rods. Which of the following statements about this infection is MOST CORRECT?",
+opts:[
+  "The bacteria will respond well to penicillin because Gram-negative bacteria have thicker peptidoglycan layers that are more easily disrupted",
+  "The bacteria are likely to be more resistant to penicillin due to their outer lipopolysaccharide (LPS) membrane that acts as a permeability barrier; the LPS itself can trigger dangerous endotoxin shock (fever, sepsis) if bacteria lyse",
+  "Gram-negative bacteria produce more potent exotoxins than Gram-positive bacteria and are always more dangerous than Gram-positive infections",
+  "Gram-negative bacteria have no cell wall; therefore, they cannot be treated with any antibiotics"
+],ans:1,
+rule:"Gram-negative: thin peptidoglycan + outer LPS membrane \u2192 penicillin-resistant; LPS = endotoxin \u2192 fever/septic shock; stains pink with safranin counterstain",
+exp:"GRAM-NEGATIVE BACTERIA have a distinctive cell envelope structure: a thin layer of peptidoglycan PLUS an outer membrane made of LIPOPOLYSACCHARIDE (LPS). This structure has two critical clinical implications: (1) ANTIBIOTIC RESISTANCE: The outer LPS membrane acts as a permeability barrier that prevents many antibiotics, including PENICILLIN, from reaching the thin peptidoglycan layer. Even though penicillin targets peptidoglycan synthesis, it cannot easily penetrate the outer membrane of Gram-negative bacteria. Hence Gram-negative infections are harder to treat with standard penicillin. Broad-spectrum antibiotics (e.g. fluoroquinolones, carbapenems) or antibiotics that can penetrate the outer membrane are used. (2) ENDOTOXIN/LPS: When Gram-negative bacteria die (e.g. due to antibiotics), they release LPS (endotoxin) from their outer membrane. LPS triggers a massive immune response \u2014 fever, inflammation, and potentially SEPTIC SHOCK (life-threatening). This is why treating some Gram-negative infections can paradoxically worsen symptoms initially. GRAM-POSITIVE bacteria have a THICK peptidoglycan layer but NO outer LPS membrane \u2014 they are generally MORE SENSITIVE to penicillin (easy access to peptidoglycan) but produce EXOTOXINS (secreted proteins) rather than LPS endotoxins. Option A is wrong (Gram-positive have thicker peptidoglycan, not Gram-negative). Option D is wrong (Gram-negative DO have cell walls \u2014 just with an outer LPS membrane as well)."},
+
+{d:"MEDIUM",e:"AFCAT 2022",
+q:"HIV is classified as a retrovirus. Which of the following correctly describes the unique replication mechanism of retroviruses and why this makes HIV infection so difficult to cure?",
+opts:[
+  "HIV is a DNA virus that integrates directly into the host chromosome; the integrated viral DNA is indistinguishable from host DNA and therefore cannot be detected or removed",
+  "HIV carries an RNA genome and uses the enzyme REVERSE TRANSCRIPTASE to convert its RNA into DNA, which then integrates into the host cell's chromosome as a PROVIRUS; this integrated provirus can remain latent in CD4+ T cells for years and reactivate, making complete eradication impossible with current drugs",
+  "HIV attacks red blood cells and uses reverse transcriptase to replicate within them; since red blood cells live for 120 days, the virus can persist for long periods despite antiretroviral treatment",
+  "HIV is a bacteriophage-like virus that integrates into the genome of gut bacteria; since we cannot eliminate gut bacteria, HIV cannot be fully cleared"
+],ans:1,
+rule:"HIV = retrovirus; RNA genome \u2192 reverse transcriptase \u2192 DNA \u2192 integrates as provirus in CD4+ T cells; latent reservoir prevents cure; ART controls but does not cure",
+exp:"HIV (Human Immunodeficiency Virus) is the classic example of a RETROVIRUS \u2014 a group of RNA viruses that reverse the normal flow of genetic information (RNA \u2192 DNA instead of DNA \u2192 RNA, reversing the central dogma). HIV's replication cycle: (1) HIV binds to CD4+ T HELPER CELLS (also macrophages and dendritic cells) via its gp120 spike protein binding to the CD4 receptor. (2) HIV RNA genome enters the cell. (3) REVERSE TRANSCRIPTASE (RT) converts the viral RNA into complementary DNA (cDNA). (4) RT then makes the cDNA double-stranded. (5) INTEGRASE enzyme inserts the viral dsDNA into the host chromosome \u2014 this integrated form is called the PROVIRUS. (6) The provirus can remain LATENT (dormant) for years within long-lived CD4+ T cells, not producing virus and INVISIBLE to the immune system and most drugs. (7) When the T cell is activated, the provirus reactivates and produces new HIV virions. CLINICAL IMPLICATIONS: (1) Antiretroviral Therapy (ART) suppresses viral replication but CANNOT remove integrated proviruses from long-lived reservoir cells. (2) If ART is stopped, HIV rebounds from these reservoirs. (3) That is why HIV is INCURABLE with current technology despite effective ART. The enzyme reverse transcriptase was discovered by DAVID BALTIMORE and HOWARD TEMIN, who received the Nobel Prize in 1975. HIV destroys CD4+ T cells \u2014 NOT red blood cells (Option C is completely wrong)."},
+
+{d:"MEDIUM",e:"NDA 2023",
+q:"In the context of vaccines, what is the fundamental difference between the Salk (IPV) and Sabin (OPV) vaccines for polio, and which concern led to the global shift away from OPV in many countries?",
+opts:[
+  "Salk vaccine is a live attenuated (weakened) virus given orally; Sabin vaccine is an inactivated virus given by injection; OPV was replaced because oral vaccines are less effective",
+  "Salk (IPV) is an inactivated (killed) virus given by INJECTION; Sabin (OPV) is a live attenuated virus given ORALLY; the concern with OPV is Vaccine-Derived Poliovirus (VDPV) \u2014 the attenuated vaccine strain can rarely revert to virulence and cause vaccine-associated paralytic polio (VAPP)",
+  "Salk vaccine provides lifelong immunity while Sabin vaccine provides only 6 months of protection; countries switched to IPV because more frequent boosters of OPV were financially burdensome",
+  "Both vaccines use the same inactivated virus; the only difference is the route of administration (injection vs oral), with oral being less preferred for safety reasons"
+],ans:1,
+rule:"IPV (Salk 1955) = inactivated virus, injected; OPV (Sabin 1961) = live attenuated, oral; OPV concern = VAPP (vaccine-associated paralytic polio) from rare reversion; India uses both",
+exp:"This is a heavily tested topic in defence exams. SALK VACCINE (IPV \u2014 Inactivated Polio Vaccine, 1955): Uses KILLED poliovirus; administered by INJECTION; cannot cause polio (no live virus); induces good systemic (blood) immunity (IgG); does NOT induce strong gut mucosal immunity (IgA). SABIN VACCINE (OPV \u2014 Oral Polio Vaccine, 1961): Uses LIVE ATTENUATED (weakened) poliovirus; administered ORALLY (drops); cheap, easy to administer (no needles); induces excellent GUT MUCOSAL immunity (IgA) \u2014 protects at the site of natural infection (intestines); can spread to close contacts (transmissible vaccine-derived immunity \u2014 originally seen as an advantage). THE CONCERN WITH OPV: In rare cases (~1 in 2.4 million doses), the attenuated OPV strain can REVERT TO VIRULENCE through mutations in the vaccinated person or in under-vaccinated communities. This can cause VACCINE-ASSOCIATED PARALYTIC POLIO (VAPP) in the vaccine recipient, or VACCINE-DERIVED POLIOVIRUS (VDPV) outbreaks in under-immunised populations. India used OPV extensively in the Pulse Polio Programme; India was declared polio-free in 2014. The global eradication programme is now switching to IPV to eliminate the risk of VAPP as wild poliovirus is eliminated."},
+
+{d:"MEDIUM",e:"CDS 2024",
+q:"Clostridium botulinum produces botulinum toxin, described as the most potent known biological toxin. What is the molecular mechanism by which this toxin causes the characteristic flaccid (floppy) paralysis of botulism?",
+opts:[
+  "Botulinum toxin permanently opens sodium channels in motor neurons, causing continuous nerve firing that eventually exhausts the muscles, leading to flaccid paralysis after initial spasms",
+  "Botulinum toxin cleaves SNARE proteins (synaptobrevin/VAMP) at the neuromuscular junction, preventing the fusion of acetylcholine-containing vesicles with the presynaptic membrane, blocking ACh release \u2014 without ACh, muscles cannot contract, causing flaccid paralysis",
+  "Botulinum toxin enters the bloodstream and destroys acetylcholine receptors on muscle cells, making muscles permanently unresponsive to nerve signals regardless of ACh levels",
+  "Botulinum toxin acts on inhibitory interneurons in the spinal cord, blocking GABA release and causing disinhibition of motor neurons, resulting in flaccid paralysis from motor neuron overactivation"
+],ans:1,
+rule:"Botulinum toxin \u2192 cleaves SNARE proteins \u2192 blocks ACh vesicle fusion \u2192 no ACh released at neuromuscular junction \u2192 flaccid paralysis (compare tetanus toxin: blocks glycine/GABA \u2192 spastic paralysis)",
+exp:"BOTULINUM TOXIN (produced by Clostridium botulinum, a Gram-positive spore-forming anaerobe) is the most potent toxin known \u2014 the estimated lethal dose for humans is approximately 1\u20132 nanograms per kilogram body weight. Its mechanism of action: (1) The toxin is a two-chain protein; the heavy chain binds to receptors on presynaptic motor neurons and facilitates entry into the cell. (2) The light chain is a zinc-dependent PROTEASE (endopeptidase) that cleaves SNARE PROTEINS (specifically synaptobrevin/VAMP, syntaxin, or SNAP-25 depending on the toxin serotype). (3) SNARE proteins are essential for the FUSION of acetylcholine (ACh)-containing synaptic vesicles with the presynaptic membrane. (4) Without functional SNARE proteins, ACh vesicles CANNOT fuse and release their contents into the neuromuscular junction. (5) With NO ACh released, muscles receive NO stimulation to contract \u2192 FLACCID PARALYSIS (muscles are limp and floppy). COMPARE WITH TETANUS: Tetanus toxin (tetanospasmin from Clostridium tetani) blocks the release of INHIBITORY neurotransmitters (glycine and GABA) at inhibitory interneurons in the spinal cord \u2192 motor neurons fire uncontrollably \u2192 SPASTIC paralysis (rigid muscles, lock jaw). Both toxins are zinc proteases but act at different synapses. MEDICAL USE: Botulinum toxin (Botox) is used medically for muscle spasm disorders, cosmetic wrinkle treatment, hyperhidrosis, and migraine prevention \u2014 all exploiting its ability to temporarily block ACh release at targeted sites."},
+
+{d:"MEDIUM",e:"AFCAT 2024",
+q:"In the context of antibiotic resistance, MRSA (Methicillin-Resistant Staphylococcus aureus) is a major hospital-acquired pathogen. Which of the following BEST explains the primary mechanism of MRSA's resistance and how resistance spreads between bacteria?",
+opts:[
+  "MRSA actively produces more penicillin-binding proteins which dilute out the antibiotic effect; resistance is inherited genetically from parent cells during binary fission only",
+  "MRSA carries altered PENICILLIN-BINDING PROTEINS (PBPs) with low affinity for beta-lactam antibiotics, encoded by the mecA gene on the staphylococcal cassette chromosome (SCCmec); resistance spreads horizontally via PLASMIDS and mobile genetic elements through conjugation between bacteria (horizontal gene transfer)",
+  "MRSA lacks a cell wall entirely, making all beta-lactam antibiotics (which target cell wall synthesis) ineffective; it is treated with antivirals",
+  "MRSA produces an enzyme that converts methicillin into a harmless metabolite; this enzymatic resistance is encoded in the main chromosome and cannot be transferred to other bacteria"
+],ans:1,
+rule:"MRSA: altered PBPs (mecA gene) \u2192 low affinity for beta-lactams; resistance spreads via plasmids through horizontal gene transfer (conjugation); treated with vancomycin",
+exp:"MRSA (Methicillin-Resistant Staphylococcus aureus) is a critical global public health threat. Understanding its resistance mechanism: NORMAL PENICILLIN RESISTANCE: Some staphylococci produce BETA-LACTAMASE enzymes that hydrolyse (break) the beta-lactam ring of penicillin, inactivating it. Methicillin was developed to overcome beta-lactamase (methicillin is beta-lactamase stable). MRSA RESISTANCE: MRSA carries the mecA GENE (on the SCCmec \u2014 staphylococcal cassette chromosome mec) that encodes an ALTERED PENICILLIN-BINDING PROTEIN called PBP2a (or PBP2'). Normal PBPs are the enzymes that synthesise peptidoglycan cell walls \u2014 beta-lactam antibiotics inhibit them by binding to their active site. PBP2a has a VERY LOW AFFINITY for all beta-lactam antibiotics (penicillins, methicillin, cephalosporins, carbapenems) \u2014 they cannot bind to PBP2a effectively, so MRSA can still synthesise its cell wall even in the presence of these antibiotics. SPREAD OF RESISTANCE: Antibiotic resistance genes are frequently carried on PLASMIDS \u2014 small, circular, self-replicating DNA molecules. Bacteria share plasmids through CONJUGATION (a form of horizontal gene transfer in which a pilus connects two bacteria and DNA is transferred). This spreads resistance rapidly between different bacterial species. TREATMENT: MRSA is treated with VANCOMYCIN (a glycopeptide antibiotic that works differently \u2014 binds to the D-Ala-D-Ala terminus of peptidoglycan precursors). Linezolid and daptomycin are alternatives. VRMRSA (Vancomycin-resistant MRSA) is now also emerging."},
+
+/* HARD */
+{d:"HARD",e:"CDS 2024",
+q:"A child develops a high fever every 48 hours with severe chills and rigors. Blood smear shows ring-trophozoite forms inside red blood cells. Which Plasmodium species is MOST likely, and what feature of its biology explains the periodic fever pattern and why this species can cause relapses months or years later?",
+opts:[
+  "Plasmodium falciparum \u2014 the 48-hour cycle reflects the time for merozoites to burst RBCs in the erythrocytic schizogony cycle; relapses occur because P. falciparum forms hypnozoites in the liver that reactivate periodically",
+  "Plasmodium vivax \u2014 the 48-hour (tertian) fever cycle reflects synchronous bursting of RBCs as merozoites complete the erythrocytic cycle; relapses occur because P. vivax forms HYPNOZOITES (dormant liver-stage parasites) that can reactivate months or years after the initial infection",
+  "Plasmodium malariae \u2014 it causes a 48-hour fever cycle and forms hypnozoites in kidney cells; relapses are triggered by stress or immunosuppression reactivating these kidney-stage dormant forms",
+  "Plasmodium ovale \u2014 the 48-hour cycle is identical to P. vivax; however, relapses in P. ovale are caused by gametocytes surviving in RBCs for years without causing symptoms"
+],ans:1,
+rule:"P. vivax \u2192 48-hour tertian fever (RBC bursting); HYPNOZOITES in liver \u2192 relapses months/years later; treated with chloroquine (blood) + primaquine (liver/hypnozoites)",
+exp:"The clinical picture described \u2014 48-hour fever (tertian fever) with rigors and ring-trophozoite forms in RBCs \u2014 is most consistent with PLASMODIUM VIVAX (though P. ovale also causes tertian fever). However, the question about RELAPSES specifically distinguishes P. vivax. FEVER MECHANISM: The Plasmodium parasite completes its ASEXUAL ERYTHROCYTIC CYCLE (in RBCs) in a characteristic time: P. vivax and P. ovale \u2192 48 hours (TERTIAN fever, i.e., fever every third day counting inclusively); P. malariae \u2192 72 hours (QUARTAN fever, every 4th day); P. falciparum \u2192 irregular/quotidian (daily) because cycles are often not synchronised. When RBCs burst simultaneously, they release merozoites, pigment and pyrogens (fever-inducing substances) \u2192 sudden fever spike. HYPNOZOITES: After the initial infection, P. vivax (and P. ovale) can leave some parasites in a DORMANT FORM called HYPNOZOITES in the liver parenchymal cells. These hypnozoites do NOT cause symptoms and are NOT killed by chloroquine (which only kills blood-stage parasites). Months or years later, hypnozoites can REACTIVATE \u2192 re-enter the bloodstream \u2192 cause a RELAPSE of malaria. P. falciparum and P. malariae do NOT form hypnozoites (P. falciparum causes RECRUDESCENCE \u2014 re-emergence from low-level blood parasitaemia, not true relapse). TREATMENT: Chloroquine for blood-stage P. vivax; PRIMAQUINE to kill liver-stage hypnozoites and prevent relapses (must check G6PD status before primaquine as it causes haemolytic anaemia in G6PD deficiency)."},
+
+{d:"HARD",e:"NDA 2024",
+q:"Prions are described as infectious agents composed solely of misfolded protein with no nucleic acid. Which of the following MOST accurately describes how prions propagate and why they are nearly impossible to destroy by conventional sterilisation methods?",
+opts:[
+  "Prions contain a very small, tightly coiled DNA molecule that current detection methods cannot identify; they replicate like viruses by hijacking host cell DNA replication machinery",
+  "Prions are misfolded versions of the normal cellular prion protein (PrPC). The abnormal form (PrPSc) acts as a template, converting normal PrPC proteins into the misfolded PrPSc form through direct protein-protein interaction (conformational change), without any nucleic acid; PrPSc is resistant to heat, proteases, radiation and standard autoclaving because it is a protein aggregate with no nucleic acid to degrade",
+  "Prions are polysaccharide capsules released by certain bacteria that can infect brain cells; they are resistant to antibiotics because they contain no peptidoglycan target for antibiotic action",
+  "Prions replicate using RNA-dependent RNA polymerase encoded within their structure; they resist sterilisation by forming spore-like structures similar to bacterial endospores that protect the RNA genome"
+],ans:1,
+rule:"Prions = misfolded PrPSc protein; converts normal PrPC by conformational templating; no nucleic acid; resistant to heat, proteases, radiation, formalin; destroyed only by concentrated NaOH or prolonged autoclaving at higher temperatures",
+exp:"PRIONS (Proteinaceous Infectious Particles) are the most unconventional infectious agents known. The PRION HYPOTHESIS (Stanley Prusiner, Nobel Prize 1997) proposes that prions consist SOLELY of a misfolded protein with NO nucleic acid (no DNA, no RNA). THE NORMAL CELLULAR PROTEIN: The prion protein gene (PRNP) is a normal mammalian gene that encodes the normal cellular prion protein PrPC. The normal PrPC is predominantly alpha-helical in structure, is expressed on the surface of many cells (especially neurons), and has poorly understood normal functions (possibly in cell signalling, sleep, or copper metabolism). THE INFECTIOUS FORM: PrPSc (scrapie isoform) is the abnormal, disease-causing form. It differs from PrPC only in its THREE-DIMENSIONAL CONFORMATION (folding) \u2014 PrPSc has a high proportion of BETA-SHEETS instead of alpha-helices. PrPSc is extremely AGGREGATION-PRONE. THE PROPAGATION MECHANISM: When PrPSc contacts normal PrPC, it catalyses the conversion of PrPC into the PrPSc conformation \u2014 pure protein-to-protein CONFORMATIONAL TEMPLATING, requiring no nucleic acid whatsoever. This creates more PrPSc, which converts more PrPC in an exponential chain reaction. WHY SO HARD TO DESTROY: Normal sterilisation relies on (a) denaturing proteins (heat \u2014 but PrPSc aggregates are very thermostable) or (b) destroying nucleic acids (UV/gamma radiation \u2014 no nucleic acid to target!). PrPSc resists: boiling, autoclaving at standard conditions (121\u00b0C), UV radiation, ionising radiation, formaldehyde, most disinfectants, and proteases. Effective destruction requires: prolonged autoclaving at HIGHER temperatures (134\u00b0C, 1 hr+) or treatment with CONCENTRATED NaOH. DISEASES: Bovine Spongiform Encephalopathy (BSE/mad cow disease) in cattle; Creutzfeldt-Jakob Disease (CJD) in humans (both sporadic and variant vCJD from eating BSE-infected beef); Kuru (first prion disease identified; affected Fore tribe of Papua New Guinea through ritual cannibalism; described by Gajdusek, Nobel 1976); Scrapie in sheep."},
+
+{d:"HARD",e:"AFCAT 2024",
+q:"Koch's Postulates are a set of criteria established to prove that a specific microorganism causes a specific disease. However, these postulates have significant limitations in modern microbiology. Which option BEST describes the postulates AND identifies a valid modern limitation?",
+opts:[
+  "Koch's Postulates state that a microorganism must be found in all diseased individuals, must be isolated and grown in pure culture, must cause disease when introduced into a healthy host, and must be re-isolated from the experimentally infected host; a limitation is that they cannot be applied to viruses (obligate intracellular parasites that cannot be grown in pure culture on artificial media) or to microorganisms like Treponema pallidum that cannot be cultured at all",
+  "Koch's Postulates require only that a microorganism be isolated from a diseased patient and that it produces antibodies in the patient's serum; limitations include that antibody tests are not specific enough for modern applications",
+  "Koch's Postulates require that treatment with antibiotics cures the disease as proof of bacterial causation; limitations include that viral diseases do not respond to antibiotics and therefore viral causation cannot be proven by these postulates",
+  "Koch's Postulates were formulated for tropical diseases only and cannot be applied to temperate-zone pathogens like influenza or tuberculosis"
+],ans:0,
+rule:"Koch's Postulates: 4 criteria for proving microbial disease causation; limitations: obligate intracellular parasites (viruses, Chlamydia), unculturable organisms, asymptomatic carriers, ethical constraints on human experiments",
+exp:"ROBERT KOCH formulated his postulates in the 1880s while studying anthrax and tuberculosis: POSTULATE 1: The microorganism must be FOUND IN ALL CASES of the disease (and absent from healthy individuals). POSTULATE 2: The microorganism must be ISOLATED from the diseased organism and GROWN IN PURE CULTURE on artificial medium. POSTULATE 3: The cultured microorganism must CAUSE DISEASE when introduced into a HEALTHY, SUSCEPTIBLE HOST. POSTULATE 4: The microorganism must be RE-ISOLATED from the experimentally infected host and shown to be IDENTICAL to the original isolate. SIGNIFICANCE: These postulates established the scientific standard for proving that a specific microorganism causes a specific disease, making modern infectious disease microbiology possible. Koch used them to prove that Mycobacterium tuberculosis causes TB and Vibrio cholerae causes cholera. CRITICAL LIMITATIONS: (1) VIRUSES: Cannot be grown on artificial bacterial culture media (they are obligate intracellular parasites requiring living cells). Tissue culture and animal models are used instead. (2) UNCULTURABLE ORGANISMS: Treponema pallidum (syphilis) and Mycobacterium leprae (leprosy) cannot be grown in pure culture in vitro. (3) ASYMPTOMATIC CARRIERS: Some organisms cause disease in some individuals but not others (e.g. Vibrio cholerae \u2014 most infected people have no symptoms; Helicobacter pylori \u2014 common in stomach but causes ulcers in only some). This violates Postulate 1. (4) ETHICAL CONSTRAINTS: Human experiments (Postulate 3) are often unethical. (5) POLYMICROBIAL DISEASES: Some diseases require multiple organisms (e.g. dental caries). The answer here is Option A (correct postulates + valid limitation about viruses/unculturable organisms)."},
+
+{d:"HARD",e:"CDS 2024",
+q:"The mRNA vaccines against COVID-19 (Pfizer-BioNTech and Moderna) represent a completely new vaccine platform that won the 2023 Nobel Prize. Which of the following MOST accurately describes how mRNA vaccines work and what specific scientific problem Katalin Karik\u00f3 and Drew Weissman solved to make them feasible?",
+opts:[
+  "mRNA vaccines inject a small piece of the viral DNA directly into the nucleus of immune cells, where it permanently integrates and instructs the cell to produce antibodies indefinitely; Karik\u00f3 and Weissman solved the problem of viral DNA integrating into oncogenes by adding a protective methylation tag",
+  "mRNA vaccines deliver lipid nanoparticle-encapsulated synthetic mRNA encoding a viral antigen (e.g. SARS-CoV-2 spike protein) into cells; the cell's ribosomes translate the mRNA into spike protein \u2192 immune response generated; Karik\u00f3 and Weissman solved the key problem that synthetic mRNA caused massive innate immune activation (degradation before translation) by replacing uridine with pseudouridine (\u03a8U), reducing immunogenicity while maintaining translatability",
+  "mRNA vaccines work by injecting viral mRNA extracted directly from the SARS-CoV-2 virus; the immune system recognises this foreign mRNA as an antigen and makes antibodies against it; Karik\u00f3 and Weissman discovered that viral mRNA is less immunogenic than synthetic mRNA and therefore safer",
+  "mRNA vaccines use CRISPR technology to edit the host genome to express spike protein permanently; Karik\u00f3 and Weissman developed the guide RNA that directs CRISPR-Cas9 to the correct genomic insertion site"
+],ans:1,
+rule:"mRNA vaccine: LNP-encapsulated synthetic mRNA \u2192 ribosomes translate \u2192 viral antigen \u2192 immune response; Karik\u00f3 & Weissman: pseudouridine substitution reduces innate immune recognition; Nobel 2023",
+exp:"The 2023 Nobel Prize in Physiology or Medicine was awarded to KATALIN KARIK\u00d3 and DREW WEISSMAN for their foundational discoveries that enabled mRNA vaccines. HOW mRNA VACCINES WORK: (1) Synthetic mRNA is designed to encode a viral protein antigen \u2014 for COVID-19, this is the SPIKE PROTEIN of SARS-CoV-2. (2) The mRNA cannot survive alone in the body (it degrades rapidly); it is packaged in LIPID NANOPARTICLES (LNPs) \u2014 tiny fat bubbles that protect the mRNA and help it enter cells. (3) After injection, LNPs are taken up by cells (mostly at the injection site and draining lymph nodes). (4) The cell's own RIBOSOMES translate the mRNA into spike protein. (5) The spike protein is displayed on the cell surface \u2192 immune system recognises it as foreign \u2192 produces antibodies and T cells against it. (6) The mRNA is DEGRADED within days (not weeks); it NEVER enters the nucleus and CANNOT integrate into chromosomal DNA (it lacks reverse transcriptase and integrase). THE KEY PROBLEM KARIK\u00d3 AND WEISSMAN SOLVED: When synthetic mRNA is introduced into cells, the cell's innate immune sensors (TLR7, TLR8, TLR3) recognise it as a sign of viral infection and trigger a massive inflammatory response that degrades the mRNA before it can be translated \u2014 making early synthetic mRNA vaccines ineffective and inflammatory. Karik\u00d3 and Weissman discovered (published 2005) that replacing URIDINE (U) in the mRNA with PSEUDOURIDINE (\u03a8U) \u2014 a naturally occurring modified nucleoside \u2014 dramatically reduced recognition by innate immune sensors while PRESERVING the mRNA's ability to be translated into protein. This breakthrough made mRNA therapeutically viable. Additional innovations: codon optimisation; optimising the LNP formulation. IMPORTANT: mRNA vaccines do NOT alter DNA, do NOT use live virus, and are rapidly degradable."}
+
+];
+
+const answers=new Array(QS.length).fill(null);
+const revealed=new Array(QS.length).fill(false);
+const LABS=["A","B","C","D"];
+
+function build(){
+  const area=document.getElementById("q-area");
+  area.innerHTML="";
+  QS.forEach((q,i)=>{
+    const dc=q.d==="EASY"?"diff-e":q.d==="MEDIUM"?"diff-m":"diff-h";
+    const div=document.createElement("div");
+    div.className="q-card";div.id="qc"+i;
+    div.innerHTML=`
+      <div class="q-meta">
+        <span class="q-num">Q.${String(i+1).padStart(2,"0")}</span>
+        <span class="q-diff ${dc}">${q.d}</span>
+        <span class="q-exam">${q.e}</span>
+      </div>
+      <div class="q-body">
+        <div class="q-text">${q.q}</div>
+        <div class="opts" id="opts${i}">
+          ${q.opts.map((o,j)=>`
+            <button class="opt" id="o${i}_${j}" onclick="pick(${i},${j})">
+              <span class="opt-lbl">${LABS[j]}</span>${o}
+            </button>`).join("")}
+        </div>
+        <div class="exp-panel" id="ex${i}">
+          <div class="exp-tag">Explanation</div>
+          <div class="exp-rule">${q.rule}</div>
+          <p>${q.exp}</p>
+        </div>
+      </div>
+      <div class="q-foot">
+        <span style="font-size:11px;color:var(--dim);font-weight:700">Biology \u00b7 B13</span>
+        <span id="ai${i}" class="q-status">\u2014</span>
+      </div>`;
+    area.appendChild(div);
+  });
+}
+
+function pick(qi,oi){
+  if(revealed[qi])return;
+  answers[qi]=oi;
+  document.querySelectorAll("#opts"+qi+" .opt").forEach((b,j)=>{b.classList.remove("sel");if(j===oi)b.classList.add("sel");});
+  document.getElementById("qc"+qi).classList.add("answered");
+  const ai=document.getElementById("ai"+qi);
+  ai.textContent="Selected: "+LABS[oi];
+  ai.style.color="var(--primary)";
+  updateStats();
+}
+
+function updateStats(){
+  const att=answers.filter(a=>a!==null).length;
+  document.getElementById("s-att").textContent=att;
+  document.getElementById("prog").style.width=(att/QS.length*100)+"%";
+  document.getElementById("prog-label").textContent=att+" of "+QS.length+" answered";
+  let c=0,w=0;
+  answers.forEach((a,i)=>{if(a===null)return;if(a===QS[i].ans)c++;else w++;});
+  document.getElementById("s-cor").textContent=c;
+  document.getElementById("s-wrg").textContent=w;
+}
+
+function submitAll(){
+  let cor=0,wrg=0,skp=0;
+  QS.forEach((q,i)=>{
+    revealed[i]=true;
+    const opts=document.querySelectorAll("#opts"+i+" .opt");
+    opts.forEach(b=>{b.disabled=true;b.classList.remove("sel");});
+    opts[q.ans].classList.add("ok");
+    if(answers[i]!==null&&answers[i]!==q.ans)opts[answers[i]].classList.add("bad");
+    document.getElementById("ex"+i).classList.add("show");
+    const ai=document.getElementById("ai"+i);
+    const card=document.getElementById("qc"+i);
+    card.classList.remove("answered");
+    if(answers[i]===null){skp++;ai.textContent="Skipped";ai.style.color="var(--dim)";}
+    else if(answers[i]===q.ans){cor++;card.classList.add("correct");ai.textContent="\u2713 Correct";ai.style.color="var(--green)";}
+    else{wrg++;card.classList.add("wrong");ai.textContent="\u2717 Wrong";ai.style.color="var(--red)";}
+  });
+  updateStats();
+  showResults(cor,wrg,skp);
+}
+
+function showResults(cor,wrg,skp){
+  const pct=Math.round(cor/QS.length*100);
+  let grade,msg;
+  if(pct>=88){grade="Excellent";msg="Outstanding! You have mastered Microorganisms.";}
+  else if(pct>=70){grade="Good";msg="Well done. Review the questions you missed.";}
+  else if(pct>=50){grade="Average";msg="Good effort. Revisit the theory cards and try again.";}
+  else{grade="Needs Work";msg="Review the Quick Ref carefully and try again.";}
+  const res=document.getElementById("results");
+  res.innerHTML=`
+    <div class="res-hero">
+      <div class="res-score">${cor}<span style="font-size:36px;opacity:.5">/${QS.length}</span></div>
+      <div class="res-grade">${grade} \u00b7 ${pct}%</div>
+      <div class="res-msg">${msg}</div>
+    </div>
+    <div class="res-stats">
+      <div class="qs-cell"><div class="qs-val g">${cor}</div><div class="qs-lbl">Correct</div></div>
+      <div class="qs-cell"><div class="qs-val r">${wrg}</div><div class="qs-lbl">Wrong</div></div>
+      <div class="qs-cell"><div class="qs-val a">${skp}</div><div class="qs-lbl">Skipped</div></div>
+      <div class="qs-cell"><div class="qs-val">${pct}%</div><div class="qs-lbl">Score</div></div>
+    </div>
+    <div style="text-align:center;margin:16px 0">
+      <button class="btn btn-ghost" onclick="document.getElementById('q-area').scrollIntoView({behavior:'smooth'})">Review All Answers</button>
+    </div>`;
+  res.style.display="block";
+  res.scrollIntoView({behavior:"smooth",block:"start"});
+}
+
+function resetQuiz(){
+  answers.fill(null);revealed.fill(false);
+  build();
+  document.getElementById("results").style.display="none";
+  document.getElementById("results").innerHTML="";
+  ["s-att","s-cor","s-wrg"].forEach(id=>document.getElementById(id).textContent="0");
+  document.getElementById("prog").style.width="0%";
+  document.getElementById("prog-label").textContent="0 of "+QS.length+" answered";
+  window.scrollTo({top:0,behavior:"smooth"});
+}
+
+function switchTab(id){
+  document.querySelectorAll(".pane").forEach(p=>p.classList.remove("on"));
+  document.querySelectorAll(".tab").forEach(b=>b.classList.remove("on"));
+  document.getElementById(id).classList.add("on");
+  const idx={theory:0,quickref:1,quiz:2}[id];
+  document.querySelectorAll(".tab")[idx].classList.add("on");
+}
+
+function tog(hd){
+  const bd=hd.nextElementSibling;
+  const isOpen=bd.classList.contains("open");
+  bd.classList.toggle("open",!isOpen);
+  hd.classList.toggle("open",!isOpen);
+}
+
+build();
+</script>
+</body>
+</html>
