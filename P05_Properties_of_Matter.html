@@ -1,0 +1,1533 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>P05 · Properties of Matter | Olive Defence</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+
+/* ══ BURGUNDY / SLATE THEME ════════════════════════════════════ */
+:root{
+  --bg:          #F5F2F0;
+  --bg2:         #EDE8E4;
+  --bg3:         #E2DAD4;
+  --white:       #FFFFFF;
+  --ink:         #1E1410;
+  --ink2:        #332418;
+  --muted:       #7A6558;
+  --dim:         #A8988C;
+  --border:      #D4C8C0;
+
+  /* Primary — Burgundy */
+  --burg:        #7A1A2E;
+  --burgLt:      #962236;
+  --burgPale:    #F8ECEE;
+
+  /* Accent — Warm Slate / Teal */
+  --slate:       #1E4E5F;
+  --slateLt:     #256070;
+  --slatePale:   #E6F2F5;
+
+  /* Gold/Amber accents */
+  --amber:       #8C5E00;
+  --amberLt:     #A87200;
+  --amberPale:   #FDF4DC;
+
+  /* Semantic */
+  --green:       #1A6035;
+  --greenLt:     #207840;
+  --greenPale:   #E6F5EC;
+  --red:         #8B1C1C;
+  --redLt:       #AA2222;
+  --redPale:     #FCEAEA;
+  --purple:      #5C2A8E;
+  --purplePale:  #F2EDFB;
+  --rust:        #A83210;
+  --rustPale:    #FDEEE9;
+
+  --radius:      12px;
+  --shadow:      0 2px 12px rgba(30,20,16,.09);
+  --shadow-md:   0 4px 20px rgba(30,20,16,.14);
+}
+
+body{
+  font-family:'Nunito',sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  font-size:17px;
+  line-height:1.75;
+  min-height:100vh;
+}
+
+.page{max-width:680px;margin:0 auto;padding:0 16px 80px}
+
+/* ── HERO ─────────────────────────────────────────────────────── */
+.hero{
+  background:linear-gradient(135deg,#3A0A16 0%,#7A1A2E 55%,#8C2438 100%);
+  margin:0 -16px;
+  padding:30px 20px 28px;
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 82% 18%,rgba(255,200,140,.07) 0%,transparent 55%),
+    radial-gradient(ellipse at 10% 90%,rgba(100,180,200,.05) 0%,transparent 50%);
+  pointer-events:none;
+}
+.hero::after{
+  content:'';position:absolute;
+  width:260px;height:260px;
+  border:1.5px solid rgba(255,255,255,.05);
+  border-radius:50%;right:-70px;bottom:-80px;
+  pointer-events:none;
+}
+.hero-kicker{
+  font-size:11px;font-weight:700;letter-spacing:3px;
+  text-transform:uppercase;color:rgba(255,255,255,.48);
+  margin-bottom:8px;display:flex;align-items:center;gap:8px;
+}
+.hero-kicker::before{content:'';width:18px;height:2px;background:rgba(255,180,120,.38)}
+.hero-title{
+  font-family:'Lora',serif;
+  font-size:clamp(24px,5.5vw,36px);
+  font-weight:700;color:#fff;line-height:1.18;margin-bottom:10px;
+}
+.hero-title span{color:#FFCF8A;font-style:italic}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.62);margin-bottom:18px;line-height:1.65}
+.hero-chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{font-size:11px;font-weight:700;letter-spacing:1px;padding:4px 12px;border-radius:20px;text-transform:uppercase}
+.chip-w{background:rgba(255,255,255,.13);color:rgba(255,255,255,.88)}
+.chip-y{background:rgba(255,207,138,.16);color:#FFCF8A}
+.chip-g{background:rgba(100,210,140,.11);color:#80E0A8}
+
+/* ── TAB BAR ──────────────────────────────────────────────────── */
+.tab-bar{
+  position:sticky;top:0;z-index:50;
+  background:var(--white);border-bottom:2px solid var(--border);
+  margin:0 -16px;display:flex;overflow-x:auto;
+  box-shadow:0 2px 8px rgba(30,20,16,.08);
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;
+}
+.tab-bar::-webkit-scrollbar{display:none}
+.tab{
+  flex-shrink:0;padding:14px 18px;
+  font-size:12px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--muted);
+  border:none;background:transparent;cursor:pointer;
+  border-bottom:3px solid transparent;margin-bottom:-2px;
+  transition:all .2s;white-space:nowrap;
+}
+.tab:hover{color:var(--ink);background:var(--bg)}
+.tab.on{color:var(--burg);border-bottom-color:var(--burg)}
+
+/* ── PANES ────────────────────────────────────────────────────── */
+.pane{display:none;padding-top:24px;animation:fadeUp .3s ease}
+.pane.on{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── SECTION LABEL ────────────────────────────────────────────── */
+.sec-label{
+  font-size:10px;font-weight:800;letter-spacing:3px;
+  text-transform:uppercase;color:var(--burg);
+  margin:28px 0 12px;display:flex;align-items:center;gap:10px;
+}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* ── INTRO BOX ────────────────────────────────────────────────── */
+.intro-box{
+  background:var(--burgPale);border:1.5px solid rgba(122,26,46,.16);
+  border-radius:var(--radius);padding:20px;margin-bottom:8px;
+}
+.intro-box p{font-size:16px;color:var(--ink2);line-height:1.8}
+.intro-box strong{color:var(--burg)}
+
+/* ── CONCEPT CARDS ────────────────────────────────────────────── */
+.c-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius);margin-bottom:10px;
+  box-shadow:var(--shadow);overflow:hidden;
+}
+.c-head{
+  display:flex;align-items:center;gap:12px;padding:16px 18px;
+  cursor:pointer;border-left:4px solid transparent;
+  transition:all .15s;-webkit-tap-highlight-color:transparent;
+}
+.c-head:hover,.c-head.open{background:var(--bg);border-left-color:var(--burg)}
+.c-icon{
+  width:38px;height:38px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;
+}
+.c-title{font-size:17px;font-weight:700;color:var(--ink);flex:1}
+.c-sub{font-size:12px;color:var(--dim);font-weight:600;margin-top:2px}
+.c-arrow{font-size:12px;color:var(--dim);transition:transform .2s;flex-shrink:0}
+.c-head.open .c-arrow{transform:rotate(180deg)}
+.c-body{display:none;padding:4px 18px 20px;border-top:1px solid var(--border)}
+.c-body.open{display:block;animation:fadeUp .2s ease}
+.c-body p{font-size:16px;color:var(--ink2);line-height:1.85;margin-bottom:12px}
+.c-body p:last-child{margin-bottom:0}
+.c-body strong{color:var(--burg);font-weight:700}
+.c-body em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* ── CONTENT BLOCKS ───────────────────────────────────────────── */
+
+/* Amber fact box */
+.fact-box{
+  background:var(--amberPale);border:1.5px solid rgba(140,94,0,.20);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.fact-box .fb-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--amber);text-transform:uppercase;margin-bottom:8px;
+}
+.fact-box ul{list-style:none;padding:0}
+.fact-box li{
+  font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;
+  position:relative;line-height:1.7;
+}
+.fact-box li::before{content:'→';position:absolute;left:0;color:var(--amber);font-weight:700;font-size:13px}
+
+/* Green example box */
+.eg-box{
+  background:var(--greenPale);border-left:4px solid var(--green);
+  border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0;
+}
+.eg-box .eg-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--green);text-transform:uppercase;margin-bottom:6px;
+}
+.eg-box p{font-size:15px;color:var(--ink2);line-height:1.75}
+.eg-box ul{list-style:none;padding:0}
+.eg-box li{font-size:15px;color:var(--ink2);padding:4px 0 4px 18px;position:relative;line-height:1.65}
+.eg-box li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:800;font-size:12px}
+
+/* Red trap box */
+.trap-box{
+  background:var(--redPale);border:1.5px solid rgba(139,28,28,.20);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.trap-box .tr-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--red);text-transform:uppercase;margin-bottom:8px;
+}
+.trap-box p,.trap-box li{font-size:15.5px;color:var(--ink2);line-height:1.75}
+.trap-box ul{list-style:none;padding:0}
+.trap-box li{padding:5px 0 5px 22px;position:relative}
+.trap-box li::before{content:'⚑';position:absolute;left:0;font-size:12px;color:var(--red)}
+
+/* Slate rule box */
+.rule-box{
+  background:var(--slatePale);border:1.5px solid rgba(30,78,95,.18);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.rule-box .rl-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--slate);text-transform:uppercase;margin-bottom:8px;
+}
+.rule-box p{font-size:15.5px;color:var(--ink2);line-height:1.8}
+.rule-box strong{color:var(--slate)}
+
+/* Purple formula box */
+.formula-box{
+  background:var(--purplePale);border:1.5px solid rgba(92,42,142,.22);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.formula-box .fl-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--purple);text-transform:uppercase;margin-bottom:10px;
+}
+.formula-line{
+  font-family:'Lora',serif;font-size:18px;font-weight:700;
+  color:var(--purple);text-align:center;padding:8px 0;
+  letter-spacing:.5px;line-height:1.6;
+}
+.formula-note{font-size:14px;color:var(--ink2);line-height:1.7;margin-top:8px}
+.formula-note b{color:var(--purple)}
+
+/* Burgundy highlight box */
+.burg-box{
+  background:var(--burgPale);border:1.5px solid rgba(122,26,46,.16);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.burg-box .bl-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--burg);text-transform:uppercase;margin-bottom:8px;
+}
+.burg-box ul{list-style:none;padding:0}
+.burg-box li{font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;position:relative;line-height:1.8}
+.burg-box li::before{content:'◆';position:absolute;left:0;font-size:9px;color:var(--burg);top:10px}
+
+/* Rust analogy box */
+.analogy-box{
+  background:var(--rustPale);border-left:4px solid var(--rust);
+  border-radius:0 8px 8px 0;padding:14px 16px;margin:12px 0;
+}
+.analogy-box .an-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--rust);text-transform:uppercase;margin-bottom:6px;
+}
+.analogy-box p{font-size:15.5px;color:var(--ink2);line-height:1.75}
+
+/* Compare table */
+.compare-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
+.compare-table th{
+  background:var(--burg);color:#fff;
+  padding:10px 12px;text-align:left;
+  font-size:13px;font-weight:700;letter-spacing:.5px;
+}
+.compare-table td{
+  padding:10px 12px;border:1px solid var(--border);
+  color:var(--ink2);vertical-align:top;line-height:1.65;
+}
+.compare-table tr:nth-child(even) td{background:var(--bg)}
+.compare-table td b{color:var(--burg)}
+
+/* Mini property cards */
+.prop-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}
+.prop-card{
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:10px;padding:13px 14px;
+}
+.prop-card .pc-name{
+  font-size:13px;font-weight:800;color:var(--burg);
+  margin-bottom:4px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;
+}
+.prop-card .pc-tag{
+  font-size:10px;font-weight:700;color:var(--amber);
+  background:var(--amberPale);border-radius:4px;
+  padding:1px 7px;
+}
+.prop-card p{font-size:13.5px;color:var(--ink2);line-height:1.6}
+
+/* ── QUICK REFERENCE ──────────────────────────────────────────── */
+.ref-grid{display:grid;gap:10px;margin:8px 0}
+.ref-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);
+}
+.ref-card-title{
+  font-size:11px;font-weight:800;letter-spacing:2px;
+  text-transform:uppercase;color:var(--burg);
+  margin-bottom:10px;padding-bottom:8px;
+  border-bottom:1px solid var(--border);
+}
+.ref-card ul{list-style:none;padding:0}
+.ref-card li{
+  font-size:15px;color:var(--ink2);padding:5px 0 5px 16px;
+  position:relative;line-height:1.65;
+  border-bottom:1px solid var(--bg2);
+}
+.ref-card li:last-child{border-bottom:none}
+.ref-card li::before{content:'·';position:absolute;left:4px;color:var(--burg);font-weight:900;font-size:18px;line-height:1.3}
+.ref-card li b{color:var(--ink);font-weight:700}
+.ref-card li em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* ── QUIZ ─────────────────────────────────────────────────────── */
+.quiz-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:2px;background:var(--border);
+  border-radius:var(--radius);overflow:hidden;
+  margin-bottom:16px;box-shadow:var(--shadow);
+}
+.qs-cell{background:var(--white);padding:12px 8px;text-align:center}
+.qs-val{font-family:'Lora',serif;font-size:22px;font-weight:700;color:var(--burg);line-height:1}
+.qs-val.g{color:var(--green)}.qs-val.r{color:var(--red)}.qs-val.a{color:var(--amber)}
+.qs-lbl{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:1px;margin-top:4px;text-transform:uppercase}
+
+.prog-wrap{margin-bottom:20px}
+.prog-bar{height:6px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;background:var(--burg);border-radius:3px;transition:width .4s ease;width:0%}
+.prog-label{font-size:12px;color:var(--muted);font-weight:700;margin-bottom:6px}
+
+.q-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius);margin-bottom:12px;
+  box-shadow:var(--shadow);overflow:hidden;
+  border-left:4px solid transparent;transition:border-color .15s;
+}
+.q-card.answered{border-left-color:var(--burg)}
+.q-card.correct{border-left-color:var(--green)}
+.q-card.wrong{border-left-color:var(--red)}
+
+.q-meta{
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  padding:10px 16px;background:var(--bg);
+  border-bottom:1px solid var(--border);
+}
+.q-num{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:1px}
+.q-diff{font-size:10px;font-weight:800;padding:2px 10px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase}
+.diff-e{background:var(--greenPale);color:var(--green)}
+.diff-m{background:var(--amberPale);color:var(--amber)}
+.diff-h{background:var(--redPale);color:var(--red)}
+.q-exam{font-size:11px;color:var(--dim);margin-left:auto;font-weight:600}
+
+.q-body{padding:16px}
+.q-text{font-size:17px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-weight:600}
+
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{
+  background:var(--bg);border:1.5px solid var(--border);
+  border-radius:10px;padding:14px 16px;
+  cursor:pointer;display:flex;align-items:flex-start;gap:12px;
+  font-size:16px;color:var(--ink2);text-align:left;width:100%;
+  transition:all .15s;-webkit-tap-highlight-color:transparent;
+  min-height:48px;line-height:1.6;
+}
+.opt:hover:not(:disabled){border-color:var(--burg);background:var(--burgPale)}
+.opt:disabled{cursor:default}
+.opt.sel{border-color:var(--burg);background:var(--burgPale);color:var(--burg)}
+.opt.ok{border-color:var(--green)!important;background:var(--greenPale)!important;color:var(--green)!important}
+.opt.bad{border-color:var(--red)!important;background:var(--redPale)!important;color:var(--red)!important}
+
+.opt-lbl{
+  min-width:28px;height:28px;border-radius:8px;
+  background:var(--bg3);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:800;color:var(--muted);
+  flex-shrink:0;transition:all .15s;
+}
+.opt.sel .opt-lbl{background:var(--burg);color:#fff;border-color:var(--burg)}
+.opt.ok  .opt-lbl{background:var(--green)!important;color:#fff!important;border-color:var(--green)!important}
+.opt.bad .opt-lbl{background:var(--red)!important;color:#fff!important;border-color:var(--red)!important}
+
+.exp-panel{display:none;margin-top:14px;background:var(--bg);border-radius:10px;padding:14px 16px}
+.exp-panel.show{display:block;animation:fadeUp .2s ease}
+.exp-tag{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--burg);text-transform:uppercase;margin-bottom:6px}
+.exp-rule{font-size:13px;font-weight:800;color:var(--purple);background:var(--purplePale);border-radius:6px;padding:6px 10px;margin-bottom:10px}
+.exp-panel p{font-size:15px;color:var(--ink2);line-height:1.8}
+
+.q-foot{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 16px;background:var(--bg2);border-top:1px solid var(--border);
+}
+.q-status{font-size:12px;font-weight:700}
+
+.btn{
+  padding:14px 24px;border-radius:10px;font-size:14px;font-weight:800;
+  letter-spacing:.5px;border:none;cursor:pointer;transition:all .15s;
+  font-family:'Nunito',sans-serif;
+}
+.btn-primary{background:var(--burg);color:#fff;box-shadow:0 4px 14px rgba(122,26,46,.28)}
+.btn-primary:hover{background:var(--burgLt);transform:translateY(-1px)}
+.btn-ghost{background:var(--bg2);color:var(--ink2);border:1.5px solid var(--border)}
+.btn-ghost:hover{background:var(--bg3)}
+.btn-row{display:flex;gap:10px;justify-content:center;margin:16px 0}
+
+.res-hero{
+  background:linear-gradient(135deg,#3A0A16,#7A1A2E);
+  border-radius:var(--radius);
+  padding:28px 20px;text-align:center;color:#fff;margin-bottom:12px;
+}
+.res-score{font-family:'Lora',serif;font-size:72px;font-weight:700;line-height:1;color:#FFCF8A}
+.res-grade{font-size:18px;font-weight:800;margin:8px 0 6px;color:rgba(255,255,255,.92)}
+.res-msg{font-size:15px;color:rgba(255,255,255,.62);line-height:1.6}
+.res-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:2px;background:var(--border);border-radius:var(--radius);
+  overflow:hidden;margin-bottom:12px;
+}
+
+@media(max-width:400px){
+  .hero{padding:22px 16px 20px}
+  .hero-title{font-size:22px}
+  .tab{padding:12px 13px;font-size:11px}
+  .q-text{font-size:16px}
+  .opt{font-size:15px;padding:12px 14px}
+  .prop-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── HERO ── -->
+  <div class="hero">
+    <div class="hero-kicker">Olive Defence · Physics · P05</div>
+    <div class="hero-title">Properties<br><span>of Matter</span></div>
+    <div class="hero-sub">Elasticity · Pressure · Fluid Statics · Surface Tension · Viscosity — complete CDS · NDA · AFCAT coverage</div>
+    <div class="hero-chips">
+      <span class="chip chip-w">⚡ CDS</span>
+      <span class="chip chip-y">🛡 NDA</span>
+      <span class="chip chip-g">✈ AFCAT</span>
+      <span class="chip chip-w">Physics · P05</span>
+    </div>
+  </div>
+
+  <!-- ── TAB BAR ── -->
+  <div class="tab-bar">
+    <button class="tab on" onclick="switchTab('theory')">📖 Theory</button>
+    <button class="tab" onclick="switchTab('quickref')">⚡ Quick Ref</button>
+    <button class="tab" onclick="switchTab('quiz')">🎯 Quiz</button>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       PANE 1 — THEORY
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="pane on" id="theory">
+
+    <div class="intro-box">
+      <p>Properties of Matter is a <strong>high-yield chapter</strong> across all three exams. Questions focus on Pascal's law, Archimedes' principle, Bernoulli's theorem, surface tension phenomena, viscosity, Hooke's law, and specific real-world applications. Expect 3–6 questions per paper combining conceptual and numerical approaches.</p>
+    </div>
+
+    <!-- ══ SECTION 1: ELASTICITY ══ -->
+    <div class="sec-label">Section 1 — Elasticity &amp; Hooke's Law</div>
+
+    <div class="c-card">
+      <div class="c-head" onclick="tog(this)">
+        <div class="c-icon" style="background:#F8ECEE">🔩</div>
+        <div style="flex:1">
+          <div class="c-title">Elasticity, Stress &amp; Strain</div>
+          <div class="c-sub">How materials deform — and spring back</div>
+        </div>
+        <span class="c-arrow">▾</span>
+      </div>
+      <div class="c-body">
+        <p><strong>Elasticity</strong> is the property of a material by virtue of which it tends to <strong>regain its original shape and size</strong> after the deforming force is removed. If it cannot, it is called <strong>plastic</strong>.</p>
+
+        <div class="formula-box">
+          <div class="fl-label">Hooke's Law &amp; Key Definitions</div>
+          <div class="formula-line">Stress = Force / Area &nbsp;·&nbsp; Strain = Change / Original</div>
+          <div class="formula-note">
+            <b>Hooke's Law:</b> Within the elastic limit, Stress ∝ Strain → Stress / Strain = Modulus of Elasticity (constant)<br><br>
+            <b>Young's Modulus (Y):</b> Longitudinal stress / longitudinal strain &nbsp;·&nbsp; unit: N/m² (Pa)<br>
+            <b>Bulk Modulus (B):</b> Volumetric stress / volumetric strain (liquids &amp; solids)<br>
+            <b>Modulus of Rigidity (G):</b> Shear stress / shear strain (solids only)
+          </div>
+        </div>
+
+        <div class="fact-box">
+          <div class="fb-label">Key Definitions — Frequently Tested</div>
+          <ul>
+            <li><strong>Elastic limit</strong> — maximum stress beyond which a material does not return to its original shape (permanent deformation begins)</li>
+            <li><strong>Yield point</strong> — stress at which material starts to deform plastically without further increase in load</li>
+            <li><strong>Breaking stress (Ultimate stress)</strong> — maximum stress a material can withstand before breaking</li>
+            <li><strong>Ductile materials</strong> — large plastic deformation before breaking (e.g., copper, mild steel)</li>
+            <li><strong>Brittle materials</strong> — little or no plastic deformation before breaking (e.g., glass, cast iron)</li>
+            <li><strong>Steel is more elastic than rubber</strong> — steel returns to shape with less deformation for the same stress</li>
+          </ul>
+        </div>
+
+        <div class="trap-box">
+          <div class="tr-label">⚑ Classic Exam Trap</div>
+          <ul>
+            <li><strong>Steel is MORE elastic than rubber</strong> — NOT less. Elasticity = ability to resist deformation and return to original shape. Steel has a much higher Young's modulus and returns to shape more precisely. Rubber stretches a lot, which seems "elastic" in everyday language, but physically it is LESS elastic.</li>
+            <li>Stress is force per unit area (like pressure); Strain is dimensionless (a pure ratio)</li>
+          </ul>
+        </div>
+
+        <div class="eg-box">
+          <div class="eg-label">Practical Example</div>
+          <p>Bridges and buildings use steel beams precisely because steel has a high Young's modulus — it does not deform significantly under large loads. Rubber bands, despite their large deformation, have low Young's modulus and are physically less elastic.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ SECTION 2: PRESSURE ══ -->
+    <div class="sec-label">Section 2 — Pressure in Fluids</div>
+
+    <div class="c-card">
+      <div class="c-head" onclick="tog(this)">
+        <div class="c-icon" style="background:#E6F2F5">🌊</div>
+        <div style="flex:1">
+          <div class="c-title">Pressure — Definition &amp; Fluid Pressure</div>
+          <div class="c-sub">How pressure works in liquids and gases</div>
+        </div>
+        <span class="c-arrow">▾</span>
+      </div>
+      <div class="c-body">
+        <p><strong>Pressure</strong> is defined as the force exerted per unit area. In a fluid (liquid or gas), pressure acts in <strong>all directions equally</strong> at a given depth.</p>
+
+        <div class="formula-box">
+          <div class="fl-label">Pressure Formulas</div>
+          <div class="formula-line">P = F/A &nbsp;&nbsp;·&nbsp;&nbsp; P = ρgh</div>
+          <div class="formula-note">
+            <b>P</b> = Pressure (Pa = N/m²) &nbsp;·&nbsp; <b>F</b> = Force (N) &nbsp;·&nbsp; <b>A</b> = Area (m²)<br>
+            <b>ρ</b> = density of fluid (kg/m³) &nbsp;·&nbsp; <b>g</b> = 9.8 m/s² &nbsp;·&nbsp; <b>h</b> = depth (m)<br><br>
+            Fluid pressure <b>depends only on depth</b>, not on the shape or volume of the container.
+          </div>
+        </div>
+
+        <div class="fact-box">
+          <div class="fb-label">Key Properties of Fluid Pressure</div>
+          <ul>
+            <li>Pressure at a point in a fluid acts <strong>equally in all directions</strong> (Pascal's property)</li>
+            <li>Pressure increases with <strong>depth</strong> — deeper → greater pressure</li>
+            <li>Pressure depends on <strong>density</strong> of the fluid — denser fluid → more pressure at same depth</li>
+            <li>Pressure is <strong>independent of the shape</strong> of the container (Hydrostatic paradox)</li>
+            <li>At the same horizontal level in a connected fluid, pressure is <strong>equal everywhere</strong></li>
+            <li>SI unit: <strong>Pascal (Pa)</strong> = 1 N/m² &nbsp;·&nbsp; Also: 1 atm = 101,325 Pa ≈ 10⁵ Pa</li>
+          </ul>
+        </div>
+
+        <div class="analogy-box">
+          <div class="an-label">Hydrostatic Paradox</div>
+          <p>A narrow tall vase and a wide shallow bowl filled to the same height with water exert the <strong>same pressure at the bottom</strong> (P = ρgh — shape doesn't matter). But the <em>total force</em> on the wide bowl's base is greater because its area is larger. This is the "hydrostatic paradox."</p>
+        </div>
+
+        <div class="trap-box">
+          <div class="tr-label">⚑ Pressure vs Force — Exam Trap</div>
+          <ul>
+            <li>Pressure = F/A — a <strong>sharp knife</strong> cuts more easily (same force, tiny area → huge pressure)</li>
+            <li>Camel walks on sand without sinking — large foot area → low pressure per unit area</li>
+            <li>A woman in high heels exerts more pressure than an elephant — her heel area is tiny</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-card">
+      <div class="c-head" onclick="tog(this)">
+        <div class="c-icon" style="background:#F8ECEE">⚖️</div>
+        <div style="flex:1">
+          <div class="c-title">Pascal's Law</div>
+          <div class="c-sub">Hydraulic machines — force multiplication principle</div>
+        </div>
+        <span class="c-arrow">▾</span>
+      </div>
+      <div class="c-body">
+        <p><strong>Pascal's Law</strong> states that pressure applied to an <strong>enclosed fluid is transmitted equally and undiminished</strong> in all directions throughout the fluid.</p>
+
+        <div class="rule-box">
+          <div class="rl-label">Pascal's Law — Statement</div>
+          <p><strong>"A change in pressure applied to an enclosed fluid is transmitted without diminishment to all portions of the fluid and to the walls of the container."</strong><br><br>
+          This means if you press on one part of an enclosed liquid, the pressure increases by the same amount everywhere in the liquid.</p>
+        </div>
+
+        <div class="formula-box">
+          <div class="fl-label">Hydraulic Machine (Pascal's Law Applied)</div>
+          <div class="formula-line">F₁/A₁ = F₂/A₂ &nbsp;→&nbsp; F₂ = F₁ × (A₂/A₁)</div>
+          <div class="formula-note">
+            A small force F₁ on a small piston (area A₁) creates pressure P = F₁/A₁.<br>
+            This same pressure acts on a large piston (area A₂), producing a <b>large force F₂</b>.<br>
+            <b>Force is multiplied</b> — but note: work input = work output (energy conservation). The large piston moves a shorter distance.
+          </div>
+        </div>
+
+        <div class="burg-box">
+          <div class="bl-label">Applications of Pascal's Law — All Tested</div>
+          <ul>
+            <li><strong>Hydraulic lift / jack</strong> — used in service stations to lift cars and heavy vehicles</li>
+            <li><strong>Hydraulic press</strong> — used in industries to compress, stamp, and shape metal</li>
+            <li><strong>Hydraulic brakes</strong> — in vehicles; pressing brake pedal transmits pressure to all four wheels equally</li>
+            <li><strong>Hydraulic crane</strong> — construction machinery</li>
+            <li><strong>Dental chair, barber chair</strong> — height adjusted using hydraulic system</li>
+          </ul>
+        </div>
+
+        <div class="trap-box">
+          <div class="tr-label">⚑ Exam Trap — Pascal's Law</div>
+          <ul>
+            <li>Pascal's law multiplies <strong>force</strong>, NOT energy or work. Work done by both pistons is equal (energy is conserved). What you gain in force, you lose in distance.</li>
+            <li>The law applies only to <strong>enclosed, incompressible fluids</strong> (liquids, not gases, for practical machines)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-card">
+      <div class="c-head" onclick="tog(this)">
+        <div class="c-icon" style="background:#E6F2F5">🚢</div>
+        <div style="flex:1">
+          <div class="c-title">Archimedes' Principle &amp; Buoyancy</div>
+          <div class="c-sub">Why ships float and why objects feel lighter in water</div>
+        </div>
+        <span class="c-arrow">▾</span>
+      </div>
+      <div class="c-body">
+        <p><strong>Archimedes' Principle:</strong> When a body is wholly or partially immersed in a fluid, it experiences an <strong>upward buoyant force</strong> equal to the <strong>weight of the fluid displaced</strong> by it.</p>
+
+        <div class="formula-box">
+          <div class="fl-label">Buoyant Force</div>
+          <div class="formula-line">F_b = ρ_fluid × V_submerged × g</div>
+          <div class="formula-note">
+            <b>F_b</b> = buoyant force (upthrust) &nbsp;·&nbsp; <b>ρ_fluid</b> = density of fluid<br>
+            <b>V_submerged</b> = volume of body submerged in fluid &nbsp;·&nbsp; <b>g</b> = 9.8 m/s²<br><br>
+            <b>Law of Floatation:</b> A body floats when the buoyant force = weight of the body.<br>
+            This means: <b>ρ_body × V_body × g = ρ_fluid × V_submerged × g</b>
+          </div>
+        </div>
+
+        <div style="overflow-x:auto">
+          <table class="compare-table">
+            <tr><th>Condition</th><th>Relationship</th><th>Result</th></tr>
+            <tr><td><b>ρ_body &lt; ρ_fluid</b></td><td>Buoyant force &gt; Weight</td><td>Body <b>floats</b> (partially submerged)</td></tr>
+            <tr><td><b>ρ_body = ρ_fluid</b></td><td>Buoyant force = Weight</td><td>Body <b>remains suspended</b> anywhere in fluid</td></tr>
+            <tr><td><b>ρ_body &gt; ρ_fluid</b></td><td>Buoyant force &lt; Weight</td><td>Body <b>sinks</b></td></tr>
+          </table>
+        </div>
+
+        <div class="eg-box">
+          <div class="eg-label">Real-World Applications</div>
+          <ul>
+            <li><strong>Ships float</strong> despite being made of steel — the hollow interior means average density is less than water</li>
+            <li><strong>Icebergs</strong> — approximately 1/9 of an iceberg is visible above water (density of ice ≈ 0.9 × density of water)</li>
+            <li><strong>Submarines</strong> — use ballast tanks; fill with water to sink, expel water to rise</li>
+            <li><strong>Hydrometer</strong> — measures density/relative density of liquids using Archimedes' principle</li>
+            <li><strong>Hot air balloon</strong> — hot air inside is less dense; average density &lt; surrounding air → buoyant force &gt; weight → rises</li>
+            <li><strong>Apparent weight</strong> in water = actual weight − buoyant force (objects feel lighter)</li>
+          </ul>
+        </div>
+
+        <div class="fact-box">
+          <div class="fb-label">Relative Density (Specific Gravity)</div>
+          <ul>
+            <li><strong>Relative Density (RD)</strong> = Density of substance / Density of water = Weight in air / Loss of weight in water</li>
+            <li>Water has RD = 1 &nbsp;·&nbsp; Ice: 0.9 &nbsp;·&nbsp; Mercury: 13.6 &nbsp;·&nbsp; Aluminium: 2.7 &nbsp;·&nbsp; Iron: 7.8</li>
+            <li>Relative Density is a <strong>pure number</strong> — no units</li>
+          </ul>
+        </div>
+
+        <div class="trap-box">
+          <div class="tr-label">⚑ Exam Traps — Archimedes</div>
+          <ul>
+            <li>Buoyant force depends on the <strong>volume submerged</strong> and the <strong>fluid density</strong> — NOT on the weight or density of the object itself</li>
+            <li>An ice cube floating in a glass of water — when it melts, the water level <strong>stays the same</strong> (ice displaces exactly its own weight of water, and melted water has the same mass)</li>
+            <li>Dead Sea is extremely salty (dense) → humans float easily without effort</li>
+            <li>A body weighs least in mercury (densest common liquid) — largest buoyant force</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ SECTION 3: BERNOULLI ══ -->
+    <div class="sec-label">Section 3 — Fluid Dynamics &amp; Bernoulli's Theorem</div>
+
+    <div class="c-card">
+      <div class="c-head" onclick="tog(this)">
+        <div class="c-icon" style="background:#F2EDFB">✈️</div>
+        <div style="flex:1">
+          <div class="c-title">Bernoulli's Theorem</div>
+          <div class="c-sub">Why faster-moving fluid has lower pressure — and how planes fly</div>
+        </div>
+        <span class="c-arrow">▾</span>
+      </div>
+      <div class="c-body">
+        <p><strong>Bernoulli's Theorem</strong> states that for an ideal, incompressible fluid in steady flow, the total energy per unit volume (sum of pressure energy, kinetic energy, and potential energy) remains <strong>constant</strong> along a streamline.</p>
+
+        <div class="formula-box">
+          <div class="fl-label">Bernoulli's Equation</div>
+          <div class="formula-line">P + ½ρv² + ρgh = constant</div>
+          <div class="formula-note">
+            <b>P</b> = pressure &nbsp;·&nbsp; <b>½ρv²</b> = kinetic energy per unit volume &nbsp;·&nbsp; <b>ρgh</b> = potential energy per unit volume<br><br>
+            <b>Key implication:</b> Where velocity is <b>high</b>, pressure is <b>low</b> — and vice versa.<br>
+            This is an expression of conservation of energy for fluid flow.
+          </div>
+        </div>
+
+        <div class="burg-box">
+          <div class="bl-label">Applications of Bernoulli's Theorem — Most Tested</div>
+          <ul>
+            <li><strong>Aerofoil / Aeroplane wing</strong> — curved upper surface → air flows faster over the top → lower pressure above wing → net upward lift force (aerodynamic lift)</li>
+            <li><strong>Venturimeter</strong> — device to measure flow speed of a fluid in a pipe; narrowed section increases velocity → decreased pressure (pressure difference measured)</li>
+            <li><strong>Carburetor</strong> — in petrol engines; fast-moving air creates low pressure that draws in petrol vapour</li>
+            <li><strong>Atomiser / Sprayer / Perfume spray</strong> — fast air over a tube creates low pressure → liquid drawn up and sprayed</li>
+            <li><strong>Bunsen burner</strong> — fast gas flow draws in air for combustion</li>
+            <li><strong>Curve ball in cricket/baseball</strong> — spinning ball creates unequal air speeds on two sides → pressure difference → ball curves (Magnus effect, related to Bernoulli)</li>
+            <li><strong>Blowing between two sheets of paper</strong> — they come together (low pressure between them)</li>
+          </ul>
+        </div>
+
+        <div class="analogy-box">
+          <div class="an-label">Think of it this way</div>
+          <p>Imagine water flowing through a garden hose that narrows at the nozzle. At the narrow part, water must flow faster (same amount must pass through a smaller area). That faster-moving water has lower pressure — which is why the spray at the nozzle is powerful but doesn't "push back" on the hose walls much.</p>
+        </div>
+
+        <div class="trap-box">
+          <div class="tr-label">⚑ Exam Traps — Bernoulli</div>
+          <ul>
+            <li>Bernoulli's theorem is valid for <strong>ideal (non-viscous), incompressible, steady (streamline) flow</strong> only</li>
+            <li>Higher velocity → <strong>lower</strong> pressure (many students get this backwards)</li>
+            <li>Aeroplane lift is due to <strong>pressure difference</strong> (Bernoulli), NOT because air "pushes up" on the flat bottom</li>
+            <li>Continuity equation (A₁v₁ = A₂v₂) is related — narrower pipe → higher velocity</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ SECTION 4: SURFACE TENSION ══ -->
+    <div class="sec-label">Section 4 — Surface Tension &amp; Capillarity</div>
+
+    <div class="c-card">
+      <div class="c-head" onclick="tog(this)">
+        <div class="c-icon" style="background:#E6F5EC">💧</div>
+        <div style="flex:1">
+          <div class="c-title">Surface Tension</div>
+          <div class="c-sub">Why water forms droplets and insects walk on water</div>
+        </div>
+        <span class="c-arrow">▾</span>
+      </div>
+      <div class="c-body">
+        <p><strong>Surface tension</strong> is the tendency of the free surface of a liquid to <strong>contract to the minimum possible area</strong>, behaving like a stretched elastic membrane. It arises due to <strong>intermolecular attractive forces</strong> (cohesion) among liquid molecules.</p>
+
+        <div class="formula-box">
+          <div class="fl-label">Surface Tension Definition</div>
+          <div class="formula-line">T = F / L</div>
+          <div class="formula-note">
+            <b>T</b> = surface tension (N/m) &nbsp;·&nbsp; <b>F</b> = force acting along the surface &nbsp;·&nbsp; <b>L</b> = length of the liquid surface<br>
+            Also defined as: <b>T = Surface energy / Area</b> (J/m²)<br>
+            Surface tension decreases with <b>increasing temperature</b> (except for molten copper and cadmium).
+          </div>
+        </div>
+
+        <div class="fact-box">
+          <div class="fb-label">Factors Affecting Surface Tension</div>
+          <ul>
+            <li><strong>Temperature increases</strong> → surface tension <strong>decreases</strong> (molecules have more energy, cohesion weakens)</li>
+            <li><strong>Adding soap / detergent</strong> → surface tension <strong>decreases</strong> significantly (surfactants disrupt cohesion)</li>
+            <li><strong>Adding salt to water</strong> → surface tension slightly <strong>increases</strong></li>
+            <li><strong>Contamination / impurities</strong> → generally decreases surface tension</li>
+            <li>At <strong>critical temperature</strong> of a liquid → surface tension becomes <strong>zero</strong></li>
+          </ul>
+        </div>
+
+        <div class="eg-box">
+          <div class="eg-label">Phenomena Due to Surface Tension</div>
+          <ul>
+            <li>Water droplets are <strong>spherical</strong> — sphere has minimum surface area for a given volume</li>
+            <li><strong>Insects walk on water</strong> (e.g., water strider) — their weight is supported by surface tension</li>
+            <li><strong>Needle floats</strong> on water if placed gently — steel is denser than water but surface tension supports it</li>
+            <li><strong>Soap bubbles</strong> are spherical and last for a while</li>
+            <li><strong>Camphor dances</strong> on water — camphor dissolves unevenly, reducing surface tension on one side, pulling the camphor</li>
+            <li>Oil spreads on water — oil has lower surface tension than water</li>
+            <li>Hot water washes better than cold — lower surface tension means better wetting</li>
+          </ul>
+        </div>
+
+        <div class="analogy-box">
+          <div class="an-label">Why Soap Reduces Surface Tension</div>
+          <p>Soap molecules have a hydrophilic head (attracted to water) and a hydrophobic tail (repelled by water). They sit at the water surface with tails sticking out, disrupting the cohesive bonds between water molecules and dramatically lowering surface tension. This makes soapy water spread and penetrate fabric much better — which is why soap cleans clothes.</p>
+        </div>
+
+        <div class="trap-box">
+          <div class="tr-label">⚑ Exam Traps — Surface Tension</div>
+          <ul>
+            <li>Surface tension decreases with temperature — hot water has <strong>lower</strong> surface tension than cold water</li>
+            <li>Soap <strong>decreases</strong> surface tension — that's why soap bubbles are possible (they need the surface to stretch) and why soap is a good cleaner</li>
+            <li>A soap bubble has <strong>two</strong> surfaces (inner + outer) — excess pressure inside = 4T/r. A liquid drop has one surface — excess pressure = 2T/r</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-card">
+      <div class="c-head" onclick="tog(this)">
+        <div class="c-icon" style="background:#F8ECEE">🌿</div>
+        <div style="flex:1">
+          <div class="c-title">Capillarity (Capillary Action)</div>
+          <div class="c-sub">How water rises in thin tubes — and in plants</div>
+        </div>
+        <span class="c-arrow">▾</span>
+      </div>
+      <div class="c-body">
+        <p><strong>Capillarity</strong> (or capillary action) is the rise or fall of a liquid in a narrow tube (capillary) due to the combined effects of <strong>adhesion</strong> (liquid–solid attraction) and <strong>cohesion</strong> (liquid–liquid attraction) and surface tension.</p>
+
+        <div class="formula-box">
+          <div class="fl-label">Capillary Rise Formula</div>
+          <div class="formula-line">h = 2T cos θ / (ρgr)</div>
+          <div class="formula-note">
+            <b>h</b> = height of rise &nbsp;·&nbsp; <b>T</b> = surface tension &nbsp;·&nbsp; <b>θ</b> = contact angle<br>
+            <b>ρ</b> = density of liquid &nbsp;·&nbsp; <b>g</b> = gravitational acceleration &nbsp;·&nbsp; <b>r</b> = radius of capillary tube<br><br>
+            <b>h ∝ 1/r</b> — narrower tube → greater capillary rise
+          </div>
+        </div>
+
+        <div class="prop-grid">
+          <div class="prop-card">
+            <div class="pc-name">Water in Glass <span class="pc-tag">Rises</span></div>
+            <p>Water wets glass (adhesion &gt; cohesion). Contact angle &lt; 90°. Meniscus is concave. Liquid <strong>rises</strong> in capillary.</p>
+          </div>
+          <div class="prop-card">
+            <div class="pc-name">Mercury in Glass <span class="pc-tag">Falls</span></div>
+            <p>Mercury does NOT wet glass (cohesion &gt; adhesion). Contact angle &gt; 90°. Meniscus is convex. Liquid <strong>falls</strong> in capillary.</p>
+          </div>
+        </div>
+
+        <div class="eg-box">
+          <div class="eg-label">Applications of Capillarity</div>
+          <ul>
+            <li><strong>Water transport in plants</strong> — water moves up from roots to leaves through narrow xylem tubes via capillary action</li>
+            <li><strong>Blotting paper / sponge</strong> — soaks up water through tiny capillary spaces</li>
+            <li><strong>Oil lamp / candle wick</strong> — oil / wax rises up the wick to the flame</li>
+            <li><strong>Towel drying</strong> — absorbs water through capillary spaces in fabric fibres</li>
+            <li><strong>Ink in fountain pen</strong> — capillary action draws ink to the nib</li>
+            <li><strong>Soil moisture</strong> — water rises from deep soil to surface through capillary action in soil particles</li>
+          </ul>
+        </div>
+
+        <div class="trap-box">
+          <div class="tr-label">⚑ Mercury Falls — Exam Trap</div>
+          <p>Mercury falls in a glass capillary (unlike water which rises) because mercury's cohesion is stronger than its adhesion to glass. The contact angle for mercury–glass is about 140°, so cos θ is negative → the height formula gives a negative value → liquid level is <strong>depressed</strong> below the outside level.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ SECTION 5: VISCOSITY ══ -->
+    <div class="sec-label">Section 5 — Viscosity</div>
+
+    <div class="c-card">
+      <div class="c-head" onclick="tog(this)">
+        <div class="c-icon" style="background:#FDF4DC">🫙</div>
+        <div style="flex:1">
+          <div class="c-title">Viscosity &amp; Stokes' Law</div>
+          <div class="c-sub">Internal friction of fluids — why honey flows slower than water</div>
+        </div>
+        <span class="c-arrow">▾</span>
+      </div>
+      <div class="c-body">
+        <p><strong>Viscosity</strong> is the property of a fluid that opposes relative motion between its layers — it is the <strong>internal friction</strong> of a fluid. Honey is more viscous than water; water is more viscous than air.</p>
+
+        <div class="formula-box">
+          <div class="fl-label">Viscous Force (Newton's Law of Viscosity) &amp; Stokes' Law</div>
+          <div class="formula-line">F = ηA(dv/dx) &nbsp;&nbsp;·&nbsp;&nbsp; F_stokes = 6πηrv</div>
+          <div class="formula-note">
+            <b>η</b> (eta) = coefficient of viscosity (Pa·s or Poise) &nbsp;·&nbsp; 1 Poise = 0.1 Pa·s<br>
+            <b>dv/dx</b> = velocity gradient between layers<br>
+            <b>Stokes' Law:</b> viscous drag on a sphere of radius r moving at speed v through fluid of viscosity η<br>
+            <b>Terminal velocity:</b> when drag force + buoyancy = weight → v_t = 2r²(ρ−σ)g / 9η
+          </div>
+        </div>
+
+        <div class="fact-box">
+          <div class="fb-label">Effect of Temperature on Viscosity</div>
+          <ul>
+            <li><strong>Liquids</strong> — viscosity <strong>DECREASES</strong> with temperature (honey flows more easily when warm)</li>
+            <li><strong>Gases</strong> — viscosity <strong>INCREASES</strong> with temperature (gas molecules move faster, more intermolecular collisions)</li>
+            <li>This is the <strong>opposite behaviour</strong> — a key exam comparison</li>
+            <li>Unit of viscosity: <strong>Poise (CGS)</strong> or <strong>Pa·s (SI)</strong> &nbsp;·&nbsp; 1 Pa·s = 10 Poise</li>
+          </ul>
+        </div>
+
+        <div class="eg-box">
+          <div class="eg-label">Terminal Velocity — Concept</div>
+          <p>When a raindrop (or any sphere) falls through air, it accelerates until the <strong>viscous drag + buoyancy = weight</strong>. At this point, net force = 0 and velocity becomes constant — called <strong>terminal velocity</strong>. Larger drops reach higher terminal velocities. This is why raindrops fall at a steady speed rather than accelerating forever.</p>
+        </div>
+
+        <div class="trap-box">
+          <div class="tr-label">⚑ Liquid vs Gas Viscosity with Temperature</div>
+          <ul>
+            <li><strong>Liquid viscosity decreases</strong> with temperature (cooking oil becomes runnier when heated)</li>
+            <li><strong>Gas viscosity increases</strong> with temperature (opposite of liquids)</li>
+            <li>This distinction is a DIRECT exam question in CDS/NDA/AFCAT — do not confuse the two</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ SECTION 6: STATES / DENSITY ══ -->
+    <div class="sec-label">Section 6 — Density, States of Matter &amp; Thermal Expansion</div>
+
+    <div class="c-card">
+      <div class="c-head" onclick="tog(this)">
+        <div class="c-icon" style="background:#E6F2F5">🧊</div>
+        <div style="flex:1">
+          <div class="c-title">Density, Specific Gravity &amp; States of Matter</div>
+          <div class="c-sub">Key densities, anomalous expansion of water, and matter properties</div>
+        </div>
+        <span class="c-arrow">▾</span>
+      </div>
+      <div class="c-body">
+        <div class="formula-box">
+          <div class="fl-label">Density &amp; Relative Density</div>
+          <div class="formula-line">ρ = m / V &nbsp;&nbsp;·&nbsp;&nbsp; RD = ρ_substance / ρ_water</div>
+          <div class="formula-note">
+            <b>ρ</b> = density (kg/m³) &nbsp;·&nbsp; SI unit: kg/m³ &nbsp;·&nbsp; CGS unit: g/cm³<br>
+            <b>RD</b> = Relative Density (no units) &nbsp;·&nbsp; Water density = 1000 kg/m³ = 1 g/cm³<br>
+            RD numerically equals density in g/cm³.
+          </div>
+        </div>
+
+        <div class="fact-box">
+          <div class="fb-label">Important Densities — Frequently Tested</div>
+          <ul>
+            <li><strong>Water</strong> — 1000 kg/m³ (1 g/cm³) &nbsp;·&nbsp; maximum density at <strong>4°C</strong></li>
+            <li><strong>Ice</strong> — 900 kg/m³ (less than water → floats)</li>
+            <li><strong>Mercury</strong> — 13,600 kg/m³ (13.6 g/cm³) — densest common liquid</li>
+            <li><strong>Air</strong> — ≈ 1.2 kg/m³ &nbsp;·&nbsp; <strong>Steel</strong> — ≈ 7800 kg/m³ &nbsp;·&nbsp; <strong>Gold</strong> — ≈ 19,300 kg/m³</li>
+            <li><strong>Osmium</strong> — densest known element ≈ 22,590 kg/m³</li>
+          </ul>
+        </div>
+
+        <div class="rule-box">
+          <div class="rl-label">Anomalous Expansion of Water — Critical Concept</div>
+          <p>Water has a unique property: it <strong>expands on cooling below 4°C</strong> (instead of contracting like most substances). Water has its <strong>maximum density at 4°C</strong>. Below 4°C, it expands; at 0°C it freezes and ice forms with even lower density (floats on water).</p>
+          <p style="margin-top:10px"><strong>Why this matters:</strong> In winter, lakes freeze from the <strong>top down</strong>, not the bottom up. The ice layer at the top insulates the water below, allowing aquatic life to survive. If water behaved normally (denser when colder), water would sink to the bottom and freeze from the bottom up — killing all aquatic life.</p>
+        </div>
+
+        <div class="trap-box">
+          <div class="tr-label">⚑ Anomalous Expansion — Exam Trap</div>
+          <ul>
+            <li>Water is densest at <strong>4°C</strong>, not 0°C. At 0°C it is ice with lower density.</li>
+            <li>Ice floats because it is <strong>less dense</strong> than liquid water — not because it is lighter in some other sense</li>
+            <li>Pipes burst in winter because water <strong>expands</strong> when it freezes (unusual for a solid)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-card">
+      <div class="c-head" onclick="tog(this)">
+        <div class="c-icon" style="background:#F8ECEE">🌡️</div>
+        <div style="flex:1">
+          <div class="c-title">Thermal Expansion</div>
+          <div class="c-sub">How solids, liquids, and gases expand with heat</div>
+        </div>
+        <span class="c-arrow">▾</span>
+      </div>
+      <div class="c-body">
+        <p>Almost all materials <strong>expand on heating</strong> and contract on cooling. The degree of expansion differs between solids, liquids, and gases.</p>
+
+        <div class="formula-box">
+          <div class="fl-label">Expansion Formulas</div>
+          <div class="formula-line">ΔL = αLΔT &nbsp;·&nbsp; ΔA = βAΔT &nbsp;·&nbsp; ΔV = γVΔT</div>
+          <div class="formula-note">
+            <b>α</b> = coefficient of linear expansion &nbsp;·&nbsp; <b>β</b> = coefficient of areal expansion &nbsp;·&nbsp; <b>γ</b> = coefficient of volumetric expansion<br>
+            <b>Relationship:</b> β = 2α &nbsp;·&nbsp; γ = 3α<br>
+            For gases at constant pressure: <b>V ∝ T</b> (Charles' Law) — much larger expansion than solids/liquids
+          </div>
+        </div>
+
+        <div class="burg-box">
+          <div class="bl-label">Applications of Thermal Expansion</div>
+          <ul>
+            <li><strong>Railway tracks</strong> — gaps left between sections to allow for expansion in summer (no gaps → tracks buckle)</li>
+            <li><strong>Bimetallic strip</strong> — two metals bonded together; different expansion rates cause bending on heating → used in thermostats, fire alarms, circuit breakers</li>
+            <li><strong>Pendulum clock runs slow</strong> in summer — rod expands, pendulum becomes longer, time period increases (T = 2π√(L/g))</li>
+            <li><strong>Rivets</strong> — heated and inserted; as they cool and contract, they clamp parts together tightly</li>
+            <li><strong>Glass jars</strong> — run hot water over a stuck metal lid; metal expands faster than glass → lid loosens</li>
+            <li><strong>Invar</strong> — alloy with very low coefficient of expansion, used in precision instruments and watches</li>
+            <li><strong>Tyres burst</strong> in summer — gas inside expands; if pressure is already high, tyre may burst (Charles' Law)</li>
+          </ul>
+        </div>
+
+        <div class="trap-box">
+          <div class="tr-label">⚑ Pendulum Clock in Summer — Exam Trap</div>
+          <ul>
+            <li>In summer, a pendulum clock <strong>runs slow</strong> (loses time) — the rod expands, making the pendulum longer, increasing time period</li>
+            <li>In winter, it <strong>runs fast</strong> (gains time) — rod contracts, shorter pendulum, shorter time period</li>
+            <li>γ = 3α (volumetric = 3 × linear) — a basic but frequently tested relationship</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end theory pane -->
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       PANE 2 — QUICK REF
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="pane" id="quickref">
+
+    <div class="sec-label">All Key Formulas</div>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <div class="ref-card-title">Properties of Matter — Master Formula Sheet</div>
+        <ul>
+          <li><b>Pressure:</b> P = F/A &nbsp;·&nbsp; Fluid: P = ρgh &nbsp;·&nbsp; Unit: <em>Pascal (Pa)</em></li>
+          <li><b>Pascal's Law (Hydraulic):</b> F₁/A₁ = F₂/A₂</li>
+          <li><b>Buoyant Force:</b> F_b = ρ_fluid × V_submerged × g</li>
+          <li><b>Relative Density:</b> RD = ρ_substance / ρ_water (no units)</li>
+          <li><b>Bernoulli:</b> P + ½ρv² + ρgh = constant</li>
+          <li><b>Continuity:</b> A₁v₁ = A₂v₂</li>
+          <li><b>Surface Tension:</b> T = F/L (N/m)</li>
+          <li><b>Capillary Rise:</b> h = 2T cosθ / ρgr</li>
+          <li><b>Viscous Force:</b> F = ηA(dv/dx)</li>
+          <li><b>Stokes' Law:</b> F = 6πηrv</li>
+          <li><b>Terminal Velocity:</b> v_t = 2r²(ρ−σ)g / 9η</li>
+          <li><b>Hooke's Law:</b> Stress ∝ Strain (within elastic limit)</li>
+          <li><b>Linear Expansion:</b> ΔL = αLΔT &nbsp;·&nbsp; γ = 3α</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sec-label">Pressure &amp; Pascal's Law</div>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <div class="ref-card-title">Key Pressure Facts</div>
+        <ul>
+          <li><b>1 atm</b> = 101,325 Pa ≈ <em>10⁵ Pa</em></li>
+          <li>Pressure at depth h: P = ρgh (independent of shape)</li>
+          <li>Pascal's Law: pressure transmitted <em>equally</em> in all directions in enclosed fluid</li>
+          <li>Force multiplied by hydraulic press: F₂ = F₁ × A₂/A₁</li>
+          <li>Applications: hydraulic lift, brakes, press, crane, dental chair</li>
+          <li>Sharp knife: same force + small area = <em>huge pressure</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sec-label">Archimedes &amp; Floatation</div>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <div class="ref-card-title">Buoyancy Quick Rules</div>
+        <ul>
+          <li>ρ_body &lt; ρ_fluid → body <em>floats</em></li>
+          <li>ρ_body = ρ_fluid → body <em>suspended</em> anywhere in fluid</li>
+          <li>ρ_body &gt; ρ_fluid → body <em>sinks</em></li>
+          <li>Iceberg: <em>1/9 above</em> water, 8/9 submerged (ice density ≈ 0.9 × water)</li>
+          <li>Dead Sea → very salty → dense → humans float easily</li>
+          <li>Apparent weight = actual weight − buoyant force</li>
+          <li>Object weighs <em>least</em> in mercury (densest common liquid)</li>
+          <li>Ice melting in a glass → water level stays <em>the same</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sec-label">Bernoulli — Applications Snapshot</div>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <div class="ref-card-title">Bernoulli Applications</div>
+        <ul>
+          <li><b>High velocity → low pressure</b> (key principle)</li>
+          <li>Aerofoil: faster air above wing → lower pressure above → <em>lift</em></li>
+          <li>Venturimeter: measures flow speed using pressure difference</li>
+          <li>Carburetor, atomiser, sprayer, Bunsen burner — all use low pressure from fast-moving air/gas</li>
+          <li>Two paper sheets blow together — low pressure between them</li>
+          <li>Valid only for: <em>ideal, incompressible, steady</em> flow</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sec-label">Surface Tension vs Capillarity</div>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <div class="ref-card-title">Surface Tension Key Facts</div>
+        <ul>
+          <li>Temperature ↑ → ST <em>decreases</em></li>
+          <li>Soap / detergent → ST <em>decreases</em></li>
+          <li>Salt in water → ST slightly <em>increases</em></li>
+          <li>Soap bubble: 2 surfaces → excess pressure = <em>4T/r</em></li>
+          <li>Liquid drop: 1 surface → excess pressure = <em>2T/r</em></li>
+          <li>Water rises in capillary (θ &lt; 90°) · Mercury <em>falls</em> (θ &gt; 90°)</li>
+          <li>Narrower tube → <em>greater</em> capillary rise (h ∝ 1/r)</li>
+          <li>Plants absorb water via <em>capillary action</em> in xylem</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sec-label">Viscosity &amp; Density</div>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <div class="ref-card-title">Viscosity &amp; Important Densities</div>
+        <ul>
+          <li>Liquid viscosity: temperature ↑ → viscosity <em>decreases</em></li>
+          <li>Gas viscosity: temperature ↑ → viscosity <em>increases</em></li>
+          <li>Terminal velocity: when drag + buoyancy = weight → constant speed</li>
+          <li>Water max density: <em>4°C</em> · Ice floats (ρ_ice &lt; ρ_water)</li>
+          <li>Mercury density: <em>13,600 kg/m³</em> (13.6 g/cm³)</li>
+          <li>Water density: <em>1000 kg/m³</em> · Ice: <em>900 kg/m³</em></li>
+          <li>Anomalous expansion: water expands below 4°C → pipes burst in winter</li>
+          <li>Lakes freeze from <em>top down</em> — aquatic life survives</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sec-label">Thermal Expansion Quick Facts</div>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <div class="ref-card-title">Expansion Applications</div>
+        <ul>
+          <li>γ = 3α &nbsp;·&nbsp; β = 2α &nbsp;(volumetric = 3 × linear)</li>
+          <li>Railway tracks: <em>gaps</em> left for summer expansion</li>
+          <li>Bimetallic strip: bends on heating → thermostat, fire alarm</li>
+          <li>Pendulum clock: summer → rod longer → period longer → <em>runs slow</em></li>
+          <li>Pendulum clock: winter → rod shorter → period shorter → <em>runs fast</em></li>
+          <li>Invar alloy: very low α → used in precision instruments</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sec-label">Elasticity Quick Facts</div>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <div class="ref-card-title">Elasticity Essentials</div>
+        <ul>
+          <li><b>Steel is MORE elastic than rubber</b> (higher Young's modulus)</li>
+          <li>Elastic limit: max stress before permanent deformation</li>
+          <li>Stress = F/A · Strain = ΔL/L (dimensionless)</li>
+          <li>Young's modulus (Y): longitudinal deformation</li>
+          <li>Bulk modulus (B): volumetric (liquids + solids)</li>
+          <li>Modulus of rigidity (G): shear (solids only)</li>
+          <li>Ductile: large plastic deformation (copper, steel)</li>
+          <li>Brittle: fractures with no plastic deformation (glass, cast iron)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sec-label">Top Exam Traps</div>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <div class="ref-card-title">Never Get These Wrong</div>
+        <ul>
+          <li><b>Steel MORE elastic</b> than rubber (NOT less)</li>
+          <li>Pascal's law multiplies <em>force</em>, NOT energy (work in = work out)</li>
+          <li>Buoyancy depends on <em>volume submerged + fluid density</em>, not object density</li>
+          <li>Ice melts in water → water level stays <em>same</em></li>
+          <li>Higher velocity → <em>lower</em> pressure (Bernoulli)</li>
+          <li>Soap <em>decreases</em> surface tension</li>
+          <li>Liquid viscosity ↓ with T · Gas viscosity ↑ with T</li>
+          <li>Water densest at <em>4°C</em> (not 0°C)</li>
+          <li>Soap bubble pressure: <em>4T/r</em> · Liquid drop: <em>2T/r</em></li>
+          <li>Mercury <em>falls</em> in capillary (does not rise like water)</li>
+          <li>Pendulum clock: summer → <em>runs slow</em>; winter → runs fast</li>
+          <li>Hydraulic brakes: apply Pascal's law (pressure transmitted equally)</li>
+        </ul>
+      </div>
+    </div>
+
+  </div><!-- end quickref pane -->
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       PANE 3 — QUIZ
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="pane" id="quiz">
+
+    <div class="quiz-stats">
+      <div class="qs-cell"><div class="qs-val" id="s-att">0</div><div class="qs-lbl">Attempted</div></div>
+      <div class="qs-cell"><div class="qs-val g" id="s-cor">0</div><div class="qs-lbl">Correct</div></div>
+      <div class="qs-cell"><div class="qs-val r" id="s-wrg">0</div><div class="qs-lbl">Wrong</div></div>
+      <div class="qs-cell"><div class="qs-val a" id="s-tot">20</div><div class="qs-lbl">Total</div></div>
+    </div>
+
+    <div class="prog-wrap">
+      <div class="prog-label" id="prog-label">0 of 20 answered</div>
+      <div class="prog-bar"><div class="prog-fill" id="prog"></div></div>
+    </div>
+
+    <div id="q-area"></div>
+    <div id="results" style="display:none"></div>
+
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="submitAll()">Submit All Answers</button>
+      <button class="btn btn-ghost" onclick="resetQuiz()">Reset Quiz</button>
+    </div>
+
+  </div><!-- end quiz pane -->
+
+</div><!-- .page -->
+
+<script>
+const QS = [
+
+// ── EASY ──
+{d:'EASY',e:'NDA 2022',
+q:'Archimedes\' Principle states that when a body is immersed in a fluid, the buoyant force on it is equal to:',
+opts:['The weight of the body','The weight of the fluid displaced by the body','The volume of the fluid displaced','The density of the fluid times the volume of the body'],
+ans:1,
+rule:'Archimedes\' Principle: Buoyant force = weight of fluid displaced (not weight of object, not volume alone)',
+exp:'Archimedes\' Principle states that the buoyant force (upthrust) on an immersed body equals the weight of the fluid displaced by it — F_b = ρ_fluid × V_submerged × g. This force acts upward and is independent of the object\'s own weight or density. It is the weight of the fluid displaced, not the weight of the object itself. This principle explains why objects feel lighter in water and why ships float.'},
+
+{d:'EASY',e:'CDS 2023',
+q:'Pascal\'s Law is the working principle of which of the following?',
+opts:['Thermometer','Hydraulic lift','Hydrometer','Barometer'],
+ans:1,
+rule:'Pascal\'s Law: pressure applied to enclosed fluid is transmitted equally in all directions → force multiplication in hydraulic machines',
+exp:'Pascal\'s Law states that pressure applied to an enclosed fluid is transmitted equally and undiminished in all directions. A hydraulic lift uses this principle: a small force applied on a small piston creates pressure P = F/A. This same pressure acts on a much larger piston, producing a large upward force sufficient to lift heavy vehicles. Thermometers work on thermal expansion, hydrometers use Archimedes\' principle, and barometers measure atmospheric pressure.'},
+
+{d:'EASY',e:'AFCAT 2022',
+q:'The property of a fluid by which it opposes the relative motion between its adjacent layers is called:',
+opts:['Surface tension','Viscosity','Elasticity','Buoyancy'],
+ans:1,
+rule:'Viscosity = internal friction of a fluid; it opposes relative motion between fluid layers',
+exp:'Viscosity is the property of a fluid that resists the relative motion between adjacent layers — it is the internal friction of the fluid. Think of honey vs water: honey has higher viscosity and flows much more slowly. Surface tension is the elastic-like film at a liquid\'s surface. Elasticity is the property of solids (and fluids to some extent) to regain shape. Buoyancy is the upward force on an immersed object.'},
+
+{d:'EASY',e:'NDA 2023',
+q:'Water has its maximum density at:',
+opts:['0°C','4°C','100°C','-4°C'],
+ans:1,
+rule:'Water is densest at 4°C due to anomalous expansion. Below 4°C it expands, and freezes at 0°C with even lower density.',
+exp:'Water has a unique anomalous property: it reaches maximum density at 4°C. Below 4°C, water begins to expand (unlike most liquids that continue contracting). At 0°C it freezes into ice, which is even less dense (900 kg/m³) than liquid water (1000 kg/m³). This is why ice floats and why lakes freeze from the top downward — the denser 4°C water sinks to the bottom, allowing aquatic life to survive in the warmer water below the ice.'},
+
+{d:'EASY',e:'CDS 2022',
+q:'A body floats in a liquid when:',
+opts:['Its density is greater than the liquid','Its density is less than or equal to the liquid','Its weight is less than the weight of the liquid','Its volume equals the volume of liquid in the container'],
+ans:1,
+rule:'Law of floatation: a body floats when ρ_body ≤ ρ_liquid (buoyant force ≥ weight of body)',
+exp:'A body floats when its average density is less than or equal to the density of the liquid. When ρ_body < ρ_fluid, the buoyant force (weight of fluid displaced) exceeds the body\'s weight — the body rises until only part of it is submerged and equilibrium is reached. When ρ_body = ρ_fluid, the body is in neutral buoyancy and can be fully submerged while remaining suspended. When ρ_body > ρ_fluid, it sinks.'},
+
+// ── MEDIUM ──
+{d:'MEDIUM',e:'NDA 2023',
+q:'Which of the following correctly explains why a ship made of steel floats on water even though steel is denser than water?',
+opts:[
+  'Steel has a special coating that repels water',
+  'The hollow structure of the ship makes its average density less than water',
+  'The engines generate enough force to keep it afloat',
+  'Steel expands when in contact with water, reducing its density'
+],ans:1,
+rule:'A ship floats because its hollow shape gives it an average density (total mass / total volume including air) less than water → buoyant force ≥ weight',
+exp:'Steel has a density of about 7800 kg/m³ — much greater than water (1000 kg/m³). However, a ship is not a solid block of steel. It is a hollow structure with a large volume of air inside. The average density = total mass / total volume (including enclosed air). This average density is less than 1000 kg/m³, so the ship floats. If the ship fills with water (as in sinking), the average density increases above water\'s density and it sinks.'},
+
+{d:'MEDIUM',e:'CDS 2023',
+q:'Bernoulli\'s theorem is based on the principle of conservation of:',
+opts:['Mass','Linear momentum','Energy','Angular momentum'],
+ans:2,
+rule:'Bernoulli\'s theorem: P + ½ρv² + ρgh = constant — this is conservation of energy per unit volume for flowing fluid',
+exp:'Bernoulli\'s equation P + ½ρv² + ρgh = constant is a statement of conservation of energy for a flowing ideal fluid. Each term represents energy per unit volume: P is pressure (work) energy, ½ρv² is kinetic energy, and ρgh is potential energy. The sum remains constant along a streamline, meaning energy is neither created nor destroyed — it is simply converted between these forms. The continuity equation (A₁v₁ = A₂v₂) is based on conservation of mass.'},
+
+{d:'MEDIUM',e:'AFCAT 2023',
+q:'The viscosity of a liquid:',
+opts:[
+  'Increases with increase in temperature',
+  'Decreases with increase in temperature',
+  'Does not change with temperature',
+  'First increases then decreases with temperature'
+],ans:1,
+rule:'Liquid viscosity DECREASES with temperature (intermolecular bonds weaken with heat). Gas viscosity INCREASES with temperature — opposite behaviour.',
+exp:'For liquids, viscosity decreases as temperature increases. This is because rising temperature gives molecules more kinetic energy, weakening the intermolecular cohesive forces that resist flow. Honey flows more easily when warmed — a practical example. For gases, the opposite is true: viscosity increases with temperature because gas viscosity arises from molecular collisions (not intermolecular forces), and faster molecules collide more frequently. This distinction is directly tested in CDS, NDA, and AFCAT.'},
+
+{d:'MEDIUM',e:'NDA 2022',
+q:'Which of the following is an application of Bernoulli\'s theorem?',
+opts:[
+  'A hydraulic lift lifting a heavy car',
+  'A submarine submerging by filling ballast tanks',
+  'An aeroplane gaining lift due to pressure difference on its wings',
+  'A hydrometer measuring the density of milk'
+],ans:2,
+rule:'Aeroplane lift: curved upper wing → faster airflow → lower pressure above → upward lift. This is Bernoulli\'s theorem in action.',
+exp:'An aeroplane\'s wing (aerofoil) is shaped so that air flows faster over the curved upper surface than the flat lower surface. By Bernoulli\'s theorem, higher velocity means lower pressure. The pressure above the wing becomes lower than below it, creating a net upward force (lift). Hydraulic lift uses Pascal\'s law. A submarine uses density adjustment (not Bernoulli). A hydrometer uses Archimedes\' principle.'},
+
+{d:'MEDIUM',e:'CDS 2024',
+q:'When a capillary tube is dipped in water, the water rises in the tube. If the radius of the tube is doubled, the height of water rise will:',
+opts:['Double','Remain the same','Become half','Become one-fourth'],
+ans:2,
+rule:'Capillary rise h = 2T cosθ / ρgr → h ∝ 1/r. If r doubles, h becomes half.',
+exp:'The formula for capillary rise is h = 2T cosθ / (ρgr), where T is surface tension, θ is the contact angle, ρ is liquid density, g is gravitational acceleration, and r is the radius of the tube. Since h ∝ 1/r, when the radius is doubled (r → 2r), the height becomes h/2 — it is halved. This is why water rises much higher in very thin capillaries (like those in plant xylem) than in wider tubes.'},
+
+{d:'MEDIUM',e:'AFCAT 2022',
+q:'A steel needle can float on water. This is due to:',
+opts:['Buoyancy (Archimedes\' principle)','Viscosity of water','Surface tension of water','The steel needle being hollow'],
+ans:2,
+rule:'A steel needle placed carefully on water is supported by surface tension — the water surface acts like a stretched membrane. The needle is NOT less dense than water.',
+exp:'Steel is much denser than water (7800 kg/m³ vs 1000 kg/m³), so buoyancy alone cannot float a steel needle. The needle floats because the surface tension of water creates a thin "skin" at the surface that can support small, light objects if they are placed carefully and horizontally. The water surface deforms slightly (like a stretched elastic sheet) under the needle\'s weight. If a drop of soap is added, surface tension decreases and the needle sinks.'},
+
+{d:'MEDIUM',e:'NDA 2024',
+q:'A hydraulic machine has a small piston of area 10 cm² and a large piston of area 200 cm². A force of 50 N is applied on the small piston. What is the force exerted by the large piston?',
+opts:['500 N','1000 N','2500 N','250 N'],
+ans:1,
+rule:'Pascal\'s Law: F₂ = F₁ × A₂/A₁ = 50 × 200/10 = 50 × 20 = 1000 N',
+exp:'Using Pascal\'s Law: F₁/A₁ = F₂/A₂, so F₂ = F₁ × (A₂/A₁). Here F₁ = 50 N, A₁ = 10 cm², A₂ = 200 cm². F₂ = 50 × (200/10) = 50 × 20 = 1000 N. The force is multiplied 20 times. Note: work is conserved — the large piston moves 20 times less distance. Energy in = Energy out: 50 N × 20 cm = 1000 N × 1 cm.'},
+
+{d:'MEDIUM',e:'CDS 2023',
+q:'Which of the following materials is MORE elastic — steel or rubber?',
+opts:[
+  'Rubber, because it stretches more',
+  'Steel, because it has a higher Young\'s modulus and returns to shape more precisely',
+  'Both are equally elastic',
+  'Rubber, because it has a lower Young\'s modulus'
+],ans:1,
+rule:'Elasticity in physics = ability to resist deformation and return to original shape. Steel has HIGHER Young\'s modulus → MORE elastic. Rubber\'s large deformation means it is LESS elastic.',
+exp:'In everyday language, "elastic" means stretchy — but in physics, elasticity means the ability of a material to return to its original shape after deforming stress is removed. The measure of this is the Young\'s modulus: the higher the Young\'s modulus, the less the material deforms under stress and the more elastic it is. Steel has a much higher Young\'s modulus (~200 GPa) than rubber (~0.01–0.1 GPa). Steel deforms very little under stress and snaps back precisely — so steel is physically MORE elastic than rubber.'},
+
+// ── HARD ──
+{d:'HARD',e:'NDA 2023',
+q:'A body weighs 80 N in air and 60 N when completely submerged in water. What is the relative density of the body?',
+opts:['3','4','6','8'],
+ans:1,
+rule:'RD = Weight in air / Loss of weight in water = 80 / (80 − 60) = 80 / 20 = 4',
+exp:'The loss of weight in water equals the buoyant force = weight of water displaced. Loss of weight = 80 − 60 = 20 N. Relative Density = Weight in air / Loss of weight in water = 80/20 = 4. This means the body is 4 times as dense as water, i.e., density = 4000 kg/m³. This formula (RD = W_air / (W_air − W_water)) is a standard application of Archimedes\' principle and is directly tested in NDA and CDS.'},
+
+{d:'HARD',e:'CDS 2024',
+q:'A soap bubble of radius r₁ is blown. Another soap bubble of radius r₂ (r₂ > r₁) is blown. If a tube connects both bubbles, which way does air flow?',
+opts:[
+  'From larger bubble to smaller bubble',
+  'From smaller bubble to larger bubble',
+  'No flow — they are in equilibrium',
+  'Depends on the soap used'
+],ans:1,
+rule:'Excess pressure inside a soap bubble = 4T/r. Smaller bubble (r₁) has HIGHER internal pressure (P ∝ 1/r) → air flows from smaller to larger.',
+exp:'The excess pressure inside a soap bubble is P = 4T/r. Since P ∝ 1/r, a smaller bubble has higher internal pressure than a larger bubble. When connected by a tube, air flows from higher pressure (smaller bubble, r₁) to lower pressure (larger bubble, r₂). So the smaller bubble shrinks and the larger one grows until they reach a new equilibrium. This counter-intuitive result is a classic physics problem and is directly tested.'},
+
+{d:'HARD',e:'AFCAT 2024',
+q:'A block of wood floats with 1/3 of its volume above the surface of a liquid. The relative density of the liquid is 0.9. The relative density of the wood is:',
+opts:['0.3','0.6','0.9','1.2'],
+ans:1,
+rule:'Fraction submerged = ρ_body / ρ_liquid. 2/3 submerged: ρ_wood / 0.9 = 2/3 → ρ_wood = 0.9 × 2/3 = 0.6',
+exp:'If 1/3 of the block is above the liquid, then 2/3 is submerged. For a floating body, weight = buoyant force: ρ_wood × V × g = ρ_liquid × (2V/3) × g. Simplifying: ρ_wood = ρ_liquid × (2/3) = 0.9 × 2/3 = 0.6. So the relative density of the wood is 0.6. This uses the key result: fraction submerged = ρ_body / ρ_liquid, which means ρ_body = ρ_liquid × fraction submerged.'},
+
+{d:'HARD',e:'NDA 2024',
+q:'A pendulum clock keeps correct time at 20°C. On a hot summer day the temperature is 40°C. If the coefficient of linear expansion of the pendulum rod is α, the clock will:',
+opts:[
+  'Keep correct time (temperature does not affect pendulums)',
+  'Gain time (run fast)',
+  'Lose time (run slow)',
+  'Stop working'
+],ans:2,
+rule:'T = 2π√(L/g). Summer → L increases → T increases → clock takes longer per oscillation → runs SLOW (loses time)',
+exp:'The time period of a pendulum is T = 2π√(L/g). When temperature increases from 20°C to 40°C, the rod expands: ΔL = αLΔT = αL × 20. The length L increases, so T increases (longer time per oscillation). The clock takes more time to register each second — it "runs slow" or loses time. On a cold winter day, the rod contracts, L decreases, T decreases → clock runs fast. The fractional change in time period = ½ × α × ΔT.'},
+
+{d:'HARD',e:'CDS 2023',
+q:'Water is flowing through a horizontal pipe of non-uniform cross-section. At a point where the velocity of flow is 2 m/s, the pressure is 20,000 Pa. At another point the velocity is 4 m/s. What is the pressure at that point? (density of water = 1000 kg/m³)',
+opts:['14,000 Pa','18,000 Pa','22,000 Pa','24,000 Pa'],
+ans:0,
+rule:'Bernoulli (horizontal pipe, so ρgh cancels): P₁ + ½ρv₁² = P₂ + ½ρv₂². P₂ = 20000 + ½×1000×(4 − 16) = 20000 − 6000 = 14,000 Pa',
+exp:'Using Bernoulli\'s equation for a horizontal pipe (h is constant, so ρgh cancels): P₁ + ½ρv₁² = P₂ + ½ρv₂². P₂ = P₁ + ½ρ(v₁² − v₂²) = 20,000 + ½ × 1000 × (2² − 4²) = 20,000 + 500 × (4 − 16) = 20,000 + 500 × (−12) = 20,000 − 6,000 = 14,000 Pa. The pressure decreases where velocity increases — a direct application of Bernoulli\'s theorem.'},
+
+{d:'HARD',e:'AFCAT 2023',
+q:'A liquid drop of radius R breaks into 64 smaller equal droplets. The ratio of the total surface energy of the 64 droplets to that of the original drop is:',
+opts:['4:1','16:1','1:4','1:16'],
+ans:0,
+rule:'Volume conserved: (4/3)πR³ = 64 × (4/3)πr³ → r = R/4. Surface energy ∝ area. Total area of 64 drops / original area = 64×4πr² / 4πR² = 64×(R/4)² / R² = 64/16 = 4.',
+exp:'Volume is conserved: (4/3)πR³ = 64 × (4/3)πr³ → R³ = 64r³ → r = R/4. Surface energy = T × surface area. Original surface energy = T × 4πR². Total surface energy of 64 drops = 64 × T × 4πr² = 64 × T × 4π(R/4)² = 64 × T × 4π × R²/16 = 64T × πR²/4 = 16TπR² = 4 × 4πR²T. So ratio = 4:1. Surface energy increases when a drop is broken into smaller drops (energy must be supplied to create new surfaces).'},
+
+{d:'HARD',e:'NDA 2023',
+q:'A solid sphere of density 2000 kg/m³ and radius 0.01 m falls through a viscous liquid of density 1000 kg/m³. If the coefficient of viscosity is 0.1 Pa·s, the terminal velocity is: (g = 10 m/s²)',
+opts:['0.22 m/s','0.44 m/s','0.11 m/s','1.1 m/s'],
+ans:0,
+rule:'Terminal velocity v_t = 2r²(ρ−σ)g / 9η = 2×(0.01)²×(2000−1000)×10 / (9×0.1) = 2×10⁻⁴×10000/(0.9) = 2/0.9 ≈ 0.22 m/s',
+exp:'Using Stokes\' Law terminal velocity: v_t = 2r²(ρ − σ)g / 9η. Here r = 0.01 m, ρ = 2000 kg/m³ (sphere), σ = 1000 kg/m³ (liquid), g = 10 m/s², η = 0.1 Pa·s. v_t = [2 × (0.01)² × (2000−1000) × 10] / [9 × 0.1] = [2 × 10⁻⁴ × 1000 × 10] / 0.9 = [2 × 10⁻⁴ × 10000] / 0.9 = 2 / 0.9 ≈ 0.22 m/s. Terminal velocity is reached when weight = drag force + buoyancy.'},
+
+{d:'HARD',e:'CDS 2024',
+q:'A wire of length L and cross-sectional area A is stretched by a force F, producing an extension x. If another wire of the same material has length 2L and cross-sectional area 2A, and the same force F is applied, the extension will be:',
+opts:['x','x/2','2x','4x'],
+ans:0,
+rule:'Y = (F/A)/(x/L) = FL/Ax. New extension: x\' = FL\'/(YA\') = F×2L/(Y×2A) = FL/YA = x. Extension stays the same.',
+exp:'Young\'s modulus Y = stress/strain = (F/A)/(x/L) = FL/(Ax). Rearranging: x = FL/(YA). For the new wire: L\' = 2L, A\' = 2A, same F, same material (same Y). New extension x\' = FL\'/(YA\') = F×2L/(Y×2A) = FL/(YA) = x. The extension is the same as the original. Doubling both length and area exactly cancel each other out. This is a subtle but common exam question on Young\'s modulus.'},
+
+];
+
+// ── ENGINE ─────────────────────────────────────────────────────────────────────
+const answers  = new Array(QS.length).fill(null);
+const revealed = new Array(QS.length).fill(false);
+const LABS = ['A','B','C','D'];
+
+function build(){
+  const area = document.getElementById('q-area');
+  area.innerHTML = '';
+  QS.forEach((q,i)=>{
+    const dc = q.d==='EASY'?'diff-e':q.d==='MEDIUM'?'diff-m':'diff-h';
+    const div = document.createElement('div');
+    div.className='q-card'; div.id=`qc${i}`;
+    div.innerHTML=`
+      <div class="q-meta">
+        <span class="q-num">Q.${String(i+1).padStart(2,'0')}</span>
+        <span class="q-diff ${dc}">${q.d}</span>
+        <span class="q-exam">${q.e}</span>
+      </div>
+      <div class="q-body">
+        <div class="q-text">${q.q}</div>
+        <div class="opts" id="opts${i}">
+          ${q.opts.map((o,j)=>`
+            <button class="opt" id="o${i}_${j}" onclick="pick(${i},${j})">
+              <span class="opt-lbl">${LABS[j]}</span>${o}
+            </button>`).join('')}
+        </div>
+        <div class="exp-panel" id="ex${i}">
+          <div class="exp-tag">Explanation</div>
+          <div class="exp-rule">${q.rule}</div>
+          <p>${q.exp}</p>
+        </div>
+      </div>
+      <div class="q-foot">
+        <span style="font-size:11px;color:var(--dim);font-weight:700">Physics · P05</span>
+        <span id="ai${i}" class="q-status">—</span>
+      </div>`;
+    area.appendChild(div);
+  });
+}
+
+function pick(qi,oi){
+  if(revealed[qi]) return;
+  answers[qi]=oi;
+  document.querySelectorAll(`#opts${qi} .opt`).forEach((b,j)=>{
+    b.classList.remove('sel');
+    if(j===oi) b.classList.add('sel');
+  });
+  document.getElementById(`qc${qi}`).classList.add('answered');
+  const ai=document.getElementById(`ai${qi}`);
+  ai.textContent=`Selected: ${LABS[oi]}`;
+  ai.style.color='var(--burg)';
+  updateStats();
+}
+
+function updateStats(){
+  const att=answers.filter(a=>a!==null).length;
+  document.getElementById('s-att').textContent=att;
+  document.getElementById('prog').style.width=(att/QS.length*100)+'%';
+  document.getElementById('prog-label').textContent=`${att} of ${QS.length} answered`;
+  let c=0,w=0;
+  answers.forEach((a,i)=>{ if(a===null)return; if(a===QS[i].ans)c++; else w++; });
+  document.getElementById('s-cor').textContent=c;
+  document.getElementById('s-wrg').textContent=w;
+}
+
+function submitAll(){
+  let cor=0,wrg=0,skp=0;
+  QS.forEach((q,i)=>{
+    revealed[i]=true;
+    const opts=document.querySelectorAll(`#opts${i} .opt`);
+    opts.forEach(b=>{b.disabled=true;b.classList.remove('sel')});
+    opts[q.ans].classList.add('ok');
+    if(answers[i]!==null && answers[i]!==q.ans) opts[answers[i]].classList.add('bad');
+    document.getElementById(`ex${i}`).classList.add('show');
+    const ai=document.getElementById(`ai${i}`);
+    const card=document.getElementById(`qc${i}`);
+    card.classList.remove('answered');
+    if(answers[i]===null){skp++;ai.textContent='Skipped';ai.style.color='var(--dim)';}
+    else if(answers[i]===q.ans){cor++;card.classList.add('correct');ai.textContent='✓ Correct';ai.style.color='var(--green)';}
+    else{wrg++;card.classList.add('wrong');ai.textContent='✗ Wrong';ai.style.color='var(--red)';}
+  });
+  updateStats();
+  showResults(cor,wrg,skp);
+}
+
+function showResults(cor,wrg,skp){
+  const pct=Math.round(cor/QS.length*100);
+  let grade,msg;
+  if(pct>=88){grade='Excellent';msg='Outstanding! You have mastered Properties of Matter.'}
+  else if(pct>=70){grade='Good';msg='Well done. Review the questions you got wrong and revisit the formulas.'}
+  else if(pct>=50){grade='Average';msg='Good effort. Revisit the Theory — especially Bernoulli, surface tension, and viscosity.'}
+  else{grade='Needs Work';msg="Don't worry — go through Quick Ref and Theory again, then retry."}
+  const res=document.getElementById('results');
+  res.innerHTML=`
+    <div class="res-hero">
+      <div class="res-score">${cor}<span style="font-size:36px;opacity:.45">/${QS.length}</span></div>
+      <div class="res-grade">${grade} · ${pct}%</div>
+      <div class="res-msg">${msg}</div>
+    </div>
+    <div class="res-stats">
+      <div class="qs-cell"><div class="qs-val g">${cor}</div><div class="qs-lbl">Correct</div></div>
+      <div class="qs-cell"><div class="qs-val r">${wrg}</div><div class="qs-lbl">Wrong</div></div>
+      <div class="qs-cell"><div class="qs-val a">${skp}</div><div class="qs-lbl">Skipped</div></div>
+      <div class="qs-cell"><div class="qs-val">${pct}%</div><div class="qs-lbl">Score</div></div>
+    </div>
+    <div style="text-align:center;margin:16px 0">
+      <button class="btn btn-ghost" onclick="document.getElementById('q-area').scrollIntoView({behavior:'smooth'})">📖 Review All Answers</button>
+    </div>`;
+  res.style.display='block';
+  res.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function resetQuiz(){
+  answers.fill(null); revealed.fill(false);
+  build();
+  document.getElementById('results').style.display='none';
+  document.getElementById('results').innerHTML='';
+  ['s-att','s-cor','s-wrg'].forEach(id=>document.getElementById(id).textContent='0');
+  document.getElementById('prog').style.width='0%';
+  document.getElementById('prog-label').textContent=`0 of ${QS.length} answered`;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function switchTab(id){
+  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  const idx={theory:0,quickref:1,quiz:2}[id];
+  document.querySelectorAll('.tab')[idx].classList.add('on');
+}
+
+function tog(hd){
+  const bd=hd.nextElementSibling;
+  const isOpen=bd.classList.contains('open');
+  bd.classList.toggle('open',!isOpen);
+  hd.classList.toggle('open',!isOpen);
+}
+
+build();
+</script>
+</body>
+</html>

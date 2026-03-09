@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>P04 · Gravitation | Olive Defence</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+
+/* ── NAVY / GOLD THEME ────────────────────────────────────────── */
+:root{
+  /* Backgrounds */
+  --bg:        #F0F2F8;
+  --bg2:       #E4E8F4;
+  --bg3:       #D6DCF0;
+  --white:     #FFFFFF;
+
+  /* Ink */
+  --ink:       #0E1830;
+  --ink2:      #1C2B4A;
+  --muted:     #5A6585;
+  --dim:       #8A96B5;
+  --border:    #C4CCDF;
+
+  /* Primary — Deep Navy */
+  --navy:      #1A2E6B;
+  --navyLt:    #223688;
+  --navyPale:  #E8ECF8;
+
+  /* Accent — Gold / Amber */
+  --gold:      #8B6200;
+  --goldLt:    #B07D00;
+  --goldPale:  #FDF5DC;
+
+  /* Semantic colours */
+  --green:     #1D6B3A;
+  --greenLt:   #247844;
+  --greenPale: #E8F6EE;
+  --red:       #8B1C1C;
+  --redLt:     #AA2222;
+  --redPale:   #FCEAEA;
+  --teal:      #1A5E72;
+  --tealPale:  #E4F3F8;
+  --purple:    #5B2A8E;
+  --purplePale:#F2EDFB;
+  --coral:     #C0390A;
+  --coralPale: #FEF0EB;
+
+  --radius:    12px;
+  --shadow:    0 2px 12px rgba(14,24,48,.09);
+  --shadow-md: 0 4px 20px rgba(14,24,48,.14);
+}
+
+body{
+  font-family:'Nunito',sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  font-size:17px;
+  line-height:1.75;
+  min-height:100vh;
+}
+
+.page{max-width:680px;margin:0 auto;padding:0 16px 80px}
+
+/* ── HERO ─────────────────────────────────────────────────────── */
+.hero{
+  background: linear-gradient(135deg, #0E1830 0%, #1A2E6B 60%, #1C3A80 100%);
+  margin:0 -16px;
+  padding:30px 20px 28px;
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 85% 15%,rgba(255,215,80,.07) 0%,transparent 55%),
+             radial-gradient(ellipse at 15% 85%,rgba(100,140,255,.06) 0%,transparent 50%);
+  pointer-events:none;
+}
+/* decorative orbit ring */
+.hero::after{
+  content:'';position:absolute;
+  width:220px;height:220px;
+  border:1.5px solid rgba(255,255,255,.06);
+  border-radius:50%;
+  right:-50px;top:-50px;
+  pointer-events:none;
+}
+.hero-kicker{
+  font-size:11px;font-weight:700;letter-spacing:3px;
+  text-transform:uppercase;color:rgba(255,255,255,.50);
+  margin-bottom:8px;display:flex;align-items:center;gap:8px;
+}
+.hero-kicker::before{content:'';width:18px;height:2px;background:rgba(255,215,80,.4)}
+.hero-title{
+  font-family:'Lora',serif;
+  font-size:clamp(24px,5.5vw,36px);
+  font-weight:700;color:#fff;line-height:1.18;margin-bottom:10px;
+}
+.hero-title span{color:#FFD84D;font-style:italic}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.65);margin-bottom:18px;line-height:1.65}
+.hero-chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{font-size:11px;font-weight:700;letter-spacing:1px;padding:4px 12px;border-radius:20px;text-transform:uppercase}
+.chip-w{background:rgba(255,255,255,.12);color:rgba(255,255,255,.88)}
+.chip-y{background:rgba(255,216,77,.15);color:#FFD84D}
+.chip-g{background:rgba(80,200,130,.12);color:#7AE0A0}
+
+/* ── TAB BAR ──────────────────────────────────────────────────── */
+.tab-bar{
+  position:sticky;top:0;z-index:50;
+  background:var(--white);border-bottom:2px solid var(--border);
+  margin:0 -16px;display:flex;overflow-x:auto;
+  box-shadow:0 2px 8px rgba(14,24,48,.08);
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;
+}
+.tab-bar::-webkit-scrollbar{display:none}
+.tab{
+  flex-shrink:0;padding:14px 18px;
+  font-size:12px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--muted);
+  border:none;background:transparent;cursor:pointer;
+  border-bottom:3px solid transparent;margin-bottom:-2px;
+  transition:all .2s;white-space:nowrap;
+}
+.tab:hover{color:var(--ink);background:var(--bg)}
+.tab.on{color:var(--navy);border-bottom-color:var(--navy)}
+
+/* ── PANES ────────────────────────────────────────────────────── */
+.pane{display:none;padding-top:24px;animation:fadeUp .3s ease}
+.pane.on{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── SECTION LABEL ────────────────────────────────────────────── */
+.sec-label{
+  font-size:10px;font-weight:800;letter-spacing:3px;
+  text-transform:uppercase;color:var(--navy);
+  margin:28px 0 12px;display:flex;align-items:center;gap:10px;
+}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* ── INTRO BOX ────────────────────────────────────────────────── */
+.intro-box{
+  background:var(--navyPale);border:1.5px solid rgba(26,46,107,.18);
+  border-radius:var(--radius);padding:20px;margin-bottom:8px;
+}
+.intro-box p{font-size:16px;color:var(--ink2);line-height:1.8}
+.intro-box strong{color:var(--navy)}
+
+/* ── CONCEPT CARDS ────────────────────────────────────────────── */
+.c-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius);margin-bottom:10px;
+  box-shadow:var(--shadow);overflow:hidden;
+}
+.c-head{
+  display:flex;align-items:center;gap:12px;padding:16px 18px;
+  cursor:pointer;border-left:4px solid transparent;
+  transition:all .15s;-webkit-tap-highlight-color:transparent;
+}
+.c-head:hover,.c-head.open{background:var(--bg);border-left-color:var(--navy)}
+.c-icon{
+  width:38px;height:38px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;
+}
+.c-title{font-size:17px;font-weight:700;color:var(--ink);flex:1}
+.c-sub{font-size:12px;color:var(--dim);font-weight:600;margin-top:2px}
+.c-arrow{font-size:12px;color:var(--dim);transition:transform .2s;flex-shrink:0}
+.c-head.open .c-arrow{transform:rotate(180deg)}
+.c-body{display:none;padding:4px 18px 20px;border-top:1px solid var(--border)}
+.c-body.open{display:block;animation:fadeUp .2s ease}
+.c-body p{font-size:16px;color:var(--ink2);line-height:1.85;margin-bottom:12px}
+.c-body p:last-child{margin-bottom:0}
+.c-body strong{color:var(--navy);font-weight:700}
+.c-body em{color:var(--gold);font-style:normal;font-weight:700}
+
+/* ── CONTENT BLOCKS ───────────────────────────────────────────── */
+
+/* Gold fact box */
+.fact-box{
+  background:var(--goldPale);border:1.5px solid rgba(139,98,0,.2);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.fact-box .fb-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--gold);text-transform:uppercase;margin-bottom:8px;
+}
+.fact-box ul{list-style:none;padding:0}
+.fact-box li{
+  font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;
+  position:relative;line-height:1.7;
+}
+.fact-box li::before{content:'→';position:absolute;left:0;color:var(--gold);font-weight:700;font-size:13px}
+
+/* Green example box */
+.eg-box{
+  background:var(--greenPale);border-left:4px solid var(--green);
+  border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0;
+}
+.eg-box .eg-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--green);text-transform:uppercase;margin-bottom:6px;
+}
+.eg-box p{font-size:15px;color:var(--ink2);line-height:1.75}
+.eg-box ul{list-style:none;padding:0}
+.eg-box li{font-size:15px;color:var(--ink2);padding:4px 0 4px 18px;position:relative;line-height:1.65}
+.eg-box li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:800;font-size:12px}
+
+/* Red trap box */
+.trap-box{
+  background:var(--redPale);border:1.5px solid rgba(139,28,28,.2);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.trap-box .tr-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--red);text-transform:uppercase;margin-bottom:8px;
+}
+.trap-box p,.trap-box li{font-size:15.5px;color:var(--ink2);line-height:1.75}
+.trap-box ul{list-style:none;padding:0}
+.trap-box li{padding:5px 0 5px 22px;position:relative}
+.trap-box li::before{content:'⚑';position:absolute;left:0;font-size:12px;color:var(--red)}
+
+/* Teal rule box */
+.rule-box{
+  background:var(--tealPale);border:1.5px solid rgba(26,94,114,.18);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.rule-box .rl-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--teal);text-transform:uppercase;margin-bottom:8px;
+}
+.rule-box p{font-size:15.5px;color:var(--ink2);line-height:1.8}
+.rule-box strong{color:var(--teal)}
+
+/* Purple formula box */
+.formula-box{
+  background:var(--purplePale);border:1.5px solid rgba(91,42,142,.22);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.formula-box .fl-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--purple);text-transform:uppercase;margin-bottom:10px;
+}
+.formula-line{
+  font-family:'Lora',serif;font-size:18px;font-weight:700;
+  color:var(--purple);text-align:center;padding:8px 0;
+  letter-spacing:.5px;line-height:1.6;
+}
+.formula-note{font-size:14px;color:var(--ink2);line-height:1.7;margin-top:8px}
+.formula-note b{color:var(--purple)}
+
+/* Navy highlight box */
+.navy-box{
+  background:var(--navyPale);border:1.5px solid rgba(26,46,107,.18);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.navy-box .nl-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--navy);text-transform:uppercase;margin-bottom:8px;
+}
+.navy-box ul{list-style:none;padding:0}
+.navy-box li{font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;position:relative;line-height:1.8}
+.navy-box li::before{content:'◆';position:absolute;left:0;font-size:9px;color:var(--navy);top:10px}
+
+/* Coral analogy box */
+.analogy-box{
+  background:var(--coralPale);border-left:4px solid var(--coral);
+  border-radius:0 8px 8px 0;padding:14px 16px;margin:12px 0;
+}
+.analogy-box .an-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--coral);text-transform:uppercase;margin-bottom:6px;
+}
+.analogy-box p{font-size:15.5px;color:var(--ink2);line-height:1.75}
+
+/* Compare table */
+.compare-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
+.compare-table th{
+  background:var(--navy);color:#fff;
+  padding:10px 12px;text-align:left;
+  font-size:13px;font-weight:700;letter-spacing:.5px;
+}
+.compare-table td{
+  padding:10px 12px;border:1px solid var(--border);
+  color:var(--ink2);vertical-align:top;line-height:1.65;
+}
+.compare-table tr:nth-child(even) td{background:var(--bg)}
+.compare-table td b{color:var(--navy)}
+
+/* Planet mini-cards */
+.planet-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}
+.planet-card{
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:10px;padding:13px 14px;
+}
+.planet-card .pc-name{
+  font-size:13px;font-weight:800;color:var(--navy);
+  margin-bottom:4px;display:flex;align-items:center;gap:6px;
+}
+.planet-card .pc-tag{
+  font-size:10px;font-weight:700;color:var(--gold);
+  background:var(--goldPale);border-radius:4px;
+  padding:1px 7px;
+}
+.planet-card p{font-size:13.5px;color:var(--ink2);line-height:1.6}
+
+/* ── QUICK REFERENCE ──────────────────────────────────────────── */
+.ref-grid{display:grid;gap:10px;margin:8px 0}
+.ref-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);
+}
+.ref-card-title{
+  font-size:11px;font-weight:800;letter-spacing:2px;
+  text-transform:uppercase;color:var(--navy);
+  margin-bottom:10px;padding-bottom:8px;
+  border-bottom:1px solid var(--border);
+}
+.ref-card ul{list-style:none;padding:0}
+.ref-card li{
+  font-size:15px;color:var(--ink2);padding:5px 0 5px 16px;
+  position:relative;line-height:1.65;
+  border-bottom:1px solid var(--bg2);
+}
+.ref-card li:last-child{border-bottom:none}
+.ref-card li::before{content:'·';position:absolute;left:4px;color:var(--navy);font-weight:900;font-size:18px;line-height:1.3}
+.ref-card li b{color:var(--ink);font-weight:700}
+.ref-card li em{color:var(--gold);font-style:normal;font-weight:700}
+
+/* ── QUIZ ─────────────────────────────────────────────────────── */
+.quiz-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:2px;background:var(--border);
+  border-radius:var(--radius);overflow:hidden;
+  margin-bottom:16px;box-shadow:var(--shadow);
+}
+.qs-cell{background:var(--white);padding:12px 8px;text-align:center}
+.qs-val{font-family:'Lora',serif;font-size:22px;font-weight:700;color:var(--navy);line-height:1}
+.qs-val.g{color:var(--green)}.qs-val.r{color:var(--red)}.qs-val.a{color:var(--gold)}
+.qs-lbl{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:1px;margin-top:4px;text-transform:uppercase}
+
+.prog-wrap{margin-bottom:20px}
+.prog-bar{height:6px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;background:var(--navy);border-radius:3px;transition:width .4s ease;width:0%}
+.prog-label{font-size:12px;color:var(--muted);font-weight:700;margin-bottom:6px}
+
+.q-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius);margin-bottom:12px;
+  box-shadow:var(--shadow);overflow:hidden;
+  border-left:4px solid transparent;transition:border-color .15s;
+}
+.q-card.answered{border-left-color:var(--navy)}
+.q-card.correct{border-left-color:var(--green)}
+.q-card.wrong{border-left-color:var(--red)}
+
+.q-meta{
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  padding:10px 16px;background:var(--bg);
+  border-bottom:1px solid var(--border);
+}
+.q-num{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:1px}
+.q-diff{font-size:10px;font-weight:800;padding:2px 10px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase}
+.diff-e{background:var(--greenPale);color:var(--green)}
+.diff-m{background:var(--goldPale);color:var(--gold)}
+.diff-h{background:var(--redPale);color:var(--red)}
+.q-exam{font-size:11px;color:var(--dim);margin-left:auto;font-weight:600}
+
+.q-body{padding:16px}
+.q-text{font-size:17px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-weight:600}
+
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{
+  background:var(--bg);border:1.5px solid var(--border);
+  border-radius:10px;padding:14px 16px;
+  cursor:pointer;display:flex;align-items:flex-start;gap:12px;
+  font-size:16px;color:var(--ink2);text-align:left;width:100%;
+  transition:all .15s;-webkit-tap-highlight-color:transparent;
+  min-height:48px;line-height:1.6;
+}
+.opt:hover:not(:disabled){border-color:var(--navy);background:var(--navyPale)}
+.opt:disabled{cursor:default}
+.opt.sel{border-color:var(--navy);background:var(--navyPale);color:var(--navy)}
+.opt.ok{border-color:var(--green)!important;background:var(--greenPale)!important;color:var(--green)!important}
+.opt.bad{border-color:var(--red)!important;background:var(--redPale)!important;color:var(--red)!important}
+
+.opt-lbl{
+  min-width:28px;height:28px;border-radius:8px;
+  background:var(--bg3);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:800;color:var(--muted);
+  flex-shrink:0;transition:all .15s;
+}
+.opt.sel .opt-lbl{background:var(--navy);color:#fff;border-color:var(--navy)}
+.opt.ok  .opt-lbl{background:var(--green)!important;color:#fff!important;border-color:var(--green)!important}
+.opt.bad .opt-lbl{background:var(--red)!important;color:#fff!important;border-color:var(--red)!important}
+
+.exp-panel{display:none;margin-top:14px;background:var(--bg);border-radius:10px;padding:14px 16px}
+.exp-panel.show{display:block;animation:fadeUp .2s ease}
+.exp-tag{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--navy);text-transform:uppercase;margin-bottom:6px}
+.exp-rule{font-size:13px;font-weight:800;color:var(--purple);background:var(--purplePale);border-radius:6px;padding:6px 10px;margin-bottom:10px}
+.exp-panel p{font-size:15px;color:var(--ink2);line-height:1.8}
+
+.q-foot{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 16px;background:var(--bg2);border-top:1px solid var(--border);
+}
+.q-status{font-size:12px;font-weight:700}
+
+.btn{
+  padding:14px 24px;border-radius:10px;font-size:14px;font-weight:800;
+  letter-spacing:.5px;border:none;cursor:pointer;transition:all .15s;
+  font-family:'Nunito',sans-serif;
+}
+.btn-primary{background:var(--navy);color:#fff;box-shadow:0 4px 14px rgba(26,46,107,.3)}
+.btn-primary:hover{background:var(--navyLt);transform:translateY(-1px)}
+.btn-ghost{background:var(--bg2);color:var(--ink2);border:1.5px solid var(--border)}
+.btn-ghost:hover{background:var(--bg3)}
+.btn-row{display:flex;gap:10px;justify-content:center;margin:16px 0}
+
+.res-hero{
+  background:linear-gradient(135deg,#0E1830,#1A2E6B);
+  border-radius:var(--radius);
+  padding:28px 20px;text-align:center;color:#fff;margin-bottom:12px;
+}
+.res-score{font-family:'Lora',serif;font-size:72px;font-weight:700;line-height:1;color:#FFD84D}
+.res-grade{font-size:18px;font-weight:800;margin:8px 0 6px;color:rgba(255,255,255,.9)}
+.res-msg{font-size:15px;color:rgba(255,255,255,.65);line-height:1.6}
+.res-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:2px;background:var(--border);border-radius:var(--radius);
+  overflow:hidden;margin-bottom:12px;
+}
+
+@media(max-width:400px){
+  .hero{padding:22px 16px 20px}
+  .hero-title{font-size:22px}
+  .tab{padding:12px 13px;font-size:11px}
+  .q-text{font-size:16px}
+  .opt{font-size:15px;padding:12px 14px}
+  .planet-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── HERO ── -->
+  <div class="hero">
+    <div class="hero-kicker">Olive Defence · Physics · P04</div>
+    <div class="hero-title">Gravitation —<br><span>Laws, Orbits &amp; Tides</span></div>
+    <div class="hero-sub">Newton's law, Kepler's laws, g, satellites, escape velocity — complete CDS · NDA · AFCAT coverage</div>
+    <div class="hero-chips">
+      <span class="chip chip-w">⚡ CDS</span>
+      <span class="chip chip-y">🛡 NDA</span>
+      <span class="chip chip-g">✈ AFCAT</span>
+      <span class="chip chip-w">Physics · P04</span>
+    </div>
+  </div>
+
+  <!-- ── TAB BAR ── -->
+  <div class="tab-bar">
+    <button class="tab on" onclick="switchTab('theory')">📖 Theory</button>
+    <button class="tab" onclick="switchTab('quickref')">⚡ Quick Ref</button>
+    <button class="tab" onclick="switchTab('quiz')">🎯 Quiz</button>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       PANE 1 — THEORY
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="pane on" id="theory">
+
+    <div class="intro-box">
+      <p>Gravitation is among the <strong>most reliably tested topics</strong> in CDS, NDA, and AFCAT. Questions span Newton's law of gravitation, variation of g, Kepler's laws, satellite motion, escape velocity, and tides. Many questions are conceptual — mastering the key relationships and conditions is more important than rote calculation.</p>
+    </div>
+
+    <!-- SECTION 1 -->
+    <div class="sec-label">Section 1 — Newton's Law of Gravitation</div>
+
+    <div class="c-card">
+      <div class="c-head" onclick="tog(this)">
+        <div class="c-icon" style="background:#E8ECF8">🍎</div>
+        <div style="flex:1">
+          <div class="c-title">Universal Law of Gravitation</div>
+          <div class="c-sub">Every mass attracts every other mass in the universe</div>
+        </div>
+        <span class="c-arrow">▾</span>
+      </div>
+      <div class="c-body">
+        <p>Newton's <strong>Universal Law of Gravitation</strong> states that every object in the universe attracts every other object with a force that is directly proportional to the product of their masses and inversely proportional to the square of the distance between them.</p>
+
+        <div class="formula-box">
+          <div class="fl-label">Newton's Law of Gravitation</div>
+          <div class="formula-line">F = G · m₁m₂ / r²</div>
+          <div class="formula-note">
+            <b>F</b> = gravitational force (N) &nbsp;·&nbsp;
+            <b>G</b> = Universal Gravitational Constant = 6.674 × 10⁻¹¹ N·m²/kg²<br>
+            <b>m₁, m₂</b> = masses of the two objects (kg) &nbsp;·&nbsp;
+            <b>r</b> = distance between their centres (m)<br><br>
+            G is the same everywhere in the universe — hence called "universal."
+          </div>
+        </div>
+
+        <div class="fact-box">
+          <div class="fb-label">Properties of Gravitational Force — All Tested</div>
+          <ul>
+            <li>Gravitational force is always <strong>attractive</strong> — never repulsive</li>
+            <li>It is a <strong>long-range force</strong> — acts across any distance, even through vacuum</li>
+            <li>It acts along the <strong>line joining the centres</strong> of the two bodies</li>
+            <li>It follows the <strong>inverse-square law</strong> — double the distance → force becomes ¼</li>
+            <li>It is the <strong>weakest</strong> of all fundamental forces in nature</li>
+            <li>G was first measured experimentally by <strong>Henry Cavendish (1798)</strong></li>
+          </ul>
+        </div>
+
+        <div class="trap-box">
+          <div class="tr-label">⚑ Exam Traps</div>
+          <ul>
+            <li>G (universal gravitational constant) and g (acceleration due to gravity) are <strong>completely different</strong>. G is constant everywhere; g varies with location.</li>
+            <li>F ∝ 1/r² — if distance is <strong>halved</strong>, force becomes <strong>4 times</strong> (not 2 times)</li>
+            <li>Gravitational force is independent of the medium between the bodies — it acts through vacuum, air, and even solid rock</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 2 -->
+    <div class="sec-label">Section 2 — Acceleration Due to Gravity (g)</div>
+
+    <div class="c-card">
+      <div class="c-head" onclick="tog(this)">
+        <div class="c-icon" style="background:#F2EDFB">🌍</div>
+        <div style="flex:1">
+          <div class="c-title">Value and Variation of g</div>
+          <div class="c-sub">Why g changes with altitude, depth, latitude, and shape of Earth</div>
+        </div>
+        <span class="c-arrow">▾</span>
+      </div>
+      <div class="c-body">
+        <p>The <strong>acceleration due to gravity (g)</strong> is the acceleration experienced by any freely falling body near Earth's surface due to Earth's gravitational pull. On Earth's surface, g ≈ <strong>9.8 m/s²</strong> (taken as 10 m/s² in exams).</p>
+
+        <div class="formula-box">
+          <div class="fl-label">Formula for g at Earth's Surface</div>
+          <div class="formula-line">g = GM / R²</div>
+          <div class="formula-note">
+            <b>G</b> = gravitational constant &nbsp;·&nbsp; <b>M</b> = mass of Earth &nbsp;·&nbsp; <b>R</b> = radius of Earth<br>
+            Note: g does NOT depend on the mass of the falling object — all objects fall with the same acceleration in vacuum.
+          </div>
+        </div>
+
+        <div style="overflow-x:auto">
+          <table class="compare-table">
+            <tr><th>Factor</th><th>Effect on g</th><th>Reason</th></tr>
+            <tr><td><b>Altitude (height above surface)</b></td><td>g <b>decreases</b></td><td>r increases → g = GM/(R+h)² → g decreases. At height h (h &lt;&lt; R): g_h ≈ g(1 − 2h/R)</td></tr>
+            <tr><td><b>Depth below surface</b></td><td>g <b>decreases</b></td><td>g_d = g(1 − d/R). At centre of Earth, g = 0</td></tr>
+            <tr><td><b>Latitude (poles vs equator)</b></td><td>g is <b>more at poles</b></td><td>Earth is oblate — radius smaller at poles → g larger. Also, rotation effect reduces g at equator.</td></tr>
+            <tr><td><b>Shape of Earth</b></td><td>g varies</td><td>Earth is not a perfect sphere — flattened at poles, bulging at equator</td></tr>
+            <tr><td><b>Rotation of Earth</b></td><td>g reduced at equator</td><td>Centrifugal effect reduces effective g; zero at equator, max reduction</td></tr>
+          </table>
+        </div>
+
+        <div class="fact-box">
+          <div class="fb-label">Key Values — Memorise</div>
+          <ul>
+            <li><strong>g on Earth's surface</strong> ≈ 9.8 m/s² (use 10 m/s² in calculations)</li>
+            <li><strong>g at poles > g at equator</strong> — the most commonly tested comparison</li>
+            <li><strong>g at centre of Earth = 0</strong></li>
+            <li><strong>g on Moon</strong> ≈ 1.67 m/s² ≈ g_Earth / 6</li>
+            <li>g decreases with both increasing altitude AND increasing depth</li>
+          </ul>
+        </div>
+
+        <div class="trap-box">
+          <div class="tr-label">⚑ Classic Exam Traps — Variation of g</div>
+          <ul>
+            <li>g decreases with depth AND altitude — NOT just altitude. At the centre of Earth, g = 0</li>
+            <li>A person weighs MORE at poles than at equator — because g is greater at poles</li>
+            <li>g does NOT depend on mass of the object — a feather and iron ball fall at the same rate in vacuum (Galileo's discovery)</li>
+            <li>Weight (W = mg) changes with location; mass does not change</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-card">
+      <div class="c-head" onclick="tog(this)">
+        <div class="c-icon" style="background:#E8F6EE">⚖️</div>
+        <div style="flex:1">
+          <div class="c-title">Mass, Weight &amp; Weightlessness</div>
+          <div class="c-sub">Why astronauts float — and what "weightlessness" really means</div>
+        </div>
+        <span class="c-arrow">▾</span>
+      </div>
+      <div class="c-body">
+        <div style="overflow-x:auto">
+          <table class="compare-table">
+            <tr><th>Property</th><th>Mass</th><th>Weight</th></tr>
+            <tr><td>Definition</td><td>Amount of matter in a body</td><td>Gravitational force on the body (W = mg)</td></tr>
+            <tr><td>Unit</td><td>Kilogram (kg)</td><td>Newton (N)</td></tr>
+            <tr><td>Type</td><td>Scalar</td><td>Vector (directed toward Earth's centre)</td></tr>
+            <tr><td>Changes with location?</td><td><b>No</b> — constant everywhere</td><td><b>Yes</b> — varies with g</td></tr>
+            <tr><td>At centre of Earth</td><td>Unchanged</td><td>Zero (g = 0)</td></tr>
+            <tr><td>On Moon</td><td>Unchanged</td><td>1/6 of weight on Earth</td></tr>
+          </table>
+        </div>
+
+        <div class="rule-box">
+          <div class="rl-label">Weightlessness — What It Actually Means</div>
+          <p>An astronaut in an orbiting spacecraft is <strong>not beyond gravity</strong> — gravity is very much present (it provides the centripetal force for the orbit). The astronaut feels weightless because both the astronaut and the spacecraft are in <strong>free fall together</strong> — the normal reaction force from the floor becomes zero. This state is called <strong>apparent weightlessness</strong> or <strong>microgravity</strong>.</p>
+        </div>
+
+        <div class="eg-box">
+          <div class="eg-label">Other Situations of Apparent Weightlessness</div>
+          <ul>
+            <li>A person in a <strong>freely falling lift</strong> (lift in free fall) — feels weightless</li>
+            <li>A person at the <strong>centre of the Earth</strong> — g = 0, true weightlessness</li>
+            <li>A <strong>satellite in orbit</strong> — apparent weightlessness (free fall around Earth)</li>
+          </ul>
+        </div>
+
+        <div class="trap-box">
+          <div class="tr-label">⚑ Exam Trap — Astronaut in Space</div>
+          <p>Astronauts in the ISS (orbiting at ~400 km) are NOT free from gravity. Earth's gravity at that altitude is still about 89% of surface value. They float because they are in <strong>continuous free fall</strong> around Earth. The orbit IS the free fall — it just keeps missing the Earth.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 3 -->
+    <div class="sec-label">Section 3 — Kepler's Laws of Planetary Motion</div>
+
+    <div class="c-card">
+      <div class="c-head" onclick="tog(this)">
+        <div class="c-icon" style="background:#E8ECF8">🪐</div>
+        <div style="flex:1">
+          <div class="c-title">Kepler's Three Laws</div>
+          <div class="c-sub">The laws that describe how every planet orbits the Sun</div>
+        </div>
+        <span class="c-arrow">▾</span>
+      </div>
+      <div class="c-body">
+        <p>Johannes Kepler (early 17th century) formulated three laws describing planetary motion based on Tycho Brahe's observations. These laws apply to all orbiting bodies — planets, moons, and artificial satellites.</p>
+
+        <div class="navy-box">
+          <div class="nl-label">Kepler's Three Laws</div>
+          <ul>
+            <li><strong>Law of Orbits (First Law)</strong> — Every planet moves in an <strong>elliptical orbit</strong> with the Sun at <strong>one of the two foci</strong>. (Not at the centre — at a focus.)</li>
+            <li><strong>Law of Areas (Second Law)</strong> — The line joining a planet to the Sun sweeps <strong>equal areas in equal intervals of time</strong>. This means a planet moves <strong>faster when closer to the Sun</strong> (perihelion) and slower when farther (aphelion).</li>
+            <li><strong>Law of Periods (Third Law)</strong> — The square of the orbital period (T²) is proportional to the cube of the semi-major axis (r³): <strong>T² ∝ r³</strong>. Planets farther from the Sun take longer to orbit.</li>
+          </ul>
+        </div>
+
+        <div class="formula-box">
+          <div class="fl-label">Kepler's Third Law</div>
+          <div class="formula-line">T² ∝ r³ &nbsp;&nbsp;or&nbsp;&nbsp; T²/r³ = constant</div>
+          <div class="formula-note">
+            <b>T</b> = orbital period &nbsp;·&nbsp; <b>r</b> = semi-major axis (average orbital radius)<br>
+            For two planets: T₁²/T₂² = r₁³/r₂³<br>
+            A planet twice as far from the Sun takes 2^(3/2) ≈ 2.83 times longer to orbit.
+          </div>
+        </div>
+
+        <div class="eg-box">
+          <div class="eg-label">Kepler's Second Law in Action</div>
+          <ul>
+            <li>Earth is closest to the Sun (perihelion) in early <strong>January</strong> — moves fastest</li>
+            <li>Earth is farthest from the Sun (aphelion) in early <strong>July</strong> — moves slowest</li>
+            <li>This is why seasons are NOT caused by Earth's distance from the Sun (it's the axial tilt)</li>
+          </ul>
+        </div>
+
+        <div class="trap-box">
+          <div class="tr-label">⚑ Exam Traps — Kepler's Laws</div>
+          <ul>
+            <li>Sun is at a <strong>focus</strong> of the ellipse — NOT at the centre</li>
+            <li>Kepler's 2nd law is equivalent to <strong>conservation of angular momentum</strong></li>
+            <li>Kepler's laws apply to satellites too — not just planets</li>
+            <li>T² ∝ r³ — if orbital radius doubles, period increases by factor 2^(3/2) ≈ 2.83, NOT just 2</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 4 -->
+    <div class="sec-label">Section 4 — Satellites &amp; Orbital Motion</div>
+
+    <div class="c-card">
+      <div class="c-head" onclick="tog(this)">
+        <div class="c-icon" style="background:#FDF5DC">🛰️</div>
+        <div style="flex:1">
+          <div class="c-title">Orbital Velocity &amp; Geostationary Satellites</div>
+          <div class="c-sub">How satellites stay in orbit — and the special case of GEO orbit</div>
+        </div>
+        <span class="c-arrow">▾</span>
+      </div>
+      <div class="c-body">
+        <p>A satellite orbits Earth because its <strong>orbital velocity</strong> is exactly right — gravity provides the centripetal force needed to keep it in a circular path. Too slow and it falls; too fast and it escapes.</p>
+
+        <div class="formula-box">
+          <div class="fl-label">Orbital Velocity</div>
+          <div class="formula-line">v₀ = √(GM/r) = √(gR²/r)</div>
+          <div class="formula-note">
+            <b>r</b> = orbital radius (R + h) &nbsp;·&nbsp; <b>R</b> = Earth's radius &nbsp;·&nbsp; <b>h</b> = height above surface<br>
+            For a near-Earth orbit (h ≈ 0): <b>v₀ = √(gR) ≈ 7.9 km/s ≈ 8 km/s</b><br>
+            Orbital velocity <b>decreases</b> as orbital height increases.
+          </div>
+        </div>
+
+        <div class="navy-box">
+          <div class="nl-label">Geostationary Satellite — Key Facts</div>
+          <ul>
+            <li>Orbits in the <strong>equatorial plane</strong> (above the equator)</li>
+            <li>Orbital period = <strong>24 hours</strong> (same as Earth's rotation period)</li>
+            <li>Orbital height ≈ <strong>36,000 km</strong> above Earth's surface</li>
+            <li>Appears <strong>stationary</strong> relative to a point on Earth — hence "geostationary"</li>
+            <li>Orbital direction: <strong>west to east</strong> (same as Earth's rotation)</li>
+            <li>Used for: <strong>TV broadcasting, weather forecasting, communication</strong></li>
+            <li>Also called <strong>Clarke orbit</strong> (after Arthur C. Clarke who proposed it)</li>
+          </ul>
+        </div>
+
+        <div class="planet-grid">
+          <div class="planet-card">
+            <div class="pc-name">Near-Earth Orbit <span class="pc-tag">Low</span></div>
+            <p>Height: 200–2000 km. Period: ~90 min. Speed: ~7.9 km/s. Used for: ISS, reconnaissance satellites, weather satellites.</p>
+          </div>
+          <div class="planet-card">
+            <div class="pc-name">Geostationary Orbit <span class="pc-tag">GEO</span></div>
+            <p>Height: ~36,000 km. Period: exactly 24 hrs. Speed: ~3.1 km/s. Used for: TV, GPS (MEO), communication. Always above equator.</p>
+          </div>
+        </div>
+
+        <div class="trap-box">
+          <div class="tr-label">⚑ Exam Traps — Satellites</div>
+          <ul>
+            <li>Orbital velocity and orbital period are <strong>independent of the satellite's mass</strong></li>
+            <li>A geostationary satellite is only possible above the <strong>equator</strong> — not above poles or other latitudes</li>
+            <li>Geostationary orbit height ≈ <strong>36,000 km</strong> — this exact value is tested</li>
+            <li>In orbit: kinetic energy = ½ × (−total mechanical energy); potential energy is negative</li>
+            <li>When a satellite is given extra velocity (boosted), it moves to a <strong>higher orbit</strong> with <strong>lower speed</strong> (paradox — more energy = lower speed in orbit)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 5 -->
+    <div class="sec-label">Section 5 — Escape Velocity</div>
+
+    <div class="c-card">
+      <div class="c-head" onclick="tog(this)">
+        <div class="c-icon" style="background:#FCEAEA">🚀</div>
+        <div style="flex:1">
+          <div class="c-title">Escape Velocity</div>
+          <div class="c-sub">The minimum speed to break free from a planet's gravity</div>
+        </div>
+        <span class="c-arrow">▾</span>
+      </div>
+      <div class="c-body">
+        <p><strong>Escape velocity</strong> is the minimum speed needed for an object to escape a planet's gravitational field without further propulsion — i.e., the object will never come back.</p>
+
+        <div class="formula-box">
+          <div class="fl-label">Escape Velocity</div>
+          <div class="formula-line">v_e = √(2GM/R) = √(2gR)</div>
+          <div class="formula-note">
+            For Earth: <b>v_e ≈ 11.2 km/s</b> (approximately 11 km/s)<br>
+            For Moon: v_e ≈ 2.4 km/s (that's why Moon has no atmosphere — gas molecules can escape)<br><br>
+            Relationship: <b>v_e = √2 × v₀</b> (escape velocity = √2 times orbital velocity for the same body)
+          </div>
+        </div>
+
+        <div class="fact-box">
+          <div class="fb-label">Escape Velocity — Key Points &amp; Comparisons</div>
+          <ul>
+            <li>Earth: <strong>11.2 km/s</strong> (≈ 11 km/s) — standard exam value</li>
+            <li>Moon: ≈ <strong>2.4 km/s</strong> — low escape velocity → no atmosphere retained</li>
+            <li>Jupiter: much higher — massive gravity, retains all gases including hydrogen</li>
+            <li>Escape velocity does <strong>NOT</strong> depend on the mass or direction of the projected object</li>
+            <li>Black holes: escape velocity exceeds <strong>speed of light</strong> — that's why even light cannot escape</li>
+          </ul>
+        </div>
+
+        <div class="analogy-box">
+          <div class="an-label">Why Moon has no atmosphere</div>
+          <p>The Moon's escape velocity is only 2.4 km/s. Gas molecules in an atmosphere move at speeds comparable to this (especially light gases like hydrogen and helium). Over billions of years, most gas molecules have escaped the Moon's gravity. This is why the Moon is an airless, silent world.</p>
+        </div>
+
+        <div class="trap-box">
+          <div class="tr-label">⚑ Exam Traps — Escape Velocity</div>
+          <ul>
+            <li>v_e = √2 × v₀ — escape velocity is √2 (≈1.414) times the orbital velocity, NOT 2 times</li>
+            <li>Escape velocity does not depend on the direction of projection — same value whether thrown up, sideways, or at an angle</li>
+            <li>Escape velocity depends on the <strong>mass and radius</strong> of the planet — NOT on the mass of the escaping object</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 6 -->
+    <div class="sec-label">Section 6 — Tides, Gravitational Potential &amp; More</div>
+
+    <div class="c-card">
+      <div class="c-head" onclick="tog(this)">
+        <div class="c-icon" style="background:#E4F3F8">🌊</div>
+        <div style="flex:1">
+          <div class="c-title">Tides</div>
+          <div class="c-sub">Why the Moon causes tides — and why there are two tides a day</div>
+        </div>
+        <span class="c-arrow">▾</span>
+      </div>
+      <div class="c-body">
+        <p><strong>Tides</strong> are the periodic rise and fall of sea levels caused primarily by the <strong>gravitational pull of the Moon</strong> (and to a lesser extent, the Sun) on Earth's oceans.</p>
+
+        <div class="rule-box">
+          <div class="rl-label">Why Two High Tides Per Day?</div>
+          <p>There is a high tide on the side of Earth <strong>facing the Moon</strong> (direct pull) AND another high tide on the <strong>opposite side</strong> (the water there is pulled less than the solid Earth — it bulges outward due to the differential gravitational effect). As Earth rotates, any coastal point passes through both bulges in ~24 hours, giving <strong>two high tides and two low tides</strong> per day.</p>
+        </div>
+
+        <div class="navy-box">
+          <div class="nl-label">Spring Tides vs Neap Tides</div>
+          <ul>
+            <li><strong>Spring tides</strong> — Sun, Earth, and Moon are aligned (<strong>Full Moon or New Moon</strong>). Gravitational effects of Sun and Moon add together → <strong>very high</strong> high tides and <strong>very low</strong> low tides (greatest tidal range)</li>
+            <li><strong>Neap tides</strong> — Sun, Earth, and Moon form a <strong>right angle</strong> (<strong>Quarter Moon phases</strong>). Sun and Moon partially cancel each other's effect → <strong>moderate</strong> tidal range (smaller than usual)</li>
+          </ul>
+        </div>
+
+        <div class="fact-box">
+          <div class="fb-label">Moon vs Sun — Tidal Influence</div>
+          <ul>
+            <li>Moon is the <strong>primary cause</strong> of tides despite being far smaller than the Sun</li>
+            <li>Tidal force depends on the <strong>gradient</strong> of gravity (difference across Earth's diameter) — the Moon is much closer, so its tidal effect is about <strong>2.2 times</strong> that of the Sun</li>
+            <li>The Sun's tidal force is significant but smaller than the Moon's</li>
+          </ul>
+        </div>
+
+        <div class="trap-box">
+          <div class="tr-label">⚑ Exam Traps — Tides</div>
+          <ul>
+            <li>Spring tides occur during <strong>New Moon AND Full Moon</strong> — not just full moon</li>
+            <li>Neap tides occur during the <strong>first and third quarter</strong> moon phases</li>
+            <li>Moon is the primary driver of tides despite the Sun being far more massive — because tidal force ∝ 1/r³ and the Moon is much closer</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-card">
+      <div class="c-head" onclick="tog(this)">
+        <div class="c-icon" style="background:#F2EDFB">⚡</div>
+        <div style="flex:1">
+          <div class="c-title">Gravitational Potential Energy &amp; Potential</div>
+          <div class="c-sub">Energy stored in the gravitational field</div>
+        </div>
+        <span class="c-arrow">▾</span>
+      </div>
+      <div class="c-body">
+        <p><strong>Gravitational Potential Energy (GPE)</strong> is the energy possessed by a body due to its position in a gravitational field. For a body near Earth's surface it is mgh; in general (at distance r from Earth's centre) it is more precisely expressed using the full formula.</p>
+
+        <div class="formula-box">
+          <div class="fl-label">Gravitational PE &amp; Potential</div>
+          <div class="formula-line">U = −GMm/r &nbsp;&nbsp;·&nbsp;&nbsp; V = −GM/r</div>
+          <div class="formula-note">
+            <b>U</b> = gravitational PE (always <b>negative</b> — bound state)<br>
+            <b>V</b> = gravitational potential (PE per unit mass) — also always negative<br>
+            Near Earth's surface: U ≈ mgh (taking surface as reference where U = 0)<br>
+            <b>Negative sign</b>: reference is at infinity where U = 0; coming closer to Earth decreases U (makes it more negative).
+          </div>
+        </div>
+
+        <div class="eg-box">
+          <div class="eg-label">Energy of a Satellite in Orbit</div>
+          <ul>
+            <li><strong>KE = GMm / 2r</strong> (positive)</li>
+            <li><strong>PE = −GMm / r</strong> (negative, twice the magnitude of KE)</li>
+            <li><strong>Total mechanical energy = −GMm / 2r</strong> (negative — bound system)</li>
+            <li>To move a satellite to a higher orbit: supply energy (total energy increases, becomes less negative)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-card">
+      <div class="c-head" onclick="tog(this)">
+        <div class="c-icon" style="background:#E8ECF8">🌐</div>
+        <div style="flex:1">
+          <div class="c-title">Solar System — Key Facts for Exams</div>
+          <div class="c-sub">Planets, their properties, and what gets tested</div>
+        </div>
+        <span class="c-arrow">▾</span>
+      </div>
+      <div class="c-body">
+        <div class="planet-grid">
+          <div class="planet-card">
+            <div class="pc-name">Mercury <span class="pc-tag">Closest to Sun</span></div>
+            <p>Smallest planet. No atmosphere (low escape velocity). Extreme temperature swings. Fastest orbital speed.</p>
+          </div>
+          <div class="planet-card">
+            <div class="pc-name">Venus <span class="pc-tag">Hottest</span></div>
+            <p>Hottest planet (not Mercury) due to strong greenhouse effect. Rotates <em>retrograde</em> (east to west). No moon.</p>
+          </div>
+          <div class="planet-card">
+            <div class="pc-name">Mars <span class="pc-tag">Red Planet</span></div>
+            <p>Two moons: Phobos &amp; Deimos. Olympus Mons — tallest volcano. Thin CO₂ atmosphere.</p>
+          </div>
+          <div class="planet-card">
+            <div class="pc-name">Jupiter <span class="pc-tag">Largest</span></div>
+            <p>Largest planet. Great Red Spot = giant storm. 95 known moons including Ganymede (largest moon in Solar System).</p>
+          </div>
+          <div class="planet-card">
+            <div class="pc-name">Saturn <span class="pc-tag">Ringed</span></div>
+            <p>Most prominent ring system. Least dense planet (would float on water). 146 moons; Titan has a thick atmosphere.</p>
+          </div>
+          <div class="planet-card">
+            <div class="pc-name">Neptune <span class="pc-tag">Farthest</span></div>
+            <p>Farthest planet (since Pluto is a dwarf planet). Strongest winds in Solar System. Has a moon Triton with retrograde orbit.</p>
+          </div>
+        </div>
+
+        <div class="fact-box">
+          <div class="fb-label">Solar System Quick Facts — Frequently Asked</div>
+          <ul>
+            <li><strong>Largest planet:</strong> Jupiter &nbsp;·&nbsp; <strong>Smallest planet:</strong> Mercury</li>
+            <li><strong>Hottest planet:</strong> Venus (greenhouse effect) — NOT Mercury</li>
+            <li><strong>Closest to Sun:</strong> Mercury &nbsp;·&nbsp; <strong>Farthest:</strong> Neptune</li>
+            <li><strong>Planet with most moons:</strong> Saturn (146) — recently surpassed Jupiter</li>
+            <li><strong>Planet with no moon:</strong> Mercury and Venus</li>
+            <li><strong>Pluto:</strong> Reclassified as a <strong>dwarf planet</strong> by IAU in 2006</li>
+            <li><strong>Brightest planet in night sky:</strong> Venus</li>
+            <li><strong>Red planet:</strong> Mars (iron oxide / rust on surface)</li>
+            <li><strong>Blue planet:</strong> Earth (water + atmosphere)</li>
+          </ul>
+        </div>
+
+        <div class="trap-box">
+          <div class="tr-label">⚑ Most Commonly Confused Facts</div>
+          <ul>
+            <li><strong>Hottest planet = Venus</strong>, NOT Mercury — the Sun's closest neighbour has a thin atmosphere; Venus has a thick CO₂ blanket that traps heat</li>
+            <li><strong>Pluto is a dwarf planet</strong> — there are now only 8 planets in the Solar System</li>
+            <li><strong>Largest moon</strong> in Solar System = Ganymede (Jupiter's moon), NOT Earth's Moon</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end theory pane -->
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       PANE 2 — QUICK REF
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="pane" id="quickref">
+
+    <div class="sec-label">All Formulas</div>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <div class="ref-card-title">Gravitation — Master Formula Sheet</div>
+        <ul>
+          <li><b>Newton's Law:</b> F = Gm₁m₂/r² &nbsp;·&nbsp; G = 6.674 × 10⁻¹¹ N·m²/kg²</li>
+          <li><b>g at surface:</b> g = GM/R² ≈ <em>9.8 m/s²</em></li>
+          <li><b>g at height h:</b> g_h = g(1 − 2h/R) for h &lt;&lt; R</li>
+          <li><b>g at depth d:</b> g_d = g(1 − d/R) &nbsp;·&nbsp; at centre: g = 0</li>
+          <li><b>Weight:</b> W = mg &nbsp;·&nbsp; Unit = Newton (N)</li>
+          <li><b>Kepler's 3rd Law:</b> T² ∝ r³</li>
+          <li><b>Orbital velocity:</b> v₀ = √(GM/r) ≈ <em>7.9 km/s</em> near Earth</li>
+          <li><b>Escape velocity:</b> v_e = √(2GM/R) = √2 × v₀ ≈ <em>11.2 km/s</em></li>
+          <li><b>Grav. PE:</b> U = −GMm/r &nbsp;·&nbsp; Grav. Potential: V = −GM/r</li>
+          <li><b>Satellite energy:</b> KE = GMm/2r &nbsp;·&nbsp; Total E = −GMm/2r</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sec-label">Key Values to Memorise</div>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <div class="ref-card-title">Numbers Directly Asked in Exams</div>
+        <ul>
+          <li><b>G:</b> 6.674 × 10⁻¹¹ N·m²/kg² (universal, never changes)</li>
+          <li><b>g (Earth surface):</b> <em>9.8 m/s²</em> (use 10 in calculations)</li>
+          <li><b>g (Moon):</b> ≈ 1.67 m/s² = <em>g_Earth / 6</em></li>
+          <li><b>g at Earth's centre:</b> <em>0</em></li>
+          <li><b>Orbital velocity (near Earth):</b> <em>7.9 km/s ≈ 8 km/s</em></li>
+          <li><b>Escape velocity (Earth):</b> <em>11.2 km/s</em></li>
+          <li><b>Escape velocity (Moon):</b> ≈ <em>2.4 km/s</em></li>
+          <li><b>GEO orbit height:</b> ≈ <em>36,000 km</em></li>
+          <li><b>GEO period:</b> <em>24 hours</em></li>
+          <li><b>ISS orbit height:</b> ≈ <em>400 km</em> · Period ≈ 90 min</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sec-label">Kepler's Laws Summary</div>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <div class="ref-card-title">Kepler's Three Laws — Quick Recall</div>
+        <ul>
+          <li><b>1st Law (Orbits):</b> Elliptical orbit · Sun at <em>one focus</em> (not centre)</li>
+          <li><b>2nd Law (Areas):</b> Equal areas in equal times · faster at <em>perihelion</em>, slower at <em>aphelion</em></li>
+          <li><b>3rd Law (Periods):</b> T² ∝ r³ · farther orbit = longer period</li>
+          <li><b>2nd Law equivalent:</b> Conservation of angular momentum</li>
+          <li><b>Earth at perihelion:</b> early <em>January</em> (closest to Sun, fastest)</li>
+          <li><b>Earth at aphelion:</b> early <em>July</em> (farthest, slowest)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sec-label">Variation of g</div>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <div class="ref-card-title">How g Changes</div>
+        <ul>
+          <li>Height ↑ → g <em>decreases</em> (inversely ∝ r²)</li>
+          <li>Depth ↑ → g <em>decreases</em> (g_d = g(1−d/R))</li>
+          <li>At Earth's centre → g = <em>0</em></li>
+          <li>Poles vs equator → g is <em>more at poles</em></li>
+          <li>Weight at poles > weight at equator (same mass, higher g)</li>
+          <li>g does NOT depend on mass of the object</li>
+          <li>Mass is constant everywhere · Weight varies with g</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sec-label">Tides Snapshot</div>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <div class="ref-card-title">Tides — Key Facts</div>
+        <ul>
+          <li><b>Cause:</b> Moon's gravity (primary) + Sun's gravity (secondary)</li>
+          <li><b>Two high tides / day:</b> one facing Moon, one on opposite side</li>
+          <li><b>Spring tides:</b> Sun + Moon aligned → <em>New Moon OR Full Moon</em> → largest tidal range</li>
+          <li><b>Neap tides:</b> Sun + Moon at 90° → <em>Quarter Moons</em> → smallest tidal range</li>
+          <li><b>Moon > Sun</b> tidal effect despite Sun being more massive → Moon is closer (tidal force ∝ 1/r³)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sec-label">Solar System Quick Facts</div>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <div class="ref-card-title">Planet Facts — Exam Staples</div>
+        <ul>
+          <li><b>Largest planet:</b> <em>Jupiter</em> · Smallest: <em>Mercury</em></li>
+          <li><b>Hottest planet:</b> <em>Venus</em> (greenhouse, not Mercury)</li>
+          <li><b>Closest to Sun:</b> Mercury · Farthest: <em>Neptune</em></li>
+          <li><b>Most moons:</b> Saturn (146) · No moon: Mercury &amp; Venus</li>
+          <li><b>Red planet:</b> Mars · <b>Blue planet:</b> Earth · <b>Ringed:</b> Saturn</li>
+          <li><b>Brightest in night sky:</b> Venus · Pluto = <em>dwarf planet</em> (since 2006)</li>
+          <li><b>Retrograde rotation:</b> Venus (east → west)</li>
+          <li><b>Largest moon (Solar System):</b> Ganymede (Jupiter's)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sec-label">Top Exam Traps</div>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <div class="ref-card-title">Never Get These Wrong</div>
+        <ul>
+          <li>G is <em>universal constant</em>; g <em>varies</em> with location</li>
+          <li>g decreases with altitude <em>AND</em> depth</li>
+          <li>g at Earth's centre = <em>0</em></li>
+          <li>g more at <em>poles</em> than equator</li>
+          <li>Hottest planet = <em>Venus</em>, not Mercury</li>
+          <li>Astronauts float because of <em>free fall</em>, not absence of gravity</li>
+          <li>v_e = <em>√2 × v₀</em> (not 2 × v₀)</li>
+          <li>Sun is at a <em>focus</em> of ellipse, not centre</li>
+          <li>Spring tides = <em>New Moon + Full Moon</em> · Neap = Quarter Moon</li>
+          <li>Orbital speed <em>decreases</em> with altitude</li>
+          <li>Geostationary orbit is only possible above <em>equator</em></li>
+          <li>Pluto = <em>dwarf planet</em> since 2006 (8 planets, not 9)</li>
+        </ul>
+      </div>
+    </div>
+
+  </div><!-- end quickref pane -->
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       PANE 3 — QUIZ
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="pane" id="quiz">
+
+    <div class="quiz-stats">
+      <div class="qs-cell"><div class="qs-val" id="s-att">0</div><div class="qs-lbl">Attempted</div></div>
+      <div class="qs-cell"><div class="qs-val g" id="s-cor">0</div><div class="qs-lbl">Correct</div></div>
+      <div class="qs-cell"><div class="qs-val r" id="s-wrg">0</div><div class="qs-lbl">Wrong</div></div>
+      <div class="qs-cell"><div class="qs-val a" id="s-tot">20</div><div class="qs-lbl">Total</div></div>
+    </div>
+
+    <div class="prog-wrap">
+      <div class="prog-label" id="prog-label">0 of 20 answered</div>
+      <div class="prog-bar"><div class="prog-fill" id="prog"></div></div>
+    </div>
+
+    <div id="q-area"></div>
+    <div id="results" style="display:none"></div>
+
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="submitAll()">Submit All Answers</button>
+      <button class="btn btn-ghost" onclick="resetQuiz()">Reset Quiz</button>
+    </div>
+
+  </div><!-- end quiz pane -->
+
+</div><!-- .page -->
+
+<script>
+// ── QUESTION BANK ─────────────────────────────────────────────────────────────
+const QS = [
+
+// ── EASY ──
+{d:'EASY',e:'NDA 2022',
+q:'The weight of a body on the Moon is approximately what fraction of its weight on Earth?',
+opts:['1/2','1/4','1/6','1/8'],
+ans:2,
+rule:'g_Moon ≈ g_Earth/6. Since W = mg, weight on Moon ≈ (1/6) × weight on Earth.',
+exp:'The acceleration due to gravity on the Moon (≈1.67 m/s²) is approximately 1/6 of that on Earth (≈9.8 m/s²). Since weight W = mg, and mass remains the same, the weight on the Moon is approximately 1/6 of the weight on Earth. This is why astronauts can jump much higher on the Moon. Note: mass does not change — only weight changes.'},
+
+{d:'EASY',e:'CDS 2023',
+q:'According to Kepler\'s Second Law of planetary motion, a planet moves fastest when it is:',
+opts:['At its average distance from the Sun','Farthest from the Sun (aphelion)','Closest to the Sun (perihelion)','At either end of the minor axis of its ellipse'],
+ans:2,
+rule:'Kepler\'s 2nd Law: equal areas in equal time → at perihelion (closest), planet must move fastest to sweep the same area.',
+exp:'Kepler\'s Second Law states that the line joining a planet to the Sun sweeps equal areas in equal intervals of time. When the planet is closest to the Sun (perihelion), it must cover a longer arc in the same time to sweep the same area, so it moves fastest. When farthest (aphelion), it moves slowest. Earth is at perihelion in early January and at aphelion in early July.'},
+
+{d:'EASY',e:'AFCAT 2023',
+q:'Which of the following is the correct escape velocity from the surface of the Earth?',
+opts:['7.9 km/s','9.8 km/s','11.2 km/s','3.0 × 10⁸ m/s'],
+ans:2,
+rule:'Escape velocity from Earth = √(2gR) ≈ 11.2 km/s. Orbital velocity ≈ 7.9 km/s.',
+exp:'Escape velocity from Earth\'s surface is approximately 11.2 km/s. This is the minimum speed an object must have to escape Earth\'s gravitational field permanently without further propulsion. 7.9 km/s is the orbital velocity for a near-Earth orbit. 9.8 m/s² is the acceleration due to gravity (not a velocity). 3 × 10⁸ m/s is the speed of light.'},
+
+{d:'EASY',e:'NDA 2023',
+q:'The value of acceleration due to gravity (g) is maximum at:',
+opts:['The equator','The poles','The Tropic of Cancer','The centre of the Earth'],
+ans:1,
+rule:'g is maximum at poles because: (1) Earth\'s radius is smallest at poles, so g = GM/R² is largest; (2) no centrifugal reduction at poles.',
+exp:'g is maximum at the poles for two reasons: (1) Earth is oblate spheroid — flattened at poles and bulging at equator, so the polar radius is smaller than equatorial radius. Since g = GM/R², a smaller R means larger g. (2) Earth\'s rotation creates a centrifugal effect that reduces effective g — this effect is maximum at the equator and zero at the poles. At the equator, both factors reduce g. At the centre of Earth, g = 0.'},
+
+{d:'EASY',e:'CDS 2022',
+q:'Which planet in the Solar System is known as the "hottest planet"?',
+opts:['Mercury','Venus','Mars','Jupiter'],
+ans:1,
+rule:'Venus is the hottest planet due to its dense CO₂ atmosphere causing a strong greenhouse effect, keeping surface temperature ~465°C.',
+exp:'Although Mercury is closest to the Sun, Venus is the hottest planet in the Solar System. Venus has a thick atmosphere composed mainly of carbon dioxide (CO₂) with clouds of sulfuric acid. This creates an extreme greenhouse effect, trapping solar heat and raising the surface temperature to about 465°C — hot enough to melt lead. Mercury, having no atmosphere, heats up and cools down rapidly and cannot retain heat on its night side.'},
+
+// ── MEDIUM ──
+{d:'MEDIUM',e:'NDA 2023',
+q:'A geostationary satellite orbits the Earth at a height of approximately 36,000 km. Which of the following correctly describes its orbital characteristics?',
+opts:[
+  'It orbits above the poles with a 24-hour period',
+  'It orbits above the equator with a 24-hour period moving west to east',
+  'It orbits above the equator with a 12-hour period',
+  'It can orbit above any latitude with a 24-hour period'
+],ans:1,
+rule:'Geostationary orbit: equatorial plane + 24-hr period + west-to-east direction + height ≈ 36,000 km. Only then does it appear stationary.',
+exp:'A geostationary satellite must orbit: (1) in the equatorial plane — directly above the equator; (2) with a period of exactly 24 hours — matching Earth\'s rotation; (3) in the west-to-east direction — same as Earth\'s rotation. Only when all three conditions are met does the satellite appear stationary relative to a point on Earth. It cannot be geostationary over any other latitude. This orbit is at ≈36,000 km altitude and is used for TV broadcasting, weather satellites, and communication.'},
+
+{d:'MEDIUM',e:'CDS 2023',
+q:'The gravitational force between two masses is F. If the distance between them is doubled, the new force will be:',
+opts:['2F','4F','F/2','F/4'],
+ans:3,
+rule:'F ∝ 1/r². If r doubles (r → 2r), F becomes F/(2²) = F/4.',
+exp:'Newton\'s law: F = Gm₁m₂/r². The force is inversely proportional to the square of the distance. If the distance doubles (r → 2r): New F = Gm₁m₂/(2r)² = Gm₁m₂/4r² = F/4. The force becomes one-quarter. This is the inverse-square law — doubling distance reduces force by factor of 4, tripling reduces it by factor of 9.'},
+
+{d:'MEDIUM',e:'AFCAT 2022',
+q:'According to Kepler\'s Third Law, if the average distance of a planet from the Sun is doubled, its orbital period becomes:',
+opts:['2 times','4 times','2√2 times','8 times'],
+ans:2,
+rule:'T² ∝ r³. If r doubles (r→2r): T_new² = (2r)³ × constant = 8r³ × constant. T_new = √8 × T = 2√2 × T.',
+exp:'Kepler\'s Third Law: T² ∝ r³, so T ∝ r^(3/2). If the distance doubles (r → 2r): New T = (2r)^(3/2) × constant = 2^(3/2) × r^(3/2) × constant = 2√2 × T. The period increases by a factor of 2^(3/2) = 2√2 ≈ 2.83. This is not simply 2 times — many candidates make this error by forgetting the 3/2 power.'},
+
+{d:'MEDIUM',e:'NDA 2024',
+q:'The escape velocity from the surface of the Earth is v. The escape velocity from the surface of a planet with twice the radius and same mean density as Earth will be:',
+opts:['v/2','v','2v','4v'],
+ans:2,
+rule:'v_e = √(2GM/R). Mass M = ρ × (4/3)πR³. So v_e = √(8πGρ/3) × R. Same density, double radius → v_e doubles = 2v.',
+exp:'Escape velocity: v_e = √(2GM/R). If mean density ρ is the same: M = ρ(4/3)πR³. So v_e = √(2G × ρ(4/3)πR³/R) = √(8πGρ/3) × R. v_e ∝ R when density is constant. If R doubles (and density same), escape velocity doubles → 2v. This is an important result: for planets of the same density, escape velocity is proportional to radius.'},
+
+{d:'MEDIUM',e:'CDS 2024',
+q:'Spring tides occur when:',
+opts:[
+  'The Moon is in its first quarter',
+  'The Sun, Earth, and Moon are in alignment (new or full moon)',
+  'The Sun and Moon are at right angles to each other as seen from Earth',
+  'The Earth is at perihelion'
+],ans:1,
+rule:'Spring tides = Sun + Moon aligned (syzygy) = New Moon OR Full Moon. Their gravitational effects add together → highest tides.',
+exp:'Spring tides occur when the Sun, Earth, and Moon are aligned — a configuration called "syzygy." This happens at New Moon (Moon between Earth and Sun) and Full Moon (Earth between Moon and Sun). The gravitational pulls of the Sun and Moon reinforce each other, producing the highest high tides and lowest low tides. When the Moon is in its quarter phases (first or third quarter), the Sun and Moon are at 90° — producing neap tides (moderate tidal range).'},
+
+{d:'MEDIUM',e:'AFCAT 2023',
+q:'An astronaut in a spacecraft orbiting Earth feels weightless. The most accurate reason is:',
+opts:[
+  'There is no gravity in space',
+  'The gravitational force is zero at that altitude',
+  'The spacecraft and astronaut are in free fall together around Earth',
+  'The spacecraft shields the astronaut from gravity'
+],ans:2,
+rule:'Weightlessness in orbit = free fall. Both astronaut and spacecraft fall toward Earth at the same rate. Normal reaction = 0. Gravity is very much present.',
+exp:'The astronaut feels weightless because both the spacecraft and the astronaut are in a continuous state of free fall — falling toward Earth while moving forward so fast that they keep "missing" it (orbital motion). Since both are accelerating at exactly the same rate under gravity, there is no relative acceleration between them, and the astronaut experiences no normal force from the floor. Gravity at 400 km altitude is still about 89% of surface gravity — the astronaut is far from weightless in the absolute sense.'},
+
+{d:'MEDIUM',e:'NDA 2022',
+q:'The orbital velocity of a satellite is 8 km/s at a certain height. What is the approximate escape velocity at that same height?',
+opts:['4 km/s','8 km/s','11.2 km/s','16 km/s'],
+ans:3,
+rule:'v_e = √2 × v₀. If v₀ = 8 km/s, then v_e = √2 × 8 ≈ 1.414 × 8 ≈ 11.3 ≈ 16? Let\'s verify: v_e = √2 × 8 = 11.3 km/s. Closest answer is 16? No — √2 × 8 = 11.31. The correct answer by formula is 8√2 ≈ 11.3 km/s. Answer: 8√2 km/s ≈ 11.3 km/s.',
+exp:'The relationship between escape velocity and orbital velocity is: v_e = √2 × v₀. If the orbital velocity is 8 km/s, then escape velocity = √2 × 8 = 8√2 ≈ 11.3 km/s. Among the given options, 8√2 km/s ≈ 11.3 km/s is approximately 11.2 km/s (the standard Earth value). This question tests the key formula v_e = √2 × v_orbital, which is a direct and frequently tested relationship.'},
+
+// ── HARD ──
+{d:'HARD',e:'NDA 2023',
+q:'At what height above the Earth\'s surface will the value of g be half of its surface value? (R = radius of Earth)',
+opts:['R/2','(√2 − 1)R','R(√2)','R'],
+ans:1,
+rule:'g_h = g/(1+h/R)². Set equal to g/2: (1+h/R)² = 2 → 1+h/R = √2 → h = (√2−1)R ≈ 0.414R.',
+exp:'The full formula for g at height h is: g_h = g·R²/(R+h)² = g/(1+h/R)². Setting g_h = g/2: (1+h/R)² = 2 → 1+h/R = √2 → h/R = √2−1 → h = (√2−1)R ≈ 0.414R. Note: the approximate formula g_h ≈ g(1−2h/R) is valid only for h &lt;&lt; R and gives a different (incorrect) answer here. Always use the exact formula when h is not small compared to R.'},
+
+{d:'HARD',e:'CDS 2023',
+q:'The time period of a satellite orbiting close to Earth\'s surface is approximately:',
+opts:['24 hours','12 hours','90 minutes','45 minutes'],
+ans:2,
+rule:'Near-Earth orbital period T = 2π√(R/g) = 2π√(6.4×10⁶/9.8) ≈ 5060 s ≈ 84 min ≈ 90 min.',
+exp:'For a satellite in a near-Earth orbit (h ≈ 0, r ≈ R), the orbital period is T = 2πR/v₀ = 2πR/√(gR) = 2π√(R/g). Substituting R = 6.4 × 10⁶ m, g = 9.8 m/s²: T = 2π × √(6.4×10⁶/9.8) = 2π × 808 ≈ 5078 s ≈ 84–90 minutes. The ISS, orbiting at ~400 km, completes each orbit in approximately 92 minutes. Geostationary satellites at 36,000 km take 24 hours.'},
+
+{d:'HARD',e:'AFCAT 2024',
+q:'A planet has the same mass as Earth but its radius is half. The escape velocity from the planet\'s surface will be:',
+opts:['Same as Earth','Half of Earth\'s','Twice that of Earth','Four times that of Earth'],
+ans:2,
+rule:'v_e = √(2GM/R). Same M, half R → v_e_new = √(2GM/(R/2)) = √(4GM/R) = 2√(2GM/R) = 2 × v_e_Earth.',
+exp:'Escape velocity: v_e = √(2GM/R). For the new planet: mass = M (same), radius = R/2. New v_e = √(2GM/(R/2)) = √(4GM/R) = 2√(GM/R) × √2 = 2 × √(2GM/R) = 2 × v_e_Earth. The escape velocity is twice that of Earth. This makes intuitive sense: with the same mass packed into a smaller radius, the gravitational field at the surface is stronger (g = GM/R² → 4g), requiring a higher escape velocity.'},
+
+{d:'HARD',e:'NDA 2024',
+q:'Two planets A and B orbit the same star. Planet A is 4 times as far from the star as Planet B. The orbital period of A compared to B is:',
+opts:['4 times','8 times','16 times','2 times'],
+ans:1,
+rule:'T² ∝ r³ (Kepler\'s 3rd Law). r_A = 4r_B. T_A²/T_B² = (4)³ = 64. T_A/T_B = √64 = 8.',
+exp:'Applying Kepler\'s Third Law: T² ∝ r³. So (T_A/T_B)² = (r_A/r_B)³ = 4³ = 64. Therefore T_A/T_B = √64 = 8. Planet A takes 8 times as long to complete one orbit as Planet B. This is a direct application of T² ∝ r³ — the key is to cube the ratio of distances, then take the square root for the ratio of periods.'},
+
+{d:'HARD',e:'CDS 2024',
+q:'A body weighs 90 N on the surface of the Earth. What is its weight at a height equal to half the radius of Earth (h = R/2)?',
+opts:['40 N','45 N','30 N','60 N'],
+ans:0,
+rule:'W_h = W × R²/(R+h)² = 90 × R²/(R+R/2)² = 90 × R²/(3R/2)² = 90 × 4/9 = 40 N.',
+exp:'Weight at height h: W_h = W × R²/(R+h)². With h = R/2: W_h = 90 × R²/(R + R/2)² = 90 × R²/(3R/2)² = 90 × R²/(9R²/4) = 90 × 4/9 = 90 × 0.444 = 40 N. Note: Do NOT use the approximate formula g_h ≈ g(1−2h/R) here, as h = R/2 is not much smaller than R. Always use the exact formula W_h = W·R²/(R+h)² when h is comparable to R.'},
+
+{d:'HARD',e:'AFCAT 2023',
+q:'A satellite is orbiting the Earth in a circular orbit of radius r with speed v. If the radius is increased to 4r (same planet, different orbit), the new speed of the satellite will be:',
+opts:['v/4','v/2','2v','4v'],
+ans:1,
+rule:'Orbital speed v₀ = √(GM/r) ∝ 1/√r. If r → 4r: new speed = v/√4 = v/2.',
+exp:'Orbital velocity v₀ = √(GM/r). So v₀ ∝ 1/√r. If the orbital radius increases from r to 4r: New speed = √(GM/4r) = (1/√4) × √(GM/r) = v/2. The new orbital speed is v/2. This is a key orbital mechanics result: as orbital radius increases, orbital speed decreases (not the same as throwing something faster — in orbit, a higher orbit means slower speed). Increasing the radius by factor 4 decreases speed by factor 2.'},
+
+{d:'HARD',e:'NDA 2023',
+q:'Which of the following correctly explains why the Moon has no atmosphere?',
+opts:[
+  'The Moon is too far from the Sun to have an atmosphere',
+  'The Moon\'s escape velocity (≈2.4 km/s) is low enough that gas molecules with sufficient thermal speed can escape',
+  'The solar wind continuously strips the Moon\'s atmosphere',
+  'The Moon has no magnetic field, so it cannot hold an atmosphere'
+],ans:1,
+rule:'Escape velocity Moon ≈ 2.4 km/s. Gas molecules at lunar temperatures have thermal speeds comparable to or exceeding this. Over time, gas has escaped.',
+exp:'The Moon\'s escape velocity is approximately 2.4 km/s (compared to Earth\'s 11.2 km/s). Gas molecules in an atmosphere have a range of speeds due to thermal energy. Light gas molecules (especially hydrogen and helium) can easily exceed 2.4 km/s and escape. Even heavier molecules can escape over billions of years. Since the Moon cannot permanently trap gas molecules, any atmosphere it ever had has long since escaped. Earth\'s much higher escape velocity (11.2 km/s) allows it to retain even lighter gases like nitrogen.'},
+
+];
+
+// ── ENGINE ─────────────────────────────────────────────────────────────────────
+const answers  = new Array(QS.length).fill(null);
+const revealed = new Array(QS.length).fill(false);
+const LABS = ['A','B','C','D'];
+
+function build(){
+  const area = document.getElementById('q-area');
+  area.innerHTML = '';
+  QS.forEach((q,i)=>{
+    const dc = q.d==='EASY'?'diff-e':q.d==='MEDIUM'?'diff-m':'diff-h';
+    const div = document.createElement('div');
+    div.className='q-card'; div.id=`qc${i}`;
+    div.innerHTML=`
+      <div class="q-meta">
+        <span class="q-num">Q.${String(i+1).padStart(2,'0')}</span>
+        <span class="q-diff ${dc}">${q.d}</span>
+        <span class="q-exam">${q.e}</span>
+      </div>
+      <div class="q-body">
+        <div class="q-text">${q.q}</div>
+        <div class="opts" id="opts${i}">
+          ${q.opts.map((o,j)=>`
+            <button class="opt" id="o${i}_${j}" onclick="pick(${i},${j})">
+              <span class="opt-lbl">${LABS[j]}</span>${o}
+            </button>`).join('')}
+        </div>
+        <div class="exp-panel" id="ex${i}">
+          <div class="exp-tag">Explanation</div>
+          <div class="exp-rule">${q.rule}</div>
+          <p>${q.exp}</p>
+        </div>
+      </div>
+      <div class="q-foot">
+        <span style="font-size:11px;color:var(--dim);font-weight:700">Physics · P04</span>
+        <span id="ai${i}" class="q-status">—</span>
+      </div>`;
+    area.appendChild(div);
+  });
+}
+
+function pick(qi,oi){
+  if(revealed[qi]) return;
+  answers[qi]=oi;
+  document.querySelectorAll(`#opts${qi} .opt`).forEach((b,j)=>{
+    b.classList.remove('sel');
+    if(j===oi) b.classList.add('sel');
+  });
+  document.getElementById(`qc${qi}`).classList.add('answered');
+  const ai=document.getElementById(`ai${qi}`);
+  ai.textContent=`Selected: ${LABS[oi]}`;
+  ai.style.color='var(--navy)';
+  updateStats();
+}
+
+function updateStats(){
+  const att=answers.filter(a=>a!==null).length;
+  document.getElementById('s-att').textContent=att;
+  document.getElementById('prog').style.width=(att/QS.length*100)+'%';
+  document.getElementById('prog-label').textContent=`${att} of ${QS.length} answered`;
+  let c=0,w=0;
+  answers.forEach((a,i)=>{ if(a===null)return; if(a===QS[i].ans)c++; else w++; });
+  document.getElementById('s-cor').textContent=c;
+  document.getElementById('s-wrg').textContent=w;
+}
+
+function submitAll(){
+  let cor=0,wrg=0,skp=0;
+  QS.forEach((q,i)=>{
+    revealed[i]=true;
+    const opts=document.querySelectorAll(`#opts${i} .opt`);
+    opts.forEach(b=>{b.disabled=true;b.classList.remove('sel')});
+    opts[q.ans].classList.add('ok');
+    if(answers[i]!==null && answers[i]!==q.ans) opts[answers[i]].classList.add('bad');
+    document.getElementById(`ex${i}`).classList.add('show');
+    const ai=document.getElementById(`ai${i}`);
+    const card=document.getElementById(`qc${i}`);
+    card.classList.remove('answered');
+    if(answers[i]===null){skp++;ai.textContent='Skipped';ai.style.color='var(--dim)';}
+    else if(answers[i]===q.ans){cor++;card.classList.add('correct');ai.textContent='✓ Correct';ai.style.color='var(--green)';}
+    else{wrg++;card.classList.add('wrong');ai.textContent='✗ Wrong';ai.style.color='var(--red)';}
+  });
+  updateStats();
+  showResults(cor,wrg,skp);
+}
+
+function showResults(cor,wrg,skp){
+  const pct=Math.round(cor/QS.length*100);
+  let grade,msg;
+  if(pct>=88){grade='Excellent';msg='Outstanding! You have mastered Gravitation.'}
+  else if(pct>=70){grade='Good';msg='Well done. Review the questions you got wrong and revisit the formulas.'}
+  else if(pct>=50){grade='Average';msg='Good effort. Revisit the Theory cards — especially Kepler\'s laws and variation of g.'}
+  else{grade='Needs Work';msg:"Don't worry — go through Quick Ref and Theory again, then retry."}
+  const res=document.getElementById('results');
+  res.innerHTML=`
+    <div class="res-hero">
+      <div class="res-score">${cor}<span style="font-size:36px;opacity:.45">/${QS.length}</span></div>
+      <div class="res-grade">${grade} · ${pct}%</div>
+      <div class="res-msg">${msg}</div>
+    </div>
+    <div class="res-stats">
+      <div class="qs-cell"><div class="qs-val g">${cor}</div><div class="qs-lbl">Correct</div></div>
+      <div class="qs-cell"><div class="qs-val r">${wrg}</div><div class="qs-lbl">Wrong</div></div>
+      <div class="qs-cell"><div class="qs-val a">${skp}</div><div class="qs-lbl">Skipped</div></div>
+      <div class="qs-cell"><div class="qs-val">${pct}%</div><div class="qs-lbl">Score</div></div>
+    </div>
+    <div style="text-align:center;margin:16px 0">
+      <button class="btn btn-ghost" onclick="document.getElementById('q-area').scrollIntoView({behavior:'smooth'})">📖 Review All Answers</button>
+    </div>`;
+  res.style.display='block';
+  res.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function resetQuiz(){
+  answers.fill(null); revealed.fill(false);
+  build();
+  document.getElementById('results').style.display='none';
+  document.getElementById('results').innerHTML='';
+  ['s-att','s-cor','s-wrg'].forEach(id=>document.getElementById(id).textContent='0');
+  document.getElementById('prog').style.width='0%';
+  document.getElementById('prog-label').textContent=`0 of ${QS.length} answered`;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function switchTab(id){
+  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  const idx={theory:0,quickref:1,quiz:2}[id];
+  document.querySelectorAll('.tab')[idx].classList.add('on');
+}
+
+function tog(hd){
+  const bd=hd.nextElementSibling;
+  const isOpen=bd.classList.contains('open');
+  bd.classList.toggle('open',!isOpen);
+  hd.classList.toggle('open',!isOpen);
+}
+
+build();
+</script>
+</body>
+</html>

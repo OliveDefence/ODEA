@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>P03 · Work, Energy & Power | Olive Defence</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+
+:root{
+  --bg:        #F3F5F0;
+  --bg2:       #E8EDE3;
+  --bg3:       #DCE3D5;
+  --white:     #FFFFFF;
+  --ink:       #1A2214;
+  --ink2:      #2C3A22;
+  --muted:     #6A7A5A;
+  --dim:       #9AAA85;
+  --border:    #C8D4BC;
+  --teal:      #1F6B4A;
+  --tealLt:    #27854E;
+  --tealPale:  #E6F4EE;
+  --amber:     #9A6010;
+  --amberLt:   #BF7812;
+  --amberPale: #FDF4E3;
+  --green:     #2A6835;
+  --greenLt:   #348040;
+  --greenPale: #EAF5EC;
+  --red:       #8B2020;
+  --redLt:     #AC2828;
+  --redPale:   #FCEAEA;
+  --blue:      #1A3F72;
+  --bluePale:  #EAF0FA;
+  --purple:    #5B2D8E;
+  --purplePale:#F3EEFB;
+  --radius:    12px;
+  --shadow:    0 2px 12px rgba(26,34,20,.09);
+  --shadow-md: 0 4px 20px rgba(26,34,20,.13);
+}
+
+body{
+  font-family:'Nunito',sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  font-size:17px;
+  line-height:1.75;
+  min-height:100vh;
+}
+
+.page{max-width:680px;margin:0 auto;padding:0 16px 80px}
+
+/* ── HERO ─────────────────────────────────────────────────────── */
+.hero{
+  background:var(--teal);
+  margin:0 -16px;
+  padding:28px 20px 26px;
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 80% 20%,rgba(255,255,255,.06) 0%,transparent 60%);
+  pointer-events:none;
+}
+.hero-kicker{
+  font-size:11px;font-weight:700;letter-spacing:3px;
+  text-transform:uppercase;color:rgba(255,255,255,.58);
+  margin-bottom:8px;display:flex;align-items:center;gap:8px;
+}
+.hero-kicker::before{content:'';width:18px;height:2px;background:rgba(255,255,255,.35)}
+.hero-title{
+  font-family:'Lora',serif;
+  font-size:clamp(24px,5.5vw,34px);
+  font-weight:700;color:#fff;line-height:1.2;margin-bottom:10px;
+}
+.hero-title span{color:#C8F0A0;font-style:italic}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.70);margin-bottom:18px;line-height:1.65}
+.hero-chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{font-size:11px;font-weight:700;letter-spacing:1px;padding:4px 12px;border-radius:20px;text-transform:uppercase}
+.chip-w{background:rgba(255,255,255,.14);color:rgba(255,255,255,.88)}
+.chip-y{background:rgba(200,240,160,.18);color:#C8F0A0}
+.chip-g{background:rgba(100,220,130,.13);color:#7ADEA0}
+
+/* ── TAB BAR ──────────────────────────────────────────────────── */
+.tab-bar{
+  position:sticky;top:0;z-index:50;
+  background:var(--white);border-bottom:2px solid var(--border);
+  margin:0 -16px;display:flex;overflow-x:auto;
+  box-shadow:0 2px 8px rgba(26,34,20,.07);
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;
+}
+.tab-bar::-webkit-scrollbar{display:none}
+.tab{
+  flex-shrink:0;padding:14px 18px;
+  font-size:12px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--muted);
+  border:none;background:transparent;cursor:pointer;
+  border-bottom:3px solid transparent;margin-bottom:-2px;
+  transition:all .2s;white-space:nowrap;
+}
+.tab:hover{color:var(--ink);background:var(--bg)}
+.tab.on{color:var(--teal);border-bottom-color:var(--teal)}
+
+/* ── PANES ────────────────────────────────────────────────────── */
+.pane{display:none;padding-top:24px;animation:fadeUp .3s ease}
+.pane.on{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── SECTION LABEL ────────────────────────────────────────────── */
+.sec-label{
+  font-size:10px;font-weight:800;letter-spacing:3px;
+  text-transform:uppercase;color:var(--teal);
+  margin:28px 0 12px;display:flex;align-items:center;gap:10px;
+}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* ── INTRO BOX ────────────────────────────────────────────────── */
+.intro-box{
+  background:var(--tealPale);border:1.5px solid rgba(31,107,74,.2);
+  border-radius:var(--radius);padding:20px;margin-bottom:8px;
+}
+.intro-box p{font-size:16px;color:var(--ink2);line-height:1.8}
+.intro-box strong{color:var(--teal)}
+
+/* ── CONCEPT CARDS ────────────────────────────────────────────── */
+.c-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius);margin-bottom:10px;
+  box-shadow:var(--shadow);overflow:hidden;
+}
+.c-head{
+  display:flex;align-items:center;gap:12px;padding:16px 18px;
+  cursor:pointer;border-left:4px solid transparent;
+  transition:all .15s;-webkit-tap-highlight-color:transparent;
+}
+.c-head:hover,.c-head.open{background:var(--bg);border-left-color:var(--teal)}
+.c-icon{
+  width:38px;height:38px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;
+}
+.c-title{font-size:17px;font-weight:700;color:var(--ink);flex:1}
+.c-sub{font-size:12px;color:var(--dim);font-weight:600;margin-top:2px}
+.c-arrow{font-size:12px;color:var(--dim);transition:transform .2s;flex-shrink:0}
+.c-head.open .c-arrow{transform:rotate(180deg)}
+.c-body{display:none;padding:4px 18px 20px;border-top:1px solid var(--border)}
+.c-body.open{display:block;animation:fadeUp .2s ease}
+.c-body p{font-size:16px;color:var(--ink2);line-height:1.85;margin-bottom:12px}
+.c-body p:last-child{margin-bottom:0}
+.c-body strong{color:var(--teal);font-weight:700}
+.c-body em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* ── CONTENT BLOCKS ───────────────────────────────────────────── */
+.fact-box{
+  background:var(--amberPale);border:1.5px solid rgba(154,96,16,.2);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.fact-box .fb-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--amber);text-transform:uppercase;margin-bottom:8px;
+}
+.fact-box ul{list-style:none;padding:0}
+.fact-box li{
+  font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;
+  position:relative;line-height:1.7;
+}
+.fact-box li::before{content:'→';position:absolute;left:0;color:var(--amber);font-weight:700;font-size:13px}
+
+.eg-box{
+  background:var(--greenPale);border-left:4px solid var(--green);
+  border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0;
+}
+.eg-box .eg-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--green);text-transform:uppercase;margin-bottom:6px;
+}
+.eg-box p{font-size:15px;color:var(--ink2);line-height:1.75}
+.eg-box ul{list-style:none;padding:0}
+.eg-box li{font-size:15px;color:var(--ink2);padding:4px 0 4px 18px;position:relative;line-height:1.65}
+.eg-box li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:800;font-size:12px}
+
+.trap-box{
+  background:var(--redPale);border:1.5px solid rgba(139,32,32,.2);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.trap-box .tr-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--red);text-transform:uppercase;margin-bottom:8px;
+}
+.trap-box p,.trap-box li{font-size:15.5px;color:var(--ink2);line-height:1.75}
+.trap-box ul{list-style:none;padding:0}
+.trap-box li{padding:5px 0 5px 22px;position:relative}
+.trap-box li::before{content:'⚑';position:absolute;left:0;font-size:12px;color:var(--red)}
+
+.rule-box{
+  background:var(--bluePale);border:1.5px solid rgba(26,63,114,.18);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.rule-box .rl-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--blue);text-transform:uppercase;margin-bottom:8px;
+}
+.rule-box p{font-size:15.5px;color:var(--ink2);line-height:1.8}
+.rule-box strong{color:var(--blue)}
+
+/* Formula Box */
+.formula-box{
+  background:#F3EEFB;border:1.5px solid rgba(91,45,142,.22);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.formula-box .fl-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--purple);text-transform:uppercase;margin-bottom:10px;
+}
+.formula-line{
+  font-family:'Lora',serif;font-size:18px;font-weight:700;
+  color:var(--purple);text-align:center;padding:8px 0;
+  letter-spacing:.5px;
+}
+.formula-note{font-size:14px;color:var(--ink2);line-height:1.7;margin-top:8px}
+.formula-note b{color:var(--purple)}
+
+.purple-box{
+  background:var(--purplePale);border:1.5px solid rgba(91,45,142,.18);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.purple-box .pl-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--purple);text-transform:uppercase;margin-bottom:8px;
+}
+.purple-box ul{list-style:none;padding:0}
+.purple-box li{font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;position:relative;line-height:1.8}
+.purple-box li::before{content:'◆';position:absolute;left:0;font-size:9px;color:var(--purple);top:10px}
+
+.analogy-box{
+  background:#F0F7FF;border-left:4px solid var(--blue);
+  border-radius:0 8px 8px 0;padding:14px 16px;margin:12px 0;
+}
+.analogy-box .an-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--blue);text-transform:uppercase;margin-bottom:6px;
+}
+.analogy-box p{font-size:15.5px;color:var(--ink2);line-height:1.75}
+
+.compare-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
+.compare-table th{
+  background:var(--teal);color:#fff;
+  padding:10px 12px;text-align:left;
+  font-size:13px;font-weight:700;letter-spacing:.5px;
+}
+.compare-table td{
+  padding:10px 12px;border:1px solid var(--border);
+  color:var(--ink2);vertical-align:top;line-height:1.65;
+}
+.compare-table tr:nth-child(even) td{background:var(--bg)}
+.compare-table td b{color:var(--teal)}
+
+/* ── QUICK REFERENCE ──────────────────────────────────────────── */
+.ref-grid{display:grid;gap:10px;margin:8px 0}
+.ref-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);
+}
+.ref-card-title{
+  font-size:11px;font-weight:800;letter-spacing:2px;
+  text-transform:uppercase;color:var(--teal);
+  margin-bottom:10px;padding-bottom:8px;
+  border-bottom:1px solid var(--border);
+}
+.ref-card ul{list-style:none;padding:0}
+.ref-card li{
+  font-size:15px;color:var(--ink2);padding:5px 0 5px 16px;
+  position:relative;line-height:1.65;
+  border-bottom:1px solid var(--bg2);
+}
+.ref-card li:last-child{border-bottom:none}
+.ref-card li::before{content:'·';position:absolute;left:4px;color:var(--teal);font-weight:900;font-size:18px;line-height:1.3}
+.ref-card li b{color:var(--ink);font-weight:700}
+.ref-card li em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* ── QUIZ ─────────────────────────────────────────────────────── */
+.quiz-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:2px;background:var(--border);
+  border-radius:var(--radius);overflow:hidden;
+  margin-bottom:16px;box-shadow:var(--shadow);
+}
+.qs-cell{background:var(--white);padding:12px 8px;text-align:center}
+.qs-val{font-family:'Lora',serif;font-size:22px;font-weight:700;color:var(--teal);line-height:1}
+.qs-val.g{color:var(--green)}.qs-val.r{color:var(--red)}.qs-val.a{color:var(--amber)}
+.qs-lbl{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:1px;margin-top:4px;text-transform:uppercase}
+
+.prog-wrap{margin-bottom:20px}
+.prog-bar{height:6px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;background:var(--teal);border-radius:3px;transition:width .4s ease;width:0%}
+.prog-label{font-size:12px;color:var(--muted);font-weight:700;margin-bottom:6px}
+
+.q-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius);margin-bottom:12px;
+  box-shadow:var(--shadow);overflow:hidden;
+  border-left:4px solid transparent;transition:border-color .15s;
+}
+.q-card.answered{border-left-color:var(--teal)}
+.q-card.correct{border-left-color:var(--green)}
+.q-card.wrong{border-left-color:var(--red)}
+
+.q-meta{
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  padding:10px 16px;background:var(--bg);
+  border-bottom:1px solid var(--border);
+}
+.q-num{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:1px}
+.q-diff{font-size:10px;font-weight:800;padding:2px 10px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase}
+.diff-e{background:var(--greenPale);color:var(--green)}
+.diff-m{background:var(--amberPale);color:var(--amber)}
+.diff-h{background:var(--redPale);color:var(--red)}
+.q-exam{font-size:11px;color:var(--dim);margin-left:auto;font-weight:600}
+
+.q-body{padding:16px}
+.q-text{font-size:17px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-weight:600}
+
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{
+  background:var(--bg);border:1.5px solid var(--border);
+  border-radius:10px;padding:14px 16px;
+  cursor:pointer;display:flex;align-items:flex-start;gap:12px;
+  font-size:16px;color:var(--ink2);text-align:left;width:100%;
+  transition:all .15s;-webkit-tap-highlight-color:transparent;
+  min-height:48px;line-height:1.6;
+}
+.opt:hover:not(:disabled){border-color:var(--teal);background:var(--tealPale)}
+.opt:disabled{cursor:default}
+.opt.sel{border-color:var(--teal);background:var(--tealPale);color:var(--teal)}
+.opt.ok{border-color:var(--green)!important;background:var(--greenPale)!important;color:var(--green)!important}
+.opt.bad{border-color:var(--red)!important;background:var(--redPale)!important;color:var(--red)!important}
+
+.opt-lbl{
+  min-width:28px;height:28px;border-radius:8px;
+  background:var(--bg3);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:800;color:var(--muted);
+  flex-shrink:0;transition:all .15s;
+}
+.opt.sel .opt-lbl{background:var(--teal);color:#fff;border-color:var(--teal)}
+.opt.ok .opt-lbl{background:var(--green)!important;color:#fff!important;border-color:var(--green)!important}
+.opt.bad .opt-lbl{background:var(--red)!important;color:#fff!important;border-color:var(--red)!important}
+
+.exp-panel{display:none;margin-top:14px;background:var(--bg);border-radius:10px;padding:14px 16px}
+.exp-panel.show{display:block;animation:fadeUp .2s ease}
+.exp-tag{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--teal);text-transform:uppercase;margin-bottom:6px}
+.exp-rule{font-size:13px;font-weight:800;color:var(--purple);background:var(--purplePale);border-radius:6px;padding:6px 10px;margin-bottom:10px}
+.exp-panel p{font-size:15px;color:var(--ink2);line-height:1.8}
+
+.q-foot{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 16px;background:var(--bg2);border-top:1px solid var(--border);
+}
+.q-status{font-size:12px;font-weight:700}
+
+.btn{
+  padding:14px 24px;border-radius:10px;font-size:14px;font-weight:800;
+  letter-spacing:.5px;border:none;cursor:pointer;transition:all .15s;
+  font-family:'Nunito',sans-serif;
+}
+.btn-primary{background:var(--teal);color:#fff}
+.btn-primary:hover{background:var(--tealLt)}
+.btn-ghost{background:var(--bg2);color:var(--ink2);border:1.5px solid var(--border)}
+.btn-ghost:hover{background:var(--bg3)}
+.btn-row{display:flex;gap:10px;justify-content:center;margin:16px 0}
+
+.res-hero{
+  background:var(--teal);border-radius:var(--radius);
+  padding:28px 20px;text-align:center;color:#fff;margin-bottom:12px;
+}
+.res-score{font-family:'Lora',serif;font-size:72px;font-weight:700;line-height:1}
+.res-grade{font-size:18px;font-weight:800;margin:8px 0 6px;color:#C8F0A0}
+.res-msg{font-size:15px;color:rgba(255,255,255,.78);line-height:1.6}
+.res-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:2px;background:var(--border);border-radius:var(--radius);
+  overflow:hidden;margin-bottom:12px;
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── HERO ── -->
+  <div class="hero">
+    <div class="hero-kicker">Olive Defence · Physics · P03</div>
+    <div class="hero-title">Work, Energy<br><span>&amp; Power</span></div>
+    <div class="hero-sub">Complete coverage for CDS · NDA · AFCAT — theory, formulas, traps, and MCQs</div>
+    <div class="hero-chips">
+      <span class="chip chip-w">⚡ CDS</span>
+      <span class="chip chip-y">🛡 NDA</span>
+      <span class="chip chip-g">✈ AFCAT</span>
+      <span class="chip chip-w">Physics · P03</span>
+    </div>
+  </div>
+
+  <!-- ── TAB BAR ── -->
+  <div class="tab-bar">
+    <button class="tab on" onclick="switchTab('theory')">📖 Theory</button>
+    <button class="tab" onclick="switchTab('quickref')">⚡ Quick Ref</button>
+    <button class="tab" onclick="switchTab('quiz')">🎯 Quiz</button>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       PANE 1 — THEORY
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="pane on" id="theory">
+
+    <div class="intro-box">
+      <p>Work, Energy, and Power form the <strong>core of mechanics</strong> — questions from this chapter appear in almost every CDS, NDA, and AFCAT paper. Master the definitions, conditions, and formulas precisely; confusing units or signs is a guaranteed way to lose marks.</p>
+    </div>
+
+    <!-- SECTION 1: WORK -->
+    <div class="sec-label">Section 1 — Work</div>
+
+    <div class="c-card">
+      <div class="c-head" onclick="tog(this)">
+        <div class="c-icon" style="background:#EAF0FA">🔩</div>
+        <div style="flex:1">
+          <div class="c-title">Definition of Work</div>
+          <div class="c-sub">What physicists actually mean by "work"</div>
+        </div>
+        <span class="c-arrow">▾</span>
+      </div>
+      <div class="c-body">
+        <p>In physics, <strong>work</strong> is done when a force causes a displacement in the <strong>direction of the force</strong>. Simply applying force without movement does <em>no work</em>.</p>
+
+        <div class="formula-box">
+          <div class="fl-label">Formula</div>
+          <div class="formula-line">W = F · d · cos θ</div>
+          <div class="formula-note">
+            <b>W</b> = Work done (Joules, J) &nbsp;·&nbsp;
+            <b>F</b> = Force (Newtons, N) &nbsp;·&nbsp;
+            <b>d</b> = Displacement (metres, m) &nbsp;·&nbsp;
+            <b>θ</b> = Angle between force and displacement
+          </div>
+        </div>
+
+        <div class="fact-box">
+          <div class="fb-label">Key Conditions — Frequently Tested</div>
+          <ul>
+            <li><strong>θ = 0°</strong> → W = Fd (maximum work; force and displacement in the same direction)</li>
+            <li><strong>θ = 90°</strong> → W = 0 (force perpendicular to motion — no work done)</li>
+            <li><strong>θ = 180°</strong> → W = −Fd (negative work; force opposes motion)</li>
+          </ul>
+        </div>
+
+        <div class="eg-box">
+          <div class="eg-label">Examples from Daily Life</div>
+          <ul>
+            <li>Pushing a box across the floor — positive work</li>
+            <li>Carrying a bag horizontally — <strong>zero work</strong> (force is vertical, motion is horizontal)</li>
+            <li>Brakes stopping a moving car — negative work (friction opposes motion)</li>
+            <li>A planet orbiting the Sun in a circular orbit — <strong>zero work</strong> by gravity (centripetal force ⊥ velocity)</li>
+          </ul>
+        </div>
+
+        <div class="trap-box">
+          <div class="tr-label">⚑ Exam Traps</div>
+          <ul>
+            <li>A coolie carrying luggage on his head while walking on a level road does <strong>zero work</strong> — the upward force is perpendicular to displacement</li>
+            <li>Work is a <strong>scalar</strong> quantity — it has magnitude only, no direction</li>
+            <li>SI unit of work = <strong>Joule (J)</strong> = 1 N·m. CGS unit = <strong>erg</strong>. 1 J = 10⁷ erg</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-card">
+      <div class="c-head" onclick="tog(this)">
+        <div class="c-icon" style="background:#FDF4E3">📐</div>
+        <div style="flex:1">
+          <div class="c-title">Work Done Against Gravity</div>
+          <div class="c-sub">Lifting objects and potential energy connection</div>
+        </div>
+        <span class="c-arrow">▾</span>
+      </div>
+      <div class="c-body">
+        <p>When you lift an object of mass <strong>m</strong> to height <strong>h</strong>, you do work against gravity.</p>
+
+        <div class="formula-box">
+          <div class="fl-label">Formula</div>
+          <div class="formula-line">W = mgh</div>
+          <div class="formula-note">
+            <b>m</b> = mass (kg) &nbsp;·&nbsp; <b>g</b> = 9.8 m/s² (≈ 10 m/s² in exams) &nbsp;·&nbsp; <b>h</b> = height (m)
+          </div>
+        </div>
+
+        <div class="rule-box">
+          <div class="rl-label">Important Point</div>
+          <p>Work done against gravity depends <strong>only on the vertical height</strong>, not on the path taken. Whether you climb stairs or a ramp to reach the same height, the work done against gravity is identical. This is a key property of <strong>conservative forces</strong>.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 2: ENERGY -->
+    <div class="sec-label">Section 2 — Energy</div>
+
+    <div class="c-card">
+      <div class="c-head" onclick="tog(this)">
+        <div class="c-icon" style="background:#E6F4EE">⚡</div>
+        <div style="flex:1">
+          <div class="c-title">Kinetic Energy (KE)</div>
+          <div class="c-sub">Energy due to motion</div>
+        </div>
+        <span class="c-arrow">▾</span>
+      </div>
+      <div class="c-body">
+        <p><strong>Kinetic energy</strong> is the energy possessed by a body due to its <strong>motion</strong>. Any moving body has KE — and to stop it, you must do work against it.</p>
+
+        <div class="formula-box">
+          <div class="fl-label">Formula</div>
+          <div class="formula-line">KE = ½ mv²</div>
+          <div class="formula-note">
+            <b>m</b> = mass (kg) &nbsp;·&nbsp; <b>v</b> = velocity (m/s) &nbsp;·&nbsp; KE is in <b>Joules (J)</b>
+          </div>
+        </div>
+
+        <div class="fact-box">
+          <div class="fb-label">Must-Know Relationships</div>
+          <ul>
+            <li>KE ∝ v² — if speed <strong>doubles</strong>, KE becomes <strong>4 times</strong></li>
+            <li>KE ∝ m — if mass doubles, KE doubles (at same speed)</li>
+            <li>KE is <strong>always positive</strong> (v² is always ≥ 0)</li>
+            <li>KE and momentum (p) relationship: <strong>KE = p² / 2m</strong></li>
+          </ul>
+        </div>
+
+        <div class="eg-box">
+          <div class="eg-label">Numerical Shortcut</div>
+          <p>If a body's speed increases by 20%, its KE increases by: (1.2)² − 1 = 1.44 − 1 = <strong>44%</strong>. This "percentage increase in KE" type question is common.</p>
+        </div>
+
+        <div class="trap-box">
+          <div class="tr-label">⚑ Exam Trap — KE vs Momentum</div>
+          <ul>
+            <li>Two bodies with same momentum: lighter body has <strong>higher KE</strong></li>
+            <li>Two bodies with same KE: heavier body has <strong>higher momentum</strong></li>
+            <li>A body at rest has <strong>zero KE</strong> but can have potential energy</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-card">
+      <div class="c-head" onclick="tog(this)">
+        <div class="c-icon" style="background:#F3EEFB">🏔️</div>
+        <div style="flex:1">
+          <div class="c-title">Potential Energy (PE)</div>
+          <div class="c-sub">Energy due to position or configuration</div>
+        </div>
+        <span class="c-arrow">▾</span>
+      </div>
+      <div class="c-body">
+        <p><strong>Potential energy</strong> is energy stored in a body due to its <strong>position</strong> (gravitational PE) or <strong>configuration</strong> (elastic PE like a compressed spring).</p>
+
+        <div class="formula-box">
+          <div class="fl-label">Gravitational PE</div>
+          <div class="formula-line">PE = mgh</div>
+          <div class="formula-note">
+            PE is always measured relative to a chosen reference level (usually the ground). It can be <b>negative</b> if the object is below the reference level.
+          </div>
+        </div>
+
+        <div class="formula-box">
+          <div class="fl-label">Elastic (Spring) PE</div>
+          <div class="formula-line">PE = ½ kx²</div>
+          <div class="formula-note">
+            <b>k</b> = spring constant (N/m) &nbsp;·&nbsp; <b>x</b> = compression or extension from natural length
+          </div>
+        </div>
+
+        <div class="purple-box">
+          <div class="pl-label">Types of Potential Energy</div>
+          <ul>
+            <li><strong>Gravitational PE</strong> — due to height above ground (e.g., water in a dam, a raised hammer)</li>
+            <li><strong>Elastic PE</strong> — due to deformation (e.g., stretched rubber band, compressed spring)</li>
+            <li><strong>Chemical PE</strong> — stored in chemical bonds (e.g., food, fuel, battery)</li>
+            <li><strong>Electrostatic PE</strong> — due to position of charges</li>
+            <li><strong>Nuclear PE</strong> — stored in nucleus (released in nuclear reactions)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-card">
+      <div class="c-head" onclick="tog(this)">
+        <div class="c-icon" style="background:#EAF0FA">🔄</div>
+        <div style="flex:1">
+          <div class="c-title">Work-Energy Theorem</div>
+          <div class="c-sub">The fundamental link between work and kinetic energy</div>
+        </div>
+        <span class="c-arrow">▾</span>
+      </div>
+      <div class="c-body">
+        <p>The <strong>Work-Energy Theorem</strong> states that the net work done on a body equals the change in its kinetic energy.</p>
+
+        <div class="formula-box">
+          <div class="fl-label">Work-Energy Theorem</div>
+          <div class="formula-line">W_net = ΔKE = ½mv² − ½mu²</div>
+          <div class="formula-note">
+            <b>v</b> = final velocity &nbsp;·&nbsp; <b>u</b> = initial velocity<br>
+            This holds true even when multiple forces act simultaneously — only the <b>net</b> work matters.
+          </div>
+        </div>
+
+        <div class="analogy-box">
+          <div class="an-label">Think of it this way</div>
+          <p>Imagine pushing a car from rest. Every joule of net work you do goes directly into increasing the car's kinetic energy. If friction also acts, it does negative work and reduces the net change in KE.</p>
+        </div>
+
+        <div class="trap-box">
+          <div class="tr-label">⚑ Common Mistake</div>
+          <ul>
+            <li>The theorem uses <strong>net work</strong> — not work done by individual forces</li>
+            <li>If KE is constant (body moves at constant velocity), <strong>net work = zero</strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 3: CONSERVATION -->
+    <div class="sec-label">Section 3 — Conservation of Energy</div>
+
+    <div class="c-card">
+      <div class="c-head" onclick="tog(this)">
+        <div class="c-icon" style="background:#EAF5EC">⚖️</div>
+        <div style="flex:1">
+          <div class="c-title">Law of Conservation of Energy</div>
+          <div class="c-sub">Energy can neither be created nor destroyed</div>
+        </div>
+        <span class="c-arrow">▾</span>
+      </div>
+      <div class="c-body">
+        <p><strong>Energy cannot be created or destroyed</strong> — it can only be <strong>converted from one form to another</strong>. The total mechanical energy (KE + PE) of a system remains constant if only <strong>conservative forces</strong> act on it.</p>
+
+        <div class="rule-box">
+          <div class="rl-label">For a Freely Falling Body</div>
+          <p>At the top: <strong>PE is maximum, KE = 0</strong><br>
+          At the bottom: <strong>KE is maximum, PE = 0</strong><br>
+          At any intermediate height: <strong>PE + KE = constant = mgh</strong> (where h = initial height)</p>
+        </div>
+
+        <div class="eg-box">
+          <div class="eg-label">Classic Exam Example — Simple Pendulum</div>
+          <p>At the highest point of its swing → max PE, zero KE. At the lowest point → max KE, zero PE. Total mechanical energy is constant throughout (ignoring air resistance).</p>
+        </div>
+
+        <div class="fact-box">
+          <div class="fb-label">Energy Conversions — Frequently Asked</div>
+          <ul>
+            <li><strong>Hydroelectric dam</strong> → PE of water → KE of turbine → Electrical energy</li>
+            <li><strong>Burning fuel</strong> → Chemical PE → Heat + Light energy</li>
+            <li><strong>Solar panel</strong> → Light (radiant) energy → Electrical energy</li>
+            <li><strong>Microphone</strong> → Sound energy → Electrical energy</li>
+            <li><strong>Electric motor</strong> → Electrical energy → Mechanical energy</li>
+            <li><strong>Loudspeaker</strong> → Electrical energy → Sound energy</li>
+          </ul>
+        </div>
+
+        <div class="trap-box">
+          <div class="tr-label">⚑ Conservative vs Non-Conservative Forces</div>
+          <ul>
+            <li><strong>Conservative forces</strong> (gravity, spring) — work done is path-independent; mechanical energy is conserved</li>
+            <li><strong>Non-conservative forces</strong> (friction, air resistance) — work done is path-dependent; they convert mechanical energy to <strong>heat</strong></li>
+            <li>In the presence of friction, total mechanical energy <strong>decreases</strong> (converts to heat). The total energy of the universe is still conserved.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 4: POWER -->
+    <div class="sec-label">Section 4 — Power</div>
+
+    <div class="c-card">
+      <div class="c-head" onclick="tog(this)">
+        <div class="c-icon" style="background:#FDF4E3">💡</div>
+        <div style="flex:1">
+          <div class="c-title">Power — Definition & Formulas</div>
+          <div class="c-sub">Rate of doing work</div>
+        </div>
+        <span class="c-arrow">▾</span>
+      </div>
+      <div class="c-body">
+        <p><strong>Power</strong> is the rate at which work is done or energy is transferred. Two machines doing the same work differ in power if one does it faster.</p>
+
+        <div class="formula-box">
+          <div class="fl-label">Formulas for Power</div>
+          <div class="formula-line">P = W/t &nbsp;=&nbsp; F · v</div>
+          <div class="formula-note">
+            <b>P</b> = Power (Watts, W) &nbsp;·&nbsp; <b>W</b> = Work (J) &nbsp;·&nbsp; <b>t</b> = time (s)<br>
+            <b>F·v</b> form: used when force and velocity are given directly (e.g., engine problems)
+          </div>
+        </div>
+
+        <div class="compare-table" style="margin:14px 0">
+          <table class="compare-table">
+            <tr><th>Unit</th><th>Value</th><th>Used for</th></tr>
+            <tr><td><b>Watt (W)</b></td><td>1 J/s</td><td>SI unit of power</td></tr>
+            <tr><td><b>Kilowatt (kW)</b></td><td>1000 W</td><td>Appliances, engines</td></tr>
+            <tr><td><b>Horsepower (hp)</b></td><td>746 W</td><td>Motors, vehicles</td></tr>
+            <tr><td><b>kWh</b></td><td>3.6 × 10⁶ J</td><td>Unit of energy (not power!), used for electricity billing</td></tr>
+          </table>
+        </div>
+
+        <div class="trap-box">
+          <div class="tr-label">⚑ Critical Trap — kWh</div>
+          <ul>
+            <li><strong>kWh (kilowatt-hour)</strong> is a unit of <strong>ENERGY</strong>, not power. It is the commercial unit of electrical energy.</li>
+            <li>1 kWh = 1000 W × 3600 s = <strong>3.6 × 10⁶ J</strong></li>
+            <li>1 horsepower = <strong>746 W</strong> (not 750 W — the exact value is tested)</li>
+          </ul>
+        </div>
+
+        <div class="eg-box">
+          <div class="eg-label">Exam-Style Problem</div>
+          <p>A car engine exerts a force of 2000 N and moves at 20 m/s. Its power output = F × v = 2000 × 20 = <strong>40,000 W = 40 kW</strong>.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION 5: COLLISIONS -->
+    <div class="sec-label">Section 5 — Collisions & Practical Concepts</div>
+
+    <div class="c-card">
+      <div class="c-head" onclick="tog(this)">
+        <div class="c-icon" style="background:#FCEAEA">💥</div>
+        <div style="flex:1">
+          <div class="c-title">Elastic vs Inelastic Collisions</div>
+          <div class="c-sub">What is conserved in each type</div>
+        </div>
+        <span class="c-arrow">▾</span>
+      </div>
+      <div class="c-body">
+        <p>In all collisions, <strong>momentum is always conserved</strong>. Whether <strong>kinetic energy</strong> is also conserved distinguishes elastic from inelastic collisions.</p>
+
+        <div style="overflow-x:auto">
+          <table class="compare-table">
+            <tr><th>Property</th><th>Elastic Collision</th><th>Perfectly Inelastic</th></tr>
+            <tr><td>Momentum</td><td><b>Conserved ✓</b></td><td><b>Conserved ✓</b></td></tr>
+            <tr><td>Kinetic Energy</td><td><b>Conserved ✓</b></td><td>Not conserved ✗</td></tr>
+            <tr><td>Objects after</td><td>Separate</td><td>Stick together</td></tr>
+            <tr><td>e (restitution)</td><td>e = 1</td><td>e = 0</td></tr>
+            <tr><td>Example</td><td>Billiard balls, gas molecules</td><td>Clay lumps, bullet embedding in block</td></tr>
+          </table>
+        </div>
+
+        <div class="rule-box">
+          <div class="rl-label">Coefficient of Restitution (e)</div>
+          <p><strong>e = (relative velocity of separation) / (relative velocity of approach)</strong><br>
+          For elastic: e = 1 &nbsp;·&nbsp; For perfectly inelastic: e = 0 &nbsp;·&nbsp; For real collisions: 0 &lt; e &lt; 1</p>
+        </div>
+
+        <div class="trap-box">
+          <div class="tr-label">⚑ Exam Traps</div>
+          <ul>
+            <li>In any collision, <strong>total energy</strong> is always conserved (some converts to heat/sound in inelastic), but <strong>kinetic energy</strong> may not be</li>
+            <li>A "perfectly elastic" collision is an <strong>ideal concept</strong> — rarely achieved in practice (gas molecules approximate it)</li>
+            <li>Explosion is the reverse of perfectly inelastic collision — KE increases, momentum is conserved</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-card">
+      <div class="c-head" onclick="tog(this)">
+        <div class="c-icon" style="background:#E6F4EE">🏋️</div>
+        <div style="flex:1">
+          <div class="c-title">Efficiency & Machines</div>
+          <div class="c-sub">No machine is 100% efficient</div>
+        </div>
+        <span class="c-arrow">▾</span>
+      </div>
+      <div class="c-body">
+        <p>In any real machine, some input energy is always lost to <strong>friction and heat</strong>. Efficiency tells us how much of the input energy is usefully converted.</p>
+
+        <div class="formula-box">
+          <div class="fl-label">Efficiency Formula</div>
+          <div class="formula-line">η = (Useful Output Energy / Input Energy) × 100%</div>
+          <div class="formula-note">
+            Or equivalently: η = (Output Power / Input Power) × 100%<br>
+            <b>η &lt; 100%</b> for all real machines.
+          </div>
+        </div>
+
+        <div class="fact-box">
+          <div class="fb-label">Key Points on Efficiency</div>
+          <ul>
+            <li>An <strong>ideal machine</strong> has efficiency = 100% (theoretical only — friction makes this impossible)</li>
+            <li>Efficiency has no unit — it is a pure ratio (or percentage)</li>
+            <li>Lost energy typically appears as <strong>heat</strong> due to friction</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end theory pane -->
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       PANE 2 — QUICK REF
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="pane" id="quickref">
+
+    <div class="sec-label">All Formulas</div>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <div class="ref-card-title">Work, Energy & Power — Master Formula Sheet</div>
+        <ul>
+          <li><b>Work:</b> W = Fd cos θ &nbsp;·&nbsp; Unit: <em>Joule (J)</em></li>
+          <li><b>Work against gravity:</b> W = mgh</li>
+          <li><b>Kinetic Energy:</b> KE = ½mv² &nbsp;·&nbsp; Unit: <em>Joule (J)</em></li>
+          <li><b>Gravitational PE:</b> PE = mgh</li>
+          <li><b>Elastic PE:</b> PE = ½kx²</li>
+          <li><b>Work-Energy Theorem:</b> W_net = ΔKE = ½mv² − ½mu²</li>
+          <li><b>Conservation (no friction):</b> KE + PE = constant</li>
+          <li><b>Power:</b> P = W/t = Fv &nbsp;·&nbsp; Unit: <em>Watt (W)</em></li>
+          <li><b>Efficiency:</b> η = (Output / Input) × 100%</li>
+          <li><b>KE–Momentum:</b> KE = p²/2m</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sec-label">Units & Conversions</div>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <div class="ref-card-title">Units — Frequently Tested</div>
+        <ul>
+          <li><b>Work &amp; Energy:</b> <em>Joule (J)</em> = 1 N·m (SI) · CGS = <em>erg</em> · 1 J = 10⁷ erg</li>
+          <li><b>Power:</b> <em>Watt (W)</em> = 1 J/s · 1 kW = 1000 W</li>
+          <li><b>Horsepower:</b> 1 hp = <em>746 W</em> (exact — don't write 750)</li>
+          <li><b>kWh:</b> Commercial unit of <em>energy</em> = 3.6 × 10⁶ J (used in electricity billing)</li>
+          <li><b>Electron-volt (eV):</b> 1 eV = 1.6 × 10⁻¹⁹ J (used in atomic physics)</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sec-label">Zero Work — Exam Favourites</div>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <div class="ref-card-title">When is work done = zero?</div>
+        <ul>
+          <li><b>Force ⊥ displacement</b> (θ = 90°) — e.g., coolie carrying load, centripetal force</li>
+          <li><b>No displacement</b> — pushing a wall; holding a heavy bag stationary</li>
+          <li><b>No force</b> — freely sliding on a frictionless surface (after the push)</li>
+          <li><b>Satellite in circular orbit</b> — gravity is always perpendicular to velocity → zero work by gravity</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sec-label">Quick Comparisons</div>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <div class="ref-card-title">KE vs Momentum Relationships</div>
+        <ul>
+          <li>Same momentum → <em>lighter body</em> has MORE KE</li>
+          <li>Same KE → <em>heavier body</em> has MORE momentum</li>
+          <li>Speed doubles → KE becomes <em>4×</em></li>
+          <li>Speed triples → KE becomes <em>9×</em></li>
+          <li>KE halved → speed becomes <em>1/√2 times</em></li>
+        </ul>
+      </div>
+      <div class="ref-card">
+        <div class="ref-card-title">Collision Snapshot</div>
+        <ul>
+          <li><b>Elastic:</b> momentum ✓ · KE ✓ · e = 1</li>
+          <li><b>Inelastic:</b> momentum ✓ · KE ✗ · e = 0</li>
+          <li><b>Explosion:</b> momentum ✓ · KE increases · e > 1</li>
+          <li><b>Real collision:</b> 0 &lt; e &lt; 1</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sec-label">Energy Forms — Conversion Table</div>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <div class="ref-card-title">Device → Energy Conversion</div>
+        <ul>
+          <li><b>Electric bulb:</b> Electrical → <em>Light + Heat</em></li>
+          <li><b>Electric motor:</b> Electrical → <em>Mechanical</em></li>
+          <li><b>Dynamo/Generator:</b> Mechanical → <em>Electrical</em></li>
+          <li><b>Microphone:</b> Sound → <em>Electrical</em></li>
+          <li><b>Loudspeaker:</b> Electrical → <em>Sound</em></li>
+          <li><b>Solar cell:</b> Light → <em>Electrical</em></li>
+          <li><b>Battery:</b> Chemical → <em>Electrical</em></li>
+          <li><b>Hydroelectric dam:</b> PE of water → <em>Electrical</em></li>
+          <li><b>Candle:</b> Chemical → <em>Heat + Light</em></li>
+          <li><b>Seismograph:</b> Mechanical (seismic) → <em>Electrical</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sec-label">Exam Traps — Never Forget</div>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <div class="ref-card-title">Top Traps for CDS / NDA / AFCAT</div>
+        <ul>
+          <li><b>kWh</b> is a unit of <em>energy</em>, NOT power</li>
+          <li>1 hp = <em>746 W</em> exactly — not 750</li>
+          <li>Work is a <em>scalar</em> quantity (no direction)</li>
+          <li>A coolie carrying load horizontally does <em>zero work</em></li>
+          <li>Gravity does <em>zero work</em> on a satellite in circular orbit</li>
+          <li>In inelastic collision, <em>momentum conserved</em> but KE is not</li>
+          <li>Conservative force = work independent of path (gravity, spring)</li>
+          <li>Path taken doesn't affect work done <em>against gravity</em> (only height matters)</li>
+        </ul>
+      </div>
+    </div>
+
+  </div><!-- end quickref pane -->
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       PANE 3 — QUIZ
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="pane" id="quiz">
+
+    <div class="quiz-stats">
+      <div class="qs-cell"><div class="qs-val" id="s-att">0</div><div class="qs-lbl">Attempted</div></div>
+      <div class="qs-cell"><div class="qs-val g" id="s-cor">0</div><div class="qs-lbl">Correct</div></div>
+      <div class="qs-cell"><div class="qs-val r" id="s-wrg">0</div><div class="qs-lbl">Wrong</div></div>
+      <div class="qs-cell"><div class="qs-val a" id="s-tot">20</div><div class="qs-lbl">Total</div></div>
+    </div>
+
+    <div class="prog-wrap">
+      <div class="prog-label" id="prog-label">0 of 20 answered</div>
+      <div class="prog-bar"><div class="prog-fill" id="prog"></div></div>
+    </div>
+
+    <div id="q-area"></div>
+
+    <div id="results" style="display:none"></div>
+
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="submitAll()">Submit All Answers</button>
+      <button class="btn btn-ghost" onclick="resetQuiz()">Reset Quiz</button>
+    </div>
+
+  </div><!-- end quiz pane -->
+
+</div><!-- .page -->
+
+<script>
+// ── QUESTION BANK ────────────────────────────────────────────────────────────
+const QS = [
+
+{d:'EASY',e:'NDA 2022',
+q:'A coolie carries a load of 50 kg on his head and walks on a horizontal road. The work done by the coolie against gravity is:',
+opts:['50 × g joules','Zero','50g × distance joules','Cannot be determined'],
+ans:1,
+rule:'Work = Fd cos θ; force (gravity) is vertical, displacement is horizontal → θ = 90° → cos 90° = 0 → W = 0',
+exp:'Work is defined as W = Fd cos θ. The coolie applies an upward force to support the load (vertical), but moves horizontally. The angle between force and displacement is 90°. cos 90° = 0, so work done = 0. This is one of the most frequently tested concepts — carrying a load horizontally does zero work against gravity.'},
+
+{d:'EASY',e:'CDS 2023',
+q:'The SI unit of power is:',
+opts:['Joule','Newton','Watt','Erg per second'],
+ans:2,
+rule:'Power = Work/Time. SI unit = Joule/second = Watt (W)',
+exp:'Power is the rate of doing work. Its SI unit is the Watt (W), which equals 1 Joule per second (J/s). The Joule is the SI unit of energy/work. The Newton is the unit of force. Erg per second is the CGS unit of power. The Watt is named after James Watt.'},
+
+{d:'EASY',e:'AFCAT 2023',
+q:'Which of the following is a unit of energy?',
+opts:['Watt','Newton-metre per second','Kilowatt-hour','Joule per second'],
+ans:2,
+rule:'kWh = kilowatt × hour = energy unit. Watt and J/s are units of power.',
+exp:'The kilowatt-hour (kWh) is the commercial unit of electrical energy. 1 kWh = 3.6 × 10⁶ Joules. Watt (W) and Joule per second (J/s) are the same — both are units of power. Newton-metre per second is also power (N·m/s = W). Only kWh is an energy unit among the options.'},
+
+{d:'EASY',e:'NDA 2023',
+q:'Kinetic energy of a body depends on:',
+opts:['Only its mass','Only its velocity','Both mass and the square of velocity','Only the direction of motion'],
+ans:2,
+rule:'KE = ½mv² → depends on both mass (m) and square of velocity (v²)',
+exp:'KE = ½mv². So kinetic energy depends on both mass and the square of velocity. Notably, if velocity doubles, KE becomes 4 times (not 2 times). Direction of motion is irrelevant because v² is always positive regardless of direction. This is why KE is always a positive scalar.'},
+
+{d:'EASY',e:'CDS 2022',
+q:'Work done by a force is negative when:',
+opts:['The force is perpendicular to displacement','The force is in the same direction as displacement','The force is opposite to displacement','The force is zero'],
+ans:2,
+rule:'W = Fd cos θ. When θ = 180° (force opposite to displacement), cos 180° = −1, so W is negative',
+exp:'W = Fd cos θ. When force is in the opposite direction to displacement, θ = 180° and cos 180° = −1. Therefore W = −Fd, which is negative. Examples: friction (opposes motion), braking force on a car, gravity on a ball thrown upward. When force is perpendicular (θ = 90°), work is zero, not negative.'},
+
+{d:'MEDIUM',e:'NDA 2023',
+q:'A body of mass 4 kg moving at 6 m/s has its speed doubled. The increase in its kinetic energy is:',
+opts:['72 J','108 J','216 J','180 J'],
+ans:1,
+rule:'KE₁ = ½ × 4 × 36 = 72 J; KE₂ = ½ × 4 × 144 = 288 J; ΔKE = 216 J',
+exp:'Initial KE = ½ × 4 × 6² = ½ × 4 × 36 = 72 J. New speed = 12 m/s. Final KE = ½ × 4 × 12² = ½ × 4 × 144 = 288 J. Increase in KE = 288 − 72 = 216 J. Note: when speed doubles, KE becomes 4 times (not 2 times) because KE ∝ v². So the increase = 4 × 72 − 72 = 3 × 72 = 216 J.'},
+
+{d:'MEDIUM',e:'CDS 2023',
+q:'A satellite revolves around the Earth in a circular orbit. The work done by Earth\'s gravity on the satellite is:',
+opts:['Positive','Negative','Zero','Depends on the orbital radius'],
+ans:2,
+rule:'In circular orbit, gravitational force is centripetal (directed toward Earth centre) and always perpendicular to velocity (tangential). θ = 90°, cos 90° = 0 → W = 0',
+exp:'For a satellite in a circular orbit, velocity is always tangential (perpendicular to the radius), while the gravitational force is always directed toward the centre (centripetal). Since force is perpendicular to displacement at every point, the angle θ = 90°, and work = Fd cos 90° = 0. Therefore Earth\'s gravity does zero work on the satellite in a perfectly circular orbit.'},
+
+{d:'MEDIUM',e:'AFCAT 2022',
+q:'One horsepower is equal to:',
+opts:['500 W','550 W','746 W','1000 W'],
+ans:2,
+rule:'1 horsepower = 746 Watts (exact value — frequently tested)',
+exp:'One horsepower (hp) = 746 Watts. This is the standard SI conversion. Many candidates write 750 W as an approximation, but the exact value — 746 W — is what exam papers test. 1 kW = 1000 W. 1 hp ≈ 0.746 kW. This unit originated from James Watt\'s comparison of steam engines to horses.'},
+
+{d:'MEDIUM',e:'NDA 2022',
+q:'Two bodies A and B have the same kinetic energy. If the mass of A is four times the mass of B, the ratio of momentum of A to momentum of B is:',
+opts:['1:4','4:1','1:2','2:1'],
+ans:3,
+rule:'KE = p²/2m → p = √(2m·KE). Same KE: p_A/p_B = √(m_A/m_B) = √(4/1) = 2:1',
+exp:'Using the relation KE = p²/2m, we get p = √(2m·KE). If KE is the same for both, then p ∝ √m. Mass of A = 4m_B. So p_A/p_B = √(4m_B)/√(m_B) = √4 = 2. Therefore p_A : p_B = 2:1. Remember: same KE → heavier body has more momentum.'},
+
+{d:'MEDIUM',e:'CDS 2022',
+q:'In a perfectly inelastic collision between two bodies:',
+opts:['Both momentum and kinetic energy are conserved','Only kinetic energy is conserved','Only momentum is conserved','Neither momentum nor kinetic energy is conserved'],
+ans:2,
+rule:'In any collision: momentum always conserved. Perfectly inelastic: KE NOT conserved (objects stick together, KE lost as heat/deformation)',
+exp:'In all collisions, the law of conservation of momentum holds — momentum is always conserved. In a perfectly inelastic collision, the two bodies stick together after impact. Kinetic energy is NOT conserved — some KE is converted to heat, sound, and deformation energy. The objects move with a common velocity after collision. This is tested very commonly in CDS and NDA papers.'},
+
+{d:'MEDIUM',e:'AFCAT 2023',
+q:'A ball is dropped from a height h. Which statement about energy is correct at the midpoint (height h/2)?',
+opts:['KE = PE','KE = 2 × PE','PE = 2 × KE','KE = 0'],
+ans:0,
+rule:'At height h/2: PE = mg(h/2). KE gained = mgh − mg(h/2) = mg(h/2). So KE = PE at midpoint.',
+exp:'Total mechanical energy = mgh (constant). At height h/2: PE = mg(h/2). By conservation, KE = total − PE = mgh − mgh/2 = mgh/2. Therefore KE = PE = mgh/2 at the midpoint. So KE = PE at half the initial height. This is a standard numerical shortcut: KE equals PE at exactly half the height.'},
+
+{d:'MEDIUM',e:'NDA 2024',
+q:'A machine works at 2 kW and is 80% efficient. The power wasted as heat is:',
+opts:['200 W','400 W','1600 W','160 W'],
+ans:1,
+rule:'Input = 2000 W. Useful output = 80% × 2000 = 1600 W. Wasted = 2000 − 1600 = 400 W',
+exp:'Input power = 2 kW = 2000 W. Efficiency = 80%, so useful output power = 80/100 × 2000 = 1600 W. Power wasted as heat = Input − Useful output = 2000 − 1600 = 400 W. This is 20% of the input. Always work with input power as the denominator in efficiency questions.'},
+
+{d:'HARD',e:'CDS 2023',
+q:'A body of mass m is moving with velocity v. Another body of mass M is at rest. They collide and stick together. The ratio of final KE to initial KE is:',
+opts:['m/(m+M)','M/(m+M)','(m+M)/m','m²/(m+M)²'],
+ans:0,
+rule:'Perfectly inelastic: v_f = mv/(m+M). Initial KE = ½mv². Final KE = ½(m+M)v_f². Ratio = m/(m+M).',
+exp:'By conservation of momentum: mv = (m+M)v_f, so v_f = mv/(m+M). Initial KE = ½mv². Final KE = ½(m+M)(mv/(m+M))² = ½m²v²/(m+M). Ratio = Final KE / Initial KE = [½m²v²/(m+M)] / [½mv²] = m/(m+M). This is always less than 1, confirming KE is lost in a perfectly inelastic collision.'},
+
+{d:'HARD',e:'AFCAT 2024',
+q:'A pump lifts 200 kg of water per minute from a depth of 10 m. The minimum power of the pump is: (g = 10 m/s²)',
+opts:['200 W','300 W','333 W','500 W'],
+ans:2,
+rule:'Work per minute = mgh = 200 × 10 × 10 = 20,000 J. Power = 20,000 / 60 ≈ 333 W',
+exp:'Work done per minute = mgh = 200 × 10 × 10 = 20,000 J (using g = 10 m/s²). Power = Work / time = 20,000 J / 60 s ≈ 333.3 W. Always convert time to seconds. This tests the formula P = W/t = mgh/t. The minimum power assumes 100% efficiency — real pumps need more.'},
+
+{d:'HARD',e:'NDA 2024',
+q:'The kinetic energy of a body is increased by 44%. The percentage increase in its momentum is:',
+opts:['22%','44%','20%','72%'],
+ans:2,
+rule:'KE ∝ p² → p ∝ √KE. If KE becomes 1.44 KE, p becomes √1.44 = 1.2 times → 20% increase',
+exp:'Using KE = p²/2m → p = √(2m·KE) → p ∝ √KE. If KE increases by 44%, new KE = 1.44 × old KE. New momentum = √(1.44) × old momentum = 1.2 × old momentum. Percentage increase = 20%. Key insight: a 44% increase in KE corresponds to a 20% increase in momentum because momentum goes as the square root of KE.'},
+
+{d:'HARD',e:'CDS 2024',
+q:'A spring of spring constant k is compressed by x. It is then released. What is the velocity of the block of mass m attached to it when the spring returns to natural length (ignore friction)?',
+opts:['x√(k/m)','(k/m)x','x²k/m','√(k/m) / x'],
+ans:0,
+rule:'Elastic PE = ½kx² converts entirely to KE = ½mv². Solving: v = x√(k/m)',
+exp:'At compression: PE = ½kx², KE = 0. At natural length: PE = 0, KE = ½mv². By conservation of energy: ½kx² = ½mv² → v² = kx²/m → v = x√(k/m). This is a direct application of conservation of energy with elastic PE. Note the formula: v = x√(k/m) — it is proportional to x and √k, and inversely proportional to √m.'},
+
+{d:'HARD',e:'AFCAT 2023',
+q:'A car of mass 1000 kg moves at a constant speed of 20 m/s on a level road against a friction force of 500 N. The power delivered by the engine is:',
+opts:['10 kW','50 kW','25 kW','5 kW'],
+ans:0,
+rule:'Constant speed → engine force = friction force = 500 N. Power = Fv = 500 × 20 = 10,000 W = 10 kW',
+exp:'At constant speed, acceleration = 0, so engine force exactly equals friction (500 N). Using P = Fv = 500 × 20 = 10,000 W = 10 kW. At constant velocity, work done by engine = work done against friction. Mass (1000 kg) is a red herring here — it is not needed when we already know the friction force and constant velocity.'},
+
+{d:'HARD',e:'NDA 2023',
+q:'A body is projected vertically upward with velocity u from the ground. Which of the following correctly describes the variation of total mechanical energy during its upward journey (no air resistance)?',
+opts:['Increases continuously','Decreases continuously','Remains constant','First increases then decreases'],
+ans:2,
+rule:'No air resistance = only conservative force (gravity) acts → total mechanical energy = KE + PE = constant throughout',
+exp:'With no air resistance, only gravity acts — a conservative force. The total mechanical energy (KE + PE) remains constant throughout the motion. As the body rises, KE decreases (v decreases) and PE increases by exactly the same amount. At the top, KE = 0 and PE = max = mu²/2g. The total is always equal to the initial KE = ½mu². If air resistance were present, total ME would decrease continuously.'},
+
+{d:'HARD',e:'CDS 2024',
+q:'Two bodies of equal mass are moving with velocities v and 3v. The ratio of their kinetic energies is:',
+opts:['1:3','1:6','1:9','3:1'],
+ans:2,
+rule:'KE ∝ v² for equal masses. KE₁/KE₂ = v²/(3v)² = v²/9v² = 1:9',
+exp:'KE = ½mv². For equal masses, KE ∝ v². Body 1: KE₁ = ½mv². Body 2: KE₂ = ½m(3v)² = ½m × 9v² = 9 × ½mv². Ratio KE₁ : KE₂ = 1:9. This directly tests the fact that KE depends on the square of velocity — tripling the velocity increases KE by 9 times.'},
+
+{d:'HARD',e:'NDA 2024',
+q:'Which of the following statements about the work done by friction is CORRECT?',
+opts:[
+  'Friction always does positive work on a moving body',
+  'Friction always does negative work on a moving body',
+  'The work done by static friction can be positive, negative, or zero',
+  'Friction never does work since it is not a real force'
+],
+ans:2,
+rule:'Static friction adjusts direction to oppose relative motion tendency. It can do positive work (e.g., on a box accelerated by a truck), negative work, or zero.',
+exp:'Kinetic friction always opposes relative motion, so it always does negative work on a sliding body. However, STATIC friction is different — it acts to prevent relative sliding and its direction depends on the situation. Example: a box sitting on an accelerating truck — static friction on the box is forward (in the direction of motion), doing positive work. So static friction can be positive, negative, or zero. The question asks about friction in general, making option C the most accurate.'},
+
+];
+
+// ── ENGINE ────────────────────────────────────────────────────────────────────
+const answers  = new Array(QS.length).fill(null);
+const revealed = new Array(QS.length).fill(false);
+const LABS = ['A','B','C','D'];
+
+function build(){
+  const area = document.getElementById('q-area');
+  area.innerHTML = '';
+  QS.forEach((q,i)=>{
+    const dc = q.d==='EASY'?'diff-e':q.d==='MEDIUM'?'diff-m':'diff-h';
+    const div = document.createElement('div');
+    div.className='q-card'; div.id=`qc${i}`;
+    div.innerHTML=`
+      <div class="q-meta">
+        <span class="q-num">Q.${String(i+1).padStart(2,'0')}</span>
+        <span class="q-diff ${dc}">${q.d}</span>
+        <span class="q-exam">${q.e}</span>
+      </div>
+      <div class="q-body">
+        <div class="q-text">${q.q}</div>
+        <div class="opts" id="opts${i}">
+          ${q.opts.map((o,j)=>`
+            <button class="opt" id="o${i}_${j}" onclick="pick(${i},${j})">
+              <span class="opt-lbl">${LABS[j]}</span>${o}
+            </button>`).join('')}
+        </div>
+        <div class="exp-panel" id="ex${i}">
+          <div class="exp-tag">Explanation</div>
+          <div class="exp-rule">${q.rule}</div>
+          <p>${q.exp}</p>
+        </div>
+      </div>
+      <div class="q-foot">
+        <span style="font-size:11px;color:var(--dim);font-weight:700">Physics · P03</span>
+        <span id="ai${i}" class="q-status">—</span>
+      </div>`;
+    area.appendChild(div);
+  });
+}
+
+function pick(qi,oi){
+  if(revealed[qi]) return;
+  answers[qi]=oi;
+  document.querySelectorAll(`#opts${qi} .opt`).forEach((b,j)=>{
+    b.classList.remove('sel');
+    if(j===oi) b.classList.add('sel');
+  });
+  document.getElementById(`qc${qi}`).classList.add('answered');
+  const ai=document.getElementById(`ai${qi}`);
+  ai.textContent=`Selected: ${LABS[oi]}`;
+  ai.style.color='var(--teal)';
+  updateStats();
+}
+
+function updateStats(){
+  const att=answers.filter(a=>a!==null).length;
+  document.getElementById('s-att').textContent=att;
+  document.getElementById('prog').style.width=(att/QS.length*100)+'%';
+  document.getElementById('prog-label').textContent=`${att} of ${QS.length} answered`;
+  let c=0,w=0;
+  answers.forEach((a,i)=>{ if(a===null)return; if(a===QS[i].ans)c++; else w++; });
+  document.getElementById('s-cor').textContent=c;
+  document.getElementById('s-wrg').textContent=w;
+}
+
+function submitAll(){
+  let cor=0,wrg=0,skp=0;
+  QS.forEach((q,i)=>{
+    revealed[i]=true;
+    const opts=document.querySelectorAll(`#opts${i} .opt`);
+    opts.forEach(b=>{b.disabled=true;b.classList.remove('sel')});
+    opts[q.ans].classList.add('ok');
+    if(answers[i]!==null && answers[i]!==q.ans) opts[answers[i]].classList.add('bad');
+    document.getElementById(`ex${i}`).classList.add('show');
+    const ai=document.getElementById(`ai${i}`);
+    const card=document.getElementById(`qc${i}`);
+    card.classList.remove('answered');
+    if(answers[i]===null){skp++;ai.textContent='Skipped';ai.style.color='var(--dim)';}
+    else if(answers[i]===q.ans){cor++;card.classList.add('correct');ai.textContent='✓ Correct';ai.style.color='var(--green)';}
+    else{wrg++;card.classList.add('wrong');ai.textContent='✗ Wrong';ai.style.color='var(--red)';}
+  });
+  updateStats();
+  showResults(cor,wrg,skp);
+}
+
+function showResults(cor,wrg,skp){
+  const pct=Math.round(cor/QS.length*100);
+  let grade,msg;
+  if(pct>=88){grade='Excellent';msg='Outstanding! You have mastered Work, Energy & Power.'}
+  else if(pct>=70){grade='Good';msg='Well done. Review the questions you got wrong and revisit the formulas.'}
+  else if(pct>=50){grade='Average';msg='Good effort. Revisit the Theory cards — especially the traps.'}
+  else{grade='Needs Work';msg="Don't worry — go through Quick Ref and Theory again, then retry."}
+  const res=document.getElementById('results');
+  res.innerHTML=`
+    <div class="res-hero">
+      <div class="res-score">${cor}<span style="font-size:36px;opacity:.5">/${QS.length}</span></div>
+      <div class="res-grade">${grade} · ${pct}%</div>
+      <div class="res-msg">${msg}</div>
+    </div>
+    <div class="res-stats">
+      <div class="qs-cell"><div class="qs-val g">${cor}</div><div class="qs-lbl">Correct</div></div>
+      <div class="qs-cell"><div class="qs-val r">${wrg}</div><div class="qs-lbl">Wrong</div></div>
+      <div class="qs-cell"><div class="qs-val a">${skp}</div><div class="qs-lbl">Skipped</div></div>
+      <div class="qs-cell"><div class="qs-val">${pct}%</div><div class="qs-lbl">Score</div></div>
+    </div>
+    <div style="text-align:center;margin:16px 0">
+      <button class="btn btn-ghost" onclick="document.getElementById('q-area').scrollIntoView({behavior:'smooth'})">📖 Review All Answers</button>
+    </div>`;
+  res.style.display='block';
+  res.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function resetQuiz(){
+  answers.fill(null); revealed.fill(false);
+  build();
+  document.getElementById('results').style.display='none';
+  document.getElementById('results').innerHTML='';
+  ['s-att','s-cor','s-wrg'].forEach(id=>document.getElementById(id).textContent='0');
+  document.getElementById('prog').style.width='0%';
+  document.getElementById('prog-label').textContent=`0 of ${QS.length} answered`;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function switchTab(id){
+  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  const idx={theory:0,quickref:1,quiz:2}[id];
+  document.querySelectorAll('.tab')[idx].classList.add('on');
+}
+
+function tog(hd){
+  const bd=hd.nextElementSibling;
+  const isOpen=bd.classList.contains('open');
+  bd.classList.toggle('open',!isOpen);
+  hd.classList.toggle('open',!isOpen);
+}
+
+build();
+</script>
+</body>
+</html>

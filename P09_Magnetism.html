@@ -1,0 +1,1457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>P09 · Magnetism | Olive Defence</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+
+/* ══ CRIMSON / SILVER-STEEL THEME ══════════════════════════════ */
+:root{
+  --bg:         #F3F1F1;
+  --bg2:        #E8E4E4;
+  --bg3:        #D8D2D2;
+  --white:      #FFFFFF;
+  --ink:        #160C0C;
+  --ink2:       #2C1A1A;
+  --muted:      #756060;
+  --dim:        #AA9898;
+  --border:     #D4C8C8;
+
+  /* Primary — Deep Crimson */
+  --crim:       #8B0000;
+  --crimLt:     #A50000;
+  --crimPale:   #FBE8E8;
+
+  /* Accent — Steel Silver */
+  --steel:      #4A5568;
+  --steelLt:    #5A6780;
+  --steelPale:  #EEF0F5;
+  --steelMid:   #8A9AB8;
+
+  /* Semantic */
+  --green:      #1A6035;
+  --greenPale:  #E6F5EC;
+  --red:        #8B1C1C;
+  --redPale:    #FCEAEA;
+  --purple:     #5C2A8E;
+  --purplePale: #F2EDFB;
+  --amber:      #8C6000;
+  --amberPale:  #FDF5DC;
+  --teal:       #1A5C6E;
+  --tealPale:   #E4F3F8;
+  --blue:       #1A3F72;
+  --bluePale:   #EAF0FA;
+
+  --radius:     12px;
+  --shadow:     0 2px 12px rgba(22,12,12,.09);
+  --shadow-md:  0 4px 20px rgba(22,12,12,.14);
+}
+
+body{
+  font-family:'Nunito',sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  font-size:17px;
+  line-height:1.75;
+  min-height:100vh;
+}
+.page{max-width:680px;margin:0 auto;padding:0 16px 80px}
+
+/* ── HERO ─────────────────────────────────────────────────────── */
+.hero{
+  background:linear-gradient(135deg,#0F0101 0%,#8B0000 55%,#6B0000 100%);
+  margin:0 -16px;padding:30px 20px 28px;
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 80% 20%,rgba(220,220,255,.07) 0%,transparent 55%),
+    radial-gradient(ellipse at 15% 85%,rgba(255,180,180,.06) 0%,transparent 50%);
+  pointer-events:none;
+}
+.hero::after{
+  content:'';position:absolute;
+  width:280px;height:280px;
+  border:1.5px solid rgba(255,255,255,.06);
+  border-radius:50%;right:-80px;bottom:-90px;
+  pointer-events:none;
+}
+.hero-kicker{
+  font-size:11px;font-weight:700;letter-spacing:3px;
+  text-transform:uppercase;color:rgba(255,255,255,.45);
+  margin-bottom:8px;display:flex;align-items:center;gap:8px;
+}
+.hero-kicker::before{content:'';width:18px;height:2px;background:rgba(220,180,180,.5)}
+.hero-title{
+  font-family:'Lora',serif;
+  font-size:clamp(24px,5.5vw,36px);
+  font-weight:700;color:#fff;line-height:1.18;margin-bottom:10px;
+}
+.hero-title span{color:#FFB3B3;font-style:italic}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.60);margin-bottom:18px;line-height:1.65}
+.hero-chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{font-size:11px;font-weight:700;letter-spacing:1px;padding:4px 12px;border-radius:20px;text-transform:uppercase}
+.chip-w{background:rgba(255,255,255,.13);color:rgba(255,255,255,.88)}
+.chip-r{background:rgba(255,179,179,.16);color:#FFB3B3}
+.chip-g{background:rgba(100,210,140,.11);color:#80E0A8}
+
+/* ── TAB BAR ──────────────────────────────────────────────────── */
+.tab-bar{
+  position:sticky;top:0;z-index:50;
+  background:var(--white);border-bottom:2px solid var(--border);
+  margin:0 -16px;display:flex;overflow-x:auto;
+  box-shadow:0 2px 8px rgba(22,12,12,.08);
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;
+}
+.tab-bar::-webkit-scrollbar{display:none}
+.tab{
+  flex-shrink:0;padding:14px 18px;
+  font-size:12px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--muted);
+  border:none;background:transparent;cursor:pointer;
+  border-bottom:3px solid transparent;margin-bottom:-2px;
+  transition:all .2s;white-space:nowrap;
+}
+.tab:hover{color:var(--ink);background:var(--bg)}
+.tab.on{color:var(--crim);border-bottom-color:var(--crim)}
+
+/* ── PANES ────────────────────────────────────────────────────── */
+.pane{display:none;padding-top:24px;animation:fadeUp .3s ease}
+.pane.on{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── SECTION LABEL ────────────────────────────────────────────── */
+.sec-label{
+  font-size:10px;font-weight:800;letter-spacing:3px;
+  text-transform:uppercase;color:var(--crim);
+  margin:28px 0 12px;display:flex;align-items:center;gap:10px;
+}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* ── INTRO BOX ────────────────────────────────────────────────── */
+.intro-box{
+  background:var(--crimPale);border:1.5px solid rgba(139,0,0,.15);
+  border-radius:var(--radius);padding:20px;margin-bottom:8px;
+}
+.intro-box p{font-size:16px;color:var(--ink2);line-height:1.8}
+.intro-box strong{color:var(--crim)}
+
+/* ── CONCEPT CARDS ────────────────────────────────────────────── */
+.c-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius);margin-bottom:10px;
+  box-shadow:var(--shadow);overflow:hidden;
+}
+.c-head{
+  display:flex;align-items:center;gap:12px;padding:16px 18px;
+  cursor:pointer;border-left:4px solid transparent;
+  transition:all .15s;-webkit-tap-highlight-color:transparent;
+}
+.c-head:hover,.c-head.open{background:var(--bg);border-left-color:var(--crim)}
+.c-icon{
+  width:38px;height:38px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;
+}
+.c-title{font-size:17px;font-weight:700;color:var(--ink);flex:1}
+.c-sub{font-size:12px;color:var(--dim);font-weight:600;margin-top:2px}
+.c-arrow{font-size:12px;color:var(--dim);transition:transform .2s;flex-shrink:0}
+.c-head.open .c-arrow{transform:rotate(180deg)}
+.c-body{display:none;padding:4px 18px 20px;border-top:1px solid var(--border)}
+.c-body.open{display:block;animation:fadeUp .2s ease}
+.c-body p{font-size:16px;color:var(--ink2);line-height:1.85;margin-bottom:12px}
+.c-body p:last-child{margin-bottom:0}
+.c-body strong{color:var(--crim);font-weight:700}
+.c-body em{color:var(--steel);font-style:normal;font-weight:700}
+
+/* ── CONTENT BLOCKS ───────────────────────────────────────────── */
+/* Crimson fact box */
+.fact-box{
+  background:var(--crimPale);border:1.5px solid rgba(139,0,0,.18);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.fact-box .fb-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--crim);text-transform:uppercase;margin-bottom:8px;
+}
+.fact-box ul{list-style:none;padding:0}
+.fact-box li{
+  font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;
+  position:relative;line-height:1.7;
+}
+.fact-box li::before{content:'→';position:absolute;left:0;color:var(--crim);font-weight:700;font-size:13px}
+
+/* Green example box */
+.eg-box{
+  background:var(--greenPale);border-left:4px solid var(--green);
+  border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0;
+}
+.eg-box .eg-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--green);text-transform:uppercase;margin-bottom:6px;
+}
+.eg-box p{font-size:15px;color:var(--ink2);line-height:1.75}
+.eg-box ul{list-style:none;padding:0}
+.eg-box li{font-size:15px;color:var(--ink2);padding:4px 0 4px 18px;position:relative;line-height:1.65}
+.eg-box li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:800;font-size:12px}
+
+/* Red trap box */
+.trap-box{
+  background:var(--redPale);border:1.5px solid rgba(139,28,28,.20);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.trap-box .tr-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--red);text-transform:uppercase;margin-bottom:8px;
+}
+.trap-box p,.trap-box li{font-size:15.5px;color:var(--ink2);line-height:1.75}
+.trap-box ul{list-style:none;padding:0}
+.trap-box li{padding:5px 0 5px 22px;position:relative}
+.trap-box li::before{content:'⚑';position:absolute;left:0;font-size:12px;color:var(--red)}
+
+/* Teal rule box */
+.rule-box{
+  background:var(--tealPale);border:1.5px solid rgba(26,92,110,.18);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.rule-box .rl-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--teal);text-transform:uppercase;margin-bottom:8px;
+}
+.rule-box p{font-size:15.5px;color:var(--ink2);line-height:1.8}
+.rule-box strong{color:var(--teal)}
+
+/* Purple formula box */
+.formula-box{
+  background:var(--purplePale);border:1.5px solid rgba(92,42,142,.22);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.formula-box .fl-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--purple);text-transform:uppercase;margin-bottom:10px;
+}
+.formula-line{
+  font-family:'Lora',serif;font-size:18px;font-weight:700;
+  color:var(--purple);text-align:center;padding:8px 0;
+  letter-spacing:.5px;line-height:1.6;
+}
+.formula-note{font-size:14px;color:var(--ink2);line-height:1.7;margin-top:8px}
+.formula-note b{color:var(--purple)}
+
+/* Steel highlight box */
+.steel-box{
+  background:var(--steelPale);border:1.5px solid rgba(74,85,104,.18);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.steel-box .sl-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--steel);text-transform:uppercase;margin-bottom:8px;
+}
+.steel-box ul{list-style:none;padding:0}
+.steel-box li{font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;position:relative;line-height:1.8}
+.steel-box li::before{content:'◆';position:absolute;left:0;font-size:9px;color:var(--steelMid);top:10px}
+
+/* Amber analogy box */
+.analogy-box{
+  background:var(--amberPale);border-left:4px solid var(--amber);
+  border-radius:0 8px 8px 0;padding:14px 16px;margin:12px 0;
+}
+.analogy-box .an-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--amber);text-transform:uppercase;margin-bottom:6px;
+}
+.analogy-box p{font-size:15.5px;color:var(--ink2);line-height:1.75}
+
+/* Compare table */
+.compare-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
+.compare-table th{
+  background:var(--crim);color:#fff;
+  padding:10px 12px;text-align:left;
+  font-size:13px;font-weight:700;letter-spacing:.5px;
+}
+.compare-table td{
+  padding:10px 12px;border:1px solid var(--border);
+  color:var(--ink2);vertical-align:top;line-height:1.65;
+}
+.compare-table tr:nth-child(even) td{background:var(--bg)}
+.compare-table td b{color:var(--crim)}
+
+/* Mag mini-cards grid */
+.mag-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}
+.mag-card{
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:10px;padding:13px 14px;
+}
+.mag-card .mc-name{
+  font-size:13px;font-weight:800;color:var(--crim);
+  margin-bottom:4px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;
+}
+.mag-card .mc-tag{
+  font-size:10px;font-weight:700;color:var(--steel);
+  background:var(--steelPale);border-radius:4px;padding:1px 7px;
+}
+.mag-card p{font-size:13.5px;color:var(--ink2);line-height:1.6}
+
+/* ── QUICK REF ────────────────────────────────────────────────── */
+.ref-grid{display:grid;gap:10px;margin:8px 0}
+.ref-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);
+}
+.ref-card-title{
+  font-size:11px;font-weight:800;letter-spacing:2px;
+  text-transform:uppercase;color:var(--crim);
+  margin-bottom:10px;padding-bottom:8px;
+  border-bottom:2px solid var(--crim);
+}
+.ref-card ul{list-style:none;padding:0}
+.ref-card li{
+  font-size:15px;color:var(--ink2);padding:5px 0 5px 16px;
+  position:relative;line-height:1.65;
+  border-bottom:1px solid var(--bg2);
+}
+.ref-card li:last-child{border-bottom:none}
+.ref-card li::before{content:'·';position:absolute;left:4px;color:var(--crim);font-weight:900;font-size:18px;line-height:1.3}
+.ref-card li b{color:var(--ink);font-weight:700}
+.ref-card li em{color:var(--crim);font-style:normal;font-weight:700}
+
+/* ── QUIZ ─────────────────────────────────────────────────────── */
+.quiz-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:2px;background:var(--border);
+  border-radius:var(--radius);overflow:hidden;
+  margin-bottom:16px;box-shadow:var(--shadow);
+}
+.qs-cell{background:var(--white);padding:12px 8px;text-align:center}
+.qs-val{font-family:'Lora',serif;font-size:22px;font-weight:700;color:var(--crim);line-height:1}
+.qs-val.g{color:var(--green)}.qs-val.r{color:var(--red)}.qs-val.a{color:var(--steel)}
+.qs-lbl{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:1px;margin-top:4px;text-transform:uppercase}
+
+.prog-wrap{margin-bottom:20px}
+.prog-bar{height:6px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;background:var(--crim);border-radius:3px;transition:width .4s ease;width:0%}
+.prog-label{font-size:12px;color:var(--muted);font-weight:700;margin-bottom:6px}
+
+.q-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius);margin-bottom:12px;
+  box-shadow:var(--shadow);overflow:hidden;
+  border-left:4px solid transparent;transition:border-color .15s;
+}
+.q-card.answered{border-left-color:var(--crim)}
+.q-card.correct{border-left-color:var(--green)}
+.q-card.wrong{border-left-color:var(--red)}
+
+.q-meta{
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  padding:10px 16px;background:var(--bg);
+  border-bottom:1px solid var(--border);
+}
+.q-num{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:1px}
+.q-diff{font-size:10px;font-weight:800;padding:2px 10px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase}
+.diff-e{background:var(--greenPale);color:var(--green)}
+.diff-m{background:var(--steelPale);color:var(--steel)}
+.diff-h{background:var(--redPale);color:var(--red)}
+.q-exam{font-size:11px;color:var(--dim);margin-left:auto;font-weight:600}
+
+.q-body{padding:16px}
+.q-text{font-size:17px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-weight:600}
+
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{
+  background:var(--bg);border:1.5px solid var(--border);
+  border-radius:10px;padding:14px 16px;
+  cursor:pointer;display:flex;align-items:flex-start;gap:12px;
+  font-size:16px;color:var(--ink2);text-align:left;width:100%;
+  transition:all .15s;-webkit-tap-highlight-color:transparent;
+  min-height:48px;line-height:1.6;
+}
+.opt:hover:not(:disabled){border-color:var(--crim);background:var(--crimPale)}
+.opt:disabled{cursor:default}
+.opt.sel{border-color:var(--crim);background:var(--crimPale);color:var(--crim)}
+.opt.ok{border-color:var(--green)!important;background:var(--greenPale)!important;color:var(--green)!important}
+.opt.bad{border-color:var(--red)!important;background:var(--redPale)!important;color:var(--red)!important}
+.opt-lbl{
+  min-width:28px;height:28px;border-radius:8px;
+  background:var(--bg3);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:800;color:var(--muted);
+  flex-shrink:0;transition:all .15s;
+}
+.opt.sel .opt-lbl{background:var(--crim);color:#fff;border-color:var(--crim)}
+.opt.ok  .opt-lbl{background:var(--green)!important;color:#fff!important;border-color:var(--green)!important}
+.opt.bad .opt-lbl{background:var(--red)!important;color:#fff!important;border-color:var(--red)!important}
+
+.exp-panel{display:none;margin-top:14px;background:var(--bg);border-radius:10px;padding:14px 16px}
+.exp-panel.show{display:block;animation:fadeUp .2s ease}
+.exp-tag{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--crim);text-transform:uppercase;margin-bottom:6px}
+.exp-rule{font-size:13px;font-weight:800;color:var(--purple);background:var(--purplePale);border-radius:6px;padding:6px 10px;margin-bottom:10px}
+.exp-panel p{font-size:15px;color:var(--ink2);line-height:1.8}
+
+.q-foot{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 16px;background:var(--bg2);border-top:1px solid var(--border);
+}
+.q-status{font-size:12px;font-weight:700}
+
+.btn{
+  padding:14px 24px;border-radius:10px;font-size:14px;font-weight:800;
+  letter-spacing:.5px;border:none;cursor:pointer;transition:all .15s;
+  font-family:'Nunito',sans-serif;
+}
+.btn-primary{background:var(--crim);color:#fff;box-shadow:0 4px 14px rgba(139,0,0,.30)}
+.btn-primary:hover{background:var(--crimLt);transform:translateY(-1px)}
+.btn-ghost{background:var(--bg2);color:var(--ink2);border:1.5px solid var(--border)}
+.btn-ghost:hover{background:var(--bg3)}
+.btn-row{display:flex;gap:10px;justify-content:center;margin:16px 0}
+
+.res-hero{
+  background:linear-gradient(135deg,#0F0101,#8B0000);
+  border-radius:var(--radius);
+  padding:28px 20px;text-align:center;color:#fff;margin-bottom:12px;
+}
+.res-score{font-family:'Lora',serif;font-size:72px;font-weight:700;line-height:1;color:#FFB3B3}
+.res-grade{font-size:18px;font-weight:800;margin:8px 0 6px;color:rgba(255,255,255,.92)}
+.res-msg{font-size:15px;color:rgba(255,255,255,.62);line-height:1.6}
+.res-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:2px;background:var(--border);border-radius:var(--radius);
+  overflow:hidden;margin-bottom:12px;
+}
+@media(max-width:400px){
+  .hero{padding:22px 16px 20px}
+  .hero-title{font-size:22px}
+  .tab{padding:12px 13px;font-size:11px}
+  .q-text{font-size:16px}
+  .opt{font-size:15px;padding:12px 14px}
+  .mag-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-kicker">Olive Defence · Physics · P09</div>
+  <div class="hero-title">Magnetism &amp;<br><span>Electromagnetism</span></div>
+  <div class="hero-sub">Magnets · Earth's Magnetism · Magnetic Effects of Current · Electromagnetic Induction · Motors &amp; Generators — complete CDS · NDA · AFCAT coverage</div>
+  <div class="hero-chips">
+    <span class="chip chip-w">⚡ CDS</span>
+    <span class="chip chip-r">🛡 NDA</span>
+    <span class="chip chip-g">✈ AFCAT</span>
+    <span class="chip chip-w">Physics · P09</span>
+  </div>
+</div>
+
+<!-- ── TAB BAR ── -->
+<div class="tab-bar">
+  <button class="tab on" onclick="switchTab('theory')">📖 Theory</button>
+  <button class="tab" onclick="switchTab('quickref')">⚡ Quick Ref</button>
+  <button class="tab" onclick="switchTab('quiz')">🎯 Quiz</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     PANE 1 — THEORY
+════════════════════════════════════════════════════════════════ -->
+<div class="pane on" id="theory">
+
+  <div class="intro-box">
+    <p>Magnetism is a <strong>regularly tested chapter</strong> across all three defence exams. Expect questions on properties of magnets, Earth's magnetic field and its elements, magnetic effects of electric current, electromagnetic induction, and practical applications like motors, generators, and transformers. Understanding the <strong>interplay between electricity and magnetism</strong> is the key to scoring well here.</p>
+  </div>
+
+  <!-- ══ SECTION 1: NATURAL MAGNETISM ══ -->
+  <div class="sec-label">Section 1 — Magnets &amp; Magnetic Properties</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#FBE8E8">🧲</div>
+      <div style="flex:1">
+        <div class="c-title">Natural &amp; Artificial Magnets</div>
+        <div class="c-sub">Properties, poles, and the laws of magnetic attraction</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>A <strong>magnet</strong> is a material that attracts iron and certain other materials (nickel, cobalt) and aligns itself in the north–south direction when freely suspended. The two ends of a magnet are called its <strong>poles</strong> — the north-seeking pole (N) and the south-seeking pole (S).</p>
+
+      <div class="fact-box">
+        <div class="fb-label">Fundamental Properties of Magnets — All Exam-Tested</div>
+        <ul>
+          <li><strong>Like poles repel; unlike poles attract</strong> — a north pole repels another north pole; north attracts south</li>
+          <li><strong>Magnetic poles always exist in pairs</strong> — an isolated magnetic monopole has never been found; cutting a magnet in half produces two complete magnets, each with its own N and S pole</li>
+          <li><strong>Strongest attraction at poles</strong> — the centre of a bar magnet (the neutral point) shows the least magnetic effect</li>
+          <li><strong>Natural magnet: Lodestone (Magnetite, Fe₃O₄)</strong> — naturally occurring magnetic mineral; historically used in compasses</li>
+          <li><strong>Magnetic substances (ferromagnetic)</strong> — strongly attracted to magnets: iron (Fe), nickel (Ni), cobalt (Co)</li>
+          <li><strong>Non-magnetic substances</strong> — wood, copper, aluminium, glass, plastic; NOT attracted to magnets</li>
+        </ul>
+      </div>
+
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Type</th><th>Natural Magnet</th><th>Artificial Magnet</th></tr>
+          <tr><td><b>Origin</b></td><td>Found in nature (lodestone/magnetite)</td><td>Made by magnetising iron, steel, or alloys</td></tr>
+          <tr><td><b>Shape</b></td><td>Irregular</td><td>Regular — bar, horseshoe (U-shape), needle</td></tr>
+          <tr><td><b>Strength</b></td><td>Weak</td><td>Can be made very strong</td></tr>
+          <tr><td><b>Permanence</b></td><td>Permanent</td><td>Permanent (steel) or temporary (soft iron)</td></tr>
+          <tr><td><b>Use</b></td><td>Early compasses, historical</td><td>Electric motors, generators, loudspeakers, MRI machines, compasses</td></tr>
+        </table>
+      </div>
+
+      <div class="mag-grid">
+        <div class="mag-card">
+          <div class="mc-name">Permanent Magnet <span class="mc-tag">Steel</span></div>
+          <p>Made of hardened steel or special alloys (Alnico, Neodymium). Retains magnetism for long time. Used in: compass needles, loudspeakers, electric meters.</p>
+        </div>
+        <div class="mag-card">
+          <div class="mc-name">Temporary Magnet <span class="mc-tag">Soft Iron</span></div>
+          <p>Made of soft iron. Strong magnet while magnetising force is applied; loses magnetism immediately when removed. Used in: electromagnets, electric bells, cranes.</p>
+        </div>
+        <div class="mag-card">
+          <div class="mc-name">Electromagnet <span class="mc-tag">Current</span></div>
+          <p>Soft iron core wrapped with coil. Magnetised by passing current. Strength controlled by current. Used in: electric bell, telephone receiver, MRI, scrapyard cranes.</p>
+        </div>
+        <div class="mag-card">
+          <div class="mc-name">Demagnetisation <span class="mc-tag">Losing Magnetism</span></div>
+          <p>Magnets lose magnetism by: heating (above Curie temperature), hammering/rough handling, and storing N near N pole (repulsion). Store bar magnets in pairs with unlike poles together.</p>
+        </div>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Monopole Trap — Most Tested Fact</div>
+        <ul>
+          <li>Magnetic poles always come in <strong>pairs (dipoles)</strong> — you can NEVER isolate a single magnetic pole. Cutting a magnet ALWAYS produces two complete magnets with both poles.</li>
+          <li><strong>Soft iron</strong> is used for temporary magnets (electromagnets) — it gains and loses magnetism quickly</li>
+          <li><strong>Steel / Alnico</strong> is used for permanent magnets — it retains magnetism</li>
+          <li>Aluminium and copper are <strong>NOT magnetic</strong> — they are non-ferromagnetic metals</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 2: MAGNETIC FIELD LINES ══ -->
+  <div class="sec-label">Section 2 — Magnetic Field &amp; Field Lines</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#EEF0F5">🌐</div>
+      <div style="flex:1">
+        <div class="c-title">Magnetic Field Lines &amp; Properties</div>
+        <div class="c-sub">Visualising the invisible force around magnets</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>The region around a magnet where its influence can be felt is called the <strong>magnetic field</strong>. Magnetic field lines (lines of force) are imaginary lines used to represent the magnetic field — they show both the direction and relative strength of the field.</p>
+
+      <div class="steel-box">
+        <div class="sl-label">Properties of Magnetic Field Lines</div>
+        <ul>
+          <li><strong>They emerge from the North pole and enter the South pole</strong> outside the magnet; inside the magnet, they travel from South to North (forming closed loops)</li>
+          <li><strong>They never cross each other</strong> — at any point in space, the field has only one direction</li>
+          <li><strong>Closer lines = stronger field</strong> — field lines are densest near the poles where the field is strongest</li>
+          <li><strong>They are closed continuous loops</strong> — unlike electric field lines (which begin and end on charges), magnetic field lines form complete closed loops with no beginning or end</li>
+          <li><strong>They leave and enter the poles at right angles</strong> to the surface of the magnet</li>
+          <li>The direction of the field at any point is the <strong>tangent to the field line</strong> at that point</li>
+        </ul>
+      </div>
+
+      <div class="formula-box">
+        <div class="fl-label">Magnetic Field Strength</div>
+        <div class="formula-line">B = F / (qv) &nbsp;&nbsp;·&nbsp;&nbsp; F = qvB sinθ</div>
+        <div class="formula-note">
+          <b>B</b> = magnetic field (Tesla, T) &nbsp;·&nbsp; <b>F</b> = force (N) &nbsp;·&nbsp; <b>q</b> = charge (C) &nbsp;·&nbsp; <b>v</b> = velocity (m/s)<br>
+          <b>θ</b> = angle between velocity and magnetic field direction<br><br>
+          <b>1 Tesla (T)</b> = SI unit of magnetic field &nbsp;·&nbsp; <b>1 Gauss (G)</b> = 10⁻⁴ T (CGS unit)<br>
+          A charge moving <b>parallel</b> to B (θ = 0°) experiences <b>zero force</b> (sin 0° = 0)
+        </div>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Field Lines — Key Traps</div>
+        <ul>
+          <li>Magnetic field lines are <strong>closed loops</strong> — they go from N to S outside and S to N inside. They have no beginning or end.</li>
+          <li>Two field lines <strong>never cross</strong> — if they did, a compass placed there would point in two directions simultaneously, which is impossible</li>
+          <li>A charge moving <strong>parallel</strong> to a magnetic field experiences <strong>zero magnetic force</strong> (F = qvB sin0° = 0)</li>
+          <li>SI unit of magnetic field is <strong>Tesla (T)</strong> — NOT Gauss. 1 T = 10,000 Gauss</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 3: EARTH'S MAGNETISM ══ -->
+  <div class="sec-label">Section 3 — Earth's Magnetism</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#FBE8E8">🌍</div>
+      <div style="flex:1">
+        <div class="c-title">Earth as a Magnet — Elements of Earth's Magnetism</div>
+        <div class="c-sub">Magnetic declination, dip, and horizontal intensity</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>The Earth behaves like a giant bar magnet. Its magnetic field is believed to be generated by electric currents in the liquid outer core (molten iron-nickel). The Earth's <strong>geographic north pole</strong> coincides approximately with its <strong>magnetic south pole</strong> — which is why the north-seeking pole of a compass (its N pole) points towards geographic north.</p>
+
+      <div class="fact-box">
+        <div class="fb-label">Three Elements of Earth's Magnetism — Exam Essential</div>
+        <ul>
+          <li><strong>Magnetic Declination (θ)</strong> — the angle between the geographic (true) north and the magnetic north at a place. A compass needle does not point to exact geographic north — it points to magnetic north. The difference is the declination. Varies from place to place.</li>
+          <li><strong>Magnetic Dip / Inclination (δ)</strong> — the angle made by the Earth's total magnetic field with the horizontal at a given place. At the magnetic equator: dip = 0°. At the magnetic poles: dip = 90° (field is vertical). In India, dip is about 17°–24°.</li>
+          <li><strong>Horizontal Component (H)</strong> — the horizontal component of Earth's total magnetic field. H = B_total × cos(δ). At magnetic poles, H = 0 (field is entirely vertical). At magnetic equator, H = B_total (maximum; field is entirely horizontal).</li>
+        </ul>
+      </div>
+
+      <div class="formula-box">
+        <div class="fl-label">Earth's Magnetic Field Components</div>
+        <div class="formula-line">H = B cosδ &nbsp;&nbsp;·&nbsp;&nbsp; V = B sinδ &nbsp;&nbsp;·&nbsp;&nbsp; tan δ = V/H</div>
+        <div class="formula-note">
+          <b>B</b> = total magnetic field of Earth &nbsp;·&nbsp; <b>H</b> = horizontal component &nbsp;·&nbsp; <b>V</b> = vertical component<br>
+          <b>δ</b> = angle of dip (inclination)<br><br>
+          At <b>magnetic equator</b>: δ = 0°, H = B (maximum), V = 0<br>
+          At <b>magnetic poles</b>: δ = 90°, H = 0, V = B (maximum)
+        </div>
+      </div>
+
+      <div class="steel-box">
+        <div class="sl-label">Key Facts About Earth's Magnetism</div>
+        <ul>
+          <li>Earth's magnetic south pole is near the geographic north pole — the N-pole of a compass needle is attracted to it</li>
+          <li>The magnetic axis of Earth is tilted at about <strong>11.3°</strong> to its geographic axis (rotation axis)</li>
+          <li>Earth's magnetic poles are <strong>not fixed</strong> — they slowly drift (secular variation)</li>
+          <li><strong>Magnetic equator (aclinic line)</strong> — the line where angle of dip is zero; a freely suspended magnet is horizontal here</li>
+          <li><strong>Isogonic lines</strong> — lines joining places of equal magnetic declination</li>
+          <li><strong>Agonic lines</strong> — lines where magnetic declination is zero (compass points to true north)</li>
+          <li><strong>Isoclinic lines (Isogonal)</strong> — lines joining places of equal dip</li>
+          <li>Earth's magnetic field reverses periodically over geological timescales (every few hundred thousand years)</li>
+        </ul>
+      </div>
+
+      <div class="analogy-box">
+        <div class="an-label">Why Geographic North = Magnetic South</div>
+        <p>The north pole of a compass needle (which is itself a magnet) is attracted to the geographic north of Earth. By the law of magnetism (unlike poles attract), the geographic north region of Earth must contain a magnetic <strong>south</strong> pole. Earth's geographic north and magnetic south are near each other — this is the reason a freely suspended magnet points north.</p>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Earth's Magnetism — Exam Traps</div>
+        <ul>
+          <li>Earth's geographic north = Earth's <strong>magnetic south pole</strong> (unlike poles attract compass needle)</li>
+          <li>At the magnetic poles: dip = <strong>90°</strong>, horizontal component = <strong>zero</strong></li>
+          <li>At the magnetic equator: dip = <strong>0°</strong>, horizontal component = <strong>maximum</strong></li>
+          <li>Compass does NOT point to true geographic north — it points to <strong>magnetic north</strong>. The difference is the declination.</li>
+          <li>A dip needle (magnetic needle free to rotate vertically) is horizontal at magnetic equator and vertical at magnetic poles</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 4: MAGNETIC EFFECT OF CURRENT ══ -->
+  <div class="sec-label">Section 4 — Magnetic Effect of Electric Current</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E4F3F8">⚡</div>
+      <div style="flex:1">
+        <div class="c-title">Oersted's Discovery &amp; Magnetic Effect of Current</div>
+        <div class="c-sub">A current-carrying conductor creates a magnetic field around it</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>In 1820, <strong>Hans Christian Oersted</strong> discovered that a compass needle deflects when placed near a current-carrying wire — establishing that electric current produces a magnetic field. This was the first evidence that electricity and magnetism are related.</p>
+
+      <div class="rule-box">
+        <div class="rl-label">Rules for Direction of Magnetic Field Due to Current</div>
+        <p><strong>Right-Hand Thumb Rule (for straight wire):</strong> Grasp the wire with the right hand, thumb pointing in the direction of conventional current. The curled fingers show the direction of the circular magnetic field around the wire.<br><br>
+        <strong>Right-Hand Screw Rule (Corkscrew Rule):</strong> If a right-handed screw rotates in the direction of the induced field, the direction of advancement of the screw is the direction of the current — and vice versa.<br><br>
+        <strong>Right-Hand Rule for solenoid/coil:</strong> Wrap right hand around solenoid with fingers in current direction; thumb points to the North pole of the solenoid.</p>
+      </div>
+
+      <div class="fact-box">
+        <div class="fb-label">Factors Affecting Magnetic Field Strength of a Current-Carrying Conductor</div>
+        <ul>
+          <li><strong>Magnitude of current (I)</strong> — greater current → stronger magnetic field (B ∝ I)</li>
+          <li><strong>Distance from conductor (r)</strong> — farther from wire → weaker field (B ∝ 1/r for straight wire)</li>
+          <li><strong>Number of turns in coil</strong> — more turns → stronger field (field adds up)</li>
+          <li><strong>Nature of core material</strong> — iron core inside coil dramatically amplifies the magnetic field (up to 1000×)</li>
+        </ul>
+      </div>
+
+      <div class="formula-box">
+        <div class="fl-label">Key Magnetic Field Formulas</div>
+        <div class="formula-line">B = μ₀I / (2πr) &nbsp;·&nbsp; B = μ₀nI (solenoid)</div>
+        <div class="formula-note">
+          <b>Straight wire:</b> B = μ₀I/(2πr); B decreases with distance r from wire<br>
+          <b>Solenoid:</b> B = μ₀nI; n = number of turns per unit length, I = current<br>
+          <b>μ₀</b> = permeability of free space = 4π × 10⁻⁷ T·m/A<br><br>
+          A <b>solenoid</b> is a long coil of wire — it produces a uniform magnetic field inside (like a bar magnet), with a definite N and S pole at its ends.
+        </div>
+      </div>
+
+      <div class="eg-box">
+        <div class="eg-label">Applications of Magnetic Effect of Current</div>
+        <ul>
+          <li><strong>Electromagnet</strong> — current-carrying coil around soft iron core; used in scrapyard cranes, electric bells, relays, MRI machines</li>
+          <li><strong>Electric bell</strong> — electromagnet attracts a metal strip (armature), hits the bell; contact breaks, demagnetises coil, armature returns, contact re-made → continuous ringing</li>
+          <li><strong>Loudspeaker</strong> — current-varying signal through coil in permanent magnetic field creates varying force → cone vibrates → sound</li>
+          <li><strong>Galvanometer</strong> — coil in magnetic field deflects proportionally to current; basis of all current-measuring instruments</li>
+          <li><strong>Telephone earpiece</strong> — varying current creates varying magnetic field → varying force on metal diaphragm → sound</li>
+        </ul>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Oersted Trap</div>
+        <ul>
+          <li>Oersted discovered (1820) that current produces magnetism — this is the foundation of electromagnetism</li>
+          <li>The magnetic field around a straight wire forms <strong>concentric circles</strong> in planes perpendicular to the wire — not straight lines</li>
+          <li>Increasing current → field strength <strong>increases</strong>; increasing distance → field strength <strong>decreases</strong></li>
+          <li>A solenoid acts like a <strong>bar magnet</strong> — it has distinct N and S poles; its field is strongest inside and nearly uniform</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 5: FORCE ON CURRENT ══ -->
+  <div class="sec-label">Section 5 — Force on a Current-Carrying Conductor</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#F2EDFB">🔁</div>
+      <div style="flex:1">
+        <div class="c-title">Force on a Current-Carrying Conductor — Fleming's Left-Hand Rule</div>
+        <div class="c-sub">The motor principle — how electric current becomes motion</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>When a current-carrying conductor is placed in an external magnetic field, it experiences a <strong>mechanical force</strong>. This is the principle behind electric motors. The force is maximum when the current is perpendicular to the field, and zero when the current is parallel to the field.</p>
+
+      <div class="formula-box">
+        <div class="fl-label">Force on a Current-Carrying Conductor</div>
+        <div class="formula-line">F = BIL sinθ</div>
+        <div class="formula-note">
+          <b>F</b> = force (N) &nbsp;·&nbsp; <b>B</b> = magnetic field (T) &nbsp;·&nbsp; <b>I</b> = current (A) &nbsp;·&nbsp; <b>L</b> = length of conductor (m)<br>
+          <b>θ</b> = angle between current direction and magnetic field direction<br><br>
+          Maximum force when θ = 90° (current ⊥ field): <b>F = BIL</b><br>
+          Zero force when θ = 0° (current ∥ field): F = 0
+        </div>
+      </div>
+
+      <div class="rule-box">
+        <div class="rl-label">Fleming's Left-Hand Rule — The Motor Rule</div>
+        <p>Stretch the <strong>thumb</strong>, <strong>index finger</strong>, and <strong>middle finger</strong> of the <strong>left hand</strong> so they are mutually perpendicular:<br><br>
+        <strong>Index finger (Forefinger)</strong> → direction of magnetic Field (B)<br>
+        <strong>Middle finger</strong> → direction of conventional Current (I)<br>
+        <strong>Thumb</strong> → direction of Thrust/Force (Motion) on the conductor<br><br>
+        Memory: <strong>FBI</strong> — Forefinger = B (field), Middle = current (I), Thumb = Force. Left hand for motor (Left hand rule → eLectric motor).</p>
+      </div>
+
+      <div class="steel-box">
+        <div class="sl-label">Electric Motor — Working Principle</div>
+        <ul>
+          <li>A rectangular coil (armature) carrying current is placed between the poles of a permanent magnet</li>
+          <li>By Fleming's Left-Hand Rule, forces on opposite sides of the coil are in opposite directions → the coil rotates</li>
+          <li>A <strong>commutator</strong> (split-ring) reverses the current direction every half turn to maintain continuous rotation in one direction</li>
+          <li>A <strong>DC motor</strong> uses a commutator; an <strong>AC motor</strong> (induction motor) uses alternating current directly</li>
+          <li>Converts: <strong>Electrical energy → Mechanical (kinetic) energy</strong></li>
+          <li>Applications: electric fans, water pumps, washing machines, electric vehicles, lifts</li>
+        </ul>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Left vs Right Hand — Never Confuse</div>
+        <ul>
+          <li><strong>Fleming's Left-Hand Rule</strong> → <em>Motor</em> (current in field → force/motion)</li>
+          <li><strong>Fleming's Right-Hand Rule</strong> → <em>Generator</em> (motion in field → induced current)</li>
+          <li>Memory trick: <strong>M</strong>otor = <strong>L</strong>eft (M·L); <strong>G</strong>enerator = <strong>R</strong>ight (G·R) — alphabetical order M before G, L before R</li>
+          <li>Force is zero when current and field are <strong>parallel</strong> — directly tested in NDA</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 6: ELECTROMAGNETIC INDUCTION ══ -->
+  <div class="sec-label">Section 6 — Electromagnetic Induction</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#FBE8E8">⚙️</div>
+      <div style="flex:1">
+        <div class="c-title">Faraday's Laws &amp; Lenz's Law</div>
+        <div class="c-sub">How changing magnetism creates electricity — the generator principle</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>In 1831, <strong>Michael Faraday</strong> discovered that a changing magnetic flux through a circuit induces an EMF (and hence a current) in that circuit. This is called <strong>electromagnetic induction</strong> — the reverse of Oersted's finding, and the foundation of all electrical power generation.</p>
+
+      <div class="steel-box">
+        <div class="sl-label">Faraday's Two Laws of Electromagnetic Induction</div>
+        <ul>
+          <li><strong>First Law:</strong> Whenever the magnetic flux through a circuit changes, an EMF is induced in the circuit. The induced EMF (and current) lasts only as long as the flux is changing — a static magnetic field induces nothing.</li>
+          <li><strong>Second Law:</strong> The magnitude of the induced EMF is directly proportional to the rate of change of magnetic flux. EMF = −dΦ/dt. Faster change → larger induced EMF.</li>
+        </ul>
+      </div>
+
+      <div class="formula-box">
+        <div class="fl-label">Faraday's Law &amp; Lenz's Law</div>
+        <div class="formula-line">EMF = −N × (ΔΦ/Δt)</div>
+        <div class="formula-note">
+          <b>EMF</b> = induced electromotive force (V) &nbsp;·&nbsp; <b>N</b> = number of turns in coil<br>
+          <b>ΔΦ</b> = change in magnetic flux (Weber, Wb) &nbsp;·&nbsp; <b>Δt</b> = time interval (s)<br>
+          The <b>negative sign</b> represents Lenz's Law — the induced EMF opposes the change causing it<br><br>
+          <b>Magnetic flux:</b> Φ = B × A × cosθ (B = field, A = area, θ = angle between B and normal to area)
+        </div>
+      </div>
+
+      <div class="rule-box">
+        <div class="rl-label">Lenz's Law — Conservation of Energy in Induction</div>
+        <p>The <strong>direction</strong> of the induced current is always such that it <strong>opposes the change in magnetic flux</strong> that caused it. If you push a magnet into a coil, the coil's induced current creates a magnetic field that repels the incoming magnet — you must do work to push it in. This work appears as electrical energy. Lenz's Law is a direct consequence of the <strong>conservation of energy</strong>.</p>
+      </div>
+
+      <div class="rule-box">
+        <div class="rl-label">Fleming's Right-Hand Rule — The Generator Rule</div>
+        <p>Stretch the <strong>thumb</strong>, <strong>index finger</strong>, and <strong>middle finger</strong> of the <strong>right hand</strong> mutually perpendicular:<br><br>
+        <strong>Index finger (Forefinger)</strong> → direction of magnetic Field (B)<br>
+        <strong>Middle finger</strong> → direction of induced Current<br>
+        <strong>Thumb</strong> → direction of Motion (velocity) of conductor<br><br>
+        Used to find the direction of induced current in a generator/dynamo when the conductor moves in a magnetic field.</p>
+      </div>
+
+      <div class="steel-box">
+        <div class="sl-label">AC Generator (Dynamo) — Working Principle</div>
+        <ul>
+          <li>A rectangular coil is rotated inside a uniform magnetic field between strong poles</li>
+          <li>As the coil rotates, the magnetic flux through it changes continuously → alternating EMF is induced</li>
+          <li>The induced EMF is sinusoidal: E = E₀ sin(ωt), where E₀ is the peak EMF</li>
+          <li><strong>Slip rings</strong> (not commutator) allow the alternating current to flow out to the external circuit without reversing it → produces AC</li>
+          <li>Converts: <strong>Mechanical energy → Electrical energy (AC)</strong></li>
+          <li>Applications: power stations, bicycle dynamos, alternators in cars</li>
+          <li>A <strong>DC generator</strong> uses a commutator instead of slip rings → rectifies the AC to pulsating DC</li>
+        </ul>
+      </div>
+
+      <div class="eg-box">
+        <div class="eg-label">Ways to Increase Induced EMF (and Current)</div>
+        <ul>
+          <li>Increase the <strong>speed of rotation</strong> (or speed of relative motion between conductor and field)</li>
+          <li>Increase the <strong>number of turns (N)</strong> in the coil — EMF ∝ N</li>
+          <li>Increase the <strong>strength of the magnetic field (B)</strong> — use stronger magnets</li>
+          <li>Increase the <strong>area of the coil (A)</strong> — larger coil sweeps more flux</li>
+          <li>Use a <strong>soft iron core</strong> inside the coil to concentrate the magnetic field</li>
+        </ul>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Generator vs Motor — Key Exam Distinctions</div>
+        <ul>
+          <li>A static magnetic field induces <strong>no EMF</strong> — only a <em>changing</em> flux induces EMF</li>
+          <li>Generator: uses <strong>slip rings</strong> → produces AC. DC generator uses <strong>commutator</strong> → produces DC</li>
+          <li>Motor: uses <strong>commutator</strong> to maintain rotation direction</li>
+          <li>Lenz's Law: induced current <strong>opposes</strong> the change — it does NOT stop the change entirely</li>
+          <li>Faraday was the discoverer of electromagnetic induction; the unit of capacitance (Farad) is also named after him</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 7: TRANSFORMER ══ -->
+  <div class="sec-label">Section 7 — Transformer &amp; Mutual Induction</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#EEF0F5">🔌</div>
+      <div style="flex:1">
+        <div class="c-title">Transformer — Step-Up &amp; Step-Down</div>
+        <div class="c-sub">Changing voltage levels using mutual induction — AC only</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>A <strong>transformer</strong> is a device that transfers electrical energy between two circuits through <strong>mutual induction</strong> — the changing current in the primary coil creates a changing magnetic flux, which induces an EMF in the secondary coil. <strong>Transformers work only with AC</strong> — a steady DC produces no changing flux and therefore no induction.</p>
+
+      <div class="formula-box">
+        <div class="fl-label">Transformer Equations</div>
+        <div class="formula-line">V_s/V_p = N_s/N_p = I_p/I_s</div>
+        <div class="formula-note">
+          <b>V_s, V_p</b> = secondary and primary voltages &nbsp;·&nbsp; <b>N_s, N_p</b> = secondary and primary turns<br>
+          <b>I_s, I_p</b> = secondary and primary currents<br><br>
+          For an ideal (100% efficient) transformer: <b>V_p × I_p = V_s × I_s</b> (input power = output power)<br>
+          Note: current ratio is <b>inverse</b> of voltage ratio — voltage steps up → current steps down (energy conserved)
+        </div>
+      </div>
+
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Property</th><th>Step-Up Transformer</th><th>Step-Down Transformer</th></tr>
+          <tr><td><b>Turns</b></td><td>N_s &gt; N_p (more turns in secondary)</td><td>N_s &lt; N_p (fewer turns in secondary)</td></tr>
+          <tr><td><b>Voltage</b></td><td>V_s &gt; V_p (voltage increases)</td><td>V_s &lt; V_p (voltage decreases)</td></tr>
+          <tr><td><b>Current</b></td><td>I_s &lt; I_p (current decreases)</td><td>I_s &gt; I_p (current increases)</td></tr>
+          <tr><td><b>Use</b></td><td>Power stations — raise voltage before long-distance transmission (reduces I²R losses)</td><td>Substations, homes — reduce voltage to safe 220 V for domestic use</td></tr>
+        </table>
+      </div>
+
+      <div class="steel-box">
+        <div class="sl-label">Why High Voltage for Power Transmission?</div>
+        <ul>
+          <li>Power loss in transmission lines: P_loss = I²R. Lower current (I) → dramatically less power loss</li>
+          <li>Step-up transformer increases voltage (e.g., 11 kV → 220 kV) → current drops proportionally</li>
+          <li>At the destination, step-down transformer reduces voltage back to 220 V for home use</li>
+          <li>This is why AC is preferred for power distribution — transformers only work with AC</li>
+        </ul>
+      </div>
+
+      <div class="fact-box">
+        <div class="fb-label">Transformer Losses — Reasons for Less Than 100% Efficiency</div>
+        <ul>
+          <li><strong>Copper losses (I²R losses)</strong> — heating of primary and secondary coil wires; minimised by using thick copper wire</li>
+          <li><strong>Iron / core losses</strong> — two types: (a) <em>Eddy current losses</em> — induced circular currents in the iron core waste energy as heat; minimised by using a <em>laminated core</em> (thin insulated layers); (b) <em>Hysteresis losses</em> — energy lost in magnetising and demagnetising the core in each AC cycle; minimised by using <em>silicon steel</em> core</li>
+          <li><strong>Flux leakage</strong> — not all magnetic flux from primary links with secondary coil; minimised by winding coils on the same core</li>
+        </ul>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Transformer Exam Traps</div>
+        <ul>
+          <li>Transformers work on <strong>AC only</strong> — DC produces no changing flux → no induction → no output</li>
+          <li>When voltage steps up, current steps <strong>down</strong> (energy conservation — power = VI remains constant for ideal transformer)</li>
+          <li>Eddy current losses are reduced by <strong>laminating</strong> the core (NOT by using soft iron)</li>
+          <li>Transformer neither creates nor destroys energy — it only <strong>changes voltage level</strong></li>
+          <li>A transformer with more turns in primary than secondary is a <strong>step-down</strong> transformer</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 8: CLASSIFICATION OF MATERIALS ══ -->
+  <div class="sec-label">Section 8 — Magnetic Classification of Materials</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#FBE8E8">🔬</div>
+      <div style="flex:1">
+        <div class="c-title">Dia-, Para-, and Ferromagnetic Materials</div>
+        <div class="c-sub">How different materials behave in a magnetic field</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Property</th><th>Diamagnetic</th><th>Paramagnetic</th><th>Ferromagnetic</th></tr>
+          <tr><td><b>Behaviour in field</b></td><td>Weakly repelled by magnetic field</td><td>Weakly attracted by magnetic field</td><td>Strongly attracted by magnetic field</td></tr>
+          <tr><td><b>Examples</b></td><td>Bismuth (Bi), copper, gold, silver, water, NaCl, most plastics</td><td>Aluminium, platinum, chromium, oxygen (liquid), manganese</td><td>Iron (Fe), Nickel (Ni), Cobalt (Co) and their alloys</td></tr>
+          <tr><td><b>Relative permeability (μ_r)</b></td><td>Slightly less than 1 (μ_r &lt; 1)</td><td>Slightly greater than 1 (μ_r &gt; 1)</td><td>Very much greater than 1 (μ_r &gt;&gt; 1, can be thousands)</td></tr>
+          <tr><td><b>Effect of temperature</b></td><td>Nearly independent of temperature</td><td>Susceptibility decreases as T increases (Curie's Law)</td><td>Above Curie temperature, behaves as paramagnetic</td></tr>
+          <tr><td><b>Retain magnetism?</b></td><td>No</td><td>No</td><td>Yes (if hard material like steel)</td></tr>
+        </table>
+      </div>
+
+      <div class="fact-box">
+        <div class="fb-label">Curie Temperature — Exam Fact</div>
+        <ul>
+          <li><strong>Curie temperature</strong> — the temperature above which a ferromagnetic material loses its ferromagnetic properties and becomes paramagnetic</li>
+          <li>Iron's Curie temperature ≈ <strong>770°C</strong></li>
+          <li>Nickel's Curie temperature ≈ <strong>358°C</strong></li>
+          <li>Cobalt's Curie temperature ≈ <strong>1115°C</strong> (highest among common ferromagnets)</li>
+          <li>Magnets lose magnetism when heated above Curie temperature — this is why heating a magnet demagnetises it</li>
+        </ul>
+      </div>
+
+      <div class="steel-box">
+        <div class="sl-label">Important Magnetic Materials &amp; Their Uses</div>
+        <ul>
+          <li><strong>Alnico (Al-Ni-Co alloy)</strong> — high coercivity; used in permanent magnets, loudspeakers, motors</li>
+          <li><strong>Neodymium magnets (Nd-Fe-B)</strong> — strongest permanent magnets known; used in hard disks, headphones, MRI machines</li>
+          <li><strong>Ferrites (Fe₂O₃ compounds)</strong> — used in transformer cores, computer memories, radio antennae; low eddy current losses</li>
+          <li><strong>Silicon steel (electrical steel)</strong> — used in transformer and motor cores; low hysteresis loss</li>
+          <li><strong>Soft iron</strong> — high permeability, low coercivity; used in electromagnet cores, transformer cores, shielding</li>
+          <li><strong>Bismuth</strong> — strongest diamagnetic material; used in magnetic levitation demonstrations</li>
+        </ul>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Classification Traps</div>
+        <ul>
+          <li><strong>Aluminium</strong> is <em>paramagnetic</em>, NOT diamagnetic — it is weakly attracted to magnets. This is directly tested.</li>
+          <li><strong>Copper, gold, silver, bismuth</strong> are <em>diamagnetic</em> — weakly repelled by magnets. Most exam-goers think metals are magnetic.</li>
+          <li>Only iron, nickel, and cobalt (and their alloys) are <strong>ferromagnetic</strong></li>
+          <li>Above Curie temperature, ferromagnets become <strong>paramagnetic</strong> — NOT diamagnetic</li>
+          <li>Superconductors exhibit perfect <strong>diamagnetism</strong> (Meissner effect) — they completely expel magnetic fields; this causes magnetic levitation</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end theory pane -->
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     PANE 2 — QUICK REF
+════════════════════════════════════════════════════════════════ -->
+<div class="pane" id="quickref">
+
+  <div class="sec-label">Formulas &amp; Key Values</div>
+  <div class="ref-grid">
+    <div class="ref-card">
+      <div class="ref-card-title">Magnetism — Master Formula Sheet</div>
+      <ul>
+        <li><b>Force on charge:</b> F = qvB sinθ &nbsp;·&nbsp; zero when θ = 0°</li>
+        <li><b>Force on conductor:</b> F = BIL sinθ</li>
+        <li><b>Field near straight wire:</b> B = μ₀I / (2πr)</li>
+        <li><b>Solenoid field:</b> B = μ₀nI (n = turns per unit length)</li>
+        <li><b>Faraday's Law:</b> EMF = −N(ΔΦ/Δt)</li>
+        <li><b>Transformer:</b> V_s/V_p = N_s/N_p = I_p/I_s</li>
+        <li><b>Earth's field:</b> H = B cosδ &nbsp;·&nbsp; V = B sinδ &nbsp;·&nbsp; tanδ = V/H</li>
+        <li><b>Flux:</b> Φ = BA cosθ &nbsp;·&nbsp; Unit: Weber (Wb)</li>
+        <li><b>SI unit of B:</b> <em>Tesla (T)</em> = Wb/m²</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-label">Magnets &amp; Properties</div>
+  <div class="ref-grid">
+    <div class="ref-card">
+      <div class="ref-card-title">Magnets — Key Facts</div>
+      <ul>
+        <li>Like poles <em>repel</em>; unlike poles <em>attract</em></li>
+        <li>Poles always in pairs — cutting magnet → two complete magnets</li>
+        <li>Natural magnet: <em>Lodestone (Fe₃O₄, Magnetite)</em></li>
+        <li>Ferromagnetic: <em>Fe, Ni, Co</em> and alloys only</li>
+        <li>Paramagnetic: Al, Pt, O₂ (weakly attracted)</li>
+        <li>Diamagnetic: Cu, Ag, Au, Bi, water (weakly repelled)</li>
+        <li>Soft iron: <em>temporary</em> magnets (electromagnets)</li>
+        <li>Steel/Alnico: <em>permanent</em> magnets</li>
+        <li>Demagnetise by: <em>heating, hammering, wrong storage</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-label">Earth's Magnetism</div>
+  <div class="ref-grid">
+    <div class="ref-card">
+      <div class="ref-card-title">Three Elements of Earth's Magnetism</div>
+      <ul>
+        <li><b>Declination:</b> angle between geographic north and magnetic north</li>
+        <li><b>Dip (Inclination):</b> angle of total field with horizontal</li>
+        <li><b>H (Horizontal component):</b> H = B cosδ</li>
+        <li>At magnetic equator: dip = <em>0°</em>, H = maximum</li>
+        <li>At magnetic poles: dip = <em>90°</em>, H = zero</li>
+        <li>Geographic north ≈ Earth's <em>magnetic south pole</em></li>
+        <li>Compass points to <em>magnetic north</em>, not geographic north</li>
+        <li>Agonic line: declination = <em>zero</em> (compass → true north)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-label">Rules &amp; Laws</div>
+  <div class="ref-grid">
+    <div class="ref-card">
+      <div class="ref-card-title">Fleming's Rules &amp; Faraday's Law</div>
+      <ul>
+        <li>Right-Hand Thumb Rule: current direction → field circles around wire</li>
+        <li>RH Rule for solenoid: fingers follow current → thumb = North pole</li>
+        <li><b>Left-Hand Rule → Motor</b> (FBI: Forefinger=B, Middle=I, Thumb=Force)</li>
+        <li><b>Right-Hand Rule → Generator</b> (Forefinger=B, Middle=current, Thumb=motion)</li>
+        <li>Motor: electrical → mechanical energy</li>
+        <li>Generator: mechanical → electrical energy</li>
+        <li>Faraday: changing flux → induced EMF</li>
+        <li>Lenz's Law: induced current <em>opposes</em> change in flux</li>
+        <li>Static field → <em>no induction</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-label">Transformer &amp; Generator</div>
+  <div class="ref-grid">
+    <div class="ref-card">
+      <div class="ref-card-title">Transformer Key Points</div>
+      <ul>
+        <li>Works on <em>AC only</em> — DC produces no changing flux</li>
+        <li>Step-up: N_s &gt; N_p → V_s &gt; V_p, I_s &lt; I_p</li>
+        <li>Step-down: N_s &lt; N_p → V_s &lt; V_p, I_s &gt; I_p</li>
+        <li>Ideal: V_p I_p = V_s I_s (power conserved)</li>
+        <li>Eddy current losses → reduced by <em>laminating</em> core</li>
+        <li>Hysteresis losses → reduced by <em>silicon steel</em> core</li>
+        <li>High-voltage transmission → reduces <em>I²R losses</em> in lines</li>
+        <li>Generator with slip rings → <em>AC</em>; commutator → <em>DC</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-label">Material Classification</div>
+  <div class="ref-grid">
+    <div class="ref-card">
+      <div class="ref-card-title">Dia · Para · Ferromagnetic</div>
+      <ul>
+        <li><b>Diamagnetic:</b> weakly <em>repelled</em> — Cu, Ag, Au, Bi, water</li>
+        <li><b>Paramagnetic:</b> weakly <em>attracted</em> — Al, Pt, Cr, O₂</li>
+        <li><b>Ferromagnetic:</b> strongly <em>attracted</em> — Fe, Ni, Co only</li>
+        <li>Al is <em>paramagnetic</em> (NOT diamagnetic or non-magnetic)</li>
+        <li>Curie temp of iron: <em>770°C</em></li>
+        <li>Above Curie temp: ferromagnet → <em>paramagnetic</em></li>
+        <li>Superconductors: perfect <em>diamagnets</em> (Meissner effect)</li>
+        <li>Strongest permanent magnet alloy: <em>Neodymium (Nd-Fe-B)</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-label">Top Exam Traps</div>
+  <div class="ref-grid">
+    <div class="ref-card">
+      <div class="ref-card-title">Never Get These Wrong</div>
+      <ul>
+        <li>Cutting magnet in half → <em>two complete magnets</em> (not isolated poles)</li>
+        <li>Geographic north = Earth's <em>magnetic south</em> pole</li>
+        <li>At magnetic poles: H = <em>zero</em>, dip = <em>90°</em></li>
+        <li>At magnetic equator: H = maximum, dip = <em>zero</em></li>
+        <li>Motor → <em>Left</em>-Hand Rule; Generator → <em>Right</em>-Hand Rule</li>
+        <li>Force on conductor <em>zero</em> when current ∥ field (θ = 0°)</li>
+        <li>Transformers work on <em>AC only</em></li>
+        <li>Step-up voltage → current steps <em>down</em></li>
+        <li>Eddy currents reduced by <em>laminated</em> core</li>
+        <li>Al is <em>paramagnetic</em> (not non-magnetic, not diamagnetic)</li>
+        <li>Cu, Ag, Au are <em>diamagnetic</em> (not paramagnetic)</li>
+        <li>Above Curie temp → ferromagnet becomes <em>paramagnetic</em></li>
+        <li>Lenz's Law: induced current <em>opposes</em> (not stops) the change</li>
+        <li>Oersted: current → magnetism (1820); Faraday: changing flux → current (1831)</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- end quickref pane -->
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     PANE 3 — QUIZ
+════════════════════════════════════════════════════════════════ -->
+<div class="pane" id="quiz">
+  <div class="quiz-stats">
+    <div class="qs-cell"><div class="qs-val" id="s-att">0</div><div class="qs-lbl">Attempted</div></div>
+    <div class="qs-cell"><div class="qs-val g" id="s-cor">0</div><div class="qs-lbl">Correct</div></div>
+    <div class="qs-cell"><div class="qs-val r" id="s-wrg">0</div><div class="qs-lbl">Wrong</div></div>
+    <div class="qs-cell"><div class="qs-val a" id="s-tot">20</div><div class="qs-lbl">Total</div></div>
+  </div>
+  <div class="prog-wrap">
+    <div class="prog-label" id="prog-label">0 of 20 answered</div>
+    <div class="prog-bar"><div class="prog-fill" id="prog"></div></div>
+  </div>
+  <div id="q-area"></div>
+  <div id="results" style="display:none"></div>
+  <div class="btn-row">
+    <button class="btn btn-primary" onclick="submitAll()">Submit All Answers</button>
+    <button class="btn btn-ghost" onclick="resetQuiz()">Reset Quiz</button>
+  </div>
+</div>
+
+</div><!-- .page -->
+
+<script>
+const QS=[
+
+// ── EASY (5) ──
+{d:'EASY',e:'NDA 2022',
+q:'When a bar magnet is cut into two equal pieces across its length, what happens?',
+opts:['Each piece has only one pole (N or S)','Each piece becomes a complete magnet with both N and S poles','The pieces lose all magnetism','One piece has double the magnetic strength'],
+ans:1,
+rule:'Magnetic monopoles do not exist. Cutting a magnet always produces two complete magnets, each with its own N and S pole — no matter how many times you cut.',
+exp:'This is one of the most fundamental facts about magnetism. When you cut a bar magnet in half, you don\'t get an isolated north pole and an isolated south pole. Instead, you get two smaller complete magnets, each with its own north and south pole. This is because magnetism arises from the alignment of tiny magnetic dipoles (atomic magnets) throughout the material. No matter how small you cut a magnet, each piece will always have both poles. Isolated magnetic monopoles (single poles) have never been found in nature, and their existence is not supported by classical physics.'},
+
+{d:'EASY',e:'CDS 2023',
+q:'The natural magnet, also known as lodestone, is chemically:',
+opts:['Iron oxide (Fe₂O₃)','Ferric chloride (FeCl₃)','Magnetite (Fe₃O₄)','Ferrous sulphate (FeSO₄)'],
+ans:2,
+rule:'Lodestone = Magnetite = Fe₃O₄ (iron(II,III) oxide). It is the naturally occurring magnetic mineral that was historically used in compasses.',
+exp:'The natural magnet is called lodestone (also spelled loadstone), and its chemical composition is magnetite — Fe₃O₄, which is iron(II,III) oxide. It is a naturally occurring mineral that exhibits permanent magnetism. Historically, it was the first magnetic material known to humans and was used in early Chinese compasses. Fe₂O₃ is haematite (rust), which is not magnetic. Lodestone\'s ability to attract iron was known to ancient Greeks and Chinese, and the word "magnet" is believed to derive from the ancient Greek region of Magnesia where lodestone was found.'},
+
+{d:'EASY',e:'AFCAT 2023',
+q:'The angle of dip at the magnetic equator is:',
+opts:['90°','45°','0°','180°'],
+ans:2,
+rule:'At the magnetic equator, the Earth\'s total magnetic field is horizontal. Dip (angle between total field and horizontal) = 0°. At magnetic poles, dip = 90° (field is vertical).',
+exp:'The angle of dip (magnetic inclination) is the angle made by the Earth\'s total magnetic field vector with the horizontal plane at a given location. At the magnetic equator, the Earth\'s field is entirely horizontal — it has no vertical component — so the angle of dip is 0°. A freely suspended magnetic needle here would lie horizontal. At the magnetic poles, the field is entirely vertical, so the dip is 90°. In India (mid-latitude), dip is typically 17°–24°. The horizontal component H = B cosδ is maximum at the magnetic equator and zero at the poles.'},
+
+{d:'EASY',e:'NDA 2023',
+q:'Which of the following materials is ferromagnetic?',
+opts:['Copper','Aluminium','Cobalt','Bismuth'],
+ans:2,
+rule:'Ferromagnetic materials — strongly attracted to magnets — are only iron (Fe), nickel (Ni), cobalt (Co), and their alloys. Copper and bismuth are diamagnetic; aluminium is paramagnetic.',
+exp:'Ferromagnetic materials are those that are strongly attracted by magnets, can be magnetised, and can form permanent magnets. There are only three common elemental ferromagnetic materials: iron (Fe), nickel (Ni), and cobalt (Co). Cobalt has the highest Curie temperature (≈1115°C) of the three. Copper is diamagnetic (weakly repelled by magnets). Aluminium is paramagnetic (weakly attracted — but this is distinct from ferromagnetic, which is a much stronger effect). Bismuth is strongly diamagnetic — the most diamagnetic naturally occurring element.'},
+
+{d:'EASY',e:'CDS 2022',
+q:'Fleming\'s left-hand rule is used to determine the direction of force on a current-carrying conductor in a magnetic field. This rule is the working principle of:',
+opts:['Electric generator','Electric motor','Transformer','Galvanometer only'],
+ans:1,
+rule:'Left-Hand Rule → Motor (electrical energy → mechanical energy). Right-Hand Rule → Generator (mechanical energy → electrical energy). Memory: M·L and G·R — Motor=Left, Generator=Right.',
+exp:'Fleming\'s Left-Hand Rule gives the direction of the mechanical force (thrust) experienced by a current-carrying conductor placed in a magnetic field. The three fingers represent: index finger = magnetic field (B), middle finger = current (I), thumb = force/motion. This is the operating principle of the electric motor — when current flows through the armature coil in a magnetic field, the resulting force makes the coil rotate. Conversely, Fleming\'s Right-Hand Rule applies to generators, where mechanical motion in a field induces current. The memory trick: Motor = Left hand; Generator = Right hand.'},
+
+// ── MEDIUM (8) ──
+{d:'MEDIUM',e:'NDA 2023',
+q:'A transformer has a primary coil with 200 turns connected to a 400 V AC supply. If the secondary coil has 50 turns, the output voltage is:',
+opts:['1600 V','100 V','200 V','800 V'],
+ans:1,
+rule:'V_s/V_p = N_s/N_p → V_s = 400 × (50/200) = 400 × 0.25 = 100 V. N_s < N_p → step-down transformer.',
+exp:'Using the transformer equation: V_s/V_p = N_s/N_p. V_s = V_p × (N_s/N_p) = 400 × (50/200) = 400 × 0.25 = 100 V. Since N_s (50) < N_p (200), this is a step-down transformer — it reduces voltage from 400 V to 100 V. Correspondingly, the secondary current will be 4× the primary current (since V_p × I_p = V_s × I_s for an ideal transformer). Step-down transformers are used in substations to reduce high-transmission voltages to safe domestic levels.'},
+
+{d:'MEDIUM',e:'CDS 2023',
+q:'Which of the following is correct about Earth\'s magnetic field?',
+opts:[
+  'The geographic north pole is Earth\'s magnetic north pole',
+  'The geographic north pole is near Earth\'s magnetic south pole',
+  'The magnetic and geographic poles coincide exactly',
+  'Earth\'s magnetic poles are fixed and never change position'
+],ans:1,
+rule:'A compass\'s north pole is attracted to geographic north. By the law of magnetism (unlike poles attract), the geographic north must be Earth\'s magnetic south pole.',
+exp:'The geographic north pole of Earth is close to Earth\'s magnetic south pole. This seems counterintuitive, but consider: the north-seeking pole of a compass needle (which is its magnetic north pole) points toward geographic north. Since unlike magnetic poles attract, the region near geographic north must contain a magnetic south pole. Earth\'s magnetic axis is tilted about 11.3° from its geographic (rotation) axis, so the poles don\'t coincide exactly. Earth\'s magnetic poles also drift slowly over time — they are not fixed. The difference between geographic north and magnetic north at any location is the magnetic declination.'},
+
+{d:'MEDIUM',e:'AFCAT 2022',
+q:'A current of 5 A flows through a straight conductor. What is the magnetic field at a distance of 10 cm from the wire? (μ₀ = 4π × 10⁻⁷ T·m/A)',
+opts:['1 × 10⁻⁵ T','2 × 10⁻⁵ T','5 × 10⁻⁵ T','10 × 10⁻⁵ T'],
+ans:0,
+rule:'B = μ₀I/(2πr) = (4π × 10⁻⁷ × 5)/(2π × 0.1) = (20π × 10⁻⁷)/(0.2π) = 100 × 10⁻⁷/10 = 10 × 10⁻⁶ = 1 × 10⁻⁵ T.',
+exp:'Using the formula for the magnetic field due to a long straight current-carrying conductor: B = μ₀I/(2πr). Substituting: B = (4π × 10⁻⁷ × 5)/(2π × 0.10) = (20π × 10⁻⁷)/(0.2π) = (20 × 10⁻⁷)/0.2 = 100 × 10⁻⁷ = 10 × 10⁻⁶ = 1 × 10⁻⁵ T. The field decreases with distance (B ∝ 1/r). At 20 cm, it would be 0.5 × 10⁻⁵ T (half the value). The field forms concentric circles around the wire, with the direction given by the Right-Hand Thumb Rule.'},
+
+{d:'MEDIUM',e:'NDA 2022',
+q:'According to Lenz\'s Law, the direction of the induced current in a coil is such that it:',
+opts:[
+  'Aids the change in magnetic flux that produced it',
+  'Opposes the change in magnetic flux that produced it',
+  'Is perpendicular to the magnetic flux',
+  'Is always in the clockwise direction'
+],ans:1,
+rule:'Lenz\'s Law: the induced current always opposes the change in magnetic flux that caused it. This is a consequence of the conservation of energy.',
+exp:'Lenz\'s Law states that the induced current always flows in a direction such that its magnetic field opposes the change in the magnetic flux that caused it. For example, if you push a north pole of a magnet into a coil, the near face of the coil becomes a north pole (to repel the incoming magnet) — you must do work against this repulsion, and that work appears as electrical energy in the coil. If the induced current aided the change, it would amplify itself indefinitely without any energy input — violating conservation of energy. Lenz\'s Law is a manifestation of energy conservation in electromagnetic induction.'},
+
+{d:'MEDIUM',e:'CDS 2024',
+q:'A solenoid of 500 turns per metre carries a current of 2 A. The magnetic field inside the solenoid is: (μ₀ = 4π × 10⁻⁷ T·m/A)',
+opts:['4π × 10⁻⁴ T','4π × 10⁻³ T','4π × 10⁻² T','2π × 10⁻³ T'],
+ans:1,
+rule:'B = μ₀nI = 4π × 10⁻⁷ × 500 × 2 = 4π × 10⁻⁷ × 1000 = 4π × 10⁻⁴ T. Wait: 4π×10⁻⁷ × 500 × 2 = 4π × 10⁻⁷ × 1000 = 4π × 10⁻⁴ T.',
+exp:'The magnetic field inside a long solenoid is B = μ₀nI, where n is the number of turns per unit length and I is the current. B = 4π × 10⁻⁷ × 500 × 2 = 4π × 10⁻⁷ × 1000 = 4π × 10⁻⁴ T ≈ 1.26 × 10⁻³ T. The field inside a solenoid is uniform and directed along the axis. The right-hand rule for solenoid: wrap your right hand around the solenoid with fingers in the direction of current flow — your thumb points to the north pole. A solenoid with an iron core (electromagnet) has its field amplified thousands of times due to the high permeability of iron.'},
+
+{d:'MEDIUM',e:'AFCAT 2023',
+q:'In an AC generator, which component ensures that the output is alternating current (AC) rather than direct current (DC)?',
+opts:['Commutator (split ring)','Slip rings','Armature coil','Field magnets'],
+ans:1,
+rule:'Slip rings allow current to flow out without reversal → AC output. A commutator reverses current every half-turn → pulsating DC. AC generator uses slip rings; DC generator uses commutator.',
+exp:'In an AC generator (alternator), the rotating coil (armature) is connected to the external circuit through two slip rings — one for each end of the coil. The slip rings maintain continuous, uninterrupted contact with the brushes as the coil rotates, allowing the naturally alternating induced current to flow out unchanged → AC output. In contrast, a DC generator uses a commutator (split ring), which reverses the connections every half-turn to ensure the external current always flows in the same direction → pulsating DC. The armature coil generates the EMF; the field magnets provide the static magnetic field.'},
+
+{d:'MEDIUM',e:'NDA 2024',
+q:'The horizontal component of Earth\'s magnetic field at a place where the angle of dip is 30° is H. What is the total magnetic field of Earth at that place?',
+opts:['H/2','H√3','2H/√3','H×√2'],
+ans:2,
+rule:'H = B cosδ → B = H/cosδ = H/cos30° = H/(√3/2) = 2H/√3.',
+exp:'The relationship between the horizontal component H and the total field B is: H = B cosδ, where δ is the angle of dip. Therefore: B = H/cosδ = H/cos30° = H/(√3/2) = 2H/√3. We can verify using the vertical component: V = B sinδ = (2H/√3) × sin30° = (2H/√3) × (1/2) = H/√3. Check: B² = H² + V² = H² + H²/3 = 4H²/3. So B = 2H/√3 ✓. This formula is directly tested in NDA and CDS numerical questions on Earth\'s magnetism.'},
+
+{d:'MEDIUM',e:'CDS 2023',
+q:'Which of the following correctly explains why eddy current losses in a transformer core are minimised by using a laminated core?',
+opts:[
+  'Lamination increases the resistance of the core material itself',
+  'Lamination reduces the cross-sectional area available for eddy currents to flow, increasing resistance to circular currents',
+  'Lamination makes the core more ferromagnetic',
+  'Lamination removes hysteresis losses entirely'
+],ans:1,
+rule:'Eddy currents are induced circular currents in the bulk iron core. Laminating (thin insulated layers) breaks the bulk into small sections, reducing the cross-sectional area for eddy currents → greatly increases resistance to them → reduces eddy current losses (P = V²/R).',
+exp:'Eddy currents are loops of induced current that circulate within the iron core of a transformer due to the changing magnetic flux. They cause heating and energy loss (P = I²R in the core). The solution is to laminate the core — make it from many thin sheets (laminations) of silicon steel, each insulated from the next by a thin oxide or varnish layer. This breaks up the potential paths for eddy currents, forcing them to flow in much smaller loops with much higher resistance. Since power loss = V²/R, higher resistance means lower eddy current loss. Lamination does not affect hysteresis losses (those are reduced by using silicon steel or special alloys).'},
+
+// ── HARD (7) ──
+{d:'HARD',e:'NDA 2023',
+q:'A charged particle of charge q and mass m enters a uniform magnetic field B perpendicular to its velocity. The radius of its circular path is:',
+opts:['r = qBm','r = mv/(qB)','r = qB/(mv)','r = mB/(qv)'],
+ans:1,
+rule:'The magnetic force provides centripetal force: qvB = mv²/r → r = mv/(qB). Radius increases with mass and velocity; decreases with charge and field strength.',
+exp:'When a charged particle moves perpendicular to a magnetic field, the magnetic force (F = qvB) acts as the centripetal force (F = mv²/r). Setting them equal: qvB = mv²/r. Solving for r: r = mv/(qB). This formula tells us: (1) heavier particles have larger orbits (r ∝ m); (2) faster particles have larger orbits (r ∝ v); (3) stronger field → smaller orbit (r ∝ 1/B); (4) larger charge → smaller orbit (r ∝ 1/q). This principle is the basis of the cyclotron (particle accelerator) and mass spectrometry for identifying isotopes.'},
+
+{d:'HARD',e:'CDS 2024',
+q:'An ideal step-up transformer has a primary with 100 turns connected to 200 V AC. The secondary has 500 turns. If the secondary delivers 4 A to a resistive load, what is the primary current?',
+opts:['0.8 A','20 A','2 A','5 A'],
+ans:1,
+rule:'V_s = 200×(500/100) = 1000V. For ideal transformer: V_p I_p = V_s I_s → 200×I_p = 1000×4 = 4000 → I_p = 20 A.',
+exp:'Step 1: Find secondary voltage: V_s = V_p × (N_s/N_p) = 200 × (500/100) = 200 × 5 = 1000 V. Step 2: For an ideal (100% efficient) transformer, input power = output power: V_p × I_p = V_s × I_s. Therefore: 200 × I_p = 1000 × 4 = 4000. I_p = 4000/200 = 20 A. The primary current (20 A) is 5× the secondary current (4 A) — the current is stepped down by the same factor that voltage is stepped up. This confirms energy conservation: input power = 200 × 20 = 4000 W = output power = 1000 × 4 = 4000 W.'},
+
+{d:'HARD',e:'AFCAT 2024',
+q:'A rectangular coil of 100 turns, area 0.02 m², rotates in a uniform magnetic field of 0.5 T. If the coil makes 50 complete revolutions per second, the peak EMF induced is:',
+opts:['50π V','100π V','200π V','314 V'],
+ans:3,
+rule:'Peak EMF: E₀ = NBAω = 100 × 0.5 × 0.02 × (2π×50) = 100 × 0.5 × 0.02 × 100π = 100π ≈ 314 V.',
+exp:'The peak EMF of a rotating coil is: E₀ = NBAω, where N = turns, B = field, A = area, ω = angular velocity = 2πf. ω = 2π × 50 = 100π rad/s. E₀ = 100 × 0.5 × 0.02 × 100π = 100 × 0.01 × 100π = 100π ≈ 314.16 V ≈ 314 V. The instantaneous EMF at any angle θ is E = E₀ sinθ = E₀ sin(ωt). The RMS (root-mean-square) value of the EMF is E_rms = E₀/√2 = 314/√2 ≈ 222 V — this is what a voltmeter would read for this AC supply.'},
+
+{d:'HARD',e:'NDA 2024',
+q:'A proton (charge +e, mass m_p) and an alpha particle (charge +2e, mass 4m_p) enter a uniform magnetic field with the same velocity perpendicular to the field. The ratio of the radius of the proton\'s path to that of the alpha particle is:',
+opts:['1:2','2:1','1:1','4:1'],
+ans:0,
+rule:'r = mv/(qB). r_proton = m_p v/(eB). r_alpha = 4m_p v/(2eB) = 2m_p v/(eB). Ratio = r_p/r_α = (m_p v/eB)/(2m_p v/eB) = 1/2 → 1:2.',
+exp:'The radius of a charged particle\'s circular path in a magnetic field is r = mv/(qB). For the proton: r_p = m_p × v/(e × B). For the alpha particle (charge = 2e, mass = 4m_p): r_α = 4m_p × v/(2e × B) = 2m_p × v/(e × B). Ratio r_p/r_α = (m_p v/eB)/(2m_p v/eB) = 1/2. So r_p : r_α = 1 : 2. The alpha particle has a larger orbit because, although it has twice the charge (which would reduce radius), it has four times the mass (which increases radius) — the mass effect wins. This type of comparison is a standard NDA and CDS Hard question.'},
+
+{d:'HARD',e:'CDS 2023',
+q:'The magnetic flux through a coil of 200 turns changes from 0.5 Wb to 0.1 Wb in 0.2 seconds. The induced EMF is:',
+opts:['40 V','400 V','4 V','0.04 V'],
+ans:1,
+rule:'EMF = N × |ΔΦ/Δt| = 200 × |0.1 − 0.5|/0.2 = 200 × 0.4/0.2 = 200 × 2 = 400 V.',
+exp:'Using Faraday\'s Law: EMF = N × |ΔΦ/Δt|. Change in flux: ΔΦ = 0.1 − 0.5 = −0.4 Wb (magnitude 0.4 Wb). Rate of change: |ΔΦ/Δt| = 0.4/0.2 = 2 Wb/s = 2 V (for a single turn). For 200 turns: EMF = 200 × 2 = 400 V. The negative sign (from Lenz\'s Law) indicates the induced EMF opposes the decrease in flux — the induced current will flow to try to maintain the flux. A larger number of turns means greater induced EMF for the same rate of flux change — this is why transformer secondaries with more turns produce higher voltage.'},
+
+{d:'HARD',e:'AFCAT 2023',
+q:'In a transformer, the primary coil has 1000 turns and draws 2 A from a 220 V AC supply. The secondary has 100 turns. Assuming 80% efficiency, the secondary current is:',
+opts:['16 A','20 A','2 A','14.5 A'],
+ans:0,
+rule:'V_s = 220×(100/1000) = 22V. Input power = 220×2 = 440W. Output power = 0.80×440 = 352W. I_s = 352/22 = 16 A.',
+exp:'Step 1: Secondary voltage: V_s = V_p × (N_s/N_p) = 220 × (100/1000) = 22 V. Step 2: Input power to primary: P_in = V_p × I_p = 220 × 2 = 440 W. Step 3: Output power at secondary (80% efficiency): P_out = 0.80 × 440 = 352 W. Step 4: Secondary current: I_s = P_out/V_s = 352/22 = 16 A. Note: in an ideal transformer, I_s would be 20 A. Due to 80% efficiency (losses in core and winding), only 352 W is available, giving 16 A. Efficiency losses are due to eddy currents, hysteresis, and copper (I²R) heating.'},
+
+{d:'HARD',e:'NDA 2023',
+q:'The angle of dip at a place is 60°. If the horizontal component of Earth\'s field is H, what is the vertical component?',
+opts:['H/√3','H√3','H/2','2H'],
+ans:1,
+rule:'tanδ = V/H → V = H tanδ = H tan60° = H × √3. So V = H√3.',
+exp:'The relationship between the vertical component (V), horizontal component (H), and angle of dip (δ) is: tan δ = V/H. Therefore: V = H × tan δ = H × tan 60° = H × √3. We can verify: total field B = √(H² + V²) = √(H² + 3H²) = √(4H²) = 2H. Also, B = H/cos60° = H/(1/2) = 2H ✓. And V = B sin60° = 2H × (√3/2) = H√3 ✓. This type of Earth\'s magnetism numerical is a staple of NDA paper I (Physics section) and CDS GK.'},
+
+];
+
+// ── ENGINE ────────────────────────────────────────────────────────
+const answers  = new Array(QS.length).fill(null);
+const revealed = new Array(QS.length).fill(false);
+const LABS = ['A','B','C','D'];
+
+function build(){
+  const area = document.getElementById('q-area');
+  area.innerHTML = '';
+  QS.forEach((q,i)=>{
+    const dc = q.d==='EASY'?'diff-e':q.d==='MEDIUM'?'diff-m':'diff-h';
+    const div = document.createElement('div');
+    div.className='q-card'; div.id=`qc${i}`;
+    div.innerHTML=`
+      <div class="q-meta">
+        <span class="q-num">Q.${String(i+1).padStart(2,'0')}</span>
+        <span class="q-diff ${dc}">${q.d}</span>
+        <span class="q-exam">${q.e}</span>
+      </div>
+      <div class="q-body">
+        <div class="q-text">${q.q}</div>
+        <div class="opts" id="opts${i}">
+          ${q.opts.map((o,j)=>`
+            <button class="opt" id="o${i}_${j}" onclick="pick(${i},${j})">
+              <span class="opt-lbl">${LABS[j]}</span>${o}
+            </button>`).join('')}
+        </div>
+        <div class="exp-panel" id="ex${i}">
+          <div class="exp-tag">Explanation</div>
+          <div class="exp-rule">${q.rule}</div>
+          <p>${q.exp}</p>
+        </div>
+      </div>
+      <div class="q-foot">
+        <span style="font-size:11px;color:var(--dim);font-weight:700">Physics · P09</span>
+        <span id="ai${i}" class="q-status">—</span>
+      </div>`;
+    area.appendChild(div);
+  });
+}
+
+function pick(qi,oi){
+  if(revealed[qi]) return;
+  answers[qi]=oi;
+  document.querySelectorAll(`#opts${qi} .opt`).forEach((b,j)=>{
+    b.classList.remove('sel');
+    if(j===oi) b.classList.add('sel');
+  });
+  document.getElementById(`qc${qi}`).classList.add('answered');
+  const ai=document.getElementById(`ai${qi}`);
+  ai.textContent=`Selected: ${LABS[oi]}`;
+  ai.style.color='var(--crim)';
+  updateStats();
+}
+
+function updateStats(){
+  const att=answers.filter(a=>a!==null).length;
+  document.getElementById('s-att').textContent=att;
+  document.getElementById('prog').style.width=(att/QS.length*100)+'%';
+  document.getElementById('prog-label').textContent=`${att} of ${QS.length} answered`;
+  let c=0,w=0;
+  answers.forEach((a,i)=>{ if(a===null)return; if(a===QS[i].ans)c++; else w++; });
+  document.getElementById('s-cor').textContent=c;
+  document.getElementById('s-wrg').textContent=w;
+}
+
+function submitAll(){
+  let cor=0,wrg=0,skp=0;
+  QS.forEach((q,i)=>{
+    revealed[i]=true;
+    const opts=document.querySelectorAll(`#opts${i} .opt`);
+    opts.forEach(b=>{b.disabled=true;b.classList.remove('sel')});
+    opts[q.ans].classList.add('ok');
+    if(answers[i]!==null && answers[i]!==q.ans) opts[answers[i]].classList.add('bad');
+    document.getElementById(`ex${i}`).classList.add('show');
+    const ai=document.getElementById(`ai${i}`);
+    const card=document.getElementById(`qc${i}`);
+    card.classList.remove('answered');
+    if(answers[i]===null){skp++;ai.textContent='Skipped';ai.style.color='var(--dim)';}
+    else if(answers[i]===q.ans){cor++;card.classList.add('correct');ai.textContent='✓ Correct';ai.style.color='var(--green)';}
+    else{wrg++;card.classList.add('wrong');ai.textContent='✗ Wrong';ai.style.color='var(--red)';}
+  });
+  updateStats();
+  showResults(cor,wrg,skp);
+}
+
+function showResults(cor,wrg,skp){
+  const pct=Math.round(cor/QS.length*100);
+  let grade,msg;
+  if(pct>=88){grade='Excellent';msg='Outstanding! You have mastered Magnetism & Electromagnetism.'}
+  else if(pct>=70){grade='Good';msg='Well done. Review the hard numericals — especially transformer efficiency and circular motion in fields.'}
+  else if(pct>=50){grade='Average';msg='Good effort. Focus on Earth\'s magnetism elements, Fleming\'s rules, and Faraday\'s Law.'}
+  else{grade='Needs Work';msg:"Go through Theory and Quick Ref section by section, then retry."}
+  const res=document.getElementById('results');
+  res.innerHTML=`
+    <div class="res-hero">
+      <div class="res-score">${cor}<span style="font-size:36px;opacity:.45">/${QS.length}</span></div>
+      <div class="res-grade">${grade} · ${pct}%</div>
+      <div class="res-msg">${msg}</div>
+    </div>
+    <div class="res-stats">
+      <div class="qs-cell"><div class="qs-val g">${cor}</div><div class="qs-lbl">Correct</div></div>
+      <div class="qs-cell"><div class="qs-val r">${wrg}</div><div class="qs-lbl">Wrong</div></div>
+      <div class="qs-cell"><div class="qs-val a">${skp}</div><div class="qs-lbl">Skipped</div></div>
+      <div class="qs-cell"><div class="qs-val">${pct}%</div><div class="qs-lbl">Score</div></div>
+    </div>
+    <div style="text-align:center;margin:16px 0">
+      <button class="btn btn-ghost" onclick="document.getElementById('q-area').scrollIntoView({behavior:'smooth'})">📖 Review All Answers</button>
+    </div>`;
+  res.style.display='block';
+  res.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function resetQuiz(){
+  answers.fill(null); revealed.fill(false);
+  build();
+  document.getElementById('results').style.display='none';
+  document.getElementById('results').innerHTML='';
+  ['s-att','s-cor','s-wrg'].forEach(id=>document.getElementById(id).textContent='0');
+  document.getElementById('prog').style.width='0%';
+  document.getElementById('prog-label').textContent=`0 of ${QS.length} answered`;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function switchTab(id){
+  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  const idx={theory:0,quickref:1,quiz:2}[id];
+  document.querySelectorAll('.tab')[idx].classList.add('on');
+}
+
+function tog(hd){
+  const bd=hd.nextElementSibling;
+  const isOpen=bd.classList.contains('open');
+  bd.classList.toggle('open',!isOpen);
+  hd.classList.toggle('open',!isOpen);
+}
+
+build();
+</script>
+</body>
+</html>

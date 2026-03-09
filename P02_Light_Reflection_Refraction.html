@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>P02 · Light — Reflection &amp; Refraction | Olive Defence</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+
+:root{
+  --bg:        #F3F5F0;
+  --bg2:       #E8EDE3;
+  --bg3:       #DCE3D5;
+  --white:     #FFFFFF;
+  --ink:       #1A2214;
+  --ink2:      #2C3A22;
+  --muted:     #6A7A5A;
+  --dim:       #9AAA85;
+  --border:    #C8D4BC;
+  --teal:      #1F6B4A;
+  --tealLt:    #27854E;
+  --tealPale:  #E6F4EE;
+  --amber:     #9A6010;
+  --amberLt:   #BF7812;
+  --amberPale: #FDF4E3;
+  --green:     #2A6835;
+  --greenLt:   #348040;
+  --greenPale: #EAF5EC;
+  --red:       #8B2020;
+  --redLt:     #AC2828;
+  --redPale:   #FCEAEA;
+  --blue:      #1A3F72;
+  --bluePale:  #EAF0FA;
+  --purple:    #5B2D8E;
+  --purplePale:#F3EEFB;
+  --radius:    12px;
+  --shadow:    0 2px 12px rgba(26,34,20,.09);
+  --shadow-md: 0 4px 20px rgba(26,34,20,.13);
+}
+
+body{
+  font-family:'Nunito',sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  font-size:17px;
+  line-height:1.75;
+  min-height:100vh;
+}
+
+.page{max-width:680px;margin:0 auto;padding:0 16px 80px}
+
+/* ── HERO ─────────────────────────────────────────────────────── */
+.hero{
+  background:var(--teal);
+  margin:0 -16px;
+  padding:28px 20px 26px;
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse at 80% 20%,rgba(255,255,255,.06) 0%,transparent 60%);
+  pointer-events:none;
+}
+.hero-kicker{
+  font-size:11px;font-weight:700;letter-spacing:3px;
+  text-transform:uppercase;color:rgba(255,255,255,.58);
+  margin-bottom:8px;display:flex;align-items:center;gap:8px;
+}
+.hero-kicker::before{content:'';width:18px;height:2px;background:rgba(255,255,255,.35)}
+.hero-title{
+  font-family:'Lora',serif;
+  font-size:clamp(24px,5.5vw,34px);
+  font-weight:700;color:#fff;line-height:1.2;margin-bottom:10px;
+}
+.hero-title span{color:#C8F0A0;font-style:italic}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.70);margin-bottom:18px;line-height:1.65}
+.hero-chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{font-size:11px;font-weight:700;letter-spacing:1px;padding:4px 12px;border-radius:20px;text-transform:uppercase}
+.chip-w{background:rgba(255,255,255,.14);color:rgba(255,255,255,.88)}
+.chip-y{background:rgba(200,240,160,.18);color:#C8F0A0}
+.chip-g{background:rgba(100,220,130,.13);color:#7ADEA0}
+
+/* ── TAB BAR ──────────────────────────────────────────────────── */
+.tab-bar{
+  position:sticky;top:0;z-index:50;
+  background:var(--white);border-bottom:2px solid var(--border);
+  margin:0 -16px;display:flex;overflow-x:auto;
+  box-shadow:0 2px 8px rgba(26,34,20,.07);
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;
+}
+.tab-bar::-webkit-scrollbar{display:none}
+.tab{
+  flex-shrink:0;padding:14px 18px;
+  font-size:12px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--muted);
+  border:none;background:transparent;cursor:pointer;
+  border-bottom:3px solid transparent;margin-bottom:-2px;
+  transition:all .2s;white-space:nowrap;
+}
+.tab:hover{color:var(--ink);background:var(--bg)}
+.tab.on{color:var(--teal);border-bottom-color:var(--teal)}
+
+/* ── PANES ────────────────────────────────────────────────────── */
+.pane{display:none;padding-top:24px;animation:fadeUp .3s ease}
+.pane.on{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── SECTION LABEL ────────────────────────────────────────────── */
+.sec-label{
+  font-size:10px;font-weight:800;letter-spacing:3px;
+  text-transform:uppercase;color:var(--teal);
+  margin:28px 0 12px;display:flex;align-items:center;gap:10px;
+}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* ── INTRO BOX ────────────────────────────────────────────────── */
+.intro-box{
+  background:var(--tealPale);border:1.5px solid rgba(31,107,74,.2);
+  border-radius:var(--radius);padding:20px;margin-bottom:8px;
+}
+.intro-box p{font-size:16px;color:var(--ink2);line-height:1.8}
+.intro-box strong{color:var(--teal)}
+
+/* ── CONCEPT CARDS ────────────────────────────────────────────── */
+.c-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius);margin-bottom:10px;
+  box-shadow:var(--shadow);overflow:hidden;
+}
+.c-head{
+  display:flex;align-items:center;gap:12px;padding:16px 18px;
+  cursor:pointer;border-left:4px solid transparent;
+  transition:all .15s;-webkit-tap-highlight-color:transparent;
+}
+.c-head:hover,.c-head.open{background:var(--bg);border-left-color:var(--teal)}
+.c-icon{
+  width:38px;height:38px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;
+}
+.c-title{font-size:17px;font-weight:700;color:var(--ink);flex:1}
+.c-sub{font-size:12px;color:var(--dim);font-weight:600;margin-top:2px}
+.c-arrow{font-size:12px;color:var(--dim);transition:transform .2s;flex-shrink:0}
+.c-head.open .c-arrow{transform:rotate(180deg)}
+.c-body{display:none;padding:4px 18px 20px;border-top:1px solid var(--border)}
+.c-body.open{display:block;animation:fadeUp .2s ease}
+.c-body p{font-size:16px;color:var(--ink2);line-height:1.85;margin-bottom:12px}
+.c-body p:last-child{margin-bottom:0}
+.c-body strong{color:var(--teal);font-weight:700}
+.c-body em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* ── CONTENT BLOCKS ───────────────────────────────────────────── */
+.fact-box{
+  background:var(--amberPale);border:1.5px solid rgba(154,96,16,.2);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.fact-box .fb-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--amber);text-transform:uppercase;margin-bottom:8px;
+}
+.fact-box ul{list-style:none;padding:0}
+.fact-box li{
+  font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;
+  position:relative;line-height:1.7;
+}
+.fact-box li::before{content:'→';position:absolute;left:0;color:var(--amber);font-weight:700;font-size:13px}
+
+.eg-box{
+  background:var(--greenPale);border-left:4px solid var(--green);
+  border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0;
+}
+.eg-box .eg-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--green);text-transform:uppercase;margin-bottom:6px;
+}
+.eg-box p{font-size:15px;color:var(--ink2);line-height:1.75}
+.eg-box ul{list-style:none;padding:0}
+.eg-box li{font-size:15px;color:var(--ink2);padding:4px 0 4px 18px;position:relative;line-height:1.65}
+.eg-box li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:800;font-size:12px}
+
+.trap-box{
+  background:var(--redPale);border:1.5px solid rgba(139,32,32,.2);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.trap-box .tr-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--red);text-transform:uppercase;margin-bottom:8px;
+}
+.trap-box p,.trap-box li{font-size:15.5px;color:var(--ink2);line-height:1.75}
+.trap-box ul{list-style:none;padding:0}
+.trap-box li{padding:5px 0 5px 22px;position:relative}
+.trap-box li::before{content:'⚑';position:absolute;left:0;font-size:12px;color:var(--red)}
+
+.rule-box{
+  background:var(--bluePale);border:1.5px solid rgba(26,63,114,.18);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.rule-box .rl-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--blue);text-transform:uppercase;margin-bottom:8px;
+}
+.rule-box p{font-size:15.5px;color:var(--ink2);line-height:1.8}
+.rule-box strong{color:var(--blue)}
+
+/* Formula Box */
+.formula-box{
+  background:#F3EEFB;border:1.5px solid rgba(91,45,142,.22);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.formula-box .fl-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--purple);text-transform:uppercase;margin-bottom:10px;
+}
+.formula-line{
+  font-family:'Lora',serif;font-size:18px;font-weight:700;
+  color:var(--purple);text-align:center;padding:8px 0;
+  letter-spacing:.5px;line-height:1.6;
+}
+.formula-note{font-size:14px;color:var(--ink2);line-height:1.7;margin-top:8px}
+.formula-note b{color:var(--purple)}
+
+.purple-box{
+  background:var(--purplePale);border:1.5px solid rgba(91,45,142,.18);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.purple-box .pl-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--purple);text-transform:uppercase;margin-bottom:8px;
+}
+.purple-box ul{list-style:none;padding:0}
+.purple-box li{font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;position:relative;line-height:1.8}
+.purple-box li::before{content:'◆';position:absolute;left:0;font-size:9px;color:var(--purple);top:10px}
+
+.analogy-box{
+  background:#F0F7FF;border-left:4px solid var(--blue);
+  border-radius:0 8px 8px 0;padding:14px 16px;margin:12px 0;
+}
+.analogy-box .an-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--blue);text-transform:uppercase;margin-bottom:6px;
+}
+.analogy-box p{font-size:15.5px;color:var(--ink2);line-height:1.75}
+
+/* Mirror image grid */
+.mirror-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}
+.mirror-card{
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:10px;padding:13px 14px;
+}
+.mirror-card .mc-name{
+  font-size:13px;font-weight:800;color:var(--teal);
+  margin-bottom:6px;display:flex;align-items:center;gap:6px;
+}
+.mirror-card .mc-tag{
+  font-size:10px;font-weight:700;color:var(--amber);
+  background:var(--amberPale);border-radius:4px;
+  padding:1px 7px;
+}
+.mirror-card p{font-size:13.5px;color:var(--ink2);line-height:1.6}
+
+.compare-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
+.compare-table th{
+  background:var(--teal);color:#fff;
+  padding:10px 12px;text-align:left;
+  font-size:13px;font-weight:700;letter-spacing:.5px;
+}
+.compare-table td{
+  padding:10px 12px;border:1px solid var(--border);
+  color:var(--ink2);vertical-align:top;line-height:1.65;
+}
+.compare-table tr:nth-child(even) td{background:var(--bg)}
+.compare-table td b{color:var(--teal)}
+
+/* ── QUICK REFERENCE ──────────────────────────────────────────── */
+.ref-grid{display:grid;gap:10px;margin:8px 0}
+.ref-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);
+}
+.ref-card-title{
+  font-size:11px;font-weight:800;letter-spacing:2px;
+  text-transform:uppercase;color:var(--teal);
+  margin-bottom:10px;padding-bottom:8px;
+  border-bottom:1px solid var(--border);
+}
+.ref-card ul{list-style:none;padding:0}
+.ref-card li{
+  font-size:15px;color:var(--ink2);padding:5px 0 5px 16px;
+  position:relative;line-height:1.65;
+  border-bottom:1px solid var(--bg2);
+}
+.ref-card li:last-child{border-bottom:none}
+.ref-card li::before{content:'·';position:absolute;left:4px;color:var(--teal);font-weight:900;font-size:18px;line-height:1.3}
+.ref-card li b{color:var(--ink);font-weight:700}
+.ref-card li em{color:var(--amber);font-style:normal;font-weight:700}
+
+/* ── QUIZ ─────────────────────────────────────────────────────── */
+.quiz-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:2px;background:var(--border);
+  border-radius:var(--radius);overflow:hidden;
+  margin-bottom:16px;box-shadow:var(--shadow);
+}
+.qs-cell{background:var(--white);padding:12px 8px;text-align:center}
+.qs-val{font-family:'Lora',serif;font-size:22px;font-weight:700;color:var(--teal);line-height:1}
+.qs-val.g{color:var(--green)}.qs-val.r{color:var(--red)}.qs-val.a{color:var(--amber)}
+.qs-lbl{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:1px;margin-top:4px;text-transform:uppercase}
+
+.prog-wrap{margin-bottom:20px}
+.prog-bar{height:6px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;background:var(--teal);border-radius:3px;transition:width .4s ease;width:0%}
+.prog-label{font-size:12px;color:var(--muted);font-weight:700;margin-bottom:6px}
+
+.q-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius);margin-bottom:12px;
+  box-shadow:var(--shadow);overflow:hidden;
+  border-left:4px solid transparent;transition:border-color .15s;
+}
+.q-card.answered{border-left-color:var(--teal)}
+.q-card.correct{border-left-color:var(--green)}
+.q-card.wrong{border-left-color:var(--red)}
+
+.q-meta{
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  padding:10px 16px;background:var(--bg);
+  border-bottom:1px solid var(--border);
+}
+.q-num{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:1px}
+.q-diff{font-size:10px;font-weight:800;padding:2px 10px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase}
+.diff-e{background:var(--greenPale);color:var(--green)}
+.diff-m{background:var(--amberPale);color:var(--amber)}
+.diff-h{background:var(--redPale);color:var(--red)}
+.q-exam{font-size:11px;color:var(--dim);margin-left:auto;font-weight:600}
+
+.q-body{padding:16px}
+.q-text{font-size:17px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-weight:600}
+
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{
+  background:var(--bg);border:1.5px solid var(--border);
+  border-radius:10px;padding:14px 16px;
+  cursor:pointer;display:flex;align-items:flex-start;gap:12px;
+  font-size:16px;color:var(--ink2);text-align:left;width:100%;
+  transition:all .15s;-webkit-tap-highlight-color:transparent;
+  min-height:48px;line-height:1.6;
+}
+.opt:hover:not(:disabled){border-color:var(--teal);background:var(--tealPale)}
+.opt:disabled{cursor:default}
+.opt.sel{border-color:var(--teal);background:var(--tealPale);color:var(--teal)}
+.opt.ok{border-color:var(--green)!important;background:var(--greenPale)!important;color:var(--green)!important}
+.opt.bad{border-color:var(--red)!important;background:var(--redPale)!important;color:var(--red)!important}
+
+.opt-lbl{
+  min-width:28px;height:28px;border-radius:8px;
+  background:var(--bg3);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:800;color:var(--muted);
+  flex-shrink:0;transition:all .15s;
+}
+.opt.sel .opt-lbl{background:var(--teal);color:#fff;border-color:var(--teal)}
+.opt.ok .opt-lbl{background:var(--green)!important;color:#fff!important;border-color:var(--green)!important}
+.opt.bad .opt-lbl{background:var(--red)!important;color:#fff!important;border-color:var(--red)!important}
+
+.exp-panel{display:none;margin-top:14px;background:var(--bg);border-radius:10px;padding:14px 16px}
+.exp-panel.show{display:block;animation:fadeUp .2s ease}
+.exp-tag{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--teal);text-transform:uppercase;margin-bottom:6px}
+.exp-rule{font-size:13px;font-weight:800;color:var(--purple);background:var(--purplePale);border-radius:6px;padding:6px 10px;margin-bottom:10px}
+.exp-panel p{font-size:15px;color:var(--ink2);line-height:1.8}
+
+.q-foot{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 16px;background:var(--bg2);border-top:1px solid var(--border);
+}
+.q-status{font-size:12px;font-weight:700}
+
+.btn{
+  padding:14px 24px;border-radius:10px;font-size:14px;font-weight:800;
+  letter-spacing:.5px;border:none;cursor:pointer;transition:all .15s;
+  font-family:'Nunito',sans-serif;
+}
+.btn-primary{background:var(--teal);color:#fff}
+.btn-primary:hover{background:var(--tealLt)}
+.btn-ghost{background:var(--bg2);color:var(--ink2);border:1.5px solid var(--border)}
+.btn-ghost:hover{background:var(--bg3)}
+.btn-row{display:flex;gap:10px;justify-content:center;margin:16px 0}
+
+.res-hero{
+  background:var(--teal);border-radius:var(--radius);
+  padding:28px 20px;text-align:center;color:#fff;margin-bottom:12px;
+}
+.res-score{font-family:'Lora',serif;font-size:72px;font-weight:700;line-height:1}
+.res-grade{font-size:18px;font-weight:800;margin:8px 0 6px;color:#C8F0A0}
+.res-msg{font-size:15px;color:rgba(255,255,255,.78);line-height:1.6}
+.res-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:2px;background:var(--border);border-radius:var(--radius);
+  overflow:hidden;margin-bottom:12px;
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── HERO ── -->
+  <div class="hero">
+    <div class="hero-kicker">Olive Defence · Physics · P02</div>
+    <div class="hero-title">Light —<br><span>Reflection &amp; Refraction</span></div>
+    <div class="hero-sub">Mirrors, lenses, laws, and optical phenomena — complete coverage for CDS · NDA · AFCAT</div>
+    <div class="hero-chips">
+      <span class="chip chip-w">⚡ CDS</span>
+      <span class="chip chip-y">🛡 NDA</span>
+      <span class="chip chip-g">✈ AFCAT</span>
+      <span class="chip chip-w">Physics · P02</span>
+    </div>
+  </div>
+
+  <!-- ── TAB BAR ── -->
+  <div class="tab-bar">
+    <button class="tab on" onclick="switchTab('theory')">📖 Theory</button>
+    <button class="tab" onclick="switchTab('quickref')">⚡ Quick Ref</button>
+    <button class="tab" onclick="switchTab('quiz')">🎯 Quiz</button>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       PANE 1 — THEORY
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="pane on" id="theory">
+
+    <div class="intro-box">
+      <p>Light is one of the <strong>highest-scoring chapters</strong> in CDS, NDA, and AFCAT. Questions cover the laws of reflection, mirror and lens image formation, Snell's law, critical angle, total internal reflection, and real-world optical phenomena. A strong grasp of sign conventions and the mirror/lens formula will earn you 3–5 marks per paper.</p>
+    </div>
+
+    <!-- ══ SECTION 1: REFLECTION ══ -->
+    <div class="sec-label">Section 1 — Reflection of Light</div>
+
+    <div class="c-card">
+      <div class="c-head" onclick="tog(this)">
+        <div class="c-icon" style="background:#EAF0FA">🔁</div>
+        <div style="flex:1">
+          <div class="c-title">Laws of Reflection</div>
+          <div class="c-sub">The two fundamental rules that govern all mirrors</div>
+        </div>
+        <span class="c-arrow">▾</span>
+      </div>
+      <div class="c-body">
+        <p>When light bounces off a surface, it obeys two laws — always, for any type of surface (plane or curved).</p>
+
+        <div class="rule-box">
+          <div class="rl-label">The Two Laws of Reflection</div>
+          <p><strong>Law 1:</strong> The angle of incidence (∠i) = angle of reflection (∠r). Both are measured from the <strong>normal</strong> to the surface at the point of incidence.<br><br>
+          <strong>Law 2:</strong> The incident ray, the reflected ray, and the normal — all lie in the <strong>same plane</strong>.</p>
+        </div>
+
+        <div class="fact-box">
+          <div class="fb-label">Key Definitions — Always Tested</div>
+          <ul>
+            <li><strong>Normal</strong> — an imaginary line perpendicular (90°) to the reflecting surface at the point of incidence</li>
+            <li><strong>Angle of incidence (∠i)</strong> — angle between incident ray and the normal (NOT the surface)</li>
+            <li><strong>Angle of reflection (∠r)</strong> — angle between reflected ray and the normal</li>
+            <li><strong>Glancing angle</strong> — angle between incident ray and the surface itself = (90° − ∠i)</li>
+          </ul>
+        </div>
+
+        <div class="trap-box">
+          <div class="tr-label">⚑ Exam Trap</div>
+          <ul>
+            <li>Angles are always measured from the <strong>normal</strong>, NOT from the surface. Many students confuse glancing angle with angle of incidence.</li>
+            <li>If a ray falls <strong>normally</strong> (perpendicularly) on a mirror, it reflects <strong>straight back</strong> — ∠i = ∠r = 0°</li>
+            <li>Laws of reflection hold for <strong>all types of surfaces</strong> — plane, concave, convex, rough, smooth</li>
+          </ul>
+        </div>
+
+        <div class="eg-box">
+          <div class="eg-label">Practical Example</div>
+          <p>If a plane mirror is rotated by angle θ, the reflected ray rotates by <strong>2θ</strong>. This principle is used in galvanometers and periscopes.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-card">
+      <div class="c-head" onclick="tog(this)">
+        <div class="c-icon" style="background:#E6F4EE">🪞</div>
+        <div style="flex:1">
+          <div class="c-title">Plane Mirror — Image Properties</div>
+          <div class="c-sub">Virtual, erect, laterally inverted — and always the same size</div>
+        </div>
+        <span class="c-arrow">▾</span>
+      </div>
+      <div class="c-body">
+        <p>A <strong>plane mirror</strong> is a flat, polished reflecting surface. The image it forms has specific properties that are directly tested in every exam.</p>
+
+        <div class="purple-box">
+          <div class="pl-label">Properties of Image in a Plane Mirror</div>
+          <ul>
+            <li>Image is <strong>Virtual</strong> — cannot be projected on a screen; formed behind the mirror</li>
+            <li>Image is <strong>Erect</strong> — upright, same orientation as the object</li>
+            <li>Image is <strong>Laterally Inverted</strong> — left and right are swapped (your right hand appears as left hand in mirror)</li>
+            <li>Image size = Object size — <strong>magnification = 1</strong></li>
+            <li>Image distance behind mirror = Object distance in front of mirror</li>
+            <li>For a full-length image of a person, mirror height = <strong>half the person's height</strong></li>
+          </ul>
+        </div>
+
+        <div class="fact-box">
+          <div class="fb-label">Number of Images in Two Mirrors — Formula</div>
+          <ul>
+            <li>Two mirrors at angle θ: number of images = <strong>(360°/θ) − 1</strong> (when 360/θ is even)</li>
+            <li>Mirrors at 90° → <strong>3 images</strong> · At 60° → <strong>5 images</strong> · At 45° → <strong>7 images</strong></li>
+            <li>Parallel mirrors (θ = 0°) → <strong>infinite images</strong> (used in barber shops)</li>
+          </ul>
+        </div>
+
+        <div class="trap-box">
+          <div class="tr-label">⚑ Lateral Inversion vs Inversion</div>
+          <p>Lateral inversion means left ↔ right swap only. The image is NOT upside down. The word "AMBULANCE" is written mirror-reversed on ambulances so drivers can read it correctly in their rear-view mirrors.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-card">
+      <div class="c-head" onclick="tog(this)">
+        <div class="c-icon" style="background:#FDF4E3">🔭</div>
+        <div style="flex:1">
+          <div class="c-title">Spherical Mirrors — Concave &amp; Convex</div>
+          <div class="c-sub">Terminology, sign convention, mirror formula</div>
+        </div>
+        <span class="c-arrow">▾</span>
+      </div>
+      <div class="c-body">
+        <p>Spherical mirrors are sections of a hollow sphere. The <strong>concave mirror</strong> (reflecting surface is the inner side) converges light; the <strong>convex mirror</strong> (outer side) diverges light.</p>
+
+        <div class="fact-box">
+          <div class="fb-label">Key Terms — Learn All of These</div>
+          <ul>
+            <li><strong>Pole (P)</strong> — midpoint of the mirror surface</li>
+            <li><strong>Centre of Curvature (C)</strong> — centre of the sphere of which the mirror is a part</li>
+            <li><strong>Radius of Curvature (R)</strong> — distance from P to C</li>
+            <li><strong>Principal Focus (F)</strong> — point where parallel rays meet (concave) or appear to diverge from (convex) after reflection</li>
+            <li><strong>Focal Length (f)</strong> — distance from P to F &nbsp;·&nbsp; <strong>f = R/2</strong></li>
+            <li><strong>Principal Axis</strong> — straight line through P and C</li>
+          </ul>
+        </div>
+
+        <div class="formula-box">
+          <div class="fl-label">Mirror Formula &amp; Magnification</div>
+          <div class="formula-line">1/f = 1/v + 1/u</div>
+          <div class="formula-note">
+            <b>f</b> = focal length &nbsp;·&nbsp; <b>v</b> = image distance &nbsp;·&nbsp; <b>u</b> = object distance<br><br>
+            <b>Magnification: m = −v/u = h_i / h_o</b><br>
+            m &gt; 0 → erect image &nbsp;·&nbsp; m &lt; 0 → inverted image &nbsp;·&nbsp; |m| &gt; 1 → magnified
+          </div>
+        </div>
+
+        <div class="rule-box">
+          <div class="rl-label">New Cartesian Sign Convention</div>
+          <p>All distances are measured from the <strong>pole (P)</strong>.<br>
+          • Distances in the direction of <strong>incident light</strong> (usually left to right) are <strong>positive</strong>.<br>
+          • Distances <strong>opposite</strong> to incident light are <strong>negative</strong>.<br>
+          • Object is always placed to the <strong>left</strong> of mirror, so <strong>u is always negative</strong>.<br>
+          • For concave mirror: <strong>f is negative</strong>. For convex mirror: <strong>f is positive</strong>.</p>
+        </div>
+
+        <div style="overflow-x:auto">
+          <table class="compare-table">
+            <tr><th>Object Position<br>(Concave Mirror)</th><th>Image Position</th><th>Image Nature</th><th>Use</th></tr>
+            <tr><td>At infinity</td><td>At F</td><td>Real, inverted, highly diminished</td><td>Searchlights, solar furnaces</td></tr>
+            <tr><td>Beyond C</td><td>Between F and C</td><td>Real, inverted, diminished</td><td>—</td></tr>
+            <tr><td>At C</td><td>At C</td><td>Real, inverted, same size</td><td>—</td></tr>
+            <tr><td>Between C and F</td><td>Beyond C</td><td>Real, inverted, magnified</td><td>—</td></tr>
+            <tr><td>At F</td><td>At infinity</td><td>Real, inverted, highly magnified</td><td>Headlights, torches</td></tr>
+            <tr><td>Between F and P</td><td>Behind mirror</td><td><b>Virtual, erect, magnified</b></td><td>Shaving/makeup mirrors, dentist</td></tr>
+          </table>
+        </div>
+
+        <div class="mirror-grid">
+          <div class="mirror-card">
+            <div class="mc-name">Concave Mirror <span class="mc-tag">Converging</span></div>
+            <p>Always forms real + inverted image (except when object is between F and P → virtual + erect). Used: shaving mirrors, dentist mirrors, solar furnaces, torch reflectors, satellite dishes.</p>
+          </div>
+          <div class="mirror-card">
+            <div class="mc-name">Convex Mirror <span class="mc-tag">Diverging</span></div>
+            <p><strong>Always</strong> forms a virtual, erect, diminished image — regardless of object position. Wider field of view. Used: rear-view mirrors in vehicles, security mirrors in shops, road bends.</p>
+          </div>
+        </div>
+
+        <div class="trap-box">
+          <div class="tr-label">⚑ Top Exam Traps — Spherical Mirrors</div>
+          <ul>
+            <li>Convex mirror <strong>always</strong> gives virtual, erect, diminished image — no exceptions</li>
+            <li>Concave mirror gives virtual image <strong>only</strong> when object is between F and P</li>
+            <li>Focal length = R/2, NOT R. Confusing f and R is the #1 calculation error</li>
+            <li>Rear-view mirror in vehicles = <strong>convex</strong> (wider field of view)</li>
+            <li>Dentist's mirror = <strong>concave</strong> (magnified image of teeth)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ SECTION 2: REFRACTION ══ -->
+    <div class="sec-label">Section 2 — Refraction of Light</div>
+
+    <div class="c-card">
+      <div class="c-head" onclick="tog(this)">
+        <div class="c-icon" style="background:#F3EEFB">📐</div>
+        <div style="flex:1">
+          <div class="c-title">Laws of Refraction &amp; Snell's Law</div>
+          <div class="c-sub">Why light bends when it changes medium</div>
+        </div>
+        <span class="c-arrow">▾</span>
+      </div>
+      <div class="c-body">
+        <p><strong>Refraction</strong> is the bending of light as it passes from one medium to another due to a change in its <strong>speed</strong>. Light slows down in denser media and bends toward the normal; it speeds up in rarer media and bends away.</p>
+
+        <div class="rule-box">
+          <div class="rl-label">Laws of Refraction</div>
+          <p><strong>Law 1:</strong> The incident ray, refracted ray, and normal all lie in the same plane.<br><br>
+          <strong>Law 2 (Snell's Law):</strong> n₁ sin θ₁ = n₂ sin θ₂ — the ratio of sines of the angles of incidence and refraction is constant for a given pair of media.</p>
+        </div>
+
+        <div class="formula-box">
+          <div class="fl-label">Snell's Law</div>
+          <div class="formula-line">n₁ sin θ₁ = n₂ sin θ₂</div>
+          <div class="formula-note">
+            <b>n</b> = refractive index of the medium &nbsp;·&nbsp; <b>θ₁</b> = angle of incidence &nbsp;·&nbsp; <b>θ₂</b> = angle of refraction<br><br>
+            Also: <b>n = c / v</b> &nbsp;·&nbsp; c = speed of light in vacuum = 3 × 10⁸ m/s &nbsp;·&nbsp; v = speed in medium<br>
+            Higher n → denser medium → light travels <b>slower</b>
+          </div>
+        </div>
+
+        <div class="fact-box">
+          <div class="fb-label">Refractive Indices — Frequently Tested Values</div>
+          <ul>
+            <li><strong>Vacuum / Air</strong> — n = 1.0 (light travels fastest here)</li>
+            <li><strong>Water</strong> — n ≈ 1.33</li>
+            <li><strong>Glass</strong> — n ≈ 1.5</li>
+            <li><strong>Diamond</strong> — n ≈ 2.42 (highest among common materials — explains its brilliance)</li>
+            <li><strong>Speed of light in vacuum</strong> — c = 3 × 10⁸ m/s</li>
+          </ul>
+        </div>
+
+        <div class="analogy-box">
+          <div class="an-label">Think of it this way</div>
+          <p>Imagine a car driving from a smooth road (fast) into mud (slow). The front wheel hitting the mud first slows down, causing the car to turn. That's exactly what happens to light — the part of the wavefront entering the denser medium slows and the beam bends toward the normal.</p>
+        </div>
+
+        <div class="eg-box">
+          <div class="eg-label">Everyday Refraction Phenomena</div>
+          <ul>
+            <li>A pencil partially in water appears <strong>bent</strong> at the surface</li>
+            <li>A pool of water looks <strong>shallower</strong> than it actually is (apparent depth)</li>
+            <li>Stars appear to <strong>twinkle</strong> (atmospheric refraction)</li>
+            <li>The sun is visible slightly <strong>before</strong> it actually rises above the horizon (atmospheric refraction)</li>
+            <li>A coin in a glass of water appears <strong>raised</strong></li>
+          </ul>
+        </div>
+
+        <div class="trap-box">
+          <div class="tr-label">⚑ Exam Trap — What Changes, What Doesn't</div>
+          <ul>
+            <li>During refraction, <strong>frequency does NOT change</strong>. Speed and wavelength change.</li>
+            <li>When light goes from rarer → denser medium: it <strong>bends toward</strong> the normal (angle decreases)</li>
+            <li>When light goes from denser → rarer medium: it <strong>bends away</strong> from the normal (angle increases)</li>
+            <li>A ray falling <strong>perpendicular</strong> to the surface (θ = 0°) does NOT bend — it passes straight through</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-card">
+      <div class="c-head" onclick="tog(this)">
+        <div class="c-icon" style="background:#FCEAEA">💎</div>
+        <div style="flex:1">
+          <div class="c-title">Total Internal Reflection (TIR)</div>
+          <div class="c-sub">Critical angle, optical fibres, mirage, diamond brilliance</div>
+        </div>
+        <span class="c-arrow">▾</span>
+      </div>
+      <div class="c-body">
+        <p>When light travels from a <strong>denser</strong> to a <strong>rarer</strong> medium and the angle of incidence exceeds the <strong>critical angle</strong>, no refraction occurs — all light is reflected back. This is <strong>Total Internal Reflection</strong>.</p>
+
+        <div class="rule-box">
+          <div class="rl-label">Conditions for TIR</div>
+          <p>1. Light must travel from a <strong>denser medium to a rarer medium</strong> (e.g., glass to air, water to air).<br>
+          2. Angle of incidence must be <strong>greater than the critical angle (C)</strong>.</p>
+        </div>
+
+        <div class="formula-box">
+          <div class="fl-label">Critical Angle Formula</div>
+          <div class="formula-line">sin C = 1/n &nbsp;(or n = 1/sin C)</div>
+          <div class="formula-note">
+            <b>C</b> = critical angle &nbsp;·&nbsp; <b>n</b> = refractive index of the denser medium (w.r.t. air)<br>
+            Higher n → smaller critical angle → TIR occurs more easily
+          </div>
+        </div>
+
+        <div class="fact-box">
+          <div class="fb-label">Critical Angles — Exam Values</div>
+          <ul>
+            <li><strong>Water–Air</strong>: Critical angle ≈ 48.8°</li>
+            <li><strong>Glass–Air</strong>: Critical angle ≈ 42°</li>
+            <li><strong>Diamond–Air</strong>: Critical angle ≈ 24.4° (very small — almost all light reflects internally, giving brilliant sparkle)</li>
+          </ul>
+        </div>
+
+        <div class="purple-box">
+          <div class="pl-label">Applications of TIR — All Frequently Tested</div>
+          <ul>
+            <li><strong>Optical Fibre</strong> — light trapped inside glass fibre by repeated TIR; used in internet cables, endoscopes, medical imaging</li>
+            <li><strong>Diamond brilliance</strong> — very small critical angle (≈24°) causes most light to undergo TIR and emerge from the top, creating sparkle</li>
+            <li><strong>Mirage</strong> — hot air near the ground is less dense; light from sky bends away from normal and undergoes TIR, creating an illusion of water on hot roads</li>
+            <li><strong>Periscope &amp; binoculars</strong> — use totally reflecting prisms (more efficient than mirrors)</li>
+            <li><strong>Sparkling of glass prism</strong> — same principle as diamond</li>
+          </ul>
+        </div>
+
+        <div class="trap-box">
+          <div class="tr-label">⚑ Exam Traps — TIR</div>
+          <ul>
+            <li>TIR is possible only from <strong>denser to rarer</strong> medium — NEVER from rarer to denser</li>
+            <li>At exactly the critical angle, the refracted ray travels along the <strong>surface</strong> (θ_refraction = 90°)</li>
+            <li>Optical fibres work on TIR, not reflection from a silvered surface</li>
+            <li>Mirage is caused by TIR (atmospheric refraction + TIR), NOT simple reflection</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ SECTION 3: LENSES ══ -->
+    <div class="sec-label">Section 3 — Lenses</div>
+
+    <div class="c-card">
+      <div class="c-head" onclick="tog(this)">
+        <div class="c-icon" style="background:#EAF5EC">🔬</div>
+        <div style="flex:1">
+          <div class="c-title">Convex &amp; Concave Lenses</div>
+          <div class="c-sub">Lens formula, power, magnification, and image tables</div>
+        </div>
+        <span class="c-arrow">▾</span>
+      </div>
+      <div class="c-body">
+        <p>A <strong>convex (converging) lens</strong> is thicker at the centre; it converges parallel rays to a real focus. A <strong>concave (diverging) lens</strong> is thinner at the centre; it diverges rays and the focus is virtual.</p>
+
+        <div class="formula-box">
+          <div class="fl-label">Lens Formula &amp; Power</div>
+          <div class="formula-line">1/f = 1/v − 1/u</div>
+          <div class="formula-note">
+            Same variables as mirror formula but note the <b>sign difference</b> (minus, not plus).<br><br>
+            <b>Power of a lens: P = 1/f (in metres)</b> &nbsp;·&nbsp; Unit = <b>Dioptre (D)</b><br>
+            Convex lens: <b>f positive → P positive</b><br>
+            Concave lens: <b>f negative → P negative</b><br><br>
+            <b>Combined lenses:</b> P_total = P₁ + P₂ + P₃ ...
+          </div>
+        </div>
+
+        <div style="overflow-x:auto">
+          <table class="compare-table">
+            <tr><th>Object Position<br>(Convex Lens)</th><th>Image Position</th><th>Nature of Image</th><th>Application</th></tr>
+            <tr><td>At infinity</td><td>At F₂</td><td>Real, inverted, highly diminished</td><td>Camera, telescope objective</td></tr>
+            <tr><td>Beyond 2F₁</td><td>Between F₂ and 2F₂</td><td>Real, inverted, diminished</td><td>Camera</td></tr>
+            <tr><td>At 2F₁</td><td>At 2F₂</td><td>Real, inverted, same size</td><td>Photocopier</td></tr>
+            <tr><td>Between F₁ and 2F₁</td><td>Beyond 2F₂</td><td>Real, inverted, magnified</td><td>Projector, slide projector</td></tr>
+            <tr><td>At F₁</td><td>At infinity</td><td>Real, inverted, highly magnified</td><td>Search light</td></tr>
+            <tr><td>Between F₁ and O</td><td>Same side as object</td><td><b>Virtual, erect, magnified</b></td><td>Magnifying glass, reading lens</td></tr>
+          </table>
+        </div>
+
+        <div class="mirror-grid">
+          <div class="mirror-card">
+            <div class="mc-name">Convex Lens <span class="mc-tag">Converging</span></div>
+            <p>Used for: magnifying glass, camera, projector, telescope eyepiece, microscope, correction of <strong>hypermetropia</strong> (long-sightedness).</p>
+          </div>
+          <div class="mirror-card">
+            <div class="mc-name">Concave Lens <span class="mc-tag">Diverging</span></div>
+            <p><strong>Always</strong> gives virtual, erect, diminished image. Used for: correction of <strong>myopia</strong> (short-sightedness), peepholes in doors (spy-holes).</p>
+          </div>
+        </div>
+
+        <div class="trap-box">
+          <div class="tr-label">⚑ Critical Traps — Lenses</div>
+          <ul>
+            <li>Lens formula uses <strong>1/v − 1/u</strong> (minus sign), mirror formula uses <strong>1/v + 1/u</strong> — extremely common error</li>
+            <li>Power is in <strong>Dioptres</strong>, NOT Watts. A lens of focal length 25 cm = 0.25 m → P = 1/0.25 = <strong>+4 D</strong></li>
+            <li>Concave lens <strong>always</strong> forms virtual, erect, diminished image — no exception</li>
+            <li>Myopia corrected by <strong>concave</strong> lens; Hypermetropia by <strong>convex</strong> lens</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ SECTION 4: DISPERSION & PHENOMENA ══ -->
+    <div class="sec-label">Section 4 — Dispersion &amp; Optical Phenomena</div>
+
+    <div class="c-card">
+      <div class="c-head" onclick="tog(this)">
+        <div class="c-icon" style="background:#FDF4E3">🌈</div>
+        <div style="flex:1">
+          <div class="c-title">Dispersion of Light &amp; Rainbow</div>
+          <div class="c-sub">Why a prism splits white light — and how rainbows form</div>
+        </div>
+        <span class="c-arrow">▾</span>
+      </div>
+      <div class="c-body">
+        <p><strong>Dispersion</strong> is the splitting of white light into its constituent colours (spectrum) when it passes through a prism. It happens because different colours travel at different speeds in glass and are refracted by different amounts.</p>
+
+        <div class="fact-box">
+          <div class="fb-label">VIBGYOR — Spectrum Order</div>
+          <ul>
+            <li>Order from top to bottom through a prism: <strong>V-I-B-G-Y-O-R</strong> (Violet, Indigo, Blue, Green, Yellow, Orange, Red)</li>
+            <li><strong>Violet</strong> is deviated MOST (highest n, shortest wavelength, highest frequency)</li>
+            <li><strong>Red</strong> is deviated LEAST (lowest n, longest wavelength, lowest frequency)</li>
+            <li>In a rainbow: Red is on the <strong>outer edge</strong>, Violet on the <strong>inner edge</strong></li>
+            <li>Speed in glass: Red is fastest, Violet is slowest (opposite of frequency)</li>
+          </ul>
+        </div>
+
+        <div class="rule-box">
+          <div class="rl-label">Rainbow Formation</div>
+          <p>A rainbow forms due to <strong>dispersion + total internal reflection + refraction</strong> inside raindrops. Sunlight enters a raindrop, disperses (splits into colours), undergoes TIR at the back of the drop, and exits at different angles. The observer sees different colours from different droplets simultaneously.</p>
+        </div>
+
+        <div class="analogy-box">
+          <div class="an-label">Memory Trick</div>
+          <p><strong>"Roy G Biv"</strong> backwards = VIBGYOR. Red has the longest wavelength (≈700 nm), Violet the shortest (≈400 nm). Red bends least — think "Red = Relaxed = barely bends."</p>
+        </div>
+
+        <div class="trap-box">
+          <div class="tr-label">⚑ Exam Traps — Dispersion</div>
+          <ul>
+            <li>In a rainbow, <strong>red is outside, violet is inside</strong> (opposite to prism orientation — confuses many)</li>
+            <li>The colour that undergoes maximum deviation in a prism = <strong>Violet</strong></li>
+            <li>The colour with maximum speed in glass = <strong>Red</strong></li>
+            <li>White light = mixture of all visible colours. Sunlight = white light.</li>
+            <li>Scattering (not dispersion): sky is blue because air scatters <strong>shorter wavelengths</strong> (blue) more — Rayleigh scattering</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-card">
+      <div class="c-head" onclick="tog(this)">
+        <div class="c-icon" style="background:#EAF0FA">👁️</div>
+        <div style="flex:1">
+          <div class="c-title">Human Eye &amp; Defects of Vision</div>
+          <div class="c-sub">Myopia, hypermetropia, presbyopia — causes and corrections</div>
+        </div>
+        <span class="c-arrow">▾</span>
+      </div>
+      <div class="c-body">
+        <p>The human eye works like a convex lens camera. The <strong>crystalline lens</strong> focuses light on the <strong>retina</strong>. Defects occur when this focusing goes wrong.</p>
+
+        <div style="overflow-x:auto">
+          <table class="compare-table">
+            <tr><th>Defect</th><th>Also Called</th><th>Problem</th><th>Image Forms</th><th>Corrected By</th></tr>
+            <tr><td><b>Myopia</b></td><td>Short-sightedness</td><td>Can't see distant objects clearly</td><td>In front of retina</td><td><b>Concave lens</b></td></tr>
+            <tr><td><b>Hypermetropia</b></td><td>Long-sightedness</td><td>Can't see near objects clearly</td><td>Behind retina</td><td><b>Convex lens</b></td></tr>
+            <tr><td><b>Presbyopia</b></td><td>Old-age sight</td><td>Can't see near OR far (loss of accommodation)</td><td>—</td><td><b>Bifocal lens</b></td></tr>
+            <tr><td><b>Astigmatism</b></td><td>—</td><td>Unequal curvature of cornea; blurred vision</td><td>—</td><td><b>Cylindrical lens</b></td></tr>
+          </table>
+        </div>
+
+        <div class="fact-box">
+          <div class="fb-label">Key Eye Facts — Frequently Asked</div>
+          <ul>
+            <li><strong>Persistence of vision</strong> — the eye retains an image for about <strong>1/16th of a second</strong>; basis of cinema and animation</li>
+            <li><strong>Near point</strong> of a normal eye = <strong>25 cm</strong></li>
+            <li><strong>Far point</strong> of a normal eye = <strong>infinity</strong></li>
+            <li><strong>Power of accommodation</strong> — ability of the eye lens to change its focal length (curvature) to focus objects at varying distances</li>
+            <li><strong>Blind spot</strong> — point on retina where optic nerve connects; no photoreceptors here; no image formed</li>
+            <li><strong>Yellow spot (Fovea)</strong> — point of sharpest vision on retina</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-card">
+      <div class="c-head" onclick="tog(this)">
+        <div class="c-icon" style="background:#EAF5EC">🌅</div>
+        <div style="flex:1">
+          <div class="c-title">Atmospheric Optical Phenomena</div>
+          <div class="c-sub">Twinkling of stars, blue sky, red sunset — all explained</div>
+        </div>
+        <span class="c-arrow">▾</span>
+      </div>
+      <div class="c-body">
+
+        <div class="compare-table" style="margin:0">
+          <table class="compare-table">
+            <tr><th>Phenomenon</th><th>Cause</th><th>Key Detail</th></tr>
+            <tr><td><b>Twinkling of stars</b></td><td>Atmospheric refraction (turbulent air layers)</td><td>Stars are point sources — small changes in refraction cause apparent flickering. Planets do NOT twinkle (they are extended sources).</td></tr>
+            <tr><td><b>Blue sky</b></td><td>Rayleigh scattering by air molecules</td><td>Blue light (short wavelength) is scattered ~10× more than red. Sky appears blue to us.</td></tr>
+            <tr><td><b>Red sunrise/sunset</b></td><td>Scattering — blue scattered away, red reaches eye</td><td>Sun near horizon: light travels through more atmosphere, blue scattered away; only red/orange remain.</td></tr>
+            <tr><td><b>Mirage</b></td><td>TIR in hot air layers near ground</td><td>Hot road air is less dense (rarer). Light undergoes TIR, creating inverted image that looks like water.</td></tr>
+            <tr><td><b>Sun visible before sunrise</b></td><td>Atmospheric refraction</td><td>Atmosphere bends light, making sun appear above horizon before it actually is. Day is longer than night due to this.</td></tr>
+            <tr><td><b>Looming</b></td><td>Atmospheric refraction (cold air near sea)</td><td>Cold dense air at sea level — objects below horizon appear raised. Opposite of mirage.</td></tr>
+          </table>
+        </div>
+
+        <div class="trap-box">
+          <div class="tr-label">⚑ Stars vs Planets — Twinkling</div>
+          <p>Stars twinkle because they are so far away they act as <strong>point sources</strong>. Planets are close enough to appear as <strong>extended discs</strong> — the multiple beams average out, so planets do <strong>NOT</strong> twinkle. This is a CDS/NDA favourite.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-card">
+      <div class="c-head" onclick="tog(this)">
+        <div class="c-icon" style="background:#F3EEFB">🔧</div>
+        <div style="flex:1">
+          <div class="c-title">Optical Instruments — Applications</div>
+          <div class="c-sub">Which mirror/lens goes where — a must-memorise list</div>
+        </div>
+        <span class="c-arrow">▾</span>
+      </div>
+      <div class="c-body">
+
+        <div class="purple-box">
+          <div class="pl-label">Mirror &amp; Lens Applications — Learn Each One</div>
+          <ul>
+            <li><strong>Rear-view mirror (vehicles)</strong> → Convex mirror (wider field of view, virtual image)</li>
+            <li><strong>Dentist / ENT doctor mirror</strong> → Concave mirror (magnified, virtual, erect image)</li>
+            <li><strong>Shaving / makeup mirror</strong> → Concave mirror (magnified image when close)</li>
+            <li><strong>Torch / headlight / searchlight reflector</strong> → Concave mirror (placed at F, produces parallel beam)</li>
+            <li><strong>Solar furnace / solar cooker</strong> → Large concave mirror (converges sun's rays to F)</li>
+            <li><strong>Shops / banks security mirror</strong> → Convex mirror (wide-angle view)</li>
+            <li><strong>Periscope</strong> → Two plane mirrors at 45° (submarines, tanks)</li>
+            <li><strong>Telescope (Astronomical)</strong> → Concave objective + convex eyepiece</li>
+            <li><strong>Compound microscope</strong> → Two convex lenses (objective + eyepiece)</li>
+            <li><strong>Spectacles for myopia</strong> → Concave lens</li>
+            <li><strong>Spectacles for hypermetropia</strong> → Convex lens</li>
+            <li><strong>Camera</strong> → Convex lens (real, inverted, diminished image on film/sensor)</li>
+            <li><strong>Magnifying glass</strong> → Convex lens (object inside F → virtual, erect, magnified)</li>
+            <li><strong>Projector / slide projector</strong> → Convex lens (real, inverted, magnified image on screen)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- end theory pane -->
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       PANE 2 — QUICK REF
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="pane" id="quickref">
+
+    <div class="sec-label">Laws &amp; Formulas</div>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <div class="ref-card-title">Master Formula Sheet — Light</div>
+        <ul>
+          <li><b>Laws of Reflection:</b> ∠i = ∠r &nbsp;·&nbsp; same plane</li>
+          <li><b>Mirror Formula:</b> 1/f = 1/v + 1/u &nbsp;·&nbsp; f = R/2</li>
+          <li><b>Mirror Magnification:</b> m = −v/u</li>
+          <li><b>Snell's Law:</b> n₁ sin θ₁ = n₂ sin θ₂</li>
+          <li><b>Refractive Index:</b> n = c/v = sin i / sin r</li>
+          <li><b>Critical Angle:</b> sin C = 1/n</li>
+          <li><b>Lens Formula:</b> 1/f = 1/v − 1/u</li>
+          <li><b>Lens Power:</b> P = 1/f(m) &nbsp;·&nbsp; Unit = Dioptre (D)</li>
+          <li><b>Combined Power:</b> P = P₁ + P₂ + ...</li>
+          <li><b>Near point of normal eye:</b> 25 cm</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sec-label">Mirror vs Lens — Key Differences</div>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <div class="ref-card-title">Mirror vs Lens Formula Comparison</div>
+        <ul>
+          <li><b>Mirror:</b> 1/f = 1/v <em>+</em> 1/u &nbsp;·&nbsp; Concave f is <em>negative</em></li>
+          <li><b>Lens:</b> 1/f = 1/v <em>−</em> 1/u &nbsp;·&nbsp; Convex f is <em>positive</em></li>
+          <li><b>Mirror sign:</b> All real distances negative (object left of mirror)</li>
+          <li><b>Lens sign:</b> Object always left → u negative; real image → v positive</li>
+          <li><b>Concave mirror ↔ Convex lens</b> — both are converging; similar image tables</li>
+          <li><b>Convex mirror ↔ Concave lens</b> — both are diverging; always virtual image</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sec-label">Always Virtual Image — Both Situations</div>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <div class="ref-card-title">When is the image ALWAYS virtual?</div>
+        <ul>
+          <li><b>Plane mirror</b> — always virtual, erect, same size</li>
+          <li><b>Convex mirror</b> — always virtual, erect, diminished</li>
+          <li><b>Concave lens</b> — always virtual, erect, diminished</li>
+          <li><b>Concave mirror</b> (object between F and P) → virtual, erect, magnified</li>
+          <li><b>Convex lens</b> (object between F and O) → virtual, erect, magnified</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sec-label">Refractive Indices &amp; Critical Angles</div>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <div class="ref-card-title">n Values &amp; Critical Angles</div>
+        <ul>
+          <li><b>Air / Vacuum:</b> n = 1.0</li>
+          <li><b>Water:</b> n ≈ <em>1.33</em> &nbsp;·&nbsp; Critical angle ≈ 48.8°</li>
+          <li><b>Glass:</b> n ≈ <em>1.5</em> &nbsp;·&nbsp; Critical angle ≈ 42°</li>
+          <li><b>Diamond:</b> n ≈ <em>2.42</em> &nbsp;·&nbsp; Critical angle ≈ 24.4°</li>
+          <li><b>Speed of light (vacuum):</b> c = 3 × 10⁸ m/s</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sec-label">Colour / Dispersion Quick Facts</div>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <div class="ref-card-title">Spectrum — VIBGYOR Facts</div>
+        <ul>
+          <li><b>Order (most deviated → least):</b> <em>V-I-B-G-Y-O-R</em></li>
+          <li><b>Violet:</b> highest frequency · shortest wavelength · maximum deviation</li>
+          <li><b>Red:</b> lowest frequency · longest wavelength · minimum deviation</li>
+          <li><b>Rainbow:</b> Red = outer arc · Violet = inner arc</li>
+          <li><b>Blue sky:</b> Rayleigh scattering — blue scattered most</li>
+          <li><b>Red sunset:</b> blue scattered away; red reaches eye</li>
+          <li><b>Twinkling:</b> stars (point source) twinkle; planets do <em>NOT</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sec-label">Vision Defects — Quick Table</div>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <div class="ref-card-title">Defects of Vision</div>
+        <ul>
+          <li><b>Myopia</b> (short-sight) → image in front of retina → corrected by <em>concave lens</em></li>
+          <li><b>Hypermetropia</b> (long-sight) → image behind retina → corrected by <em>convex lens</em></li>
+          <li><b>Presbyopia</b> (old-age) → both near + far → corrected by <em>bifocal lens</em></li>
+          <li><b>Astigmatism</b> → uneven cornea → corrected by <em>cylindrical lens</em></li>
+          <li><b>Near point (normal eye):</b> <em>25 cm</em> · Far point: infinity</li>
+          <li><b>Persistence of vision:</b> <em>1/16 second</em> — basis of cinema</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sec-label">Instruments — Mirror/Lens Used</div>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <div class="ref-card-title">Application → Optic Used</div>
+        <ul>
+          <li><b>Rear-view mirror</b> → <em>Convex mirror</em></li>
+          <li><b>Dentist / ENT mirror</b> → <em>Concave mirror</em></li>
+          <li><b>Torch / Headlight</b> → <em>Concave mirror</em> (object at F)</li>
+          <li><b>Solar furnace</b> → <em>Large concave mirror</em></li>
+          <li><b>Shop security</b> → <em>Convex mirror</em></li>
+          <li><b>Camera</b> → <em>Convex lens</em></li>
+          <li><b>Magnifying glass</b> → <em>Convex lens</em></li>
+          <li><b>Projector</b> → <em>Convex lens</em></li>
+          <li><b>Optical fibre</b> → <em>TIR</em></li>
+          <li><b>Myopia specs</b> → <em>Concave lens</em></li>
+          <li><b>Hypermetropia specs</b> → <em>Convex lens</em></li>
+          <li><b>Periscope</b> → <em>Two plane mirrors at 45°</em></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="sec-label">Top Exam Traps</div>
+    <div class="ref-grid">
+      <div class="ref-card">
+        <div class="ref-card-title">Never Get These Wrong</div>
+        <ul>
+          <li>Angles of incidence/reflection measured from <em>normal</em>, NOT surface</li>
+          <li>Rear-view mirror = <em>convex</em> (NOT plane or concave)</li>
+          <li>Convex mirror and concave lens — <em>always virtual</em> image</li>
+          <li>Mirror formula: 1/v <em>+</em> 1/u &nbsp;·&nbsp; Lens formula: 1/v <em>−</em> 1/u</li>
+          <li>Frequency does <em>NOT change</em> during refraction</li>
+          <li>TIR: denser → rarer ONLY &nbsp;·&nbsp; angle > critical angle</li>
+          <li>Diamond sparkling = very low critical angle (≈24°)</li>
+          <li>Rainbow: red <em>outer</em>, violet <em>inner</em></li>
+          <li>Violet deviated most; red deviated least in prism</li>
+          <li>Planets do <em>NOT</em> twinkle; stars do</li>
+          <li>Mirage = TIR, NOT just refraction</li>
+          <li>Lens power unit = <em>Dioptre</em> (NOT Watt)</li>
+        </ul>
+      </div>
+    </div>
+
+  </div><!-- end quickref pane -->
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       PANE 3 — QUIZ
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="pane" id="quiz">
+
+    <div class="quiz-stats">
+      <div class="qs-cell"><div class="qs-val" id="s-att">0</div><div class="qs-lbl">Attempted</div></div>
+      <div class="qs-cell"><div class="qs-val g" id="s-cor">0</div><div class="qs-lbl">Correct</div></div>
+      <div class="qs-cell"><div class="qs-val r" id="s-wrg">0</div><div class="qs-lbl">Wrong</div></div>
+      <div class="qs-cell"><div class="qs-val a" id="s-tot">20</div><div class="qs-lbl">Total</div></div>
+    </div>
+
+    <div class="prog-wrap">
+      <div class="prog-label" id="prog-label">0 of 20 answered</div>
+      <div class="prog-bar"><div class="prog-fill" id="prog"></div></div>
+    </div>
+
+    <div id="q-area"></div>
+    <div id="results" style="display:none"></div>
+
+    <div class="btn-row">
+      <button class="btn btn-primary" onclick="submitAll()">Submit All Answers</button>
+      <button class="btn btn-ghost" onclick="resetQuiz()">Reset Quiz</button>
+    </div>
+
+  </div><!-- end quiz pane -->
+
+</div><!-- .page -->
+
+<script>
+// ── QUESTION BANK ─────────────────────────────────────────────────────────────
+const QS = [
+
+// ─ EASY ─
+{d:'EASY',e:'NDA 2022',
+q:'Which type of mirror is used as a rear-view mirror in vehicles?',
+opts:['Plane mirror','Concave mirror','Convex mirror','Parabolic mirror'],
+ans:2,
+rule:'Rear-view mirror = Convex mirror → wider field of view → virtual, erect, diminished image always',
+exp:'A convex mirror is used as a rear-view mirror in vehicles because it always forms a virtual, erect, and diminished image, giving the driver a wider field of view of the traffic behind. A concave mirror would form a real, inverted image which would be dangerous. A plane mirror gives a normal image but has a limited field of view.'},
+
+{d:'EASY',e:'CDS 2023',
+q:'The angle of incidence is always measured from:',
+opts:['The reflecting surface','The normal to the surface at the point of incidence','The horizontal','The vertical'],
+ans:1,
+rule:'Both angle of incidence and angle of reflection are measured from the NORMAL, not from the surface',
+exp:'In optics, all angles related to reflection and refraction are measured from the normal — an imaginary line drawn perpendicular to the surface at the point where the ray strikes. The angle between the incident ray and the normal is called the angle of incidence. Measuring from the surface gives the "glancing angle," which equals 90° minus the angle of incidence.'},
+
+{d:'EASY',e:'AFCAT 2022',
+q:'Total Internal Reflection (TIR) occurs when light travels from:',
+opts:['Rarer to denser medium at any angle','Denser to rarer medium beyond the critical angle','Rarer to denser medium beyond the critical angle','Denser to rarer medium at any angle'],
+ans:1,
+rule:'TIR condition: (1) denser → rarer medium, AND (2) angle of incidence > critical angle',
+exp:'TIR requires two conditions: the light must travel from a denser medium to a rarer medium (e.g., glass to air, water to air), and the angle of incidence must exceed the critical angle for that medium pair. If either condition is not met, TIR does not occur. TIR is impossible when going from rarer to denser medium.'},
+
+{d:'EASY',e:'NDA 2023',
+q:'Which colour of light has the highest frequency in the visible spectrum?',
+opts:['Red','Orange','Yellow','Violet'],
+ans:3,
+rule:'VIBGYOR: Violet = highest frequency, shortest wavelength. Red = lowest frequency, longest wavelength.',
+exp:'In the visible spectrum, violet light has the highest frequency (and shortest wavelength). The order from highest to lowest frequency is: Violet > Indigo > Blue > Green > Yellow > Orange > Red. Red light has the lowest frequency and the longest wavelength. This is why violet is deviated most by a prism (higher frequency → higher refractive index → more bending).'},
+
+{d:'EASY',e:'CDS 2022',
+q:'The image formed by a convex mirror is always:',
+opts:['Real, inverted, and magnified','Virtual, erect, and diminished','Real, erect, and diminished','Virtual, inverted, and diminished'],
+ans:1,
+rule:'Convex mirror = diverging mirror → always virtual, erect, diminished — regardless of object position',
+exp:'A convex mirror is a diverging mirror. Regardless of where the object is placed, a convex mirror always forms a virtual (behind the mirror), erect (upright), and diminished (smaller than object) image. This is because the reflecting surface curves outward, causing reflected rays to diverge and never actually meet. The virtual image is formed where the diverging rays appear to originate from behind the mirror.'},
+
+// ─ MEDIUM ─
+{d:'MEDIUM',e:'NDA 2023',
+q:'A concave mirror has a focal length of 20 cm. Where should an object be placed to get an image at the same position as the object?',
+opts:['At 20 cm','At 40 cm','At 10 cm','At infinity'],
+ans:1,
+rule:'Object at C (= 2f) → image also forms at C. Since f = 20 cm, C = 2f = 40 cm.',
+exp:'When an object is placed at the centre of curvature (C) of a concave mirror, the image is also formed at C — same position, same size, real and inverted. The radius of curvature R = 2f = 2 × 20 = 40 cm. So the object should be placed 40 cm in front of the mirror. This is a standard result: object at C → image at C.'},
+
+{d:'MEDIUM',e:'CDS 2023',
+q:'The refractive index of glass with respect to air is 1.5. The critical angle for total internal reflection at the glass-air interface is:',
+opts:['sin⁻¹(2/3)','sin⁻¹(3/2)','cos⁻¹(2/3)','tan⁻¹(3/2)'],
+ans:0,
+rule:'sin C = 1/n = 1/1.5 = 2/3 → C = sin⁻¹(2/3) ≈ 41.8°',
+exp:'The critical angle C is given by sin C = 1/n, where n is the refractive index of the denser medium (glass) with respect to the rarer medium (air). Here n = 1.5, so sin C = 1/1.5 = 2/3. Therefore C = sin⁻¹(2/3) ≈ 41.8°. Any ray hitting the glass-air boundary at an angle greater than this will undergo total internal reflection.'},
+
+{d:'MEDIUM',e:'AFCAT 2023',
+q:'A person suffering from myopia (short-sightedness) uses spectacles with:',
+opts:['Convex lens of appropriate power','Concave lens of appropriate power','Bifocal lens','Cylindrical lens'],
+ans:1,
+rule:'Myopia → image forms in FRONT of retina → concave (diverging) lens used to push image back onto retina',
+exp:'In myopia, the eyeball is elongated or the lens is too convex, causing the image to form in front of the retina instead of on it. A concave (diverging) lens is used to correct this — it diverges the rays before they enter the eye, effectively moving the image back onto the retina. Convex lenses are used for hypermetropia (long-sightedness), bifocals for presbyopia, and cylindrical lenses for astigmatism.'},
+
+{d:'MEDIUM',e:'NDA 2022',
+q:'Why does the sky appear blue during the daytime?',
+opts:['Blue light is reflected by clouds','Blue light is scattered more than other colours by atmospheric molecules','The atmosphere absorbs all colours except blue','Water vapour in atmosphere emits blue light'],
+ans:1,
+rule:'Rayleigh scattering: scattering ∝ 1/λ⁴. Blue (shorter λ) scattered ~10× more than red. Scattered blue light reaches our eyes from all directions.',
+exp:'The blue colour of the sky is due to Rayleigh scattering. Sunlight contains all colours. When it enters the atmosphere, gas molecules scatter shorter wavelengths (blue, violet) much more than longer wavelengths (red, orange). The intensity of scattering is proportional to 1/λ⁴ — so blue (λ ≈ 450 nm) is scattered about 10 times more than red (λ ≈ 700 nm). This scattered blue light reaches our eyes from every direction, making the sky appear blue.'},
+
+{d:'MEDIUM',e:'CDS 2024',
+q:'Two plane mirrors are inclined at 60° to each other. The number of images formed of an object placed between them is:',
+opts:['4','5','6','3'],
+ans:1,
+rule:'Number of images = (360°/θ) − 1 = (360/60) − 1 = 6 − 1 = 5',
+exp:'When two mirrors are inclined at angle θ, the number of images formed is (360/θ) − 1, provided 360/θ is a whole number. Here θ = 60°, so number of images = (360/60) − 1 = 6 − 1 = 5. Common values to remember: 90° → 3 images, 60° → 5 images, 45° → 7 images, 0° (parallel mirrors) → infinite images.'},
+
+{d:'MEDIUM',e:'AFCAT 2023',
+q:'The power of a concave lens of focal length 25 cm is:',
+opts:['+4 D','-4 D','+0.25 D','-0.25 D'],
+ans:1,
+rule:'Concave lens → f is negative. f = -25 cm = -0.25 m. P = 1/f = 1/(-0.25) = -4 D',
+exp:'Power P = 1/f (in metres). For a concave lens, the focal length is negative. f = −25 cm = −0.25 m. P = 1/(−0.25) = −4 Dioptres. A negative power indicates a diverging (concave) lens. A positive power indicates a converging (convex) lens. The unit Dioptre (D) is the SI unit of lens power.'},
+
+{d:'MEDIUM',e:'NDA 2024',
+q:'During refraction of light, which of the following does NOT change?',
+opts:['Speed','Wavelength','Frequency','Direction'],
+ans:2,
+rule:'Refraction changes speed, wavelength, and direction of light — but FREQUENCY remains constant',
+exp:'When light passes from one medium to another, its speed changes (slows in denser medium) and its wavelength changes proportionally (λ = v/f). Since frequency f = v/λ, and both v and λ change by the same factor, frequency remains constant. Direction also changes (bending). So of the four options, only frequency is unchanged during refraction. This is a very commonly tested fact.'},
+
+{d:'MEDIUM',e:'CDS 2023',
+q:'Which phenomenon is responsible for the formation of a rainbow?',
+opts:['Reflection only','Refraction only','Dispersion and total internal reflection inside raindrops','Scattering of light by raindrops'],
+ans:2,
+rule:'Rainbow = dispersion (splitting into colours) + TIR (at back of raindrop) + refraction (at entry and exit)',
+exp:'A rainbow is formed by a combination of three optical phenomena occurring inside water droplets: (1) Refraction — sunlight refracts as it enters the raindrop, (2) Dispersion — white light splits into constituent colours (VIBGYOR) since each colour refracts differently, (3) Total Internal Reflection — light reflects off the back inner surface of the raindrop. The dispersed light then refracts again as it exits. Different colours reach the observer at different angles, creating the arc of colours.'},
+
+// ─ HARD ─
+{d:'HARD',e:'NDA 2023',
+q:'An object is placed 15 cm in front of a concave mirror of focal length 10 cm. The nature and position of the image is:',
+opts:['Virtual, erect, at 30 cm behind mirror','Real, inverted, at 30 cm in front of mirror','Real, inverted, at 6 cm in front of mirror','Virtual, erect, at 6 cm behind mirror'],
+ans:1,
+rule:'Mirror formula: 1/v + 1/u = 1/f. u = -15 cm, f = -10 cm. 1/v = 1/f - 1/u = -1/10 + 1/15 = -1/30. v = -30 cm (real, in front).',
+exp:'Using the mirror formula: 1/v + 1/u = 1/f. With u = −15 cm (object in front, so negative) and f = −10 cm (concave, so negative): 1/v = 1/f − 1/u = (−1/10) − (−1/15) = −1/10 + 1/15 = (−3+2)/30 = −1/30. So v = −30 cm. Negative v means the image is 30 cm in front of the mirror — it is a real, inverted image. Since |v| > |u|, the image is magnified. Object is between C and F, so image is beyond C — consistent.'},
+
+{d:'HARD',e:'CDS 2024',
+q:'A ray of light passes from air into water (n = 4/3). If the angle of incidence is 60°, the angle of refraction is:',
+opts:['sin⁻¹(√3/2)','sin⁻¹(3√3/8)','45°','sin⁻¹(√3 × 3/8)'],
+ans:1,
+rule:'Snell\'s law: n_air × sin 60° = n_water × sin r → 1 × (√3/2) = (4/3) × sin r → sin r = 3√3/8',
+exp:'Using Snell\'s law: n₁ sin θ₁ = n₂ sin θ₂. Here n₁ = 1 (air), θ₁ = 60°, n₂ = 4/3 (water). So: 1 × sin 60° = (4/3) × sin r → sin r = sin 60° × (3/4) = (√3/2) × (3/4) = 3√3/8. Therefore angle of refraction r = sin⁻¹(3√3/8) ≈ 40.5°. Note the angle decreases (bends toward normal) as light goes from rarer air to denser water.'},
+
+{d:'HARD',e:'AFCAT 2024',
+q:'A convex lens of focal length 20 cm forms a real image of an object. The image is three times the size of the object. The object distance is:',
+opts:['20 cm','26.7 cm','60 cm','80 cm'],
+ans:1,
+rule:'m = v/u = 3 (real image → m = -3 actually, but magnification magnitude = 3). v = 3u. Using lens formula: 1/v - 1/u = 1/f → 1/3u - 1/u = 1/20 → -2/3u = 1/20 → u = -40/3 ≈ -26.7 cm',
+exp:'For a real image from a convex lens, the image is inverted (magnification m = −v/u = −3, taking magnitudes: v = 3u). Using the lens formula: 1/v − 1/u = 1/f. Substituting v = 3|u| and u = −|u|: 1/(3|u|) + 1/|u| = 1/20 → (1 + 3)/(3|u|) = 1/20 → 4/3|u| = 1/20 → |u| = 80/3 ≈ 26.7 cm. Object distance is approximately 26.7 cm in front of the lens.'},
+
+{d:'HARD',e:'NDA 2024',
+q:'Stars twinkle but planets do not. The correct explanation is:',
+opts:[
+  'Stars emit their own light; planets only reflect light',
+  'Stars are much farther away and act as point sources; slight atmospheric refraction variations cause twinkling, while planets subtend a larger angle and the effect averages out',
+  'Planets are larger and emit more stable light',
+  'Stars rotate faster causing the twinkling effect'
+],ans:1,
+rule:'Twinkling = atmospheric refraction. Stars = point sources (very far) → individual variations cause flicker. Planets = extended disc sources → averaging effect eliminates twinkling.',
+exp:'Twinkling is caused by atmospheric refraction — constantly shifting layers of air at different temperatures and densities randomly bend starlight, causing the apparent position and brightness of the star to fluctuate. Stars are so far away that they appear as point sources; even tiny variations in refraction affect the entire image. Planets, being relatively closer, subtend a small but finite angular disc. The refraction variations affecting different parts of this disc average out, so planets appear steady. This is a classic CDS/NDA conceptual question.'},
+
+{d:'HARD',e:'CDS 2024',
+q:'The focal length of the objective lens of a compound microscope is f_o and that of the eyepiece is f_e. For high magnification, which condition must hold?',
+opts:['f_o >> f_e','f_o << f_e','f_o = f_e','f_o and f_e must both be very large'],
+ans:1,
+rule:'Microscope magnification ≈ L/f_o × D/f_e. For high magnification, BOTH f_o and f_e should be small. But f_o must be very small (< f_e) so the objective gives a highly magnified intermediate real image.',
+exp:'In a compound microscope, total magnification = (image distance of objective / f_o) × (D / f_e), where D = 25 cm (least distance of distinct vision). For maximum magnification, both focal lengths should be small. Specifically, the objective (f_o) must be much smaller than the eyepiece (f_e) — i.e., f_o << f_e. This allows the objective to form a highly magnified real intermediate image, which the eyepiece then further magnifies. A large eyepiece focal length reduces the overall magnification.'},
+
+{d:'HARD',e:'AFCAT 2024',
+q:'A glass slab of thickness t and refractive index n is placed in the path of a ray of light. The lateral shift of the ray is:',
+opts:[
+  'Depends only on the angle of incidence',
+  't × sin(i−r) / cos r',
+  't × sin i',
+  't × (1 − 1/n)'
+],ans:1,
+rule:'Lateral shift through a glass slab = t × sin(i − r) / cos r, where i = angle of incidence, r = angle of refraction',
+exp:'When a ray of light passes through a glass slab (parallel surfaces), it undergoes two refractions. The emergent ray is parallel to the incident ray but displaced laterally. The lateral shift d = t × sin(i − r) / cos r, where t = thickness of slab, i = angle of incidence, r = angle of refraction in glass. When i = 0 (normal incidence), d = 0 (no shift). The shift increases with thickness and angle of incidence. Option D gives the normal shift for a ray at 90° differently — the correct general formula is option B.'},
+
+{d:'HARD',e:'NDA 2023',
+q:'Two thin lenses of power +5 D and −3 D are placed in contact coaxially. The focal length of the combination is:',
+opts:['50 cm','−50 cm','25 cm','−25 cm'],
+ans:0,
+rule:'Combined power = P₁ + P₂ = +5 + (−3) = +2 D. Focal length = 1/P = 1/2 m = 50 cm (positive → converging)',
+exp:'For lenses in contact, the combined power is the algebraic sum: P = P₁ + P₂ = +5 + (−3) = +2 Dioptres. The focal length of the combination is f = 1/P = 1/2 m = 0.5 m = 50 cm. Since the power is positive, the combination is converging (convex). This is a standard formula: P_total = P₁ + P₂ + P₃ ... for thin lenses in contact.'},
+
+{d:'HARD',e:'CDS 2023',
+q:'A ray of light is incident on a plane mirror. The mirror is rotated by 20° about an axis in its plane. By how much does the reflected ray rotate?',
+opts:['10°','20°','40°','80°'],
+ans:2,
+rule:'When a mirror rotates by angle θ, the reflected ray rotates by 2θ. Here θ = 20°, so reflected ray rotates by 40°.',
+exp:'This is a standard result: when a plane mirror is rotated by angle θ (keeping the incident ray fixed), the reflected ray rotates by 2θ. This is because both the normal and reflected ray shift when the mirror rotates — the angle of incidence changes by θ, and correspondingly the angle of reflection changes by θ, resulting in a total rotation of 2θ for the reflected ray. Here θ = 20°, so the reflected ray rotates by 40°. This principle is used in galvanometers and laser scanning.'},
+
+];
+
+// ── ENGINE ─────────────────────────────────────────────────────────────────────
+const answers  = new Array(QS.length).fill(null);
+const revealed = new Array(QS.length).fill(false);
+const LABS = ['A','B','C','D'];
+
+function build(){
+  const area = document.getElementById('q-area');
+  area.innerHTML = '';
+  QS.forEach((q,i)=>{
+    const dc = q.d==='EASY'?'diff-e':q.d==='MEDIUM'?'diff-m':'diff-h';
+    const div = document.createElement('div');
+    div.className='q-card'; div.id=`qc${i}`;
+    div.innerHTML=`
+      <div class="q-meta">
+        <span class="q-num">Q.${String(i+1).padStart(2,'0')}</span>
+        <span class="q-diff ${dc}">${q.d}</span>
+        <span class="q-exam">${q.e}</span>
+      </div>
+      <div class="q-body">
+        <div class="q-text">${q.q}</div>
+        <div class="opts" id="opts${i}">
+          ${q.opts.map((o,j)=>`
+            <button class="opt" id="o${i}_${j}" onclick="pick(${i},${j})">
+              <span class="opt-lbl">${LABS[j]}</span>${o}
+            </button>`).join('')}
+        </div>
+        <div class="exp-panel" id="ex${i}">
+          <div class="exp-tag">Explanation</div>
+          <div class="exp-rule">${q.rule}</div>
+          <p>${q.exp}</p>
+        </div>
+      </div>
+      <div class="q-foot">
+        <span style="font-size:11px;color:var(--dim);font-weight:700">Physics · P02</span>
+        <span id="ai${i}" class="q-status">—</span>
+      </div>`;
+    area.appendChild(div);
+  });
+}
+
+function pick(qi,oi){
+  if(revealed[qi]) return;
+  answers[qi]=oi;
+  document.querySelectorAll(`#opts${qi} .opt`).forEach((b,j)=>{
+    b.classList.remove('sel');
+    if(j===oi) b.classList.add('sel');
+  });
+  document.getElementById(`qc${qi}`).classList.add('answered');
+  const ai=document.getElementById(`ai${qi}`);
+  ai.textContent=`Selected: ${LABS[oi]}`;
+  ai.style.color='var(--teal)';
+  updateStats();
+}
+
+function updateStats(){
+  const att=answers.filter(a=>a!==null).length;
+  document.getElementById('s-att').textContent=att;
+  document.getElementById('prog').style.width=(att/QS.length*100)+'%';
+  document.getElementById('prog-label').textContent=`${att} of ${QS.length} answered`;
+  let c=0,w=0;
+  answers.forEach((a,i)=>{ if(a===null)return; if(a===QS[i].ans)c++; else w++; });
+  document.getElementById('s-cor').textContent=c;
+  document.getElementById('s-wrg').textContent=w;
+}
+
+function submitAll(){
+  let cor=0,wrg=0,skp=0;
+  QS.forEach((q,i)=>{
+    revealed[i]=true;
+    const opts=document.querySelectorAll(`#opts${i} .opt`);
+    opts.forEach(b=>{b.disabled=true;b.classList.remove('sel')});
+    opts[q.ans].classList.add('ok');
+    if(answers[i]!==null && answers[i]!==q.ans) opts[answers[i]].classList.add('bad');
+    document.getElementById(`ex${i}`).classList.add('show');
+    const ai=document.getElementById(`ai${i}`);
+    const card=document.getElementById(`qc${i}`);
+    card.classList.remove('answered');
+    if(answers[i]===null){skp++;ai.textContent='Skipped';ai.style.color='var(--dim)';}
+    else if(answers[i]===q.ans){cor++;card.classList.add('correct');ai.textContent='✓ Correct';ai.style.color='var(--green)';}
+    else{wrg++;card.classList.add('wrong');ai.textContent='✗ Wrong';ai.style.color='var(--red)';}
+  });
+  updateStats();
+  showResults(cor,wrg,skp);
+}
+
+function showResults(cor,wrg,skp){
+  const pct=Math.round(cor/QS.length*100);
+  let grade,msg;
+  if(pct>=88){grade='Excellent';msg='Outstanding! You have mastered Light — Reflection & Refraction.'}
+  else if(pct>=70){grade='Good';msg='Well done. Review the questions you got wrong and revisit the traps.'}
+  else if(pct>=50){grade='Average';msg='Good effort. Revisit the Theory cards — especially mirrors and TIR.'}
+  else{grade='Needs Work';msg:"Don't worry — go through Quick Ref and Theory again, then retry."}
+  const res=document.getElementById('results');
+  res.innerHTML=`
+    <div class="res-hero">
+      <div class="res-score">${cor}<span style="font-size:36px;opacity:.5">/${QS.length}</span></div>
+      <div class="res-grade">${grade} · ${pct}%</div>
+      <div class="res-msg">${msg}</div>
+    </div>
+    <div class="res-stats">
+      <div class="qs-cell"><div class="qs-val g">${cor}</div><div class="qs-lbl">Correct</div></div>
+      <div class="qs-cell"><div class="qs-val r">${wrg}</div><div class="qs-lbl">Wrong</div></div>
+      <div class="qs-cell"><div class="qs-val a">${skp}</div><div class="qs-lbl">Skipped</div></div>
+      <div class="qs-cell"><div class="qs-val">${pct}%</div><div class="qs-lbl">Score</div></div>
+    </div>
+    <div style="text-align:center;margin:16px 0">
+      <button class="btn btn-ghost" onclick="document.getElementById('q-area').scrollIntoView({behavior:'smooth'})">📖 Review All Answers</button>
+    </div>`;
+  res.style.display='block';
+  res.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function resetQuiz(){
+  answers.fill(null); revealed.fill(false);
+  build();
+  document.getElementById('results').style.display='none';
+  document.getElementById('results').innerHTML='';
+  ['s-att','s-cor','s-wrg'].forEach(id=>document.getElementById(id).textContent='0');
+  document.getElementById('prog').style.width='0%';
+  document.getElementById('prog-label').textContent=`0 of ${QS.length} answered`;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function switchTab(id){
+  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  const idx={theory:0,quickref:1,quiz:2}[id];
+  document.querySelectorAll('.tab')[idx].classList.add('on');
+}
+
+function tog(hd){
+  const bd=hd.nextElementSibling;
+  const isOpen=bd.classList.contains('open');
+  bd.classList.toggle('open',!isOpen);
+  hd.classList.toggle('open',!isOpen);
+}
+
+build();
+</script>
+</body>
+</html>

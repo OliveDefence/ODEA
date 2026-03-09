@@ -1,0 +1,1462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>P10 · Modern Physics | Olive Defence</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+
+/* ══ DEEP SPACE-PURPLE / NEON-GREEN THEME ═══════════════════════ */
+:root{
+  --bg:         #F1F0F5;
+  --bg2:        #E4E2EE;
+  --bg3:        #D4D0E4;
+  --white:      #FFFFFF;
+  --ink:        #0E0A1A;
+  --ink2:       #1E1830;
+  --muted:      #60587A;
+  --dim:        #9A90B4;
+  --border:     #CCC8DC;
+
+  /* Primary — Deep Space Purple */
+  --purp:       #3B0764;
+  --purpLt:     #520A88;
+  --purpPale:   #F0EAFB;
+  --purpMid:    #7C3AED;
+
+  /* Accent — Neon Green / Lime */
+  --neo:        #1A6B2E;
+  --neoLt:      #228038;
+  --neoPale:    #E6F7EC;
+  --neoBright:  #22C55E;
+
+  /* Semantic */
+  --green:      #1A6035;
+  --greenPale:  #E6F5EC;
+  --red:        #8B1C1C;
+  --redPale:    #FCEAEA;
+  --amber:      #8C6000;
+  --amberPale:  #FDF5DC;
+  --teal:       #1A5C6E;
+  --tealPale:   #E4F3F8;
+  --blue:       #1A3F72;
+  --bluePale:   #EAF0FA;
+  --rose:       #8E2040;
+  --rosePale:   #FCEAF0;
+
+  --radius:     12px;
+  --shadow:     0 2px 12px rgba(14,10,26,.09);
+  --shadow-md:  0 4px 20px rgba(14,10,26,.14);
+}
+
+body{
+  font-family:'Nunito',sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  font-size:17px;
+  line-height:1.75;
+  min-height:100vh;
+}
+.page{max-width:680px;margin:0 auto;padding:0 16px 80px}
+
+/* ── HERO ─────────────────────────────────────────────────────── */
+.hero{
+  background:linear-gradient(135deg,#050008 0%,#3B0764 55%,#1A0038 100%);
+  margin:0 -16px;padding:30px 20px 28px;
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 78% 20%,rgba(100,220,140,.09) 0%,transparent 55%),
+    radial-gradient(ellipse at 12% 85%,rgba(140,80,255,.08) 0%,transparent 50%);
+  pointer-events:none;
+}
+.hero::after{
+  content:'';position:absolute;
+  width:280px;height:280px;
+  border:1.5px solid rgba(255,255,255,.05);
+  border-radius:50%;right:-80px;bottom:-90px;
+  pointer-events:none;
+}
+.hero-kicker{
+  font-size:11px;font-weight:700;letter-spacing:3px;
+  text-transform:uppercase;color:rgba(255,255,255,.45);
+  margin-bottom:8px;display:flex;align-items:center;gap:8px;
+}
+.hero-kicker::before{content:'';width:18px;height:2px;background:rgba(100,220,140,.5)}
+.hero-title{
+  font-family:'Lora',serif;
+  font-size:clamp(24px,5.5vw,36px);
+  font-weight:700;color:#fff;line-height:1.18;margin-bottom:10px;
+}
+.hero-title span{color:#86EFAC;font-style:italic}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.60);margin-bottom:18px;line-height:1.65}
+.hero-chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{font-size:11px;font-weight:700;letter-spacing:1px;padding:4px 12px;border-radius:20px;text-transform:uppercase}
+.chip-w{background:rgba(255,255,255,.13);color:rgba(255,255,255,.88)}
+.chip-g{background:rgba(100,220,140,.16);color:#86EFAC}
+.chip-p{background:rgba(180,140,255,.16);color:#C4B5FD}
+
+/* ── TAB BAR ──────────────────────────────────────────────────── */
+.tab-bar{
+  position:sticky;top:0;z-index:50;
+  background:var(--white);border-bottom:2px solid var(--border);
+  margin:0 -16px;display:flex;overflow-x:auto;
+  box-shadow:0 2px 8px rgba(14,10,26,.08);
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;
+}
+.tab-bar::-webkit-scrollbar{display:none}
+.tab{
+  flex-shrink:0;padding:14px 18px;
+  font-size:12px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--muted);
+  border:none;background:transparent;cursor:pointer;
+  border-bottom:3px solid transparent;margin-bottom:-2px;
+  transition:all .2s;white-space:nowrap;
+}
+.tab:hover{color:var(--ink);background:var(--bg)}
+.tab.on{color:var(--purp);border-bottom-color:var(--purpMid)}
+
+/* ── PANES ────────────────────────────────────────────────────── */
+.pane{display:none;padding-top:24px;animation:fadeUp .3s ease}
+.pane.on{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── SECTION LABEL ────────────────────────────────────────────── */
+.sec-label{
+  font-size:10px;font-weight:800;letter-spacing:3px;
+  text-transform:uppercase;color:var(--purp);
+  margin:28px 0 12px;display:flex;align-items:center;gap:10px;
+}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* ── INTRO BOX ────────────────────────────────────────────────── */
+.intro-box{
+  background:var(--purpPale);border:1.5px solid rgba(59,7,100,.15);
+  border-radius:var(--radius);padding:20px;margin-bottom:8px;
+}
+.intro-box p{font-size:16px;color:var(--ink2);line-height:1.8}
+.intro-box strong{color:var(--purp)}
+
+/* ── CONCEPT CARDS ────────────────────────────────────────────── */
+.c-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius);margin-bottom:10px;
+  box-shadow:var(--shadow);overflow:hidden;
+}
+.c-head{
+  display:flex;align-items:center;gap:12px;padding:16px 18px;
+  cursor:pointer;border-left:4px solid transparent;
+  transition:all .15s;-webkit-tap-highlight-color:transparent;
+}
+.c-head:hover,.c-head.open{background:var(--bg);border-left-color:var(--purpMid)}
+.c-icon{
+  width:38px;height:38px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;
+}
+.c-title{font-size:17px;font-weight:700;color:var(--ink);flex:1}
+.c-sub{font-size:12px;color:var(--dim);font-weight:600;margin-top:2px}
+.c-arrow{font-size:12px;color:var(--dim);transition:transform .2s;flex-shrink:0}
+.c-head.open .c-arrow{transform:rotate(180deg)}
+.c-body{display:none;padding:4px 18px 20px;border-top:1px solid var(--border)}
+.c-body.open{display:block;animation:fadeUp .2s ease}
+.c-body p{font-size:16px;color:var(--ink2);line-height:1.85;margin-bottom:12px}
+.c-body p:last-child{margin-bottom:0}
+.c-body strong{color:var(--purp);font-weight:700}
+.c-body em{color:var(--neo);font-style:normal;font-weight:700}
+
+/* ── CONTENT BLOCKS ───────────────────────────────────────────── */
+/* Purple fact box */
+.fact-box{
+  background:var(--purpPale);border:1.5px solid rgba(59,7,100,.18);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.fact-box .fb-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--purp);text-transform:uppercase;margin-bottom:8px;
+}
+.fact-box ul{list-style:none;padding:0}
+.fact-box li{
+  font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;
+  position:relative;line-height:1.7;
+}
+.fact-box li::before{content:'→';position:absolute;left:0;color:var(--purpMid);font-weight:700;font-size:13px}
+
+/* Green example box */
+.eg-box{
+  background:var(--greenPale);border-left:4px solid var(--green);
+  border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0;
+}
+.eg-box .eg-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--green);text-transform:uppercase;margin-bottom:6px;
+}
+.eg-box p{font-size:15px;color:var(--ink2);line-height:1.75}
+.eg-box ul{list-style:none;padding:0}
+.eg-box li{font-size:15px;color:var(--ink2);padding:4px 0 4px 18px;position:relative;line-height:1.65}
+.eg-box li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:800;font-size:12px}
+
+/* Red trap box */
+.trap-box{
+  background:var(--redPale);border:1.5px solid rgba(139,28,28,.20);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.trap-box .tr-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--red);text-transform:uppercase;margin-bottom:8px;
+}
+.trap-box p,.trap-box li{font-size:15.5px;color:var(--ink2);line-height:1.75}
+.trap-box ul{list-style:none;padding:0}
+.trap-box li{padding:5px 0 5px 22px;position:relative}
+.trap-box li::before{content:'⚑';position:absolute;left:0;font-size:12px;color:var(--red)}
+
+/* Teal rule box */
+.rule-box{
+  background:var(--tealPale);border:1.5px solid rgba(26,92,110,.18);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.rule-box .rl-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--teal);text-transform:uppercase;margin-bottom:8px;
+}
+.rule-box p{font-size:15.5px;color:var(--ink2);line-height:1.8}
+.rule-box strong{color:var(--teal)}
+
+/* Neon formula box */
+.formula-box{
+  background:#F0FFF5;border:1.5px solid rgba(26,107,46,.22);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.formula-box .fl-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--neo);text-transform:uppercase;margin-bottom:10px;
+}
+.formula-line{
+  font-family:'Lora',serif;font-size:18px;font-weight:700;
+  color:var(--neo);text-align:center;padding:8px 0;
+  letter-spacing:.5px;line-height:1.6;
+}
+.formula-note{font-size:14px;color:var(--ink2);line-height:1.7;margin-top:8px}
+.formula-note b{color:var(--neo)}
+
+/* Purple highlight box */
+.purp-box{
+  background:var(--purpPale);border:1.5px solid rgba(59,7,100,.14);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.purp-box .pl-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--purp);text-transform:uppercase;margin-bottom:8px;
+}
+.purp-box ul{list-style:none;padding:0}
+.purp-box li{font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;position:relative;line-height:1.8}
+.purp-box li::before{content:'◆';position:absolute;left:0;font-size:9px;color:var(--purpMid);top:10px}
+
+/* Amber analogy box */
+.analogy-box{
+  background:var(--amberPale);border-left:4px solid var(--amber);
+  border-radius:0 8px 8px 0;padding:14px 16px;margin:12px 0;
+}
+.analogy-box .an-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--amber);text-transform:uppercase;margin-bottom:6px;
+}
+.analogy-box p{font-size:15.5px;color:var(--ink2);line-height:1.75}
+
+/* Compare table */
+.compare-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
+.compare-table th{
+  background:var(--purp);color:#fff;
+  padding:10px 12px;text-align:left;
+  font-size:13px;font-weight:700;letter-spacing:.5px;
+}
+.compare-table td{
+  padding:10px 12px;border:1px solid var(--border);
+  color:var(--ink2);vertical-align:top;line-height:1.65;
+}
+.compare-table tr:nth-child(even) td{background:var(--bg)}
+.compare-table td b{color:var(--purp)}
+
+/* Mini-cards grid */
+.mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}
+.mini-card{
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:10px;padding:13px 14px;
+}
+.mini-card .mn-name{
+  font-size:13px;font-weight:800;color:var(--purp);
+  margin-bottom:4px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;
+}
+.mini-card .mn-tag{
+  font-size:10px;font-weight:700;color:var(--neo);
+  background:var(--neoPale);border-radius:4px;padding:1px 7px;
+}
+.mini-card p{font-size:13.5px;color:var(--ink2);line-height:1.6}
+
+/* ── QUICK REF ────────────────────────────────────────────────── */
+.ref-grid{display:grid;gap:10px;margin:8px 0}
+.ref-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);
+}
+.ref-card-title{
+  font-size:11px;font-weight:800;letter-spacing:2px;
+  text-transform:uppercase;color:var(--purp);
+  margin-bottom:10px;padding-bottom:8px;
+  border-bottom:2px solid var(--neoBright);
+}
+.ref-card ul{list-style:none;padding:0}
+.ref-card li{
+  font-size:15px;color:var(--ink2);padding:5px 0 5px 16px;
+  position:relative;line-height:1.65;
+  border-bottom:1px solid var(--bg2);
+}
+.ref-card li:last-child{border-bottom:none}
+.ref-card li::before{content:'·';position:absolute;left:4px;color:var(--neoBright);font-weight:900;font-size:18px;line-height:1.3}
+.ref-card li b{color:var(--ink);font-weight:700}
+.ref-card li em{color:var(--purp);font-style:normal;font-weight:700}
+
+/* ── QUIZ ─────────────────────────────────────────────────────── */
+.quiz-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:2px;background:var(--border);
+  border-radius:var(--radius);overflow:hidden;
+  margin-bottom:16px;box-shadow:var(--shadow);
+}
+.qs-cell{background:var(--white);padding:12px 8px;text-align:center}
+.qs-val{font-family:'Lora',serif;font-size:22px;font-weight:700;color:var(--purp);line-height:1}
+.qs-val.g{color:var(--green)}.qs-val.r{color:var(--red)}.qs-val.a{color:var(--neo)}
+.qs-lbl{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:1px;margin-top:4px;text-transform:uppercase}
+
+.prog-wrap{margin-bottom:20px}
+.prog-bar{height:6px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;background:var(--neoBright);border-radius:3px;transition:width .4s ease;width:0%}
+.prog-label{font-size:12px;color:var(--muted);font-weight:700;margin-bottom:6px}
+
+.q-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius);margin-bottom:12px;
+  box-shadow:var(--shadow);overflow:hidden;
+  border-left:4px solid transparent;transition:border-color .15s;
+}
+.q-card.answered{border-left-color:var(--purpMid)}
+.q-card.correct{border-left-color:var(--green)}
+.q-card.wrong{border-left-color:var(--red)}
+
+.q-meta{
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  padding:10px 16px;background:var(--bg);
+  border-bottom:1px solid var(--border);
+}
+.q-num{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:1px}
+.q-diff{font-size:10px;font-weight:800;padding:2px 10px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase}
+.diff-e{background:var(--greenPale);color:var(--green)}
+.diff-m{background:var(--purpPale);color:var(--purp)}
+.diff-h{background:var(--redPale);color:var(--red)}
+.q-exam{font-size:11px;color:var(--dim);margin-left:auto;font-weight:600}
+
+.q-body{padding:16px}
+.q-text{font-size:17px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-weight:600}
+
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{
+  background:var(--bg);border:1.5px solid var(--border);
+  border-radius:10px;padding:14px 16px;
+  cursor:pointer;display:flex;align-items:flex-start;gap:12px;
+  font-size:16px;color:var(--ink2);text-align:left;width:100%;
+  transition:all .15s;-webkit-tap-highlight-color:transparent;
+  min-height:48px;line-height:1.6;
+}
+.opt:hover:not(:disabled){border-color:var(--purpMid);background:var(--purpPale)}
+.opt:disabled{cursor:default}
+.opt.sel{border-color:var(--purpMid);background:var(--purpPale);color:var(--purp)}
+.opt.ok{border-color:var(--green)!important;background:var(--greenPale)!important;color:var(--green)!important}
+.opt.bad{border-color:var(--red)!important;background:var(--redPale)!important;color:var(--red)!important}
+.opt-lbl{
+  min-width:28px;height:28px;border-radius:8px;
+  background:var(--bg3);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:800;color:var(--muted);
+  flex-shrink:0;transition:all .15s;
+}
+.opt.sel .opt-lbl{background:var(--purp);color:#86EFAC;border-color:var(--purp)}
+.opt.ok  .opt-lbl{background:var(--green)!important;color:#fff!important;border-color:var(--green)!important}
+.opt.bad .opt-lbl{background:var(--red)!important;color:#fff!important;border-color:var(--red)!important}
+
+.exp-panel{display:none;margin-top:14px;background:var(--bg);border-radius:10px;padding:14px 16px}
+.exp-panel.show{display:block;animation:fadeUp .2s ease}
+.exp-tag{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--purp);text-transform:uppercase;margin-bottom:6px}
+.exp-rule{font-size:13px;font-weight:800;color:var(--neo);background:var(--neoPale);border-radius:6px;padding:6px 10px;margin-bottom:10px}
+.exp-panel p{font-size:15px;color:var(--ink2);line-height:1.8}
+
+.q-foot{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 16px;background:var(--bg2);border-top:1px solid var(--border);
+}
+.q-status{font-size:12px;font-weight:700}
+
+.btn{
+  padding:14px 24px;border-radius:10px;font-size:14px;font-weight:800;
+  letter-spacing:.5px;border:none;cursor:pointer;transition:all .15s;
+  font-family:'Nunito',sans-serif;
+}
+.btn-primary{background:var(--purp);color:#86EFAC;box-shadow:0 4px 14px rgba(59,7,100,.32)}
+.btn-primary:hover{background:var(--purpLt);transform:translateY(-1px)}
+.btn-ghost{background:var(--bg2);color:var(--ink2);border:1.5px solid var(--border)}
+.btn-ghost:hover{background:var(--bg3)}
+.btn-row{display:flex;gap:10px;justify-content:center;margin:16px 0}
+
+.res-hero{
+  background:linear-gradient(135deg,#050008,#3B0764);
+  border-radius:var(--radius);
+  padding:28px 20px;text-align:center;color:#fff;margin-bottom:12px;
+}
+.res-score{font-family:'Lora',serif;font-size:72px;font-weight:700;line-height:1;color:#86EFAC}
+.res-grade{font-size:18px;font-weight:800;margin:8px 0 6px;color:rgba(255,255,255,.92)}
+.res-msg{font-size:15px;color:rgba(255,255,255,.62);line-height:1.6}
+.res-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:2px;background:var(--border);border-radius:var(--radius);
+  overflow:hidden;margin-bottom:12px;
+}
+@media(max-width:400px){
+  .hero{padding:22px 16px 20px}
+  .hero-title{font-size:22px}
+  .tab{padding:12px 13px;font-size:11px}
+  .q-text{font-size:16px}
+  .opt{font-size:15px;padding:12px 14px}
+  .mini-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-kicker">Olive Defence · Physics · P10</div>
+  <div class="hero-title">Modern<br><span>Physics</span></div>
+  <div class="hero-sub">Atomic Structure · Radioactivity · Nuclear Reactions · Photoelectric Effect · X-Rays · Semiconductors · Special Relativity — complete CDS · NDA · AFCAT coverage</div>
+  <div class="hero-chips">
+    <span class="chip chip-w">⚡ CDS</span>
+    <span class="chip chip-g">🛡 NDA</span>
+    <span class="chip chip-p">✈ AFCAT</span>
+    <span class="chip chip-w">Physics · P10</span>
+  </div>
+</div>
+
+<!-- ── TAB BAR ── -->
+<div class="tab-bar">
+  <button class="tab on" onclick="switchTab('theory')">📖 Theory</button>
+  <button class="tab" onclick="switchTab('quickref')">⚡ Quick Ref</button>
+  <button class="tab" onclick="switchTab('quiz')">🎯 Quiz</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     PANE 1 — THEORY
+════════════════════════════════════════════════════════════════ -->
+<div class="pane on" id="theory">
+
+  <div class="intro-box">
+    <p>Modern Physics is a <strong>high-yield chapter</strong> across all three defence exams. NDA Paper I tests it extensively — atomic models, radioactivity, half-life, nuclear fission and fusion, and the photoelectric effect all appear regularly. CDS GK covers nuclear energy, X-rays, and semiconductor applications. AFCAT tests conceptual understanding of lasers, radiation, and modern technology. Mastering the <strong>key numbers, discoverers, and conceptual distinctions</strong> is the fastest route to marks here.</p>
+  </div>
+
+  <!-- ══ SECTION 1: ATOMIC STRUCTURE ══ -->
+  <div class="sec-label">Section 1 — Atomic Structure &amp; Atomic Models</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#F0EAFB">⚛️</div>
+      <div style="flex:1">
+        <div class="c-title">Atomic Models — Thomson to Bohr</div>
+        <div class="c-sub">The evolving picture of the atom — and what each model got right</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>The atom — once thought indivisible — was revealed to have internal structure through a series of landmark experiments in the late 19th and early 20th centuries. Each model improved on the last, culminating in the quantum mechanical model used today.</p>
+
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Model</th><th>Scientist &amp; Year</th><th>Description</th><th>Limitation</th></tr>
+          <tr><td><b>Plum Pudding</b></td><td>J.J. Thomson, 1904</td><td>Atom = positive sphere with electrons embedded like plums in pudding. Discovered the electron (1897) using cathode ray tubes.</td><td>Could not explain Rutherford's scattering experiment — why most α-particles passed straight through</td></tr>
+          <tr><td><b>Nuclear Model</b></td><td>Rutherford, 1911</td><td>Atom has a tiny, dense, positively charged nucleus; electrons orbit it at a distance. Most of the atom is empty space. Based on gold foil experiment (α-particle scattering).</td><td>Could not explain atomic stability (orbiting electron should radiate energy and spiral into nucleus) or discrete spectral lines</td></tr>
+          <tr><td><b>Bohr's Model</b></td><td>Niels Bohr, 1913</td><td>Electrons orbit nucleus in fixed quantised orbits (shells/energy levels) without radiating. Electron emits/absorbs a photon when it jumps between orbits. Successfully explained hydrogen spectrum.</td><td>Only worked for hydrogen (single-electron atoms); could not explain fine spectral structure or multi-electron atoms</td></tr>
+          <tr><td><b>Quantum Mechanical</b></td><td>Schrödinger, Heisenberg, 1920s</td><td>Electrons exist in probability clouds (orbitals), not fixed orbits. Based on wave mechanics and Heisenberg's uncertainty principle.</td><td>Mathematically complex; current accepted model</td></tr>
+        </table>
+      </div>
+
+      <div class="fact-box">
+        <div class="fb-label">Nuclear Structure — Key Numbers for Exams</div>
+        <ul>
+          <li><strong>Proton</strong> — positively charged; charge = +1.6 × 10⁻¹⁹ C; mass = 1.672 × 10⁻²⁷ kg; inside the nucleus</li>
+          <li><strong>Neutron</strong> — no charge (neutral); mass ≈ proton mass (1.674 × 10⁻²⁷ kg); inside the nucleus; discovered by Chadwick (1932)</li>
+          <li><strong>Electron</strong> — negatively charged; charge = −1.6 × 10⁻¹⁹ C; mass = 9.11 × 10⁻³¹ kg (≈ 1/1836 of proton); orbits nucleus</li>
+          <li><strong>Atomic number (Z)</strong> — number of protons in the nucleus; defines the element</li>
+          <li><strong>Mass number (A)</strong> — total number of protons + neutrons (nucleons) in the nucleus</li>
+          <li><strong>Isotopes</strong> — atoms of the same element with different numbers of neutrons (same Z, different A). Example: ¹H, ²H (deuterium), ³H (tritium)</li>
+          <li><strong>Isobars</strong> — atoms of different elements with the same mass number A but different Z. Example: ⁴⁰Ca and ⁴⁰Ar</li>
+          <li><strong>Isotones</strong> — atoms with the same number of neutrons but different Z and A</li>
+        </ul>
+      </div>
+
+      <div class="formula-box">
+        <div class="fl-label">Bohr's Model — Key Relations</div>
+        <div class="formula-line">E_n = −13.6 / n² eV &nbsp;&nbsp;·&nbsp;&nbsp; r_n = 0.529 × n² Å</div>
+        <div class="formula-note">
+          <b>E_n</b> = energy of electron in nth orbit of hydrogen &nbsp;·&nbsp; <b>n</b> = principal quantum number (1, 2, 3…)<br>
+          <b>r_n</b> = radius of nth orbit (Bohr radius a₀ = 0.529 Å for n=1)<br><br>
+          Ground state (n=1): E₁ = −13.6 eV (most stable; lowest energy)<br>
+          n=2: E₂ = −3.4 eV &nbsp;·&nbsp; n=3: E₃ = −1.51 eV &nbsp;·&nbsp; n=∞: E = 0 eV (ionised)<br>
+          Energy to ionise hydrogen from ground state = <b>13.6 eV</b>
+        </div>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Atomic Model Exam Traps</div>
+        <ul>
+          <li>Thomson discovered the <strong>electron</strong> (1897); Rutherford discovered the <strong>proton</strong> (1919); Chadwick discovered the <strong>neutron</strong> (1932)</li>
+          <li>Rutherford's gold foil experiment: most α-particles passed through (atom is mostly empty space); a few deflected (nucleus is small and dense); very few bounced back (nucleus is positively charged)</li>
+          <li>Bohr's model is valid only for <strong>hydrogen-like</strong> atoms (H, He⁺, Li²⁺) — single electron systems</li>
+          <li><strong>Isotopes</strong> have same Z (same element), different A (different neutrons) — NOT same A different Z (those are isobars)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 2: RADIOACTIVITY ══ -->
+  <div class="sec-label">Section 2 — Radioactivity &amp; Types of Radiation</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E6F7EC">☢️</div>
+      <div style="flex:1">
+        <div class="c-title">Radioactivity — Alpha, Beta &amp; Gamma Radiation</div>
+        <div class="c-sub">Spontaneous nuclear decay — properties and penetrating power</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p><strong>Radioactivity</strong> is the spontaneous disintegration of unstable atomic nuclei with the emission of radiation. It was discovered by <strong>Henri Becquerel</strong> in 1896, and further studied by <strong>Marie Curie</strong> and <strong>Pierre Curie</strong>, who isolated radium and polonium. Radioactive decay is a <strong>nuclear process</strong> — it is not affected by temperature, pressure, or chemical state of the substance.</p>
+
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Property</th><th>Alpha (α)</th><th>Beta (β)</th><th>Gamma (γ)</th></tr>
+          <tr><td><b>Nature</b></td><td>Helium-4 nucleus (2 protons + 2 neutrons): ⁴₂He</td><td>High-energy electron (β⁻) or positron (β⁺)</td><td>High-energy electromagnetic radiation (photon)</td></tr>
+          <tr><td><b>Charge</b></td><td>+2</td><td>−1 (β⁻) or +1 (β⁺)</td><td>0 (neutral)</td></tr>
+          <tr><td><b>Mass</b></td><td>4 u (heaviest)</td><td>~0 u (very light)</td><td>0 (massless photon)</td></tr>
+          <tr><td><b>Speed</b></td><td>~0.05c (slowest)</td><td>Up to 0.99c</td><td>c (speed of light)</td></tr>
+          <tr><td><b>Ionising power</b></td><td>Highest (10,000×)</td><td>Moderate (100×)</td><td>Lowest</td></tr>
+          <tr><td><b>Penetrating power</b></td><td>Lowest — stopped by paper / skin</td><td>Moderate — stopped by 3–5 mm aluminium</td><td>Highest — needs thick lead or concrete</td></tr>
+          <tr><td><b>Deflected by field?</b></td><td>Yes (towards negative plate)</td><td>Yes (towards positive plate, more deflected)</td><td>No (neutral)</td></tr>
+          <tr><td><b>Effect on nucleus</b></td><td>Z−2, A−4</td><td>β⁻: Z+1, A unchanged; β⁺: Z−1, A unchanged</td><td>Z and A unchanged (just energy release)</td></tr>
+        </table>
+      </div>
+
+      <div class="analogy-box">
+        <div class="an-label">Penetrating Power Memory Aid</div>
+        <p><strong>"Paper stops Alpha, Aluminium stops Beta, only Lead stops Gamma."</strong> Think of it as increasing effort needed: A sheet of paper blocks α; a few mm of metal block β; several cm of lead (or concrete wall) barely reduces γ. Paradoxically, alpha is the most ionising despite being the least penetrating — it dumps all its energy very quickly in a small volume.</p>
+      </div>
+
+      <div class="eg-box">
+        <div class="eg-label">Alpha &amp; Beta Decay Equations</div>
+        <ul>
+          <li><strong>Alpha decay:</strong> ᴬ_Z X → ᴬ⁻⁴_(Z−2) Y + ⁴₂He &nbsp;&nbsp;(Z decreases by 2, A decreases by 4)</li>
+          <li><strong>Beta-minus decay:</strong> ᴬ_Z X → ᴬ_(Z+1) Y + ⁰₋₁e + antineutrino &nbsp;&nbsp;(neutron → proton + electron; Z increases by 1, A unchanged)</li>
+          <li><strong>Beta-plus decay:</strong> ᴬ_Z X → ᴬ_(Z−1) Y + ⁰₊₁e + neutrino &nbsp;&nbsp;(proton → neutron + positron; Z decreases by 1, A unchanged)</li>
+          <li><strong>Gamma emission:</strong> No change in Z or A — nucleus just releases excess energy as a γ photon (often follows alpha or beta decay)</li>
+        </ul>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Radioactivity Traps</div>
+        <ul>
+          <li>Gamma radiation is <strong>NOT deflected</strong> by electric or magnetic fields (it is neutral/electromagnetic)</li>
+          <li>Alpha is the <strong>most ionising</strong> but <strong>least penetrating</strong> — these are opposite rankings. Gamma is least ionising but most penetrating.</li>
+          <li>Beta particles are deflected <strong>more</strong> than alpha particles in the same field (much lighter mass)</li>
+          <li>In beta-minus decay, a <strong>neutron converts to a proton</strong> — the atomic number increases by 1, mass number unchanged. The electron (beta particle) was NOT pre-existing in the nucleus; it is created during decay.</li>
+          <li>Radioactive decay rate is <strong>not affected</strong> by temperature, pressure, or chemical bonding</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 3: HALF-LIFE ══ -->
+  <div class="sec-label">Section 3 — Half-Life &amp; Radioactive Decay Law</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#F0EAFB">⏳</div>
+      <div style="flex:1">
+        <div class="c-title">Half-Life, Decay Constant &amp; Activity</div>
+        <div class="c-sub">How fast a radioactive substance decays — the maths of nuclear decay</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>The <strong>half-life (T½)</strong> of a radioactive substance is the time taken for half of the radioactive nuclei in a sample to decay. It is a constant characteristic of each radioactive isotope — it does not depend on the initial amount of material, temperature, or any external conditions.</p>
+
+      <div class="formula-box">
+        <div class="fl-label">Radioactive Decay Law</div>
+        <div class="formula-line">N = N₀ × (1/2)^(t/T½) &nbsp;&nbsp;·&nbsp;&nbsp; N = N₀ e^(−λt)</div>
+        <div class="formula-note">
+          <b>N</b> = number of nuclei remaining at time t &nbsp;·&nbsp; <b>N₀</b> = initial number of nuclei<br>
+          <b>T½</b> = half-life &nbsp;·&nbsp; <b>λ</b> = decay constant (λ = 0.693/T½)<br>
+          <b>Activity (A)</b> = rate of decay = λN &nbsp;·&nbsp; Unit: <b>Becquerel (Bq)</b> = 1 disintegration per second<br>
+          Older unit: <b>Curie (Ci)</b> = 3.7 × 10¹⁰ Bq (activity of 1 gram of radium)
+        </div>
+      </div>
+
+      <div class="purp-box">
+        <div class="pl-label">Half-Life Calculation — Step by Step</div>
+        <ul>
+          <li>After <strong>1 half-life</strong>: N = N₀/2 &nbsp;&nbsp;(50% remains)</li>
+          <li>After <strong>2 half-lives</strong>: N = N₀/4 &nbsp;&nbsp;(25% remains)</li>
+          <li>After <strong>3 half-lives</strong>: N = N₀/8 &nbsp;&nbsp;(12.5% remains)</li>
+          <li>After <strong>n half-lives</strong>: N = N₀/2ⁿ &nbsp;&nbsp;(fraction remaining = 1/2ⁿ)</li>
+          <li>Amount decayed after n half-lives: N₀ − N₀/2ⁿ = N₀(1 − 1/2ⁿ)</li>
+        </ul>
+      </div>
+
+      <div class="eg-box">
+        <div class="eg-label">Half-Lives of Important Isotopes — Exam Favourites</div>
+        <ul>
+          <li><strong>Carbon-14 (¹⁴C)</strong> — T½ ≈ <strong>5730 years</strong>; used in radiocarbon dating of organic matter</li>
+          <li><strong>Uranium-238 (²³⁸U)</strong> — T½ ≈ <strong>4.5 × 10⁹ years</strong>; geological age dating</li>
+          <li><strong>Iodine-131 (¹³¹I)</strong> — T½ ≈ <strong>8 days</strong>; used in thyroid cancer treatment</li>
+          <li><strong>Cobalt-60 (⁶⁰Co)</strong> — T½ ≈ <strong>5.27 years</strong>; cancer radiotherapy (gamma knife)</li>
+          <li><strong>Radon-222 (²²²Rn)</strong> — T½ ≈ <strong>3.8 days</strong>; radioactive gas, health hazard in buildings</li>
+          <li><strong>Strontium-90 (⁹⁰Sr)</strong> — T½ ≈ <strong>28.8 years</strong>; nuclear fallout concern (mimics calcium in bones)</li>
+        </ul>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Half-Life Exam Traps</div>
+        <ul>
+          <li>Half-life is a <strong>constant</strong> — it does not change with initial amount, temperature, or pressure</li>
+          <li>After n half-lives, <strong>NOT zero</strong> nuclei remain — theoretically radioactive material never fully decays (approaches zero asymptotically)</li>
+          <li>SI unit of radioactivity is the <strong>Becquerel (Bq)</strong>, named after the discoverer; 1 Bq = 1 decay per second. The older Curie (Ci) is still used in medicine.</li>
+          <li>Carbon-14 dating works for objects up to ~50,000 years old — not for geological age (use U-238 for that)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 4: NUCLEAR REACTIONS ══ -->
+  <div class="sec-label">Section 4 — Nuclear Fission, Fusion &amp; Mass-Energy</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E6F7EC">💥</div>
+      <div style="flex:1">
+        <div class="c-title">Nuclear Fission &amp; Fusion — E = mc²</div>
+        <div class="c-sub">The energy of the nucleus — splitting and joining atoms</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+
+      <div class="formula-box">
+        <div class="fl-label">Einstein's Mass-Energy Equivalence</div>
+        <div class="formula-line">E = mc²</div>
+        <div class="formula-note">
+          <b>E</b> = energy (Joules) &nbsp;·&nbsp; <b>m</b> = mass defect (kg) &nbsp;·&nbsp; <b>c</b> = speed of light = 3 × 10⁸ m/s<br><br>
+          <b>Mass defect (Δm)</b> = difference between the mass of separate nucleons and the actual mass of the nucleus. This "missing" mass is converted to binding energy.<br>
+          <b>Binding energy per nucleon</b> = total binding energy / number of nucleons. Iron-56 has the <b>highest binding energy per nucleon</b> (~8.8 MeV) — most stable nucleus.
+        </div>
+      </div>
+
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Property</th><th>Nuclear Fission</th><th>Nuclear Fusion</th></tr>
+          <tr><td><b>Process</b></td><td>Heavy nucleus splits into two or more lighter nuclei + neutrons + energy</td><td>Two light nuclei combine to form a heavier nucleus + energy</td></tr>
+          <tr><td><b>Fuel</b></td><td>Heavy isotopes: U-235, Pu-239</td><td>Light isotopes: H-2 (deuterium), H-3 (tritium)</td></tr>
+          <tr><td><b>Energy released per reaction</b></td><td>~200 MeV per fission of U-235</td><td>~17.6 MeV per D-T fusion</td></tr>
+          <tr><td><b>Energy per kg of fuel</b></td><td>Very high; more than chemical</td><td>~4× more than fission per kg (greatest known energy density)</td></tr>
+          <tr><td><b>Conditions</b></td><td>Neutron bombardment; chain reaction</td><td>Extremely high temperature (≥ 10⁷ K) and pressure — plasma state</td></tr>
+          <tr><td><b>Radioactive waste</b></td><td>Significant — long-lived radioactive products</td><td>Much less — helium is the main product</td></tr>
+          <tr><td><b>Applications</b></td><td>Nuclear power plants; atomic bomb (gun-type/implosion)</td><td>Sun &amp; stars; hydrogen bomb (thermonuclear bomb); future fusion reactors (ITER)</td></tr>
+          <tr><td><b>Chain reaction</b></td><td>Yes — each fission releases 2–3 neutrons which can trigger more fissions</td><td>Not a self-sustaining chain reaction; requires continuous input</td></tr>
+        </table>
+      </div>
+
+      <div class="purp-box">
+        <div class="pl-label">Nuclear Fission — Chain Reaction &amp; Critical Mass</div>
+        <ul>
+          <li>When U-235 absorbs a neutron, it splits into two smaller nuclei + 2–3 fast neutrons + ~200 MeV energy</li>
+          <li><strong>Chain reaction</strong> — released neutrons trigger further fissions; self-sustaining if enough fissile material is present</li>
+          <li><strong>Critical mass</strong> — minimum mass of fissile material needed to sustain a chain reaction</li>
+          <li><strong>Subcritical</strong>: reaction dies out; <strong>Critical</strong>: steady reaction (power plant); <strong>Supercritical</strong>: exponentially growing reaction (bomb)</li>
+          <li><strong>Moderator</strong> — slows down fast neutrons to thermal speed (needed for U-235 fission); common moderators: heavy water (D₂O), graphite, ordinary water</li>
+          <li><strong>Control rods</strong> — absorb excess neutrons to control reaction rate; made of boron, cadmium, or hafnium</li>
+          <li><strong>Coolant</strong> — removes heat from reactor core; water, CO₂, or liquid sodium</li>
+        </ul>
+      </div>
+
+      <div class="eg-box">
+        <div class="eg-label">Sun's Energy — Proton-Proton Chain</div>
+        <ul>
+          <li>The Sun generates energy by <strong>nuclear fusion</strong> — primarily the proton-proton chain where hydrogen nuclei fuse to form helium</li>
+          <li>Net reaction: 4¹H → ⁴He + 2e⁺ + 2ν + 2γ + 26.7 MeV</li>
+          <li>The Sun converts about <strong>4 million tonnes</strong> of mass into energy every second (E = mc²)</li>
+          <li>The Sun has enough hydrogen fuel for approximately <strong>5 billion more years</strong></li>
+        </ul>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Fission vs Fusion Exam Traps</div>
+        <ul>
+          <li>Nuclear <strong>power plants</strong> use fission (not fusion) — controlled fission of U-235 or Pu-239</li>
+          <li><strong>Hydrogen bomb</strong> uses fusion (triggered by a fission bomb) — thermonuclear weapon</li>
+          <li><strong>Atomic bomb</strong> uses fission of U-235 or Pu-239</li>
+          <li>Fusion releases <strong>more energy per kg of fuel</strong> than fission, but requires extreme conditions — not yet commercially viable</li>
+          <li><strong>ITER</strong> (International Thermonuclear Experimental Reactor) in France is the world's largest fusion experiment</li>
+          <li>Iron-56 is the <strong>most stable</strong> nucleus (highest binding energy per nucleon) — splitting or fusing iron costs energy rather than releasing it</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 5: PHOTOELECTRIC EFFECT ══ -->
+  <div class="sec-label">Section 5 — Photoelectric Effect &amp; Quantum Nature of Light</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#FDF5DC">💡</div>
+      <div style="flex:1">
+        <div class="c-title">Photoelectric Effect — Einstein's Nobel Prize</div>
+        <div class="c-sub">Light as particles — photons and the quantum revolution</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>The <strong>photoelectric effect</strong> is the emission of electrons from a metal surface when light of sufficient frequency falls on it. First observed by Hertz (1887), it was explained by <strong>Albert Einstein in 1905</strong> using the concept of <strong>photons</strong> (quantised packets of light energy). Einstein received the Nobel Prize in Physics (1921) for this — NOT for relativity.</p>
+
+      <div class="formula-box">
+        <div class="fl-label">Einstein's Photoelectric Equation</div>
+        <div class="formula-line">KE_max = hf − φ &nbsp;&nbsp;·&nbsp;&nbsp; hf = φ + ½mv²_max</div>
+        <div class="formula-note">
+          <b>KE_max</b> = maximum kinetic energy of emitted photoelectrons<br>
+          <b>h</b> = Planck's constant = 6.626 × 10⁻³⁴ J·s<br>
+          <b>f</b> = frequency of incident light &nbsp;·&nbsp; <b>φ</b> (phi) = work function of metal (minimum energy to eject an electron)<br>
+          <b>Threshold frequency (f₀)</b>: minimum frequency needed; φ = hf₀<br>
+          <b>Energy of photon:</b> E = hf = hc/λ
+        </div>
+      </div>
+
+      <div class="purp-box">
+        <div class="pl-label">Key Observations of Photoelectric Effect</div>
+        <ul>
+          <li><strong>No emission below threshold frequency (f₀)</strong> — no matter how intense the light, if f &lt; f₀, no photoelectrons are emitted</li>
+          <li><strong>Emission is instantaneous</strong> — no time delay, even at low intensity; one photon ejects one electron</li>
+          <li><strong>KE of photoelectrons depends on frequency, NOT intensity</strong> — higher frequency → higher KE of electrons</li>
+          <li><strong>Number of photoelectrons depends on intensity</strong> — brighter light → more photons → more electrons emitted (but same KE)</li>
+          <li>These observations could NOT be explained by wave theory of light — only the particle (photon) model explains them</li>
+        </ul>
+      </div>
+
+      <div class="eg-box">
+        <div class="eg-label">Applications of Photoelectric Effect</div>
+        <ul>
+          <li><strong>Solar cells (photovoltaic cells)</strong> — convert sunlight into electricity</li>
+          <li><strong>Photodiodes and phototransistors</strong> — light-sensitive electronic components</li>
+          <li><strong>Light meters</strong> (in cameras) — measure light intensity</li>
+          <li><strong>Burglar alarms and automatic doors</strong> — light beam interrupted → circuit triggered</li>
+          <li><strong>Night-vision devices</strong> — photoelectric effect used to amplify faint light</li>
+        </ul>
+      </div>
+
+      <div class="analogy-box">
+        <div class="an-label">Why Wave Theory Failed to Explain It</div>
+        <p>Wave theory predicted: (1) even low-frequency light should eventually eject electrons if intense enough — <em>wrong</em>; (2) there should be a time delay for energy to build up — <em>wrong</em>; (3) brighter light should give electrons more KE — <em>wrong</em>. Einstein's photon model (light comes in discrete packets of energy E = hf) explained all observations perfectly. This was the birth of quantum physics.</p>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Photoelectric Effect Traps</div>
+        <ul>
+          <li>Einstein won the Nobel Prize for the <strong>photoelectric effect</strong> — NOT for relativity (commonly mistaken)</li>
+          <li>KE of photoelectrons depends on <strong>frequency</strong> — increasing intensity (brightness) does NOT increase KE, only increases the number of electrons</li>
+          <li>Below threshold frequency, <strong>no emission occurs</strong> regardless of intensity — a key quantum result</li>
+          <li>Planck's constant h = 6.626 × 10⁻³⁴ J·s — frequently asked in NDA numericals</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 6: X-RAYS ══ -->
+  <div class="sec-label">Section 6 — X-Rays &amp; Their Applications</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E4F3F8">🔬</div>
+      <div style="flex:1">
+        <div class="c-title">X-Rays — Discovery, Production &amp; Uses</div>
+        <div class="c-sub">Electromagnetic radiation that sees through matter</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>X-rays were discovered by <strong>Wilhelm Röntgen</strong> in <strong>1895</strong> — he received the first Nobel Prize in Physics (1901) for this discovery. X-rays are <strong>electromagnetic radiation</strong> with wavelengths of 0.01–10 nm, lying between gamma rays and ultraviolet in the EM spectrum.</p>
+
+      <div class="purp-box">
+        <div class="pl-label">Production of X-Rays — Coolidge X-Ray Tube</div>
+        <ul>
+          <li>Electrons are emitted from a heated cathode (filament) by thermionic emission</li>
+          <li>Electrons are accelerated by a high voltage (20,000–100,000 V) towards a metal anode (target, usually tungsten or molybdenum)</li>
+          <li>When high-speed electrons hit the metal target, they rapidly decelerate — energy is emitted as X-rays (Bremsstrahlung radiation — "braking radiation")</li>
+          <li>The target must have: (a) <strong>high melting point</strong> (tungsten: 3422°C) to withstand heat; (b) <strong>high atomic number</strong> for efficient X-ray production</li>
+          <li>Energy of X-rays: higher accelerating voltage → shorter wavelength (harder, more penetrating X-rays)</li>
+        </ul>
+      </div>
+
+      <div class="eg-box">
+        <div class="eg-label">Properties &amp; Applications of X-Rays</div>
+        <ul>
+          <li><strong>Travel at speed of light</strong> in straight lines; not deflected by electric or magnetic fields</li>
+          <li><strong>High penetrating power</strong> — pass through soft tissue but absorbed by dense materials (bone, metal)</li>
+          <li><strong>Cause fluorescence</strong> — X-rays cause certain materials to glow (used in X-ray screens)</li>
+          <li><strong>Medical diagnosis</strong> — chest X-rays (pneumonia, tuberculosis), dental X-rays, bone fractures, CT (Computed Tomography) scans</li>
+          <li><strong>Cancer treatment (Radiation therapy)</strong> — high-energy X-rays destroy cancer cells</li>
+          <li><strong>Security scanning</strong> — airport baggage scanners</li>
+          <li><strong>Industrial inspection</strong> — detecting cracks and flaws in metal structures</li>
+          <li><strong>Crystal structure analysis (X-ray crystallography)</strong> — used to determine the structure of DNA (Watson &amp; Crick used Rosalind Franklin's X-ray images)</li>
+        </ul>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ X-Ray Traps</div>
+        <ul>
+          <li>X-rays are <strong>NOT deflected</strong> by electric or magnetic fields (they are electromagnetic radiation, not charged particles)</li>
+          <li>Röntgen discovered X-rays in <strong>1895</strong> — won the <strong>first Nobel Prize</strong> in Physics (1901)</li>
+          <li>X-rays and gamma rays are both electromagnetic radiation but differ in <strong>origin</strong>: X-rays come from electron transitions or deceleration; gamma rays come from the <strong>nucleus</strong></li>
+          <li>Longer wavelength X-rays = softer (less penetrating) = lower energy; Shorter wavelength = harder (more penetrating) = higher energy</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 7: SEMICONDUCTORS ══ -->
+  <div class="sec-label">Section 7 — Semiconductors &amp; Electronics</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#F0EAFB">💻</div>
+      <div style="flex:1">
+        <div class="c-title">Semiconductors, Diodes &amp; Transistors</div>
+        <div class="c-sub">The foundation of modern electronics and computing</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Property</th><th>Conductor</th><th>Semiconductor</th><th>Insulator</th></tr>
+          <tr><td><b>Resistance</b></td><td>Very low (10⁻⁸ Ω·m)</td><td>Intermediate (10⁻⁴–0.5 Ω·m)</td><td>Very high (10⁸–10¹⁷ Ω·m)</td></tr>
+          <tr><td><b>Examples</b></td><td>Cu, Ag, Al, Fe</td><td>Si, Ge, GaAs, InP</td><td>Glass, rubber, wood, plastics</td></tr>
+          <tr><td><b>Effect of temperature</b></td><td>Resistance increases with T</td><td>Resistance decreases with T (more charge carriers)</td><td>Nearly unchanged</td></tr>
+          <tr><td><b>Band gap</b></td><td>Zero (overlapping bands)</td><td>Small: Si≈1.1 eV, Ge≈0.67 eV</td><td>Large (&gt;5 eV)</td></tr>
+        </table>
+      </div>
+
+      <div class="purp-box">
+        <div class="pl-label">Intrinsic vs Extrinsic Semiconductors &amp; Doping</div>
+        <ul>
+          <li><strong>Intrinsic semiconductor</strong> — pure semiconductor (pure Si or Ge); very few charge carriers at room temperature; conduction by thermally generated electron-hole pairs</li>
+          <li><strong>Doping</strong> — adding tiny amounts of impurity atoms to dramatically increase conductivity</li>
+          <li><strong>N-type semiconductor</strong> — doped with pentavalent atom (5 valence electrons: P, As, Sb); extra electron becomes a free charge carrier; majority carriers = <strong>electrons</strong>; minority = holes</li>
+          <li><strong>P-type semiconductor</strong> — doped with trivalent atom (3 valence electrons: B, Al, In, Ga); creates electron holes; majority carriers = <strong>holes</strong>; minority = electrons</li>
+        </ul>
+      </div>
+
+      <div class="mini-grid">
+        <div class="mini-card">
+          <div class="mn-name">P-N Junction Diode <span class="mn-tag">Rectifier</span></div>
+          <p>P-type and N-type joined. <strong>Forward bias</strong>: current flows freely. <strong>Reverse bias</strong>: no current (acts as off switch). Used to convert AC to DC (rectification).</p>
+        </div>
+        <div class="mini-card">
+          <div class="mn-name">LED <span class="mn-tag">Light</span></div>
+          <p>Light Emitting Diode. Emits light when forward biased. Colour depends on band gap of semiconductor (GaAs→infrared, GaP→green/red, GaN→blue). Used in displays, remotes, indicators.</p>
+        </div>
+        <div class="mini-card">
+          <div class="mn-name">Transistor <span class="mn-tag">Amplifier/Switch</span></div>
+          <p>3-layer device (NPN or PNP). Acts as: (1) <strong>amplifier</strong> (small input → large output) or (2) <strong>switch</strong> (on/off). Foundation of all digital computers and electronics. Invented 1947 (Bell Labs: Bardeen, Brattain, Shockley).</p>
+        </div>
+        <div class="mini-card">
+          <div class="mn-name">Solar Cell <span class="mn-tag">Photovoltaic</span></div>
+          <p>P-N junction converts light energy into electrical energy (photoelectric effect). Used in calculators, satellites, rooftop panels, spacecraft power systems.</p>
+        </div>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Semiconductor Traps</div>
+        <ul>
+          <li>Semiconductor resistance <strong>decreases</strong> with temperature — opposite of metals</li>
+          <li><strong>Silicon</strong> is more widely used than Germanium in modern electronics (higher operating temperature, more abundant)</li>
+          <li>N-type semiconductor has extra electrons as majority carriers — it is NOT negatively charged overall (it is neutral)</li>
+          <li>P-type semiconductor has holes as majority carriers — it is NOT positively charged overall (neutral)</li>
+          <li>A diode in <strong>reverse bias</strong> does not conduct (except at breakdown voltage in Zener diode)</li>
+          <li>Transistor was invented in 1947 — it replaced the bulky, power-hungry vacuum tubes and enabled miniaturisation of electronics</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 8: LASER & SPECIAL RELATIVITY ══ -->
+  <div class="sec-label">Section 8 — LASER, Special Relativity &amp; Nuclear Technology</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E6F7EC">🔴</div>
+      <div style="flex:1">
+        <div class="c-title">LASER, Special Relativity &amp; Nuclear Applications</div>
+        <div class="c-sub">Modern technology rooted in 20th-century physics</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+
+      <div class="rule-box">
+        <div class="rl-label">LASER — Light Amplification by Stimulated Emission of Radiation</div>
+        <p><strong>LASER</strong> produces a beam of light that is <strong>monochromatic</strong> (single wavelength/colour), <strong>coherent</strong> (all photons in phase), and <strong>highly collimated</strong> (narrow, non-diverging beam). It works by stimulated emission — a photon triggers an excited atom to emit another photon of the same frequency, phase, and direction. Key types include: Ruby laser (first laser, 1960, Theodore Maiman), He-Ne laser (red beam), CO₂ laser (high power, industrial), semiconductor laser diodes (CD/DVD players).</p>
+      </div>
+
+      <div class="eg-box">
+        <div class="eg-label">Applications of LASER</div>
+        <ul>
+          <li><strong>Medical</strong> — eye surgery (LASIK), kidney stone removal (lithotripsy), tumour removal, skin treatments</li>
+          <li><strong>Communications</strong> — fibre optic data transmission, long-distance telephony</li>
+          <li><strong>Defence / Military</strong> — laser rangefinders, target designators, missile guidance systems, laser weapons (directed-energy weapons)</li>
+          <li><strong>Industry</strong> — cutting and welding metals, precision drilling, 3D printing (laser sintering)</li>
+          <li><strong>Consumer</strong> — barcode scanners, CD/DVD/Blu-ray players, laser printers</li>
+          <li><strong>Scientific</strong> — spectroscopy, holography, laser cooling (trapping atoms)</li>
+        </ul>
+      </div>
+
+      <div class="purp-box">
+        <div class="pl-label">Special Theory of Relativity — Einstein (1905)</div>
+        <ul>
+          <li><strong>Postulate 1</strong>: Laws of physics are the same in all inertial (non-accelerating) reference frames</li>
+          <li><strong>Postulate 2</strong>: The speed of light in vacuum is constant (<strong>c = 3 × 10⁸ m/s</strong>) for all observers, regardless of the motion of the source or observer</li>
+          <li><strong>Time dilation</strong> — a moving clock runs slower; moving objects experience less time (confirmed by atomic clocks on satellites)</li>
+          <li><strong>Length contraction</strong> — objects moving at high speed appear shorter in the direction of motion</li>
+          <li><strong>Mass-energy equivalence</strong>: E = mc² — matter can be converted to energy and vice versa; the ultimate source of nuclear energy</li>
+          <li>Nothing with mass can reach or exceed the speed of light</li>
+        </ul>
+      </div>
+
+      <div class="purp-box">
+        <div class="pl-label">Nuclear Technology — India's Programme &amp; Key Facts</div>
+        <ul>
+          <li><strong>Homi J. Bhabha</strong> — father of India's nuclear programme; founded TIFR (1945) and BARC (1954)</li>
+          <li><strong>BARC</strong> (Bhabha Atomic Research Centre, Trombay, Mumbai) — India's premier nuclear research centre</li>
+          <li><strong>Apsara</strong> — India's first nuclear reactor (1956, BARC); Asia's first research reactor</li>
+          <li><strong>India's nuclear power plants</strong> — use Pressurised Heavy Water Reactors (PHWR); fuel is natural uranium; moderator is heavy water (D₂O)</li>
+          <li><strong>Pokhran-I (Smiling Buddha, 1974)</strong> — India's first nuclear test; peaceful nuclear explosion</li>
+          <li><strong>Pokhran-II (Operation Shakti, 1998)</strong> — India's second nuclear test; established India as a nuclear weapons state</li>
+          <li><strong>Thorium</strong> — India has world's largest thorium reserves (Kerala beach sands); India's three-stage nuclear programme aims to use thorium as fuel in stage 3</li>
+        </ul>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Modern Technology Exam Traps</div>
+        <ul>
+          <li>Einstein won his Nobel Prize for the <strong>photoelectric effect</strong> (1921) — NOT for relativity or E = mc²</li>
+          <li>LASER light is <strong>coherent, monochromatic, and collimated</strong> — ordinary light is none of these</li>
+          <li>The speed of light (<strong>c = 3 × 10⁸ m/s</strong>) is the universal speed limit — nothing with mass can reach it</li>
+          <li>India's nuclear reactors use <strong>heavy water (D₂O)</strong> as moderator — not graphite (unlike Russian RBMK reactors like Chernobyl)</li>
+          <li><strong>Homi Bhabha</strong> (nuclear) ≠ <strong>Vikram Sarabhai</strong> (space programme). Sarabhai is the father of India's space programme; Bhabha of nuclear.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end theory pane -->
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     PANE 2 — QUICK REF
+════════════════════════════════════════════════════════════════ -->
+<div class="pane" id="quickref">
+
+  <div class="sec-label">Master Formula Sheet</div>
+  <div class="ref-grid">
+    <div class="ref-card">
+      <div class="ref-card-title">Modern Physics — All Key Formulas</div>
+      <ul>
+        <li><b>Bohr energy:</b> E_n = −13.6/n² eV; r_n = 0.529n² Å</li>
+        <li><b>Photon energy:</b> E = hf = hc/λ; h = 6.626 × 10⁻³⁴ J·s</li>
+        <li><b>Photoelectric:</b> KE_max = hf − φ; threshold: f₀ = φ/h</li>
+        <li><b>Radioactive decay:</b> N = N₀(½)^(t/T½) = N₀e^(−λt)</li>
+        <li><b>Decay constant:</b> λ = 0.693/T½</li>
+        <li><b>Activity:</b> A = λN; unit = <em>Becquerel (Bq)</em></li>
+        <li><b>Mass-energy:</b> E = mc²; c = 3 × 10⁸ m/s</li>
+        <li><b>de Broglie wavelength:</b> λ = h/mv = h/p</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-label">Atomic Models &amp; Structure</div>
+  <div class="ref-grid">
+    <div class="ref-card">
+      <div class="ref-card-title">Atomic Models — Discoverers &amp; Key Facts</div>
+      <ul>
+        <li><b>Electron:</b> J.J. Thomson, 1897 (cathode rays)</li>
+        <li><b>Nucleus:</b> Rutherford, 1911 (gold foil / α-scattering)</li>
+        <li><b>Proton:</b> Rutherford, 1919</li>
+        <li><b>Neutron:</b> Chadwick, 1932</li>
+        <li><b>Bohr model:</b> 1913; valid only for hydrogen-like atoms</li>
+        <li>Ground state H: E₁ = <em>−13.6 eV</em>; ionisation energy = 13.6 eV</li>
+        <li><b>Isotopes:</b> same Z, different A (same element, different neutrons)</li>
+        <li><b>Isobars:</b> same A, different Z (different elements)</li>
+        <li><b>Isotones:</b> same neutron number, different Z &amp; A</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-label">Radiation Types</div>
+  <div class="ref-grid">
+    <div class="ref-card">
+      <div class="ref-card-title">Alpha · Beta · Gamma — Quick Comparison</div>
+      <ul>
+        <li><b>Alpha (α):</b> ⁴He nucleus; charge +2; most ionising, least penetrating</li>
+        <li><b>Beta (β):</b> fast electron/positron; charge ±1; medium properties</li>
+        <li><b>Gamma (γ):</b> EM radiation; charge 0; least ionising, most penetrating</li>
+        <li>Stopped by: α=paper, β=Al sheet, γ=<em>thick lead/concrete</em></li>
+        <li>γ rays NOT deflected by fields (neutral)</li>
+        <li>α decay: Z−2, A−4 &nbsp;·&nbsp; β⁻ decay: Z+1, A same</li>
+        <li>γ decay: Z and A <em>unchanged</em></li>
+        <li>Radioactivity discovered: <em>Becquerel, 1896</em></li>
+        <li>Radium &amp; polonium: <em>Marie Curie</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-label">Half-Life &amp; Important Isotopes</div>
+  <div class="ref-grid">
+    <div class="ref-card">
+      <div class="ref-card-title">Half-Lives &amp; Radioactive Applications</div>
+      <ul>
+        <li><b>C-14:</b> T½ = <em>5730 years</em> — carbon dating (organic)</li>
+        <li><b>U-238:</b> T½ = <em>4.5 × 10⁹ yr</em> — geological dating</li>
+        <li><b>I-131:</b> T½ = <em>8 days</em> — thyroid cancer therapy</li>
+        <li><b>Co-60:</b> T½ = <em>5.27 yr</em> — cancer radiotherapy (gamma knife)</li>
+        <li>After n half-lives: N = N₀/<em>2ⁿ</em></li>
+        <li>T½ is constant — NOT affected by temp, pressure, or chemistry</li>
+        <li>SI unit of activity: <em>Becquerel (Bq)</em> = 1 decay/second</li>
+        <li>Older unit: Curie (Ci) = 3.7 × 10¹⁰ Bq</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-label">Fission vs Fusion</div>
+  <div class="ref-grid">
+    <div class="ref-card">
+      <div class="ref-card-title">Nuclear Reactions — Key Facts</div>
+      <ul>
+        <li><b>Fission fuel:</b> <em>U-235, Pu-239</em> (heavy nuclei)</li>
+        <li><b>Fusion fuel:</b> <em>Deuterium (H-2) + Tritium (H-3)</em></li>
+        <li>Atomic bomb = <em>fission</em> (U-235 or Pu-239)</li>
+        <li>Hydrogen bomb = <em>fusion</em> (triggered by fission)</li>
+        <li>Sun's energy = <em>fusion</em> (proton-proton chain)</li>
+        <li>Power plants use = <em>fission</em> (controlled chain reaction)</li>
+        <li>Most stable nucleus = <em>Iron-56</em> (highest binding energy/nucleon)</li>
+        <li>Moderators (slow neutrons): heavy water, graphite, light water</li>
+        <li>Control rods: boron, cadmium (absorb neutrons)</li>
+        <li>ITER = fusion reactor project in <em>France</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-label">Photoelectric Effect &amp; X-Rays</div>
+  <div class="ref-grid">
+    <div class="ref-card">
+      <div class="ref-card-title">Photoelectric &amp; X-Rays</div>
+      <ul>
+        <li>Photoelectric effect explained by <em>Einstein, 1905</em></li>
+        <li>Nobel Prize (1921): Einstein for <em>photoelectric effect</em> (NOT relativity)</li>
+        <li>KE_max depends on <em>frequency</em>, NOT intensity</li>
+        <li>Number of electrons depends on <em>intensity</em></li>
+        <li>No emission below <em>threshold frequency f₀</em></li>
+        <li>X-rays discovered: <em>Röntgen, 1895</em> (Nobel Prize 1901 — first ever)</li>
+        <li>X-rays: NOT deflected by fields (EM radiation)</li>
+        <li>X-rays vs γ-rays: same EM nature, different <em>origin</em> (X=electron; γ=nucleus)</li>
+        <li>X-ray target: tungsten (high m.p. + high Z)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-label">Semiconductors &amp; India's Nuclear Programme</div>
+  <div class="ref-grid">
+    <div class="ref-card">
+      <div class="ref-card-title">Semiconductors &amp; Nuclear India</div>
+      <ul>
+        <li>Semiconductor resistance <em>decreases</em> with temperature (opposite of metals)</li>
+        <li>N-type: pentavalent dopant (P, As, Sb); majority = <em>electrons</em></li>
+        <li>P-type: trivalent dopant (B, Al, In); majority = <em>holes</em></li>
+        <li>Diode: forward bias = conducts; reverse bias = blocks</li>
+        <li>Transistor invented: <em>1947</em>, Bell Labs (Bardeen, Brattain, Shockley)</li>
+        <li>Father of India's nuclear programme: <em>Homi J. Bhabha</em></li>
+        <li>India's first reactor: <em>Apsara (1956)</em>, BARC, Trombay</li>
+        <li>India's nuclear tests: <em>1974 (Pokhran-I)</em> &amp; <em>1998 (Pokhran-II)</em></li>
+        <li>India's PHWRs use: <em>heavy water (D₂O)</em> as moderator</li>
+        <li>India's largest resource: <em>Thorium</em> (three-stage nuclear plan)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-label">Top Exam Traps — Modern Physics</div>
+  <div class="ref-grid">
+    <div class="ref-card">
+      <div class="ref-card-title">Never Get These Wrong</div>
+      <ul>
+        <li>Einstein's Nobel Prize → <em>photoelectric effect</em>, not relativity</li>
+        <li>Alpha = most <em>ionising</em>, least <em>penetrating</em></li>
+        <li>Gamma = least ionising, most <em>penetrating</em></li>
+        <li>γ rays NOT deflected by electric/magnetic fields</li>
+        <li>Isotopes = same Z, different A (same element)</li>
+        <li>Isobars = same A, different Z (different elements)</li>
+        <li>T½ is constant — unaffected by external conditions</li>
+        <li>Atomic bomb = <em>fission</em>; H-bomb = <em>fusion</em></li>
+        <li>Nuclear power plants use <em>fission</em> (not fusion)</li>
+        <li>Semiconductor resistance: <em>decreases</em> with temperature</li>
+        <li>N-type = extra electrons (but <em>electrically neutral</em>)</li>
+        <li>X-rays originate from electrons; γ-rays from <em>nucleus</em></li>
+        <li>Neutron discovered by <em>Chadwick</em> (1932)</li>
+        <li>India's first reactor: <em>Apsara (1956)</em></li>
+        <li>de Broglie: matter has wave nature; λ = h/mv</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- end quickref pane -->
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     PANE 3 — QUIZ
+════════════════════════════════════════════════════════════════ -->
+<div class="pane" id="quiz">
+  <div class="quiz-stats">
+    <div class="qs-cell"><div class="qs-val" id="s-att">0</div><div class="qs-lbl">Attempted</div></div>
+    <div class="qs-cell"><div class="qs-val g" id="s-cor">0</div><div class="qs-lbl">Correct</div></div>
+    <div class="qs-cell"><div class="qs-val r" id="s-wrg">0</div><div class="qs-lbl">Wrong</div></div>
+    <div class="qs-cell"><div class="qs-val a" id="s-tot">20</div><div class="qs-lbl">Total</div></div>
+  </div>
+  <div class="prog-wrap">
+    <div class="prog-label" id="prog-label">0 of 20 answered</div>
+    <div class="prog-bar"><div class="prog-fill" id="prog"></div></div>
+  </div>
+  <div id="q-area"></div>
+  <div id="results" style="display:none"></div>
+  <div class="btn-row">
+    <button class="btn btn-primary" onclick="submitAll()">Submit All Answers</button>
+    <button class="btn btn-ghost" onclick="resetQuiz()">Reset Quiz</button>
+  </div>
+</div>
+
+</div><!-- .page -->
+
+<script>
+const QS=[
+
+/* ── EASY (5) ── */
+{d:'EASY',e:'NDA 2022',
+q:'Who discovered the neutron?',
+opts:['J.J. Thomson','Ernest Rutherford','James Chadwick','Niels Bohr'],
+ans:2,
+rule:'James Chadwick discovered the neutron in 1932 using beryllium bombardment experiment. Thomson discovered the electron (1897); Rutherford discovered the proton (1919); Bohr proposed the atomic model (1913).',
+exp:'James Chadwick discovered the neutron in 1932 by bombarding beryllium with alpha particles. He observed that an unknown neutral radiation was produced that could eject protons from paraffin wax. Since the radiation was unaffected by electric and magnetic fields (it was neutral), he concluded a new neutral particle existed with mass similar to the proton — the neutron. J.J. Thomson discovered the electron in 1897 using cathode ray tubes. Rutherford discovered the proton in 1919 during nitrogen bombardment with alpha particles and proposed the nuclear model of the atom in 1911 based on his famous gold foil experiment.'},
+
+{d:'EASY',e:'CDS 2023',
+q:'Which of the following types of nuclear radiation is NOT deflected by electric or magnetic fields?',
+opts:['Alpha radiation','Beta radiation','Gamma radiation','Both alpha and beta'],
+ans:2,
+rule:'Gamma (γ) radiation is electromagnetic radiation (photons) — it has no charge and is NOT deflected by electric or magnetic fields. Alpha (+2) and beta (−1 or +1) are charged particles and ARE deflected.',
+exp:'Gamma radiation consists of high-energy photons — electromagnetic radiation with no mass and no charge. Since deflection by electric and magnetic fields depends on the charge of a particle (force = qE for electric fields and F = qvB for magnetic fields), gamma radiation with zero charge experiences no deflecting force. Alpha particles (charge +2) are deflected towards the negative plate in an electric field. Beta-minus particles (charge −1) are deflected towards the positive plate, and they deflect more than alpha particles (due to much smaller mass) in the same field. This is a standard exam question across CDS, NDA, and AFCAT.'},
+
+{d:'EASY',e:'AFCAT 2022',
+q:'The half-life of a radioactive element is 5 years. Starting with 80 g, how much of the element remains after 20 years?',
+opts:['40 g','20 g','10 g','5 g'],
+ans:3,
+rule:'Number of half-lives = 20/5 = 4. Remaining = 80 × (1/2)⁴ = 80/16 = 5 g.',
+exp:'The half-life is 5 years, and total time is 20 years, so the number of half-lives elapsed is 20 ÷ 5 = 4 half-lives. Using the formula: N = N₀ × (1/2)ⁿ where n is the number of half-lives. N = 80 × (1/2)⁴ = 80 × (1/16) = 80/16 = 5 g. Step by step: after 5 years → 40 g; after 10 years → 20 g; after 15 years → 10 g; after 20 years → 5 g. This is one of the most commonly tested calculation types in all three exams.'},
+
+{d:'EASY',e:'NDA 2023',
+q:'Albert Einstein received the Nobel Prize in Physics (1921) for:',
+opts:['Special Theory of Relativity','General Theory of Relativity','Explanation of the Photoelectric Effect','Discovery of the photon'],
+ans:2,
+rule:'Einstein\'s Nobel Prize (1921) was specifically for "the discovery of the law of the photoelectric effect" — not for relativity. This is one of the most commonly tested and most commonly confused facts in Modern Physics.',
+exp:'Albert Einstein received the Nobel Prize in Physics in 1921 specifically for "his discovery of the law of the photoelectric effect." Despite his theory of special relativity (1905) and general relativity (1915) being far more famous and profoundly changing physics, the Nobel Committee awarded the prize for the photoelectric effect — partly because relativity was still considered controversial and abstract by some members. Einstein explained the photoelectric effect using the concept of light quanta (photons), showing that light has particle-like properties. This work was foundational to quantum mechanics. The photoelectric equation KE_max = hf − φ remains directly tested in NDA numericals.'},
+
+{d:'EASY',e:'CDS 2022',
+q:'Atoms of the same element that have the same atomic number (Z) but different mass numbers (A) are called:',
+opts:['Isobars','Isotones','Isotopes','Allotropes'],
+ans:2,
+rule:'Isotopes: same Z (same element, same number of protons), different A (different number of neutrons). Isobars: same A, different Z. Isotones: same number of neutrons, different Z and A. Allotropes: different structural forms of the same element (not related to nucleus).',
+exp:'Isotopes are atoms of the same element that have the same atomic number (Z = number of protons, which determines the element) but different mass numbers (A = protons + neutrons, so different numbers of neutrons). Examples: ¹H (protium, no neutrons), ²H (deuterium, 1 neutron), ³H (tritium, 2 neutrons) are all isotopes of hydrogen. Isobars have the same mass number but different atomic numbers — e.g., ⁴⁰Ca and ⁴⁰Ar. Isotones have the same neutron number. Allotropes are different physical forms of the same element (e.g., diamond and graphite are allotropes of carbon) — this is a chemical concept, not nuclear.'},
+
+/* ── MEDIUM (8) ── */
+{d:'MEDIUM',e:'NDA 2023',
+q:'In Rutherford\'s gold foil experiment, most alpha particles passed straight through the gold foil. What conclusion was drawn from this observation?',
+opts:[
+  'Gold atoms are very heavy',
+  'Alpha particles are neutral',
+  'Most of the atom is empty space — the nucleus is very small',
+  'Electrons are present inside the nucleus'
+],ans:2,
+rule:'Most α-particles pass through → most of atom is empty space. The few that deflect greatly → nucleus is tiny, dense, positively charged. This disproved Thomson\'s Plum Pudding model.',
+exp:'Rutherford\'s gold foil experiment (1911) fired alpha particles at a thin gold foil and observed where they went using a zinc sulphide detector screen. Three key observations: (1) Most alpha particles (~99%) passed straight through — meaning most of the atom is empty space. (2) Some were deflected at small angles — the positive nucleus repels the positive alpha particles. (3) A very few (about 1 in 20,000) bounced back at angles greater than 90° — the nucleus is extremely small and dense, so a direct hit causes massive deflection. This led Rutherford to propose the nuclear model: a tiny, dense, positively charged nucleus with electrons orbiting at relatively large distances.'},
+
+{d:'MEDIUM',e:'CDS 2024',
+q:'The energy of a photon of light with frequency 6 × 10¹⁴ Hz is: (h = 6.626 × 10⁻³⁴ J·s)',
+opts:['3.98 × 10⁻¹⁹ J','6.63 × 10⁻²⁰ J','2.48 eV','Both A and C are correct'],
+ans:3,
+rule:'E = hf = 6.626 × 10⁻³⁴ × 6 × 10¹⁴ = 39.76 × 10⁻²⁰ = 3.976 × 10⁻¹⁹ J. In eV: 3.976 × 10⁻¹⁹ / 1.6 × 10⁻¹⁹ = 2.485 eV ≈ 2.48 eV. So both A (3.98 × 10⁻¹⁹ J) and C (2.48 eV) are correct expressions of the same energy.',
+exp:'Using E = hf: E = 6.626 × 10⁻³⁴ × 6 × 10¹⁴ = 39.756 × 10⁻²⁰ J ≈ 3.976 × 10⁻¹⁹ J ≈ 3.98 × 10⁻¹⁹ J. Converting to electron-volts: 1 eV = 1.6 × 10⁻¹⁹ J, so E = 3.976 × 10⁻¹⁹ / 1.6 × 10⁻¹⁹ = 2.485 eV ≈ 2.48 eV. This frequency (6 × 10¹⁴ Hz) corresponds to orange-yellow visible light. Both option A (in joules) and option C (in eV) represent the same energy correctly — so option D is correct. Visible light photons typically have energies of 1.7–3.1 eV.'},
+
+{d:'MEDIUM',e:'AFCAT 2023',
+q:'Which of the following is used as a moderator in nuclear reactors to slow down fast neutrons?',
+opts:['Cadmium rods','Boron rods','Heavy water (D₂O)','Uranium-238'],
+ans:2,
+rule:'Moderators slow down fast neutrons so they can trigger further U-235 fission (which requires slow/thermal neutrons). Heavy water (D₂O), graphite, and ordinary light water are moderators. Cadmium and boron rods are CONTROL rods (they absorb neutrons — different function).',
+exp:'In a nuclear reactor using U-235, fission is triggered by slow (thermal) neutrons. However, fission itself releases fast neutrons (~2 MeV). A moderator is a material that slows these fast neutrons to thermal energies (~0.025 eV) through successive collisions, without absorbing them. Common moderators: heavy water (D₂O) — used in India\'s PHWRs and Canada\'s CANDU reactors; graphite — used in the UK Magnox reactors and Soviet RBMK (Chernobyl); ordinary water (H₂O) — most common worldwide. Cadmium and boron rods are control rods — they absorb neutrons to control the fission rate (slow it down or shut the reactor). They are NOT moderators.'},
+
+{d:'MEDIUM',e:'NDA 2022',
+q:'A radioactive isotope has a half-life of 10 days. A 160 g sample is kept for 40 days. What fraction of the original amount remains?',
+opts:['1/2','1/4','1/8','1/16'],
+ans:3,
+rule:'Number of half-lives = 40/10 = 4. Fraction remaining = (1/2)⁴ = 1/16.',
+exp:'Number of half-lives in 40 days: n = 40/10 = 4 half-lives. Fraction remaining after n half-lives = (1/2)ⁿ = (1/2)⁴ = 1/16. Amount remaining = 160 × (1/16) = 10 g. Verification step by step: after 10 days → 80 g; after 20 days → 40 g; after 30 days → 20 g; after 40 days → 10 g = 160/16 of original. This is a fundamental calculation repeated across all defence exams — the key is to divide total time by half-life to find n, then raise 1/2 to the power n.'},
+
+{d:'MEDIUM',e:'CDS 2023',
+q:'When a ²³⁸₉₂U nucleus undergoes alpha decay, the resulting nucleus is:',
+opts:['²³⁸₉₃Np','²³⁴₉₀Th','²³⁴₉₁Pa','²³⁶₉₀Th'],
+ans:1,
+rule:'Alpha decay: Z decreases by 2, A decreases by 4. New Z = 92 − 2 = 90 (Thorium, Th). New A = 238 − 4 = 234. Product: ²³⁴₉₀Th.',
+exp:'In alpha (α) decay, the nucleus emits an alpha particle (⁴₂He — 2 protons and 2 neutrons). Therefore: Atomic number Z decreases by 2: 92 − 2 = 90 (Thorium, Th). Mass number A decreases by 4: 238 − 4 = 234. The product nucleus is ²³⁴₉₀Th (Thorium-234). The complete equation: ²³⁸₉₂U → ²³⁴₉₀Th + ⁴₂He. This is the start of the uranium-238 decay series, which eventually ends at lead-206. Conservation laws to check: atomic numbers (92 = 90 + 2 ✓) and mass numbers (238 = 234 + 4 ✓) must balance.'},
+
+{d:'MEDIUM',e:'AFCAT 2022',
+q:'Which of the following correctly describes the difference between X-rays and gamma rays?',
+opts:[
+  'X-rays have longer wavelengths than gamma rays and are produced by electron transitions or deceleration; gamma rays come from the nucleus',
+  'Gamma rays have longer wavelengths than X-rays',
+  'X-rays come from nuclear reactions; gamma rays from electron transitions',
+  'X-rays and gamma rays are completely different types of radiation with different speeds'
+],ans:0,
+rule:'X-rays and γ-rays are both electromagnetic radiation travelling at speed c. They differ in ORIGIN: X-rays — from electron deceleration (Bremsstrahlung) or inner-shell electron transitions; γ-rays — from nuclear decay. X-rays generally have longer wavelength (less energy) than γ-rays.',
+exp:'X-rays and gamma rays are both electromagnetic radiation travelling at the speed of light (c = 3 × 10⁸ m/s). They overlap in the electromagnetic spectrum, but differ primarily in their origin: X-rays are produced by (1) rapid deceleration of high-speed electrons hitting a target (Bremsstrahlung) or (2) transitions of inner-shell electrons in heavy atoms. Gamma rays are produced by nuclear decay — a nucleus in an excited state emitting energy as a photon. X-rays generally have wavelengths of 0.01–10 nm and energies of 100 eV to 100 keV. Gamma rays typically have shorter wavelengths and higher energies (>100 keV). Their biological and industrial applications overlap significantly (both used in cancer therapy and sterilisation).'},
+
+{d:'MEDIUM',e:'NDA 2024',
+q:'In a p-type semiconductor, the majority charge carriers are:',
+opts:['Free electrons','Holes','Neutrons','Protons'],
+ans:1,
+rule:'P-type semiconductor is made by doping silicon/germanium with a trivalent impurity (B, Al, In). This creates electron deficiencies called holes. Holes are the majority charge carriers in p-type semiconductors.',
+exp:'A p-type semiconductor is created by doping a pure semiconductor (silicon or germanium) with a trivalent element — an element with 3 valence electrons — such as Boron (B), Aluminium (Al), Indium (In), or Gallium (Ga). When the trivalent atom replaces a silicon atom in the crystal lattice, it can only form 3 of the 4 covalent bonds required. This leaves an electron deficiency — a "hole" — which acts as a positive charge carrier. In p-type: majority carriers = holes (positive); minority carriers = electrons. Note: the p-type semiconductor is electrically neutral overall — it just has an abundance of holes as the conducting species. In contrast, n-type semiconductor (doped with pentavalent: P, As, Sb) has majority carriers = free electrons.'},
+
+{d:'MEDIUM',e:'CDS 2023',
+q:'The energy released in nuclear reactions is fundamentally due to:',
+opts:[
+  'Breaking of chemical bonds between atoms',
+  'The conversion of mass defect into energy according to E = mc²',
+  'The potential energy stored in electron orbits',
+  'The kinetic energy of neutrons used to trigger the reaction'
+],ans:1,
+rule:'Nuclear energy comes from mass defect: the actual mass of a nucleus is LESS than the sum of its constituent nucleons. This mass difference (Δm) is converted to energy: E = Δm × c².',
+exp:'In both nuclear fission and fusion, the products have slightly less mass than the reactants. This difference in mass — called the mass defect (Δm) — is converted to energy according to Einstein\'s equation E = mc². Although the mass differences are tiny (a fraction of a percent), the factor c² (9 × 10¹⁶ m²/s²) is enormous, resulting in enormous energy release. For example, the fission of one U-235 nucleus releases about 200 MeV of energy — roughly 50 million times more energy than burning one carbon atom chemically. This is fundamentally different from chemical reactions (which involve electron rearrangement and orbital energy — orders of magnitude smaller). The concept of binding energy per nucleon quantifies how tightly nucleons are bound in the nucleus.'},
+
+/* ── HARD (7) ── */
+{d:'HARD',e:'NDA 2023',
+q:'The work function of a metal is 2.0 eV. The threshold frequency of light needed to emit photoelectrons from this metal is: (h = 6.626 × 10⁻³⁴ J·s, 1 eV = 1.6 × 10⁻¹⁹ J)',
+opts:['4.83 × 10¹⁴ Hz','3.0 × 10¹⁴ Hz','6.0 × 10¹⁵ Hz','2.0 × 10¹⁴ Hz'],
+ans:0,
+rule:'φ = hf₀ → f₀ = φ/h = (2 × 1.6 × 10⁻¹⁹) / (6.626 × 10⁻³⁴) = 3.2 × 10⁻¹⁹ / 6.626 × 10⁻³⁴ ≈ 4.83 × 10¹⁴ Hz.',
+exp:'The threshold frequency f₀ is the minimum frequency at which photoelectrons are just emitted (KE = 0). Using φ = hf₀: f₀ = φ/h. First, convert work function to joules: φ = 2.0 eV × 1.6 × 10⁻¹⁹ J/eV = 3.2 × 10⁻¹⁹ J. Then: f₀ = 3.2 × 10⁻¹⁹ / 6.626 × 10⁻³⁴ = 4.83 × 10¹⁴ Hz. This frequency lies in the visible light range (violet light is ~7 × 10¹⁴ Hz; visible range is roughly 4–7.5 × 10¹⁴ Hz). For light with f > f₀, electrons are emitted with KE = h(f − f₀). For f < f₀, no emission regardless of intensity — a key quantum result.'},
+
+{d:'HARD',e:'CDS 2024',
+q:'The ground state energy of hydrogen atom is −13.6 eV. What is the energy of the photon emitted when an electron transitions from n=3 to n=1?',
+opts:['12.09 eV','10.2 eV','1.51 eV','3.4 eV'],
+ans:0,
+rule:'E₃ = −13.6/9 = −1.511 eV. E₁ = −13.6 eV. Photon energy = E₃ − E₁ = −1.511 − (−13.6) = 12.09 eV (Lyman series).',
+exp:'Using the Bohr model: Energy of nth level = E_n = −13.6/n² eV. E₁ = −13.6/1² = −13.6 eV (ground state). E₃ = −13.6/3² = −13.6/9 = −1.511 eV. Energy of emitted photon = E₃ − E₁ = −1.511 − (−13.6) = −1.511 + 13.6 = 12.089 eV ≈ 12.09 eV. This transition (n=3 → n=1) belongs to the Lyman series (all transitions to n=1) in the ultraviolet region. Transitions to n=2 are the Balmer series (visible light); to n=3 are the Paschen series (infrared). The photon carries energy equal to the energy difference between the two levels.'},
+
+{d:'HARD',e:'AFCAT 2024',
+q:'A radioactive sample has an activity of 3200 disintegrations per second. After 4 half-lives, its activity will be:',
+opts:['800 Bq','400 Bq','200 Bq','100 Bq'],
+ans:2,
+rule:'Activity is proportional to N (number of undecayed nuclei). After n half-lives, activity A = A₀ × (1/2)ⁿ = 3200 × (1/2)⁴ = 3200/16 = 200 Bq.',
+exp:'Activity (A) = λN — it is directly proportional to the number of undecayed nuclei (N). Since N decreases by half each half-life, so does the activity. After n = 4 half-lives: A = A₀ × (1/2)⁴ = 3200 × (1/16) = 200 disintegrations per second = 200 Bq. Step by step: after 1st T½ → 1600 Bq; after 2nd T½ → 800 Bq; after 3rd T½ → 400 Bq; after 4th T½ → 200 Bq. The unit Becquerel (Bq) = 1 disintegration per second, named after Henri Becquerel who discovered radioactivity in 1896.'},
+
+{d:'HARD',e:'NDA 2024',
+q:'If the de Broglie wavelength of an electron (mass 9.1 × 10⁻³¹ kg) moving at 2 × 10⁶ m/s is calculated, it is approximately: (h = 6.626 × 10⁻³⁴ J·s)',
+opts:['3.6 × 10⁻¹⁰ m','2.2 × 10⁻¹⁰ m','0.36 nm','Both A and C'],
+ans:3,
+rule:'λ = h/(mv) = 6.626 × 10⁻³⁴ / (9.1 × 10⁻³¹ × 2 × 10⁶) = 6.626 × 10⁻³⁴ / (1.82 × 10⁻²⁴) = 3.64 × 10⁻¹⁰ m ≈ 3.6 × 10⁻¹⁰ m = 0.36 nm. Both A and C express the same value.',
+exp:'de Broglie\'s hypothesis: every moving particle has a wave nature with wavelength λ = h/(mv) = h/p, where p is momentum. λ = h/(mv) = 6.626 × 10⁻³⁴ / (9.1 × 10⁻³¹ × 2 × 10⁶) = 6.626 × 10⁻³⁴ / (1.82 × 10⁻²⁴) = 3.64 × 10⁻¹⁰ m ≈ 3.6 × 10⁻¹⁰ m. Converting: 3.6 × 10⁻¹⁰ m = 0.36 × 10⁻⁹ m = 0.36 nm. So options A (3.6 × 10⁻¹⁰ m) and C (0.36 nm) are identical expressions of the same answer — D is correct. This wavelength is in the X-ray range, explaining why electrons can diffract off crystal lattices (electron diffraction — used in electron microscopes).'},
+
+{d:'HARD',e:'CDS 2023',
+q:'In a nuclear reactor, which of the following statements correctly distinguishes between a moderator and a control rod?',
+opts:[
+  'A moderator absorbs excess neutrons; a control rod slows them down',
+  'A moderator slows fast neutrons to thermal energies; a control rod absorbs neutrons to regulate the reaction rate',
+  'Both moderator and control rod slow down neutrons — they are interchangeable',
+  'A control rod converts U-238 to U-235; a moderator converts U-235 to Pu-239'
+],ans:1,
+rule:'Moderator (heavy water, graphite, light water): slows fast neutrons to thermal speed for efficient U-235 fission. Control rod (cadmium, boron): absorbs neutrons to control reaction rate — inserted more to slow down, withdrawn to speed up.',
+exp:'In a nuclear reactor: A moderator slows fast neutrons (emitted at ~2 MeV in fission) to thermal neutron energies (~0.025 eV). Slow neutrons are far more effective at inducing further fission of U-235. Common moderators: heavy water (D₂O), graphite, ordinary water. A control rod controls the reaction rate by absorbing neutrons. Made of cadmium, boron, or hafnium — strong neutron absorbers. Inserting control rods deeper reduces neutron count → slows/stops reaction. Withdrawing them increases neutron count → speeds up reaction. Emergency shutdown (SCRAM) inserts all control rods fully. The moderator keeps the reaction possible; the control rod regulates how fast it runs. Confusing these two is a common exam error.'},
+
+{d:'HARD',e:'NDA 2023',
+q:'An electron in the hydrogen atom jumps from n=1 to n=4 (excited state) by absorbing a photon. When it returns to n=2 in one step, what is the wavelength of the emitted photon? (E_n = −13.6/n² eV; 1 eV = 1.6 × 10⁻¹⁹ J; h = 6.626 × 10⁻³⁴ J·s; c = 3 × 10⁸ m/s)',
+opts:['486 nm (visible — blue-green)','122 nm (UV)','656 nm (visible — red)','1876 nm (infrared)'],
+ans:0,
+rule:'E₄ = −13.6/16 = −0.85 eV. E₂ = −13.6/4 = −3.4 eV. ΔE = −0.85 − (−3.4) = 2.55 eV. λ = hc/ΔE = (6.626×10⁻³⁴ × 3×10⁸)/(2.55 × 1.6×10⁻¹⁹) ≈ 487 nm ≈ 486 nm (Balmer series, Hβ line, blue-green).',
+exp:'Transition n=4 → n=2 (Balmer series — all transitions to n=2 give visible light). E₄ = −13.6/4² = −13.6/16 = −0.85 eV. E₂ = −13.6/2² = −13.6/4 = −3.4 eV. Energy of emitted photon: ΔE = E₄ − E₂ = −0.85 − (−3.4) = 2.55 eV = 2.55 × 1.6 × 10⁻¹⁹ = 4.08 × 10⁻¹⁹ J. Wavelength: λ = hc/E = (6.626 × 10⁻³⁴ × 3 × 10⁸) / (4.08 × 10⁻¹⁹) = 1.988 × 10⁻²⁵ / 4.08 × 10⁻¹⁹ ≈ 4.87 × 10⁻⁷ m = 487 nm ≈ 486 nm. This is the Hβ line of the Balmer series (blue-green visible light). The Hα line (n=3→n=2) is at 656 nm (red).'},
+
+];
+
+/* ── ENGINE ──────────────────────────────────────────────────── */
+const answers  = new Array(QS.length).fill(null);
+const revealed = new Array(QS.length).fill(false);
+const LABS = ['A','B','C','D'];
+
+function build(){
+  const area = document.getElementById('q-area');
+  area.innerHTML = '';
+  QS.forEach((q,i)=>{
+    const dc = q.d==='EASY'?'diff-e':q.d==='MEDIUM'?'diff-m':'diff-h';
+    const div = document.createElement('div');
+    div.className='q-card'; div.id=`qc${i}`;
+    div.innerHTML=`
+      <div class="q-meta">
+        <span class="q-num">Q.${String(i+1).padStart(2,'0')}</span>
+        <span class="q-diff ${dc}">${q.d}</span>
+        <span class="q-exam">${q.e}</span>
+      </div>
+      <div class="q-body">
+        <div class="q-text">${q.q}</div>
+        <div class="opts" id="opts${i}">
+          ${q.opts.map((o,j)=>`
+            <button class="opt" id="o${i}_${j}" onclick="pick(${i},${j})">
+              <span class="opt-lbl">${LABS[j]}</span>${o}
+            </button>`).join('')}
+        </div>
+        <div class="exp-panel" id="ex${i}">
+          <div class="exp-tag">Explanation</div>
+          <div class="exp-rule">${q.rule}</div>
+          <p>${q.exp}</p>
+        </div>
+      </div>
+      <div class="q-foot">
+        <span style="font-size:11px;color:var(--dim);font-weight:700">Physics · P10</span>
+        <span id="ai${i}" class="q-status">—</span>
+      </div>`;
+    area.appendChild(div);
+  });
+}
+
+function pick(qi,oi){
+  if(revealed[qi]) return;
+  answers[qi]=oi;
+  document.querySelectorAll(`#opts${qi} .opt`).forEach((b,j)=>{
+    b.classList.remove('sel');
+    if(j===oi) b.classList.add('sel');
+  });
+  document.getElementById(`qc${qi}`).classList.add('answered');
+  const ai=document.getElementById(`ai${qi}`);
+  ai.textContent=`Selected: ${LABS[oi]}`;
+  ai.style.color='var(--purpMid)';
+  updateStats();
+}
+
+function updateStats(){
+  const att=answers.filter(a=>a!==null).length;
+  document.getElementById('s-att').textContent=att;
+  document.getElementById('prog').style.width=(att/QS.length*100)+'%';
+  document.getElementById('prog-label').textContent=`${att} of ${QS.length} answered`;
+  let c=0,w=0;
+  answers.forEach((a,i)=>{ if(a===null)return; if(a===QS[i].ans)c++; else w++; });
+  document.getElementById('s-cor').textContent=c;
+  document.getElementById('s-wrg').textContent=w;
+}
+
+function submitAll(){
+  let cor=0,wrg=0,skp=0;
+  QS.forEach((q,i)=>{
+    revealed[i]=true;
+    const opts=document.querySelectorAll(`#opts${i} .opt`);
+    opts.forEach(b=>{b.disabled=true;b.classList.remove('sel')});
+    opts[q.ans].classList.add('ok');
+    if(answers[i]!==null && answers[i]!==q.ans) opts[answers[i]].classList.add('bad');
+    document.getElementById(`ex${i}`).classList.add('show');
+    const ai=document.getElementById(`ai${i}`);
+    const card=document.getElementById(`qc${i}`);
+    card.classList.remove('answered');
+    if(answers[i]===null){skp++;ai.textContent='Skipped';ai.style.color='var(--dim)';}
+    else if(answers[i]===q.ans){cor++;card.classList.add('correct');ai.textContent='✓ Correct';ai.style.color='var(--green)';}
+    else{wrg++;card.classList.add('wrong');ai.textContent='✗ Wrong';ai.style.color='var(--red)';}
+  });
+  updateStats();
+  showResults(cor,wrg,skp);
+}
+
+function showResults(cor,wrg,skp){
+  const pct=Math.round(cor/QS.length*100);
+  let grade,msg;
+  if(pct>=88){grade='Excellent';msg='Outstanding! You have mastered Modern Physics.'}
+  else if(pct>=70){grade='Good';msg='Well done. Review the hard numericals — Bohr model transitions, photoelectric, and de Broglie.'}
+  else if(pct>=50){grade='Average';msg='Good effort. Focus on radioactive decay calculations, fission vs fusion, and key discoverers.'}
+  else{grade='Needs Work';msg='Go through Theory and Quick Ref section by section, then retry the quiz.'}
+  const res=document.getElementById('results');
+  res.innerHTML=`
+    <div class="res-hero">
+      <div class="res-score">${cor}<span style="font-size:36px;opacity:.45">/${QS.length}</span></div>
+      <div class="res-grade">${grade} · ${pct}%</div>
+      <div class="res-msg">${msg}</div>
+    </div>
+    <div class="res-stats">
+      <div class="qs-cell"><div class="qs-val g">${cor}</div><div class="qs-lbl">Correct</div></div>
+      <div class="qs-cell"><div class="qs-val r">${wrg}</div><div class="qs-lbl">Wrong</div></div>
+      <div class="qs-cell"><div class="qs-val a">${skp}</div><div class="qs-lbl">Skipped</div></div>
+      <div class="qs-cell"><div class="qs-val">${pct}%</div><div class="qs-lbl">Score</div></div>
+    </div>
+    <div style="text-align:center;margin:16px 0">
+      <button class="btn btn-ghost" onclick="document.getElementById('q-area').scrollIntoView({behavior:'smooth'})">📖 Review All Answers</button>
+    </div>`;
+  res.style.display='block';
+  res.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function resetQuiz(){
+  answers.fill(null); revealed.fill(false);
+  build();
+  document.getElementById('results').style.display='none';
+  document.getElementById('results').innerHTML='';
+  ['s-att','s-cor','s-wrg'].forEach(id=>document.getElementById(id).textContent='0');
+  document.getElementById('prog').style.width='0%';
+  document.getElementById('prog-label').textContent=`0 of ${QS.length} answered`;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function switchTab(id){
+  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  const idx={theory:0,quickref:1,quiz:2}[id];
+  document.querySelectorAll('.tab')[idx].classList.add('on');
+}
+
+function tog(hd){
+  const bd=hd.nextElementSibling;
+  const isOpen=bd.classList.contains('open');
+  bd.classList.toggle('open',!isOpen);
+  hd.classList.toggle('open',!isOpen);
+}
+
+build();
+</script>
+</body>
+</html>

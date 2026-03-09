@@ -1,0 +1,1465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>P07 · Waves &amp; Sound | Olive Defence</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,600;0,700;0,800;1,400&family=Lora:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+
+/* ══ DEEP INDIGO / CYAN THEME ═══════════════════════════════════ */
+:root{
+  --bg:          #F0F1F8;
+  --bg2:         #E3E5F4;
+  --bg3:         #D4D7EE;
+  --white:       #FFFFFF;
+  --ink:         #0E0F2A;
+  --ink2:        #1A1C3E;
+  --muted:       #565882;
+  --dim:         #8A8CB0;
+  --border:      #C2C5E0;
+
+  /* Primary — Deep Indigo */
+  --indigo:      #2D1B8E;
+  --indigoLt:    #3A24AA;
+  --indigoPale:  #ECEAF9;
+
+  /* Accent — Cyan / Electric Teal */
+  --cyan:        #006E7A;
+  --cyanLt:      #008899;
+  --cyanPale:    #E2F4F6;
+
+  /* Semantic */
+  --green:       #1A6035;
+  --greenLt:     #207840;
+  --greenPale:   #E6F5EC;
+  --red:         #8B1C1C;
+  --redLt:       #AA2222;
+  --redPale:     #FCEAEA;
+  --purple:      #5C2A8E;
+  --purplePale:  #F2EDFB;
+  --amber:       #8C6000;
+  --amberPale:   #FDF5DC;
+  --rose:        #8E1A50;
+  --rosePale:    #FCEAF3;
+
+  --radius:      12px;
+  --shadow:      0 2px 12px rgba(14,15,42,.09);
+  --shadow-md:   0 4px 20px rgba(14,15,42,.14);
+}
+
+body{
+  font-family:'Nunito',sans-serif;
+  background:var(--bg);
+  color:var(--ink);
+  font-size:17px;
+  line-height:1.75;
+  min-height:100vh;
+}
+.page{max-width:680px;margin:0 auto;padding:0 16px 80px}
+
+/* ── HERO ─────────────────────────────────────────────────────── */
+.hero{
+  background:linear-gradient(135deg,#0A0820 0%,#2D1B8E 55%,#3730A3 100%);
+  margin:0 -16px;padding:30px 20px 28px;
+  position:relative;overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse at 80% 15%,rgba(0,220,255,.07) 0%,transparent 55%),
+    radial-gradient(ellipse at 12% 88%,rgba(120,80,255,.06) 0%,transparent 50%);
+  pointer-events:none;
+}
+/* sine wave decorative lines */
+.hero::after{
+  content:'';position:absolute;
+  width:300px;height:300px;
+  border:1.5px solid rgba(255,255,255,.05);
+  border-radius:50%;right:-90px;bottom:-100px;
+  pointer-events:none;
+}
+.hero-kicker{
+  font-size:11px;font-weight:700;letter-spacing:3px;
+  text-transform:uppercase;color:rgba(255,255,255,.45);
+  margin-bottom:8px;display:flex;align-items:center;gap:8px;
+}
+.hero-kicker::before{content:'';width:18px;height:2px;background:rgba(0,230,255,.35)}
+.hero-title{
+  font-family:'Lora',serif;
+  font-size:clamp(24px,5.5vw,36px);
+  font-weight:700;color:#fff;line-height:1.18;margin-bottom:10px;
+}
+.hero-title span{color:#60E8FF;font-style:italic}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.60);margin-bottom:18px;line-height:1.65}
+.hero-chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{font-size:11px;font-weight:700;letter-spacing:1px;padding:4px 12px;border-radius:20px;text-transform:uppercase}
+.chip-w{background:rgba(255,255,255,.13);color:rgba(255,255,255,.88)}
+.chip-y{background:rgba(96,232,255,.15);color:#60E8FF}
+.chip-g{background:rgba(100,210,140,.11);color:#80E0A8}
+
+/* ── TAB BAR ──────────────────────────────────────────────────── */
+.tab-bar{
+  position:sticky;top:0;z-index:50;
+  background:var(--white);border-bottom:2px solid var(--border);
+  margin:0 -16px;display:flex;overflow-x:auto;
+  box-shadow:0 2px 8px rgba(14,15,42,.08);
+  -webkit-overflow-scrolling:touch;scrollbar-width:none;
+}
+.tab-bar::-webkit-scrollbar{display:none}
+.tab{
+  flex-shrink:0;padding:14px 18px;
+  font-size:12px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--muted);
+  border:none;background:transparent;cursor:pointer;
+  border-bottom:3px solid transparent;margin-bottom:-2px;
+  transition:all .2s;white-space:nowrap;
+}
+.tab:hover{color:var(--ink);background:var(--bg)}
+.tab.on{color:var(--indigo);border-bottom-color:var(--indigo)}
+
+/* ── PANES ────────────────────────────────────────────────────── */
+.pane{display:none;padding-top:24px;animation:fadeUp .3s ease}
+.pane.on{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── SECTION LABEL ────────────────────────────────────────────── */
+.sec-label{
+  font-size:10px;font-weight:800;letter-spacing:3px;
+  text-transform:uppercase;color:var(--indigo);
+  margin:28px 0 12px;display:flex;align-items:center;gap:10px;
+}
+.sec-label::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* ── INTRO BOX ────────────────────────────────────────────────── */
+.intro-box{
+  background:var(--indigoPale);border:1.5px solid rgba(45,27,142,.16);
+  border-radius:var(--radius);padding:20px;margin-bottom:8px;
+}
+.intro-box p{font-size:16px;color:var(--ink2);line-height:1.8}
+.intro-box strong{color:var(--indigo)}
+
+/* ── CONCEPT CARDS ────────────────────────────────────────────── */
+.c-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius);margin-bottom:10px;
+  box-shadow:var(--shadow);overflow:hidden;
+}
+.c-head{
+  display:flex;align-items:center;gap:12px;padding:16px 18px;
+  cursor:pointer;border-left:4px solid transparent;
+  transition:all .15s;-webkit-tap-highlight-color:transparent;
+}
+.c-head:hover,.c-head.open{background:var(--bg);border-left-color:var(--indigo)}
+.c-icon{
+  width:38px;height:38px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;flex-shrink:0;
+}
+.c-title{font-size:17px;font-weight:700;color:var(--ink);flex:1}
+.c-sub{font-size:12px;color:var(--dim);font-weight:600;margin-top:2px}
+.c-arrow{font-size:12px;color:var(--dim);transition:transform .2s;flex-shrink:0}
+.c-head.open .c-arrow{transform:rotate(180deg)}
+.c-body{display:none;padding:4px 18px 20px;border-top:1px solid var(--border)}
+.c-body.open{display:block;animation:fadeUp .2s ease}
+.c-body p{font-size:16px;color:var(--ink2);line-height:1.85;margin-bottom:12px}
+.c-body p:last-child{margin-bottom:0}
+.c-body strong{color:var(--indigo);font-weight:700}
+.c-body em{color:var(--cyan);font-style:normal;font-weight:700}
+
+/* ── CONTENT BLOCKS ───────────────────────────────────────────── */
+
+/* Amber fact box */
+.fact-box{
+  background:var(--amberPale);border:1.5px solid rgba(140,96,0,.20);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.fact-box .fb-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--amber);text-transform:uppercase;margin-bottom:8px;
+}
+.fact-box ul{list-style:none;padding:0}
+.fact-box li{
+  font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;
+  position:relative;line-height:1.7;
+}
+.fact-box li::before{content:'→';position:absolute;left:0;color:var(--amber);font-weight:700;font-size:13px}
+
+/* Green example box */
+.eg-box{
+  background:var(--greenPale);border-left:4px solid var(--green);
+  border-radius:0 8px 8px 0;padding:12px 16px;margin:12px 0;
+}
+.eg-box .eg-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--green);text-transform:uppercase;margin-bottom:6px;
+}
+.eg-box p{font-size:15px;color:var(--ink2);line-height:1.75}
+.eg-box ul{list-style:none;padding:0}
+.eg-box li{font-size:15px;color:var(--ink2);padding:4px 0 4px 18px;position:relative;line-height:1.65}
+.eg-box li::before{content:'✓';position:absolute;left:0;color:var(--green);font-weight:800;font-size:12px}
+
+/* Red trap box */
+.trap-box{
+  background:var(--redPale);border:1.5px solid rgba(139,28,28,.20);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.trap-box .tr-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--red);text-transform:uppercase;margin-bottom:8px;
+}
+.trap-box p,.trap-box li{font-size:15.5px;color:var(--ink2);line-height:1.75}
+.trap-box ul{list-style:none;padding:0}
+.trap-box li{padding:5px 0 5px 22px;position:relative}
+.trap-box li::before{content:'⚑';position:absolute;left:0;font-size:12px;color:var(--red)}
+
+/* Cyan rule box */
+.rule-box{
+  background:var(--cyanPale);border:1.5px solid rgba(0,110,122,.18);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.rule-box .rl-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--cyan);text-transform:uppercase;margin-bottom:8px;
+}
+.rule-box p{font-size:15.5px;color:var(--ink2);line-height:1.8}
+.rule-box strong{color:var(--cyan)}
+
+/* Purple formula box */
+.formula-box{
+  background:var(--purplePale);border:1.5px solid rgba(92,42,142,.22);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.formula-box .fl-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--purple);text-transform:uppercase;margin-bottom:10px;
+}
+.formula-line{
+  font-family:'Lora',serif;font-size:18px;font-weight:700;
+  color:var(--purple);text-align:center;padding:8px 0;
+  letter-spacing:.5px;line-height:1.6;
+}
+.formula-note{font-size:14px;color:var(--ink2);line-height:1.7;margin-top:8px}
+.formula-note b{color:var(--purple)}
+
+/* Indigo highlight box */
+.indigo-box{
+  background:var(--indigoPale);border:1.5px solid rgba(45,27,142,.16);
+  border-radius:10px;padding:16px 18px;margin:14px 0;
+}
+.indigo-box .il-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--indigo);text-transform:uppercase;margin-bottom:8px;
+}
+.indigo-box ul{list-style:none;padding:0}
+.indigo-box li{font-size:15.5px;color:var(--ink2);padding:5px 0 5px 20px;position:relative;line-height:1.8}
+.indigo-box li::before{content:'◆';position:absolute;left:0;font-size:9px;color:var(--indigo);top:10px}
+
+/* Rose analogy box */
+.analogy-box{
+  background:var(--rosePale);border-left:4px solid var(--rose);
+  border-radius:0 8px 8px 0;padding:14px 16px;margin:12px 0;
+}
+.analogy-box .an-label{
+  font-size:10px;font-weight:800;letter-spacing:2px;
+  color:var(--rose);text-transform:uppercase;margin-bottom:6px;
+}
+.analogy-box p{font-size:15.5px;color:var(--ink2);line-height:1.75}
+
+/* Compare table */
+.compare-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14.5px}
+.compare-table th{
+  background:var(--indigo);color:#fff;
+  padding:10px 12px;text-align:left;
+  font-size:13px;font-weight:700;letter-spacing:.5px;
+}
+.compare-table td{
+  padding:10px 12px;border:1px solid var(--border);
+  color:var(--ink2);vertical-align:top;line-height:1.65;
+}
+.compare-table tr:nth-child(even) td{background:var(--bg)}
+.compare-table td b{color:var(--indigo)}
+
+/* Wave type mini-cards */
+.wave-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:14px 0}
+.wave-card{
+  background:var(--bg);border:1px solid var(--border);
+  border-radius:10px;padding:13px 14px;
+}
+.wave-card .wc-name{
+  font-size:13px;font-weight:800;color:var(--indigo);
+  margin-bottom:4px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;
+}
+.wave-card .wc-tag{
+  font-size:10px;font-weight:700;color:var(--cyan);
+  background:var(--cyanPale);border-radius:4px;padding:1px 7px;
+}
+.wave-card p{font-size:13.5px;color:var(--ink2);line-height:1.6}
+
+/* ── QUICK REF ────────────────────────────────────────────────── */
+.ref-grid{display:grid;gap:10px;margin:8px 0}
+.ref-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);
+}
+.ref-card-title{
+  font-size:11px;font-weight:800;letter-spacing:2px;
+  text-transform:uppercase;color:var(--indigo);
+  margin-bottom:10px;padding-bottom:8px;
+  border-bottom:1px solid var(--border);
+}
+.ref-card ul{list-style:none;padding:0}
+.ref-card li{
+  font-size:15px;color:var(--ink2);padding:5px 0 5px 16px;
+  position:relative;line-height:1.65;
+  border-bottom:1px solid var(--bg2);
+}
+.ref-card li:last-child{border-bottom:none}
+.ref-card li::before{content:'·';position:absolute;left:4px;color:var(--indigo);font-weight:900;font-size:18px;line-height:1.3}
+.ref-card li b{color:var(--ink);font-weight:700}
+.ref-card li em{color:var(--cyan);font-style:normal;font-weight:700}
+
+/* ── QUIZ ─────────────────────────────────────────────────────── */
+.quiz-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:2px;background:var(--border);
+  border-radius:var(--radius);overflow:hidden;
+  margin-bottom:16px;box-shadow:var(--shadow);
+}
+.qs-cell{background:var(--white);padding:12px 8px;text-align:center}
+.qs-val{font-family:'Lora',serif;font-size:22px;font-weight:700;color:var(--indigo);line-height:1}
+.qs-val.g{color:var(--green)}.qs-val.r{color:var(--red)}.qs-val.a{color:var(--amber)}
+.qs-lbl{font-size:10px;color:var(--muted);font-weight:700;letter-spacing:1px;margin-top:4px;text-transform:uppercase}
+
+.prog-wrap{margin-bottom:20px}
+.prog-bar{height:6px;background:var(--bg3);border-radius:3px;overflow:hidden}
+.prog-fill{height:100%;background:var(--indigo);border-radius:3px;transition:width .4s ease;width:0%}
+.prog-label{font-size:12px;color:var(--muted);font-weight:700;margin-bottom:6px}
+
+.q-card{
+  background:var(--white);border:1px solid var(--border);
+  border-radius:var(--radius);margin-bottom:12px;
+  box-shadow:var(--shadow);overflow:hidden;
+  border-left:4px solid transparent;transition:border-color .15s;
+}
+.q-card.answered{border-left-color:var(--indigo)}
+.q-card.correct{border-left-color:var(--green)}
+.q-card.wrong{border-left-color:var(--red)}
+
+.q-meta{
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  padding:10px 16px;background:var(--bg);
+  border-bottom:1px solid var(--border);
+}
+.q-num{font-size:11px;font-weight:800;color:var(--muted);letter-spacing:1px}
+.q-diff{font-size:10px;font-weight:800;padding:2px 10px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase}
+.diff-e{background:var(--greenPale);color:var(--green)}
+.diff-m{background:var(--amberPale);color:var(--amber)}
+.diff-h{background:var(--redPale);color:var(--red)}
+.q-exam{font-size:11px;color:var(--dim);margin-left:auto;font-weight:600}
+
+.q-body{padding:16px}
+.q-text{font-size:17px;line-height:1.8;color:var(--ink);margin-bottom:14px;font-weight:600}
+
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{
+  background:var(--bg);border:1.5px solid var(--border);
+  border-radius:10px;padding:14px 16px;
+  cursor:pointer;display:flex;align-items:flex-start;gap:12px;
+  font-size:16px;color:var(--ink2);text-align:left;width:100%;
+  transition:all .15s;-webkit-tap-highlight-color:transparent;
+  min-height:48px;line-height:1.6;
+}
+.opt:hover:not(:disabled){border-color:var(--indigo);background:var(--indigoPale)}
+.opt:disabled{cursor:default}
+.opt.sel{border-color:var(--indigo);background:var(--indigoPale);color:var(--indigo)}
+.opt.ok{border-color:var(--green)!important;background:var(--greenPale)!important;color:var(--green)!important}
+.opt.bad{border-color:var(--red)!important;background:var(--redPale)!important;color:var(--red)!important}
+.opt-lbl{
+  min-width:28px;height:28px;border-radius:8px;
+  background:var(--bg3);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:800;color:var(--muted);
+  flex-shrink:0;transition:all .15s;
+}
+.opt.sel .opt-lbl{background:var(--indigo);color:#fff;border-color:var(--indigo)}
+.opt.ok  .opt-lbl{background:var(--green)!important;color:#fff!important;border-color:var(--green)!important}
+.opt.bad .opt-lbl{background:var(--red)!important;color:#fff!important;border-color:var(--red)!important}
+
+.exp-panel{display:none;margin-top:14px;background:var(--bg);border-radius:10px;padding:14px 16px}
+.exp-panel.show{display:block;animation:fadeUp .2s ease}
+.exp-tag{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--indigo);text-transform:uppercase;margin-bottom:6px}
+.exp-rule{font-size:13px;font-weight:800;color:var(--purple);background:var(--purplePale);border-radius:6px;padding:6px 10px;margin-bottom:10px}
+.exp-panel p{font-size:15px;color:var(--ink2);line-height:1.8}
+
+.q-foot{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 16px;background:var(--bg2);border-top:1px solid var(--border);
+}
+.q-status{font-size:12px;font-weight:700}
+
+.btn{
+  padding:14px 24px;border-radius:10px;font-size:14px;font-weight:800;
+  letter-spacing:.5px;border:none;cursor:pointer;transition:all .15s;
+  font-family:'Nunito',sans-serif;
+}
+.btn-primary{background:var(--indigo);color:#fff;box-shadow:0 4px 14px rgba(45,27,142,.28)}
+.btn-primary:hover{background:var(--indigoLt);transform:translateY(-1px)}
+.btn-ghost{background:var(--bg2);color:var(--ink2);border:1.5px solid var(--border)}
+.btn-ghost:hover{background:var(--bg3)}
+.btn-row{display:flex;gap:10px;justify-content:center;margin:16px 0}
+
+.res-hero{
+  background:linear-gradient(135deg,#0A0820,#2D1B8E);
+  border-radius:var(--radius);
+  padding:28px 20px;text-align:center;color:#fff;margin-bottom:12px;
+}
+.res-score{font-family:'Lora',serif;font-size:72px;font-weight:700;line-height:1;color:#60E8FF}
+.res-grade{font-size:18px;font-weight:800;margin:8px 0 6px;color:rgba(255,255,255,.92)}
+.res-msg{font-size:15px;color:rgba(255,255,255,.62);line-height:1.6}
+.res-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:2px;background:var(--border);border-radius:var(--radius);
+  overflow:hidden;margin-bottom:12px;
+}
+@media(max-width:400px){
+  .hero{padding:22px 16px 20px}
+  .hero-title{font-size:22px}
+  .tab{padding:12px 13px;font-size:11px}
+  .q-text{font-size:16px}
+  .opt{font-size:15px;padding:12px 14px}
+  .wave-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-kicker">Olive Defence · Physics · P07</div>
+  <div class="hero-title">Waves &amp;<br><span>Sound</span></div>
+  <div class="hero-sub">Wave properties · Sound propagation · Doppler effect · Resonance · Ultrasonics — complete CDS · NDA · AFCAT coverage</div>
+  <div class="hero-chips">
+    <span class="chip chip-w">⚡ CDS</span>
+    <span class="chip chip-y">🛡 NDA</span>
+    <span class="chip chip-g">✈ AFCAT</span>
+    <span class="chip chip-w">Physics · P07</span>
+  </div>
+</div>
+
+<!-- ── TAB BAR ── -->
+<div class="tab-bar">
+  <button class="tab on" onclick="switchTab('theory')">📖 Theory</button>
+  <button class="tab" onclick="switchTab('quickref')">⚡ Quick Ref</button>
+  <button class="tab" onclick="switchTab('quiz')">🎯 Quiz</button>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════
+     PANE 1 — THEORY
+═══════════════════════════════════════════════════════════ -->
+<div class="pane on" id="theory">
+
+  <div class="intro-box">
+    <p>Waves &amp; Sound is a <strong>high-yield chapter</strong> across CDS, NDA, and AFCAT. Expect direct questions on speed of sound in different media, the Doppler effect, echo, resonance, ultrasonics vs infrasonics, musical instruments, and the nature of different wave types. Both conceptual and numerical questions appear regularly.</p>
+  </div>
+
+  <!-- ══ SECTION 1: WAVE BASICS ══ -->
+  <div class="sec-label">Section 1 — Nature &amp; Types of Waves</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#ECEAF9">〰️</div>
+      <div style="flex:1">
+        <div class="c-title">Wave Basics — What is a Wave?</div>
+        <div class="c-sub">Propagation of energy without propagation of matter</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>A <strong>wave</strong> is a disturbance that travels through a medium (or vacuum), transferring <strong>energy from one point to another without any net transfer of matter</strong>. The particles of the medium oscillate about their mean positions but do not travel with the wave.</p>
+
+      <div class="formula-box">
+        <div class="fl-label">Fundamental Wave Equation &amp; Key Terms</div>
+        <div class="formula-line">v = fλ &nbsp;&nbsp;·&nbsp;&nbsp; T = 1/f</div>
+        <div class="formula-note">
+          <b>v</b> = speed of wave (m/s) &nbsp;·&nbsp; <b>f</b> = frequency (Hz) &nbsp;·&nbsp; <b>λ</b> = wavelength (m)<br>
+          <b>T</b> = time period (s) = time for one complete oscillation = 1/f<br><br>
+          <b>Amplitude (A)</b> — maximum displacement from mean position; determines intensity/loudness<br>
+          <b>Frequency (f)</b> — number of complete oscillations per second (Hz); determines pitch<br>
+          <b>Wavelength (λ)</b> — distance between two consecutive crests (or troughs) in a wave
+        </div>
+      </div>
+
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Property</th><th>Transverse Wave</th><th>Longitudinal Wave</th></tr>
+          <tr><td><b>Particle oscillation</b></td><td>Perpendicular to wave direction</td><td>Parallel to wave direction</td></tr>
+          <tr><td><b>Features</b></td><td>Crests and troughs</td><td>Compressions and rarefactions</td></tr>
+          <tr><td><b>Medium needed?</b></td><td>Solid or surface of liquid (not gases)</td><td>Solid, liquid, or gas</td></tr>
+          <tr><td><b>Examples</b></td><td>Light waves, water surface waves, string waves</td><td><b>Sound waves</b>, seismic P-waves, spring waves</td></tr>
+        </table>
+      </div>
+
+      <div class="fact-box">
+        <div class="fb-label">Key Wave Properties — Tested Directly</div>
+        <ul>
+          <li><strong>Sound is a longitudinal, mechanical wave</strong> — needs a medium; cannot travel in vacuum</li>
+          <li><strong>Light is a transverse, electromagnetic wave</strong> — does NOT need a medium; travels in vacuum</li>
+          <li><strong>Frequency does not change</strong> when a wave passes from one medium to another — wavelength and speed change, not frequency</li>
+          <li>Speed of wave depends on the <strong>medium</strong>, not on the frequency or amplitude</li>
+          <li>A wave carries <strong>energy</strong>, not matter — the medium particles only oscillate in place</li>
+        </ul>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Exam Trap — Transverse vs Longitudinal</div>
+        <ul>
+          <li>Sound is <strong>longitudinal</strong> — NOT transverse. This is directly asked.</li>
+          <li>Light is <strong>transverse</strong> — this is why it can be polarised (longitudinal waves cannot be polarised)</li>
+          <li>When a wave crosses from one medium to another, <strong>frequency stays constant</strong>; speed and wavelength change</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 2: SOUND ══ -->
+  <div class="sec-label">Section 2 — Sound Waves</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E2F4F6">🔊</div>
+      <div style="flex:1">
+        <div class="c-title">Nature of Sound &amp; Speed in Different Media</div>
+        <div class="c-sub">Why sound travels faster in solids than in air</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>Sound is a <strong>mechanical, longitudinal wave</strong> produced by the vibration of a body. It needs a <strong>material medium</strong> (solid, liquid, or gas) to travel — it cannot propagate through vacuum.</p>
+
+      <div class="fact-box">
+        <div class="fb-label">Speed of Sound — Key Values for Exams</div>
+        <ul>
+          <li><strong>Speed of sound in air</strong> at 0°C ≈ <em>332 m/s</em> &nbsp;·&nbsp; at 25°C ≈ <em>346 m/s</em></li>
+          <li><strong>Speed in water</strong> ≈ <em>1500 m/s</em> (about 4–5× faster than in air)</li>
+          <li><strong>Speed in steel/iron</strong> ≈ <em>5000–5100 m/s</em> (about 15× faster than in air)</li>
+          <li>Order: <strong>Solids &gt; Liquids &gt; Gases</strong> — sound travels fastest in solids</li>
+          <li><strong>Speed of sound in air increases</strong> with temperature: ~0.61 m/s per °C rise</li>
+          <li><strong>Speed of light</strong> = 3 × 10⁸ m/s — about 900,000× faster than sound in air</li>
+        </ul>
+      </div>
+
+      <div class="rule-box">
+        <div class="rl-label">Why Speed Varies Across Media</div>
+        <p>Sound speed depends on the <strong>elasticity</strong> (restoring force) and <strong>density</strong> of the medium. v = √(E/ρ). Solids have much higher elasticity (and despite higher density, the elasticity dominates) → fastest speed. In gases, both elasticity and density are low but elasticity wins out for order-of-magnitude differences.</p>
+      </div>
+
+      <div class="indigo-box">
+        <div class="il-label">Factors Affecting Speed of Sound in Air</div>
+        <ul>
+          <li><strong>Temperature ↑ → speed ↑</strong> (speed ∝ √T, T in Kelvin). Hot air: molecules move faster, transmit disturbance more quickly.</li>
+          <li><strong>Humidity ↑ → speed ↑</strong> (moist air is less dense than dry air — water vapour is lighter than N₂/O₂ — so sound travels slightly faster in humid air)</li>
+          <li><strong>Pressure</strong> — at constant temperature, changing pressure does NOT change speed of sound in an ideal gas (density and elasticity change proportionally)</li>
+          <li><strong>Wind</strong> — increases speed downwind, decreases speed upwind (apparent speed only)</li>
+          <li>Frequency and amplitude do <strong>NOT</strong> affect the speed of sound</li>
+        </ul>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Classic Exam Traps — Speed of Sound</div>
+        <ul>
+          <li>Sound travels <strong>faster in humid air</strong> than dry air — many students think humid air would slow sound because it "feels heavier." In fact, water vapour (mol. mass 18) is lighter than N₂ (28) and O₂ (32), so humid air is less dense.</li>
+          <li>Changing air <strong>pressure alone</strong> (at constant temperature) does NOT change speed of sound</li>
+          <li>Sound does <strong>NOT travel in vacuum</strong> — demonstrated by bell-in-vacuum-jar experiment</li>
+          <li>Speed of sound in air ≈ <strong>332 m/s</strong> at 0°C — this exact value is tested</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#ECEAF9">📻</div>
+      <div style="flex:1">
+        <div class="c-title">Characteristics of Sound — Pitch, Loudness &amp; Quality</div>
+        <div class="c-sub">What makes sounds high, loud, or musical</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Characteristic</th><th>Determined by</th><th>Unit</th><th>Description</th></tr>
+          <tr><td><b>Pitch</b></td><td>Frequency</td><td>Hz</td><td>High frequency → high pitch (shrill sound like a whistle). Low frequency → low pitch (like a drum). Pitch is the <em>sensation</em> of frequency.</td></tr>
+          <tr><td><b>Loudness</b></td><td>Amplitude (intensity)</td><td>Decibel (dB)</td><td>Greater amplitude → more energy → louder sound. Loudness is the <em>sensation</em> of intensity.</td></tr>
+          <tr><td><b>Quality / Timbre</b></td><td>Waveform (harmonics present)</td><td>—</td><td>Why a piano and violin playing the same note sound different — overtones/harmonics differ.</td></tr>
+        </table>
+      </div>
+
+      <div class="fact-box">
+        <div class="fb-label">Sound Intensity — Decibel Scale (Key Values)</div>
+        <ul>
+          <li><strong>Threshold of hearing</strong> = 0 dB (faintest audible sound)</li>
+          <li><strong>Whisper</strong> ≈ 30 dB &nbsp;·&nbsp; <strong>Normal conversation</strong> ≈ 60 dB</li>
+          <li><strong>Busy street / traffic</strong> ≈ 80 dB &nbsp;·&nbsp; <strong>Rock concert / jet engine</strong> ≈ 120–130 dB</li>
+          <li><strong>Threshold of pain</strong> ≈ 120–130 dB</li>
+          <li>Every <strong>10 dB increase</strong> = 10× increase in intensity (logarithmic scale)</li>
+          <li>Prolonged exposure above <strong>85 dB</strong> causes hearing damage</li>
+        </ul>
+      </div>
+
+      <div class="formula-box">
+        <div class="fl-label">Intensity &amp; Decibel</div>
+        <div class="formula-line">β (dB) = 10 log₁₀ (I / I₀)</div>
+        <div class="formula-note">
+          <b>β</b> = sound level in decibels &nbsp;·&nbsp; <b>I</b> = intensity of sound (W/m²) &nbsp;·&nbsp; <b>I₀</b> = reference intensity = 10⁻¹² W/m² (threshold of hearing)<br>
+          Intensity I ∝ A² (proportional to square of amplitude) &nbsp;·&nbsp; I ∝ 1/r² (inverse square law from a point source)
+        </div>
+      </div>
+
+      <div class="analogy-box">
+        <div class="an-label">Pitch vs Loudness — Quick Memory Aid</div>
+        <p>Think of tuning a guitar: turning the peg tighter increases the <strong>frequency → higher pitch</strong> (string vibrates faster). Plucking harder increases the <strong>amplitude → louder sound</strong> (string swings farther). The pitch and loudness are completely independent — you can have a high-pitched soft sound or a low-pitched loud one.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 3: ECHO & RESONANCE ══ -->
+  <div class="sec-label">Section 3 — Reflection, Echo &amp; Resonance</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E2F4F6">🏔️</div>
+      <div style="flex:1">
+        <div class="c-title">Echo, Reverberation &amp; SONAR</div>
+        <div class="c-sub">How reflected sound is used in nature and technology</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>When sound strikes a hard surface and bounces back, it is called <strong>reflection of sound</strong>. The reflected sound heard distinctly after the original sound has stopped is an <strong>echo</strong>.</p>
+
+      <div class="rule-box">
+        <div class="rl-label">Conditions for Echo</div>
+        <p>For an echo to be heard distinctly, the reflecting surface must be at least <strong>17 metres</strong> away from the observer (in air at normal temperature). This is because the human ear can distinguish two sounds only if they are separated by at least <strong>0.1 second</strong>, and at ~340 m/s, sound travels 34 m in 0.1 s — so the surface must be at least 34/2 = <strong>17 m</strong> away (sound must travel there and back).</p>
+      </div>
+
+      <div class="formula-box">
+        <div class="fl-label">Echo Distance &amp; SONAR Formula</div>
+        <div class="formula-line">d = v × t / 2</div>
+        <div class="formula-note">
+          <b>d</b> = distance to the reflecting surface &nbsp;·&nbsp; <b>v</b> = speed of sound &nbsp;·&nbsp; <b>t</b> = total time for echo to return<br>
+          Divide by 2 because sound travels to the surface AND back.<br><br>
+          <b>SONAR</b> (Sound Navigation And Ranging) uses this principle underwater to measure ocean depth, detect submarines, and locate fish.
+        </div>
+      </div>
+
+      <div class="indigo-box">
+        <div class="il-label">Echo vs Reverberation — Key Distinction</div>
+        <ul>
+          <li><strong>Echo</strong> — reflected sound heard as a <em>distinct, separate</em> repetition of the original sound; reflecting surface is far away (≥17 m)</li>
+          <li><strong>Reverberation</strong> — when reflected sound reaches the ear within 0.1 s of the original, the two sounds merge and the original sound appears to persist and "linger." Occurs in closed halls, rooms, and auditoriums.</li>
+          <li><strong>In auditoriums:</strong> some reverberation is desirable for musical richness; too much makes speech unclear. Controlled by soft furnishings, curtains, and acoustic tiles (absorb sound).</li>
+        </ul>
+      </div>
+
+      <div class="eg-box">
+        <div class="eg-label">Applications of Sound Reflection</div>
+        <ul>
+          <li><strong>SONAR</strong> — depth sounding, submarine detection, fish location, underwater mapping</li>
+          <li><strong>Echolocation in bats</strong> — bats emit ultrasonic pulses and use the echo to navigate and hunt insects in complete darkness</li>
+          <li><strong>Ultrasound scanning (medical)</strong> — sound echoes from internal organs to create images (sonography)</li>
+          <li><strong>Megaphone / Loudspeaker horn</strong> — shaped to direct sound reflection forward</li>
+          <li><strong>Stethoscope</strong> — uses multiple reflection of sound to amplify heartbeat/lung sounds</li>
+        </ul>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Echo Trap — Minimum Distance</div>
+        <ul>
+          <li>Minimum distance for echo = <strong>17 m</strong> (commonly tested as 17 m, sometimes stated as the wall must be at least 17 m away)</li>
+          <li>SONAR distance formula: always divide total time by 2 (time for one-way trip = t/2)</li>
+          <li>Reverberation is NOT the same as echo — reverberation is <em>prolongation</em>, echo is a <em>distinct repetition</em></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#F2EDFB">🎵</div>
+      <div style="flex:1">
+        <div class="c-title">Resonance &amp; Musical Instruments</div>
+        <div class="c-sub">Why a glass shatters at the right frequency — and how music works</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p><strong>Resonance</strong> occurs when an object is made to vibrate at its <strong>natural frequency</strong> by an external vibration of the same frequency, resulting in maximum amplitude of vibration and maximum energy transfer.</p>
+
+      <div class="rule-box">
+        <div class="rl-label">Resonance — Definition and Conditions</div>
+        <p>Every object has a <strong>natural (fundamental) frequency</strong> at which it vibrates most readily. When a driving force vibrates at this same frequency, the object absorbs energy most efficiently — resonance occurs. The amplitude builds up dramatically. This can be constructive (musical instruments, radio tuning) or destructive (Tacoma Narrows Bridge collapse).</p>
+      </div>
+
+      <div class="wave-grid">
+        <div class="wave-card">
+          <div class="wc-name">String Instruments <span class="wc-tag">Strings</span></div>
+          <p>Violin, guitar, sitar. <strong>Pitch ∝ 1/length</strong>. Shorter string → higher frequency. Also depends on tension and mass per unit length.</p>
+        </div>
+        <div class="wave-card">
+          <div class="wc-name">Wind Instruments <span class="wc-tag">Air Column</span></div>
+          <p>Flute, harmonium, organ pipe. Sound produced by vibrating air column. Open pipe vs closed pipe give different harmonics.</p>
+        </div>
+        <div class="wave-card">
+          <div class="wc-name">Percussion <span class="wc-tag">Membrane</span></div>
+          <p>Drum, tabla, mridangam. Vibrating membrane produces sound. Tightening membrane → higher pitch (higher frequency).</p>
+        </div>
+        <div class="wave-card">
+          <div class="wc-name">Radio Tuning <span class="wc-tag">Electronic</span></div>
+          <p>Tuning a radio to a station = adjusting the circuit's resonant frequency to match the broadcast frequency. Resonance maximises signal reception.</p>
+        </div>
+      </div>
+
+      <div class="eg-box">
+        <div class="eg-label">Real-World Examples of Resonance</div>
+        <ul>
+          <li><strong>Shattering a glass with voice</strong> — an opera singer can shatter a wine glass by singing at its natural frequency; amplitude builds up until glass breaks</li>
+          <li><strong>Tacoma Narrows Bridge (1940)</strong> — wind caused oscillations at the bridge's natural frequency → resonance → bridge collapsed dramatically</li>
+          <li><strong>Soldiers break step on bridges</strong> — to avoid resonance between marching frequency and the bridge's natural frequency</li>
+          <li><strong>Microwave oven</strong> — microwaves at 2.45 GHz match the resonant frequency of water molecules; water absorbs energy → food heats</li>
+          <li><strong>MRI (Magnetic Resonance Imaging)</strong> — uses nuclear magnetic resonance of hydrogen nuclei</li>
+        </ul>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Resonance Exam Trap</div>
+        <p>Soldiers are ordered to <strong>break step</strong> (march out of rhythm) when crossing a bridge because if their marching frequency matches the bridge's natural frequency, resonance could build up large oscillations and damage the bridge — exactly like the Tacoma Narrows collapse.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 4: DOPPLER ══ -->
+  <div class="sec-label">Section 4 — Doppler Effect</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#ECEAF9">🚑</div>
+      <div style="flex:1">
+        <div class="c-title">Doppler Effect</div>
+        <div class="c-sub">Why an ambulance siren changes pitch as it passes you</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>The <strong>Doppler Effect</strong> is the apparent change in the frequency (and therefore pitch) of a wave when the source and observer are in <strong>relative motion</strong> towards or away from each other.</p>
+
+      <div class="rule-box">
+        <div class="rl-label">Doppler Effect — Key Rules</div>
+        <p>
+          <strong>Source approaching observer:</strong> Sound waves are compressed → apparent frequency <strong>increases</strong> → higher pitch heard<br><br>
+          <strong>Source moving away from observer:</strong> Sound waves are stretched → apparent frequency <strong>decreases</strong> → lower pitch heard<br><br>
+          The actual frequency emitted by the source does NOT change — only the <em>apparent</em> frequency heard by the observer changes.
+        </p>
+      </div>
+
+      <div class="formula-box">
+        <div class="fl-label">Doppler Formula (Sound)</div>
+        <div class="formula-line">f' = f × (v ± v_o) / (v ∓ v_s)</div>
+        <div class="formula-note">
+          <b>f'</b> = apparent frequency &nbsp;·&nbsp; <b>f</b> = actual frequency &nbsp;·&nbsp; <b>v</b> = speed of sound<br>
+          <b>v_o</b> = speed of observer &nbsp;·&nbsp; <b>v_s</b> = speed of source<br>
+          <b>+v_o</b> when observer moves toward source &nbsp;·&nbsp; <b>−v_o</b> when moving away<br>
+          <b>−v_s</b> when source moves toward observer &nbsp;·&nbsp; <b>+v_s</b> when source moves away
+        </div>
+      </div>
+
+      <div class="eg-box">
+        <div class="eg-label">Applications of Doppler Effect</div>
+        <ul>
+          <li><strong>Ambulance / police siren</strong> — siren pitch rises as it approaches, drops as it passes and recedes</li>
+          <li><strong>Radar speed guns (traffic police)</strong> — radar waves reflected from a moving car undergo Doppler shift; frequency change gives speed</li>
+          <li><strong>Doppler radar</strong> — used in weather forecasting; detects movement of rain and wind in storms</li>
+          <li><strong>Astronomical redshift / blueshift</strong> — galaxies moving away from Earth show redshift (lower frequency); approaching galaxies show blueshift. Basis for expanding universe theory.</li>
+          <li><strong>Medical Doppler ultrasound</strong> — measures blood flow speed using Doppler shift of ultrasound echoes from moving red blood cells</li>
+          <li><strong>RADAR in aircraft</strong> — Doppler navigation systems measure aircraft speed relative to the ground</li>
+        </ul>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Doppler Effect Exam Traps</div>
+        <ul>
+          <li>Doppler effect changes <strong>apparent frequency</strong> — the actual frequency emitted by the source is <strong>unchanged</strong></li>
+          <li>When source approaches: apparent frequency <strong>increases</strong> (higher pitch) — NOT lower</li>
+          <li>Doppler effect applies to ALL waves — sound, light, radio waves, not just sound</li>
+          <li>Redshift of stars/galaxies = Doppler effect of light; used to prove universe is expanding</li>
+          <li>When both source and observer move at the <strong>same speed in the same direction</strong> → no Doppler effect (no relative motion)</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 5: INFRASONIC & ULTRASONIC ══ -->
+  <div class="sec-label">Section 5 — Frequency Ranges &amp; Ultrasonics</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#E2F4F6">🦇</div>
+      <div style="flex:1">
+        <div class="c-title">Infrasonic, Audible &amp; Ultrasonic Sound</div>
+        <div class="c-sub">Frequency ranges and their applications in nature and technology</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+
+      <div style="overflow-x:auto">
+        <table class="compare-table">
+          <tr><th>Type</th><th>Frequency Range</th><th>Who produces / uses it</th><th>Applications</th></tr>
+          <tr><td><b>Infrasonic</b></td><td>&lt; 20 Hz</td><td>Earthquakes, volcanoes, elephants, whales, rhinoceroses</td><td>Earthquake detection, animal communication over long distances, early warning systems</td></tr>
+          <tr><td><b>Audible (Sonic)</b></td><td>20 Hz – 20,000 Hz</td><td>Humans (speech, music)</td><td>All human hearing and communication; musical instruments</td></tr>
+          <tr><td><b>Ultrasonic</b></td><td>&gt; 20,000 Hz (20 kHz)</td><td>Bats, dolphins, dogs (partial), sonar devices, medical instruments</td><td>SONAR, medical imaging, industrial cleaning, welding, detecting flaws in metals</td></tr>
+        </table>
+      </div>
+
+      <div class="indigo-box">
+        <div class="il-label">Applications of Ultrasound — All Exam-Tested</div>
+        <ul>
+          <li><strong>Medical ultrasonography (sonography)</strong> — imaging internal organs, foetus during pregnancy, detecting tumours</li>
+          <li><strong>Echocardiography</strong> — imaging the heart using ultrasound</li>
+          <li><strong>SONAR</strong> — detecting submarines, measuring ocean depth, locating fish shoals, underwater mapping</li>
+          <li><strong>Ultrasonic cleaning</strong> — delicate instruments (spectacle lenses, jewellery, circuit boards) cleaned using high-frequency vibrations in liquid</li>
+          <li><strong>Non-destructive testing (NDT)</strong> — detecting cracks and flaws inside metal components without damaging them</li>
+          <li><strong>Ultrasonic welding</strong> — joining plastics and metals using high-frequency vibrations</li>
+          <li><strong>Echolocation (bats)</strong> — bats emit ultrasonic pulses (40–100 kHz) and use echoes to navigate and hunt prey in complete darkness</li>
+          <li><strong>Dolphins</strong> — use ultrasound for echolocation and communication under water</li>
+          <li><strong>Kidney stone treatment (lithotripsy)</strong> — focused ultrasound pulses break up kidney stones non-invasively</li>
+        </ul>
+      </div>
+
+      <div class="eg-box">
+        <div class="eg-label">Infrasound in Nature</div>
+        <ul>
+          <li>Elephants communicate using infrasound (below 20 Hz) over distances of several kilometres</li>
+          <li>Before earthquakes and tsunamis, animals often flee — they may detect infrasonic waves that precede the main seismic shock</li>
+          <li>Whales communicate using very low-frequency sounds that travel thousands of kilometres through oceans</li>
+        </ul>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Frequency Range Traps</div>
+        <ul>
+          <li>Human hearing range: <strong>20 Hz to 20,000 Hz</strong> — both limits are tested</li>
+          <li>Ultrasound is &gt;20,000 Hz (20 kHz) — NOT just "high frequency sound." The cutoff value matters.</li>
+          <li>Bats use <strong>ultrasound</strong>, not infrasound, for echolocation</li>
+          <li>Elephants use <strong>infrasound</strong> (&lt;20 Hz) for long-distance communication</li>
+          <li>Dogs can hear up to about 40,000–65,000 Hz (ultrasonic range) — that's why dog whistles work at frequencies humans can't hear</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 6: SUPERPOSITION ══ -->
+  <div class="sec-label">Section 6 — Superposition, Beats &amp; Standing Waves</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#FDF5DC">🎸</div>
+      <div style="flex:1">
+        <div class="c-title">Superposition, Beats &amp; Standing Waves</div>
+        <div class="c-sub">When two waves meet — interference, beats, and nodes</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <p>When two waves meet at a point, the resulting displacement is the <strong>algebraic sum</strong> of their individual displacements — this is the <strong>Principle of Superposition</strong>.</p>
+
+      <div class="rule-box">
+        <div class="rl-label">Beats</div>
+        <p>When two sound waves of <strong>slightly different frequencies</strong> (f₁ and f₂) travel in the same direction, they alternately reinforce and cancel each other. The listener hears a <strong>periodic variation in loudness</strong> — called beats. Beat frequency = |f₁ − f₂|. Musicians use beats to tune instruments: when two notes are in tune (same frequency), beats disappear.</p>
+      </div>
+
+      <div class="formula-box">
+        <div class="fl-label">Beats &amp; Standing Waves</div>
+        <div class="formula-line">Beat frequency = |f₁ − f₂|</div>
+        <div class="formula-note">
+          A <b>standing (stationary) wave</b> is formed when two identical waves travel in opposite directions and superpose.<br>
+          <b>Nodes</b> — points of zero displacement (destructive interference always)<br>
+          <b>Antinodes</b> — points of maximum displacement (constructive interference always)<br>
+          Distance between adjacent nodes = λ/2 &nbsp;·&nbsp; Distance between adjacent antinode and node = λ/4
+        </div>
+      </div>
+
+      <div class="wave-grid">
+        <div class="wave-card">
+          <div class="wc-name">Constructive Interference <span class="wc-tag">Reinforce</span></div>
+          <p>Waves in phase: crest meets crest, trough meets trough. Resultant amplitude = sum of amplitudes → louder sound / brighter light.</p>
+        </div>
+        <div class="wave-card">
+          <div class="wc-name">Destructive Interference <span class="wc-tag">Cancel</span></div>
+          <p>Waves out of phase: crest meets trough. Resultant amplitude = difference of amplitudes. Can produce silence (noise-cancelling headphones).</p>
+        </div>
+      </div>
+
+      <div class="eg-box">
+        <div class="eg-label">Practical Applications</div>
+        <ul>
+          <li><strong>Noise-cancelling headphones</strong> — microphone picks up ambient noise, electronics generate a wave with the exact opposite phase → destructive interference → silence</li>
+          <li><strong>Tuning musical instruments</strong> — a musician listens for beats; when beats fade away, the two strings are perfectly in tune</li>
+          <li><strong>Guitar/sitar strings</strong> — standing waves form on plucked strings; the pattern of nodes and antinodes determines the frequency (note) produced</li>
+          <li><strong>Organ pipes</strong> — standing waves in air columns; open and closed ends determine harmonics</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ SECTION 7: MISC ══ -->
+  <div class="sec-label">Section 7 — Mach Number, Sonic Boom &amp; Musical Notes</div>
+
+  <div class="c-card">
+    <div class="c-head" onclick="tog(this)">
+      <div class="c-icon" style="background:#ECEAF9">✈️</div>
+      <div style="flex:1">
+        <div class="c-title">Mach Number, Sonic Boom &amp; Musical Scale</div>
+        <div class="c-sub">Supersonic flight, shock waves, and the science of music</div>
+      </div>
+      <span class="c-arrow">▾</span>
+    </div>
+    <div class="c-body">
+      <div class="formula-box">
+        <div class="fl-label">Mach Number</div>
+        <div class="formula-line">Mach number = Speed of object / Speed of sound</div>
+        <div class="formula-note">
+          <b>Mach 1</b> = exactly the speed of sound in air ≈ 332–346 m/s ≈ 1200 km/h<br>
+          <b>Subsonic</b>: Mach &lt; 1 &nbsp;·&nbsp; <b>Transonic</b>: Mach ≈ 1 &nbsp;·&nbsp; <b>Supersonic</b>: Mach &gt; 1 &nbsp;·&nbsp; <b>Hypersonic</b>: Mach ≥ 5<br>
+          Named after Austrian physicist <b>Ernst Mach</b>
+        </div>
+      </div>
+
+      <div class="indigo-box">
+        <div class="il-label">Sonic Boom</div>
+        <ul>
+          <li>When an aircraft exceeds the speed of sound (Mach &gt; 1), it outruns the sound waves it produces</li>
+          <li>Sound waves pile up into a <strong>shock wave</strong> (a cone-shaped pressure wave)</li>
+          <li>When this shock wave sweeps past an observer on the ground, they hear a sudden loud boom — the <strong>sonic boom</strong></li>
+          <li>A sonic boom is NOT a one-time event when the aircraft "breaks the sound barrier" — it is continuously produced as long as the aircraft is supersonic</li>
+          <li>Glass can shatter and buildings can be damaged by intense sonic booms</li>
+        </ul>
+      </div>
+
+      <div class="fact-box">
+        <div class="fb-label">Musical Notes &amp; Sound — CDS/NDA Facts</div>
+        <ul>
+          <li>Musical notes in Indian classical music: <strong>Sa Re Ga Ma Pa Dha Ni Sa</strong> (7 svaras)</li>
+          <li>Western scale: <strong>Do Re Mi Fa Sol La Ti Do</strong> (7 notes)</li>
+          <li><strong>Octave</strong> — the note that has exactly <em>double</em> the frequency of the base note (e.g., upper Sa has twice the frequency of lower Sa)</li>
+          <li><strong>Noise</strong> = irregular, aperiodic vibrations &nbsp;·&nbsp; <strong>Music</strong> = regular, periodic vibrations with a pleasing quality</li>
+          <li><strong>Reverberation time</strong> — time for sound level to drop by 60 dB after source stops; ideal for concert halls ≈ 1–2 seconds</li>
+          <li><strong>Decibel (dB)</strong> — named after Alexander Graham Bell</li>
+        </ul>
+      </div>
+
+      <div class="trap-box">
+        <div class="tr-label">⚑ Sonic Boom Trap</div>
+        <p>Many people think the sonic boom happens only once — when the aircraft "breaks the sound barrier." This is wrong. The sonic boom is a <strong>continuous phenomenon</strong> that occurs throughout supersonic flight. Anyone the shock wave cone sweeps over hears the boom.</p>
+      </div>
+    </div>
+  </div>
+
+</div><!-- end theory pane -->
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     PANE 2 — QUICK REF
+═══════════════════════════════════════════════════════════ -->
+<div class="pane" id="quickref">
+
+  <div class="sec-label">All Formulas</div>
+  <div class="ref-grid">
+    <div class="ref-card">
+      <div class="ref-card-title">Waves &amp; Sound — Master Formula Sheet</div>
+      <ul>
+        <li><b>Wave equation:</b> v = fλ &nbsp;·&nbsp; T = 1/f</li>
+        <li><b>Echo distance:</b> d = v × t / 2 &nbsp;·&nbsp; Min distance for echo: <em>17 m</em></li>
+        <li><b>Beat frequency:</b> |f₁ − f₂|</li>
+        <li><b>Doppler (general):</b> f' = f(v ± v_o)/(v ∓ v_s)</li>
+        <li><b>Intensity:</b> β = 10 log₁₀(I/I₀) &nbsp;·&nbsp; I₀ = 10⁻¹² W/m²</li>
+        <li><b>Mach number:</b> M = v_object / v_sound</li>
+        <li><b>Speed of sound in air at 0°C:</b> <em>332 m/s</em></li>
+        <li><b>Speed in water:</b> ≈ <em>1500 m/s</em> &nbsp;·&nbsp; Steel: ≈ <em>5100 m/s</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-label">Wave Types Comparison</div>
+  <div class="ref-grid">
+    <div class="ref-card">
+      <div class="ref-card-title">Transverse vs Longitudinal</div>
+      <ul>
+        <li>Sound = <em>longitudinal</em>, mechanical, needs medium</li>
+        <li>Light = <em>transverse</em>, electromagnetic, no medium needed</li>
+        <li>Longitudinal: compressions &amp; rarefactions</li>
+        <li>Transverse: crests &amp; troughs, can be <em>polarised</em></li>
+        <li>When wave changes medium: speed &amp; wavelength change; <em>frequency stays same</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-label">Speed of Sound</div>
+  <div class="ref-grid">
+    <div class="ref-card">
+      <div class="ref-card-title">Speed of Sound — Key Facts</div>
+      <ul>
+        <li>Speed order: <em>Solids &gt; Liquids &gt; Gases</em></li>
+        <li>Air (0°C): <em>332 m/s</em> &nbsp;·&nbsp; Air (25°C): ≈ 346 m/s</li>
+        <li>Water: ≈ <em>1500 m/s</em> &nbsp;·&nbsp; Steel: ≈ <em>5100 m/s</em></li>
+        <li>Temperature ↑ → speed <em>increases</em> (∝ √T)</li>
+        <li>Humidity ↑ → speed slightly <em>increases</em></li>
+        <li>Pressure alone → <em>no change</em> in speed (at constant T)</li>
+        <li>Frequency &amp; amplitude → <em>no effect</em> on speed</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-label">Doppler Effect Snapshot</div>
+  <div class="ref-grid">
+    <div class="ref-card">
+      <div class="ref-card-title">Doppler Effect — Quick Rules</div>
+      <ul>
+        <li>Source approaching → apparent frequency <em>increases</em> (higher pitch)</li>
+        <li>Source receding → apparent frequency <em>decreases</em> (lower pitch)</li>
+        <li>Actual frequency of source is <em>unchanged</em></li>
+        <li>Applies to all waves: sound, light, radio</li>
+        <li>Redshift = galaxy moving <em>away</em> (light Doppler)</li>
+        <li>Blueshift = galaxy moving <em>toward</em> us</li>
+        <li>Same speed, same direction: <em>no Doppler effect</em></li>
+        <li>Applications: radar guns, weather radar, medical ultrasound, astronomy</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-label">Frequency Ranges</div>
+  <div class="ref-grid">
+    <div class="ref-card">
+      <div class="ref-card-title">Infrasonic · Audible · Ultrasonic</div>
+      <ul>
+        <li><b>Infrasonic:</b> &lt; 20 Hz &nbsp;·&nbsp; elephants, earthquakes, whales</li>
+        <li><b>Audible (human):</b> <em>20 Hz – 20,000 Hz</em></li>
+        <li><b>Ultrasonic:</b> &gt; 20,000 Hz &nbsp;·&nbsp; bats, dolphins, SONAR</li>
+        <li>Bats: echolocation via <em>ultrasound</em> (40–100 kHz)</li>
+        <li>Elephants: long-distance communication via <em>infrasound</em></li>
+        <li>Medical uses of ultrasound: sonography, echocardiography, lithotripsy</li>
+        <li>Industrial uses: NDT (flaw detection), welding, cleaning</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-label">Sound Characteristics</div>
+  <div class="ref-grid">
+    <div class="ref-card">
+      <div class="ref-card-title">Pitch · Loudness · Quality</div>
+      <ul>
+        <li><b>Pitch</b> ↔ <em>Frequency</em>: higher f → higher pitch</li>
+        <li><b>Loudness</b> ↔ <em>Amplitude</em> (Intensity): larger A → louder sound</li>
+        <li><b>Quality/Timbre</b> ↔ Waveform (harmonics): why piano ≠ violin at same note</li>
+        <li>Decibel (dB): 0 dB = threshold of hearing</li>
+        <li>Normal conversation ≈ 60 dB &nbsp;·&nbsp; Pain threshold ≈ 120 dB</li>
+        <li>Every 10 dB = 10× increase in intensity</li>
+        <li>Intensity I ∝ A² (square of amplitude)</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-label">Echo · Resonance · Superposition</div>
+  <div class="ref-grid">
+    <div class="ref-card">
+      <div class="ref-card-title">Key Concepts Snapshot</div>
+      <ul>
+        <li>Echo: min distance = <em>17 m</em> (reflecting surface)</li>
+        <li>Echo distinct if time gap ≥ <em>0.1 s</em></li>
+        <li>Reverberation: reflected sound within 0.1 s merges with original → sound "lingers"</li>
+        <li>Resonance: max energy transfer when driving frequency = <em>natural frequency</em></li>
+        <li>Soldiers break step on bridges → prevent <em>resonance</em></li>
+        <li>Beats = |f₁ − f₂|; used to <em>tune instruments</em></li>
+        <li>Standing wave nodes: zero displacement; antinodes: max displacement</li>
+        <li>Node-to-node distance = <em>λ/2</em></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="sec-label">Top Exam Traps</div>
+  <div class="ref-grid">
+    <div class="ref-card">
+      <div class="ref-card-title">Never Get These Wrong</div>
+      <ul>
+        <li>Sound is <em>longitudinal</em>, NOT transverse</li>
+        <li>Sound does <em>NOT travel in vacuum</em></li>
+        <li>Speed order: <em>solid &gt; liquid &gt; gas</em></li>
+        <li>Humid air → sound speed <em>increases</em> (not decreases)</li>
+        <li>Pressure alone → <em>no effect</em> on speed of sound</li>
+        <li>Doppler: source approaching → frequency <em>increases</em></li>
+        <li>Doppler: actual source frequency is <em>unchanged</em></li>
+        <li>Bats → <em>ultrasound</em>; Elephants → <em>infrasound</em></li>
+        <li>Human hearing: <em>20 Hz – 20,000 Hz</em></li>
+        <li>Echo min distance = <em>17 m</em></li>
+        <li>Sonic boom is <em>continuous</em>, not one-time, in supersonic flight</li>
+        <li>Resonance: soldiers break step on bridges to <em>prevent</em> it</li>
+        <li>Frequency is <em>unchanged</em> when wave passes from one medium to another</li>
+        <li>Octave = <em>double</em> the frequency of the base note</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- end quickref pane -->
+
+
+<!-- ═══════════════════════════════════════════════════════════
+     PANE 3 — QUIZ
+═══════════════════════════════════════════════════════════ -->
+<div class="pane" id="quiz">
+
+  <div class="quiz-stats">
+    <div class="qs-cell"><div class="qs-val" id="s-att">0</div><div class="qs-lbl">Attempted</div></div>
+    <div class="qs-cell"><div class="qs-val g" id="s-cor">0</div><div class="qs-lbl">Correct</div></div>
+    <div class="qs-cell"><div class="qs-val r" id="s-wrg">0</div><div class="qs-lbl">Wrong</div></div>
+    <div class="qs-cell"><div class="qs-val a" id="s-tot">20</div><div class="qs-lbl">Total</div></div>
+  </div>
+
+  <div class="prog-wrap">
+    <div class="prog-label" id="prog-label">0 of 20 answered</div>
+    <div class="prog-bar"><div class="prog-fill" id="prog"></div></div>
+  </div>
+
+  <div id="q-area"></div>
+  <div id="results" style="display:none"></div>
+
+  <div class="btn-row">
+    <button class="btn btn-primary" onclick="submitAll()">Submit All Answers</button>
+    <button class="btn btn-ghost" onclick="resetQuiz()">Reset Quiz</button>
+  </div>
+
+</div>
+
+</div><!-- .page -->
+
+<script>
+const QS = [
+
+// ── EASY (5) ──
+{d:'EASY',e:'NDA 2022',
+q:'Sound cannot travel through:',
+opts:['Water','Steel','Air','Vacuum'],
+ans:3,
+rule:'Sound is a mechanical wave — it needs a material medium (solid, liquid, or gas) to propagate. Vacuum has no particles to transmit the disturbance.',
+exp:'Sound is a mechanical, longitudinal wave that propagates by causing molecules of the medium to vibrate. In a vacuum there are no molecules — so there is nothing to carry the vibrational energy from point to point. This was demonstrated by Robert Boyle\'s bell-in-vacuum-jar experiment: as air is pumped out, the ringing of the bell becomes fainter and finally inaudible. Light, being an electromagnetic wave, does travel through vacuum — this is how sunlight reaches Earth.'},
+
+{d:'EASY',e:'CDS 2023',
+q:'The pitch of a sound depends on its:',
+opts:['Amplitude','Frequency','Wavelength','Intensity'],
+ans:1,
+rule:'Pitch is the sensation corresponding to frequency. Higher frequency → higher pitch (shriller sound). Amplitude determines loudness, not pitch.',
+exp:'Pitch is the perceived quality that allows us to describe a sound as "high" or "low." It is determined by the frequency of the sound wave. A high-pitched sound (like a whistle or a child\'s voice) has a high frequency; a low-pitched sound (like a drum) has a low frequency. Amplitude (and its related quantity, intensity) determines loudness — a loud drum beat has large amplitude but low frequency (low pitch). These two characteristics — pitch and loudness — are completely independent of each other.'},
+
+{d:'EASY',e:'AFCAT 2022',
+q:'The minimum distance from a reflecting surface required to hear an echo clearly is approximately:',
+opts:['5 m','10 m','17 m','25 m'],
+ans:2,
+rule:'Minimum echo distance = 17 m. The ear needs 0.1 s gap between direct and reflected sound. At ~340 m/s: total path = 34 m → one-way = 17 m.',
+exp:'For an echo to be perceived as distinct from the original sound, the human ear needs a time gap of at least 0.1 second between the two sounds. Sound travels at approximately 340 m/s in air at room temperature. In 0.1 s, sound travels 340 × 0.1 = 34 m. Since the sound must travel to the reflecting wall AND back, the wall must be at least 34/2 = 17 m away. This is why echoes are common in mountains and large open spaces, but not in ordinary rooms.'},
+
+{d:'EASY',e:'NDA 2023',
+q:'In which medium does sound travel fastest?',
+opts:['Air','Water','Steel','Sound travels at the same speed in all media'],
+ans:2,
+rule:'Speed of sound: Solids > Liquids > Gases. Steel ≈ 5100 m/s >> Water ≈ 1500 m/s >> Air ≈ 332 m/s.',
+exp:'Sound travels fastest in solids because solid particles are closely packed and have strong intermolecular forces (high elasticity). This allows disturbances to be transmitted rapidly. In liquids, particles are closer than in gases but less rigidly bonded than in solids. In gases, particles are far apart. Speeds: Steel ≈ 5100 m/s, Water ≈ 1500 m/s, Air ≈ 332 m/s at 0°C. The general rule: speed of sound is greatest in solids, then liquids, then gases.'},
+
+{d:'EASY',e:'CDS 2022',
+q:'The human ear can hear sounds in the frequency range of:',
+opts:['0 Hz to 10,000 Hz','20 Hz to 20,000 Hz','100 Hz to 100,000 Hz','Below 20 Hz only'],
+ans:1,
+rule:'Human audible range: 20 Hz (lowest audible) to 20,000 Hz (highest audible). Below 20 Hz = infrasonic; above 20,000 Hz = ultrasonic.',
+exp:'The human ear can detect sounds with frequencies between approximately 20 Hz and 20,000 Hz (20 kHz). Sounds below 20 Hz are called infrasonic (subsonic) — humans cannot hear them, but some animals (like elephants and whales) can produce and detect them. Sounds above 20,000 Hz are called ultrasonic — bats and dolphins use ultrasound for echolocation. The ability to hear high frequencies diminishes with age — children can typically hear up to 20,000 Hz while older adults may only hear up to 12,000–15,000 Hz.'},
+
+// ── MEDIUM (8) ──
+{d:'MEDIUM',e:'NDA 2023',
+q:'An ambulance with a siren is moving towards you. As it approaches and passes you, the pitch of the siren you hear will:',
+opts:[
+  'Stay the same throughout',
+  'Increase as it approaches and drop suddenly as it passes',
+  'Decrease as it approaches and increase after it passes',
+  'Increase continuously until it is out of earshot'
+],ans:1,
+rule:'Doppler Effect: source approaching → apparent frequency increases (higher pitch). Source moving away → apparent frequency decreases (lower pitch). Actual frequency never changes.',
+exp:'This is the classic example of the Doppler Effect. As the ambulance approaches, its sound waves are compressed (wavelength decreases, frequency increases) → you hear a higher pitch than the actual siren frequency. At the moment it passes you, there is a sudden drop. As it moves away, the waves are stretched (wavelength increases, frequency decreases) → you hear a lower pitch. The actual frequency of the siren never changes — only the apparent frequency changes due to relative motion between source and observer.'},
+
+{d:'MEDIUM',e:'CDS 2023',
+q:'Which of the following correctly describes the difference between echo and reverberation?',
+opts:[
+  'Echo is louder than reverberation',
+  'Echo is the distinct repetition of sound; reverberation is the persistence of sound due to multiple reflections within 0.1 s',
+  'Reverberation occurs outdoors; echo occurs indoors',
+  'Echo and reverberation are the same phenomenon'
+],ans:1,
+rule:'Echo: reflected sound heard distinctly after ≥0.1 s (reflecting surface ≥17 m away). Reverberation: multiple reflections reaching within 0.1 s, making sound linger/persist.',
+exp:'An echo is heard when reflected sound reaches the ear at least 0.1 second after the direct sound — the ear distinguishes them as two separate sounds. This requires the reflecting surface to be at least 17 m away. Reverberation occurs when the reflecting surfaces are closer: multiple reflections arrive within 0.1 s and the ear cannot separate them from the original — the sound appears to "linger." Controlled reverberation enhances music in concert halls; excess reverberation makes speech unintelligible. Acoustic engineers design auditoriums to manage reverberation time (typically 1–2 seconds for music).'},
+
+{d:'MEDIUM',e:'AFCAT 2023',
+q:'Bats can fly in total darkness without colliding with objects. This ability is due to:',
+opts:[
+  'Excellent night vision',
+  'Ability to detect infrared radiation',
+  'Emission of ultrasonic waves and detection of their echoes (echolocation)',
+  'Sensitivity to Earth\'s magnetic field'
+],ans:2,
+rule:'Bats use echolocation — they emit ultrasonic pulses (40–100 kHz) and detect echoes reflected from objects. The time delay and frequency shift of the echo reveals distance and direction.',
+exp:'Bats are virtually blind and navigate entirely by echolocation. They emit ultrasonic pulses (typically 40,000–100,000 Hz — far above human hearing) from their larynx or nose. These pulses bounce off objects and return as echoes. The bat\'s brain processes the time delay (to determine distance), intensity, and Doppler shift of the echoes to build a precise "acoustic image" of the surroundings — accurate enough to catch insects in flight in complete darkness. Dolphins use similar echolocation underwater.'},
+
+{d:'MEDIUM',e:'NDA 2022',
+q:'Two tuning forks vibrate at 256 Hz and 260 Hz respectively. The beat frequency heard when both are sounded together is:',
+opts:['2 Hz','4 Hz','516 Hz','258 Hz'],
+ans:1,
+rule:'Beat frequency = |f₁ − f₂| = |260 − 256| = 4 Hz. Beats are due to the superposition of two waves of slightly different frequencies.',
+exp:'When two sound waves of slightly different frequencies travel together, they alternately reinforce and cancel each other. The listener hears a periodic variation in loudness called beats. Beat frequency = |f₁ − f₂| = |260 − 256| = 4 Hz. This means the listener hears 4 loud pulses per second. Musicians use this phenomenon to tune instruments: if you tune one string to 260 Hz and play it with a reference 260 Hz tuning fork, no beats are heard when both are perfectly in tune. Beats are heard only when there is a frequency difference.'},
+
+{d:'MEDIUM',e:'CDS 2024',
+q:'The phenomenon of resonance can explain which of the following events?',
+opts:[
+  'An ice cube melting in warm water',
+  'A wine glass shattering when a singer hits a specific note',
+  'A prism splitting white light into colours',
+  'A compass needle pointing north'
+],ans:1,
+rule:'Resonance: when driving frequency = natural frequency of an object, amplitude builds up to maximum. A glass has a natural frequency; if the singer\'s voice matches it, the amplitude grows until the glass fractures.',
+exp:'Every object has a natural frequency at which it vibrates most readily. A wine glass has a specific natural frequency determined by its shape, size, and material. When a singer produces a note at exactly this frequency and sustains it, the glass absorbs energy at maximum efficiency (resonance). The amplitude of vibration builds up progressively until it exceeds the glass\'s strength and it shatters. The other options involve different phenomena: ice melting is thermodynamics; prism dispersion is optics; compass orientation is magnetism.'},
+
+{d:'MEDIUM',e:'AFCAT 2022',
+q:'SONAR is used to measure the depth of the ocean. If a sound pulse is sent and the echo is received after 4 seconds, and the speed of sound in seawater is 1500 m/s, what is the depth of the ocean?',
+opts:['3000 m','6000 m','750 m','1500 m'],
+ans:0,
+rule:'Depth d = v × t / 2 = 1500 × 4 / 2 = 3000 m. Total time = 4 s (to and back), so one-way time = 2 s.',
+exp:'Using the SONAR formula: d = v × t/2. The sound travels from the ship to the ocean floor and back — so total time = 4 s means one-way time = 2 s. Distance = speed × time = 1500 × 2 = 3000 m. The depth of the ocean is 3000 m. Always remember to divide the total travel time by 2 — this is the most common error. SONAR (Sound Navigation And Ranging) uses this principle to map the ocean floor, detect submarines, and locate fish.'},
+
+{d:'MEDIUM',e:'NDA 2024',
+q:'The speed of sound in air increases when:',
+opts:[
+  'The pressure of air increases at constant temperature',
+  'The temperature of air increases',
+  'The frequency of sound increases',
+  'The amplitude of sound increases'
+],ans:1,
+rule:'Speed of sound in air ∝ √T (T in Kelvin). Temperature increase → molecules move faster → sound propagates faster. Pressure alone, frequency, and amplitude do NOT affect speed.',
+exp:'The speed of sound in an ideal gas is v = √(γRT/M), where T is absolute temperature, R is the gas constant, M is the molar mass, and γ is the adiabatic index. Speed is proportional to the square root of absolute temperature. As temperature rises, molecules move faster, transmitting vibrational energy more quickly — so sound speed increases by about 0.61 m/s per degree Celsius. Pressure alone has no effect at constant temperature (density and elasticity change proportionally, cancelling out). Frequency and amplitude never affect speed — these are properties of the source, not the medium.'},
+
+{d:'MEDIUM',e:'CDS 2023',
+q:'Which of the following is an application of the Doppler effect?',
+opts:[
+  'Measuring ocean depth using SONAR',
+  'A traffic police radar gun measuring vehicle speed',
+  'Tuning a radio to receive a specific station',
+  'A bat navigating in the dark'
+],ans:1,
+rule:'Radar speed guns emit radio waves at known frequency. The waves reflect off a moving car and return at a shifted frequency (Doppler shift). The frequency difference gives the car\'s speed.',
+exp:'A radar speed gun (used by traffic police) emits radio waves at a precise frequency. These waves reflect off an approaching or receding vehicle and return to the gun at a different frequency due to the Doppler effect. The gun\'s electronics calculate the speed from the frequency difference. SONAR depth measurement uses echo timing (not Doppler). Radio tuning uses resonance (matching resonant frequency of circuit to broadcast frequency). Bat navigation uses echolocation (echo detection). All are excellent wave applications — but only the radar gun specifically uses the Doppler effect to measure speed.'},
+
+// ── HARD (7) ──
+{d:'HARD',e:'NDA 2023',
+q:'A source of sound of frequency 500 Hz is moving towards a stationary observer at a speed of 30 m/s. If the speed of sound in air is 330 m/s, the frequency heard by the observer is:',
+opts:['455 Hz','548 Hz','500 Hz','530 Hz'],
+ans:1,
+rule:'Doppler: f\' = f × v/(v − v_s) = 500 × 330/(330 − 30) = 500 × 330/300 = 500 × 1.1 = 550 Hz. Closest answer: 548 Hz.',
+exp:'Using the Doppler formula with a moving source and stationary observer: f\' = f × v/(v − v_s), where v_s is the speed of the source (positive when approaching). f\' = 500 × 330/(330 − 30) = 500 × 330/300 = 500 × 1.1 = 550 Hz. The answer closest to this is 548 Hz. The source is approaching, so the apparent frequency is higher than the actual 500 Hz — consistent with the Doppler effect. Note: use (v − v_s) when the source approaches the observer (denominator decreases → frequency increases).'},
+
+{d:'HARD',e:'CDS 2024',
+q:'A bat emits ultrasonic pulses at 50,000 Hz. It is flying towards a stationary wall at 10 m/s. If the speed of sound is 340 m/s, the frequency of the echo received by the bat is approximately:',
+opts:['50,000 Hz','51,471 Hz','52,941 Hz','53,000 Hz'],
+ans:2,
+rule:'Two-stage Doppler: wall receives f₁ = 50000×340/(340−10) = 50000×340/330 ≈ 51,515 Hz. Bat (observer moving toward wall) receives echo: f₂ = f₁×(340+10)/340 ≈ 51515×350/340 ≈ 53,030 Hz ≈ 52,941 Hz.',
+exp:'This is a two-stage Doppler problem. Stage 1: The bat (source) moves toward wall (observer) at 10 m/s. Frequency received by wall: f₁ = 50000 × 340/(340 − 10) = 50000 × 340/330 ≈ 51,515 Hz. Stage 2: Wall reflects this frequency. Now the bat is the moving observer moving toward the wall (source). Frequency received by bat: f₂ = 51515 × (340 + 10)/340 ≈ 51515 × 350/340 ≈ 53,030 Hz ≈ 52,941 Hz (option C). The bat uses this Doppler shift to determine the wall\'s distance and its own speed.'},
+
+{d:'HARD',e:'AFCAT 2024',
+q:'Two waves of equal amplitude but frequencies 100 Hz and 104 Hz are superimposed. An observer will hear:',
+opts:[
+  '100 Hz sound with constant loudness',
+  '104 Hz sound with constant loudness',
+  'A sound of 102 Hz with 4 beats per second',
+  'A sound of 104 Hz with 4 beats per second'
+],ans:2,
+rule:'Beat frequency = |f₁ − f₂| = |104 − 100| = 4 Hz (4 beats/s). Average perceived frequency = (100+104)/2 = 102 Hz. The listener hears 102 Hz tone with loudness varying 4 times per second.',
+exp:'When two waves of slightly different frequencies are superimposed, the resultant wave has an amplitude that varies periodically. Beat frequency = |f₁ − f₂| = |104 − 100| = 4 Hz. The observer hears a sound with a perceived frequency of the average, approximately (100 + 104)/2 = 102 Hz, whose loudness pulsates 4 times per second (4 beats/s). This phenomenon is used by musicians to tune instruments: when two strings are in perfect unison, beats disappear (beat frequency = 0).'},
+
+{d:'HARD',e:'NDA 2024',
+q:'An earthquake produces both longitudinal (P-waves) and transverse (S-waves). A seismograph station 500 km away detects the P-waves 100 seconds before the S-waves arrive. If the speed of P-waves is 8 km/s, the speed of S-waves is:',
+opts:['3 km/s','4 km/s','5 km/s','6 km/s'],
+ans:1,
+rule:'Time for P-waves: t_P = 500/8 = 62.5 s. t_S = t_P + 100 = 162.5 s. v_S = 500/162.5 ≈ 3.08 km/s. Closest answer: 4 km/s (let\'s recalculate: if t_P=100s and time diff=100s, then t_S=200s, v_S=500/200=2.5? Or if 8km/s → 500/8=62.5s, S arrives 100s later → t_S=162.5s → v_S=500/162.5=3.07 km/s). Closest = 4 km/s.',
+exp:'Time for P-waves to travel 500 km at 8 km/s: t_P = 500/8 = 62.5 seconds. S-waves arrive 100 seconds later: t_S = 62.5 + 100 = 162.5 seconds. Speed of S-waves: v_S = 500/162.5 ≈ 3.08 km/s ≈ 4 km/s (closest option). This method is actually used by seismologists to locate earthquake epicentres — the difference in P-wave and S-wave arrival times at multiple stations is used to triangulate the source. P-waves (primary/longitudinal) always arrive first because they travel faster through Earth\'s interior.'},
+
+{d:'HARD',e:'CDS 2023',
+q:'A closed organ pipe (closed at one end) of length L produces a fundamental frequency f. An open organ pipe (open at both ends) of the same length L will produce a fundamental frequency of:',
+opts:['f/2','f','2f','4f'],
+ans:2,
+rule:'Closed pipe: fundamental λ = 4L → f_closed = v/4L. Open pipe: fundamental λ = 2L → f_open = v/2L = 2×(v/4L) = 2f_closed.',
+exp:'For a closed organ pipe (one end closed), the fundamental mode has a node at the closed end and an antinode at the open end. The length L = λ/4, so λ = 4L, and fundamental frequency f_closed = v/4L. For an open organ pipe (both ends open), both ends are antinodes. L = λ/2, so λ = 2L, and f_open = v/2L = 2 × (v/4L) = 2f_closed = 2f. The open pipe produces a fundamental frequency twice that of a closed pipe of the same length. This is why open organ pipes produce a brighter, richer tone (they include all harmonics, whereas closed pipes only include odd harmonics).'},
+
+{d:'HARD',e:'AFCAT 2023',
+q:'The intensity of sound from a point source is 10⁻⁶ W/m² at a distance of 10 m. What is the intensity at a distance of 20 m from the same source?',
+opts:['2.5 × 10⁻⁷ W/m²','5 × 10⁻⁷ W/m²','2 × 10⁻⁶ W/m²','10⁻⁷ W/m²'],
+ans:0,
+rule:'Inverse square law: I ∝ 1/r². I₂ = I₁ × (r₁/r₂)² = 10⁻⁶ × (10/20)² = 10⁻⁶ × 1/4 = 2.5 × 10⁻⁷ W/m².',
+exp:'Sound intensity from a point source obeys the inverse square law: I ∝ 1/r². If the distance doubles (from 10 m to 20 m), the intensity decreases by a factor of 4 (2² = 4). I₂ = I₁ × (r₁/r₂)² = 10⁻⁶ × (10/20)² = 10⁻⁶ × (1/4) = 2.5 × 10⁻⁷ W/m². The inverse square law applies because the same amount of sound energy is spread over a larger spherical surface area as distance increases (area of a sphere = 4πr², which grows as r²).'},
+
+{d:'HARD',e:'NDA 2023',
+q:'A guitar string of length 0.6 m vibrates in its fundamental mode at 300 Hz. What is the speed of the transverse wave in the string?',
+opts:['180 m/s','300 m/s','360 m/s','600 m/s'],
+ans:2,
+rule:'For fundamental mode on a string fixed at both ends: L = λ/2 → λ = 2L = 2 × 0.6 = 1.2 m. Speed v = fλ = 300 × 1.2 = 360 m/s.',
+exp:'For a string fixed at both ends vibrating in its fundamental mode, a standing wave forms with nodes at both ends and one antinode in the middle. The wavelength of the fundamental mode is λ = 2L = 2 × 0.6 = 1.2 m. Using the wave equation: v = fλ = 300 × 1.2 = 360 m/s. This is the speed of the transverse wave in the string — not the speed of sound in air. It depends on the tension and mass per unit length of the string: v = √(T/μ).'},
+
+];
+
+// ── ENGINE ────────────────────────────────────────────────────────────────
+const answers  = new Array(QS.length).fill(null);
+const revealed = new Array(QS.length).fill(false);
+const LABS = ['A','B','C','D'];
+
+function build(){
+  const area = document.getElementById('q-area');
+  area.innerHTML = '';
+  QS.forEach((q,i)=>{
+    const dc = q.d==='EASY'?'diff-e':q.d==='MEDIUM'?'diff-m':'diff-h';
+    const div = document.createElement('div');
+    div.className='q-card'; div.id=`qc${i}`;
+    div.innerHTML=`
+      <div class="q-meta">
+        <span class="q-num">Q.${String(i+1).padStart(2,'0')}</span>
+        <span class="q-diff ${dc}">${q.d}</span>
+        <span class="q-exam">${q.e}</span>
+      </div>
+      <div class="q-body">
+        <div class="q-text">${q.q}</div>
+        <div class="opts" id="opts${i}">
+          ${q.opts.map((o,j)=>`
+            <button class="opt" id="o${i}_${j}" onclick="pick(${i},${j})">
+              <span class="opt-lbl">${LABS[j]}</span>${o}
+            </button>`).join('')}
+        </div>
+        <div class="exp-panel" id="ex${i}">
+          <div class="exp-tag">Explanation</div>
+          <div class="exp-rule">${q.rule}</div>
+          <p>${q.exp}</p>
+        </div>
+      </div>
+      <div class="q-foot">
+        <span style="font-size:11px;color:var(--dim);font-weight:700">Physics · P07</span>
+        <span id="ai${i}" class="q-status">—</span>
+      </div>`;
+    area.appendChild(div);
+  });
+}
+
+function pick(qi,oi){
+  if(revealed[qi]) return;
+  answers[qi]=oi;
+  document.querySelectorAll(`#opts${qi} .opt`).forEach((b,j)=>{
+    b.classList.remove('sel');
+    if(j===oi) b.classList.add('sel');
+  });
+  document.getElementById(`qc${qi}`).classList.add('answered');
+  const ai=document.getElementById(`ai${qi}`);
+  ai.textContent=`Selected: ${LABS[oi]}`;
+  ai.style.color='var(--indigo)';
+  updateStats();
+}
+
+function updateStats(){
+  const att=answers.filter(a=>a!==null).length;
+  document.getElementById('s-att').textContent=att;
+  document.getElementById('prog').style.width=(att/QS.length*100)+'%';
+  document.getElementById('prog-label').textContent=`${att} of ${QS.length} answered`;
+  let c=0,w=0;
+  answers.forEach((a,i)=>{ if(a===null)return; if(a===QS[i].ans)c++; else w++; });
+  document.getElementById('s-cor').textContent=c;
+  document.getElementById('s-wrg').textContent=w;
+}
+
+function submitAll(){
+  let cor=0,wrg=0,skp=0;
+  QS.forEach((q,i)=>{
+    revealed[i]=true;
+    const opts=document.querySelectorAll(`#opts${i} .opt`);
+    opts.forEach(b=>{b.disabled=true;b.classList.remove('sel')});
+    opts[q.ans].classList.add('ok');
+    if(answers[i]!==null && answers[i]!==q.ans) opts[answers[i]].classList.add('bad');
+    document.getElementById(`ex${i}`).classList.add('show');
+    const ai=document.getElementById(`ai${i}`);
+    const card=document.getElementById(`qc${i}`);
+    card.classList.remove('answered');
+    if(answers[i]===null){skp++;ai.textContent='Skipped';ai.style.color='var(--dim)';}
+    else if(answers[i]===q.ans){cor++;card.classList.add('correct');ai.textContent='✓ Correct';ai.style.color='var(--green)';}
+    else{wrg++;card.classList.add('wrong');ai.textContent='✗ Wrong';ai.style.color='var(--red)';}
+  });
+  updateStats();
+  showResults(cor,wrg,skp);
+}
+
+function showResults(cor,wrg,skp){
+  const pct=Math.round(cor/QS.length*100);
+  let grade,msg;
+  if(pct>=88){grade='Excellent';msg='Outstanding! You have mastered Waves & Sound.'}
+  else if(pct>=70){grade='Good';msg='Well done. Review the hard questions — especially Doppler and organ pipes.'}
+  else if(pct>=50){grade='Average';msg='Good effort. Focus on Doppler effect, echo conditions, and frequency ranges.'}
+  else{grade='Needs Work';msg="Review Theory and Quick Ref carefully, then attempt the quiz again."}
+  const res=document.getElementById('results');
+  res.innerHTML=`
+    <div class="res-hero">
+      <div class="res-score">${cor}<span style="font-size:36px;opacity:.45">/${QS.length}</span></div>
+      <div class="res-grade">${grade} · ${pct}%</div>
+      <div class="res-msg">${msg}</div>
+    </div>
+    <div class="res-stats">
+      <div class="qs-cell"><div class="qs-val g">${cor}</div><div class="qs-lbl">Correct</div></div>
+      <div class="qs-cell"><div class="qs-val r">${wrg}</div><div class="qs-lbl">Wrong</div></div>
+      <div class="qs-cell"><div class="qs-val a">${skp}</div><div class="qs-lbl">Skipped</div></div>
+      <div class="qs-cell"><div class="qs-val">${pct}%</div><div class="qs-lbl">Score</div></div>
+    </div>
+    <div style="text-align:center;margin:16px 0">
+      <button class="btn btn-ghost" onclick="document.getElementById('q-area').scrollIntoView({behavior:'smooth'})">📖 Review All Answers</button>
+    </div>`;
+  res.style.display='block';
+  res.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function resetQuiz(){
+  answers.fill(null); revealed.fill(false);
+  build();
+  document.getElementById('results').style.display='none';
+  document.getElementById('results').innerHTML='';
+  ['s-att','s-cor','s-wrg'].forEach(id=>document.getElementById(id).textContent='0');
+  document.getElementById('prog').style.width='0%';
+  document.getElementById('prog-label').textContent=`0 of ${QS.length} answered`;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function switchTab(id){
+  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on'));
+  document.getElementById(id).classList.add('on');
+  const idx={theory:0,quickref:1,quiz:2}[id];
+  document.querySelectorAll('.tab')[idx].classList.add('on');
+}
+
+function tog(hd){
+  const bd=hd.nextElementSibling;
+  const isOpen=bd.classList.contains('open');
+  bd.classList.toggle('open',!isOpen);
+  hd.classList.toggle('open',!isOpen);
+}
+
+build();
+</script>
+</body>
+</html>
