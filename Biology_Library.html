@@ -1,174 +1,665 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Biology Library – Olive Defence Entrance Academy</title>
-
+<title>Biology – Olive Defence Entrance Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
+:root {
+  --olive: #3b5323;
+  --olive-light: #5a7a3a;
+  --olive-pale: #e8f0df;
+  --olive-mid: #c8dbb0;
+  --accent: #8fb94a;
+  --dark: #1e2b14;
+  --text: #2c3a1e;
+  --sub: #6b7c5a;
+  --white: #fff;
+  --card-bg: #f5f8ef;
+  --shadow: 0 4px 18px rgba(59,83,35,0.10);
+  --priority: #e65c00;
+  --priority-bg: #fff4ee;
+  --priority-border: #f5b08a;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-body{
-font-family:Arial;
-text-align:center;
-background:#f2f4f3;
-margin:0;
+body {
+  font-family: 'DM Sans', Arial, sans-serif;
+  background: #f2f5ec;
+  min-height: 100vh;
+  color: var(--text);
 }
 
-h1{
-margin-top:18px;
-font-size:30px;
-color:#1b3d2f;
+/* HEADER */
+.header {
+  background: var(--olive);
+  position: relative;
+  overflow: hidden;
+}
+.header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(120deg, rgba(143,185,74,0.06) 0px, rgba(143,185,74,0.06) 1px, transparent 1px, transparent 60px),
+    repeating-linear-gradient(30deg, rgba(255,255,255,0.03) 0px, rgba(255,255,255,0.03) 1px, transparent 1px, transparent 40px);
+  pointer-events: none;
+}
+.header-inner {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 36px 24px 28px;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--olive-mid);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  margin-bottom: 20px;
+  transition: color 0.2s;
+}
+.back-link:hover { color: var(--accent); }
+.back-link svg { width: 16px; height: 16px; }
+.header h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(38px, 7vw, 58px);
+  color: var(--white);
+  letter-spacing: 0.04em;
+  line-height: 1;
+  margin-bottom: 8px;
+}
+.header h1 span { color: var(--accent); }
+.tag-row {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+}
+.tag {
+  background: rgba(143,185,74,0.18);
+  color: var(--olive-mid);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: 1px solid rgba(143,185,74,0.3);
+  padding: 5px 14px;
+  border-radius: 20px;
 }
 
-.subtitle{
-color:#666;
-font-size:16px;
-margin-top:5px;
+/* PROGRESS */
+.progress-section {
+  max-width: 680px;
+  margin: 28px auto 0;
+  padding: 0 20px;
+}
+.progress-card {
+  background: var(--white);
+  border-radius: 14px;
+  padding: 18px 22px;
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  border: 1px solid var(--olive-mid);
+}
+.progress-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--sub);
+  white-space: nowrap;
+  min-width: 80px;
+}
+.progress-bar-wrap {
+  flex: 1;
+  background: var(--olive-pale);
+  border-radius: 99px;
+  height: 10px;
+  overflow: hidden;
+}
+.progress-bar-fill {
+  height: 100%;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--olive-light), var(--accent));
+  width: 0%;
+  transition: width 0.7s cubic-bezier(.4,0,.2,1);
+}
+.progress-count {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--olive);
+  white-space: nowrap;
+  min-width: 48px;
+  text-align: right;
 }
 
-.legend{
-margin-top:15px;
-font-size:14px;
-color:#555;
+/* CHAPTERS */
+.chapters {
+  max-width: 680px;
+  margin: 26px auto 48px;
+  padding: 0 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
 }
 
-/* CHAPTER CARDS */
-
-.chapter{
-padding:18px;
-margin:18px auto;
-width:88%;
-max-width:420px;
-border-radius:12px;
-font-size:19px;
-font-weight:bold;
-cursor:pointer;
-box-shadow:0 3px 8px rgba(0,0,0,0.08);
-transition:all 0.25s ease;
-background:#e6f4ea;
-border:1px solid #b7e0c2;
+.chapter-card {
+  background: var(--card-bg);
+  border-radius: 12px;
+  border: 1.5px solid var(--olive-mid);
+  box-shadow: var(--shadow);
+  display: flex;
+  align-items: stretch;
+  overflow: hidden;
+  transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s, background 0.3s;
+}
+.chapter-card.priority {
+  background: var(--priority-bg);
+  border-color: var(--priority-border);
+}
+.chapter-card.done {
+  background: #eef6e5 !important;
+  border-color: #a3d46e !important;
 }
 
-.chapter:hover{
-transform:translateY(-3px);
-box-shadow:0 8px 18px rgba(0,0,0,0.15);
+.chapter-num {
+  background: var(--olive-pale);
+  color: var(--olive);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: 0.04em;
+  min-width: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.3s, color 0.3s;
+  flex-shrink: 0;
+}
+.chapter-card.priority:not(.done) .chapter-num {
+  background: #ffe0cc;
+  color: var(--priority);
+}
+.chapter-card.done .chapter-num {
+  background: var(--olive);
+  color: var(--accent);
 }
 
-.chapter a{
-text-decoration:none;
-color:#1e7d38;
+/* Chapter link */
+.chapter-link {
+  flex: 1;
+  padding: 13px 14px 13px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+  transition: background 0.15s;
+  min-width: 0;
+}
+.chapter-link:hover { background: rgba(143,185,74,0.07); }
+
+.chapter-left {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+.chapter-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--dark);
+  line-height: 1.3;
+}
+.chapter-card.done .chapter-title { color: var(--olive); }
+
+.badge-row { display: flex; gap: 6px; flex-wrap: wrap; }
+
+.badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  padding: 3px 9px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+.badge-priority {
+  background: #ffe0cc;
+  color: var(--priority);
+  border: 1px solid var(--priority-border);
 }
 
+.chapter-arrow {
+  color: var(--accent);
+  opacity: 0.3;
+  transition: opacity 0.18s, transform 0.18s;
+  flex-shrink: 0;
+}
+.chapter-link:hover .chapter-arrow { opacity: 1; transform: translateX(3px); }
+
+/* DONE BUTTON */
+.done-btn {
+  background: none;
+  border: none;
+  border-left: 1.5px solid var(--olive-mid);
+  cursor: pointer;
+  padding: 0 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 62px;
+  transition: background 0.2s;
+  flex-shrink: 0;
+  outline: none;
+}
+.done-btn:hover { background: rgba(143,185,74,0.12); }
+.chapter-card.done .done-btn { background: rgba(143,185,74,0.08); }
+.chapter-card.done .done-btn:hover { background: rgba(200,70,70,0.07); }
+
+.btn-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid var(--olive-mid);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--white);
+  color: #aaa;
+  font-size: 15px;
+  font-weight: 700;
+  transition: all 0.25s cubic-bezier(.34,1.56,.64,1);
+  user-select: none;
+}
+.chapter-card.done .btn-icon {
+  border-color: #5aad1e;
+  background: #5aad1e;
+  color: white;
+  box-shadow: 0 2px 10px rgba(90,173,30,0.35);
+  transform: scale(1.08);
+}
+
+.btn-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--sub);
+  transition: color 0.2s;
+  user-select: none;
+}
+.chapter-card.done .btn-label { color: #5aad1e; }
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: var(--olive);
+  color: white;
+  padding: 12px 26px;
+  border-radius: 99px;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  transition: transform 0.35s cubic-bezier(.34,1.56,.64,1), opacity 0.3s;
+  opacity: 0;
+  z-index: 999;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+/* FOOTER */
+.footer {
+  text-align: center;
+  padding: 22px 16px;
+  color: var(--sub);
+  font-size: 13px;
+  border-top: 1px solid var(--olive-mid);
+  background: var(--olive-pale);
+}
 </style>
-
 </head>
-
 <body>
 
-<h1>Biology Library</h1>
-
-<p class="subtitle">
-CDS • NDA • AFCAT Biology Preparation
-</p>
-
-<p class="legend">
-All Chapters – Full Access
-</p>
-
-
-<div class="chapter">
-<a href="B01_Cell_BasicUnit.html">
-Cell – Basic Unit of Life ✅
-</a>
+<div class="header">
+  <div class="header-inner">
+    <a href="index.html" class="back-link">
+      <svg fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+      </svg>
+      Back to Portal
+    </a>
+    <h1>Bio<span>logy</span></h1>
+    <div class="tag-row">
+      <span class="tag">CDS</span>
+      <span class="tag">NDA</span>
+      <span class="tag">AFCAT</span>
+      <span class="tag">15 Chapters</span>
+    </div>
+  </div>
 </div>
 
-<div class="chapter">
-<a href="B02_Tissues.html">
-Tissues
-</a>
+<div class="progress-section">
+  <div class="progress-card">
+    <span class="progress-label">Progress</span>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progressFill"></div>
+    </div>
+    <span class="progress-count" id="progressCount">0 / 15</span>
+  </div>
 </div>
 
-<div class="chapter">
-<a href="B03_Plant_Physiology.html">
-Plant Physiology
-</a>
+<div class="chapters" id="chapterList">
+
+  <div class="chapter-card priority" data-id="B01">
+    <div class="chapter-num">01</div>
+    <a href="B01_Cell_BasicUnit.html" class="chapter-link">
+      <div class="chapter-left">
+        <span class="chapter-title">Cell – Basic Unit of Life</span>
+        <div class="badge-row"><span class="badge badge-priority">⚑ High Priority</span></div>
+      </div>
+      <svg class="chapter-arrow" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+    </a>
+    <button class="done-btn" onclick="toggleDone(this)">
+      <div class="btn-icon">✓</div>
+      <span class="btn-label">Done</span>
+    </button>
+  </div>
+
+  <div class="chapter-card" data-id="B02">
+    <div class="chapter-num">02</div>
+    <a href="B02_Tissues.html" class="chapter-link">
+      <div class="chapter-left">
+        <span class="chapter-title">Tissues</span>
+        <div class="badge-row"></div>
+      </div>
+      <svg class="chapter-arrow" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+    </a>
+    <button class="done-btn" onclick="toggleDone(this)">
+      <div class="btn-icon">✓</div>
+      <span class="btn-label">Done</span>
+    </button>
+  </div>
+
+  <div class="chapter-card" data-id="B03">
+    <div class="chapter-num">03</div>
+    <a href="B03_Plant_Physiology.html" class="chapter-link">
+      <div class="chapter-left">
+        <span class="chapter-title">Plant Physiology</span>
+        <div class="badge-row"></div>
+      </div>
+      <svg class="chapter-arrow" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+    </a>
+    <button class="done-btn" onclick="toggleDone(this)">
+      <div class="btn-icon">✓</div>
+      <span class="btn-label">Done</span>
+    </button>
+  </div>
+
+  <div class="chapter-card priority" data-id="B04">
+    <div class="chapter-num">04</div>
+    <a href="B04_Digestive_System.html" class="chapter-link">
+      <div class="chapter-left">
+        <span class="chapter-title">Digestive System</span>
+        <div class="badge-row"><span class="badge badge-priority">⚑ High Priority</span></div>
+      </div>
+      <svg class="chapter-arrow" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+    </a>
+    <button class="done-btn" onclick="toggleDone(this)">
+      <div class="btn-icon">✓</div>
+      <span class="btn-label">Done</span>
+    </button>
+  </div>
+
+  <div class="chapter-card" data-id="B05">
+    <div class="chapter-num">05</div>
+    <a href="B05_Respiratory_System.html" class="chapter-link">
+      <div class="chapter-left">
+        <span class="chapter-title">Respiratory System</span>
+        <div class="badge-row"></div>
+      </div>
+      <svg class="chapter-arrow" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+    </a>
+    <button class="done-btn" onclick="toggleDone(this)">
+      <div class="btn-icon">✓</div>
+      <span class="btn-label">Done</span>
+    </button>
+  </div>
+
+  <div class="chapter-card priority" data-id="B06">
+    <div class="chapter-num">06</div>
+    <a href="B06_Circulatory_System.html" class="chapter-link">
+      <div class="chapter-left">
+        <span class="chapter-title">Circulatory System</span>
+        <div class="badge-row"><span class="badge badge-priority">⚑ High Priority</span></div>
+      </div>
+      <svg class="chapter-arrow" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+    </a>
+    <button class="done-btn" onclick="toggleDone(this)">
+      <div class="btn-icon">✓</div>
+      <span class="btn-label">Done</span>
+    </button>
+  </div>
+
+  <div class="chapter-card" data-id="B07">
+    <div class="chapter-num">07</div>
+    <a href="B07_Excretory_System.html" class="chapter-link">
+      <div class="chapter-left">
+        <span class="chapter-title">Excretory System</span>
+        <div class="badge-row"></div>
+      </div>
+      <svg class="chapter-arrow" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+    </a>
+    <button class="done-btn" onclick="toggleDone(this)">
+      <div class="btn-icon">✓</div>
+      <span class="btn-label">Done</span>
+    </button>
+  </div>
+
+  <div class="chapter-card" data-id="B08">
+    <div class="chapter-num">08</div>
+    <a href="B08_Nervous_System.html" class="chapter-link">
+      <div class="chapter-left">
+        <span class="chapter-title">Nervous System</span>
+        <div class="badge-row"></div>
+      </div>
+      <svg class="chapter-arrow" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+    </a>
+    <button class="done-btn" onclick="toggleDone(this)">
+      <div class="btn-icon">✓</div>
+      <span class="btn-label">Done</span>
+    </button>
+  </div>
+
+  <div class="chapter-card" data-id="B09">
+    <div class="chapter-num">09</div>
+    <a href="B09_Endocrine_System.html" class="chapter-link">
+      <div class="chapter-left">
+        <span class="chapter-title">Endocrine System</span>
+        <div class="badge-row"></div>
+      </div>
+      <svg class="chapter-arrow" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+    </a>
+    <button class="done-btn" onclick="toggleDone(this)">
+      <div class="btn-icon">✓</div>
+      <span class="btn-label">Done</span>
+    </button>
+  </div>
+
+  <div class="chapter-card" data-id="B10">
+    <div class="chapter-num">10</div>
+    <a href="B10_Reproductive_System.html" class="chapter-link">
+      <div class="chapter-left">
+        <span class="chapter-title">Reproductive System</span>
+        <div class="badge-row"></div>
+      </div>
+      <svg class="chapter-arrow" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+    </a>
+    <button class="done-btn" onclick="toggleDone(this)">
+      <div class="btn-icon">✓</div>
+      <span class="btn-label">Done</span>
+    </button>
+  </div>
+
+  <div class="chapter-card priority" data-id="B11">
+    <div class="chapter-num">11</div>
+    <a href="B11_Genetics_Heredity.html" class="chapter-link">
+      <div class="chapter-left">
+        <span class="chapter-title">Genetics and Heredity</span>
+        <div class="badge-row"><span class="badge badge-priority">⚑ High Priority</span></div>
+      </div>
+      <svg class="chapter-arrow" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+    </a>
+    <button class="done-btn" onclick="toggleDone(this)">
+      <div class="btn-icon">✓</div>
+      <span class="btn-label">Done</span>
+    </button>
+  </div>
+
+  <div class="chapter-card" data-id="B12">
+    <div class="chapter-num">12</div>
+    <a href="B12_Evolution.html" class="chapter-link">
+      <div class="chapter-left">
+        <span class="chapter-title">Evolution</span>
+        <div class="badge-row"></div>
+      </div>
+      <svg class="chapter-arrow" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+    </a>
+    <button class="done-btn" onclick="toggleDone(this)">
+      <div class="btn-icon">✓</div>
+      <span class="btn-label">Done</span>
+    </button>
+  </div>
+
+  <div class="chapter-card" data-id="B13">
+    <div class="chapter-num">13</div>
+    <a href="B13_Microorganisms.html" class="chapter-link">
+      <div class="chapter-left">
+        <span class="chapter-title">Microorganisms</span>
+        <div class="badge-row"></div>
+      </div>
+      <svg class="chapter-arrow" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+    </a>
+    <button class="done-btn" onclick="toggleDone(this)">
+      <div class="btn-icon">✓</div>
+      <span class="btn-label">Done</span>
+    </button>
+  </div>
+
+  <div class="chapter-card priority" data-id="B14">
+    <div class="chapter-num">14</div>
+    <a href="B14_Human_Diseases.html" class="chapter-link">
+      <div class="chapter-left">
+        <span class="chapter-title">Human Diseases</span>
+        <div class="badge-row"><span class="badge badge-priority">⚑ High Priority</span></div>
+      </div>
+      <svg class="chapter-arrow" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+    </a>
+    <button class="done-btn" onclick="toggleDone(this)">
+      <div class="btn-icon">✓</div>
+      <span class="btn-label">Done</span>
+    </button>
+  </div>
+
+  <div class="chapter-card" data-id="B15">
+    <div class="chapter-num">15</div>
+    <a href="B15_Ecology_Environment.html" class="chapter-link">
+      <div class="chapter-left">
+        <span class="chapter-title">Ecology and Environment</span>
+        <div class="badge-row"></div>
+      </div>
+      <svg class="chapter-arrow" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></svg>
+    </a>
+    <button class="done-btn" onclick="toggleDone(this)">
+      <div class="btn-icon">✓</div>
+      <span class="btn-label">Done</span>
+    </button>
+  </div>
+
 </div>
 
-<div class="chapter">
-<a href="B04_Digestive_System.html">
-Digestive System ✅
-</a>
+<div class="toast" id="toast"></div>
+
+<div class="footer">
+  © Olive Defence Entrance Academy &nbsp;·&nbsp; Progress saved on your device
 </div>
 
-<div class="chapter">
-<a href="B05_Respiratory_System.html">
-Respiratory System
-</a>
-</div>
+<script>
+const TOTAL = 15;
+const STORAGE_KEY = 'olive_bio_done';
 
-<div class="chapter">
-<a href="B06_Circulatory_System.html">
-Circulatory System ✅
-</a>
-</div>
+function getSaved() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+  catch(e) { return []; }
+}
+function saveDone(arr) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(arr));
+}
 
-<div class="chapter">
-<a href="B07_Excretory_System.html">
-Excretory System
-</a>
-</div>
+function updateProgress() {
+  const done = document.querySelectorAll('.chapter-card.done').length;
+  const pct = (done / TOTAL) * 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressCount').textContent = done + ' / ' + TOTAL;
+}
 
-<div class="chapter">
-<a href="B08_Nervous_System.html">
-Nervous System
-</a>
-</div>
+function toggleDone(btn) {
+  const card = btn.closest('.chapter-card');
+  const id = card.dataset.id;
+  const isDone = card.classList.contains('done');
+  const saved = getSaved();
 
-<div class="chapter">
-<a href="B09_Endocrine_System.html">
-Endocrine System
-</a>
-</div>
+  if (isDone) {
+    card.classList.remove('done');
+    const idx = saved.indexOf(id);
+    if (idx > -1) saved.splice(idx, 1);
+    saveDone(saved);
+    updateProgress();
+    showToast('Marked as incomplete');
+  } else {
+    card.classList.add('done');
+    if (!saved.includes(id)) saved.push(id);
+    saveDone(saved);
+    updateProgress();
+    showToast('✓ Chapter marked as done!');
+  }
+}
 
-<div class="chapter">
-<a href="B10_Reproductive_System.html">
-Reproductive System
-</a>
-</div>
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
+}
 
-<div class="chapter">
-<a href="B11_Genetics_Heredity.html">
-Genetics and Heredity ✅
-</a>
-</div>
+function restoreProgress() {
+  const saved = getSaved();
+  document.querySelectorAll('.chapter-card').forEach(card => {
+    if (saved.includes(card.dataset.id)) card.classList.add('done');
+  });
+  updateProgress();
+}
 
-<div class="chapter">
-<a href="B12_Evolution.html">
-Evolution
-</a>
-</div>
-
-<div class="chapter">
-<a href="B13_Microorganisms.html">
-Microorganisms
-</a>
-</div>
-
-<div class="chapter">
-<a href="B14_Human_Diseases.html">
-Human Diseases ✅
-</a>
-</div>
-
-<div class="chapter">
-<a href="B15_Ecology_Environment.html">
-Ecology and Environment
-</a>
-</div>
-
+restoreProgress();
+</script>
 </body>
-
 </html>
